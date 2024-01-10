@@ -1,42 +1,34 @@
 using UnityEngine;
 using Leopotam.Ecs;
 using Voody.UniLeo;
+using Ecs.Systems;
 
-public sealed class EcsStartup : MonoBehaviour
+namespace Ecs
 {
-    private EcsWorld _world;
-    private EcsSystems _updateSystems;
-
-    private void Start()
+    public sealed class EcsStartup : MonoBehaviour
     {
-        _world = new EcsWorld();
-        _updateSystems = new EcsSystems(_world).ConvertScene();
+        private EcsWorld _world;
+        private EcsSystems _updateSystems;
 
-        AddSystems();
-        AddOneFrames();
+        private void Start()
+        {
+            _world = new EcsWorld();
+            _updateSystems = new EcsSystems(_world).ConvertScene();
 
-        _updateSystems.Init();
-    }
+            _updateSystems.Add(new HeroInputSystem());
+            _updateSystems.Add(new DestinationSystem());
+            _updateSystems.Init();
+        }
 
-    private void AddSystems()
-    {
-        _updateSystems.Add(new TestTransformSystem());
-    }
+        private void Update() => _updateSystems?.Run();
 
-    private void AddOneFrames()
-    {
-        // Компонент, живущий в рамках одного кадра (используются для ивентов, запросов)
-        // _updateSystems.OneFrame<SomeComponent>();
-    }
+        private void OnDestroy()
+        {
+            _updateSystems?.Destroy();
+            _world?.Destroy();
 
-    private void Update() => _updateSystems?.Run();
-
-    private void Destroy()
-    {
-        _updateSystems?.Destroy();
-        _world?.Destroy();
-
-        _updateSystems = null;
-        _world = null;
+            _updateSystems = null;
+            _world = null;
+        }
     }
 }
