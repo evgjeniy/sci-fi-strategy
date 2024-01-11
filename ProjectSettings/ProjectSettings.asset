@@ -804,7 +804,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: UNITASK_DOTWEEN_SUPPORT
+    Standalone: UNITASK_DOTWEEN_SUPPORT;DREAMTECK_SPLINES
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
