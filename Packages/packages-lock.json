@@ -14,13 +14,6 @@
       "dependencies": {},
       "hash": "b8ec502d517a44b12000503bba8bd2ef11144328"
     },
-    "com.leopotam.ecs": {
-      "version": "https://github.com/Leopotam/ecs.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "1213c31c9ef8325d48e74a52b345c4db242d038b"
-    },
     "com.unity.ai.navigation": {
       "version": "1.1.5",
       "depth": 0,
@@ -200,13 +193,6 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
-    },
-    "com.voody.unileo": {
-      "version": "https://github.com/voody2506/UniLeo.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "bbaed2aec8231b6e79369eecd5c3a9f3b80a97e2"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
