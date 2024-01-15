@@ -1,5 +1,3 @@
-using System.Collections;
-using System.ComponentModel.Design;
 using UnityEngine;
 
 public abstract class BaseAbility
