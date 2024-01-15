@@ -7,15 +7,13 @@ using UnityEngine;
 
 public class SplinePathFollower : IPathFollower
 {
-    private readonly SplineFollower splineFollower;
-    private readonly SplineTracer splineTracer;
-
-    public SplinePathFollower(SplineFollower splineFollower, SplineTracer splineTracer)
+    private readonly SplineFollower follower;
+    SplineProjector projector;
+    public SplinePathFollower(SplineFollower splineFollower)
     {
-        this.splineFollower = splineFollower;
-        this.splineTracer = splineTracer;
+        follower = splineFollower;
 
-        splineTracer.onNode += OnNode;
+        follower.onNode += OnNode;
     }
 
     private void OnNode(List<SplineTracer.NodeConnection> passed)
@@ -24,7 +22,7 @@ public class SplinePathFollower : IPathFollower
         Node.Connection[] connections = passed[0].node.GetConnections();
         if (connections.Length == 1) return;
         int newConnection = UnityEngine.Random.Range(0, connections.Length);
-        if (connections[newConnection].spline == splineTracer.spline &&
+        if (connections[newConnection].spline == follower.spline &&
         connections[newConnection].pointIndex == passed[0].point)
         {
             newConnection++;
@@ -35,21 +33,20 @@ public class SplinePathFollower : IPathFollower
 
     private void SwitchSpline(Node.Connection to)
     {
-        splineTracer.spline = to.spline;
+        follower.spline = to.spline;
 
-        splineTracer.RebuildImmediate();
-
-        double startpercent = splineTracer.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
-        splineTracer.SetPercent(startpercent+0.01);
+        follower.RebuildImmediate();
+        double startpercent = follower.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
+        follower.SetPercent(startpercent+0.01);
     }
 
     public void Stop()
     {
-        splineFollower.follow = false;
+        follower.follow = false;
     }
 
     public void Start()
     {
-        splineFollower.follow = true;
+        follower.follow = true;
     }
 }

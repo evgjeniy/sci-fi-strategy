@@ -15,6 +15,7 @@ public class NavPathFollower : IPathFollower
     public void MoveTo(Vector3 position)
     {
         agent.destination = position;
+
     }
 
     public void Start()
