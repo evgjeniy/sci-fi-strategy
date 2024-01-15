@@ -18,10 +18,16 @@ namespace Systems
         
         }
 
-        public override void Spend(int value)
+        public override bool TrySpend(int value)
         {
-            base.Spend(value);
+            return base.TrySpend(value);
             Debug.Log("Energy spended tra-la-la");
+        }
+        
+        public override bool TryRefill(int value)
+        {
+            return base.TryRefill(value);
+            //CurrentCount += value;
         }
     }
 }

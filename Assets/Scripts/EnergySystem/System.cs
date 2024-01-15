@@ -14,16 +14,8 @@ namespace Systems
             get => _currentCount;
             private set
             {
-                if (value > _maxCount)
-                {
-                    _currentCount = _maxCount;
-                }
-                else
-                {
-                    if (value < 0) return;
-                    _currentCount = value;
-                    
-                }
+                if (value < 0) return;
+                _currentCount = value;
                 OnValueChanged?.Invoke(_currentCount);
             }
         }
@@ -36,12 +28,26 @@ namespace Systems
             CurrentCount = _maxCount;
         }
 
-        public virtual void Spend(int value)
+        public virtual bool TrySpend(int value)
         {
             if (CurrentCount >= value)
             {
                 CurrentCount -= value;
+                return true;
             }
+
+            return false;
+        }
+
+        public virtual bool TryRefill(int value)
+        {
+            if (CurrentCount + value <= _maxCount)
+            {
+                CurrentCount += value;
+                return true;
+            }
+
+            return false;
         }
         
     }

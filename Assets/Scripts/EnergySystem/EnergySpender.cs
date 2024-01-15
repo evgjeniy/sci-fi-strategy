@@ -8,11 +8,37 @@ namespace Systems
     {
         [SerializeField] private EnergySystem _energySystem;
         [SerializeField] private int _energySpendCount;
-
-        private void Spend()
+        [SerializeField] private int _maxEnergy;
+        public Action<int> OnValueChanged;
+        private int _currentEnergy;
+        public int CurrentEnergy
         {
-            _energySystem.Spend(_energySpendCount);
+            get => _currentEnergy;
+            private set
+            {
+                if (value < 0) return;
+                _currentEnergy = value;
+                OnValueChanged?.Invoke(_currentEnergy);
+            }
+        }
+
+        private void TrySpend()
+        {
+            if (_currentEnergy + _energySpendCount > _maxEnergy) return;
+            if (_energySystem.TrySpend(_energySpendCount))
+            {
+                CurrentEnergy += _energySpendCount;
+            }
             //Here should be system upgrade logic
+        }
+
+        private void TryRefill()
+        {
+            if (_currentEnergy <= 0) return;
+            if (_energySystem.TryRefill(_energySpendCount))
+            {
+                CurrentEnergy -= _energySpendCount;
+            }
         }
 
         //Energy spend test
@@ -20,8 +46,12 @@ namespace Systems
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Used energy");
-                Spend();
+                TrySpend();
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                TryRefill();
             }
         }
     }
