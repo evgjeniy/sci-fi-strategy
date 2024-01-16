@@ -1,34 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Zenject;
 
 namespace Systems
 {
-    public class EnergySystem : System
+    public class EnergySystem : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField] private EnergyManager _energyManager;
+        [SerializeField] private int _energySpendCount;
+        [SerializeField] private int _maxEnergy;
+        public Action<int> OnValueChanged;
+        private int _currentEnergy;
+        public int CurrentEnergy
         {
-        
+            get => _currentEnergy;
+            private set
+            {
+                if (value < 0) return;
+                _currentEnergy = value;
+                OnValueChanged?.Invoke(_currentEnergy);
+            }
         }
 
-        // Update is called once per frame
-        void Update()
+        [Inject]
+        public void BindManager(EnergyManager manager)
         {
-        
+            _energyManager = manager;
         }
 
-        public override bool TrySpend(int value)
+        private void TrySpend()
         {
-            return base.TrySpend(value);
-            Debug.Log("Energy spended tra-la-la");
+            if (_currentEnergy + _energySpendCount > _maxEnergy) return;
+            if (_energyManager.TrySpend(_energySpendCount))
+            {
+                CurrentEnergy += _energySpendCount;
+            }
+            //Here should be manager upgrade logic
         }
-        
-        public override bool TryRefill(int value)
+
+        private void TryRefill()
         {
-            return base.TryRefill(value);
-            //CurrentCount += value;
+            if (_currentEnergy <= 0) return;
+            if (_energyManager.TryRefill(_energySpendCount))
+            {
+                CurrentEnergy -= _energySpendCount;
+            }
+        }
+
+        //Energy spend test
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                TrySpend();
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                TryRefill();
+            }
         }
     }
 }
-

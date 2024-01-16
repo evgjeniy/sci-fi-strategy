@@ -1,20 +1,23 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Systems
 {
     public class EnergyUI : MonoBehaviour
     {
         [SerializeField] private Slider _valueSlider;
-        [SerializeField] private EnergySystem _energySystem;
+        [SerializeField] private EnergyManager energyManager;
 
-        public void Bind(EnergySystem system)
+        [Inject]
+        public void Bind(EnergyManager manager)
         {
-            _energySystem = system;
-            _valueSlider.maxValue = system.MaxCount;
+            energyManager = manager;
+            _valueSlider.maxValue = manager.MaxCount;
             _valueSlider.minValue = 0;
-            _energySystem.OnValueChanged += Display;
+            energyManager.OnValueChanged += Display;
         }
         
         private void Display(int value)
@@ -24,7 +27,7 @@ namespace Systems
 
         private void OnDisable()
         {
-            _energySystem.OnValueChanged -= Display;
+            energyManager.OnValueChanged -= Display;
         }
     }
 }
