@@ -15,9 +15,10 @@ namespace Systems
         public void Bind(EnergyManager manager)
         {
             energyManager = manager;
-            _valueSlider.maxValue = manager.MaxCount;
+            SetMaxEnergy(manager.MaxCount);
             _valueSlider.minValue = 0;
             energyManager.OnValueChanged += Display;
+            energyManager.OnMaxValueChanged += SetMaxEnergy;
         }
         
         private void Display(int value)
@@ -25,9 +26,15 @@ namespace Systems
             _valueSlider.value = value;
         }
 
+        private void SetMaxEnergy(int value)
+        {
+            _valueSlider.maxValue = value;
+        }
+
         private void OnDisable()
         {
             energyManager.OnValueChanged -= Display;
+            energyManager.OnMaxValueChanged -= SetMaxEnergy;
         }
     }
 }

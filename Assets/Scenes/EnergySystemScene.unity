@@ -840,9 +840,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34582b7c5bff4dc58bac4774e732b3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _energyManager: {fileID: 0}
-  _energySpendCount: 5
-  _maxEnergy: 15
+  <_energySpendCount>k__BackingField: 2
+  _maxEnergy: 10
+  _currentEnergy: 0
 --- !u!4 &1505232234
 Transform:
   m_ObjectHideFlags: 0

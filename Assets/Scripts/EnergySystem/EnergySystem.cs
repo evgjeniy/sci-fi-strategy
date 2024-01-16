@@ -6,13 +6,32 @@ using Zenject;
 
 namespace Systems
 {
-    public class EnergySystem : MonoBehaviour
+    public class EnergySystem : MonoBehaviour, IEnergySystem
     {
-        [SerializeField] private EnergyManager _energyManager;
-        [SerializeField] private int _energySpendCount;
-        [SerializeField] private int _maxEnergy;
-        public Action<int> OnValueChanged;
+        
+        public EnergyManager _energyManager { get; set; }
+        [field: SerializeField] public int _energySpendCount { get; set; }
+        
+        public int MaxEnergy
+        {
+            get => _maxEnergy;
+            private set
+            {
+                if (value > _maxEnergy)
+                {
+                    _maxEnergy = value;
+                    OnValueChanged?.Invoke(_maxEnergy);
+                }
+            }
+        }
+
+        public Action<int> OnValueChanged { get; set; }
+        public Action<int> OnMaxValueChanged { get; set; }
+        [SerializeField] 
+        private int _maxEnergy;
+        [SerializeField] 
         private int _currentEnergy;
+       
         public int CurrentEnergy
         {
             get => _currentEnergy;
@@ -30,9 +49,14 @@ namespace Systems
             _energyManager = manager;
         }
 
-        private void TrySpend()
+        public void IncreaseMaxEnergy(int value)
         {
-            if (_currentEnergy + _energySpendCount > _maxEnergy) return;
+            MaxEnergy += value;
+        }
+
+        public void TrySpend()
+        {
+            if (_currentEnergy + _energySpendCount > MaxEnergy) return;
             if (_energyManager.TrySpend(_energySpendCount))
             {
                 CurrentEnergy += _energySpendCount;
@@ -40,7 +64,7 @@ namespace Systems
             //Here should be manager upgrade logic
         }
 
-        private void TryRefill()
+        public void TryRefill()
         {
             if (_currentEnergy <= 0) return;
             if (_energyManager.TryRefill(_energySpendCount))

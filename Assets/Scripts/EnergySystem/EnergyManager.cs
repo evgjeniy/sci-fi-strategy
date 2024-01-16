@@ -8,7 +8,18 @@ namespace Systems
     public class EnergyManager : MonoBehaviour
     {
         [SerializeField] private int _maxCount;
-        public int MaxCount => _maxCount;
+        
+        public int MaxCount { 
+            get => _maxCount; 
+            private set 
+            {
+                if (value > _maxCount)
+                {
+                    _maxCount = value;
+                    OnMaxValueChanged?.Invoke(_maxCount);
+                }
+            } 
+        }
 
         [SerializeField] private int _currentCount;
         public int CurrentCount
@@ -21,24 +32,28 @@ namespace Systems
                 OnValueChanged?.Invoke(_currentCount);
             }
         }
-
-        //public int FreeCount => _maxCount - _currentCount;
+        
+        public Action<int> OnMaxValueChanged;
         public Action<int> OnValueChanged;
 
         private void OnEnable()
         {
             CurrentCount = _maxCount;
         }
-        // Start is called before the first frame update
+
         void Start()
         {
         
         }
-
-        // Update is called once per frame
+        
         void Update()
         {
         
+        }
+
+        public void IncreaseMaxEnergy(int value)
+        {
+            MaxCount += value;
         }
 
         public bool TrySpend(int value)
