@@ -9,9 +9,9 @@ namespace Systems
         public EnergyManager _energyManager { get;}
         public int _energySpendCount { get;}
         public int MaxEnergy { get; }
-        public Action<int> OnValueChanged { get; }
-        public Action<int> OnMaxValueChanged { get; }
-        [field: SerializeField]
+        public Action<int> OnCurrentEnergyChanged { get; }
+        public Action<int> OnMaxEnergyChanged { get; }
+        
         int CurrentEnergy { get; }
 
         public void IncreaseMaxEnergy(int value){}

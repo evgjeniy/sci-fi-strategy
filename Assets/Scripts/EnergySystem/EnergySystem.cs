@@ -20,13 +20,13 @@ namespace Systems
                 if (value > _maxEnergy)
                 {
                     _maxEnergy = value;
-                    OnValueChanged?.Invoke(_maxEnergy);
+                    OnCurrentEnergyChanged?.Invoke(_maxEnergy);
                 }
             }
         }
 
-        public Action<int> OnValueChanged { get; set; }
-        public Action<int> OnMaxValueChanged { get; set; }
+        public Action<int> OnCurrentEnergyChanged { get; set; }
+        public Action<int> OnMaxEnergyChanged { get; set; }
         [SerializeField] 
         private int _maxEnergy;
         [SerializeField] 
@@ -39,7 +39,7 @@ namespace Systems
             {
                 if (value < 0) return;
                 _currentEnergy = value;
-                OnValueChanged?.Invoke(_currentEnergy);
+                OnCurrentEnergyChanged?.Invoke(_currentEnergy);
             }
         }
 
@@ -61,7 +61,7 @@ namespace Systems
             {
                 CurrentEnergy += _energySpendCount;
             }
-            //Here should be manager upgrade logic
+            //Here should be system upgrade logic
         }
 
         public void TryRefill()
@@ -71,6 +71,7 @@ namespace Systems
             {
                 CurrentEnergy -= _energySpendCount;
             }
+            //Here should be system downgrade logic
         }
 
         //Energy spend test
