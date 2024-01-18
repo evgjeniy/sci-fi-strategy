@@ -15,13 +15,18 @@ public class WeaponController : MonoBehaviour
     [SerializeField] float zoneDamageMaxDistFromCamera;
     [SerializeField] float zoneDamageRadius;
     [SerializeField] float zoneDamageReloadingSpeed;
-    private UIController uiController;
+    public delegate void ReloadDelegate(float l, bool r);
+    private ReloadDelegate ZoneDamageUpdate;
 
     private void Start()
     {
-        uiController = GetComponent<UIController>();
         zoneDmg = new ZoneDamageAbility(zoneDamageRadius, aimSpherePrefab, zoneDamageReloadingSpeed);
         addAbility(zoneDmg);
+    }
+
+    public void zoneDamageAdd(ReloadDelegate rd)
+    {
+        ZoneDamageUpdate += rd;
     }
 
     public void addAbility(BaseAbility ability)
@@ -54,7 +59,8 @@ public class WeaponController : MonoBehaviour
             {
                 ability.Load(Time.deltaTime);
                 if (ability is ZoneDamageAbility)   //tut poka tak budet, Ilya ne bei, mozhet potom chto to peredelaem
-                    uiController.setZoneDamageButtonData(ability.getReload(), ability.canShoot());
+                    ZoneDamageUpdate.Invoke(ability.getReload(), ability.canShoot());
+                    //uiController.setZoneDamageButtonData(ability.getReload(), ability.canShoot());
             }
         switch (mode)
         {
