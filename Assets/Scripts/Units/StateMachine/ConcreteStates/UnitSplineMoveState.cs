@@ -7,19 +7,19 @@ using UnityEngine.AI;
 public class UnitSplineMoveState : State<Unit>
 {
     private bool _isOnSpline = false;
+    private SplineFollower _splineFollower;
 
-    public UnitSplineMoveState(Unit context, StateMachine<Unit> stateMachine) : base(context, stateMachine) {}
+    public UnitSplineMoveState(Unit context, StateMachine stateMachine) : base(context, stateMachine) 
+    {
+        _splineFollower = context.GetComponent<SplineFollower>();
+    }
 
     public override void EnterState()
     {
-        SplineSample result = new SplineSample();
-        context.GetComponent<SplineFollower>().Project(context.transform.position, ref result);
-
-        _isOnSpline = context.transform.position == result.position;
-
-        if(!_isOnSpline)
+        if(IsOnSpline(out var splineSample))
         {
-            context.NavPathFollower.MoveTo(result.position);
+            _isOnSpline = true;
+            context.NavPathFollower.MoveTo(splineSample.position);
         }
         else
         {
@@ -34,16 +34,19 @@ public class UnitSplineMoveState : State<Unit>
 
     public override void FrameUpdate()
     {
-        if (!context.GetComponent<NavMeshAgent>().pathPending)
-        {
-            if (context.GetComponent<NavMeshAgent>().remainingDistance <= context.GetComponent<NavMeshAgent>().stoppingDistance)
-            {
-                if (!context.GetComponent<NavMeshAgent>().hasPath || context.GetComponent<NavMeshAgent>().velocity.sqrMagnitude == 0f)
-                {
-                    context.SplinePathFollower.Start();
-                }
-            }
-        }
+        if(!_isOnSpline)
+            if (context.NavPathFollower.IsDestinationReached())
+                context.SplinePathFollower?.Start();
+    }
+
+    public bool IsOnSpline(out SplineSample resultSample)
+    {
+        SplineSample result = new SplineSample();
+        _splineFollower.Project(context.transform.position, ref result);
+
+        resultSample = result;
+
+        return context.transform.position == result.position;
     }
 
     public override void PhysicsUpdate()

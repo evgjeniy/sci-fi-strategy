@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +8,21 @@ public class NavPathFollower : IPathFollower
     public NavPathFollower(NavMeshAgent agent)
     {
         this.agent = agent;
+    }
+
+    public bool IsDestinationReached()
+    {
+        if (!agent.pathPending)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void MoveTo(Vector3 position)

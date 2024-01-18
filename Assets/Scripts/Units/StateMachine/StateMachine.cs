@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine<T>
+public class StateMachine
 {
-    public State<T> CurrentState { get; private set; }
+    public IState CurrentState { get; private set; }
 
-    public void Initialize(State<T> startingState)
+    public void Initialize(IState startingState)
     {
         CurrentState = startingState;
         CurrentState.EnterState();
     }
 
-    public void ChangeState(State<T> newState)
+    public void ChangeState(IState newState)
     {
-        CurrentState.ExitState();
+        CurrentState?.ExitState();
         CurrentState = newState;
         CurrentState.EnterState();
     }

@@ -1,9 +1,9 @@
-public abstract class State<T>
+public abstract class State<T> : IState
 {
     protected T context;
-    protected StateMachine<T> stateMachine;
+    protected StateMachine stateMachine;
 
-    public State(T context, StateMachine<T> stateMachine)
+    public State(T context, StateMachine stateMachine)
     {
         this.context = context;
         this.stateMachine = stateMachine;

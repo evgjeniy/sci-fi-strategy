@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitAttackState : State<Unit>
 {
-    public UnitAttackState(Unit context, StateMachine<Unit> stateMachine) : base(context, stateMachine)
+    public UnitAttackState(Unit context, StateMachine stateMachine) : base(context, stateMachine)
     {
     }
 

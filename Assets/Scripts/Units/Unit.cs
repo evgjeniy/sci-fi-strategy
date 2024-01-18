@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Extensions;
 
 public class Unit : MonoBehaviour, IDamageble
 {
@@ -18,10 +19,12 @@ public class Unit : MonoBehaviour, IDamageble
     public Unit AgroUnit { get; protected set; }
     [SerializeField]
     private float _agroCheckDelay;
+    [SerializeField]
+    private SphereData _sphere;
 
     #region State Machine Variables
 
-    protected StateMachine<Unit> _stateMachine = new StateMachine<Unit>(); 
+    protected StateMachine _stateMachine = new StateMachine(); 
 
     #endregion
 
@@ -40,7 +43,7 @@ public class Unit : MonoBehaviour, IDamageble
     {
         CurrentHP = MaxHP;
 
-        SplinePathFollower = new SplinePathFollower(GetComponent<SplineFollower>());
+        //SplinePathFollower = new SplinePathFollower(GetComponent<SplineFollower>());
         NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
     }
 
@@ -85,9 +88,9 @@ public class Unit : MonoBehaviour, IDamageble
     {
         while (AgroUnit == null)
         {
-            foreach (var hit in Physics.SphereCastAll(transform.position, _agroRadius, transform.forward))
+            foreach (var collider in _sphere.Overlap())
             {
-                if (hit.collider.TryGetComponent<Unit>(out var unit) && unit.Team != this.Team)
+                if (collider.TryGetComponent<Unit>(out var unit) && unit.Team != this.Team)
                 {
                     AgroUnit = unit;
                     yield break;
@@ -95,6 +98,11 @@ public class Unit : MonoBehaviour, IDamageble
             }
             yield return new WaitForSeconds(_agroCheckDelay);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        _sphere.DrawGizmos();
     }
 }
  

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitAgroState : State<Unit>
 {
-    public UnitAgroState(Unit context, StateMachine<Unit> stateMachine) : base(context, stateMachine)
+    public UnitAgroState(Unit context, StateMachine stateMachine) : base(context, stateMachine)
     {
     }
 
