@@ -14,32 +14,32 @@ public abstract class BaseAbility
 
     public void setLoadingSpeed(float speed) => loadingSpeed = speed; //ne znayu nuzhen li no pust budet))
 
-    public void Shoot()
+    public void Shoot(Vector3 point)
     {
-        if (!canShoot())
+        if (!isReloaded())
         {
             FailShootLogic();
             return;
         }
         reload = 0;
-        SuccessShootLogic();
+        SuccessShootLogic(point);
     }
 
     public void Load(float delt)
     {
-        if (!canShoot())
+        if (!isReloaded())
         {
             reload += loadingSpeed * delt;
-            if(canShoot())
+            if(isReloaded())
                 ReadyToShoot();
         }
     }
 
-    public bool canShoot() => getReload() == 1f; //reload > 1 and pogreshnost ychtena v getReload()
+    public bool isReloaded() => getReload() == 1f; //reload > 1 and pogreshnost ychtena v getReload()
 
     protected abstract void FailShootLogic();
 
-    protected abstract void SuccessShootLogic();
+    protected abstract void SuccessShootLogic(Vector3 point);
 
     protected abstract void ReadyToShoot();
 }

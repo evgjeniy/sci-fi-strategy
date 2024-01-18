@@ -1,29 +1,25 @@
 using UnityEngine;
 
-public class ZoneDamageAbility : BaseAbility
+public class ZoneDamageAbility : ZoneAbility
 {
-    private float zoneRadius;
-    private GameObject aimSphere;
-
-    public ZoneDamageAbility(float zone, GameObject aim, float speed)
+    public ZoneDamageAbility(float zone, float speed)
     {
         zoneRadius = zone;
-        aimSphere = aim;
         loadingSpeed = speed;
     }
 
     protected override void FailShootLogic()
     {
-        Debug.Log("ZONE failed to shoot");
+        Debug.Log("zoneDGM failed to shoot");
     }
 
-    protected override void SuccessShootLogic()
+    protected override void SuccessShootLogic(Vector3 point)
     {
-        Debug.Log("ZONE success shot");
+        Debug.Log("zoneDMG success shot");
     }
 
     protected override void ReadyToShoot()
     {
-        Debug.Log("ZONE ready to shoot");
+        Debug.Log("zoneDMG ready to shoot");
     }
 }
