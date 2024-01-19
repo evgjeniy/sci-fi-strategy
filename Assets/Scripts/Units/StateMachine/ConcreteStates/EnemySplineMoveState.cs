@@ -6,12 +6,18 @@ using UnityEngine.AI;
 
 public class EnemySplineMoveState : State<Enemy>
 {
+    private IState _aggroState;
     private bool _isOnSpline = false;
     private SplineFollower _splineFollower;
 
     public EnemySplineMoveState(Enemy context, StateMachine stateMachine) : base(context, stateMachine) 
     {
         _splineFollower = context.GetComponent<SplineFollower>();
+    }
+
+    public void Init(IState aggroState)
+    {
+        _aggroState = aggroState;
     }
 
     public override void EnterState()
@@ -40,6 +46,11 @@ public class EnemySplineMoveState : State<Enemy>
                 _isOnSpline = true;
                 context.SplinePathFollower?.Start();
             }
+
+        if (context.Opponent != null)
+        {
+            context.StateMachine.ChangeState(_aggroState);
+        }
     }
 
     public bool IsOnSpline(out SplineSample resultSample)

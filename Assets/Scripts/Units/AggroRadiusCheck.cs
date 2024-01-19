@@ -9,8 +9,8 @@ public class AggroRadiusCheck : MonoBehaviour
 
     public List<Unit> AggroZoneUnits => _aggroZoneUnits;
 
-    public event Action<Unit> onUnitEnteredAgroZone;
-    public event Action<Unit> onUnitLeftAgroZone;
+    public event Action<Unit> OnUnitEnteredAggroZone;
+    public event Action<Unit> OnUnitLeftAggroZone;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,7 +20,7 @@ public class AggroRadiusCheck : MonoBehaviour
 
         Debug.Log("On unit entered aggro zone");
         _aggroZoneUnits.Add(unit);
-        onUnitEnteredAgroZone?.Invoke(unit);
+        OnUnitEnteredAggroZone?.Invoke(unit);
     }
 
     private void OnTriggerExit(Collider other)
@@ -29,12 +29,17 @@ public class AggroRadiusCheck : MonoBehaviour
         {
             if (other.gameObject == _aggroZoneUnits[i].gameObject)
             {
-                onUnitLeftAgroZone?.Invoke(_aggroZoneUnits[i]);
+                OnUnitLeftAggroZone?.Invoke(_aggroZoneUnits[i]);
                 _aggroZoneUnits.RemoveAt(i);
                 Debug.Log("On unit left aggro zone");
                 break;
             }
         }
+    }
+
+    private void RemoveUnit(Unit unit)
+    {
+        _aggroZoneUnits.Remove(unit);
     }
 }
 

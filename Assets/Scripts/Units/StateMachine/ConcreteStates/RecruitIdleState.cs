@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class RecruitIdleState : State<Recruit>
 {
+    private IState _aggroState;
+
     public RecruitIdleState(Recruit context, StateMachine stateMachine) : base(context, stateMachine)
     {
+    }
+
+    public void Init(IState aggroState)
+    {
+        _aggroState = aggroState;
     }
 
     public override void EnterState()
@@ -16,12 +23,15 @@ public class RecruitIdleState : State<Recruit>
 
     public override void ExitState()
     {
-        
+        context.NavPathFollower.Stop();
     }
 
     public override void FrameUpdate()
     {
-        
+        if(context.Opponent != null)
+        {
+            context.StateMachine.ChangeState(_aggroState);
+        }
     }
 
     public override void PhysicsUpdate()

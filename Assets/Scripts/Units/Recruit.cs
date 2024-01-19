@@ -8,7 +8,7 @@ public class Recruit : Unit
 
     protected RecruitIdleState _recruitIdleState;
     protected UnitAttackState _attackState;
-    protected UnitAgroState _agroState;
+    protected UnitAgroState _aggroState;
 
     #endregion
 
@@ -29,7 +29,9 @@ public class Recruit : Unit
 
         _recruitIdleState = new RecruitIdleState(this, _stateMachine);
         _attackState = new UnitAttackState(this, _stateMachine);
-        _agroState = new UnitAgroState(this, _stateMachine);
+        _aggroState = new UnitAgroState(this, _stateMachine);
+        _recruitIdleState.Init(_aggroState);
+        _aggroState.Init(_attackState, _recruitIdleState);
 
         _stateMachine.Initialize(_recruitIdleState);
     }

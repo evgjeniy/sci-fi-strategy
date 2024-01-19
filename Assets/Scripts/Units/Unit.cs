@@ -17,11 +17,19 @@ public class Unit : MonoBehaviour, IDamageble
     [field: SerializeField]
     public int Team { get; protected set; }
     [SerializeField]
-    private AggroRadiusCheck aggroRadius;
+    private AggroRadiusCheck _aggroRadius;
+    [SerializeField]
+    private AttackRadiusCheck _attackRadius;
 
     protected StateMachine _stateMachine = new StateMachine();
 
+    public StateMachine StateMachine => _stateMachine;
     public NavPathFollower NavPathFollower { get; protected set; }
+
+    public Unit Opponent { get; protected set; }
+    public bool IsOpponentInAttackZone { get; protected set; }
+
+    public event Action<Unit> OnDead;
 
     private void Start()
     {
@@ -32,20 +40,58 @@ public class Unit : MonoBehaviour, IDamageble
     {
         CurrentHP = MaxHP;
 
-        aggroRadius = new AggroRadiusCheck();
-        aggroRadius.onUnitEnteredAgroZone += UnitEneterdAgroZone;
-        aggroRadius.onUnitEnteredAgroZone += UnitLeftAgroZone;
+        _aggroRadius = GetComponentInChildren<AggroRadiusCheck>();
+        _aggroRadius.OnUnitEnteredAggroZone += UnitEneterdAggroZone;
+        _aggroRadius.OnUnitLeftAggroZone += UnitLeftAggroZone;
+        _attackRadius = GetComponentInChildren<AttackRadiusCheck>();
+        _attackRadius.OnUnitEnteredAttackZone += UnitEneterdAttackZone;
+        _attackRadius.OnUnitLeftAttackZone += UnitLeftAttackZone;
 
         NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
     }
-    private void UnitEneterdAgroZone(Unit unit)
+    private void UnitEneterdAggroZone(Unit unit)
     {
-        throw new NotImplementedException();
+        if (unit.Team == Team) return;
+
+        if (unit.RequestDuel(this))
+        {
+            Opponent = unit;
+            unit.OnDead += OpponentDead;
+        }
     }
 
-    private void UnitLeftAgroZone(Unit unit)
+    private void OpponentDead(Unit unit)
     {
-        throw new NotImplementedException();
+        BreakDuel();
+        IsOpponentInAttackZone = false;
+    }
+
+    private void UnitLeftAggroZone(Unit unit)
+    {
+        if (unit == Opponent) BreakDuel();
+    }
+
+    private void UnitEneterdAttackZone(Unit unit)
+    {
+        if(Opponent == unit) IsOpponentInAttackZone = true;
+    }
+
+    private void UnitLeftAttackZone(Unit unit)
+    {
+        if (Opponent == unit) IsOpponentInAttackZone = false;
+    }
+
+    public bool RequestDuel(Unit unit)
+    {
+        if(Opponent != null) return false;
+
+        Opponent = unit;
+        return true;
+    }
+
+    public void BreakDuel()
+    {
+        Opponent = null;
     }
 
     private void Update()
@@ -70,6 +116,7 @@ public class Unit : MonoBehaviour, IDamageble
 
     public void Die()
     {
+        OnDead?.Invoke(this);
         Destroy(gameObject);
     }  
 }

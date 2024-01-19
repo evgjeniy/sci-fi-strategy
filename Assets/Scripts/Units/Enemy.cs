@@ -9,7 +9,7 @@ public class Enemy : Unit
 
     protected EnemySplineMoveState _splineMoveState;
     protected UnitAttackState _attackState;
-    protected UnitAgroState _agroState;
+    protected UnitAgroState _aggroState;
 
     #endregion
 
@@ -29,7 +29,9 @@ public class Enemy : Unit
 
         _splineMoveState = new EnemySplineMoveState(this, _stateMachine);
         _attackState = new UnitAttackState(this, _stateMachine);
-        _agroState = new UnitAgroState(this, _stateMachine);
+        _aggroState = new UnitAgroState(this, _stateMachine);
+        _splineMoveState.Init(_aggroState);
+        _aggroState.Init(_attackState, _splineMoveState);
 
         _stateMachine.Initialize(_splineMoveState);
     }
