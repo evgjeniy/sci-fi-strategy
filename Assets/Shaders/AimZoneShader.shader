@@ -9,6 +9,7 @@ Shader "Custom/AimZoneShader"
         _Thickness ("Thickness", Range(0, 100)) = 5
     }
     SubShader {
+        Tags { "RenderType"="Opaque" "RenderPipeline"="UniversalPipeline" }
 
         CGPROGRAM
         #pragma surface surf Lambert
