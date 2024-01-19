@@ -7,7 +7,7 @@ namespace SustainTheStrain.Installers
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<InputService>().FromNew().AsSingle();
+            Container.BindInterfacesTo<InputService>().AsSingle();
         }
     }
 }

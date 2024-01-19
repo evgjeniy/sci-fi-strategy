@@ -1,11 +1,18 @@
 using System;
 using SustainTheStrain.Input;
 using UnityEngine;
-using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    public class BuildingSystem : MonoBehaviour
+    public interface IBuildingSystem
+    {
+        public event Action OnMouseClick; // TODO: needs to be replaced at some 'BuildingSelector'
+        public event Action<BuildingPlaceholder> OnMousePlaceholderClick;
+        public event Action<BuildingPlaceholder> OnMousePlaceholderEnter;
+        public event Action<BuildingPlaceholder> OnMousePlaceholderExit;
+    }
+
+    public class BuildingSystem : MonoBehaviour, IBuildingSystem
     {
         [SerializeField] private float _sphereCastRadius = 0.5f;
         [SerializeField] private LayerMask _sphereCastLayerMask;
@@ -16,12 +23,12 @@ namespace SustainTheStrain.Buildings
         private Camera _camera;
         private IInputService _inputService;
 
-        public event Action OnMouseClick; // TODO: needs to be replaced at some 'BuildingSelector'
+        public event Action OnMouseClick;
         public event Action<BuildingPlaceholder> OnMousePlaceholderClick;
         public event Action<BuildingPlaceholder> OnMousePlaceholderEnter;
         public event Action<BuildingPlaceholder> OnMousePlaceholderExit;
         
-        [Inject]
+        [Zenject.Inject]
         private void Construct(IInputService inputService)
         {
             _inputService = inputService;

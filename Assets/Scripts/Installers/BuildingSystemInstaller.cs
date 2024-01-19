@@ -10,7 +10,7 @@ namespace SustainTheStrain.Installers
     
         public override void InstallBindings()
         {
-            Container.Bind<BuildingSystem>().FromComponentInNewPrefab(_buildingSystemPrefab).AsSingle();
+            Container.Bind<IBuildingSystem>().FromComponentInNewPrefab(_buildingSystemPrefab).AsSingle();
         }
     }
 }

@@ -1,11 +1,18 @@
-﻿using SustainTheStrain.Buildings.Components;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SustainTheStrain.Buildings.Data
 {
     [CreateAssetMenu(menuName = "Static Data/Buildings/Artillery", fileName = "Artillery")]
-    public class ArtilleryData : BaseBuildingData<Artillery, ArtilleryData.Stats>
+    public class ArtilleryData : BuildingData
     {
+        [field: SerializeField] public PricedLevelStats<Stats>[] ArtilleryStats { get; private set; } = { new() };
+
+        public void OnValidate()
+        {
+            if (ArtilleryStats.Length == 0)
+                ArtilleryStats = new[] { new PricedLevelStats<Stats>() };
+        }
+
         [System.Serializable]
         public class Stats
         {

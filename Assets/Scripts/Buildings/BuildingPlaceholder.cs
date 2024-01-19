@@ -5,6 +5,9 @@ namespace SustainTheStrain.Buildings
 {
     public class BuildingPlaceholder : MonoBehaviour
     {
-        private BaseBuilding _building;
+        [field: SerializeField] public Transform BuildingRoot { get; private set; }
+        [field: SerializeField] public Transform SelectorUIRoot { get; private set; }
+        
+        private Building _building;
     }
 }
