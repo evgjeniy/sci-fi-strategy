@@ -25,6 +25,8 @@ public class Recruit : Unit
     {
         base.Init();
 
+        _guardPosition = transform.position;
+
         _recruitIdleState = new RecruitIdleState(this, _stateMachine);
         _attackState = new UnitAttackState(this, _stateMachine);
         _agroState = new UnitAgroState(this, _stateMachine);

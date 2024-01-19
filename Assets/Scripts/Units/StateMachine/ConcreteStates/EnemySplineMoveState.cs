@@ -4,21 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class UnitSplineMoveState : State<Unit>
+public class EnemySplineMoveState : State<Enemy>
 {
     private bool _isOnSpline = false;
     private SplineFollower _splineFollower;
 
-    public UnitSplineMoveState(Unit context, StateMachine stateMachine) : base(context, stateMachine) 
+    public EnemySplineMoveState(Enemy context, StateMachine stateMachine) : base(context, stateMachine) 
     {
         _splineFollower = context.GetComponent<SplineFollower>();
     }
 
     public override void EnterState()
     {
-        if(IsOnSpline(out var splineSample))
+        if(!IsOnSpline(out var splineSample))
         {
-            _isOnSpline = true;
+            _isOnSpline = false;
             context.NavPathFollower.MoveTo(splineSample.position);
         }
         else
@@ -34,9 +34,12 @@ public class UnitSplineMoveState : State<Unit>
 
     public override void FrameUpdate()
     {
-        if(!_isOnSpline)
+        if (!_isOnSpline)
             if (context.NavPathFollower.IsDestinationReached())
+            {
+                _isOnSpline = true;
                 context.SplinePathFollower?.Start();
+            }
     }
 
     public bool IsOnSpline(out SplineSample resultSample)

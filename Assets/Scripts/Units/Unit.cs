@@ -1,5 +1,6 @@
 using Dreamteck.Splines;
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -15,24 +16,12 @@ public class Unit : MonoBehaviour, IDamageble
     public float CurrentHP { get; protected set; }
     [field: SerializeField]
     public int Team { get; protected set; }
-    [field: SerializeField]
-    public Unit AgroUnit { get; protected set; }
     [SerializeField]
-    private float _agroCheckDelay;
-    [SerializeField]
-    private SphereData _sphere;
+    private AggroRadiusCheck aggroRadius;
 
-    #region State Machine Variables
-
-    protected StateMachine _stateMachine = new StateMachine(); 
-
-    #endregion
-
-    private IPathFollower currentPathFollower;
-    private float _agroRadius;
+    protected StateMachine _stateMachine = new StateMachine();
 
     public NavPathFollower NavPathFollower { get; protected set; }
-    public SplinePathFollower SplinePathFollower { get; protected set; }
 
     private void Start()
     {
@@ -43,8 +32,20 @@ public class Unit : MonoBehaviour, IDamageble
     {
         CurrentHP = MaxHP;
 
-        //SplinePathFollower = new SplinePathFollower(GetComponent<SplineFollower>());
+        aggroRadius = new AggroRadiusCheck();
+        aggroRadius.onUnitEnteredAgroZone += UnitEneterdAgroZone;
+        aggroRadius.onUnitEnteredAgroZone += UnitLeftAgroZone;
+
         NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
+    }
+    private void UnitEneterdAgroZone(Unit unit)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void UnitLeftAgroZone(Unit unit)
+    {
+        throw new NotImplementedException();
     }
 
     private void Update()
@@ -55,18 +56,6 @@ public class Unit : MonoBehaviour, IDamageble
     private void FixedUpdate()
     {
         _stateMachine.CurrentState.PhysicsUpdate();
-    }
-
-    [Button("Stop")]
-    public void StopMovement()
-    {
-        currentPathFollower?.Stop();
-    }
-
-    [Button("Start")]
-    public void StartMovement()
-    {
-        
     }
 
     public void Damage(float damage)
@@ -82,27 +71,6 @@ public class Unit : MonoBehaviour, IDamageble
     public void Die()
     {
         Destroy(gameObject);
-    }
-
-    private IEnumerator CheckForAgro()
-    {
-        while (AgroUnit == null)
-        {
-            foreach (var collider in _sphere.Overlap())
-            {
-                if (collider.TryGetComponent<Unit>(out var unit) && unit.Team != this.Team)
-                {
-                    AgroUnit = unit;
-                    yield break;
-                }
-            }
-            yield return new WaitForSeconds(_agroCheckDelay);
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        _sphere.DrawGizmos();
-    }
+    }  
 }
  
