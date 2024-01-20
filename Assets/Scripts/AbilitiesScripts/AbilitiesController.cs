@@ -16,8 +16,10 @@ public class AbilitiesController : MonoBehaviour
     [SerializeField] float zoneDamageReloadingSpeed;
     public delegate void ReloadDelegate(float l, bool r);
     private ReloadDelegate ZoneDamageUpdate;
-    private delegate void CurrentAbilityDelegate();
-    private CurrentAbilityDelegate currentAbilityUpdateLogic, currentAbilityDestroyLogic;
+    private delegate void CurrentDestroyDelegate();
+    private CurrentDestroyDelegate currentAbilityDestroyLogic;
+    private delegate void CurrentUpdateDelegate(RaycastHit hit);
+    CurrentUpdateDelegate currentAbilityUpdateLogic;
 
     private void Start()
     {
@@ -53,7 +55,8 @@ public class AbilitiesController : MonoBehaviour
         {
             mode = -1;
             currentAbilityDestroyLogic?.Invoke();
-            currentAbilityDestroyLogic = currentAbilityUpdateLogic = null;
+            currentAbilityDestroyLogic = null;
+            currentAbilityUpdateLogic = null;
             return true;
         }
         return false;
@@ -70,27 +73,22 @@ public class AbilitiesController : MonoBehaviour
         currentAbilityUpdateLogic += ZoneDamageAbilityUpdateLogic;
         currentAbilityDestroyLogic += ZoneDamageAbilityDestroyLogic;
         aimZone = Instantiate(aimZonePrefab, new Vector3(0, 0, 0), Quaternion.Euler(90, 0, 0));
-        aimZone.GetComponent<DecalProjector>().size = new Vector3(zoneDamageRadius, zoneDamageRadius, 1);
+        aimZone.GetComponent<DecalProjector>().size = new Vector3(zoneDamageRadius, zoneDamageRadius, 25);
     }
 
-    private void ZoneDamageAbilityUpdateLogic()
+    private void ZoneDamageAbilityUpdateLogic(RaycastHit hit)
     {
-        Vector3 mousePosition = Input.mousePosition;
-        Ray ray = mainCamera.ScreenPointToRay(mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, zoneDamageMaxDistFromCamera, layersToHit))
+        Vector3 point = hit.point;
+        aimZone.transform.position = point + offset;
+        if (abilities[mode].isReloaded())
         {
-            Vector3 point = hit.point;
-            aimZone.transform.position = point + offset; //now aim is like sphere, cause my shader does not work
-            if (abilities[mode].isReloaded())
-            {
-                //мб цвет прицела будет зеленый
-                if (Input.GetMouseButtonDown(0))
-                    abilities[mode].Shoot(point);
-            }
-            else
-            {
-                //мб цвет прицела будет красный
-            }
+            //мб цвет прицела будет зеленый
+            if (Input.GetMouseButtonDown(0))
+                abilities[mode].Shoot(point);
+        }
+        else
+        {
+            //мб цвет прицела будет красный
         }
     }
 
@@ -110,6 +108,11 @@ public class AbilitiesController : MonoBehaviour
             }
         if (mode == -1)
             return;
-        currentAbilityUpdateLogic?.Invoke();
+        Vector3 mousePosition = Input.mousePosition;
+        Ray ray = mainCamera.ScreenPointToRay(mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, zoneDamageMaxDistFromCamera, layersToHit))
+        {
+            currentAbilityUpdateLogic?.Invoke(hit);
+        }
     }
 }

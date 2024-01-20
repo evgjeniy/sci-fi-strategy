@@ -414,9 +414,9 @@ MonoBehaviour:
   layersToHit:
     serializedVersion: 2
     m_Bits: 8
-  zoneDamageMaxDistFromCamera: 500
-  zoneDamageRadius: 10
-  zoneDamageReloadingSpeed: 0.3
+  zoneDamageMaxDistFromCamera: 300
+  zoneDamageRadius: 15
+  zoneDamageReloadingSpeed: 0.6
 --- !u!1 &774110299
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,7 +795,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 566213455}
-        m_TargetAssemblyTypeName: WeaponController, Assembly-CSharp
+        m_TargetAssemblyTypeName: AbilitiesController, Assembly-CSharp
         m_MethodName: OnZoneDamageAbilitySelect
         m_Mode: 1
         m_Arguments:
@@ -1276,8 +1276,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7140163344742071951, guid: dec463a7aab7ab7489701ffb37bc966f,
         type: 3}
+      propertyPath: m_Size.z
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7140163344742071951, guid: dec463a7aab7ab7489701ffb37bc966f,
+        type: 3}
       propertyPath: m_Offset.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7140163344742071951, guid: dec463a7aab7ab7489701ffb37bc966f,
+        type: 3}
+      propertyPath: m_Offset.z
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: 7140163344742071951, guid: dec463a7aab7ab7489701ffb37bc966f,
         type: 3}
