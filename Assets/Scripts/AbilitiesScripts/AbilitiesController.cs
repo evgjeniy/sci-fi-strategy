@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class AbilitiesController : MonoBehaviour
 {
+    private Vector3 offset = new Vector3(0, 0.8f, 0);
     private List<BaseAbility> abilities = new List<BaseAbility>();
     private int mode = -1;
-    [SerializeField] GameObject aimSpherePrefab;
-    private GameObject aimSphere;
+    [SerializeField] GameObject aimZonePrefab;
+    private GameObject aimZone;
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask layersToHit;
     [SerializeField] float zoneDamageMaxDistFromCamera;
@@ -67,8 +69,8 @@ public class AbilitiesController : MonoBehaviour
             return;
         currentAbilityUpdateLogic += ZoneDamageAbilityUpdateLogic;
         currentAbilityDestroyLogic += ZoneDamageAbilityDestroyLogic;
-        aimSphere = Instantiate(aimSpherePrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        aimSphere.transform.localScale = new Vector3(zoneDamageRadius, zoneDamageRadius, zoneDamageRadius);
+        aimZone = Instantiate(aimZonePrefab, new Vector3(0, 0, 0), Quaternion.Euler(90, 0, 0));
+        aimZone.GetComponent<DecalProjector>().size = new Vector3(zoneDamageRadius, zoneDamageRadius, 1);
     }
 
     private void ZoneDamageAbilityUpdateLogic()
@@ -78,7 +80,7 @@ public class AbilitiesController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, zoneDamageMaxDistFromCamera, layersToHit))
         {
             Vector3 point = hit.point;
-            aimSphere.transform.position = point; //now aim is like sphere, cause my shader does not work
+            aimZone.transform.position = point + offset; //now aim is like sphere, cause my shader does not work
             if (abilities[mode].isReloaded())
             {
                 //мб цвет прицела будет зеленый
@@ -94,7 +96,7 @@ public class AbilitiesController : MonoBehaviour
 
     private void ZoneDamageAbilityDestroyLogic()
     {
-        Destroy(aimSphere);
+        Destroy(aimZone);
     }
 
     void Update()
