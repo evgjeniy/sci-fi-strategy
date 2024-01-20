@@ -9,16 +9,17 @@ namespace Systems
     public class EnergyUI : MonoBehaviour
     {
         [SerializeField] private Slider _valueSlider;
-        [SerializeField] private EnergyManager energyManager;
+        [SerializeField] private EnergyController _energyController;
 
         [Inject]
-        public void Bind(EnergyManager manager)
+        public void Bind(EnergyController controller)
         {
-            energyManager = manager;
-            SetMaxEnergy(manager.MaxCount);
+            _energyController = controller;
             _valueSlider.minValue = 0;
-            energyManager.OnValueChanged += Display;
-            energyManager.OnMaxValueChanged += SetMaxEnergy;
+            var manager = _energyController.Manager;
+            _valueSlider.maxValue = manager.MaxCount;
+            manager.OnEnergyChanged += Display;
+            manager.OnMaxEnergyChanged += SetMaxEnergy;
         }
         
         private void Display(int value)
@@ -33,8 +34,9 @@ namespace Systems
 
         private void OnDisable()
         {
-            energyManager.OnValueChanged -= Display;
-            energyManager.OnMaxValueChanged -= SetMaxEnergy;
+            var manager = _energyController.Manager;
+            manager.OnEnergyChanged -= Display;
+            manager.OnMaxEnergyChanged -= SetMaxEnergy;
         }
     }
 }

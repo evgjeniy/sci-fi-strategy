@@ -2,20 +2,50 @@
 using System.Collections;
 using Systems;
 using UnityEngine;
+using Zenject;
 
 namespace ResourceSystems
 {
     public class ExplorePointGenerator : ResourceGenerator, IEnergySystem
     {
-        // private void Start()
-        // {
-        //     StartGeneration();
-        // }
-
+        [Inject] public EnergyController EnergyController { get; set; }
+        [field:SerializeField] public int EnergySpendCount { get; private set; }
+        public int MaxEnergy
+        {
+            get => _maxEnergy;
+            private set
+            {
+                _maxEnergy = value;
+                OnMaxEnergyChanged?.Invoke(_maxEnergy);
+            }
+        }
+        
+        [SerializeField] 
+        private int _maxEnergy;
+        public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
+        public event Action<int> OnCurrentEnergyChanged;
+        public event Action<int> OnMaxEnergyChanged;
+        public int CurrentEnergy
+        {
+            get => _currentEnergy;
+            private set
+            {
+                if (value < 0 || value > MaxEnergy) return;
+                if (!_canGenerate && value > 0)
+                {
+                    _canGenerate = true;
+                    StartGeneration();
+                }
+                _currentEnergy = value;
+                OnCurrentEnergyChanged?.Invoke(_currentEnergy);
+                _canGenerate = value != 0;
+            }
+        }
+    
+        private int _currentEnergy;
+        
         public override void StartGeneration()
         {
-            _canGenerate = true;
-            //Temp value
             _generatingRoutine = StartCoroutine(GenerateResource());
         }
 
@@ -23,38 +53,56 @@ namespace ResourceSystems
         {
             while (_canGenerate)
             {
-                yield return new WaitForSeconds(_cooldown);
-                OnResourceGenerated?.Invoke(_generateCount);
+                yield return new WaitForSeconds(Cooldown);
+                _resourceGenerated?.Invoke(_generateCount);
             }
             EndGeneration();
         }
 
         public override void EndGeneration()
         {
-            _generatingRoutine = null;
-        }
-
-        public override void IncreaseGenerateCount()
-        {
-            base.IncreaseGenerateCount();
-        }
-
-        public override void IncreaseGenerateSpeed()
-        {
-            base.IncreaseGenerateSpeed();
+            if (_generatingRoutine != null)
+            {
+                StopCoroutine(_generatingRoutine);
+            }
         }
         
-        public EnergyManager _energyManager { get; }
-        public int _energySpendCount { get; }
-        public int MaxEnergy { get; }
-        public Action<int> OnCurrentEnergyChanged { get; }
-        public Action<int> OnMaxEnergyChanged { get; }
-        public int CurrentEnergy { get; }
+        public void IncreaseMaxEnergy(int value)
+        {
+            MaxEnergy += value;
+        }
 
+        public void TrySpendEnergy()
+        {
+            if (FreeEnergyCells<EnergySpendCount) return;
+            if (EnergyController.TryGetEnergy(EnergySpendCount))
+            {
+                CurrentEnergy += EnergySpendCount;
+            }
+            //Here should be system upgrade logic
+        }
 
+        public void TryRefillEnergy()
+        {
+            if (_currentEnergy <= EnergySpendCount) return;
+            if (EnergyController.TryReturnEnergy(EnergySpendCount))
+            {
+                CurrentEnergy -= EnergySpendCount;
+            }
+            //Here should be system downgrade logic
+        }
+        
         private void OnDisable()
         {
             EndGeneration();
+        }
+        
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                TrySpendEnergy();
+            }
         }
     }
 }

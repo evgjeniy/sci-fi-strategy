@@ -8,6 +8,5 @@ public class EnergyManagerInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.Bind<EnergyManager>().FromInstance(_energyManager).AsSingle();
-        Container.QueueForInject(_energyManager);
     }
 }

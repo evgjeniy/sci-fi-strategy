@@ -12,8 +12,6 @@ namespace ResourceSystems
         {
             Container.Bind<ExplorePointGenerator>().FromInstance(_explorePointGenerator).AsSingle();
             Container.Bind<GoldGenerator>().FromInstance(_goldGenerator).AsSingle();
-            Container.QueueForInject(_explorePointGenerator);
-            Container.QueueForInject(_goldGenerator);
         }
     }
 }

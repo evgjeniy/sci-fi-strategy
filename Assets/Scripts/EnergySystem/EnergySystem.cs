@@ -9,24 +9,20 @@ namespace Systems
     public class EnergySystem : MonoBehaviour, IEnergySystem
     {
         
-        public EnergyManager _energyManager { get; set; }
-        [field: SerializeField] public int _energySpendCount { get; set; }
-        
+        public EnergyController EnergyController { get; set; }
+        [field: SerializeField] public int EnergySpendCount { get; set; }
+        public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
+
         public int MaxEnergy
         {
             get => _maxEnergy;
             private set
             {
-                if (value > _maxEnergy)
-                {
-                    _maxEnergy = value;
-                    OnCurrentEnergyChanged?.Invoke(_maxEnergy);
-                }
+                _maxEnergy = value;
+                OnMaxEnergyChanged?.Invoke(_maxEnergy);
             }
         }
-
-        public Action<int> OnCurrentEnergyChanged { get; set; }
-        public Action<int> OnMaxEnergyChanged { get; set; }
+        
         [SerializeField] 
         private int _maxEnergy;
         [SerializeField] 
@@ -43,10 +39,13 @@ namespace Systems
             }
         }
 
+        public event Action<int> OnCurrentEnergyChanged;
+        public event Action<int> OnMaxEnergyChanged;
+
         [Inject]
-        public void BindManager(EnergyManager manager)
+        public void BindController(EnergyController controller)
         {
-            _energyManager = manager;
+            EnergyController = controller;
         }
 
         public void IncreaseMaxEnergy(int value)
@@ -54,22 +53,22 @@ namespace Systems
             MaxEnergy += value;
         }
 
-        public void TrySpend()
+        public void TrySpendEnergy()
         {
-            if (_currentEnergy + _energySpendCount > MaxEnergy) return;
-            if (_energyManager.TrySpend(_energySpendCount))
+            if (_currentEnergy + EnergySpendCount > MaxEnergy) return;
+            if (EnergyController.TryGetEnergy(EnergySpendCount))
             {
-                CurrentEnergy += _energySpendCount;
+                CurrentEnergy += EnergySpendCount;
             }
             //Here should be system upgrade logic
         }
 
-        public void TryRefill()
+        public void TryRefillEnergy()
         {
             if (_currentEnergy <= 0) return;
-            if (_energyManager.TryRefill(_energySpendCount))
+            if (EnergyController.TryReturnEnergy(EnergySpendCount))
             {
-                CurrentEnergy -= _energySpendCount;
+                CurrentEnergy -= EnergySpendCount;
             }
             //Here should be system downgrade logic
         }
@@ -79,12 +78,12 @@ namespace Systems
         {
             if (Input.GetMouseButtonDown(0))
             {
-                TrySpend();
+                TrySpendEnergy();
             }
 
             if (Input.GetMouseButtonDown(1))
             {
-                TryRefill();
+                TryRefillEnergy();
             }
         }
     }

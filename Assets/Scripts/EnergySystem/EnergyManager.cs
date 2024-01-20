@@ -7,16 +7,18 @@ namespace Systems
 {
     public class EnergyManager : MonoBehaviour
     {
-        [SerializeField] private int _maxCount;
+        public event Action<int> OnEnergyChanged;
+        public event Action<int> OnMaxEnergyChanged;
         
+        [Min(1)] [SerializeField] private int _maxCount;
         public int MaxCount { 
             get => _maxCount; 
             private set 
             {
-                if (value > _maxCount)
+                if (value > 0)
                 {
                     _maxCount = value;
-                    OnMaxValueChanged?.Invoke(_maxCount);
+                    OnMaxEnergyChanged?.Invoke(_maxCount);
                 }
             } 
         }
@@ -29,28 +31,15 @@ namespace Systems
             {
                 if (value < 0) return;
                 _currentCount = value;
-                OnValueChanged?.Invoke(_currentCount);
+                OnEnergyChanged?.Invoke(_currentCount);
             }
         }
         
-        public Action<int> OnMaxValueChanged;
-        public Action<int> OnValueChanged;
-
         private void OnEnable()
         {
             CurrentCount = _maxCount;
         }
-
-        void Start()
-        {
         
-        }
-        
-        void Update()
-        {
-        
-        }
-
         public void IncreaseMaxEnergy(int value)
         {
             MaxCount += value;
@@ -58,29 +47,20 @@ namespace Systems
 
         public bool TrySpend(int value)
         {
-            if (CurrentCount >= value)
-            {
-                CurrentCount -= value;
-                return true;
-            }
+            if (CurrentCount < value) return false;
+            CurrentCount -= value;
+            return true;
 
-            return false;
         }
         
         public bool TryRefill(int value)
         {
-            if (CurrentCount + value <= _maxCount)
-            {
-                CurrentCount += value;
-                return true;
-            }
+            if (CurrentCount + value > _maxCount) return false;
+            CurrentCount += value;
+            return true;
 
-            return false;
         }
         
-        
-
-       
     }
 }
 

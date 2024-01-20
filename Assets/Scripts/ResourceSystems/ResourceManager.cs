@@ -8,35 +8,31 @@ namespace ResourceSystems
     {
         private int _currentExplorePoints;
         [SerializeField] private int _maxExplorePoints;
-        public Action<int> OnExplorePointsChanged;
+        public event Action<int> OnExplorePointsChanged;
         
         public int CurrentExplorePoints
         {
             get => _currentExplorePoints;
             private set
             {
-                if (value < _maxExplorePoints)
-                {
-                    _currentExplorePoints = value;
-                    OnExplorePointsChanged?.Invoke(_currentExplorePoints);
-                }
+                if (value > _maxExplorePoints) return;
+                _currentExplorePoints = value;
+                OnExplorePointsChanged?.Invoke(_currentExplorePoints);
             }
         }
         
         private int _currentGold;
         [SerializeField] private int _maxGold;
-        public Action<int> OnGoldChanged;
+        public event Action<int> OnGoldChanged;
         
         public int CurrentGold
         {
             get => _currentGold;
             private set
             {
-                if (value < _maxGold)
-                {
-                    _currentGold = value;
-                    OnGoldChanged?.Invoke(_currentGold);
-                }
+                if (value > _maxGold) return;
+                _currentGold = value;
+                OnGoldChanged?.Invoke(_currentGold);
             }
         }
         
@@ -49,7 +45,6 @@ namespace ResourceSystems
             _explorePointGenerator = explorePointGenerator;
             _goldGenerator = goldGenerator;
             Subscribe();
-            Debug.Log("Subscribed");
         }
 
         private void Subscribe()
@@ -78,14 +73,6 @@ namespace ResourceSystems
         {
             UnSubscribe();
         }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                _goldGenerator.StartGeneration();
-                _explorePointGenerator.StartGeneration();
-            }
-        }
+        
     }
 }
