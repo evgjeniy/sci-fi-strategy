@@ -1,39 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using UnityEngine;
-
-public class RecruitIdleState : State<Recruit>
+namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
-    private IState _aggroState;
-
-    public RecruitIdleState(Recruit context, StateMachine stateMachine) : base(context, stateMachine)
+    public class RecruitIdleState : State<Recruit>
     {
-    }
+        private IState _aggroState;
 
-    public void Init(IState aggroState)
-    {
-        _aggroState = aggroState;
-    }
+        public RecruitIdleState(Recruit context, StateMachine stateMachine) : base(context, stateMachine)
+        {
+        }
 
-    public override void EnterState()
-    {
-        if(context.transform.position != context.GuardPosition)
-            context.NavPathFollower.MoveTo(context.GuardPosition);
-    }
+        public void Init(IState aggroState)
+        {
+            _aggroState = aggroState;
+        }
 
-    public override void ExitState()
-    {
-        context.NavPathFollower.Stop();
-    }
+        public override void EnterState()
+        {
+            if(context.transform.position != context.GuardPosition)
+                context.NavPathFollower.MoveTo(context.GuardPosition);
+        }
 
-    public override void FrameUpdate()
-    {
+        public override void ExitState()
+        {
+            context.NavPathFollower.Stop();
+        }
+
+        public override void FrameUpdate()
+        {
        
-    }
+        }
 
-    public override void PhysicsUpdate()
-    {
+        public override void PhysicsUpdate()
+        {
         
+        }
     }
 }

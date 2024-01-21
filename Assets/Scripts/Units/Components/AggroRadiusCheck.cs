@@ -1,45 +1,47 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AggroRadiusCheck : MonoBehaviour
+namespace SustainTheStrain.Units.Components
 {
-    private List<Unit> _aggroZoneUnits = new List<Unit>();
-
-    public List<Unit> AggroZoneUnits => _aggroZoneUnits;
-
-    public event Action<Unit> OnUnitEnteredAggroZone;
-    public event Action<Unit> OnUnitLeftAggroZone;
-
-    private void OnTriggerEnter(Collider other)
+    public class AggroRadiusCheck : MonoBehaviour
     {
-        other.gameObject.TryGetComponent<Unit>(out var unit);
+        private List<Unit> _aggroZoneUnits = new List<Unit>();
 
-        if (unit == null) return;
+        public List<Unit> AggroZoneUnits => _aggroZoneUnits;
 
-        Debug.Log("On unit entered aggro zone");
-        _aggroZoneUnits.Add(unit);
-        OnUnitEnteredAggroZone?.Invoke(unit);
-    }
+        public event Action<Unit> OnUnitEnteredAggroZone;
+        public event Action<Unit> OnUnitLeftAggroZone;
 
-    private void OnTriggerExit(Collider other)
-    {
-        for (int i = 0; i < _aggroZoneUnits.Count; i++)
+        private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject == _aggroZoneUnits[i].gameObject)
+            other.gameObject.TryGetComponent<Unit>(out var unit);
+
+            if (unit == null) return;
+
+            Debug.Log("On unit entered aggro zone");
+            _aggroZoneUnits.Add(unit);
+            OnUnitEnteredAggroZone?.Invoke(unit);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            for (int i = 0; i < _aggroZoneUnits.Count; i++)
             {
-                OnUnitLeftAggroZone?.Invoke(_aggroZoneUnits[i]);
-                _aggroZoneUnits.RemoveAt(i);
-                Debug.Log("On unit left aggro zone");
-                break;
+                if (other.gameObject == _aggroZoneUnits[i].gameObject)
+                {
+                    OnUnitLeftAggroZone?.Invoke(_aggroZoneUnits[i]);
+                    _aggroZoneUnits.RemoveAt(i);
+                    Debug.Log("On unit left aggro zone");
+                    break;
+                }
             }
         }
-    }
 
-    private void RemoveUnit(Unit unit)
-    {
-        _aggroZoneUnits.Remove(unit);
+        private void RemoveUnit(Unit unit)
+        {
+            _aggroZoneUnits.Remove(unit);
+        }
     }
 }
 

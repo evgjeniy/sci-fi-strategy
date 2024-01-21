@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IPathFollower
+namespace SustainTheStrain.Units.PathFollowers
 {
-    public float Speed { get; set; }
+    public interface IPathFollower
+    {
+        public float Speed { get; set; }
 
-    public void Start();
-    public void Stop();
+        public void Start();
+        public void Stop();
+    }
 }

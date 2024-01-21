@@ -1,38 +1,40 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackRadiusCheck : MonoBehaviour
+namespace SustainTheStrain.Units.Components
 {
-    private List<Unit> _attackZoneUnits = new List<Unit>();
-
-    public List<Unit> AttackZoneUnits => _attackZoneUnits;
-
-    public event Action<Unit> OnUnitEnteredAttackZone;
-    public event Action<Unit> OnUnitLeftAttackZone;
-
-    private void OnTriggerEnter(Collider other)
+    public class AttackRadiusCheck : MonoBehaviour
     {
-        other.gameObject.TryGetComponent<Unit>(out var unit);
+        private List<Unit> _attackZoneUnits = new List<Unit>();
 
-        if (unit == null) return;
+        public List<Unit> AttackZoneUnits => _attackZoneUnits;
 
-        Debug.Log("On unit entered attack zone");
-        _attackZoneUnits.Add(unit);
-        OnUnitEnteredAttackZone?.Invoke(unit);
-    }
+        public event Action<Unit> OnUnitEnteredAttackZone;
+        public event Action<Unit> OnUnitLeftAttackZone;
 
-    private void OnTriggerExit(Collider other)
-    {
-        for (int i = 0; i < _attackZoneUnits.Count; i++)
+        private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject == _attackZoneUnits[i].gameObject)
+            other.gameObject.TryGetComponent<Unit>(out var unit);
+
+            if (unit == null) return;
+
+            Debug.Log("On unit entered attack zone");
+            _attackZoneUnits.Add(unit);
+            OnUnitEnteredAttackZone?.Invoke(unit);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            for (int i = 0; i < _attackZoneUnits.Count; i++)
             {
-                OnUnitLeftAttackZone?.Invoke(_attackZoneUnits[i]);
-                _attackZoneUnits.RemoveAt(i);
-                Debug.Log("On unit left attack zone");
-                break;
+                if (other.gameObject == _attackZoneUnits[i].gameObject)
+                {
+                    OnUnitLeftAttackZone?.Invoke(_attackZoneUnits[i]);
+                    _attackZoneUnits.RemoveAt(i);
+                    Debug.Log("On unit left attack zone");
+                    break;
+                }
             }
         }
     }

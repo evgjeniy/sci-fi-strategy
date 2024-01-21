@@ -1,66 +1,65 @@
 using Dreamteck.Splines;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
 
-public class EnemySplineMoveState : State<Enemy>
+namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
-    private IState _aggroState;
-    private bool _isOnSpline = false;
-    private SplineFollower _splineFollower;
-
-    public EnemySplineMoveState(Enemy context, StateMachine stateMachine) : base(context, stateMachine) 
+    public class EnemySplineMoveState : State<Enemy>
     {
-        _splineFollower = context.GetComponent<SplineFollower>();
-    }
+        private IState _aggroState;
+        private bool _isOnSpline = false;
+        private SplineFollower _splineFollower;
 
-    public void Init(IState aggroState)
-    {
-        _aggroState = aggroState;
-    }
-
-    public override void EnterState()
-    {
-        if(!IsOnSpline(out var splineSample))
+        public EnemySplineMoveState(Enemy context, StateMachine stateMachine) : base(context, stateMachine) 
         {
-            _isOnSpline = false;
-            context.NavPathFollower.MoveTo(splineSample.position);
+            _splineFollower = context.GetComponent<SplineFollower>();
         }
-        else
+
+        public void Init(IState aggroState)
         {
-            context.SplinePathFollower.Start();
+            _aggroState = aggroState;
         }
-    }
 
-    public override void ExitState()
-    {
-        context.SplinePathFollower.Stop();
-    }
-
-    public override void FrameUpdate()
-    {
-
-        if (!_isOnSpline)
-            if (context.NavPathFollower.IsDestinationReached())
+        public override void EnterState()
+        {
+            if(!IsOnSpline(out var splineSample))
             {
-                _isOnSpline = true;
-                context.SplinePathFollower?.Start();
+                _isOnSpline = false;
+                context.NavPathFollower.MoveTo(splineSample.position);
             }
-    }
+            else
+            {
+                context.SplinePathFollower.Start();
+            }
+        }
 
-    public bool IsOnSpline(out SplineSample resultSample)
-    {
-        SplineSample result = new SplineSample();
-        _splineFollower.Project(context.transform.position, ref result);
+        public override void ExitState()
+        {
+            context.SplinePathFollower.Stop();
+        }
 
-        resultSample = result;
+        public override void FrameUpdate()
+        {
 
-        return context.transform.position == result.position;
-    }
+            if (!_isOnSpline)
+                if (context.NavPathFollower.IsDestinationReached())
+                {
+                    _isOnSpline = true;
+                    context.SplinePathFollower?.Start();
+                }
+        }
 
-    public override void PhysicsUpdate()
-    {
+        public bool IsOnSpline(out SplineSample resultSample)
+        {
+            SplineSample result = new SplineSample();
+            _splineFollower.Project(context.transform.position, ref result);
 
+            resultSample = result;
+
+            return context.transform.position == result.position;
+        }
+
+        public override void PhysicsUpdate()
+        {
+
+        }
     }
 }

@@ -1,45 +1,48 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NavPathFollower : IPathFollower
+namespace SustainTheStrain.Units.PathFollowers
 {
-    private readonly NavMeshAgent agent;
-
-    public float Speed { get => agent.speed; set => agent.speed = value; }
-
-    public NavPathFollower(NavMeshAgent agent)
+    public class NavPathFollower : IPathFollower
     {
-        this.agent = agent;
-    }
+        private readonly NavMeshAgent agent;
 
-    public bool IsDestinationReached()
-    {
-        if (!agent.pathPending)
+        public float Speed { get => agent.speed; set => agent.speed = value; }
+
+        public NavPathFollower(NavMeshAgent agent)
         {
-            if (agent.remainingDistance <= agent.stoppingDistance)
+            this.agent = agent;
+        }
+
+        public bool IsDestinationReached()
+        {
+            if (!agent.pathPending)
             {
-                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                if (agent.remainingDistance <= agent.stoppingDistance)
                 {
-                    return true;
+                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                    {
+                        return true;
+                    }
                 }
             }
+            return false;
         }
-        return false;
-    }
 
-    public void MoveTo(Vector3 position)
-    {
-        agent.destination = position;
+        public void MoveTo(Vector3 position)
+        {
+            agent.destination = position;
 
-    }
+        }
 
-    public void Start()
-    {
-        agent.isStopped = false;
-    }
+        public void Start()
+        {
+            agent.isStopped = false;
+        }
 
-    public void Stop()
-    {
-        agent.isStopped = true;
+        public void Stop()
+        {
+            agent.isStopped = true;
+        }
     }
 }

@@ -1,21 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class StateMachine
+namespace SustainTheStrain.Units.StateMachine
 {
-    public IState CurrentState { get; private set; }
-
-    public void Initialize(IState startingState)
+    public class StateMachine
     {
-        CurrentState = startingState;
-        CurrentState.EnterState();
-    }
+        public IState CurrentState { get; private set; }
 
-    public void ChangeState(IState newState)
-    {
-        CurrentState?.ExitState();
-        CurrentState = newState;
-        CurrentState.EnterState();
+        public void Initialize(IState startingState)
+        {
+            CurrentState = startingState;
+            CurrentState.EnterState();
+        }
+
+        public void ChangeState(IState newState)
+        {
+            CurrentState?.ExitState();
+            CurrentState = newState;
+            CurrentState.EnterState();
+        }
     }
 }

@@ -1,54 +1,53 @@
-using Dreamteck.Splines;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
+using Dreamteck.Splines;
 
-public class SplinePathFollower : IPathFollower
+namespace SustainTheStrain.Units.PathFollowers
 {
-    private readonly SplineFollower follower;
-
-    public float Speed { get => follower.followSpeed; set => follower.followSpeed = value; }
-
-    public SplinePathFollower(SplineFollower splineFollower)
+    public class SplinePathFollower : IPathFollower
     {
-        follower = splineFollower;
+        private readonly SplineFollower follower;
 
-        follower.onNode += OnNode;
-    }
+        public float Speed { get => follower.followSpeed; set => follower.followSpeed = value; }
 
-    private void OnNode(List<SplineTracer.NodeConnection> passed)
-    {
-        UnityEngine.Debug.Log("Reached node " + passed[0].node.name + " connected at point " + passed[0].point);
-        Node.Connection[] connections = passed[0].node.GetConnections();
-        if (connections.Length == 1) return;
-        int newConnection = UnityEngine.Random.Range(0, connections.Length);
-        if (connections[newConnection].spline == follower.spline &&
-        connections[newConnection].pointIndex == passed[0].point)
+        public SplinePathFollower(SplineFollower splineFollower)
         {
-            newConnection++;
-            if (newConnection >= connections.Length) newConnection = 0;
+            follower = splineFollower;
+
+            follower.onNode += OnNode;
         }
-        SwitchSpline(connections[newConnection]);
-    }
 
-    private void SwitchSpline(Node.Connection to)
-    {
-        follower.spline = to.spline;
+        private void OnNode(List<SplineTracer.NodeConnection> passed)
+        {
+            UnityEngine.Debug.Log("Reached node " + passed[0].node.name + " connected at point " + passed[0].point);
+            Node.Connection[] connections = passed[0].node.GetConnections();
+            if (connections.Length == 1) return;
+            int newConnection = UnityEngine.Random.Range(0, connections.Length);
+            if (connections[newConnection].spline == follower.spline &&
+                connections[newConnection].pointIndex == passed[0].point)
+            {
+                newConnection++;
+                if (newConnection >= connections.Length) newConnection = 0;
+            }
+            SwitchSpline(connections[newConnection]);
+        }
 
-        follower.RebuildImmediate();
-        double startpercent = follower.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
-        follower.SetPercent(startpercent+0.01);
-    }
+        private void SwitchSpline(Node.Connection to)
+        {
+            follower.spline = to.spline;
 
-    public void Stop()
-    {
-        follower.follow = false;
-    }
+            follower.RebuildImmediate();
+            double startpercent = follower.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
+            follower.SetPercent(startpercent+0.01);
+        }
 
-    public void Start()
-    {
-        follower.follow = true;
+        public void Stop()
+        {
+            follower.follow = false;
+        }
+
+        public void Start()
+        {
+            follower.follow = true;
+        }
     }
 }

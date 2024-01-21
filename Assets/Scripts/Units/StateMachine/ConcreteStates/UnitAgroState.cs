@@ -1,55 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public class UnitAgroState : State<Unit>
+namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
-    private IState _attackState;
-    private IState _idleState;
-
-    private float _disaggroTime = 0.5f;
-    private float _time;
-
-    public UnitAgroState(Unit context, StateMachine stateMachine) : base(context, stateMachine)
+    public class UnitAgroState : State<Unit>
     {
-    }
+        private IState _attackState;
+        private IState _idleState;
 
-    public void Init(IState attackState, IState idleState)
-    {
-        _attackState = attackState;
-        _idleState = idleState;
-    }
+        private float _disaggroTime = 0.5f;
+        private float _time;
 
-    public override void EnterState()
-    {
-    }
-
-    public override void ExitState()
-    {
-        context.NavPathFollower.Stop();
-    }
-
-    public override void FrameUpdate()
-    {
-        if(!context.IsOpponentInAggroZone && _time > _disaggroTime)
+        public UnitAgroState(Unit context, StateMachine stateMachine) : base(context, stateMachine)
         {
-            context.BreakDuel();
-            return;
         }
 
-        if (context.Opponent == null )
-            context.StateMachine.ChangeState(_idleState);
+        public void Init(IState attackState, IState idleState)
+        {
+            _attackState = attackState;
+            _idleState = idleState;
+        }
 
-        context.NavPathFollower.MoveTo(context.Opponent.transform.position);
+        public override void EnterState()
+        {
+        }
 
-        if(context.IsOpponentInAttackZone)
-            context.StateMachine.ChangeState(_attackState);
+        public override void ExitState()
+        {
+            context.NavPathFollower.Stop();
+        }
 
-        _time += Time.deltaTime;
-    }
+        public override void FrameUpdate()
+        {
+            if(!context.IsOpponentInAggroZone && _time > _disaggroTime)
+            {
+                context.BreakDuel();
+                return;
+            }
 
-    public override void PhysicsUpdate()
-    {
+            if (context.Opponent == null )
+                context.StateMachine.ChangeState(_idleState);
+
+            context.NavPathFollower.MoveTo(context.Opponent.transform.position);
+
+            if(context.IsOpponentInAttackZone)
+                context.StateMachine.ChangeState(_attackState);
+
+            _time += Time.deltaTime;
+        }
+
+        public override void PhysicsUpdate()
+        {
+        }
     }
 }

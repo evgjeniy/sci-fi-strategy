@@ -1,36 +1,37 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Damageble : MonoBehaviour
+namespace SustainTheStrain.Units.Components
 {
-    public float MaxHP { get; protected set; }
-    public float CurrentHP { get; protected set; }
-    public int Team { get; protected set; }
-
-    public event Action<Damageble> OnDied;
-    public event Action<float> OnCurrentHPChanged;
-
-    private void Awake()
+    public class Damageble : MonoBehaviour
     {
-        CurrentHP = MaxHP;
-    }
+        public float MaxHP { get; protected set; }
+        public float CurrentHP { get; protected set; }
+        public int Team { get; protected set; }
 
-    public void Damage(float damage)
-    {
-        CurrentHP -= damage;
-        OnCurrentHPChanged?.Invoke(CurrentHP);
+        public event Action<Damageble> OnDied;
+        public event Action<float> OnCurrentHPChanged;
 
-        if (CurrentHP < 0)
+        private void Awake()
         {
-            Die();
+            CurrentHP = MaxHP;
         }
-    }
 
-    public void Die()
-    {
-        OnDied?.Invoke(this);
-        Destroy(gameObject);
+        public void Damage(float damage)
+        {
+            CurrentHP -= damage;
+            OnCurrentHPChanged?.Invoke(CurrentHP);
+
+            if (CurrentHP < 0)
+            {
+                Die();
+            }
+        }
+
+        public void Die()
+        {
+            OnDied?.Invoke(this);
+            Destroy(gameObject);
+        }
     }
 }

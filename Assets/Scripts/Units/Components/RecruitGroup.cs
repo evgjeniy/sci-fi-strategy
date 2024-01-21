@@ -1,55 +1,57 @@
-using NaughtyAttributes;
-using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
-public class RecruitGroup : MonoBehaviour
+namespace SustainTheStrain.Units.Components
 {
-    [SerializeField]
-    private List<Recruit> recruits;
-
-    [field:SerializeField]
-    public GuardPost GuardPost { get; set; }
-
-    private void OnEnable()
+    public class RecruitGroup : MonoBehaviour
     {
-        GuardPost.OnValuesChanged += UpdateRecruits;
-    }
+        [SerializeField]
+        private List<Recruit> recruits;
 
-    [Button("Update")]
-    private void UpdateRecruits()
-    {
-        Vector3[] positions = GetGuardPositions();
+        [field:SerializeField]
+        public GuardPost GuardPost { get; set; }
 
-        for(int i = 0; i < recruits.Count; i++)
+        private void OnEnable()
         {
-            recruits[i].UpdatePosition(positions[i]);
+            GuardPost.OnValuesChanged += UpdateRecruits;
         }
-    }
 
-    public Vector3[] GetGuardPositions() 
-    {
-        List<Vector3> positions = new List<Vector3>(recruits.Count);
-
-        for (float i = 0; i < Mathf.PI * 2; i += Mathf.PI * 2 / recruits.Count)
+        [Button("Update")]
+        private void UpdateRecruits()
         {
-            positions.Add(new Vector3(
-                GuardPost.Position.x + GuardPost.Radius * Mathf.Sin(i),
-                GuardPost.Position.y,
-                GuardPost.Position.z + GuardPost.Radius * Mathf.Cos(i)
-            ));
+            Vector3[] positions = GetGuardPositions();
+
+            for(int i = 0; i < recruits.Count; i++)
+            {
+                recruits[i].UpdatePosition(positions[i]);
+            }
         }
-        return positions.ToArray();
-    }
 
-    private void OnDrawGizmos()
-    {
-        foreach (var position in GetGuardPositions())
+        public Vector3[] GetGuardPositions() 
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(position, Vector3.one);
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(GuardPost.Position, GuardPost.Radius);
+            List<Vector3> positions = new List<Vector3>(recruits.Count);
+
+            for (float i = 0; i < Mathf.PI * 2; i += Mathf.PI * 2 / recruits.Count)
+            {
+                positions.Add(new Vector3(
+                    GuardPost.Position.x + GuardPost.Radius * Mathf.Sin(i),
+                    GuardPost.Position.y,
+                    GuardPost.Position.z + GuardPost.Radius * Mathf.Cos(i)
+                ));
+            }
+            return positions.ToArray();
+        }
+
+        private void OnDrawGizmos()
+        {
+            foreach (var position in GetGuardPositions())
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireCube(position, Vector3.one);
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireSphere(GuardPost.Position, GuardPost.Radius);
+            }
         }
     }
 }

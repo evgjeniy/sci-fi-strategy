@@ -1,44 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
+using SustainTheStrain.Units.StateMachine.ConcreteStates;
 using UnityEngine;
 
-public class Recruit : Unit
+namespace SustainTheStrain.Units
 {
-    #region State Machine Variables
-
-    protected RecruitIdleState _recruitIdleState;
-    protected UnitAttackState _attackState;
-    protected UnitAgroState _aggroState;
-
-    #endregion
-
-    private Vector3 _guardPosition;
-
-    public Vector3 GuardPosition => _guardPosition;
-
-    private void Start()
+    public class Recruit : Unit
     {
-        Init();
-    }
+        #region State Machine Variables
 
-    protected override void Init()
-    {
-        base.Init();
+        protected RecruitIdleState _recruitIdleState;
+        protected UnitAttackState _attackState;
+        protected UnitAgroState _aggroState;
 
-        _guardPosition = transform.position;
+        #endregion
 
-        _recruitIdleState = new RecruitIdleState(this, _stateMachine);
-        _attackState = new UnitAttackState(this, _stateMachine);
-        _aggroState = new UnitAgroState(this, _stateMachine);
-        _recruitIdleState.Init(_aggroState);
-        _aggroState.Init(_attackState, _recruitIdleState);
+        private Vector3 _guardPosition;
 
-        _stateMachine.Initialize(_recruitIdleState);
-    }
+        public Vector3 GuardPosition => _guardPosition;
 
-    public void UpdatePosition(Vector3 position)
-    {
-        _guardPosition = position;
-        _stateMachine.ChangeState(_recruitIdleState);
+        private void Start()
+        {
+            Init();
+        }
+
+        protected override void Init()
+        {
+            base.Init();
+
+            _guardPosition = transform.position;
+
+            _recruitIdleState = new RecruitIdleState(this, _stateMachine);
+            _attackState = new UnitAttackState(this, _stateMachine);
+            _aggroState = new UnitAgroState(this, _stateMachine);
+            _recruitIdleState.Init(_aggroState);
+            _aggroState.Init(_attackState, _recruitIdleState);
+
+            _stateMachine.Initialize(_recruitIdleState);
+        }
+
+        public void UpdatePosition(Vector3 position)
+        {
+            _guardPosition = position;
+            _stateMachine.ChangeState(_recruitIdleState);
+        }
     }
 }

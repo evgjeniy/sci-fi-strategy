@@ -1,110 +1,114 @@
-using System;
+using SustainTheStrain.Units.Components;
+using SustainTheStrain.Units.PathFollowers;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Damageble))]
-public class Unit : MonoBehaviour
+namespace SustainTheStrain.Units
 {
-    protected StateMachine _stateMachine = new StateMachine();
-
-    public Damageble Damageble { get; protected set; }
-    public AggroRadiusCheck AggroRadiusCheck { get; protected set;}
-    public AttackRadiusCheck AttackRadiusCheck { get; protected set;}
-    public StateMachine StateMachine => _stateMachine;
-    public NavPathFollower NavPathFollower { get; protected set; }
-    public Unit Opponent { get; protected set; }
-
-    public bool IsOpponentInAggroZone { get; protected set; }
-    public bool IsOpponentInAttackZone { get; protected set; }
-
-
-    private void Start()
+    [RequireComponent(typeof(Damageble))]
+    public class Unit : MonoBehaviour
     {
-        Init();
-    }
+        protected StateMachine.StateMachine _stateMachine = new StateMachine.StateMachine();
 
-    protected virtual void Init()
-    {
-        Damageble = GetComponent<Damageble>();
+        public Damageble Damageble { get; protected set; }
+        public AggroRadiusCheck AggroRadiusCheck { get; protected set;}
+        public AttackRadiusCheck AttackRadiusCheck { get; protected set;}
+        public StateMachine.StateMachine StateMachine => _stateMachine;
+        public NavPathFollower NavPathFollower { get; protected set; }
+        public Unit Opponent { get; protected set; }
 
-        AggroRadiusCheck = GetComponentInChildren<AggroRadiusCheck>();
-        AggroRadiusCheck.OnUnitEnteredAggroZone += UnitEneterdAggroZone;
-        AggroRadiusCheck.OnUnitLeftAggroZone += UnitLeftAggroZone;
+        public bool IsOpponentInAggroZone { get; protected set; }
+        public bool IsOpponentInAttackZone { get; protected set; }
 
-        AttackRadiusCheck = GetComponentInChildren<AttackRadiusCheck>();
-        AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEneterdAttackZone;
-        AttackRadiusCheck.OnUnitLeftAttackZone += UnitLeftAttackZone;
 
-        NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
-    }
-
-    #region UNIT_TRIGGER_LOGIC
-
-    private void UnitEneterdAggroZone(Unit unit)
-    {
-        if (Opponent != null) return;
-    }
-
-    private void UnitLeftAggroZone(Unit unit)
-    {
-        IsOpponentInAggroZone = Opponent == unit;
-    }
-
-    private void UnitEneterdAttackZone(Unit unit)
-    {
-        IsOpponentInAttackZone = unit == Opponent;
-    }
-
-    private void UnitLeftAttackZone(Unit unit)
-    {
-        IsOpponentInAttackZone = unit != Opponent;
-    }
-
-    public bool IsDuelPossible()
-    {
-        return Opponent == null;
-    }
-
-    public void RequestDuel(Unit unit)
-    {
-        if(unit.IsDuelPossible())
+        private void Start()
         {
-            unit.SetOpponent(this);
-            SetOpponent(unit);
+            Init();
         }
-    }
 
-    public void SetOpponent(Unit unit)
-    {
-        Opponent = unit;
-        unit.Damageble.OnDied += OpponentDead;
-    }
+        protected virtual void Init()
+        {
+            Damageble = GetComponent<Damageble>();
 
-    public void BreakDuel()
-    {
+            AggroRadiusCheck = GetComponentInChildren<AggroRadiusCheck>();
+            AggroRadiusCheck.OnUnitEnteredAggroZone += UnitEneterdAggroZone;
+            AggroRadiusCheck.OnUnitLeftAggroZone += UnitLeftAggroZone;
 
-    }
+            AttackRadiusCheck = GetComponentInChildren<AttackRadiusCheck>();
+            AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEneterdAttackZone;
+            AttackRadiusCheck.OnUnitLeftAttackZone += UnitLeftAttackZone;
 
-    public void RemoveOpponent()
-    {
+            NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
+        }
 
-    }
+        #region UNIT_TRIGGER_LOGIC
 
-    public void OpponentDead(Damageble damageble)
-    {
-        BreakDuel();
-    }
+        private void UnitEneterdAggroZone(Unit unit)
+        {
+            if (Opponent != null) return;
+        }
 
-    #endregion
+        private void UnitLeftAggroZone(Unit unit)
+        {
+            IsOpponentInAggroZone = Opponent == unit;
+        }
 
-    private void Update()
-    {
-        _stateMachine.CurrentState.FrameUpdate();
-    }
+        private void UnitEneterdAttackZone(Unit unit)
+        {
+            IsOpponentInAttackZone = unit == Opponent;
+        }
 
-    private void FixedUpdate()
-    {
-        _stateMachine.CurrentState.PhysicsUpdate();
+        private void UnitLeftAttackZone(Unit unit)
+        {
+            IsOpponentInAttackZone = unit != Opponent;
+        }
+
+        public bool IsDuelPossible()
+        {
+            return Opponent == null;
+        }
+
+        public void RequestDuel(Unit unit)
+        {
+            if(unit.IsDuelPossible())
+            {
+                unit.SetOpponent(this);
+                SetOpponent(unit);
+            }
+        }
+
+        public void SetOpponent(Unit unit)
+        {
+            Opponent = unit;
+            unit.Damageble.OnDied += OpponentDead;
+        }
+
+        public void BreakDuel()
+        {
+
+        }
+
+        public void RemoveOpponent()
+        {
+
+        }
+
+        public void OpponentDead(Damageble damageble)
+        {
+            BreakDuel();
+        }
+
+        #endregion
+
+        private void Update()
+        {
+            _stateMachine.CurrentState.FrameUpdate();
+        }
+
+        private void FixedUpdate()
+        {
+            _stateMachine.CurrentState.PhysicsUpdate();
+        }
     }
 }
  
