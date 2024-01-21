@@ -37,11 +37,28 @@ namespace ResourceSystems
         protected Coroutine _generatingRoutine;
         protected bool _canGenerate;
         
-        public virtual void StartGeneration(){}
-        
-        public virtual void EndGeneration(){}
+        public void StartGeneration()
+        {
+            _generatingRoutine = StartCoroutine(GenerateResource());
+        }
 
-        public virtual IEnumerator GenerateResource() {return null;}
+        public IEnumerator GenerateResource()
+        {
+            while (_canGenerate)
+            {
+                yield return new WaitForSeconds(Cooldown);
+                _resourceGenerated?.Invoke(_generateCount);
+            }
+            EndGeneration();
+        }
+
+        public void EndGeneration()
+        {
+            if (_generatingRoutine != null)
+            {
+                StopCoroutine(_generatingRoutine);
+            }
+        }
 
         public void IncreaseGenerateCount(int count)
         {

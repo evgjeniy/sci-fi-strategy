@@ -33,28 +33,7 @@ namespace ResourceSystems
     
         private int _currentEnergy;
        
-        public override void StartGeneration()
-        {
-            _generatingRoutine = StartCoroutine(GenerateResource());
-        }
-
-        public override IEnumerator GenerateResource()
-        {
-            while (_canGenerate)
-            {
-                yield return new WaitForSeconds(Cooldown);
-                _resourceGenerated?.Invoke(_generateCount);
-            }
-            EndGeneration();
-        }
-
-        public override void EndGeneration()
-        {
-            if (_generatingRoutine != null)
-            {
-                StopCoroutine(_generatingRoutine);
-            }
-        }
+        
         
         public void IncreaseMaxEnergy(int value)
         {
