@@ -7,7 +7,7 @@ public class ChainDamageAbility : PointAbility
         Debug.Log("CHAIN failed to shoot");
     }
 
-    protected override void SuccessShootLogic(Vector3 point)
+    protected override void SuccessShootLogic(RaycastHit hit)
     {
         Debug.Log("CHAIN success shot");
     }
@@ -15,5 +15,10 @@ public class ChainDamageAbility : PointAbility
     protected override void ReadyToShoot()
     {
         Debug.Log("CHAIN ready to shoot");
+    }
+
+    public override void UpdateLogic(RaycastHit hit)
+    {
+
     }
 }

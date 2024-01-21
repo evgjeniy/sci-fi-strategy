@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
+using UnityEditor.Playables;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class AbilitiesController : MonoBehaviour
 {
-    private Vector3 offset = new Vector3(0, 0.8f, 0);
-    private List<BaseAbility> abilities = new List<BaseAbility>();
-    private int mode = -1;
+    public delegate void ReloadDelegate(int idx, float l, bool r);
+    private Vector3 offset = new Vector3(0, 0.8f, 0), nullVector = new Vector3(0, 0, 0);
+    public List<BaseAbility> abilities = new List<BaseAbility>(); //better to make it readonly
+    private ReloadDelegate[] reloadList; //tut private, dlya dobavlenia est metod
+    private int selected = -1;
     [SerializeField] GameObject aimZonePrefab;
     private GameObject aimZone;
     [SerializeField] Camera mainCamera;
@@ -14,21 +17,30 @@ public class AbilitiesController : MonoBehaviour
     [SerializeField] float zoneDamageMaxDistFromCamera;
     [SerializeField] float zoneDamageRadius;
     [SerializeField] float zoneDamageReloadingSpeed;
-    public delegate void ReloadDelegate(float l, bool r);
-    private ReloadDelegate ZoneDamageUpdate;
-    private delegate void CurrentDestroyDelegate();
-    private CurrentDestroyDelegate currentAbilityDestroyLogic;
-    private delegate void CurrentUpdateDelegate(RaycastHit hit);
-    CurrentUpdateDelegate currentAbilityUpdateLogic;
+
+    public void Init() //temporary, because now we don't have MainController
+    {
+        AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
+        AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
+        AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
+        reloadListSyncSize(); //когда все абилки добавлены
+    }
 
     private void Start()
     {
-        AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
+        
     }
 
-    public void ZoneDamageAdd(ReloadDelegate rd)
+    public void reloadListSyncSize()
     {
-        ZoneDamageUpdate += rd;
+        reloadList = new ReloadDelegate[abilities.Count];
+    }
+
+    public void reloadListAdd(int idx, ReloadDelegate rd)
+    {
+        if (idx < 0 || idx >= reloadList.Length)
+            throw new IndexOutOfRangeException("Incorrect idx");
+        reloadList[idx] = rd;
     }
 
     public void AddAbility(BaseAbility ability)
@@ -38,81 +50,43 @@ public class AbilitiesController : MonoBehaviour
 
     public void ResetAbilities()
     {
+        reloadList = null;
         abilities.Clear();
     }
 
-    private int FindAbitility(string type)
+    private bool isCurrentSelected(int type)
     {
-        int cnt = 0;
-        while (cnt < abilities.Count && abilities[cnt].GetType().ToString() != type)
-            cnt++;
-        return (cnt == abilities.Count ? -1 : cnt);
-    }
-
-    private bool isCurrentSelected(string type)
-    {
-        if (mode != -1 && abilities[mode].GetType().ToString() == type) //нажали выбранную
+        if (selected == type) //нажали выбранную
         {
-            mode = -1;
-            currentAbilityDestroyLogic?.Invoke();
-            currentAbilityDestroyLogic = null;
-            currentAbilityUpdateLogic = null;
+            abilities[selected].DestroyLogic();
+            selected = -1;
             return true;
         }
         return false;
     }
 
-    public void OnZoneDamageAbilitySelect()
+    public void OnAbilitySelect(int idx)
     {
-        string typeName = "ZoneDamageAbility";
-        if (isCurrentSelected(typeName))
+        if (isCurrentSelected(idx))
             return;
-        mode = FindAbitility(typeName);
-        if (mode == -1)
-            return;
-        currentAbilityUpdateLogic += ZoneDamageAbilityUpdateLogic;
-        currentAbilityDestroyLogic += ZoneDamageAbilityDestroyLogic;
-        aimZone = Instantiate(aimZonePrefab, new Vector3(0, 0, 0), Quaternion.Euler(90, 0, 0));
-        aimZone.GetComponent<DecalProjector>().size = new Vector3(zoneDamageRadius, zoneDamageRadius, 25);
-    }
-
-    private void ZoneDamageAbilityUpdateLogic(RaycastHit hit)
-    {
-        Vector3 point = hit.point;
-        aimZone.transform.position = point + offset;
-        if (abilities[mode].isReloaded())
-        {
-            //мб цвет прицела будет зеленый
-            if (Input.GetMouseButtonDown(0))
-                abilities[mode].Shoot(point);
-        }
-        else
-        {
-            //мб цвет прицела будет красный
-        }
-    }
-
-    private void ZoneDamageAbilityDestroyLogic()
-    {
-        Destroy(aimZone);
+        selected = idx;
+        if (abilities[selected] is ZoneAbility)
+            (abilities[selected] as ZoneAbility).setAimZone(Instantiate(aimZonePrefab, nullVector, Quaternion.Euler(90, 0, 0)));
     }
 
     void Update()
     {
-        foreach (var ability in abilities)
-            if (!ability.isReloaded())
+        for(int i = 0;i < abilities.Count;i++)
+            if (!abilities[i].isReloaded())
             {
-                ability.Load(Time.deltaTime);
-                if (ability is ZoneDamageAbility)
-                    ZoneDamageUpdate.Invoke(ability.getReload(), ability.isReloaded());
+                abilities[i].Load(Time.deltaTime);
+                reloadList[i].Invoke(i, abilities[i].getReload(), abilities[i].isReloaded());
             }
-        if (mode == -1)
+        if (selected == -1)
             return;
         Vector3 mousePosition = Input.mousePosition;
         Ray ray = mainCamera.ScreenPointToRay(mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, zoneDamageMaxDistFromCamera, layersToHit))
-        {
-            currentAbilityUpdateLogic?.Invoke(hit);
-        }
+            abilities[selected].UpdateLogic(hit);
     }
 }

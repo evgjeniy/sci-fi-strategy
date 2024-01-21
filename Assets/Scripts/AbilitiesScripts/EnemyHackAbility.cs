@@ -7,7 +7,7 @@ public class EnemyHackAbility : PointAbility
         Debug.Log("HACK failed to shoot");
     }
 
-    protected override void SuccessShootLogic(Vector3 point)
+    protected override void SuccessShootLogic(RaycastHit hit)
     {
         Debug.Log("HACK success shot");
     }
@@ -15,5 +15,10 @@ public class EnemyHackAbility : PointAbility
     protected override void ReadyToShoot()
     {
         Debug.Log("HACK ready to shoot");
+    }
+
+    public override void UpdateLogic(RaycastHit hit)
+    {
+
     }
 }

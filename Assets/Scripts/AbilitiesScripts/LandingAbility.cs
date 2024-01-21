@@ -7,7 +7,7 @@ public class LandingAbility : PointAbility
         Debug.Log("LAND failed to shoot");
     }
 
-    protected override void SuccessShootLogic(Vector3 point)
+    protected override void SuccessShootLogic(RaycastHit hit)
     {
         Debug.Log("LAND success shot");
     }
@@ -15,5 +15,10 @@ public class LandingAbility : PointAbility
     protected override void ReadyToShoot()
     {
         Debug.Log("LAND ready to shoot");
+    }
+
+    public override void UpdateLogic(RaycastHit hit)
+    {
+
     }
 }

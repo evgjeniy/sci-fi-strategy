@@ -14,7 +14,7 @@ public abstract class BaseAbility
 
     public void setLoadingSpeed(float speed) => loadingSpeed = speed; //ne znayu nuzhen li no pust budet))
 
-    public void Shoot(Vector3 point)
+    public void Shoot(RaycastHit hit)
     {
         if (!isReloaded())
         {
@@ -22,7 +22,7 @@ public abstract class BaseAbility
             return;
         }
         reload = 0;
-        SuccessShootLogic(point);
+        SuccessShootLogic(hit);
     }
 
     public void Load(float delt)
@@ -39,7 +39,11 @@ public abstract class BaseAbility
 
     protected abstract void FailShootLogic();
 
-    protected abstract void SuccessShootLogic(Vector3 point);
+    protected abstract void SuccessShootLogic(RaycastHit hit);
 
     protected abstract void ReadyToShoot();
+
+    public abstract void UpdateLogic(RaycastHit hit);
+
+    public abstract void DestroyLogic();
 }
