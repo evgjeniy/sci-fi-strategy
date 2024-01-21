@@ -1,35 +1,22 @@
-using Dreamteck.Splines;
-using NaughtyAttributes;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Extensions;
 
-public class Unit : MonoBehaviour, IDamageble
+[RequireComponent(typeof(Damageble))]
+public class Unit : MonoBehaviour
 {
-    [field: SerializeField] 
-    public float MaxHP { get; protected set; }
-    [field: SerializeField] 
-    public float CurrentHP { get; protected set; }
-    [field: SerializeField]
-    public int Team { get; protected set; }
-    [SerializeField]
-    private AggroRadiusCheck _aggroRadius;
-    [SerializeField]
-    private AttackRadiusCheck _attackRadius;
-
     protected StateMachine _stateMachine = new StateMachine();
 
+    public Damageble Damageble { get; protected set; }
+    public AggroRadiusCheck AggroRadiusCheck { get; protected set;}
+    public AttackRadiusCheck AttackRadiusCheck { get; protected set;}
     public StateMachine StateMachine => _stateMachine;
     public NavPathFollower NavPathFollower { get; protected set; }
-
     public Unit Opponent { get; protected set; }
+
+    public bool IsOpponentInAggroZone { get; protected set; }
     public bool IsOpponentInAttackZone { get; protected set; }
 
-    public event Action<Unit> OnDead;
 
     private void Start()
     {
@@ -38,61 +25,77 @@ public class Unit : MonoBehaviour, IDamageble
 
     protected virtual void Init()
     {
-        CurrentHP = MaxHP;
+        Damageble = GetComponent<Damageble>();
 
-        _aggroRadius = GetComponentInChildren<AggroRadiusCheck>();
-        _aggroRadius.OnUnitEnteredAggroZone += UnitEneterdAggroZone;
-        _aggroRadius.OnUnitLeftAggroZone += UnitLeftAggroZone;
-        _attackRadius = GetComponentInChildren<AttackRadiusCheck>();
-        _attackRadius.OnUnitEnteredAttackZone += UnitEneterdAttackZone;
-        _attackRadius.OnUnitLeftAttackZone += UnitLeftAttackZone;
+        AggroRadiusCheck = GetComponentInChildren<AggroRadiusCheck>();
+        AggroRadiusCheck.OnUnitEnteredAggroZone += UnitEneterdAggroZone;
+        AggroRadiusCheck.OnUnitLeftAggroZone += UnitLeftAggroZone;
+
+        AttackRadiusCheck = GetComponentInChildren<AttackRadiusCheck>();
+        AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEneterdAttackZone;
+        AttackRadiusCheck.OnUnitLeftAttackZone += UnitLeftAttackZone;
 
         NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
     }
+
+    #region UNIT_TRIGGER_LOGIC
+
     private void UnitEneterdAggroZone(Unit unit)
     {
-        if (unit.Team == Team) return;
-
-        if (unit.RequestDuel(this))
-        {
-            Opponent = unit;
-            unit.OnDead += OpponentDead;
-        }
-    }
-
-    private void OpponentDead(Unit unit)
-    {
-        BreakDuel();
-        IsOpponentInAttackZone = false;
+        if (Opponent != null) return;
     }
 
     private void UnitLeftAggroZone(Unit unit)
     {
-        if (unit == Opponent) BreakDuel();
+        IsOpponentInAggroZone = Opponent == unit;
     }
 
     private void UnitEneterdAttackZone(Unit unit)
     {
-        if(Opponent == unit) IsOpponentInAttackZone = true;
+        IsOpponentInAttackZone = unit == Opponent;
     }
 
     private void UnitLeftAttackZone(Unit unit)
     {
-        if (Opponent == unit) IsOpponentInAttackZone = false;
+        IsOpponentInAttackZone = unit != Opponent;
     }
 
-    public bool RequestDuel(Unit unit)
+    public bool IsDuelPossible()
     {
-        if(Opponent != null) return false;
+        return Opponent == null;
+    }
 
+    public void RequestDuel(Unit unit)
+    {
+        if(unit.IsDuelPossible())
+        {
+            unit.SetOpponent(this);
+            SetOpponent(unit);
+        }
+    }
+
+    public void SetOpponent(Unit unit)
+    {
         Opponent = unit;
-        return true;
+        unit.Damageble.OnDied += OpponentDead;
     }
 
     public void BreakDuel()
     {
-        Opponent = null;
+
     }
+
+    public void RemoveOpponent()
+    {
+
+    }
+
+    public void OpponentDead(Damageble damageble)
+    {
+        BreakDuel();
+    }
+
+    #endregion
 
     private void Update()
     {
@@ -103,21 +106,5 @@ public class Unit : MonoBehaviour, IDamageble
     {
         _stateMachine.CurrentState.PhysicsUpdate();
     }
-
-    public void Damage(float damage)
-    {
-        CurrentHP -= damage;
-
-        if (CurrentHP < 0)
-        {
-            Die();
-        }
-    }
-
-    public void Die()
-    {
-        OnDead?.Invoke(this);
-        Destroy(gameObject);
-    }  
 }
  

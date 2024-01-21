@@ -40,17 +40,13 @@ public class EnemySplineMoveState : State<Enemy>
 
     public override void FrameUpdate()
     {
+
         if (!_isOnSpline)
             if (context.NavPathFollower.IsDestinationReached())
             {
                 _isOnSpline = true;
                 context.SplinePathFollower?.Start();
             }
-
-        if (context.Opponent != null)
-        {
-            context.StateMachine.ChangeState(_aggroState);
-        }
     }
 
     public bool IsOnSpline(out SplineSample resultSample)

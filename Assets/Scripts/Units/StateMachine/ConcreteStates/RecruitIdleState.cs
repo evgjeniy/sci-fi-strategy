@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class RecruitIdleState : State<Recruit>
@@ -28,10 +29,7 @@ public class RecruitIdleState : State<Recruit>
 
     public override void FrameUpdate()
     {
-        if(context.Opponent != null)
-        {
-            context.StateMachine.ChangeState(_aggroState);
-        }
+       
     }
 
     public override void PhysicsUpdate()

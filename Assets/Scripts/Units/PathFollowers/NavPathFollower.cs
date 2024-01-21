@@ -5,6 +5,8 @@ public class NavPathFollower : IPathFollower
 {
     private readonly NavMeshAgent agent;
 
+    public float Speed { get => agent.speed; set => agent.speed = value; }
+
     public NavPathFollower(NavMeshAgent agent)
     {
         this.agent = agent;

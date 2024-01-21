@@ -1431,6 +1431,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Recruit
       objectReference: {fileID: 0}
+    - target: {fileID: 3475451421703167451, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
+      propertyPath: m_Radius
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
       propertyPath: m_LocalPosition.x

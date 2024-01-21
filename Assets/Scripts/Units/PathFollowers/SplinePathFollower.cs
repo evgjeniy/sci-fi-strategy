@@ -8,7 +8,9 @@ using UnityEngine;
 public class SplinePathFollower : IPathFollower
 {
     private readonly SplineFollower follower;
-    SplineProjector projector;
+
+    public float Speed { get => follower.followSpeed; set => follower.followSpeed = value; }
+
     public SplinePathFollower(SplineFollower splineFollower)
     {
         follower = splineFollower;
