@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using SustainTheStrain.Buildings;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -11,27 +13,26 @@ namespace SustainTheStrain.Input
         [Serializable]
         public class Settings
         {
+            [field: SerializeField] public EventSystem EventSystem { get; private set; }
             [field: SerializeField] public LayerMask RayCastMask { get; private set; } = 255;
             [field: SerializeField] public float MaxDistance { get; private set; } = float.MaxValue;
         }
 
         private readonly Settings _settings;
-        private readonly InputActions _actions;
+        private readonly InputActions _actions = new();
+        private readonly List<RaycastResult> _rayCastResults = new();
 
         private Vector2 _mousePosition;
         private Camera _camera;
         private BuildingPlaceholder _placeholder;
+        private bool _isPointerUnderUI;
 
         public event Action<Vector2> OnLeftMouseClick;
         public event Action<BuildingPlaceholder> OnPlaceholderPointerEnter;
         public event Action<BuildingPlaceholder> OnPlaceholderPointerExit;
         public event Action<BuildingPlaceholder> OnPlaceholderPointerLeftClick;
 
-        public InputService(Settings settings)
-        {
-            _settings = settings;
-            _actions = new InputActions();
-        }
+        public InputService(Settings settings) => _settings = settings;
 
         public void Enable() => _actions.Enable();
         public void Disable() => _actions.Disable();
@@ -56,25 +57,29 @@ namespace SustainTheStrain.Input
         {
             _mousePosition = context.ReadValue<Vector2>();
             
+            _isPointerUnderUI = IsPointerUnderUI();
+            if (_isPointerUnderUI) return;
+
             var ray = _camera.ScreenPointToRay(_mousePosition);
-            
             if (!Physics.Raycast(ray, out var hit, _settings.MaxDistance, _settings.RayCastMask.value)) return;
             
-            if (HandleBuildings(hit)) return;
+            if (IsPointerUnderBuildingPlaceholder(hit.collider)) return;
             if (/*HandleMovement(hit)*/ false) return;
         }
 
         private void OnLeftMouseButton(InputAction.CallbackContext context)
         {
+            if (_isPointerUnderUI) return;
+            
             if (_placeholder != null)
                 OnPlaceholderPointerLeftClick?.Invoke(_placeholder);
             else
                 OnLeftMouseClick?.Invoke(_mousePosition);
         }
 
-        private bool HandleBuildings(RaycastHit hit)
+        private bool IsPointerUnderBuildingPlaceholder(Component hitCollider)
         {
-            var hasPlaceholder = hit.collider.TryGetComponent<BuildingPlaceholder>(out var placeholder);
+            var hasPlaceholder = hitCollider.TryGetComponent<BuildingPlaceholder>(out var placeholder);
             if (hasPlaceholder)
             {
                 if (_placeholder != null) return true;
@@ -90,6 +95,13 @@ namespace SustainTheStrain.Input
                 _placeholder = null;
             }
             return hasPlaceholder;
+        }
+
+        private bool IsPointerUnderUI()
+        {
+            var pointerEventData = new PointerEventData(_settings.EventSystem) { position = _mousePosition };
+            _settings.EventSystem.RaycastAll(pointerEventData, _rayCastResults);
+            return _rayCastResults.Count != 0;
         }
     }
 }
