@@ -1,40 +1,40 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Systems;
 using UnityEngine;
 using Zenject;
 
-public class EnergyController : MonoBehaviour
+namespace SustainTheStrain.EnergySystem
 {
-    
-
-    public List<IEnergySystem> Systems => _systems;
-    private List<IEnergySystem> _systems = new();
-
-    [Inject] public EnergyManager Manager { get; private set; }
-    
-    public void AddEnergySystem(IEnergySystem system)
+    public class EnergyController : MonoBehaviour
     {
-        if (!_systems.Contains(system))
+    
+
+        public List<IEnergySystem> Systems => _systems;
+        private List<IEnergySystem> _systems = new();
+
+        [Inject] public EnergyManager Manager { get; private set; }
+    
+        public void AddEnergySystem(IEnergySystem system)
         {
-            _systems.Add(system);
+            if (!_systems.Contains(system))
+            {
+                _systems.Add(system);
+            }
         }
-    }
 
-    public bool TryGetEnergy(int countOfEnergy)
-    {
-        return Manager.TrySpend(countOfEnergy);
-    }
+        public bool TryGetEnergy(int countOfEnergy)
+        {
+            return Manager.TrySpend(countOfEnergy);
+        }
     
-    public void IncreaseMaxEnergy(int value)
-    {
-        Manager.IncreaseMaxEnergy(value);
-    }
+        public void IncreaseMaxEnergy(int value)
+        {
+            Manager.IncreaseMaxEnergy(value);
+        }
     
-    public bool TryReturnEnergy(int countOfEnergy)
-    {
-        return Manager.TryRefill(countOfEnergy);
-    }
+        public bool TryReturnEnergy(int countOfEnergy)
+        {
+            return Manager.TryRefill(countOfEnergy);
+        }
     
+    }
 }

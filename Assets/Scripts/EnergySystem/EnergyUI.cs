@@ -1,10 +1,8 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Systems
+namespace SustainTheStrain.EnergySystem
 {
     public class EnergyUI : MonoBehaviour
     {

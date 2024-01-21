@@ -1,10 +1,8 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
-namespace Systems
+namespace SustainTheStrain.EnergySystem
 {
     public class EnergySystem : MonoBehaviour, IEnergySystem
     {
@@ -76,12 +74,12 @@ namespace Systems
         //Energy spend test
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (UnityEngine.Input.GetMouseButtonDown(0))
             {
                 TrySpendEnergy();
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (UnityEngine.Input.GetMouseButtonDown(1))
             {
                 TryRefillEnergy();
             }

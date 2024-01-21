@@ -1,8 +1,7 @@
 ﻿using System;
-using UnityEngine;
 using Zenject;
 
-namespace Systems
+namespace SustainTheStrain.EnergySystem
 {
     public interface IEnergySystem
     {

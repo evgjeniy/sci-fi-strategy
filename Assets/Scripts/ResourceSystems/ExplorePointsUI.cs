@@ -1,9 +1,8 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace ResourceSystems
+namespace SustainTheStrain.ResourceSystems
 {
     public class ExplorePointsUI : MonoBehaviour
     {

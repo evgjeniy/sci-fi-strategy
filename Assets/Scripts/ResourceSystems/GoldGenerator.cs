@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
-using Systems;
+using SustainTheStrain.EnergySystem;
 using UnityEngine;
 using Zenject;
 
-namespace ResourceSystems
+namespace SustainTheStrain.ResourceSystems
 {
     public class GoldGenerator : ResourceGenerator, IEnergySystem
     {
@@ -67,7 +66,7 @@ namespace ResourceSystems
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.S))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.S))
             {
                 TrySpendEnergy();
             }

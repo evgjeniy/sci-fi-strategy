@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace ResourceSystems
+namespace SustainTheStrain.ResourceSystems
 {
     public abstract class ResourceGenerator : MonoBehaviour
     {

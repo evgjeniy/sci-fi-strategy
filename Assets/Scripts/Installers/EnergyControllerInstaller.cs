@@ -1,8 +1,8 @@
-﻿using System;
+﻿using SustainTheStrain.EnergySystem;
 using UnityEngine;
 using Zenject;
 
-namespace Systems
+namespace SustainTheStrain.Installers
 {
     public class EnergyControllerInstaller : MonoInstaller
     {

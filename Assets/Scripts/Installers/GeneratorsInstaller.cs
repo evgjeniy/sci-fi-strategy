@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using SustainTheStrain.ResourceSystems;
+using UnityEngine;
 using Zenject;
 
-namespace ResourceSystems
+namespace SustainTheStrain.Installers
 {
     public class GeneratorsInstaller : MonoInstaller
     {
