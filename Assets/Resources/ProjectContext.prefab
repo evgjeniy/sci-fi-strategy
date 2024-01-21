@@ -88,6 +88,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6a311223e5148b5a9c9b48dce3d1b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _settings:
+    <RayCastMask>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    <MaxDistance>k__BackingField: 3.4028235e+38
 --- !u!1 &6696816297399331599
 GameObject:
   m_ObjectHideFlags: 0

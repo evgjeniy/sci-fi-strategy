@@ -1,12 +1,15 @@
-﻿using SustainTheStrain.Buildings.Data;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SustainTheStrain.Buildings
 {
-    public class BuildingSelector : MonoBehaviour
+    public interface IBuildingSelector {}
+
+    public class BuildingSelector : MonoBehaviour, IBuildingSelector
     {
-        [Header("TEMP"), SerializeField] private RocketData _rocketBuilding;
-        
-        public RocketData SelectedBuilding => _rocketBuilding;
+        [Zenject.Inject]
+        private void Construct(IBuildingSystem buildingSystem/*, IBuildingInputService inputService*/ )
+        {
+            // send Create/Upgrade messages to BuildingSystem
+        }
     }
 }
