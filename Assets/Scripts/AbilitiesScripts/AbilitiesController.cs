@@ -1,92 +1,95 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.Playables;
 using UnityEngine;
 
-public class AbilitiesController : MonoBehaviour
+namespace SustainTheStrain.AbilitiesScripts
 {
-    public delegate void ReloadDelegate(int idx, float l, bool r);
-    private Vector3 offset = new Vector3(0, 0.8f, 0), nullVector = new Vector3(0, 0, 0);
-    public List<BaseAbility> abilities = new List<BaseAbility>(); //better to make it readonly
-    private ReloadDelegate[] reloadList; //tut private, dlya dobavlenia est metod
-    private int selected = -1;
-    [SerializeField] GameObject aimZonePrefab;
-    private GameObject aimZone;
-    [SerializeField] Camera mainCamera;
-    [SerializeField] LayerMask layersToHit;
-    [SerializeField] float zoneDamageMaxDistFromCamera;
-    [SerializeField] float zoneDamageRadius;
-    [SerializeField] float zoneDamageReloadingSpeed;
-
-    public void Init() //temporary, because now we don't have MainController
+    public class AbilitiesController : MonoBehaviour
     {
-        AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
-        AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
-        AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
-        reloadListSyncSize(); //когда все абилки добавлены
-    }
+        [SerializeField] private GameObject aimZonePrefab;
+        [SerializeField] private Camera mainCamera;
+        [SerializeField] private LayerMask layersToHit;
+        [SerializeField] private float zoneDamageMaxDistFromCamera;
+        [SerializeField] private float zoneDamageRadius;
+        [SerializeField] private float zoneDamageReloadingSpeed;
 
-    private void Start()
-    {
-        
-    }
+        public readonly List<BaseAbility> Abilities = new(); //better to make it readonly
+        private readonly Vector3 _nullVector = new(0, 0, 0);
 
-    public void reloadListSyncSize()
-    {
-        reloadList = new ReloadDelegate[abilities.Count];
-    }
+        private ReloadDelegate[] _reloadList; //tut private, dlya dobavlenia est metod
+        private GameObject _aimZone;
+        private int _selected = -1;
 
-    public void reloadListAdd(int idx, ReloadDelegate rd)
-    {
-        if (idx < 0 || idx >= reloadList.Length)
-            throw new IndexOutOfRangeException("Incorrect idx");
-        reloadList[idx] = rd;
-    }
+        public delegate void ReloadDelegate(int idx, float l, bool r);
 
-    public void AddAbility(BaseAbility ability)
-    {
-        abilities.Add(ability);
-    }
-
-    public void ResetAbilities()
-    {
-        reloadList = null;
-        abilities.Clear();
-    }
-
-    private bool isCurrentSelected(int type)
-    {
-        if (selected == type) //нажали выбранную
+        public void Init() //temporary, because now we don't have MainController
         {
-            abilities[selected].DestroyLogic();
-            selected = -1;
-            return true;
+            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
+            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
+            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
+            ReloadListSyncSize(); //ГЄГ®ГЈГ¤Г  ГўГ±ГҐ Г ГЎГЁГ«ГЄГЁ Г¤Г®ГЎГ ГўГ«ГҐГ­Г»
         }
-        return false;
-    }
 
-    public void OnAbilitySelect(int idx)
-    {
-        if (isCurrentSelected(idx))
-            return;
-        selected = idx;
-        if (abilities[selected] is ZoneAbility)
-            (abilities[selected] as ZoneAbility).setAimZone(Instantiate(aimZonePrefab, nullVector, Quaternion.Euler(90, 0, 0)));
-    }
+        public void ReloadListSyncSize()
+        {
+            _reloadList = new ReloadDelegate[Abilities.Count];
+        }
 
-    void Update()
-    {
-        for(int i = 0;i < abilities.Count;i++)
-            if (!abilities[i].isReloaded())
+        public void ReloadListAdd(int idx, ReloadDelegate rd)
+        {
+            if (idx < 0 || idx >= _reloadList.Length)
+                throw new IndexOutOfRangeException("Incorrect idx");
+            _reloadList[idx] = rd;
+        }
+
+        public void AddAbility(BaseAbility ability)
+        {
+            Abilities.Add(ability);
+        }
+
+        public void ResetAbilities()
+        {
+            _reloadList = null;
+            Abilities.Clear();
+        }
+
+        private bool IsCurrentSelected(int type)
+        {
+            if (_selected == -1) return false;
+            
+            Abilities[_selected].DestroyLogic();
+            var sel = _selected;
+            _selected = -1;
+            
+            return sel == type;
+        }
+
+        public void OnAbilitySelect(int idx)
+        {
+            if (IsCurrentSelected(idx)) return;
+            
+            _selected = idx;
+            if (Abilities[_selected] is ZoneAbility zoneAbility)
+                zoneAbility.SetAimZone(Instantiate(aimZonePrefab, _nullVector, Quaternion.Euler(90, 0, 0)));
+        }
+
+        private void Update()
+        {
+            for (var i = 0; i < Abilities.Count; i++)
             {
-                abilities[i].Load(Time.deltaTime);
-                reloadList[i].Invoke(i, abilities[i].getReload(), abilities[i].isReloaded());
+                if (Abilities[i].IsReloaded()) continue;
+                
+                Abilities[i].Load(Time.deltaTime);
+                _reloadList[i].Invoke(i, Abilities[i].GetReload(), Abilities[i].IsReloaded());
             }
-        if (selected == -1)
-            return;
-        Vector3 mousePosition = Input.mousePosition;
-        Ray ray = mainCamera.ScreenPointToRay(mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, zoneDamageMaxDistFromCamera, layersToHit))
-            abilities[selected].UpdateLogic(hit);
+
+            if (_selected == -1) return;
+            
+            var mousePosition = UnityEngine.Input.mousePosition;
+            var ray = mainCamera.ScreenPointToRay(mousePosition);
+            
+            if (Physics.Raycast(ray, out var hit, zoneDamageMaxDistFromCamera, layersToHit))
+                Abilities[_selected].UpdateLogic(hit);
+        }
     }
 }

@@ -1,9 +1,10 @@
-using System;
-
-public abstract class PointAbility : BaseAbility
+namespace SustainTheStrain.AbilitiesScripts
 {
-    public override void DestroyLogic()
+    public abstract class PointAbility : BaseAbility
     {
+        public override void DestroyLogic()
+        {
         
+        }
     }
 }

@@ -1,14 +1,19 @@
 using UnityEngine.UI;
 
-public class AbilityButton
+namespace SustainTheStrain.AbilitiesScripts
 {
-    private Button button;
-    private Slider slider;
-    public Button getButton() => button;
-    public Slider getSlider() => slider;
-    public AbilityButton(Button b, Slider s)
+    public class AbilityButton
     {
-        button = b;
-        slider = s;
+        private readonly Button _button;
+        private readonly Slider _slider;
+        
+        public AbilityButton(Button b, Slider s)
+        {
+            _button = b;
+            _slider = s;
+        }
+        
+        public Button GetButton() => _button;
+        public Slider GetSlider() => _slider;
     }
 }
