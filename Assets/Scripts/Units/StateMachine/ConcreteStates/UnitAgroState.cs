@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
@@ -7,8 +8,8 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         private IState _attackState;
         private IState _idleState;
 
-        private float _disaggroTime = 0.5f;
-        private float _time;
+        private float _disaggroTime = 5f;
+        private float _time = 0f;
 
         public UnitAgroState(Unit context, StateMachine stateMachine) : base(context, stateMachine)
         {
@@ -22,11 +23,16 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void EnterState()
         {
+            Debug.Log(string.Format("[StateMachine {0}] UnitAgroState entered", context.gameObject.name));
+            Debug.Log(string.Format("[StateMachine {0}] OPPONENT {1}", context.gameObject.name, context.Opponent.gameObject.name));
+
+            context.SwitchPathFollower(context.NavPathFollower);
+            context.NavPathFollower.MoveTo(context.Opponent.transform.position);
         }
 
         public override void ExitState()
         {
-            context.NavPathFollower.Stop();
+            context.CurrentPathFollower.Stop();
         }
 
         public override void FrameUpdate()
@@ -37,7 +43,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
                 return;
             }
 
-            if (context.Opponent == null )
+            if (context.Opponent == null)
                 context.StateMachine.ChangeState(_idleState);
 
             context.NavPathFollower.MoveTo(context.Opponent.transform.position);

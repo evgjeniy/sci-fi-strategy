@@ -42,11 +42,13 @@ namespace SustainTheStrain.Units.PathFollowers
 
         public void Stop()
         {
+            follower.enabled = false;
             follower.follow = false;
         }
 
         public void Start()
         {
+            follower.enabled = true;
             follower.follow = true;
         }
     }

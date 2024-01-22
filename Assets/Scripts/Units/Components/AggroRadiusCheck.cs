@@ -17,30 +17,43 @@ namespace SustainTheStrain.Units.Components
         {
             other.gameObject.TryGetComponent<Unit>(out var unit);
 
-            if (unit == null) return;
-
-            Debug.Log("On unit entered aggro zone");
-            _aggroZoneUnits.Add(unit);
-            OnUnitEnteredAggroZone?.Invoke(unit);
+            AddUnit(unit);
         }
 
         private void OnTriggerExit(Collider other)
         {
+            RemoveUnit(other.gameObject);
+        }
+
+        private void AddUnit(Unit unit)
+        {
+            if (unit == null) return;
+
+            Debug.Log(string.Format("[AggroRadius] On {0} entered {1} aggro radius", unit.name, name));
+            _aggroZoneUnits.Add(unit);
+            OnUnitEnteredAggroZone?.Invoke(unit);
+
+            unit.Damageble.OnDied += UnitDied;
+        }
+
+        private void RemoveUnit(GameObject gameObject)
+        {
             for (int i = 0; i < _aggroZoneUnits.Count; i++)
             {
-                if (other.gameObject == _aggroZoneUnits[i].gameObject)
+                if (gameObject == _aggroZoneUnits[i].gameObject)
                 {
                     OnUnitLeftAggroZone?.Invoke(_aggroZoneUnits[i]);
+                    _aggroZoneUnits[i].Damageble.OnDied -= UnitDied;
+                    Debug.Log(string.Format("[AggroRadius] On {0} left {1} aggro radius", _aggroZoneUnits[i].name, name));
                     _aggroZoneUnits.RemoveAt(i);
-                    Debug.Log("On unit left aggro zone");
                     break;
                 }
             }
         }
 
-        private void RemoveUnit(Unit unit)
+        private void UnitDied(Damageble damageble)
         {
-            _aggroZoneUnits.Remove(unit);
+            RemoveUnit(damageble.gameObject);
         }
     }
 }

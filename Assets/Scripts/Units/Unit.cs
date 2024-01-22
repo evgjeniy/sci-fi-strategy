@@ -1,13 +1,20 @@
 using SustainTheStrain.Units.Components;
 using SustainTheStrain.Units.PathFollowers;
+using SustainTheStrain.Units.StateMachine.ConcreteStates;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
+using static UnityEngine.UI.CanvasScaler;
 
 namespace SustainTheStrain.Units
 {
     [RequireComponent(typeof(Damageble))]
     public class Unit : MonoBehaviour
     {
+        [field:SerializeField] public float Damage { get; private set; }
+        [field:SerializeField] public float DamagePeriod { get; private set; }
+
+        public IPathFollower CurrentPathFollower { get; protected set; }   
         protected StateMachine.StateMachine _stateMachine = new StateMachine.StateMachine();
 
         public Damageble Damageble { get; protected set; }
@@ -17,6 +24,7 @@ namespace SustainTheStrain.Units
         public NavPathFollower NavPathFollower { get; protected set; }
         public Unit Opponent { get; protected set; }
 
+        public bool IsAnnoyed { get; protected set; } 
         public bool IsOpponentInAggroZone { get; protected set; }
         public bool IsOpponentInAttackZone { get; protected set; }
 
@@ -39,17 +47,21 @@ namespace SustainTheStrain.Units
             AttackRadiusCheck.OnUnitLeftAttackZone += UnitLeftAttackZone;
 
             NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
+
+            SwitchPathFollower(NavPathFollower);
         }
 
         #region UNIT_TRIGGER_LOGIC
 
         private void UnitEneterdAggroZone(Unit unit)
         {
-            if (Opponent != null) return;
+            IsAnnoyed = true;
         }
 
         private void UnitLeftAggroZone(Unit unit)
         {
+            IsAnnoyed = AggroRadiusCheck.AggroZoneUnits.Count != 0;
+
             IsOpponentInAggroZone = Opponent == unit;
         }
 
@@ -63,18 +75,20 @@ namespace SustainTheStrain.Units
             IsOpponentInAttackZone = unit != Opponent;
         }
 
-        public bool IsDuelPossible()
+        public bool IsDuelPossible(Unit innitiator)
         {
-            return Opponent == null;
+            return Opponent == null && innitiator.Damageble.Team != Damageble.Team;
         }
 
-        public void RequestDuel(Unit unit)
+        public bool RequestDuel(Unit unit)
         {
-            if(unit.IsDuelPossible())
+            if(unit.IsDuelPossible(this))
             {
                 unit.SetOpponent(this);
                 SetOpponent(unit);
+                return true;
             }
+            else return false;
         }
 
         public void SetOpponent(Unit unit)
@@ -85,12 +99,16 @@ namespace SustainTheStrain.Units
 
         public void BreakDuel()
         {
+            if (Opponent == null) return;
 
+            Opponent.RemoveOpponent();
+            RemoveOpponent();
         }
 
         public void RemoveOpponent()
         {
-
+            Opponent.Damageble.OnDied -= OpponentDead;
+            Opponent = null;
         }
 
         public void OpponentDead(Damageble damageble)
@@ -99,6 +117,15 @@ namespace SustainTheStrain.Units
         }
 
         #endregion
+
+        public void SwitchPathFollower(IPathFollower pathFollower)
+        {
+            if (pathFollower == null) return;
+
+            CurrentPathFollower?.Stop();
+            CurrentPathFollower = pathFollower;
+            CurrentPathFollower.Start();
+        }
 
         private void Update()
         {

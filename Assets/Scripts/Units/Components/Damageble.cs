@@ -5,8 +5,11 @@ namespace SustainTheStrain.Units.Components
 {
     public class Damageble : MonoBehaviour
     {
+        [field:SerializeField]
         public float MaxHP { get; protected set; }
+        [field: SerializeField]
         public float CurrentHP { get; protected set; }
+        [field: SerializeField]
         public int Team { get; protected set; }
 
         public event Action<Damageble> OnDied;

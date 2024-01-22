@@ -1,5 +1,6 @@
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
 using UnityEngine;
+using Zenject;
 
 namespace SustainTheStrain.Units
 {
@@ -33,6 +34,7 @@ namespace SustainTheStrain.Units
             _aggroState = new UnitAgroState(this, _stateMachine);
             _recruitIdleState.Init(_aggroState);
             _aggroState.Init(_attackState, _recruitIdleState);
+            _attackState.Init(_aggroState, _recruitIdleState);
 
             _stateMachine.Initialize(_recruitIdleState);
         }
@@ -42,5 +44,17 @@ namespace SustainTheStrain.Units
             _guardPosition = position;
             _stateMachine.ChangeState(_recruitIdleState);
         }
+    }
+
+    public class Factory : IFactory<Recruit>
+    {
+        private readonly Recruit _refRecruit;
+
+        public Factory(Recruit refRecruit)
+        {
+            this._refRecruit = refRecruit;
+        }
+
+        public Recruit Create() => GameObject.Instantiate(_refRecruit);
     }
 }

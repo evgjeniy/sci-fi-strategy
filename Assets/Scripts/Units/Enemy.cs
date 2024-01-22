@@ -1,6 +1,7 @@
 using Dreamteck.Splines;
 using SustainTheStrain.Units.PathFollowers;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
+using Zenject;
 
 namespace SustainTheStrain.Units
 {
@@ -33,8 +34,21 @@ namespace SustainTheStrain.Units
             _aggroState = new UnitAgroState(this, _stateMachine);
             _splineMoveState.Init(_aggroState);
             _aggroState.Init(_attackState, _splineMoveState);
+            _attackState.Init(_aggroState, _splineMoveState);
 
             _stateMachine.Initialize(_splineMoveState);
+        }
+
+        public class Factory : IFactory<Enemy>
+        {
+            private readonly Enemy _refEnemyPrefab;
+
+            public Factory(Enemy refEnemyPrefab)
+            {
+                this._refEnemyPrefab = refEnemyPrefab;
+            }
+
+            public Enemy Create() => Instantiate(_refEnemyPrefab);
         }
     }
 }
