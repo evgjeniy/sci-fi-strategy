@@ -23,6 +23,7 @@ namespace SustainTheStrain.Units.Spawners
         {
             var unit = _factory.Create();
             unit.GetComponent<SplineFollower>().spline = _spline;
+            unit.GetComponent<SplineFollower>().RebuildImmediate();
             Debug.Log(string.Format("[EnemySpawner {0}] Spawned unit", gameObject.name));
         }
 

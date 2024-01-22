@@ -44,14 +44,6 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         {
             if (context.IsAnnoyed && context.Opponent == null) InitiateDuel();
 
-            if (!IsOnSpline(out var splineSample))
-            {
-                _isOnSpline = false;
-                context.SwitchPathFollower(context.NavPathFollower);
-                context.NavPathFollower.MoveTo(splineSample.position);
-            }
-
-
             if (!_isOnSpline)
                 if (context.NavPathFollower.IsDestinationReached())
                 {
