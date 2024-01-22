@@ -1,15 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using SustainTheStrain.EnergySystem;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.EnergySystem
 {
-    public class EnergySystemUI : MonoBehaviour
+    public class EnergyControllerUI : MonoBehaviour
     {
-        [SerializeField] private EnergySystemControllButton _controlButton;
+        [SerializeField] private EnergyController _energyController;
+
+        [Inject]
+        public void Bind(EnergyController controller)
+        {
+            _energyController = controller;
+            var manager = _energyController.Manager;
+            MaxBarsCount = manager.MaxCount;
+            manager.OnEnergyChanged += ChangeEnergy;
+            manager.OnMaxEnergyChanged += SetMax;
+        }
         
         [SerializeField] private Image _imagePrefab;
 
@@ -37,18 +45,11 @@ namespace SustainTheStrain
             }
         }
 
-        public EnergySystemControllButton SpawnButton(Sprite image)
+        private void SetMax(int value)
         {
-            var button = Instantiate(_controlButton, transform);
-            button.image.sprite = image;
-            return button;
+            MaxBarsCount = value;
         }
-        
-        // private void SetMax(int value)
-        // {
-        //     MaxBarsCount = value;
-        // }
-        
+
         private void SetMaxBarsCount(int value)
         {
             if (value > _enabledCount)
@@ -67,7 +68,7 @@ namespace SustainTheStrain
             _enabledCount++;
         }
 
-        public void ChangeEnergy(int count)
+        private void ChangeEnergy(int count)
         {
             if (count < 0 || count > _images.Count) return;
             _coloredCount = count;
@@ -122,6 +123,12 @@ namespace SustainTheStrain
         {
             img.color = _imagePrefab.color;
         }
-        
+
+        private void OnDisable()
+        {
+            var manager = _energyController.Manager;
+            manager.OnEnergyChanged -= ChangeEnergy;
+            manager.OnMaxEnergyChanged -= SetMax;
+        }
     }
 }

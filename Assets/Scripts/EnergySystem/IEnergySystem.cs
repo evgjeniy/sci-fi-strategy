@@ -1,10 +1,13 @@
 ﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace SustainTheStrain.EnergySystem
 {
     public interface IEnergySystem
     {
+        public Sprite ButtonImage { get; set;}
         [Inject] public EnergyController EnergyController { get; set; }
         public int EnergySpendCount { get; }
         public int FreeEnergyCells { get; }

@@ -1,12 +1,14 @@
 ﻿using System;
 using SustainTheStrain.EnergySystem;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace SustainTheStrain.ResourceSystems
 {
     public class ExplorePointGenerator : ResourceGenerator, IEnergySystem
     {
+        [field:SerializeField] public Sprite ButtonImage { get; set; }
         [Inject] public EnergyController EnergyController { get; set; }
         [field:SerializeField] public int EnergySpendCount { get; private set; }
         public int MaxEnergy
