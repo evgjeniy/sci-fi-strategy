@@ -17,8 +17,8 @@ MonoBehaviour:
     type: 3}
   <LaserStats>k__BackingField:
   - <Stats>k__BackingField:
-      <Damage>k__BackingField: 1
-      <AttackCooldown>k__BackingField: 1
-      <AttackRadius>k__BackingField: 1
+      <Damage>k__BackingField: 2.43
+      <AttackCooldown>k__BackingField: 2.5
+      <AttackRadius>k__BackingField: 10
     <NextLevelPrice>k__BackingField: 1
     <DestroyCompensation>k__BackingField: 1

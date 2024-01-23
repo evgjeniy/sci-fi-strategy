@@ -16,10 +16,11 @@ namespace SustainTheStrain.Buildings.Data
         [System.Serializable]
         public class Stats
         {
-            [field: SerializeField, Min(0.01f)] public float Damage { get; private set; } = 1.0f;
-            [field: SerializeField, Min(0.01f)] public float AttackCooldown { get; private set; } = 1.0f;
-            [field: SerializeField, Min(0.01f)] public float AttackRadius { get; private set; } = 1.0f;
-            [field: SerializeField, Range(0.01f, 359.9f)] public float AttackSectorAngle { get; private set; } = 45.0f;
+            [field: SerializeField, Min(1)] public int MaxEnemiesTargets { get; set; } = 1;
+            [field: SerializeField, Min(0.0f)] public float Damage { get; private set; } = 1.0f;
+            [field: SerializeField, Min(0.0f)] public float AttackCooldown { get; private set; } = 1.0f;
+            [field: SerializeField, Min(0.0f)] public float AttackRadius { get; private set; } = 1.0f;
+            [field: SerializeField, Range(0.0f, 360.0f)] public float AttackSectorAngle { get; private set; } = 45.0f;
         }
     }
 }
