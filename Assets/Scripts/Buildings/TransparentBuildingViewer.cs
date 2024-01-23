@@ -12,18 +12,21 @@ namespace SustainTheStrain.Buildings
     public class TransparentBuildingViewer : MonoBehaviour
     {
         [SerializeField, Range(0.0f, 5.0f)] private float _scaleAnimationDuration = 0.5f;
-        
+
         private Sequence _tween;
         private Transform _cashedTransform;
         private MeshFilter _meshFilter;
         private MeshRenderer _meshRenderer;
-        private IBuildingInputService _input;
-        private IBuildingSelector _buildingSelector;
-        private IBuildingSystem _buildingSystem;
+
+        private ISelectableInput<BuildingPlaceholder> _input;
+
+        // private IBuildingSelector _buildingSelector;
+        // private IBuildingSystem _buildingSystem;
+        private RaycastHit _hit;
 
         [Zenject.Inject]
         private void Construct(
-            IBuildingInputService buildingInput/*,
+            ISelectableInput<BuildingPlaceholder> buildingInput /*,
             IBuildingSelector buildingSelector,
             IBuildingSystem buildingSystem*/)
         {
@@ -38,22 +41,24 @@ namespace SustainTheStrain.Buildings
 
         private void OnEnable()
         {
-            _input.OnPlaceholderPointerLeftClick += ShowPreview;
-            _input.OnLeftMouseClick += HidePreview;
+            _input.OnSelected += ShowPreview;
+            _input.OnDeselected += HidePreview;
+            _input.OnMouseMove += InputOnOnMouseMove;
         }
 
         private void OnDisable()
         {
-            _input.OnPlaceholderPointerLeftClick -= ShowPreview;
-            _input.OnLeftMouseClick -= HidePreview;
+            _input.OnSelected -= ShowPreview;
+            _input.OnDeselected -= HidePreview;
+            _input.OnMouseMove -= InputOnOnMouseMove;
         }
 
         private void OnDestroy() => _tween?.Kill();
-        
+
         private async void ChangeBuildingMeshPreview(BuildingData buildingData)
         {
             var halfDuration = _scaleAnimationDuration / 2.0f;
-            
+
             _tween?.Kill();
             _tween = DOTween.Sequence()
                 .Append(_cashedTransform.DOScale(Vector3.zero, halfDuration))
@@ -63,7 +68,7 @@ namespace SustainTheStrain.Buildings
                 }));
 
             await _tween.Play().ToUniTask();
-        } 
+        }
 
         private async void ShowPreview(BuildingPlaceholder placeholder)
         {
@@ -78,11 +83,11 @@ namespace SustainTheStrain.Buildings
                     .OnStart(_meshRenderer.Enable)
                     .SetEase(Ease.OutBounce)
             );
-            
+
             await _tween.Play().ToUniTask();
         }
-        
-        private async void HidePreview(Vector2 vector2)
+
+        private async void HidePreview(BuildingPlaceholder buildingPlaceholder)
         {
             _cashedTransform.localScale = Vector3.one;
 
@@ -94,8 +99,11 @@ namespace SustainTheStrain.Buildings
                     .OnKill(_meshRenderer.Disable)
                     .SetEase(Ease.OutExpo)
             );
-            
+
             await _tween.Play().ToUniTask();
         }
+
+        [SerializeField] private Transform mouseMoveTransform;
+        private void InputOnOnMouseMove(RaycastHit hit) => mouseMoveTransform.position = hit.point;
     }
 }
