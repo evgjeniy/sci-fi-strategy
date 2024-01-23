@@ -13,7 +13,6 @@ namespace SustainTheStrain.EnergySystem
 
         [Inject] public EnergyManager Manager { get; private set; }
     
-        [Inject]
         public void AddEnergySystem(IEnergySystem system)
         {
             if (!_systems.Contains(system))
