@@ -17,12 +17,11 @@ namespace SustainTheStrain.Units
         public IPathFollower CurrentPathFollower { get; protected set; }   
         protected StateMachine.StateMachine _stateMachine = new StateMachine.StateMachine();
 
-        public Damageble Damageble { get; protected set; }
+        public Duelable Duelable { get; protected set; }
         public AggroRadiusCheck AggroRadiusCheck { get; protected set;}
         public AttackRadiusCheck AttackRadiusCheck { get; protected set;}
         public StateMachine.StateMachine StateMachine => _stateMachine;
         public NavPathFollower NavPathFollower { get; protected set; }
-        public Unit Opponent { get; protected set; }
 
         public bool IsAnnoyed { get; protected set; } 
         public bool IsOpponentInAggroZone { get; protected set; }
@@ -36,7 +35,7 @@ namespace SustainTheStrain.Units
 
         protected virtual void Init()
         {
-            Damageble = GetComponent<Damageble>();
+            Duelable = GetComponent<Duelable>();
 
             AggroRadiusCheck = GetComponentInChildren<AggroRadiusCheck>();
             AggroRadiusCheck.OnUnitEnteredAggroZone += UnitEneterdAggroZone;
@@ -53,67 +52,26 @@ namespace SustainTheStrain.Units
 
         #region UNIT_TRIGGER_LOGIC
 
-        private void UnitEneterdAggroZone(Unit unit)
+        private void UnitEneterdAggroZone(Duelable unit)
         {
             IsAnnoyed = true;
         }
 
-        private void UnitLeftAggroZone(Unit unit)
+        private void UnitLeftAggroZone(Duelable unit)
         {
             IsAnnoyed = AggroRadiusCheck.AggroZoneUnits.Count != 0;
 
-            IsOpponentInAggroZone = Opponent == unit;
+            IsOpponentInAggroZone = Duelable.Opponent == unit;
         }
 
-        private void UnitEneterdAttackZone(Unit unit)
+        private void UnitEneterdAttackZone(Duelable unit)
         {
-            IsOpponentInAttackZone = unit == Opponent;
+            IsOpponentInAttackZone = unit == Duelable.Opponent;
         }
 
-        private void UnitLeftAttackZone(Unit unit)
+        private void UnitLeftAttackZone(Duelable unit)
         {
-            IsOpponentInAttackZone = unit != Opponent;
-        }
-
-        public bool IsDuelPossible(Unit innitiator)
-        {
-            return Opponent == null && innitiator.Damageble.Team != Damageble.Team;
-        }
-
-        public bool RequestDuel(Unit unit)
-        {
-            if(unit.IsDuelPossible(this))
-            {
-                unit.SetOpponent(this);
-                SetOpponent(unit);
-                return true;
-            }
-            else return false;
-        }
-
-        public void SetOpponent(Unit unit)
-        {
-            Opponent = unit;
-            unit.Damageble.OnDied += OpponentDead;
-        }
-
-        public void BreakDuel()
-        {
-            if (Opponent == null) return;
-
-            Opponent.RemoveOpponent();
-            RemoveOpponent();
-        }
-
-        public void RemoveOpponent()
-        {
-            Opponent.Damageble.OnDied -= OpponentDead;
-            Opponent = null;
-        }
-
-        public void OpponentDead(Damageble damageble)
-        {
-            BreakDuel();
+            IsOpponentInAttackZone = !(unit == Duelable.Opponent);
         }
 
         #endregion

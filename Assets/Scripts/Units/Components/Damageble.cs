@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace SustainTheStrain.Units.Components
 {
-    public class Damageble : MonoBehaviour
+    public class Damageble : MonoBehaviour, IHealth, ITeam
     {
         [field:SerializeField]
-        public float MaxHP { get; protected set; }
+        public float MaxHP { get; set; }
         [field: SerializeField]
-        public float CurrentHP { get; protected set; }
+        public float CurrentHP { get; set; }
         [field: SerializeField]
-        public int Team { get; protected set; }
+        public int Team { get; set; }
 
         public event Action<Damageble> OnDied;
         public event Action<float> OnCurrentHPChanged;

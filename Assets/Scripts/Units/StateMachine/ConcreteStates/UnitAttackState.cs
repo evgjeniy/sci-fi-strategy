@@ -26,6 +26,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
             Debug.Log(string.Format("[StateMachine {0}] UnitAttackState entered", context.gameObject.name));
 
             context.SwitchPathFollower(context.NavPathFollower);
+            context.CurrentPathFollower.Stop();
         }
 
         public override void ExitState()
@@ -35,14 +36,14 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void FrameUpdate()
         {
-            if (context.Opponent == null) context.StateMachine.ChangeState(_idleState);
+            if (context.Duelable.Opponent == null) context.StateMachine.ChangeState(_idleState);
 
             if (!context.IsOpponentInAttackZone) context.StateMachine.ChangeState(_aggroState);
 
             if(_attackTime > context.DamagePeriod)
             {
                 _attackTime = 0;
-                context.Opponent.Damageble.Damage(context.Damage);
+                context.Duelable.Opponent.Damageble.Damage(context.Damage);
             }
 
             _attackTime += Time.deltaTime;

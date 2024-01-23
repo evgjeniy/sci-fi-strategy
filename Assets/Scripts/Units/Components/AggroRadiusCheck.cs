@@ -6,16 +6,16 @@ namespace SustainTheStrain.Units.Components
 {
     public class AggroRadiusCheck : MonoBehaviour
     {
-        private List<Unit> _aggroZoneUnits = new List<Unit>();
+        private List<Duelable> _aggroZoneUnits = new List<Duelable>();
 
-        public List<Unit> AggroZoneUnits => _aggroZoneUnits;
+        public List<Duelable> AggroZoneUnits => _aggroZoneUnits;
 
-        public event Action<Unit> OnUnitEnteredAggroZone;
-        public event Action<Unit> OnUnitLeftAggroZone;
+        public event Action<Duelable> OnUnitEnteredAggroZone;
+        public event Action<Duelable> OnUnitLeftAggroZone;
 
         private void OnTriggerEnter(Collider other)
         {
-            other.gameObject.TryGetComponent<Unit>(out var unit);
+            other.gameObject.TryGetComponent<Duelable>(out var unit);
 
             AddUnit(unit);
         }
@@ -25,7 +25,7 @@ namespace SustainTheStrain.Units.Components
             RemoveUnit(other.gameObject);
         }
 
-        private void AddUnit(Unit unit)
+        private void AddUnit(Duelable unit)
         {
             if (unit == null) return;
 

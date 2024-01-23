@@ -32,9 +32,9 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void FrameUpdate()
         {
-            if(context.IsAnnoyed && context.Opponent == null) InitiateDuel();
+            if(context.IsAnnoyed && context.Duelable.Opponent == null) InitiateDuel();
 
-            if (context.Opponent != null) context.StateMachine.ChangeState(_aggroState);
+            if (context.Duelable.Opponent != null) context.StateMachine.ChangeState(_aggroState);
         }
 
         public override void PhysicsUpdate()
@@ -48,7 +48,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
             foreach (var unit in context.AggroRadiusCheck.AggroZoneUnits)
             {
-                if (context.RequestDuel(unit))
+                if (context.Duelable.RequestDuel(unit))
                     break;
             }
         }

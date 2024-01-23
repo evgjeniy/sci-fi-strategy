@@ -7,16 +7,16 @@ namespace SustainTheStrain.Units.Components
 {
     public class AttackRadiusCheck : MonoBehaviour
     {
-        private List<Unit> _attackZoneUnits = new List<Unit>();
+        private List<Duelable> _attackZoneUnits = new List<Duelable>();
 
-        public List<Unit> AttackZoneUnits => _attackZoneUnits;
+        public List<Duelable> AttackZoneUnits => _attackZoneUnits;
 
-        public event Action<Unit> OnUnitEnteredAttackZone;
-        public event Action<Unit> OnUnitLeftAttackZone;
+        public event Action<Duelable> OnUnitEnteredAttackZone;
+        public event Action<Duelable> OnUnitLeftAttackZone;
 
         private void OnTriggerEnter(Collider other)
         {
-            other.gameObject.TryGetComponent<Unit>(out var unit);
+            other.gameObject.TryGetComponent<Duelable>(out var unit);
 
             AddUnit(unit);
         }
@@ -26,7 +26,7 @@ namespace SustainTheStrain.Units.Components
             RemoveUnit(other.gameObject);
         }
 
-        private void AddUnit(Unit unit)
+        private void AddUnit(Duelable unit)
         {
             if (unit == null) return;
 
