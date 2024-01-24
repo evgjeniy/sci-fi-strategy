@@ -43,14 +43,12 @@ namespace SustainTheStrain.Buildings
         {
             _input.OnSelected += ShowPreview;
             _input.OnDeselected += HidePreview;
-            _input.OnMouseMove += InputOnOnMouseMove;
         }
 
         private void OnDisable()
         {
             _input.OnSelected -= ShowPreview;
             _input.OnDeselected -= HidePreview;
-            _input.OnMouseMove -= InputOnOnMouseMove;
         }
 
         private void OnDestroy() => _tween?.Kill();
@@ -102,8 +100,5 @@ namespace SustainTheStrain.Buildings
 
             await _tween.Play().ToUniTask();
         }
-
-        [SerializeField] private Transform mouseMoveTransform;
-        private void InputOnOnMouseMove(RaycastHit hit) => mouseMoveTransform.position = hit.point;
     }
 }
