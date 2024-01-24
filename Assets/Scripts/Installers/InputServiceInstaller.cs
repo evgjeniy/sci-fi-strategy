@@ -6,7 +6,7 @@ namespace SustainTheStrain.Installers
 {
     public class InputServiceInstaller : MonoInstaller
     {
-        [SerializeField] private InputService.Settings _settings;
+        [SerializeField] private InputService.InputSettings _settings;
         
         public override void InstallBindings()
         {

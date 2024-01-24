@@ -1,107 +1,124 @@
 ﻿using System;
-using System.Collections.Generic;
+using NTC.FiniteStateMachine;
 using SustainTheStrain.Buildings;
+using SustainTheStrain.Input.States;
+using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace SustainTheStrain.Input
 {
-    public class InputService : IBuildingInputService, IInitializable, IDisposable
+    public class InputService : IInitializable, IDisposable,
+        ISelectableInput<BuildingPlaceholder>,
+        ISelectableInput<Hero>
     {
+        #region Nested Classes
+
         [Serializable]
-        public class Settings
+        public class InputSettings
         {
             [field: SerializeField] public EventSystem EventSystem { get; private set; }
             [field: SerializeField] public LayerMask RayCastMask { get; private set; } = 255;
             [field: SerializeField] public float MaxDistance { get; private set; } = float.MaxValue;
         }
 
-        private readonly Settings _settings;
+        public class InputData
+        {
+            public BuildingPlaceholder Placeholder;
+            public Hero Hero;
+        }
+
+        #endregion
+
         private readonly InputActions _actions = new();
-        private readonly List<RaycastResult> _rayCastResults = new();
 
-        private Vector2 _mousePosition;
-        private Camera _camera;
-        private BuildingPlaceholder _placeholder;
-        private bool _isPointerUnderUI;
+        public InputSettings Settings { get; }
+        public InputData CashedData { get; } = new();
+        public StateMachine<InputService> StateMachine { get; private set; }
 
-        public event Action<Vector2> OnLeftMouseClick;
-        public event Action<BuildingPlaceholder> OnPlaceholderPointerEnter;
-        public event Action<BuildingPlaceholder> OnPlaceholderPointerExit;
-        public event Action<BuildingPlaceholder> OnPlaceholderPointerLeftClick;
-
-        public InputService(Settings settings) => _settings = settings;
-
+        public InputService(InputSettings inputSettings) => Settings = inputSettings;
         public void Enable() => _actions.Enable();
         public void Disable() => _actions.Disable();
 
         public void Initialize()
         {
-            _camera = Camera.main;
-            
+            StateMachine = new StateMachine<InputService>
+            (
+                new MouseMoveState(this, _actions.Mouse, OnMouseMove),
+                new PlaceholderPointerState(this, _actions.Mouse, OnPlaceholderEnter, OnPlaceholderExit),
+                new PlaceholderSelectionState(this, _actions.Mouse, OnPlaceholderSelected, OnPlaceholderDeselected),
+                new HeroPointerState(this, _actions.Mouse, OnHeroEnter, OnHeroExit),
+                new HeroSelectionState(this, _actions.Mouse, OnHeroSelected, OnHeroDeselected)
+            );
+
+            StateMachine.SetState<MouseMoveState>();
+
             Enable();
-            _actions.Mouse.MousePosition.performed += OnMouseMoved;
-            _actions.Mouse.LeftButton.performed += OnLeftMouseButton;
         }
 
-        public void Dispose()
+        public void Dispose() => Disable();
+
+        #region Events
+
+        public event Action<RaycastHit> OnMouseMove;
+
+        public event Action<BuildingPlaceholder> OnPlaceholderEnter;
+        event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnPointerEnter
         {
-            _actions.Mouse.MousePosition.performed -= OnMouseMoved;
-            _actions.Mouse.LeftButton.performed -= OnLeftMouseButton;
-            Disable();
+            add => OnPlaceholderEnter += value;
+            remove => OnPlaceholderEnter -= value;
         }
 
-        private void OnMouseMoved(InputAction.CallbackContext context)
+        public event Action<BuildingPlaceholder> OnPlaceholderExit;
+        event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnPointerExit
         {
-            _mousePosition = context.ReadValue<Vector2>();
-            
-            _isPointerUnderUI = IsPointerUnderUI();
-            if (_isPointerUnderUI) return;
-
-            var ray = _camera.ScreenPointToRay(_mousePosition);
-            if (!Physics.Raycast(ray, out var hit, _settings.MaxDistance, _settings.RayCastMask.value)) return;
-            
-            if (IsPointerUnderBuildingPlaceholder(hit.collider)) return;
-            if (/*HandleMovement(hit)*/ false) return;
+            add => OnPlaceholderExit += value;
+            remove => OnPlaceholderExit -= value;
         }
 
-        private void OnLeftMouseButton(InputAction.CallbackContext context)
+        public event Action<BuildingPlaceholder> OnPlaceholderSelected;
+        event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnSelected
         {
-            if (_isPointerUnderUI) return;
-            
-            if (_placeholder != null)
-                OnPlaceholderPointerLeftClick?.Invoke(_placeholder);
-            else
-                OnLeftMouseClick?.Invoke(_mousePosition);
+            add => OnPlaceholderSelected += value;
+            remove => OnPlaceholderSelected -= value;
         }
 
-        private bool IsPointerUnderBuildingPlaceholder(Component hitCollider)
+        public event Action<BuildingPlaceholder> OnPlaceholderDeselected;
+        event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnDeselected
         {
-            var hasPlaceholder = hitCollider.TryGetComponent<BuildingPlaceholder>(out var placeholder);
-            if (hasPlaceholder)
-            {
-                if (_placeholder != null) return true;
-                
-                OnPlaceholderPointerEnter?.Invoke(placeholder);
-                _placeholder = placeholder;
-            }
-            else
-            {
-                if (_placeholder == null) return false;
-                
-                OnPlaceholderPointerExit?.Invoke(_placeholder);
-                _placeholder = null;
-            }
-            return hasPlaceholder;
+            add => OnPlaceholderDeselected += value;
+            remove => OnPlaceholderDeselected -= value;
         }
 
-        private bool IsPointerUnderUI()
+        public event Action<Hero> OnHeroEnter;
+        event Action<Hero> ISelectableInput<Hero>.OnPointerEnter
         {
-            var pointerEventData = new PointerEventData(_settings.EventSystem) { position = _mousePosition };
-            _settings.EventSystem.RaycastAll(pointerEventData, _rayCastResults);
-            return _rayCastResults.Count != 0;
+            add => OnHeroEnter += value;
+            remove => OnHeroEnter -= value;
         }
+
+        public event Action<Hero> OnHeroExit;
+        event Action<Hero> ISelectableInput<Hero>.OnPointerExit
+        {
+            add => OnHeroExit += value;
+            remove => OnHeroExit -= value;
+        }
+
+        public event Action<Hero> OnHeroSelected;
+        event Action<Hero> ISelectableInput<Hero>.OnSelected
+        {
+            add => OnHeroSelected += value;
+            remove => OnHeroSelected -= value;
+        }
+
+        public event Action<Hero> OnHeroDeselected;
+        event Action<Hero> ISelectableInput<Hero>.OnDeselected
+        {
+            add => OnHeroDeselected += value;
+            remove => OnHeroDeselected -= value;
+        }
+
+        #endregion
     }
 }
