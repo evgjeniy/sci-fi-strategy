@@ -1,24 +1,27 @@
 using UnityEngine;
 
-public class EnemyHackAbility : PointAbility
+namespace SustainTheStrain.AbilitiesScripts
 {
-    protected override void FailShootLogic()
+    public class EnemyHackAbility : PointAbility
     {
-        Debug.Log("HACK failed to shoot");
-    }
+        protected override void FailShootLogic()
+        {
+            Debug.Log("HACK failed to shoot");
+        }
 
-    protected override void SuccessShootLogic(RaycastHit hit)
-    {
-        Debug.Log("HACK success shot");
-    }
+        protected override void SuccessShootLogic(RaycastHit hit)
+        {
+            Debug.Log("HACK success shot");
+        }
 
-    protected override void ReadyToShoot()
-    {
-        Debug.Log("HACK ready to shoot");
-    }
+        protected override void ReadyToShoot()
+        {
+            Debug.Log("HACK ready to shoot");
+        }
 
-    public override void UpdateLogic(RaycastHit hit)
-    {
+        public override void UpdateLogic(RaycastHit hit)
+        {
 
+        }
     }
 }

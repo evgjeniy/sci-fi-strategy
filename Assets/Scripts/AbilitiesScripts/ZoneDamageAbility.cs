@@ -1,42 +1,44 @@
-using System;
 using UnityEngine;
 
-public class ZoneDamageAbility : ZoneAbility
+namespace SustainTheStrain.AbilitiesScripts
 {
-    public ZoneDamageAbility(float zone, float speed)
+    public class ZoneDamageAbility : ZoneAbility
     {
-        zoneRadius = zone;
-        loadingSpeed = speed;
-    }
-
-    protected override void FailShootLogic()
-    {
-        Debug.Log("zoneDGM failed to shoot");
-    }
-
-    protected override void SuccessShootLogic(RaycastHit hit)
-    {
-        Debug.Log("zoneDMG success shot");
-    }
-
-    protected override void ReadyToShoot()
-    {
-        Debug.Log("zoneDMG ready to shoot");
-    }
-
-    public override void UpdateLogic(RaycastHit hit)
-    {
-        Vector3 point = hit.point;
-        aimZone.transform.position = point + offset;
-        if (isReloaded())
+        public ZoneDamageAbility(float zone, float speed)
         {
-            //мб цвет прицела будет зеленый
-            if (Input.GetMouseButtonDown(0))
-                Shoot(hit);
+            ZoneRadius = zone;
+            LoadingSpeed = speed;
         }
-        else
+
+        protected override void FailShootLogic()
         {
-            //мб цвет прицела будет красный
+            Debug.Log("zoneDGM failed to shoot");
+        }
+
+        protected override void SuccessShootLogic(RaycastHit hit)
+        {
+            Debug.Log("zoneDMG success shot");
+        }
+
+        protected override void ReadyToShoot()
+        {
+            Debug.Log("zoneDMG ready to shoot");
+        }
+
+        public override void UpdateLogic(RaycastHit hit)
+        {
+            var point = hit.point;
+            AimZone.transform.position = point + Offset;
+            if (IsReloaded())
+            {
+                //Г¬ГЎ Г¶ГўГҐГІ ГЇГ°ГЁГ¶ГҐГ«Г  ГЎГіГ¤ГҐГІ Г§ГҐГ«ГҐГ­Г»Г©
+                if (UnityEngine.Input.GetMouseButtonDown(0))
+                    Shoot(hit);
+            }
+            else
+            {
+                //Г¬ГЎ Г¶ГўГҐГІ ГЇГ°ГЁГ¶ГҐГ«Г  ГЎГіГ¤ГҐГІ ГЄГ°Г Г±Г­Г»Г©
+            }
         }
     }
 }

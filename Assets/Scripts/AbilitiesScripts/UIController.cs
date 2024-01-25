@@ -1,50 +1,50 @@
-using ModestTree;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIController : MonoBehaviour
+namespace SustainTheStrain.AbilitiesScripts
 {
-    [SerializeField] Button ButtonPrefab;
-    [SerializeField] Slider SliderPrefab;
-    [SerializeField] GameObject buttonHolder;
-    [SerializeField] GameObject sliderHolder;
-    private AbilityButton[] buttons;
-    private AbilitiesController abilitiesController;
-    private Color readyColor = Color.green; //temporary UI
-    private Color loadingColor = Color.red;
-    private bool zoneDamageButtonReady = true;
-
-    void Start()
+    public class UIController : MonoBehaviour
     {
-        Init();
-    }
+        [SerializeField] private Button ButtonPrefab;
+        [SerializeField] private Slider SliderPrefab;
+        [SerializeField] private GameObject buttonHolder;
+        [SerializeField] private GameObject sliderHolder;
 
-    public void Init()
-    {
-        abilitiesController = GetComponent<AbilitiesController>();
-        abilitiesController.Init(); //temporary, because now we don't have MainController
-        buttons = new AbilityButton[abilitiesController.abilities.Count];
-        for(int i = 0; i < abilitiesController.abilities.Count; i++)
+        private readonly Color _readyColor = Color.green; //temporary UI
+        private readonly Color _loadingColor = Color.red;
+
+        private bool _zoneDamageButtonReady = true;
+        private AbilityButton[] _buttons;
+        private AbilitiesController _abilitiesController;
+
+        private void Start() => Init();
+
+        private void Init()
         {
-            Button b = Instantiate(ButtonPrefab, buttonHolder.transform);
-            Slider s = Instantiate(SliderPrefab, sliderHolder.transform);
-            buttons[i] = new AbilityButton(b, s);
-            s.value = 1;
-            b.image.color = readyColor;
-            int cnt = i;
-            b.onClick.AddListener(() => { abilitiesController.OnAbilitySelect(cnt); });
-            abilitiesController.reloadListAdd(cnt, SetZoneDamageButtonData);
+            _abilitiesController = GetComponent<AbilitiesController>();
+            _abilitiesController.Init(); //temporary, because now we don't have MainController
+            _buttons = new AbilityButton[_abilitiesController.Abilities.Count];
+            for (var i = 0; i < _abilitiesController.Abilities.Count; i++)
+            {
+                var b = Instantiate(ButtonPrefab, buttonHolder.transform);
+                var s = Instantiate(SliderPrefab, sliderHolder.transform);
+                _buttons[i] = new AbilityButton(b, s);
+                s.value = 1;
+                b.image.color = _readyColor;
+                var cnt = i;
+                b.onClick.AddListener(() => { _abilitiesController.OnAbilitySelect(cnt); });
+                _abilitiesController.ReloadListAdd(cnt, SetZoneDamageButtonData);
+            }
         }
-    }
 
-    public void SetZoneDamageButtonData(int idx, float load, bool ready)
-    {
-        buttons[idx].getSlider().value = load;
-        if (zoneDamageButtonReady ^ ready) //ready-state updated
+        private void SetZoneDamageButtonData(int idx, float load, bool ready)
         {
-            zoneDamageButtonReady = ready;
-            buttons[idx].getButton().image.color = zoneDamageButtonReady ? readyColor : loadingColor;
+            _buttons[idx].GetSlider().value = load;
+            if (_zoneDamageButtonReady ^ ready) // ready-state updated
+            {
+                _zoneDamageButtonReady = ready;
+                _buttons[idx].GetButton().image.color = _zoneDamageButtonReady ? _readyColor : _loadingColor;
+            }
         }
     }
 }

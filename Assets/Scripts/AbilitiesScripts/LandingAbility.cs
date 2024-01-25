@@ -1,24 +1,27 @@
 using UnityEngine;
 
-public class LandingAbility : PointAbility
+namespace SustainTheStrain.AbilitiesScripts
 {
-    protected override void FailShootLogic()
+    public class LandingAbility : PointAbility
     {
-        Debug.Log("LAND failed to shoot");
-    }
+        protected override void FailShootLogic()
+        {
+            Debug.Log("LAND failed to shoot");
+        }
 
-    protected override void SuccessShootLogic(RaycastHit hit)
-    {
-        Debug.Log("LAND success shot");
-    }
+        protected override void SuccessShootLogic(RaycastHit hit)
+        {
+            Debug.Log("LAND success shot");
+        }
 
-    protected override void ReadyToShoot()
-    {
-        Debug.Log("LAND ready to shoot");
-    }
+        protected override void ReadyToShoot()
+        {
+            Debug.Log("LAND ready to shoot");
+        }
 
-    public override void UpdateLogic(RaycastHit hit)
-    {
+        public override void UpdateLogic(RaycastHit hit)
+        {
 
+        }
     }
 }

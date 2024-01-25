@@ -1,24 +1,27 @@
 using UnityEngine;
 
-public class ZoneSlownessAbility : ZoneAbility
+namespace SustainTheStrain.AbilitiesScripts
 {
-    protected override void FailShootLogic()
+    public class ZoneSlownessAbility : ZoneAbility
     {
-        Debug.Log("zoneSLOW failed to shoot");
-    }
+        protected override void FailShootLogic()
+        {
+            Debug.Log("zoneSLOW failed to shoot");
+        }
 
-    protected override void SuccessShootLogic(RaycastHit hit)
-    {
-        Debug.Log("zoneSLOW success shot");
-    }
+        protected override void SuccessShootLogic(RaycastHit hit)
+        {
+            Debug.Log("zoneSLOW success shot");
+        }
 
-    protected override void ReadyToShoot()
-    {
-        Debug.Log("zoneSLOW ready to shoot");
-    }
+        protected override void ReadyToShoot()
+        {
+            Debug.Log("zoneSLOW ready to shoot");
+        }
 
-    public override void UpdateLogic(RaycastHit hit)
-    {
+        public override void UpdateLogic(RaycastHit hit)
+        {
         
+        }
     }
 }
