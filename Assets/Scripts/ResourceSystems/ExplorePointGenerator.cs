@@ -64,7 +64,7 @@ namespace SustainTheStrain.ResourceSystems
 
         public void TryRefillEnergy()
         {
-            if (_currentEnergy <= EnergySpendCount) return;
+            if (_currentEnergy < EnergySpendCount) return;
             if (EnergyController.TryReturnEnergy(EnergySpendCount))
             {
                 CurrentEnergy -= EnergySpendCount;
@@ -75,14 +75,6 @@ namespace SustainTheStrain.ResourceSystems
         private void OnDisable()
         {
             EndGeneration();
-        }
-        
-        private void Update()
-        {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.S))
-            {
-                TrySpendEnergy();
-            }
         }
     }
 }
