@@ -18,10 +18,5 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             Debug.Log("zoneSLOW ready to shoot");
         }
-
-        public override void UpdateLogic(RaycastHit hit)
-        {
-        
-        }
     }
 }

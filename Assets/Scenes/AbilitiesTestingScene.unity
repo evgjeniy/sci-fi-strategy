@@ -335,8 +335,8 @@ MonoBehaviour:
   mainCamera: {fileID: 566213450}
   layersToHit:
     serializedVersion: 2
-    m_Bits: 8
-  zoneDamageMaxDistFromCamera: 300
+    m_Bits: 64
+  zoneDamageMaxDistFromCamera: 500
   zoneDamageRadius: 15
   zoneDamageReloadingSpeed: 0.6
 --- !u!1 &567872056
@@ -542,7 +542,7 @@ GameObject:
   - component: {fileID: 1208954913}
   - component: {fileID: 1208954912}
   - component: {fileID: 1208954911}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}

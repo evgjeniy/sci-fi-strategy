@@ -9,15 +9,15 @@ namespace SustainTheStrain.AbilitiesScripts
         [SerializeField] private GameObject aimZonePrefab;
         [SerializeField] private Camera mainCamera;
         [SerializeField] private LayerMask layersToHit;
-        [SerializeField] private float zoneDamageMaxDistFromCamera;
+        [SerializeField] private int zoneDamageMaxDistFromCamera;
         [SerializeField] private float zoneDamageRadius;
         [SerializeField] private float zoneDamageReloadingSpeed;
 
+        private ZoneAim zoneAim;
+
         public readonly List<BaseAbility> Abilities = new(); //better to make it readonly
-        private readonly Vector3 _nullVector = new(0, 0, 0);
 
         private ReloadDelegate[] _reloadList; //tut private, dlya dobavlenia est metod
-        private GameObject _aimZone;
         private int _selected = -1;
 
         public delegate void ReloadDelegate(int idx, float l, bool r);
@@ -28,6 +28,7 @@ namespace SustainTheStrain.AbilitiesScripts
             AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
             AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû
+            zoneAim = new(zoneDamageRadius, aimZonePrefab, layersToHit, zoneDamageMaxDistFromCamera);
         }
 
         public void ReloadListSyncSize()
@@ -56,8 +57,8 @@ namespace SustainTheStrain.AbilitiesScripts
         private bool IsCurrentSelected(int type)
         {
             if (_selected == -1) return false;
-            
-            Abilities[_selected].DestroyLogic();
+
+            zoneAim.Destroy();
             var sel = _selected;
             _selected = -1;
             
@@ -68,9 +69,9 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             if (IsCurrentSelected(idx)) return;
             
-            _selected = idx;
+            _selected = idx; //!!! need to swap AIM
             if (Abilities[_selected] is ZoneAbility zoneAbility)
-                zoneAbility.SetAimZone(Instantiate(aimZonePrefab, _nullVector, Quaternion.Euler(90, 0, 0)));
+                zoneAim.SpawnAimZone();
         }
 
         private void Update()
@@ -87,9 +88,14 @@ namespace SustainTheStrain.AbilitiesScripts
             
             var mousePosition = UnityEngine.Input.mousePosition;
             var ray = mainCamera.ScreenPointToRay(mousePosition);
-            
-            if (Physics.Raycast(ray, out var hit, zoneDamageMaxDistFromCamera, layersToHit))
-                Abilities[_selected].UpdateLogic(hit);
+
+            var hit = zoneAim.GetAimInfo(ray);
+            if (hit.HasValue)
+            {
+                zoneAim.UpdateLogic(hit.Value.point);
+                if (UnityEngine.Input.GetMouseButtonDown(0))
+                    Abilities[_selected].Shoot(hit.Value);
+            }
         }
     }
 }

@@ -18,10 +18,5 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             Debug.Log("LAND ready to shoot");
         }
-
-        public override void UpdateLogic(RaycastHit hit)
-        {
-
-        }
     }
 }

@@ -24,21 +24,5 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             Debug.Log("zoneDMG ready to shoot");
         }
-
-        public override void UpdateLogic(RaycastHit hit)
-        {
-            var point = hit.point;
-            AimZone.transform.position = point + Offset;
-            if (IsReloaded())
-            {
-                //ìá öâåò ïðèöåëà áóäåò çåëåíûé
-                if (UnityEngine.Input.GetMouseButtonDown(0))
-                    Shoot(hit);
-            }
-            else
-            {
-                //ìá öâåò ïðèöåëà áóäåò êðàñíûé
-            }
-        }
     }
 }

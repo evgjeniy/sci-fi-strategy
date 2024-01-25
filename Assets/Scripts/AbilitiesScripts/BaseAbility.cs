@@ -39,9 +39,5 @@ namespace SustainTheStrain.AbilitiesScripts
         protected abstract void SuccessShootLogic(RaycastHit hit);
 
         protected abstract void ReadyToShoot();
-
-        public abstract void UpdateLogic(RaycastHit hit);
-
-        public abstract void DestroyLogic();
     }
 }
