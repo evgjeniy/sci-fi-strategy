@@ -1,4 +1,5 @@
 using Dreamteck.Splines;
+using UnityEngine;
 
 namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
@@ -20,31 +21,37 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void EnterState()
         {
-            if(!IsOnSpline(out var splineSample))
+            Debug.Log(string.Format("[StateMachine {0}] EnemySplineMoveState entered", context.gameObject.name));
+
+            if (!IsOnSpline(out var splineSample))
             {
                 _isOnSpline = false;
+                context.SwitchPathFollower(context.NavPathFollower);
                 context.NavPathFollower.MoveTo(splineSample.position);
             }
             else
             {
-                context.SplinePathFollower.Start();
+                context.SwitchPathFollower(context.SplinePathFollower);
             }
         }
 
         public override void ExitState()
         {
-            context.SplinePathFollower.Stop();
+            context.CurrentPathFollower.Stop();
         }
 
         public override void FrameUpdate()
         {
+            if (context.IsAnnoyed && context.Duelable.Opponent == null) InitiateDuel();
 
             if (!_isOnSpline)
                 if (context.NavPathFollower.IsDestinationReached())
                 {
                     _isOnSpline = true;
-                    context.SplinePathFollower?.Start();
+                    context.SwitchPathFollower(context.SplinePathFollower);
                 }
+
+            if (context.Duelable.Opponent != null) context.StateMachine.ChangeState(_aggroState);   
         }
 
         public bool IsOnSpline(out SplineSample resultSample)
@@ -60,6 +67,17 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         public override void PhysicsUpdate()
         {
 
+        }
+
+        private void InitiateDuel()
+        {
+            if (context.AggroRadiusCheck.AggroZoneUnits.Count == 0) return;
+
+            foreach (var unit in context.AggroRadiusCheck.AggroZoneUnits)
+            {
+                if (context.Duelable.RequestDuel(unit))
+                    break;
+            }
         }
     }
 }

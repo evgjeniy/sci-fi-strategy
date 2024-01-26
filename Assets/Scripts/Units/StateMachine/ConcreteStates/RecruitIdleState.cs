@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
     public class RecruitIdleState : State<Recruit>
@@ -15,23 +17,40 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void EnterState()
         {
-            if(context.transform.position != context.GuardPosition)
+            Debug.Log(string.Format("[StateMachine {0}] RecruitIdleState entered", context.gameObject.name));
+
+            context.SwitchPathFollower(context.NavPathFollower);
+
+            if (context.transform.position != context.GuardPosition)
                 context.NavPathFollower.MoveTo(context.GuardPosition);
         }
 
         public override void ExitState()
         {
-            context.NavPathFollower.Stop();
+            context.CurrentPathFollower.Stop();
         }
 
         public override void FrameUpdate()
         {
-       
+            if(context.IsAnnoyed && context.Duelable.Opponent == null) InitiateDuel();
+
+            if (context.Duelable.Opponent != null) context.StateMachine.ChangeState(_aggroState);
         }
 
         public override void PhysicsUpdate()
         {
         
+        }
+
+        private void InitiateDuel()
+        {
+            if (context.AggroRadiusCheck.AggroZoneUnits.Count == 0) return;
+
+            foreach (var unit in context.AggroRadiusCheck.AggroZoneUnits)
+            {
+                if (context.Duelable.RequestDuel(unit))
+                    break;
+            }
         }
     }
 }
