@@ -4,10 +4,12 @@ namespace SustainTheStrain.AbilitiesScripts
 {
     public class ZoneDamageAbility : ZoneAbility
     {
-        public ZoneDamageAbility(float zone, float speed)
+        protected float damage;
+        public ZoneDamageAbility(float zone, float speed, float dmg)
         {
             zoneRadius = zone;
             LoadingSpeed = speed;
+            damage = dmg;
         }
 
         protected override void FailShootLogic()
@@ -22,7 +24,7 @@ namespace SustainTheStrain.AbilitiesScripts
             {
                 var dmg = colliders[i].GetComponent<Units.Components.Damageble>();
                 if (dmg == null) continue;
-                dmg.Damage(0.3f); //ya hz skolko nado damagit
+                dmg.Damage(damage);
                 //Debug.Log(dmg.CurrentHP);
             }
         }

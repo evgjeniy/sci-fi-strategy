@@ -33,7 +33,7 @@ namespace SustainTheStrain
         public void SpawnAimZone()
         {
             aimZone = Object.Instantiate(aimZonePrefab, _nullVector, Quaternion.Euler(90, 0, 0));
-            aimZone.GetComponent<DecalProjector>().size = new Vector3(zoneRadius, zoneRadius, depth);
+            aimZone.GetComponent<DecalProjector>().size = new Vector3(2 * zoneRadius, 2 * zoneRadius, depth);
         }
 
         public RaycastHit? GetAimInfo(Ray ray) => Physics.Raycast(ray, out var hit, maxDistFromCamera, layersToHit) ? hit : null;

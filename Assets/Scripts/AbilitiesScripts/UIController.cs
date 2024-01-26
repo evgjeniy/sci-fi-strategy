@@ -13,7 +13,6 @@ namespace SustainTheStrain.AbilitiesScripts
         private readonly Color _readyColor = Color.green; //temporary UI
         private readonly Color _loadingColor = Color.red;
 
-        private bool _zoneDamageButtonReady = true;
         private AbilityButton[] _buttons;
         private AbilitiesController _abilitiesController;
 
@@ -40,11 +39,8 @@ namespace SustainTheStrain.AbilitiesScripts
         private void SetZoneDamageButtonData(int idx, float load, bool ready)
         {
             _buttons[idx].GetSlider().value = load;
-            if (_zoneDamageButtonReady ^ ready) // ready-state updated
-            {
-                _zoneDamageButtonReady = ready;
-                _buttons[idx].GetButton().image.color = _zoneDamageButtonReady ? _readyColor : _loadingColor;
-            }
+            if (_buttons[idx].IsReady() ^ ready) // ready-state updated
+                _buttons[idx].GetButton().image.color = _buttons[idx].ChangeReady() ? _readyColor : _loadingColor;
         }
     }
 }

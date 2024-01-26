@@ -12,6 +12,8 @@ namespace SustainTheStrain.AbilitiesScripts
         [SerializeField] private int zoneDamageMaxDistFromCamera;
         [SerializeField] private float zoneDamageRadius;
         [SerializeField] private float zoneDamageReloadingSpeed;
+        [SerializeField] private float damag;
+        [SerializeField] private float speedCoef;
 
         private ZoneAim zoneAim;
 
@@ -24,9 +26,9 @@ namespace SustainTheStrain.AbilitiesScripts
 
         public void Init() //temporary, because now we don't have MainController
         {
-            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
-            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
-            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
+            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed, damag));
+            AddAbility(new ZoneSlownessAbility(zoneDamageRadius, zoneDamageReloadingSpeed, speedCoef));
+            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed, damag));
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû
             zoneAim = new(zoneDamageRadius, aimZonePrefab, layersToHit, zoneDamageMaxDistFromCamera);
         }

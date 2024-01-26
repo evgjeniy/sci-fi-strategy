@@ -364,8 +364,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   zoneDamageMaxDistFromCamera: 500
-  zoneDamageRadius: 15
+  zoneDamageRadius: 10
   zoneDamageReloadingSpeed: 0.6
+  damag: 0.3
+  speedCoef: 0.5
 --- !u!1 &567872056
 GameObject:
   m_ObjectHideFlags: 0
