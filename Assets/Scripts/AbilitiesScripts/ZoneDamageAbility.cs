@@ -6,7 +6,7 @@ namespace SustainTheStrain.AbilitiesScripts
     {
         public ZoneDamageAbility(float zone, float speed)
         {
-            ZoneRadius = zone;
+            zoneRadius = zone;
             LoadingSpeed = speed;
         }
 
@@ -17,7 +17,14 @@ namespace SustainTheStrain.AbilitiesScripts
 
         protected override void SuccessShootLogic(RaycastHit hit)
         {
-            Debug.Log("zoneDMG success shot");
+            Collider[] colliders = GetColliders(hit.point);
+            for(int i = 0; i < colliders.Length; i++)
+            {
+                var dmg = colliders[i].GetComponent<Units.Components.Damageble>();
+                if (dmg == null) continue;
+                dmg.Damage(0.3f); //ya hz skolko nado damagit
+                //Debug.Log(dmg.CurrentHP);
+            }
         }
 
         protected override void ReadyToShoot()
