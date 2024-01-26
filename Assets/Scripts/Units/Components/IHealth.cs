@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,5 +9,7 @@ namespace SustainTheStrain.Units.Components
     {
         public float MaxHP { get; set; }
         public float CurrentHP { get; set; }
+
+        public event Action<float> OnCurrentHPChanged;
     }
 }
