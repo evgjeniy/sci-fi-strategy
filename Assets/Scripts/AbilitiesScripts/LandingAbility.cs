@@ -9,7 +9,7 @@ namespace SustainTheStrain.AbilitiesScripts
             Debug.Log("LAND failed to shoot");
         }
 
-        protected override void SuccessShootLogic(RaycastHit hit)
+        protected override void SuccessShootLogic(RaycastHit hit, int team)
         {
             Debug.Log("LAND success shot");
         }

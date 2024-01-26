@@ -15,6 +15,8 @@ namespace SustainTheStrain.AbilitiesScripts
         [SerializeField] private float damag;
         [SerializeField] private float speedCoef;
 
+        [SerializeField] private int teamOpponent;
+
         private ZoneAim zoneAim;
 
         public readonly List<BaseAbility> Abilities = new(); //better to make it readonly
@@ -30,8 +32,10 @@ namespace SustainTheStrain.AbilitiesScripts
             AddAbility(new ZoneSlownessAbility(zoneDamageRadius, zoneDamageReloadingSpeed, speedCoef));
             AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed, damag));
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû
-            zoneAim = new(zoneDamageRadius, aimZonePrefab, layersToHit, zoneDamageMaxDistFromCamera);
+            zoneAim = new(zoneDamageRadius, aimZonePrefab, layersToHit, zoneDamageMaxDistFromCamera); 
         }
+
+        public void setTeamOpponent(int team) => teamOpponent = team;
 
         public void ReloadListSyncSize()
         {
@@ -96,7 +100,7 @@ namespace SustainTheStrain.AbilitiesScripts
             {
                 zoneAim.UpdateLogic(hit.Value.point);
                 if (UnityEngine.Input.GetMouseButtonDown(0))
-                    Abilities[_selected].Shoot(hit.Value);
+                    Abilities[_selected].Shoot(hit.Value, teamOpponent);
             }
         }
     }

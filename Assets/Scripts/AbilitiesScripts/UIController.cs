@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,6 +31,7 @@ namespace SustainTheStrain.AbilitiesScripts
                 _buttons[i] = new AbilityButton(b, s);
                 s.value = 1;
                 b.image.color = _readyColor;
+                b.GetComponentInChildren<TextMeshProUGUI>().text = _abilitiesController.Abilities[i].GetType().Name;//temp
                 var cnt = i;
                 b.onClick.AddListener(() => { _abilitiesController.OnAbilitySelect(cnt); });
                 _abilitiesController.ReloadListAdd(cnt, SetZoneDamageButtonData);

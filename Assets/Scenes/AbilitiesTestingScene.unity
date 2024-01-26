@@ -277,7 +277,7 @@ Transform:
   m_GameObject: {fileID: 566213448}
   serializedVersion: 2
   m_LocalRotation: {x: 0.20463654, y: 0.38906196, z: -0.089079455, w: 0.893767}
-  m_LocalPosition: {x: -30, y: 58.3, z: -30}
+  m_LocalPosition: {x: -26, y: 58.3, z: -61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -368,6 +368,7 @@ MonoBehaviour:
   zoneDamageReloadingSpeed: 0.6
   damag: 0.3
   speedCoef: 0.5
+  teamOpponent: 1
 --- !u!1 &567872056
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 380, y: -70}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &567872058
@@ -462,6 +463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc838324d2690045a19506f5e1cb70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MaxHP>k__BackingField: 2
+  <Team>k__BackingField: 3
 --- !u!65 &814237007
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -581,7 +584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 154, y: -270}
+  m_AnchoredPosition: {x: 530, y: -370}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &876067793
@@ -642,6 +645,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc838324d2690045a19506f5e1cb70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MaxHP>k__BackingField: 1
+  <Team>k__BackingField: 1
 --- !u!65 &889795393
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -926,6 +931,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc838324d2690045a19506f5e1cb70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MaxHP>k__BackingField: 1
+  <Team>k__BackingField: 2
 --- !u!65 &1516011641
 BoxCollider:
   m_ObjectHideFlags: 0

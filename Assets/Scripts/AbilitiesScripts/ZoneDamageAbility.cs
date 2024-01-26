@@ -17,13 +17,13 @@ namespace SustainTheStrain.AbilitiesScripts
             Debug.Log("zoneDGM failed to shoot");
         }
 
-        protected override void SuccessShootLogic(RaycastHit hit)
+        protected override void SuccessShootLogic(RaycastHit hit, int team)
         {
             Collider[] colliders = GetColliders(hit.point);
             for(int i = 0; i < colliders.Length; i++)
             {
                 var dmg = colliders[i].GetComponent<Units.Components.Damageble>();
-                if (dmg == null) continue;
+                if (dmg == null || dmg.Team != team) continue;
                 dmg.Damage(damage);
                 //Debug.Log(dmg.CurrentHP);
             }

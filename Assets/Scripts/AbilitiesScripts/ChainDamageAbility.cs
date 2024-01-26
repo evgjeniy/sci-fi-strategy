@@ -9,7 +9,7 @@ namespace SustainTheStrain.AbilitiesScripts
             Debug.Log("CHAIN failed to shoot");
         }
 
-        protected override void SuccessShootLogic(RaycastHit hit)
+        protected override void SuccessShootLogic(RaycastHit hit, int team)
         {
             Debug.Log("CHAIN success shot");
         }
