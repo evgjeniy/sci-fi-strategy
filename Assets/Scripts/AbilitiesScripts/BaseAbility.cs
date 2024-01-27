@@ -12,7 +12,7 @@ namespace SustainTheStrain.AbilitiesScripts
 
         public void SetLoadingSpeed(float speed) => LoadingSpeed = speed; //ne znayu nuzhen li no pust budet))
 
-        public void Shoot(RaycastHit hit, int team)
+        public virtual void Shoot(RaycastHit hit, int team)
         {
             if (!IsReloaded())
             {

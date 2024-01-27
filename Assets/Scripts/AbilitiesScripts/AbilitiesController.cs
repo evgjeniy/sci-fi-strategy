@@ -15,6 +15,7 @@ namespace SustainTheStrain.AbilitiesScripts
         [SerializeField] private float zoneDamageReloadingSpeed;
         [SerializeField] private float damag;
         [SerializeField] private float speedCoef;
+        [SerializeField] private GameObject LinePrefab;
 
         [SerializeField] private int team;
 
@@ -31,7 +32,7 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed, damag));
             AddAbility(new ZoneSlownessAbility(zoneDamageRadius, zoneDamageReloadingSpeed, speedCoef));
-            AddAbility(new ChainDamageAbility(zoneDamageReloadingSpeed, damag));
+            AddAbility(new ChainDamageAbility(LinePrefab, zoneDamageReloadingSpeed, damag, 3, 100));
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû
         }
 
