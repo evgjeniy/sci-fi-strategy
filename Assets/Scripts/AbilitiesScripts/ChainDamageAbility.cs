@@ -4,6 +4,14 @@ namespace SustainTheStrain.AbilitiesScripts
 {
     public class ChainDamageAbility : PointAbility
     {
+        protected float damage;
+
+        public ChainDamageAbility(float speed, float dmg)
+        {
+            LoadingSpeed = speed;
+            damage = dmg;
+        }
+
         protected override void FailShootLogic()
         {
             Debug.Log("CHAIN failed to shoot");

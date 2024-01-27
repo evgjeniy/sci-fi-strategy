@@ -360,15 +360,18 @@ MonoBehaviour:
   aimZonePrefab: {fileID: 7495390952849731377, guid: dec463a7aab7ab7489701ffb37bc966f,
     type: 3}
   mainCamera: {fileID: 566213450}
-  layersToHit:
+  zoneLayersToHit:
     serializedVersion: 2
     m_Bits: 64
-  zoneDamageMaxDistFromCamera: 500
+  aimLayersToHit:
+    serializedVersion: 2
+    m_Bits: 8
+  maxDistFromCamera: 500
   zoneDamageRadius: 10
   zoneDamageReloadingSpeed: 0.6
   damag: 0.3
   speedCoef: 0.5
-  teamOpponent: 1
+  team: 1
 --- !u!1 &567872056
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +447,7 @@ GameObject:
   - component: {fileID: 814237008}
   - component: {fileID: 814237007}
   - component: {fileID: 814237006}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,7 +629,7 @@ GameObject:
   - component: {fileID: 889795394}
   - component: {fileID: 889795393}
   - component: {fileID: 889795392}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -912,7 +915,7 @@ GameObject:
   - component: {fileID: 1516011642}
   - component: {fileID: 1516011641}
   - component: {fileID: 1516011640}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Enemy1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -8,16 +8,17 @@ namespace SustainTheStrain.AbilitiesScripts
     {
         [SerializeField] private GameObject aimZonePrefab;
         [SerializeField] private Camera mainCamera;
-        [SerializeField] private LayerMask layersToHit;
-        [SerializeField] private int zoneDamageMaxDistFromCamera;
+        [SerializeField] private LayerMask zoneLayersToHit;
+        [SerializeField] private LayerMask aimLayersToHit;
+        [SerializeField] private int maxDistFromCamera;
         [SerializeField] private float zoneDamageRadius;
         [SerializeField] private float zoneDamageReloadingSpeed;
         [SerializeField] private float damag;
         [SerializeField] private float speedCoef;
 
-        [SerializeField] private int teamOpponent;
+        [SerializeField] private int team;
 
-        private ZoneAim zoneAim;
+        private BaseAim currentAim;
 
         public readonly List<BaseAbility> Abilities = new(); //better to make it readonly
 
@@ -30,12 +31,11 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed, damag));
             AddAbility(new ZoneSlownessAbility(zoneDamageRadius, zoneDamageReloadingSpeed, speedCoef));
-            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed, damag));
+            AddAbility(new ChainDamageAbility(zoneDamageReloadingSpeed, damag));
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû
-            zoneAim = new(zoneDamageRadius, aimZonePrefab, layersToHit, zoneDamageMaxDistFromCamera); 
         }
 
-        public void setTeamOpponent(int team) => teamOpponent = team;
+        public void setTeamOpponent(int team) => this.team = team;
 
         public void ReloadListSyncSize()
         {
@@ -64,7 +64,8 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             if (_selected == -1) return false;
 
-            zoneAim.Destroy();
+            currentAim.Destroy();
+            currentAim = null;
             var sel = _selected;
             _selected = -1;
             
@@ -76,8 +77,11 @@ namespace SustainTheStrain.AbilitiesScripts
             if (IsCurrentSelected(idx)) return;
             
             _selected = idx; //!!! need to swap AIM
-            if (Abilities[_selected] is ZoneAbility zoneAbility)
-                zoneAim.SpawnAimZone();
+            if (Abilities[_selected] is ZoneAbility)
+                currentAim = new ZoneAim(zoneDamageRadius, aimZonePrefab, zoneLayersToHit, maxDistFromCamera);
+            else
+                currentAim = new PointAim(aimLayersToHit, maxDistFromCamera);
+            currentAim.SpawnAimZone();
         }
 
         private void Update()
@@ -95,12 +99,12 @@ namespace SustainTheStrain.AbilitiesScripts
             var mousePosition = UnityEngine.Input.mousePosition;
             var ray = mainCamera.ScreenPointToRay(mousePosition);
 
-            var hit = zoneAim.GetAimInfo(ray);
+            var hit = currentAim.GetAimInfo(ray);
             if (hit.HasValue)
             {
-                zoneAim.UpdateLogic(hit.Value.point);
+                currentAim.UpdateLogic(hit.Value.point);
                 if (UnityEngine.Input.GetMouseButtonDown(0))
-                    Abilities[_selected].Shoot(hit.Value, teamOpponent);
+                    Abilities[_selected].Shoot(hit.Value, team);
             }
         }
     }

@@ -23,7 +23,7 @@ namespace SustainTheStrain.AbilitiesScripts
             for(int i = 0; i < colliders.Length; i++)
             {
                 var dmg = colliders[i].GetComponent<Units.Components.Damageble>();
-                if (dmg == null || dmg.Team != team) continue;
+                if (dmg == null || dmg.Team == team) continue;
                 dmg.Damage(damage);
                 //Debug.Log(dmg.CurrentHP);
             }
