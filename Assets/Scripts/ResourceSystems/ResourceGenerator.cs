@@ -46,7 +46,9 @@ namespace SustainTheStrain.ResourceSystems
             }
             remove => _resourceGenerated -= value;
         }
+        
         protected Action<int> _resourceGenerated;
+        [SerializeField] protected GeneratorUpgradeStats _upgradeStats;
         [SerializeField] protected float _cooldown;
         [SerializeField] protected float _minimalCooldown;
         [SerializeField] protected float _maximalCooldown;
@@ -90,6 +92,18 @@ namespace SustainTheStrain.ResourceSystems
             _generationTime = 0;
             _generationReseted = true;
             _generatedPercentChanged?.Invoke(0);
+        }
+
+        protected void UpgradeAll()
+        {
+            IncreaseGenerateSpeed(_upgradeStats.CooldownChange);
+            IncreaseGenerateCount(_upgradeStats.IncomeChange);
+        }
+        
+        protected void DowngradeAll()
+        {
+            IncreaseGenerateSpeed(-_upgradeStats.CooldownChange);
+            IncreaseGenerateCount(-_upgradeStats.IncomeChange);
         }
 
         public void IncreaseGenerateCount(int count)

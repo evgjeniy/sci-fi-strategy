@@ -271,6 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GeneratingIndicator>k__BackingField: {fileID: 1221989384821869751, guid: 4731a8f8932c06a4f9e497c15594ab9c,
     type: 3}
+  _upgradeStats: {fileID: 11400000, guid: b2860a554a1751f41856736b60b24934, type: 2}
   _cooldown: 2
   _minimalCooldown: 0.2
   _maximalCooldown: 3
@@ -493,6 +494,8 @@ RectTransform:
   m_AnchorMax: {x: 0.13115044, y: 0.27938035}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.0012207031, y: -0.6000366}
+  m_SizeDelta: {x: -2.0023994, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &734015596
 MonoBehaviour:
@@ -1359,6 +1362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GeneratingIndicator>k__BackingField: {fileID: 1221989384821869751, guid: 4731a8f8932c06a4f9e497c15594ab9c,
     type: 3}
+  _upgradeStats: {fileID: 11400000, guid: b2860a554a1751f41856736b60b24934, type: 2}
   _cooldown: 2
   _minimalCooldown: 0.2
   _maximalCooldown: 3
@@ -1550,8 +1554,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88df3f3e68f45cbab137fec00cd0df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxExplorePoints: 50
-  _maxGold: 50
+  _maxExplorePoints: 800
+  _maxGold: 800
   _explorePointGenerator: {fileID: 0}
   _goldGenerator: {fileID: 0}
 --- !u!4 &1986854084

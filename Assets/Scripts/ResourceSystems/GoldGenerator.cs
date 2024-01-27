@@ -47,6 +47,7 @@ namespace SustainTheStrain.ResourceSystems
             if (EnergyController.TryGetEnergy(EnergySpendCount))
             {
                 CurrentEnergy += EnergySpendCount;
+                UpgradeAll();
             }
             //Here should be system upgrade logic
         }
@@ -57,6 +58,7 @@ namespace SustainTheStrain.ResourceSystems
             if (EnergyController.TryReturnEnergy(EnergySpendCount))
             {
                 CurrentEnergy -= EnergySpendCount;
+                DowngradeAll();
             }
             //Here should be system downgrade logic
         }
