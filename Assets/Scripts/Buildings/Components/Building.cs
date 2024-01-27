@@ -4,6 +4,6 @@ namespace SustainTheStrain.Buildings.Components
 {
     public abstract class Building : MonoBehaviour
     {
-        protected int CurrentUpgradeLevel;
+        public int CurrentUpgradeLevel { get; protected set; }
     }
 }

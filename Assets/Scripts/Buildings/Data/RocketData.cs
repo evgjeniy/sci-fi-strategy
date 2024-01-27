@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using SustainTheStrain.Buildings.Components;
+using UnityEngine;
 
 namespace SustainTheStrain.Buildings.Data
 {
     [CreateAssetMenu(menuName = "Static Data/Buildings/Rocket", fileName = "Rocket")]
     public class RocketData : BuildingData
     {
+        [field: SerializeField] public Projectile Projectile { get; private set; }
+        [field: SerializeField] public LayerMask AttackMask { get; private set; } = 255;
         [field: SerializeField] public PricedLevelStats<Stats>[] RocketStats { get; private set; }
 
         public void OnValidate()

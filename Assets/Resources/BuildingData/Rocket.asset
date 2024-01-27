@@ -15,11 +15,16 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 0}
   <Mesh>k__BackingField: {fileID: -4080094585321161956, guid: 048a02ce0afb1d843b21a27834b0f9f7,
     type: 3}
+  <Projectile>k__BackingField: {fileID: -3499578410909440990, guid: cd038acd54d433a4d99b1a15c22e5121,
+    type: 3}
+  <AttackMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 8
   <RocketStats>k__BackingField:
   - <Stats>k__BackingField:
-      <MaxEnemiesTargets>k__BackingField: 1
+      <MaxEnemiesTargets>k__BackingField: 2
       <Damage>k__BackingField: 2.28
-      <AttackCooldown>k__BackingField: 3
+      <AttackCooldown>k__BackingField: 5
       <AttackRadius>k__BackingField: 10
       <AttackSectorAngle>k__BackingField: 45
     <NextLevelPrice>k__BackingField: 1

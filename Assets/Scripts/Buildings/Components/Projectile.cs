@@ -6,11 +6,13 @@ namespace SustainTheStrain.Buildings.Components
 {
     public class Projectile : MonoBehaviour
     {
-        [SerializeField] private float flyingTime = 10.0f;
+        [SerializeField] private float flyingTime = 2.0f;
         [SerializeField] private AnimationCurve flyingCurve;
         
+        public async void LaunchTo<T>(T target, Action<T> onComplete = null) where T : Component => await LaunchToAsync(target, onComplete);
+
         // TODO: Redo (need's to be a homing missile)
-        public async UniTask LaunchTo<T>(T target, Action<T> onComplete = null) where T : Component
+        public async UniTask LaunchToAsync<T>(T target, Action<T> onComplete = null) where T : Component
         {
             var startPosition = transform.position;
             

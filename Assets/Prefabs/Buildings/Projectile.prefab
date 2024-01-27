@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d384e3b3da48bd929662020d5e15a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyingTime: 10
+  flyingTime: 2
   flyingCurve:
     serializedVersion: 2
     m_Curve:

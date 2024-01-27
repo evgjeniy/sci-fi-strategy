@@ -50,10 +50,10 @@ namespace SustainTheStrain.Buildings.Components
             }
         }
 
-        private async void Attack(Damageble damageable)
+        private void Attack(Damageble damageable)
         {
             var projectileInstance = Instantiate(_projectilePrefab, transform.position, transform.rotation);
-            await projectileInstance.LaunchTo(damageable, Explosion); // change moving logic (need's to be a parabola)
+            projectileInstance.LaunchTo(damageable, Explosion); // change moving logic (need's to be a parabola)
         }
 
         private void Explosion(Damageble obj)
