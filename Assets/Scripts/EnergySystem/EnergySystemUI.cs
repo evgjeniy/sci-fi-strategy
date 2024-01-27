@@ -9,7 +9,7 @@ namespace SustainTheStrain
 {
     public class EnergySystemUI : MonoBehaviour
     {
-        [SerializeField] private EnergySystemControllButton _controlButton;
+        [SerializeField] private EnergySystemControllButton _controlButtonPrefab;
         
         [SerializeField] private Image _imagePrefab;
 
@@ -39,7 +39,7 @@ namespace SustainTheStrain
 
         public EnergySystemControllButton SpawnButton(Sprite image)
         {
-            var button = Instantiate(_controlButton, transform);
+            var button = Instantiate(_controlButtonPrefab, transform);
             button.image.sprite = image;
             return button;
         }

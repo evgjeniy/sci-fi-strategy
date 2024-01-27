@@ -8,6 +8,7 @@ namespace SustainTheStrain.EnergySystem
 {
     public class EnergySystemsUIController : MonoBehaviour
     {
+        [Inject] public ResourceManager Manager { get; private set; }
         public EnergyController Controller { get; private set; }
         [SerializeField] private EnergySystemUI UIPrefab;
         [SerializeField] private Transform _spawnParent;
@@ -16,6 +17,10 @@ namespace SustainTheStrain.EnergySystem
         {
             var ui = Instantiate(UIPrefab, _spawnParent.transform);
             var uiButton = ui.SpawnButton(system.ButtonImage);
+            if (Manager.Generators.Contains(system))
+            {
+                var generatorUI = new GeneratorUI(uiButton.transform, (ResourceGenerator)system);
+            }
             ui.MaxBarsCount = system.MaxEnergy;
             uiButton.OnLeftMouseClick += system.TrySpendEnergy;
             uiButton.OnRightMouseClick += system.TryRefillEnergy;
