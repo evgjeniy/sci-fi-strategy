@@ -16,7 +16,6 @@ namespace SustainTheStrain.ResourceSystems
                 if (value < 0) return;
                 _cooldown = Math.Clamp(value, _minimalCooldown, _maximalCooldown);
                 EndGeneration();
-                StartGeneration();
             }
         }
 

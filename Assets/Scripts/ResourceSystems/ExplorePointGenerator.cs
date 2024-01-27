@@ -34,7 +34,6 @@ namespace SustainTheStrain.ResourceSystems
                 if (value < 0 || value > MaxEnergy) return;
                 if (!_canGenerate && value > 0)
                 {
-                    _canGenerate = true;
                     StartGeneration();
                 }
                 _currentEnergy = value;
