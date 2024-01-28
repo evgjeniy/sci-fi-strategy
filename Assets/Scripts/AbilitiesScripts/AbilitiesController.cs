@@ -8,11 +8,11 @@ namespace SustainTheStrain.AbilitiesScripts
     {
         [SerializeField] private GameObject aimZonePrefab;
         [SerializeField] private Camera mainCamera;
-        [SerializeField] private LayerMask zoneLayersToHit;
-        [SerializeField] private LayerMask aimLayersToHit;
+        [SerializeField] private LayerMask groundLayers;
+        [SerializeField] private LayerMask enemyLayers;
         [SerializeField] private int maxDistFromCamera;
-        [SerializeField] private float zoneDamageRadius;
-        [SerializeField] private float zoneDamageReloadingSpeed;
+        [SerializeField] private float zoneRadius;
+        [SerializeField] private float reloadingSpeed;
         [SerializeField] private float damag;
         [SerializeField] private float speedCoef;
         [SerializeField] private GameObject LinePrefab;
@@ -30,9 +30,11 @@ namespace SustainTheStrain.AbilitiesScripts
 
         public void Init() //temporary, because now we don't have MainController
         {
-            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed, damag));
-            AddAbility(new ZoneSlownessAbility(zoneDamageRadius, zoneDamageReloadingSpeed, speedCoef));
-            AddAbility(new ChainDamageAbility(LinePrefab, zoneDamageReloadingSpeed, damag, 3, 100));
+            AddAbility(new ZoneDamageAbility(zoneRadius, reloadingSpeed, damag));
+            AddAbility(new ZoneSlownessAbility(zoneRadius, reloadingSpeed, speedCoef));
+            AddAbility(new ChainDamageAbility(LinePrefab, reloadingSpeed, damag, 3, 100));
+            AddAbility(new EnemyHackAbility(reloadingSpeed));
+            AddAbility(new LandingAbility(reloadingSpeed, 3));
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû
         }
 
@@ -79,9 +81,11 @@ namespace SustainTheStrain.AbilitiesScripts
             
             _selected = idx; //!!! need to swap AIM
             if (Abilities[_selected] is ZoneAbility)
-                currentAim = new ZoneAim(zoneDamageRadius, aimZonePrefab, zoneLayersToHit, maxDistFromCamera);
+                currentAim = new ZoneAim(zoneRadius, aimZonePrefab, groundLayers, maxDistFromCamera);
+            else if (Abilities[_selected] is LandingAbility)
+                currentAim = new PointAim(groundLayers, maxDistFromCamera);
             else
-                currentAim = new PointAim(aimLayersToHit, maxDistFromCamera);
+                currentAim = new PointAim(enemyLayers, maxDistFromCamera);
             currentAim.SpawnAimZone();
         }
 

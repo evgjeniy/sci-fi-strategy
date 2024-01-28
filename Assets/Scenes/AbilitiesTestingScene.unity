@@ -360,15 +360,15 @@ MonoBehaviour:
   aimZonePrefab: {fileID: 7495390952849731377, guid: dec463a7aab7ab7489701ffb37bc966f,
     type: 3}
   mainCamera: {fileID: 566213450}
-  zoneLayersToHit:
+  groundLayers:
     serializedVersion: 2
     m_Bits: 64
-  aimLayersToHit:
+  enemyLayers:
     serializedVersion: 2
     m_Bits: 8
   maxDistFromCamera: 500
-  zoneDamageRadius: 10
-  zoneDamageReloadingSpeed: 0.6
+  zoneRadius: 15
+  reloadingSpeed: 1
   damag: 0.3
   speedCoef: 0.5
   LinePrefab: {fileID: 8947733846225897411, guid: c194d93a0f36c404ca74008a7d9d4b62,
@@ -407,8 +407,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 380, y: -70}
-  m_SizeDelta: {x: 1000, y: 100}
+  m_AnchoredPosition: {x: 175, y: -70}
+  m_SizeDelta: {x: 1200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &567872058
 MonoBehaviour:
@@ -589,7 +589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 530, y: -370}
+  m_AnchoredPosition: {x: 230, y: -370}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &876067793
