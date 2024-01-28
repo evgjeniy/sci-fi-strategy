@@ -8,12 +8,12 @@ namespace SustainTheStrain.AbilitiesScripts
         protected float damage;
         protected int maxTargetsCount;
         protected float maxDistanceBetween;
-        protected GameObject LinePrefab;
+        protected GameObject LinePref;
+        protected GameObject LineObject;
 
         public ChainDamageAbility(GameObject pref, float speed, float dmg, int maxtrg, float dst)
         {
-            LinePrefab = GameObject.Instantiate(pref);
-            LinePrefab.SetActive(false);
+            LinePref = pref;
             LoadingSpeed = speed;
             damage = dmg;
             maxTargetsCount = maxtrg;
@@ -44,11 +44,13 @@ namespace SustainTheStrain.AbilitiesScripts
 
         protected override void SuccessShootLogic(RaycastHit hit, int team)
         {
-            var line = LinePrefab.GetComponentInChildren<LineRenderer>();
+            LineObject = GameObject.Instantiate(LinePref);
+            LineObject.SetActive(false);
+            var line = LineObject.GetComponentInChildren<LineRenderer>();
             line.positionCount = 0;
             line.startWidth = 2.5f;
             line.endWidth = 2.5f;
-            LinePrefab.SetActive(true);
+            LineObject.SetActive(true);
             var curTarget = hit.collider;
             Collider[] curColliders;
             List<Collider> used = new(maxTargetsCount);
@@ -75,6 +77,9 @@ namespace SustainTheStrain.AbilitiesScripts
                     fl = true;
                 }
             }
+            LineObject.AddComponent<ChainUpdate>();
+            var upd = LineObject.GetComponent<ChainUpdate>();
+            upd.setFields(2, used);
         }
 
         protected override void ReadyToShoot()

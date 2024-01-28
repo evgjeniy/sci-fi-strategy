@@ -31,7 +31,7 @@ namespace SustainTheStrain.AbilitiesScripts
         public void Init() //temporary, because now we don't have MainController
         {
             AddAbility(new ZoneDamageAbility(zoneRadius, reloadingSpeed, damag));
-            AddAbility(new ZoneSlownessAbility(zoneRadius, reloadingSpeed, speedCoef));
+            AddAbility(new ZoneSlownessAbility(zoneRadius, reloadingSpeed, speedCoef, 2));
             AddAbility(new ChainDamageAbility(LinePrefab, reloadingSpeed, damag, 3, 100));
             AddAbility(new EnemyHackAbility(reloadingSpeed));
             AddAbility(new LandingAbility(reloadingSpeed, 3));
