@@ -15,6 +15,9 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 7594623059986589967, guid: d8747da382f853c4ea5bd47dc2e9a356,
     type: 3}
   <Mesh>k__BackingField: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  <AttackMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 8
   <BarrackStats>k__BackingField:
   - <Stats>k__BackingField:
       <UnitMaxHealth>k__BackingField: 100

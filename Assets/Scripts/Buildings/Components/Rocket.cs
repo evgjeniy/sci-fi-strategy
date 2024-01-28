@@ -8,7 +8,7 @@ namespace SustainTheStrain.Buildings.Components
     public class Rocket : Building
     {
         private RocketStateMachine _stateMachine;
-        
+
         public RocketData Data { get; private set; }
         public RocketData.Stats CurrentStats => Data.RocketStats[CurrentUpgradeLevel].Stats;
 
@@ -17,7 +17,7 @@ namespace SustainTheStrain.Buildings.Components
         {
             Data = staticDataService.GetBuilding<RocketData>();
             CurrentUpgradeLevel = 0;
-            
+
             _stateMachine = new RocketStateMachine(this);
         }
 
@@ -26,8 +26,8 @@ namespace SustainTheStrain.Buildings.Components
         private void OnDrawGizmos()
         {
             if (Data == null) return;
-            
-            Gizmos.DrawWireSphere(transform.position, Data.RocketStats[CurrentUpgradeLevel].Stats.AttackRadius);
+
+            Gizmos.DrawWireSphere(transform.position, CurrentStats.AttackRadius);
         }
     }
 }

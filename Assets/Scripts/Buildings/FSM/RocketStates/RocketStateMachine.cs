@@ -21,9 +21,8 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
             _rocket = rocket;
             Area = new Area(GetRocketPosition, GetAttackRadius, GetAttackMask);
             TransitionsEnabled = false;
-            
-            AddStates(new IdleState(this), new RotateState(this), new AttackState(this));
-            
+
+            AddStates(new IdleState(this), new AttackState(this));
             SetState<IdleState>();
         }
 

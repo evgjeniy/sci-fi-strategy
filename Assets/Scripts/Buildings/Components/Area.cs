@@ -10,7 +10,7 @@ namespace SustainTheStrain.Buildings.Components
         private readonly Func<Vector3> _getPosition;
         private readonly Func<float> _getRadius;
         private readonly Func<int> _getLayerMask;
-        
+
         private readonly List<Collider> _entities = new(16);
         private readonly Collider[] _buffer = new Collider[32];
         private int _bufferSize;
@@ -28,14 +28,14 @@ namespace SustainTheStrain.Buildings.Components
         {
             Array.Clear(_buffer, 0, _bufferSize);
             _bufferSize = Physics.OverlapSphereNonAlloc(_getPosition(), _getRadius(), _buffer, _getLayerMask());
-            
+
             for (var i = 0; i < _bufferSize; i++)
-                if (!_entities.Contains(_buffer[i])) 
+                if (!_entities.Contains(_buffer[i]))
                     _entities.Add(_buffer[i]);
 
             _entities.RemoveAll(RemoveCondition);
         }
 
-        private bool RemoveCondition(Collider collider) => collider == null || !_buffer.Contains(collider);
+        private bool RemoveCondition(Component component) => component == null || !_buffer.Contains(component);
     }
 }

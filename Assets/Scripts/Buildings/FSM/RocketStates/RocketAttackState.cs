@@ -1,21 +1,55 @@
-﻿using SustainTheStrain.Units.Components;
+﻿using System.Linq;
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 
 namespace SustainTheStrain.Buildings.FSM.RocketStates
 {
     public partial class RocketStateMachine
     {
-        private class AttackState : RotateState
+        private class AttackState : IdleState
         {
             public AttackState(RocketStateMachine initializer) : base(initializer) {}
 
-            protected override void CheckTransitions()
+            protected override bool CheckTransitions()
             {
-                if (Initializer.Area.Entities.Count == 0) Initializer.SetState<IdleState>();
-                else if (!IsLookingToTarget()) Initializer.SetState<RotateState>();
+                if (Initializer.Area.Entities.Count == 0)
+                {
+                    Initializer.SetState<IdleState>();
+                    return false;
+                }
+
+                return true;
             }
 
-            protected override void OnOverridableRun() => TryAttack();
+            protected override void OnOverridableRun()
+            {
+                RotateToTarget();
+
+                if (IsLookingToTarget())
+                    TryAttack();
+            }
+
+            private void RotateToTarget() => Initializer.RocketTransform.rotation = Quaternion.Slerp
+            (
+                Initializer.RocketTransform.rotation,
+                GetRotationToTarget(),
+                Time.deltaTime * 3.0f
+            );
+
+            private Quaternion GetRotationToTarget()
+            {
+                var targetDirection = Initializer.Area.Entities.First().transform.position -
+                                      Initializer.RocketTransform.position;
+                return Quaternion.LookRotation(targetDirection, Initializer.RocketTransform.up);
+            }
+
+            private bool IsLookingToTarget()
+            {
+                var target = Initializer.Area.Entities.First();
+                var transform = Initializer.RocketTransform;
+
+                return Vector3.Angle(transform.forward, target.transform.position - transform.position) < 1.0f;
+            }
 
             private void TryAttack()
             {
@@ -46,8 +80,7 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
             private bool IsInSector(Transform component)
             {
                 var rocketTransform = Initializer.RocketTransform;
-                var direction = component.position - rocketTransform.position;
-                var angle = Vector3.Angle(rocketTransform.forward, direction);
+                var angle = Vector3.Angle(rocketTransform.forward, component.position - rocketTransform.position);
 
                 return angle <= Initializer.CurrentStats.AttackSectorAngle * 0.5f;
             }

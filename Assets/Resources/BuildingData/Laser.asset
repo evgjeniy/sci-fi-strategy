@@ -15,6 +15,9 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 6299249642984937572, guid: 026261e83629fa146ad9be083dd44a64,
     type: 3}
   <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  <AttackMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 8
   <LaserStats>k__BackingField:
   - <Stats>k__BackingField:
       <Damage>k__BackingField: 2.43

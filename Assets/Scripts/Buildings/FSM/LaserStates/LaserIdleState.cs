@@ -1,14 +1,14 @@
 ﻿using NTC.FiniteStateMachine;
 using UnityEngine;
 
-namespace SustainTheStrain.Buildings.FSM.RocketStates
+namespace SustainTheStrain.Buildings.FSM.LaserStates
 {
-    public partial class RocketStateMachine
+    public partial class LaserStateMachine
     {
-        private class IdleState : IState<RocketStateMachine>
+        private class IdleState : IState<LaserStateMachine>
         {
-            public RocketStateMachine Initializer { get; }
-            public IdleState(RocketStateMachine initializer) => Initializer = initializer;
+            public LaserStateMachine Initializer { get; }
+            public IdleState(LaserStateMachine initializer) => Initializer = initializer;
 
             public void OnRun()
             {
@@ -16,6 +16,7 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
                 Initializer.Area.Update();
 
                 if (!CheckTransitions()) return;
+
                 OnOverridableRun();
             }
 
