@@ -38,17 +38,18 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
 
             private Quaternion GetRotationToTarget()
             {
-                var targetDirection = Initializer.Area.Entities.First().transform.position -
-                                      Initializer.LaserTransform.position;
-                return Quaternion.LookRotation(targetDirection, Initializer.LaserTransform.up);
+                var laser = Initializer.LaserTransform;
+                var targetPosition = Initializer.Area.Entities.First().transform.position;
+
+                return Quaternion.LookRotation(targetPosition - laser.position, laser.up);
             }
 
             private bool IsLookingToTarget()
             {
-                var target = Initializer.Area.Entities.First();
-                var transform = Initializer.LaserTransform;
+                var laser = Initializer.LaserTransform;
+                var targetPosition = Initializer.Area.Entities.First().transform.position;
 
-                return Vector3.Angle(transform.forward, target.transform.position - transform.position) < 1.0f;
+                return Vector3.Angle(targetPosition - laser.position, laser.forward) < 1.0f;
             }
 
             private void TryAttack()

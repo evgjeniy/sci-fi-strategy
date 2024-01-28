@@ -38,17 +38,18 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
 
             private Quaternion GetRotationToTarget()
             {
-                var targetDirection = Initializer.Area.Entities.First().transform.position -
-                                      Initializer.RocketTransform.position;
-                return Quaternion.LookRotation(targetDirection, Initializer.RocketTransform.up);
+                var rocket = Initializer.RocketTransform;
+                var targetPosition = Initializer.Area.Entities.First().transform.position;
+
+                return Quaternion.LookRotation(targetPosition - rocket.position, rocket.up);
             }
 
             private bool IsLookingToTarget()
             {
-                var target = Initializer.Area.Entities.First();
-                var transform = Initializer.RocketTransform;
+                var rocket = Initializer.RocketTransform;
+                var targetPosition = Initializer.Area.Entities.First().transform.position;
 
-                return Vector3.Angle(transform.forward, target.transform.position - transform.position) < 1.0f;
+                return Vector3.Angle(targetPosition - rocket.position, rocket.forward) < 1.0f;
             }
 
             private void TryAttack()

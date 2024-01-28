@@ -18,14 +18,14 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
         public LaserStateMachine(Laser laser)
         {
             _laser = laser;
-            Area = new Area(GetRocketPosition, GetAttackRadius, GetAttackMask);
+            Area = new Area(GetPosition, GetAttackRadius, GetAttackMask);
             TransitionsEnabled = false;
 
             AddStates(new IdleState(this), new AttackState(this));
             SetState<IdleState>();
         }
 
-        private Vector3 GetRocketPosition() => _laser.transform.position;
+        private Vector3 GetPosition() => _laser.transform.position;
         private float GetAttackRadius() => _laser.CurrentStats.AttackRadius;
         private int GetAttackMask() => _laser.Data.AttackMask.value;
     }

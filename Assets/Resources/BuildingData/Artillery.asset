@@ -18,6 +18,8 @@ MonoBehaviour:
   <AttackMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
+  <Projectile>k__BackingField: {fileID: -3499578410909440990, guid: cd038acd54d433a4d99b1a15c22e5121,
+    type: 3}
   <ArtilleryStats>k__BackingField:
   - <Stats>k__BackingField:
       <Damage>k__BackingField: 1.337

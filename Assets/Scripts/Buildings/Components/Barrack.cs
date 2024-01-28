@@ -5,12 +5,13 @@ namespace SustainTheStrain.Buildings.Components
 {
     public class Barrack : Building
     {
-        private PricedLevelStats<BarrackData.Stats>[] _stats;
-        
+        public BarrackData Data { get; private set; }
+        public BarrackData.Stats CurrentStats => Data.BarrackStats[CurrentUpgradeLevel].Stats;
+
         [Zenject.Inject]
         private void Construct(IStaticDataService staticDataService)
         {
-            _stats = staticDataService.GetBuilding<BarrackData>().BarrackStats;
+            Data = staticDataService.GetBuilding<BarrackData>();
             CurrentUpgradeLevel = 0;
         }
     }
