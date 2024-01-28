@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9947068ecb1a4fefac6cae11b2bc7685, type: 3}
   m_Name: Barrack
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 0}
-  <Mesh>k__BackingField: {fileID: -4080094585321161956, guid: 048a02ce0afb1d843b21a27834b0f9f7,
+  <Prefab>k__BackingField: {fileID: 7594623059986589967, guid: d8747da382f853c4ea5bd47dc2e9a356,
     type: 3}
+  <Mesh>k__BackingField: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   <BarrackStats>k__BackingField:
   - <Stats>k__BackingField:
       <UnitMaxHealth>k__BackingField: 100

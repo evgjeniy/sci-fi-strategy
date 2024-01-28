@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b2c9be409a479f8d9720f09effa457, type: 3}
   m_Name: Laser
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 0}
-  <Mesh>k__BackingField: {fileID: -4080094585321161956, guid: 048a02ce0afb1d843b21a27834b0f9f7,
+  <Prefab>k__BackingField: {fileID: 6299249642984937572, guid: 026261e83629fa146ad9be083dd44a64,
     type: 3}
+  <Mesh>k__BackingField: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   <LaserStats>k__BackingField:
   - <Stats>k__BackingField:
       <Damage>k__BackingField: 2.43

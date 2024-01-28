@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e743648e1e2f43a387bf963053f2c17a, type: 3}
   m_Name: Artillery
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 0}
-  <Mesh>k__BackingField: {fileID: -4080094585321161956, guid: 048a02ce0afb1d843b21a27834b0f9f7,
+  <Prefab>k__BackingField: {fileID: 2741849864599189330, guid: 4c00a8e16ec8f8b42ba7a8852d949dc9,
     type: 3}
+  <Mesh>k__BackingField: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   <ArtilleryStats>k__BackingField:
   - <Stats>k__BackingField:
       <Damage>k__BackingField: 1.337

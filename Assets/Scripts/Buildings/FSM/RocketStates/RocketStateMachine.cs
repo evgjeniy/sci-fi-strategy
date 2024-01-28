@@ -19,12 +19,16 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
         public RocketStateMachine(Rocket rocket)
         {
             _rocket = rocket;
-            Area = new Area(rocket);
+            Area = new Area(GetRocketPosition, GetAttackRadius, GetAttackMask);
             TransitionsEnabled = false;
             
             AddStates(new IdleState(this), new RotateState(this), new AttackState(this));
             
             SetState<IdleState>();
         }
+
+        private Vector3 GetRocketPosition() => _rocket.transform.position;
+        private float GetAttackRadius() => _rocket.CurrentStats.AttackRadius;
+        private int GetAttackMask() => _rocket.Data.AttackMask.value;
     }
 }
