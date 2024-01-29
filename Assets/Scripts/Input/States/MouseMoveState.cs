@@ -10,21 +10,21 @@ namespace SustainTheStrain.Input.States
     public class MouseMoveState : IState<InputService>
     {
         private readonly InputActions.MouseActions _mouseActions;
-        private readonly Action<RaycastHit> _mouseMoveCallback;
-        private readonly Action<RaycastHit> _leftMouseButtonClick;
+        protected readonly Action<RaycastHit> MouseMoveCallback;
+        protected readonly Action<RaycastHit> LeftMouseClickCallback;
 
         private Vector2 _mousePosition;
 
         public InputService Initializer { get; }
 
         public MouseMoveState(InputService initializer, InputActions.MouseActions mouseActions,
-            Action<RaycastHit> mouseMoveCallback = null, Action<RaycastHit> leftMouseButtonClick = null)
+            Action<RaycastHit> mouseMoveCallback = null, Action<RaycastHit> leftMouseClickCallback = null)
         {
             Initializer = initializer;
 
             _mouseActions = mouseActions;
-            _mouseMoveCallback = mouseMoveCallback;
-            _leftMouseButtonClick = leftMouseButtonClick;
+            MouseMoveCallback = mouseMoveCallback;
+            LeftMouseClickCallback = leftMouseClickCallback;
         }
 
         public virtual void OnEnter()
@@ -62,10 +62,10 @@ namespace SustainTheStrain.Input.States
                 Initializer.CashedData.Hero = hero;
                 Initializer.StateMachine.SetState<HeroPointerState>();
             }
-            else _mouseMoveCallback?.Invoke(hit);
+            else MouseMoveCallback?.Invoke(hit);
         }
 
-        protected virtual void LeftMouseButtonClick(RaycastHit hit) => _leftMouseButtonClick?.Invoke(hit);
+        protected virtual void LeftMouseButtonClick(RaycastHit hit) => LeftMouseClickCallback?.Invoke(hit);
 
         private bool CheckScreenPointRayCastHit(out RaycastHit hit)
         {

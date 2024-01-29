@@ -15,4 +15,11 @@ namespace SustainTheStrain.Input
         public event Action<T> OnSelected;
         public event Action<T> OnDeselected;
     }
+
+    public interface IAbilityInput
+    {
+        public event Action<int> OnAbilityChanged;
+        public event Action<RaycastHit> OnAbilityMove;
+        public event Action<RaycastHit> OnAbilityClick;
+    }
 }
