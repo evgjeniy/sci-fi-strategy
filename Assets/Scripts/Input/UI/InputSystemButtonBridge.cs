@@ -9,7 +9,7 @@ namespace SustainTheStrain.Input.UI
     {
         [SerializeField, InputControl(layout = "Button")] private string _controlPath = "<Keyboard>/r";
         
-        [field: SerializeField] private float Value { get; set; } = 1.0f;
+        [field: SerializeField] public float Value { get; set; } = 1.0f;
 
         protected override string controlPathInternal
         {

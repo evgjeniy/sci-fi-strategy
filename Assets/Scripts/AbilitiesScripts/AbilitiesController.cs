@@ -1,6 +1,9 @@
+using SustainTheStrain.Input;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
+using Zenject;
 
 namespace SustainTheStrain.AbilitiesScripts
 {
@@ -16,10 +19,11 @@ namespace SustainTheStrain.AbilitiesScripts
         [SerializeField] private float damag;
         [SerializeField] private float speedCoef;
         [SerializeField] private GameObject LinePrefab;
-
         [SerializeField] private int team;
 
         private BaseAim currentAim;
+
+        private IAbilityInput _abilityInput;
 
         public readonly List<BaseAbility> Abilities = new(); //better to make it readonly
 
@@ -27,6 +31,36 @@ namespace SustainTheStrain.AbilitiesScripts
         private int _selected = -1;
 
         public delegate void ReloadDelegate(int idx, float l, bool r);
+
+        [Inject]
+        private void Construct(IAbilityInput inp)
+        {
+            _abilityInput = inp;
+        }
+
+        private void OnEnable()
+        {
+            _abilityInput.OnAbilityChanged += OnAbilitySelect;
+            _abilityInput.OnAbilityMove += MoveMethod;
+            _abilityInput.OnAbilityClick += UseAbility;
+        }
+
+        private void UseAbility(RaycastHit hit)
+        {
+            Abilities[_selected].Shoot(hit, team);
+        }
+
+        private void MoveMethod(RaycastHit hit)
+        {
+            currentAim.UpdateLogic(hit.point);
+        }
+
+        private void OnDisable()
+        {
+            _abilityInput.OnAbilityChanged -= OnAbilitySelect;
+            _abilityInput.OnAbilityMove -= MoveMethod;
+            _abilityInput.OnAbilityClick -= UseAbility;
+        }
 
         public void Init() //temporary, because now we don't have MainController
         {
@@ -77,6 +111,7 @@ namespace SustainTheStrain.AbilitiesScripts
 
         public void OnAbilitySelect(int idx)
         {
+            idx--;
             if (IsCurrentSelected(idx)) return;
             
             _selected = idx; //!!! need to swap AIM
@@ -97,19 +132,6 @@ namespace SustainTheStrain.AbilitiesScripts
                 
                 Abilities[i].Load(Time.deltaTime);
                 _reloadList[i].Invoke(i, Abilities[i].GetReload(), Abilities[i].IsReloaded());
-            }
-
-            if (_selected == -1) return;
-            
-            var mousePosition = UnityEngine.Input.mousePosition;
-            var ray = mainCamera.ScreenPointToRay(mousePosition);
-
-            var hit = currentAim.GetAimInfo(ray);
-            if (hit.HasValue)
-            {
-                currentAim.UpdateLogic(hit.Value.point);
-                if (UnityEngine.Input.GetMouseButtonDown(0))
-                    Abilities[_selected].Shoot(hit.Value, team);
             }
         }
     }

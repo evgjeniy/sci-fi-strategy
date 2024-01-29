@@ -93,7 +93,7 @@ MonoBehaviour:
     <EventSystem>k__BackingField: {fileID: 384919262374715419}
     <RayCastMask>k__BackingField:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 127
     <MaxDistance>k__BackingField: 3.4028235e+38
 --- !u!1 &6696816297399331599
 GameObject:

@@ -1,3 +1,4 @@
+using SustainTheStrain.Input.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ namespace SustainTheStrain.AbilitiesScripts
 {
     public class UIController : MonoBehaviour
     {
-        [SerializeField] private Button ButtonPrefab;
+        [SerializeField] private InputSystemButtonBridge ButtonPrefab;
         [SerializeField] private Slider SliderPrefab;
         [SerializeField] private GameObject buttonHolder;
         [SerializeField] private GameObject sliderHolder;
@@ -30,19 +31,18 @@ namespace SustainTheStrain.AbilitiesScripts
                 var s = Instantiate(SliderPrefab, sliderHolder.transform);
                 _buttons[i] = new AbilityButton(b, s);
                 s.value = 1;
-                b.image.color = _readyColor;
+                //b.image.color = _readyColor;
                 b.GetComponentInChildren<TextMeshProUGUI>().text = _abilitiesController.Abilities[i].GetType().Name;//temp
-                var cnt = i;
-                b.onClick.AddListener(() => { _abilitiesController.OnAbilitySelect(cnt); });
-                _abilitiesController.ReloadListAdd(cnt, SetZoneDamageButtonData);
+                b.Value = i + 1;
+                _abilitiesController.ReloadListAdd(i, SetZoneDamageButtonData);
             }
         }
 
         private void SetZoneDamageButtonData(int idx, float load, bool ready)
         {
             _buttons[idx].GetSlider().value = load;
-            if (_buttons[idx].IsReady() ^ ready) // ready-state updated
-                _buttons[idx].GetButton().image.color = _buttons[idx].ChangeReady() ? _readyColor : _loadingColor;
+            //if (_buttons[idx].IsReady() ^ ready) // ready-state updated
+                //_buttons[idx].GetButton().image.color = _buttons[idx].ChangeReady() ? _readyColor : _loadingColor;
         }
     }
 }
