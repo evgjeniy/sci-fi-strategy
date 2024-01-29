@@ -47,12 +47,14 @@ namespace SustainTheStrain.AbilitiesScripts
 
         private void UseAbility(RaycastHit hit)
         {
+            if (_selected == -1)
+                return;
             Abilities[_selected].Shoot(hit, team);
         }
 
         private void MoveMethod(RaycastHit hit)
         {
-            currentAim.UpdateLogic(hit.point);
+            currentAim?.UpdateLogic(hit.point);
         }
 
         private void OnDisable()
@@ -114,13 +116,14 @@ namespace SustainTheStrain.AbilitiesScripts
             idx--;
             if (IsCurrentSelected(idx)) return;
             
-            _selected = idx; //!!! need to swap AIM
+            _selected = idx;
             if (Abilities[_selected] is ZoneAbility)
                 currentAim = new ZoneAim(zoneRadius, aimZonePrefab, groundLayers, maxDistFromCamera);
             else if (Abilities[_selected] is LandingAbility)
                 currentAim = new PointAim(groundLayers, maxDistFromCamera);
             else
                 currentAim = new PointAim(enemyLayers, maxDistFromCamera);
+
             currentAim.SpawnAimZone();
         }
 

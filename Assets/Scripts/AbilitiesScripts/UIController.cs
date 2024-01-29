@@ -33,7 +33,8 @@ namespace SustainTheStrain.AbilitiesScripts
                 s.value = 1;
                 //b.image.color = _readyColor;
                 b.GetComponentInChildren<TextMeshProUGUI>().text = _abilitiesController.Abilities[i].GetType().Name;//temp
-                b.Value = i + 1;
+                int cnt = i + 1;
+                b.Value = cnt;
                 _abilitiesController.ReloadListAdd(i, SetZoneDamageButtonData);
             }
         }
