@@ -32,7 +32,7 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             AddAbility(new ZoneDamageAbility(zoneRadius, reloadingSpeed, damag));
             AddAbility(new ZoneSlownessAbility(zoneRadius, reloadingSpeed, speedCoef, 2));
-            AddAbility(new ChainDamageAbility(LinePrefab, reloadingSpeed, damag, 3, 100));
+            AddAbility(new ChainDamageAbility(LinePrefab, reloadingSpeed, damag, 4, 100));
             AddAbility(new EnemyHackAbility(reloadingSpeed));
             AddAbility(new LandingAbility(reloadingSpeed, 3));
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû

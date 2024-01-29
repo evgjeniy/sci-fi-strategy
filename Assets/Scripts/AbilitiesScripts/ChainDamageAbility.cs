@@ -48,8 +48,8 @@ namespace SustainTheStrain.AbilitiesScripts
             LineObject.SetActive(false);
             var line = LineObject.GetComponentInChildren<LineRenderer>();
             line.positionCount = 0;
-            line.startWidth = 2.5f;
-            line.endWidth = 2.5f;
+            line.startWidth = 0.4f;
+            line.endWidth = 0.4f;
             LineObject.SetActive(true);
             var curTarget = hit.collider;
             Collider[] curColliders;
