@@ -16,7 +16,7 @@ namespace SustainTheStrain.Units.Spawners
 
         private void Start()
         {
-            StartSpawning();
+            //StartSpawning();
         }
 
         public override void Spawn()

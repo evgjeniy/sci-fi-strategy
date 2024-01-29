@@ -23,11 +23,11 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void EnterState()
         {
-            Debug.Log(string.Format("[StateMachine {0}] UnitAgroState entered", context.gameObject.name));
-            Debug.Log(string.Format("[StateMachine {0}] OPPONENT {1}", context.gameObject.name, context.Duelable.Opponent.gameObject.name));
-
             context.SwitchPathFollower(context.NavPathFollower);
             context.NavPathFollower.MoveTo(context.Duelable.Opponent.transform.position);
+            
+            Debug.Log(string.Format("[StateMachine {0}] UnitAgroState entered", context.gameObject.name));
+            Debug.Log(string.Format("[StateMachine {0}] OPPONENT {1}", context.gameObject.name, context.Duelable.Opponent.gameObject.name));
         }
 
         public override void ExitState()
@@ -45,8 +45,8 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
             if (context.Duelable.Opponent == null)
                 context.StateMachine.ChangeState(_idleState);
-
-            context.NavPathFollower.MoveTo(context.Duelable.Opponent.transform.position);
+            
+                context.NavPathFollower.MoveTo(context.Duelable.Opponent.transform.position);
 
             if(context.IsOpponentInAttackZone)
                 context.StateMachine.ChangeState(_attackState);
