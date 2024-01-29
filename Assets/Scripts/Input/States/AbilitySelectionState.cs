@@ -5,7 +5,23 @@ namespace SustainTheStrain.Input.States
 {
     public class AbilitySelectionState : MouseMoveState
     {
-        private readonly Action<int> _abilityChangedCallback;
+        public event Action<Ray> OnAbilityMove
+        {
+            add => OnMouseMoveRay += value;
+            remove => OnMouseMoveRay -= value;
+        }
+
+        public event Action<Ray> OnAbilityClick
+        {
+            add => OnLeftMouseButtonClickRay += value;
+            remove => OnLeftMouseButtonClickRay -= value;
+        }
+
+        public event Action<int> OnAbilityEnter;
+        public event Action<int> OnAbilityChanged;
+        public event Action<int> OnAbilityExit;
+        
+        
         private int _currentAbilityIndex;
         
         public int CurrentAbilityIndex
@@ -13,22 +29,33 @@ namespace SustainTheStrain.Input.States
             get => _currentAbilityIndex;
             set
             {
-                _currentAbilityIndex = value;
-                _abilityChangedCallback?.Invoke(_currentAbilityIndex);
+                if (Initializer.StateMachine.CurrentState is not AbilitySelectionState)
+                {
+                    _currentAbilityIndex = value;
+                    Initializer.StateMachine.SetState<AbilitySelectionState>();
+                    return;
+                }
+
+                if (_currentAbilityIndex == value)
+                    Initializer.StateMachine.SetState<MouseMoveState>();
+                else
+                    OnAbilityChanged?.Invoke(_currentAbilityIndex = value);
             }
         }
 
-        public AbilitySelectionState(InputService initializer, InputActions.MouseActions mouseActions,
-            Action<RaycastHit> mouseMoveCallback = null,
-            Action<RaycastHit> leftMouseClickCallback = null,
-            Action<int> abilityChangedCallback = null)
-            : base(initializer, mouseActions, mouseMoveCallback, leftMouseClickCallback)
-        {
-            _abilityChangedCallback = abilityChangedCallback;
-        }
-        
-        protected override void MouseMove(RaycastHit hit) => MouseMoveCallback?.Invoke(hit);
+        public AbilitySelectionState(InputService initializer,
+            InputActions.MouseActions mouseActions) : base(initializer, mouseActions) {}
 
-        protected override void LeftMouseButtonClick(RaycastHit hit) => LeftMouseClickCallback?.Invoke(hit);
+        public override void OnEnter()
+        {
+            OnAbilityEnter?.Invoke(_currentAbilityIndex);
+            base.OnEnter();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            OnAbilityExit?.Invoke(_currentAbilityIndex);
+        }
     }
 }

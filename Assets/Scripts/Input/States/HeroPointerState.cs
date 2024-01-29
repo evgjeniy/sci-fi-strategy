@@ -7,26 +7,21 @@ namespace SustainTheStrain.Input.States
 {
     public class HeroPointerState : MouseMoveState
     {
-        private readonly Action<Hero> _onEnterCallback;
-        private readonly Action<Hero> _onExitCallback;
+        public event Action<Hero> OnHeroEnter;
+        public event Action<Hero> OnHeroExit;
 
-        public HeroPointerState(InputService initializer, InputActions.MouseActions mouseActions,
-            Action<Hero> onEnterCallback = null, Action<Hero> onExitCallback = null) : base(initializer, mouseActions)
-        {
-            _onEnterCallback = onEnterCallback;
-            _onExitCallback = onExitCallback;
-        }
+        public HeroPointerState(InputService initializer, InputActions.MouseActions mouseActions) : base(initializer, mouseActions) {}
 
         public override void OnEnter()
         {
-            _onEnterCallback?.Invoke(Initializer.CashedData.Hero);
+            OnHeroEnter?.Invoke(Initializer.CashedData.Hero);
             base.OnEnter();
         }
 
         public override void OnExit()
         {
             base.OnExit();
-            _onExitCallback?.Invoke(Initializer.CashedData.Hero);
+            OnHeroExit?.Invoke(Initializer.CashedData.Hero);
         }
 
         protected override void MouseMove(RaycastHit hit)
