@@ -25,8 +25,8 @@ namespace SustainTheStrain.AbilitiesScripts
             Collider[] colliders = GetColliders(hit.point);
             for (int i = 0; i < colliders.Length; i++)
             {
-                var spd = colliders[i].GetComponent<Units.Unit>()?.CurrentPathFollower;
-                var dmg = colliders[i].GetComponent<Units.Components.Damageble>();
+                var spd = colliders[i]?.GetComponent<Units.Unit>()?.CurrentPathFollower;
+                var dmg = colliders[i]?.GetComponent<Units.Components.Damageble>();
                 if (spd == null || dmg == null || dmg.Team == team) continue;
                 spd.Speed *= speedCoefficient;
                 System.Timers.Timer timer = new System.Timers.Timer(slownessTime * 1000); // Convert seconds to milliseconds
@@ -39,6 +39,7 @@ namespace SustainTheStrain.AbilitiesScripts
 
         private void RestoreSpeed(Units.PathFollowers.IPathFollower spd)
         {
+            if (spd == null) return;
             spd.Speed /= speedCoefficient;
             //Debug.Log(dmg.Speed);
         }

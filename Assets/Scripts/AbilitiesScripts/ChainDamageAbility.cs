@@ -58,7 +58,7 @@ namespace SustainTheStrain.AbilitiesScripts
             curTarget.GetComponent<Units.Components.Damageble>().Damage(damage);
             line.positionCount++;
             line.SetPosition(line.positionCount - 1, curTarget.transform.position);
-            Debug.Log(curTarget.GetComponent<Units.Components.Damageble>().Team);
+            //Debug.Log(curTarget.GetComponent<Units.Components.Damageble>().Team);
             bool fl = true;
             while (fl && line.positionCount < maxTargetsCount)
             {
@@ -67,11 +67,11 @@ namespace SustainTheStrain.AbilitiesScripts
                 for (int i = 0; !fl && i < curColliders.Length; i++)
                 {
                     curTarget = curColliders[i];
-                    var dmg = curTarget.GetComponent<Units.Components.Damageble>();
+                    var dmg = curTarget?.GetComponent<Units.Components.Damageble>();
                     if (dmg == null || dmg.Team == team || used.Contains(curTarget)) continue;
                     dmg.Damage(damage);
                     used.Add(curTarget);
-                    Debug.Log(dmg.Team);
+                    //Debug.Log(dmg.Team);
                     line.positionCount++;
                     line.SetPosition(line.positionCount - 1, curTarget.transform.position);
                     fl = true;
@@ -79,7 +79,7 @@ namespace SustainTheStrain.AbilitiesScripts
             }
             LineObject.AddComponent<ChainUpdate>();
             var upd = LineObject.GetComponent<ChainUpdate>();
-            upd.setFields(2, used);
+            upd.setFields(2, used); //hardcode
         }
 
         protected override void ReadyToShoot()

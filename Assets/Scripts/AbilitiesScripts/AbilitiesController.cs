@@ -40,28 +40,64 @@ namespace SustainTheStrain.AbilitiesScripts
 
         private void OnEnable()
         {
-            _abilityInput.OnAbilityChanged += OnAbilitySelect;
+            _abilityInput.OnAbilityChanged += OnAbilityChanged;
             _abilityInput.OnAbilityMove += MoveMethod;
             _abilityInput.OnAbilityClick += UseAbility;
+            _abilityInput.OnAbilityEnter += EnterAbility;
+            _abilityInput.OnAbilityExit += ExitAbilityl;
         }
 
-        private void UseAbility(RaycastHit hit)
+        private void OnAbilityChanged(int obj)
         {
-            if (_selected == -1)
-                return;
-            Abilities[_selected].Shoot(hit, team);
+            ExitAbilityl(obj);
+            EnterAbility(obj);
         }
 
-        private void MoveMethod(RaycastHit hit)
+        private void ExitAbilityl(int idx)
         {
-            currentAim?.UpdateLogic(hit.point);
+            idx--;
+            _selected = -1;
+            currentAim?.Destroy();
+            currentAim = null;
+        }
+
+        private void EnterAbility(int idx)
+        {
+            idx--;
+            if (Abilities[idx] is ZoneAbility)
+                currentAim = new ZoneAim(zoneRadius, aimZonePrefab, groundLayers, maxDistFromCamera);
+            else if (Abilities[idx] is LandingAbility)
+                currentAim = new PointAim(groundLayers, maxDistFromCamera);
+            else
+                currentAim = new PointAim(enemyLayers, maxDistFromCamera);
+
+            currentAim.SpawnAimZone();
+            _selected = idx;
+        }
+
+        private void UseAbility(Ray ray)
+        {
+            if (_selected == -1) return;
+            var hit = currentAim.GetAimInfo(ray);
+            if (hit.HasValue)
+                Abilities[_selected].Shoot(hit.Value, team);
+        }
+
+        private void MoveMethod(Ray ray)
+        {
+            if (currentAim == null) return;
+            var hit = currentAim.GetAimInfo(ray);
+            if (hit.HasValue)
+                currentAim.UpdateLogic(hit.Value.point);
         }
 
         private void OnDisable()
         {
-            _abilityInput.OnAbilityChanged -= OnAbilitySelect;
+            _abilityInput.OnAbilityChanged -= OnAbilityChanged;
             _abilityInput.OnAbilityMove -= MoveMethod;
-            _abilityInput.OnAbilityClick -= UseAbility;
+            _abilityInput.OnAbilityClick -= UseAbility; 
+            _abilityInput.OnAbilityEnter -= EnterAbility;
+            _abilityInput.OnAbilityExit -= ExitAbilityl;
         }
 
         public void Init() //temporary, because now we don't have MainController
@@ -97,34 +133,6 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             _reloadList = null;
             Abilities.Clear();
-        }
-
-        private bool IsCurrentSelected(int type)
-        {
-            if (_selected == -1) return false;
-
-            currentAim.Destroy();
-            currentAim = null;
-            var sel = _selected;
-            _selected = -1;
-            
-            return sel == type;
-        }
-
-        public void OnAbilitySelect(int idx)
-        {
-            idx--;
-            if (IsCurrentSelected(idx)) return;
-            
-            _selected = idx;
-            if (Abilities[_selected] is ZoneAbility)
-                currentAim = new ZoneAim(zoneRadius, aimZonePrefab, groundLayers, maxDistFromCamera);
-            else if (Abilities[_selected] is LandingAbility)
-                currentAim = new PointAim(groundLayers, maxDistFromCamera);
-            else
-                currentAim = new PointAim(enemyLayers, maxDistFromCamera);
-
-            currentAim.SpawnAimZone();
         }
 
         private void Update()
