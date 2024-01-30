@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace SustainTheStrain.Units.Components
@@ -44,7 +45,7 @@ namespace SustainTheStrain.Units.Components
                 {
                     OnUnitLeftAggroZone?.Invoke(_aggroZoneUnits[i]);
                     _aggroZoneUnits[i].Damageble.OnDied -= UnitDied;
-                    Debug.Log(string.Format("[AggroRadius] On {0} left {1} aggro radius", _aggroZoneUnits[i].name, name));
+                    //Debug.Log(string.Format("[AggroRadius] On {0} left {1} aggro radius", _aggroZoneUnits[i].name, name));
                     _aggroZoneUnits.RemoveAt(i);
                     break;
                 }
@@ -53,6 +54,7 @@ namespace SustainTheStrain.Units.Components
 
         private void UnitDied(Damageble damageble)
         {
+            if (damageble == null) return;
             RemoveUnit(damageble.gameObject);
         }
     }

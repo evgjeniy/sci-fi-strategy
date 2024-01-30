@@ -14,7 +14,7 @@ namespace SustainTheStrain.Level
         [SerializeField] private List<Spawner<Enemy>> _spawners;
 
         private readonly Dictionary<int, bool> _waveCoroutines = new();
-        private int _currentWave = -1;
+        private int _currentWave = 0;
         private bool _waveInProgress;
         
         public event Action OnLastWaveEnded;
@@ -34,8 +34,8 @@ namespace SustainTheStrain.Level
             }
         }
 
-        [Button("StartGame")]
-        private void StartGame()
+        [Button("StartWaves")]
+        public void StartWaves()
         {
             StartWave(_levelData.waves[0]);
         }

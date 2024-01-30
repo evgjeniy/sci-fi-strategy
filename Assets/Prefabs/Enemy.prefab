@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2014e46138b392c4594d03cc4c7e7f8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 3
+  <Damage>k__BackingField: 1
   <DamagePeriod>k__BackingField: 2
 --- !u!114 &7950700953650259592
 MonoBehaviour:
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc838324d2690045a19506f5e1cb70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHP>k__BackingField: 10
+  <MaxHP>k__BackingField: 5
   <Team>k__BackingField: 0
 --- !u!114 &5367921590081931393
 MonoBehaviour:

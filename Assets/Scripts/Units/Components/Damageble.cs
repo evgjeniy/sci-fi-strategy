@@ -10,7 +10,7 @@ namespace SustainTheStrain.Units.Components
 
         public float CurrentHP
         {
-            get { return _currentHp; }
+            get => _currentHp;
             set { _currentHp = value; OnCurrentHPChanged?.Invoke(value); }
         }
 
@@ -32,13 +32,13 @@ namespace SustainTheStrain.Units.Components
             CurrentHP -= damage;
             OnCurrentHPChanged?.Invoke(CurrentHP);
 
-            if (CurrentHP < 0)
+            if (CurrentHP <= 0)
             {
                 Die();
             }
         }
 
-        public virtual void Die()
+        protected virtual void Die()
         {
             OnDied?.Invoke(this);
             Destroy(gameObject);

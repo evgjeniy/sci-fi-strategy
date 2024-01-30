@@ -44,9 +44,12 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
             }
 
             if (context.Duelable.Opponent == null)
+            {
                 context.StateMachine.ChangeState(_idleState);
-            
-                context.NavPathFollower.MoveTo(context.Duelable.Opponent.transform.position);
+                return;
+            }
+
+            context.NavPathFollower.MoveTo(context.Duelable.Opponent.transform.position);
 
             if(context.IsOpponentInAttackZone)
                 context.StateMachine.ChangeState(_attackState);
