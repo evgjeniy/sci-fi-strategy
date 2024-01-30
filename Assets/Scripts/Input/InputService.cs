@@ -23,6 +23,7 @@ namespace SustainTheStrain.Input
             [field: SerializeField] public EventSystem EventSystem { get; private set; }
             [field: SerializeField] public LayerMask RayCastMask { get; private set; } = 255;
             [field: SerializeField] public float MaxDistance { get; private set; } = float.MaxValue;
+            [field: SerializeField] public LayerMask AbilityMask { get; private set; } = 255;
         }
 
         public class InputData
@@ -34,13 +35,30 @@ namespace SustainTheStrain.Input
         #endregion
 
         private readonly InputActions _actions = new();
-        private AbilitySelectionState _abilitySelectionState;
+        
+        private readonly MouseMoveState _mouseMoveState;
+        private readonly PlaceholderPointerState _placeholderPointerState;
+        private readonly PlaceholderSelectionState _placeholderSelectionState;
+        private readonly HeroPointerState _heroPointerState;
+        private readonly HeroSelectionState _heroSelectionState;
+        private readonly AbilitySelectionState _abilitySelectionState;
 
         public InputSettings Settings { get; }
         public InputData CashedData { get; } = new();
         public StateMachine<InputService> StateMachine { get; private set; }
 
-        public InputService(InputSettings inputSettings) => Settings = inputSettings;
+        public InputService(InputSettings inputSettings)
+        {
+            Settings = inputSettings;
+
+            _mouseMoveState = new MouseMoveState(this, _actions.Mouse);
+            _placeholderPointerState = new PlaceholderPointerState(this, _actions.Mouse);
+            _placeholderSelectionState = new PlaceholderSelectionState(this, _actions.Mouse);
+            _heroPointerState = new HeroPointerState(this, _actions.Mouse);
+            _heroSelectionState = new HeroSelectionState(this, _actions.Mouse);
+            _abilitySelectionState = new AbilitySelectionState(this, _actions.Mouse);
+        }
+
         public void Enable() => _actions.Enable();
         public void Disable() => _actions.Disable();
 
@@ -49,16 +67,10 @@ namespace SustainTheStrain.Input
             _actions.Mouse.EnterAbilityState.performed += EnterAbilityState;
             _actions.Mouse.ExitState.performed += EnterMouseMoveState;
             
-            _abilitySelectionState = new AbilitySelectionState(this, _actions.Mouse, OnAbilityMove, OnAbilityClick, OnAbilityChanged);
-
             StateMachine = new StateMachine<InputService>
             (
-                new MouseMoveState(this, _actions.Mouse, OnMouseMove),
-                new PlaceholderPointerState(this, _actions.Mouse, OnPlaceholderEnter, OnPlaceholderExit),
-                new PlaceholderSelectionState(this, _actions.Mouse, OnPlaceholderSelected, OnPlaceholderDeselected),
-                new HeroPointerState(this, _actions.Mouse, OnHeroEnter, OnHeroExit),
-                new HeroSelectionState(this, _actions.Mouse, OnHeroSelected, OnHeroDeselected),
-                _abilitySelectionState
+                _mouseMoveState, _placeholderPointerState, _placeholderSelectionState,
+                _heroPointerState, _heroSelectionState, _abilitySelectionState
             );
 
             StateMachine.SetState<MouseMoveState>();
@@ -66,13 +78,11 @@ namespace SustainTheStrain.Input
             Enable();
         }
 
-        private void EnterMouseMoveState(InputAction.CallbackContext obj) => StateMachine.SetState<MouseMoveState>();
+        private void EnterMouseMoveState(InputAction.CallbackContext context) =>
+            StateMachine.SetState<MouseMoveState>();
 
-        private void EnterAbilityState(InputAction.CallbackContext obj)
-        {
-            _abilitySelectionState.CurrentAbilityIndex = (int)obj.ReadValue<float>();
-            StateMachine.SetState<AbilitySelectionState>();
-        }
+        private void EnterAbilityState(InputAction.CallbackContext context) =>
+            _abilitySelectionState.CurrentAbilityIndex = (int)context.ReadValue<float>();
 
         public void Dispose()
         {
@@ -84,66 +94,88 @@ namespace SustainTheStrain.Input
 
         #region Events
 
-        public event Action<RaycastHit> OnMouseMove;
+        event Action<RaycastHit> IMouseMove.OnMouseMove
+        {
+            add => _mouseMoveState.OnMouseMove += value;
+            remove => _mouseMoveState.OnMouseMove -= value;
+        }
 
-        public event Action<int> OnAbilityChanged;
-        public event Action<RaycastHit> OnAbilityMove;
-        public event Action<RaycastHit> OnAbilityClick;
+        event Action<int> IAbilityInput.OnAbilityEnter
+        {
+            add => _abilitySelectionState.OnAbilityEnter += value;
+            remove => _abilitySelectionState.OnAbilityEnter -= value;
+        }
 
-        public event Action<BuildingPlaceholder> OnPlaceholderEnter;
+        event Action<int> IAbilityInput.OnAbilityChanged
+        {
+            add => _abilitySelectionState.OnAbilityChanged += value;
+            remove => _abilitySelectionState.OnAbilityChanged -= value;
+        }
+
+        event Action<int> IAbilityInput.OnAbilityExit
+        {
+            add => _abilitySelectionState.OnAbilityExit += value;
+            remove => _abilitySelectionState.OnAbilityExit -= value;
+        }
+
+        event Action<Ray> IAbilityInput.OnAbilityMove
+        {
+            add => _abilitySelectionState.OnAbilityMove += value;
+            remove => _abilitySelectionState.OnAbilityMove -= value;
+        }
+
+        event Action<Ray> IAbilityInput.OnAbilityClick
+        {
+            add => _abilitySelectionState.OnAbilityClick += value;
+            remove => _abilitySelectionState.OnAbilityClick -= value;
+        }
+
         event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnPointerEnter
         {
-            add => OnPlaceholderEnter += value;
-            remove => OnPlaceholderEnter -= value;
+            add => _placeholderPointerState.OnPlaceholderEnter += value;
+            remove => _placeholderPointerState.OnPlaceholderEnter -= value;
         }
-
-        public event Action<BuildingPlaceholder> OnPlaceholderExit;
+        
         event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnPointerExit
         {
-            add => OnPlaceholderExit += value;
-            remove => OnPlaceholderExit -= value;
+            add => _placeholderPointerState.OnPlaceholderExit += value;
+            remove => _placeholderPointerState.OnPlaceholderExit -= value;
         }
-
-        public event Action<BuildingPlaceholder> OnPlaceholderSelected;
+        
         event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnSelected
         {
-            add => OnPlaceholderSelected += value;
-            remove => OnPlaceholderSelected -= value;
+            add => _placeholderSelectionState.OnPlaceholderSelected += value;
+            remove => _placeholderSelectionState.OnPlaceholderSelected -= value;
         }
 
-        public event Action<BuildingPlaceholder> OnPlaceholderDeselected;
         event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnDeselected
         {
-            add => OnPlaceholderDeselected += value;
-            remove => OnPlaceholderDeselected -= value;
+            add => _placeholderSelectionState.OnPlaceholderDeselected += value;
+            remove => _placeholderSelectionState.OnPlaceholderDeselected -= value;
         }
 
-        public event Action<Hero> OnHeroEnter;
         event Action<Hero> ISelectableInput<Hero>.OnPointerEnter
         {
-            add => OnHeroEnter += value;
-            remove => OnHeroEnter -= value;
+            add => _heroPointerState.OnHeroEnter += value;
+            remove => _heroPointerState.OnHeroEnter -= value;
         }
 
-        public event Action<Hero> OnHeroExit;
         event Action<Hero> ISelectableInput<Hero>.OnPointerExit
         {
-            add => OnHeroExit += value;
-            remove => OnHeroExit -= value;
+            add => _heroPointerState.OnHeroExit += value;
+            remove => _heroPointerState.OnHeroExit -= value;
         }
 
-        public event Action<Hero> OnHeroSelected;
         event Action<Hero> ISelectableInput<Hero>.OnSelected
         {
-            add => OnHeroSelected += value;
-            remove => OnHeroSelected -= value;
+            add => _heroSelectionState.OnHeroSelected += value;
+            remove => _heroSelectionState.OnHeroSelected -= value;
         }
 
-        public event Action<Hero> OnHeroDeselected;
         event Action<Hero> ISelectableInput<Hero>.OnDeselected
         {
-            add => OnHeroDeselected += value;
-            remove => OnHeroDeselected -= value;
+            add => _heroSelectionState.OnHeroDeselected += value;
+            remove => _heroSelectionState.OnHeroDeselected -= value;
         }
 
         #endregion
