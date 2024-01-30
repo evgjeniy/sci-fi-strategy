@@ -9,17 +9,23 @@ namespace SustainTheStrain.Input.UI
     {
         [SerializeField, InputControl(layout = "Button")] private string _controlPath = "<Keyboard>/r";
         
-        [field: SerializeField] private float Value { get; set; } = 1.0f;
+        public void SetButton(string key) => controlPathInternal = $"<Keyboard>/{key}";
+        public void SetNumberButton(int number) => controlPathInternal = $"<Keyboard>/{number}";
 
         protected override string controlPathInternal
         {
             get => _controlPath;
-            set => _controlPath = value;
+            set
+            {
+                OnDisable();
+                _controlPath = value;
+                OnEnable();
+            }
         }
 
         public async UniTask Click()
         {
-            SendValueToControl(Value);
+            SendValueToControl(1.0f);
             await UniTask.NextFrame();
             SendValueToControl(0.0f);
         }

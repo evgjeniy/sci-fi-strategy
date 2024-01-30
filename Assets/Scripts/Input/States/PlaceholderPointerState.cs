@@ -7,27 +7,21 @@ namespace SustainTheStrain.Input.States
 {
     public class PlaceholderPointerState : MouseMoveState
     {
-        private readonly Action<BuildingPlaceholder> _onEnterCallback;
-        private readonly Action<BuildingPlaceholder> _onExitCallback;
-
-        public PlaceholderPointerState(InputService initializer, InputActions.MouseActions mouseActions,
-            Action<BuildingPlaceholder> onEnterCallback = null,
-            Action<BuildingPlaceholder> onExitCallback = null) : base(initializer, mouseActions)
-        {
-            _onEnterCallback = onEnterCallback;
-            _onExitCallback = onExitCallback;
-        }
+        public event Action<BuildingPlaceholder> OnPlaceholderEnter;
+        public event Action<BuildingPlaceholder> OnPlaceholderExit;
+        
+        public PlaceholderPointerState(InputService initializer, InputActions.MouseActions mouseActions) : base(initializer, mouseActions) {}
 
         public override void OnEnter()
         {
-            _onEnterCallback?.Invoke(Initializer.CashedData.Placeholder);
+            OnPlaceholderEnter?.Invoke(Initializer.CashedData.Placeholder);
             base.OnEnter();
         }
 
         public override void OnExit()
         {
             base.OnExit();
-            _onExitCallback?.Invoke(Initializer.CashedData.Placeholder);
+            OnPlaceholderExit?.Invoke(Initializer.CashedData.Placeholder);
         }
 
         protected override void MouseMove(RaycastHit hit)

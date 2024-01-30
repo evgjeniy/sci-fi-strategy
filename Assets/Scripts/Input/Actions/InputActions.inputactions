@@ -871,6 +871,28 @@
                 },
                 {
                     "name": "",
+                    "id": "0c8c88bc-64c6-41b5-8a5d-d1e560fbbfde",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "Scale(factor=4)",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EnterAbilityState",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40df01cc-d82b-47eb-9583-07d007015ef4",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "Scale(factor=5)",
+                    "groups": "Keyboard&Mouse",
+                    "action": "EnterAbilityState",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "fa3ebe77-2308-44ce-863a-e77aabddc8a9",
                     "path": "<Keyboard>/escape",
                     "interactions": "",

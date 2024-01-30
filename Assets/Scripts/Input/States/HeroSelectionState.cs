@@ -6,10 +6,23 @@ namespace SustainTheStrain.Input.States
 {
     public class HeroSelectionState : HeroPointerState
     {
-        public HeroSelectionState(InputService initializer, InputActions.MouseActions mouseActions,
-            Action<Hero> onSelectedCallback = null, Action<Hero> onDeselectedCallback = null)
-            : base(initializer, mouseActions, onSelectedCallback, onDeselectedCallback) {}
+        public event Action<Hero> OnHeroSelected;
+        public event Action<Hero> OnHeroDeselected; 
+        
+        public HeroSelectionState(InputService initializer, InputActions.MouseActions mouseActions) : base(initializer, mouseActions) {}
+        
+        public override void OnEnter()
+        {
+            OnHeroSelected?.Invoke(Initializer.CashedData.Hero);
+            base.OnEnter();
+        }
 
+        public override void OnExit()
+        {
+            base.OnExit();
+            OnHeroDeselected?.Invoke(Initializer.CashedData.Hero);
+        }
+        
         protected override void MouseMove(RaycastHit hit) {}
 
         protected override void LeftMouseButtonClick(RaycastHit hit)
