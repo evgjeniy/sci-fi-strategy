@@ -1,5 +1,6 @@
 using System;
 using SustainTheStrain.EnergySystem;
+using SustainTheStrain.EnergySystem.Settings;
 using UnityEngine;
 using Zenject;
 
@@ -83,6 +84,13 @@ namespace SustainTheStrain.AbilitiesScripts
             {
                 CurrentEnergy -= EnergySpendCount;
             }
+        }
+
+        protected void SetEnergySettings(EnergySystemSettings settings)
+        {
+            ButtonImage = settings.ButtonImage;
+            EnergySpendCount = settings.EnergySpend;
+            MaxEnergy = settings.MaxEnergy;
         }
     }
 }

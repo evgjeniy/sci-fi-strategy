@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemyHackAbilitySettings
   m_EditorClassIdentifier: 
   EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
-  ReloadingSpeed: 0
+  ReloadingSpeed: 1

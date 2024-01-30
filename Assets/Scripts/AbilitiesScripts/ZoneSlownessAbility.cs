@@ -13,6 +13,7 @@ namespace SustainTheStrain.AbilitiesScripts
             LoadingSpeed = settings.ReloadingSpeed;
             speedCoefficient = settings.SpeedKoeficient;
             slownessTime = settings.DurationTime == 0 ? 1 : settings.DurationTime;
+            SetEnergySettings(settings.EnergySettings);
         }
 
         protected override void FailShootLogic()

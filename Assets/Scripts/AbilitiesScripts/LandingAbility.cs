@@ -10,6 +10,7 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             LoadingSpeed = settings.ReloadingSpeed;
             squadSize = settings.Size;
+            SetEnergySettings(settings.EnergySettings);
         }
 
         protected override void FailShootLogic()

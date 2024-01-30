@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ZoneSlownessnAbilitySettings
   m_EditorClassIdentifier: 
   EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
-  ReloadingSpeed: 0
-  ZoneRadius: 0
-  SpeedKoeficient: 0
-  DurationTime: 0
+  ReloadingSpeed: 1
+  ZoneRadius: 2
+  SpeedKoeficient: 0.5
+  DurationTime: 2

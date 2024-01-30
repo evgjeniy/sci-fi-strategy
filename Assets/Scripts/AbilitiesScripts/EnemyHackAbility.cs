@@ -7,6 +7,7 @@ namespace SustainTheStrain.AbilitiesScripts
         public EnemyHackAbility(EnemyHackAbilitySettings settings)
         {
             LoadingSpeed = settings.ReloadingSpeed;
+            SetEnergySettings(settings.EnergySettings);
         }
 
         public override void Shoot(RaycastHit hit, int team)

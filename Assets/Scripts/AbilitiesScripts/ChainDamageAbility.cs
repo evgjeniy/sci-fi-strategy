@@ -18,6 +18,7 @@ namespace SustainTheStrain.AbilitiesScripts
             damage = settings.Damage;
             maxTargetsCount = settings.MaxTargets;
             maxDistanceBetween = settings.Distance;
+            SetEnergySettings(settings.EnergySettings);
         }
 
         protected override void FailShootLogic()

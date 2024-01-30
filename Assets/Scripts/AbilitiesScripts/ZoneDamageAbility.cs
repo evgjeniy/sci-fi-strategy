@@ -10,6 +10,7 @@ namespace SustainTheStrain.AbilitiesScripts
             zoneRadius = settings.ZoneRadius;
             LoadingSpeed = settings.ReloadingSpeed;
             damage = settings.Damage;
+            SetEnergySettings(settings.EnergySettings);
         }
 
         protected override void FailShootLogic()

@@ -19,10 +19,6 @@ namespace SustainTheStrain.AbilitiesScripts
         [SerializeField] private LayerMask enemyLayers;
         [SerializeField] private int maxDistFromCamera;
         [SerializeField] private float zoneRadius;
-        [SerializeField] private float reloadingSpeed;
-        [SerializeField] private float damag;
-        [SerializeField] private float speedCoef;
-        [SerializeField] private GameObject LinePrefab;
         [SerializeField] private int team;
         [Inject] private EnergyController _energyController;
 

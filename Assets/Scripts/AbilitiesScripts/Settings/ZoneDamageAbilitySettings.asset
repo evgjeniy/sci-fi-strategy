@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ZoneDamageAbilitySettings
   m_EditorClassIdentifier: 
   EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
-  ReloadingSpeed: 0
-  Damage: 0
-  ZoneRadius: 0
+  ReloadingSpeed: 1
+  Damage: 15
+  ZoneRadius: 2
