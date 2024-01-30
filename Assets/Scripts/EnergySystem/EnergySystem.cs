@@ -1,12 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace SustainTheStrain.EnergySystem
 {
     public class EnergySystem : MonoBehaviour, IEnergySystem
     {
-        
+        public Sprite ButtonImage { get; set; }
         public EnergyController EnergyController { get; set; }
         [field: SerializeField] public int EnergySpendCount { get; set; }
         public int FreeEnergyCells => MaxEnergy - CurrentEnergy;

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using SustainTheStrain.EnergySystem;
 using UnityEngine;
 using Zenject;
 
@@ -39,11 +41,17 @@ namespace SustainTheStrain.ResourceSystems
         [SerializeField]private ExplorePointGenerator _explorePointGenerator;
         [SerializeField]private GoldGenerator _goldGenerator;
 
+        private List<IEnergySystem> _generators = new List<IEnergySystem>();
+
+        public List<IEnergySystem> Generators => _generators;
+
         [Inject]
         public void AddGenerators(ExplorePointGenerator explorePointGenerator, GoldGenerator goldGenerator)
         {
             _explorePointGenerator = explorePointGenerator;
+            _generators.Add(_explorePointGenerator);
             _goldGenerator = goldGenerator;
+            _generators.Add(_goldGenerator);
             Subscribe();
         }
 

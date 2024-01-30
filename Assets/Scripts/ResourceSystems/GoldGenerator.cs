@@ -1,12 +1,14 @@
 ﻿using System;
 using SustainTheStrain.EnergySystem;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace SustainTheStrain.ResourceSystems
 {
     public class GoldGenerator : ResourceGenerator, IEnergySystem
     {
+        [field:SerializeField] public Sprite ButtonImage { get; set; }
         [Inject] public EnergyController EnergyController { get; set; }
         [field:SerializeField] public int EnergySpendCount { get; private set; }
         [field: Min(1)][field:SerializeField] public int MaxEnergy { get; private set; }
@@ -21,7 +23,6 @@ namespace SustainTheStrain.ResourceSystems
                 if (value < 0 || value > MaxEnergy) return;
                 if (!_canGenerate && value > 0)
                 {
-                    _canGenerate = true;
                     StartGeneration();
                 }
                 _currentEnergy = value;
@@ -45,16 +46,18 @@ namespace SustainTheStrain.ResourceSystems
             if (EnergyController.TryGetEnergy(EnergySpendCount))
             {
                 CurrentEnergy += EnergySpendCount;
+                UpgradeAll();
             }
             //Here should be system upgrade logic
         }
 
         public void TryRefillEnergy()
         {
-            if (_currentEnergy <= EnergySpendCount) return;
+            if (_currentEnergy < EnergySpendCount) return;
             if (EnergyController.TryReturnEnergy(EnergySpendCount))
             {
                 CurrentEnergy -= EnergySpendCount;
+                DowngradeAll();
             }
             //Here should be system downgrade logic
         }
@@ -62,14 +65,6 @@ namespace SustainTheStrain.ResourceSystems
         private void OnDisable()
         {
             EndGeneration();
-        }
-
-        private void Update()
-        {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.S))
-            {
-                TrySpendEnergy();
-            }
         }
     }
 }
