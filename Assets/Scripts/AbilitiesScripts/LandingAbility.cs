@@ -6,10 +6,10 @@ namespace SustainTheStrain.AbilitiesScripts
     {
         protected int squadSize;
 
-        public LandingAbility(float speed, int size)
+        public LandingAbility(LandingAbilitySettings settings)
         {
-            LoadingSpeed = speed;
-            squadSize = size;
+            LoadingSpeed = settings.ReloadingSpeed;
+            squadSize = settings.Size;
         }
 
         protected override void FailShootLogic()

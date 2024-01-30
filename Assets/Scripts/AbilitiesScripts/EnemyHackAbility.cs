@@ -4,9 +4,9 @@ namespace SustainTheStrain.AbilitiesScripts
 {
     public class EnemyHackAbility : PointAbility
     {
-        public EnemyHackAbility(float speed)
+        public EnemyHackAbility(EnemyHackAbilitySettings settings)
         {
-            LoadingSpeed = speed;
+            LoadingSpeed = settings.ReloadingSpeed;
         }
 
         public override void Shoot(RaycastHit hit, int team)

@@ -9,17 +9,15 @@ namespace SustainTheStrain.EnergySystem
     {
         public event Action<IEnergySystem> OnSystemAdded;
         public List<IEnergySystem> Systems => _systems;
-        [SerializeReference] private List<IEnergySystem> _systems;
+        private List<IEnergySystem> _systems = new();
 
         [Inject] public EnergyManager Manager { get; private set; }
     
         public void AddEnergySystem(IEnergySystem system)
         {
-            if (!_systems.Contains(system))
-            {
-                _systems.Add(system);
-                OnSystemAdded?.Invoke(system);
-            }
+            if (_systems.Contains(system)) return;
+            _systems.Add(system);
+            OnSystemAdded?.Invoke(system);
         }
 
         public bool TryGetEnergy(int countOfEnergy)

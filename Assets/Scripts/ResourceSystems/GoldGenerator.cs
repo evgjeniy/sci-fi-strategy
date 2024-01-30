@@ -8,7 +8,7 @@ namespace SustainTheStrain.ResourceSystems
 {
     public class GoldGenerator : ResourceGenerator, IEnergySystem
     {
-        [field:SerializeField] public Sprite ButtonImage { get; set; }
+        [field:SerializeField] public Sprite ButtonImage { get; private set; }
         [Inject] public EnergyController EnergyController { get; set; }
         [field:SerializeField] public int EnergySpendCount { get; private set; }
         [field: Min(1)][field:SerializeField] public int MaxEnergy { get; private set; }

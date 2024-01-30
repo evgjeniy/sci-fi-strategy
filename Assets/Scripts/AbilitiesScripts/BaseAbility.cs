@@ -1,12 +1,16 @@
+using System;
+using SustainTheStrain.EnergySystem;
 using UnityEngine;
+using Zenject;
 
 namespace SustainTheStrain.AbilitiesScripts
 {
-    public abstract class BaseAbility
+    public abstract class BaseAbility : IEnergySystem
     {
         private const float Eps = 0.00001f;
         protected float Reload = 1f;
         protected float LoadingSpeed;
+        private IEnergySystem _energySystemImplementation;
 
         public float GetReload() => Mathf.Abs(Reload - 1f) < Eps ? 1f : Mathf.Min(Reload, 1f);
 
@@ -26,10 +30,13 @@ namespace SustainTheStrain.AbilitiesScripts
         public void Load(float delt)
         {
             if (IsReloaded()) return;
-            
-            Reload += LoadingSpeed * delt;
-            if(IsReloaded())
-                ReadyToShoot();
+
+            if (_isLoaded)
+            {
+                Reload += LoadingSpeed * delt;
+                if (IsReloaded())
+                    ReadyToShoot();
+            }
         }
 
         public bool IsReloaded() => GetReload() == 1f; //reload > 1 and pogreshnost ychtena v getReload()
@@ -39,5 +46,43 @@ namespace SustainTheStrain.AbilitiesScripts
         protected abstract void SuccessShootLogic(RaycastHit hit, int team);
 
         protected abstract void ReadyToShoot();
+        [field:SerializeField] public Sprite ButtonImage { get; private set; }
+        [Inject] public EnergyController EnergyController { get; set; }
+        [field:SerializeField] public int EnergySpendCount { get; private set; }
+        [field: Min(1)][field:SerializeField] public int MaxEnergy { get; private set; }
+        public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
+        public int CurrentEnergy 
+        { 
+            get => _currentEnergy;
+            private set
+            {
+                if (value < 0 || value > MaxEnergy) return;
+                _currentEnergy = value;
+                OnCurrentEnergyChanged?.Invoke(_currentEnergy);
+                _isLoaded = value != 0;
+            }
+        }
+
+        protected bool _isLoaded;
+
+        protected int _currentEnergy;
+        public event Action<int> OnCurrentEnergyChanged;
+        public event Action<int> OnMaxEnergyChanged;
+
+        public void TrySpendEnergy()
+        {
+            if (EnergyController.TryGetEnergy(EnergySpendCount))
+            {
+                CurrentEnergy += EnergySpendCount;
+            }
+        }
+
+        public void TryRefillEnergy()
+        {
+            if (EnergyController.TryReturnEnergy(EnergySpendCount))
+            {
+                CurrentEnergy -= EnergySpendCount;
+            }
+        }
     }
 }

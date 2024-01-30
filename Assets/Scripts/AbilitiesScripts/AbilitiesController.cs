@@ -1,6 +1,9 @@
 using SustainTheStrain.Input;
 using System;
 using System.Collections.Generic;
+using SustainTheStrain;
+using SustainTheStrain.AbilitiesScripts;
+using SustainTheStrain.EnergySystem;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 using Zenject;
@@ -9,6 +12,7 @@ namespace SustainTheStrain.AbilitiesScripts
 {
     public class AbilitiesController : MonoBehaviour
     {
+        [SerializeField] private AbilitiesListSettings _abilitiesSettings;
         [SerializeField] private GameObject aimZonePrefab;
         [SerializeField] private Camera mainCamera;
         [SerializeField] private LayerMask groundLayers;
@@ -20,6 +24,7 @@ namespace SustainTheStrain.AbilitiesScripts
         [SerializeField] private float speedCoef;
         [SerializeField] private GameObject LinePrefab;
         [SerializeField] private int team;
+        [Inject] private EnergyController _energyController;
 
         private BaseAim currentAim;
 
@@ -102,11 +107,16 @@ namespace SustainTheStrain.AbilitiesScripts
 
         public void Init() //temporary, because now we don't have MainController
         {
-            AddAbility(new ZoneDamageAbility(zoneRadius, reloadingSpeed, damag));
-            AddAbility(new ZoneSlownessAbility(zoneRadius, reloadingSpeed, speedCoef, 2));
-            AddAbility(new ChainDamageAbility(LinePrefab, reloadingSpeed, damag, 4, 100));
-            AddAbility(new EnemyHackAbility(reloadingSpeed));
-            AddAbility(new LandingAbility(reloadingSpeed, 3));
+            AddAbility(new ZoneDamageAbility(_abilitiesSettings.ZoneDamage));
+            AddAbility(new ZoneSlownessAbility(_abilitiesSettings.ZoneSlowness));
+            AddAbility(new ChainDamageAbility(_abilitiesSettings.ChainAbility));
+            AddAbility(new EnemyHackAbility(_abilitiesSettings.EnemyHack));
+            AddAbility(new LandingAbility(_abilitiesSettings.LandingAbility));
+            foreach (var ability in Abilities)
+            {
+                ability.EnergyController = _energyController;
+                _energyController.AddEnergySystem(ability);
+            }
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû
         }
 
@@ -146,4 +156,14 @@ namespace SustainTheStrain.AbilitiesScripts
             }
         }
     }
+}
+
+[Serializable]
+public class AbilitiesListSettings
+{
+    public ChainDamageAbilitySettings ChainAbility;
+    public EnemyHackAbilitySettings EnemyHack;
+    public LandingAbilitySettings LandingAbility;
+    public ZoneDamageAbilitySettings ZoneDamage;
+    public ZoneSlownesAbillitySettings ZoneSlowness;
 }

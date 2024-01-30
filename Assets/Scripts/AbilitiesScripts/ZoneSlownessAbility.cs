@@ -7,12 +7,12 @@ namespace SustainTheStrain.AbilitiesScripts
         protected float speedCoefficient;
         protected float slownessTime;
 
-        public ZoneSlownessAbility(float zone, float speed, float koef, float time)
+        public ZoneSlownessAbility(ZoneSlownesAbillitySettings settings)
         {
-            zoneRadius = zone;
-            LoadingSpeed = speed;
-            speedCoefficient = koef;
-            slownessTime = time == 0 ? 1 : time;
+            zoneRadius = settings.ZoneRadius;
+            LoadingSpeed = settings.ReloadingSpeed;
+            speedCoefficient = settings.SpeedKoeficient;
+            slownessTime = settings.DurationTime == 0 ? 1 : settings.DurationTime;
         }
 
         protected override void FailShootLogic()

@@ -5,11 +5,11 @@ namespace SustainTheStrain.AbilitiesScripts
     public class ZoneDamageAbility : ZoneAbility
     {
         protected float damage;
-        public ZoneDamageAbility(float zone, float speed, float dmg)
+        public ZoneDamageAbility(ZoneDamageAbilitySettings settings)
         {
-            zoneRadius = zone;
-            LoadingSpeed = speed;
-            damage = dmg;
+            zoneRadius = settings.ZoneRadius;
+            LoadingSpeed = settings.ReloadingSpeed;
+            damage = settings.Damage;
         }
 
         protected override void FailShootLogic()

@@ -7,7 +7,7 @@ namespace SustainTheStrain.EnergySystem
 {
     public interface IEnergySystem
     {
-        public Sprite ButtonImage { get; set;}
+        public Sprite ButtonImage { get;}
         [Inject] public EnergyController EnergyController { get; set; }
         public int EnergySpendCount { get; }
         public int FreeEnergyCells { get; }

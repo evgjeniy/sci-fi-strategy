@@ -11,13 +11,13 @@ namespace SustainTheStrain.AbilitiesScripts
         protected GameObject LinePref;
         protected GameObject LineObject;
 
-        public ChainDamageAbility(GameObject pref, float speed, float dmg, int maxtrg, float dst)
+        public ChainDamageAbility(ChainDamageAbilitySettings settings)
         {
-            LinePref = pref;
-            LoadingSpeed = speed;
-            damage = dmg;
-            maxTargetsCount = maxtrg;
-            maxDistanceBetween = dst;
+            LinePref = settings.LinePrefab;
+            LoadingSpeed = settings.ReloadingSpeed;
+            damage = settings.Damage;
+            maxTargetsCount = settings.MaxTargets;
+            maxDistanceBetween = settings.Distance;
         }
 
         protected override void FailShootLogic()
