@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace SustainTheStrain.Buildings.Components
+﻿namespace SustainTheStrain.Buildings.FSM
 {
     public class Timer
     {
@@ -9,7 +7,7 @@ namespace SustainTheStrain.Buildings.Components
         public float Time
         {
             get => _time;
-            set => _time = Mathf.Clamp(value, 0.0f, Mathf.Infinity);
+            set => _time = UnityEngine.Mathf.Clamp(value, 0.0f, UnityEngine.Mathf.Infinity);
         }
 
         public bool IsTimeOver => Time == 0.0f;

@@ -16,17 +16,39 @@ MonoBehaviour:
     type: 3}
   <Mesh>k__BackingField: {fileID: -4080094585321161956, guid: 048a02ce0afb1d843b21a27834b0f9f7,
     type: 3}
-  <Projectile>k__BackingField: {fileID: -3499578410909440990, guid: cd038acd54d433a4d99b1a15c22e5121,
-    type: 3}
   <AttackMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
+  <Projectile>k__BackingField: {fileID: -3499578410909440990, guid: cd038acd54d433a4d99b1a15c22e5121,
+    type: 3}
   <RocketStats>k__BackingField:
-  - <Stats>k__BackingField:
-      <MaxEnemiesTargets>k__BackingField: 2
-      <Damage>k__BackingField: 2.28
+  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 94cd97e4ddcac474785495a5771db9ad,
+      type: 3}
+    <Stats>k__BackingField:
+      <MaxEnemiesTargets>k__BackingField: 1
+      <Damage>k__BackingField: 1
       <AttackCooldown>k__BackingField: 5
-      <AttackRadius>k__BackingField: 8.92
+      <AttackRadius>k__BackingField: 5
+      <AttackSectorAngle>k__BackingField: 30
+    <NextLevelPrice>k__BackingField: 1
+    <DestroyCompensation>k__BackingField: 1
+  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: e53f4b8ff72547549b050e73429f9568,
+      type: 3}
+    <Stats>k__BackingField:
+      <MaxEnemiesTargets>k__BackingField: 2
+      <Damage>k__BackingField: 5
+      <AttackCooldown>k__BackingField: 3
+      <AttackRadius>k__BackingField: 7
       <AttackSectorAngle>k__BackingField: 45
+    <NextLevelPrice>k__BackingField: 1
+    <DestroyCompensation>k__BackingField: 1
+  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 08fb596b7b6486e4886a39a166a178f6,
+      type: 3}
+    <Stats>k__BackingField:
+      <MaxEnemiesTargets>k__BackingField: 3
+      <Damage>k__BackingField: 10
+      <AttackCooldown>k__BackingField: 1.5
+      <AttackRadius>k__BackingField: 20
+      <AttackSectorAngle>k__BackingField: 60
     <NextLevelPrice>k__BackingField: 1
     <DestroyCompensation>k__BackingField: 1

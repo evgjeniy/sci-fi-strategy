@@ -19,9 +19,27 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   <LaserStats>k__BackingField:
-  - <Stats>k__BackingField:
-      <Damage>k__BackingField: 2.43
+  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: be8c447f59d713e479c8b80b8dc54804,
+      type: 3}
+    <Stats>k__BackingField:
+      <Damage>k__BackingField: 1.5
+      <AttackCooldown>k__BackingField: 5
+      <AttackRadius>k__BackingField: 5
+    <NextLevelPrice>k__BackingField: 1
+    <DestroyCompensation>k__BackingField: 1
+  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 3018732fca6439742ab62e40d6723e8e,
+      type: 3}
+    <Stats>k__BackingField:
+      <Damage>k__BackingField: 2.5
       <AttackCooldown>k__BackingField: 2.5
+      <AttackRadius>k__BackingField: 7
+    <NextLevelPrice>k__BackingField: 1
+    <DestroyCompensation>k__BackingField: 1
+  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 4f2b850b6583b0c4a8440bee7b36e529,
+      type: 3}
+    <Stats>k__BackingField:
+      <Damage>k__BackingField: 5
+      <AttackCooldown>k__BackingField: 1
       <AttackRadius>k__BackingField: 10
     <NextLevelPrice>k__BackingField: 1
     <DestroyCompensation>k__BackingField: 1
