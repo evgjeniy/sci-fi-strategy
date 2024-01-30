@@ -10,44 +10,54 @@ namespace SustainTheStrain.Input.States
     public class MouseMoveState : IState<InputService>
     {
         private readonly InputActions.MouseActions _mouseActions;
-        private readonly Action<RaycastHit> _mouseMoveCallback;
-        private readonly Action<RaycastHit> _leftMouseButtonClick;
+
+        public event Action<Ray> OnMouseMoveRay;
+        public event Action<Ray> OnLeftMouseButtonClickRay;
+        public event Action<RaycastHit> OnMouseMove;
+        public event Action<RaycastHit> OnLeftMouseButtonClick;
 
         private Vector2 _mousePosition;
 
         public InputService Initializer { get; }
 
-        public MouseMoveState(InputService initializer, InputActions.MouseActions mouseActions,
-            Action<RaycastHit> mouseMoveCallback = null, Action<RaycastHit> leftMouseButtonClick = null)
+        public MouseMoveState(InputService initializer, InputActions.MouseActions mouseActions)
         {
             Initializer = initializer;
-
             _mouseActions = mouseActions;
-            _mouseMoveCallback = mouseMoveCallback;
-            _leftMouseButtonClick = leftMouseButtonClick;
         }
 
         public virtual void OnEnter()
         {
-            _mouseActions.MousePosition.performed += OnMouseMove;
-            _mouseActions.LeftButton.performed += OnLeftButtonClicked;
+            _mouseActions.MousePosition.performed += MouseMovePerformed;
+            _mouseActions.LeftButton.performed += MouseLeftButtonPerformed;
         }
 
         public virtual void OnExit()
         {
-            _mouseActions.MousePosition.performed -= OnMouseMove;
-            _mouseActions.LeftButton.performed -= OnLeftButtonClicked;
+            _mouseActions.MousePosition.performed -= MouseMovePerformed;
+            _mouseActions.LeftButton.performed -= MouseLeftButtonPerformed;
         }
 
-        private void OnMouseMove(InputAction.CallbackContext context)
+        private void MouseMovePerformed(InputAction.CallbackContext context)
         {
             _mousePosition = context.ReadValue<Vector2>();
-            if (CheckScreenPointRayCastHit(out var hit)) MouseMove(hit);
+            
+            if (_mousePosition.IsPointerUnderUI(Initializer.Settings.EventSystem)) return;
+
+            var ray = Camera.main.ScreenPointToRay(_mousePosition);
+            OnMouseMoveRay?.Invoke(ray);
+            
+            if (CheckScreenPointRayCastHit(ray, out var hit)) MouseMove(hit);
         }
 
-        private void OnLeftButtonClicked(InputAction.CallbackContext context)
+        private void MouseLeftButtonPerformed(InputAction.CallbackContext context)
         {
-            if (CheckScreenPointRayCastHit(out var hit)) LeftMouseButtonClick(hit);
+            if (_mousePosition.IsPointerUnderUI(Initializer.Settings.EventSystem)) return;
+            
+            var ray = Camera.main.ScreenPointToRay(_mousePosition);
+            OnLeftMouseButtonClickRay?.Invoke(ray);
+            
+            if (CheckScreenPointRayCastHit(ray, out var hit)) LeftMouseButtonClick(hit);
         }
 
         protected virtual void MouseMove(RaycastHit hit)
@@ -62,21 +72,14 @@ namespace SustainTheStrain.Input.States
                 Initializer.CashedData.Hero = hero;
                 Initializer.StateMachine.SetState<HeroPointerState>();
             }
-            else _mouseMoveCallback?.Invoke(hit);
+            else OnMouseMove?.Invoke(hit);
         }
 
-        protected virtual void LeftMouseButtonClick(RaycastHit hit) => _leftMouseButtonClick?.Invoke(hit);
+        protected virtual void LeftMouseButtonClick(RaycastHit hit) => OnLeftMouseButtonClick?.Invoke(hit);
 
-        private bool CheckScreenPointRayCastHit(out RaycastHit hit)
-        {
-            hit = default;
-
-            return !_mousePosition.IsPointerUnderUI(Initializer.Settings.EventSystem) && Physics.Raycast
-            (
-                Camera.main.ScreenPointToRay(_mousePosition), out hit,
-                Initializer.Settings.MaxDistance,
-                Initializer.Settings.RayCastMask.value
-            );
-        }
+        private bool CheckScreenPointRayCastHit(Ray ray, out RaycastHit hit) => Physics.Raycast
+        (
+            ray, out hit, Initializer.Settings.MaxDistance, Initializer.Settings.RayCastMask.value
+        );
     }
 }
