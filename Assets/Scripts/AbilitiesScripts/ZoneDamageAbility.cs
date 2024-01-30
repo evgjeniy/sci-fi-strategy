@@ -4,10 +4,12 @@ namespace SustainTheStrain.AbilitiesScripts
 {
     public class ZoneDamageAbility : ZoneAbility
     {
-        public ZoneDamageAbility(float zone, float speed)
+        protected float damage;
+        public ZoneDamageAbility(float zone, float speed, float dmg)
         {
-            ZoneRadius = zone;
+            zoneRadius = zone;
             LoadingSpeed = speed;
+            damage = dmg;
         }
 
         protected override void FailShootLogic()
@@ -15,30 +17,21 @@ namespace SustainTheStrain.AbilitiesScripts
             Debug.Log("zoneDGM failed to shoot");
         }
 
-        protected override void SuccessShootLogic(RaycastHit hit)
+        protected override void SuccessShootLogic(RaycastHit hit, int team)
         {
-            Debug.Log("zoneDMG success shot");
+            Collider[] colliders = GetColliders(hit.point);
+            for(int i = 0; i < colliders.Length; i++)
+            {
+                var dmg = colliders[i].GetComponent<Units.Components.Damageble>();
+                if (dmg == null || dmg.Team == team) continue;
+                dmg.Damage(damage);
+                //Debug.Log(dmg.CurrentHP);
+            }
         }
 
         protected override void ReadyToShoot()
         {
             Debug.Log("zoneDMG ready to shoot");
-        }
-
-        public override void UpdateLogic(RaycastHit hit)
-        {
-            var point = hit.point;
-            AimZone.transform.position = point + Offset;
-            if (IsReloaded())
-            {
-                //ìá öâåò ïðèöåëà áóäåò çåëåíûé
-                if (UnityEngine.Input.GetMouseButtonDown(0))
-                    Shoot(hit);
-            }
-            else
-            {
-                //ìá öâåò ïðèöåëà áóäåò êðàñíûé
-            }
         }
     }
 }

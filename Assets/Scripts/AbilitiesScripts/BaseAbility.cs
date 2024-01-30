@@ -12,7 +12,7 @@ namespace SustainTheStrain.AbilitiesScripts
 
         public void SetLoadingSpeed(float speed) => LoadingSpeed = speed; //ne znayu nuzhen li no pust budet))
 
-        public void Shoot(RaycastHit hit)
+        public virtual void Shoot(RaycastHit hit, int team)
         {
             if (!IsReloaded())
             {
@@ -20,7 +20,7 @@ namespace SustainTheStrain.AbilitiesScripts
                 return;
             }
             Reload = 0;
-            SuccessShootLogic(hit);
+            SuccessShootLogic(hit, team);
         }
 
         public void Load(float delt)
@@ -36,12 +36,8 @@ namespace SustainTheStrain.AbilitiesScripts
 
         protected abstract void FailShootLogic();
 
-        protected abstract void SuccessShootLogic(RaycastHit hit);
+        protected abstract void SuccessShootLogic(RaycastHit hit, int team);
 
         protected abstract void ReadyToShoot();
-
-        public abstract void UpdateLogic(RaycastHit hit);
-
-        public abstract void DestroyLogic();
     }
 }

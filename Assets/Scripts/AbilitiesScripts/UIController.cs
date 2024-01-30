@@ -1,3 +1,5 @@
+using SustainTheStrain.Input.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,7 +7,7 @@ namespace SustainTheStrain.AbilitiesScripts
 {
     public class UIController : MonoBehaviour
     {
-        [SerializeField] private Button ButtonPrefab;
+        [SerializeField] private InputSystemButtonBridge ButtonPrefab;
         [SerializeField] private Slider SliderPrefab;
         [SerializeField] private GameObject buttonHolder;
         [SerializeField] private GameObject sliderHolder;
@@ -13,7 +15,6 @@ namespace SustainTheStrain.AbilitiesScripts
         private readonly Color _readyColor = Color.green; //temporary UI
         private readonly Color _loadingColor = Color.red;
 
-        private bool _zoneDamageButtonReady = true;
         private AbilityButton[] _buttons;
         private AbilitiesController _abilitiesController;
 
@@ -30,21 +31,19 @@ namespace SustainTheStrain.AbilitiesScripts
                 var s = Instantiate(SliderPrefab, sliderHolder.transform);
                 _buttons[i] = new AbilityButton(b, s);
                 s.value = 1;
-                b.image.color = _readyColor;
-                var cnt = i;
-                b.onClick.AddListener(() => { _abilitiesController.OnAbilitySelect(cnt); });
-                _abilitiesController.ReloadListAdd(cnt, SetZoneDamageButtonData);
+                //b.image.color = _readyColor;
+                b.GetComponentInChildren<TextMeshProUGUI>().text = _abilitiesController.Abilities[i].GetType().Name;//temp
+                int cnt = i + 1;
+                b.Value = cnt;
+                _abilitiesController.ReloadListAdd(i, SetZoneDamageButtonData);
             }
         }
 
         private void SetZoneDamageButtonData(int idx, float load, bool ready)
         {
             _buttons[idx].GetSlider().value = load;
-            if (_zoneDamageButtonReady ^ ready) // ready-state updated
-            {
-                _zoneDamageButtonReady = ready;
-                _buttons[idx].GetButton().image.color = _zoneDamageButtonReady ? _readyColor : _loadingColor;
-            }
+            //if (_buttons[idx].IsReady() ^ ready) // ready-state updated
+                //_buttons[idx].GetButton().image.color = _buttons[idx].ChangeReady() ? _readyColor : _loadingColor;
         }
     }
 }

@@ -4,24 +4,48 @@ namespace SustainTheStrain.AbilitiesScripts
 {
     public class ZoneSlownessAbility : ZoneAbility
     {
+        protected float speedCoefficient;
+        protected float slownessTime;
+
+        public ZoneSlownessAbility(float zone, float speed, float koef, float time)
+        {
+            zoneRadius = zone;
+            LoadingSpeed = speed;
+            speedCoefficient = koef;
+            slownessTime = time == 0 ? 1 : time;
+        }
+
         protected override void FailShootLogic()
         {
             Debug.Log("zoneSLOW failed to shoot");
         }
 
-        protected override void SuccessShootLogic(RaycastHit hit)
+        protected override void SuccessShootLogic(RaycastHit hit, int team)
         {
-            Debug.Log("zoneSLOW success shot");
+            Collider[] colliders = GetColliders(hit.point);
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                var spd = colliders[i].GetComponent<Units.Unit>()?.CurrentPathFollower;
+                var dmg = colliders[i].GetComponent<Units.Components.Damageble>();
+                if (spd == null || dmg == null || dmg.Team == team) continue;
+                spd.Speed *= speedCoefficient;
+                System.Timers.Timer timer = new System.Timers.Timer(slownessTime * 1000); // Convert seconds to milliseconds
+                timer.AutoReset = false; // Make the timer fire only once
+                timer.Elapsed += (sender, e) => RestoreSpeed(spd); // Set the event handler
+                timer.Start();
+                //Debug.Log(dmg.Speed);
+            }
+        }
+
+        private void RestoreSpeed(Units.PathFollowers.IPathFollower spd)
+        {
+            spd.Speed /= speedCoefficient;
+            //Debug.Log(dmg.Speed);
         }
 
         protected override void ReadyToShoot()
         {
             Debug.Log("zoneSLOW ready to shoot");
-        }
-
-        public override void UpdateLogic(RaycastHit hit)
-        {
-        
         }
     }
 }

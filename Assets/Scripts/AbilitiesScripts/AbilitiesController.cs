@@ -1,6 +1,9 @@
+using SustainTheStrain.Input;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
+using Zenject;
 
 namespace SustainTheStrain.AbilitiesScripts
 {
@@ -8,27 +11,70 @@ namespace SustainTheStrain.AbilitiesScripts
     {
         [SerializeField] private GameObject aimZonePrefab;
         [SerializeField] private Camera mainCamera;
-        [SerializeField] private LayerMask layersToHit;
-        [SerializeField] private float zoneDamageMaxDistFromCamera;
-        [SerializeField] private float zoneDamageRadius;
-        [SerializeField] private float zoneDamageReloadingSpeed;
+        [SerializeField] private LayerMask groundLayers;
+        [SerializeField] private LayerMask enemyLayers;
+        [SerializeField] private int maxDistFromCamera;
+        [SerializeField] private float zoneRadius;
+        [SerializeField] private float reloadingSpeed;
+        [SerializeField] private float damag;
+        [SerializeField] private float speedCoef;
+        [SerializeField] private GameObject LinePrefab;
+        [SerializeField] private int team;
+
+        private BaseAim currentAim;
+
+        private IAbilityInput _abilityInput;
 
         public readonly List<BaseAbility> Abilities = new(); //better to make it readonly
-        private readonly Vector3 _nullVector = new(0, 0, 0);
 
         private ReloadDelegate[] _reloadList; //tut private, dlya dobavlenia est metod
-        private GameObject _aimZone;
         private int _selected = -1;
 
         public delegate void ReloadDelegate(int idx, float l, bool r);
 
+        [Inject]
+        private void Construct(IAbilityInput inp)
+        {
+            _abilityInput = inp;
+        }
+
+        private void OnEnable()
+        {
+            _abilityInput.OnAbilityChanged += OnAbilitySelect;
+            _abilityInput.OnAbilityMove += MoveMethod;
+            _abilityInput.OnAbilityClick += UseAbility;
+        }
+
+        private void UseAbility(RaycastHit hit)
+        {
+            if (_selected == -1)
+                return;
+            Abilities[_selected].Shoot(hit, team);
+        }
+
+        private void MoveMethod(RaycastHit hit)
+        {
+            currentAim?.UpdateLogic(hit.point);
+        }
+
+        private void OnDisable()
+        {
+            _abilityInput.OnAbilityChanged -= OnAbilitySelect;
+            _abilityInput.OnAbilityMove -= MoveMethod;
+            _abilityInput.OnAbilityClick -= UseAbility;
+        }
+
         public void Init() //temporary, because now we don't have MainController
         {
-            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
-            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
-            AddAbility(new ZoneDamageAbility(zoneDamageRadius, zoneDamageReloadingSpeed));
+            AddAbility(new ZoneDamageAbility(zoneRadius, reloadingSpeed, damag));
+            AddAbility(new ZoneSlownessAbility(zoneRadius, reloadingSpeed, speedCoef, 2));
+            AddAbility(new ChainDamageAbility(LinePrefab, reloadingSpeed, damag, 4, 100));
+            AddAbility(new EnemyHackAbility(reloadingSpeed));
+            AddAbility(new LandingAbility(reloadingSpeed, 3));
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû
         }
+
+        public void setTeamOpponent(int team) => this.team = team;
 
         public void ReloadListSyncSize()
         {
@@ -56,8 +102,9 @@ namespace SustainTheStrain.AbilitiesScripts
         private bool IsCurrentSelected(int type)
         {
             if (_selected == -1) return false;
-            
-            Abilities[_selected].DestroyLogic();
+
+            currentAim.Destroy();
+            currentAim = null;
             var sel = _selected;
             _selected = -1;
             
@@ -66,11 +113,18 @@ namespace SustainTheStrain.AbilitiesScripts
 
         public void OnAbilitySelect(int idx)
         {
+            idx--;
             if (IsCurrentSelected(idx)) return;
             
             _selected = idx;
-            if (Abilities[_selected] is ZoneAbility zoneAbility)
-                zoneAbility.SetAimZone(Instantiate(aimZonePrefab, _nullVector, Quaternion.Euler(90, 0, 0)));
+            if (Abilities[_selected] is ZoneAbility)
+                currentAim = new ZoneAim(zoneRadius, aimZonePrefab, groundLayers, maxDistFromCamera);
+            else if (Abilities[_selected] is LandingAbility)
+                currentAim = new PointAim(groundLayers, maxDistFromCamera);
+            else
+                currentAim = new PointAim(enemyLayers, maxDistFromCamera);
+
+            currentAim.SpawnAimZone();
         }
 
         private void Update()
@@ -82,14 +136,6 @@ namespace SustainTheStrain.AbilitiesScripts
                 Abilities[i].Load(Time.deltaTime);
                 _reloadList[i].Invoke(i, Abilities[i].GetReload(), Abilities[i].IsReloaded());
             }
-
-            if (_selected == -1) return;
-            
-            var mousePosition = UnityEngine.Input.mousePosition;
-            var ray = mainCamera.ScreenPointToRay(mousePosition);
-            
-            if (Physics.Raycast(ray, out var hit, zoneDamageMaxDistFromCamera, layersToHit))
-                Abilities[_selected].UpdateLogic(hit);
         }
     }
 }

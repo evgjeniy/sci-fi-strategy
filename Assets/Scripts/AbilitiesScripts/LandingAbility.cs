@@ -4,24 +4,28 @@ namespace SustainTheStrain.AbilitiesScripts
 {
     public class LandingAbility : PointAbility
     {
+        protected int squadSize;
+
+        public LandingAbility(float speed, int size)
+        {
+            LoadingSpeed = speed;
+            squadSize = size;
+        }
+
         protected override void FailShootLogic()
         {
             Debug.Log("LAND failed to shoot");
         }
 
-        protected override void SuccessShootLogic(RaycastHit hit)
+        protected override void SuccessShootLogic(RaycastHit hit, int team)
         {
-            Debug.Log("LAND success shot");
+            //ifactory<squad>   there will be spawn
+            //   +setting team to squad units
         }
 
         protected override void ReadyToShoot()
         {
             Debug.Log("LAND ready to shoot");
-        }
-
-        public override void UpdateLogic(RaycastHit hit)
-        {
-
         }
     }
 }

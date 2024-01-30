@@ -11,7 +11,7 @@ namespace SustainTheStrain.Input.UI
         
         public void SetButton(string key) => controlPathInternal = $"<Keyboard>/{key}";
         public void SetNumberButton(int number) => controlPathInternal = $"<Keyboard>/{number}";
-
+        
         protected override string controlPathInternal
         {
             get => _controlPath;
