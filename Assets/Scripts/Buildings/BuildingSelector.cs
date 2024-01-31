@@ -1,15 +1,44 @@
-﻿using UnityEngine;
+﻿using System;
+using SustainTheStrain.Buildings.Data;
+using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
-    public interface IBuildingSelector {}
+    public interface IBuildingSelector
+    {
+        public BuildingData SelectedData { get; set; }
+        public void CreateBuilding();
+    }
 
     public class BuildingSelector : MonoBehaviour, IBuildingSelector
     {
-        [Zenject.Inject]
-        private void Construct(IBuildingSystem buildingSystem/*, IBuildingInputService inputService*/ )
+        private BuildingData _selectedData;
+
+        public BuildingData SelectedData
         {
-            // send Create/Upgrade messages to BuildingSystem
+            get => _selectedData;
+            set
+            {
+                _selectedData = value;
+                OnBuildingDataChanged?.Invoke(_selectedData);
+            }
+        }
+
+        public event Action<BuildingData> OnCreate;
+        public event Action<BuildingData> OnBuildingDataChanged;
+
+        public void CreateBuilding() => OnCreate?.Invoke(_selectedData);
+
+        public void ShowSelectionMenu(BuildingPlaceholder placeholder)
+        {
+            transform.position = placeholder.SelectorUIRoot.position;
+            gameObject.Activate();
+        }
+
+        public void HideSelectionMenu(BuildingPlaceholder placeholder)
+        {
+            gameObject.Deactivate();
         }
     }
 }
