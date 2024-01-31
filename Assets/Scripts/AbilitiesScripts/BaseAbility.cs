@@ -11,8 +11,7 @@ namespace SustainTheStrain.AbilitiesScripts
         private const float Eps = 0.00001f;
         protected float Reload = 1f;
         protected float LoadingSpeed;
-        private IEnergySystem _energySystemImplementation;
-
+        
         public float GetReload() => Mathf.Abs(Reload - 1f) < Eps ? 1f : Mathf.Min(Reload, 1f);
 
         public void SetLoadingSpeed(float speed) => LoadingSpeed = speed; //ne znayu nuzhen li no pust budet))
@@ -32,7 +31,7 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             if (IsReloaded()) return;
 
-            if (!_isLoaded) return;
+            if (!IsLoaded) return;
             Reload += LoadingSpeed * delt;
             if (IsReloaded())
                 ReadyToShoot();
@@ -58,11 +57,15 @@ namespace SustainTheStrain.AbilitiesScripts
                 if (value < 0 || value > MaxEnergy) return;
                 _currentEnergy = value;
                 OnCurrentEnergyChanged?.Invoke(_currentEnergy);
-                _isLoaded = value != 0;
+                IsLoaded = value != 0;
             }
         }
 
-        protected bool _isLoaded;
+        public bool IsLoaded
+        {
+            get;
+            private set;
+        }
 
         protected int _currentEnergy;
         public event Action<int> OnCurrentEnergyChanged;

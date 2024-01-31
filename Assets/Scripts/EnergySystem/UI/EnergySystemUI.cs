@@ -9,14 +9,12 @@ namespace SustainTheStrain
 {
     public class EnergySystemUI : MonoBehaviour
     {
-        [SerializeField] private EnergySystemControllButton _controlButtonPrefab;
+        public EnergySystemControllButton ControllButton;
         
         [SerializeField] private Image _imagePrefab;
-
-        [SerializeField] private List<Image> _images = new();
-
         [SerializeField] private Color _filledColor;
         
+        private List<Image> _images = new();
         private int _coloredCount = 0;
         private int _enabledCount = 0;
         
@@ -35,13 +33,6 @@ namespace SustainTheStrain
                 }
                 else {SetMaxBarsCount(value);}
             }
-        }
-
-        public EnergySystemControllButton SpawnButton(Sprite image)
-        {
-            var button = Instantiate(_controlButtonPrefab, transform);
-            button.image.sprite = image;
-            return button;
         }
         
         // private void SetMax(int value)

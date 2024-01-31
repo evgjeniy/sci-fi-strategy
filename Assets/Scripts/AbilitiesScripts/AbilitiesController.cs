@@ -65,12 +65,19 @@ namespace SustainTheStrain.AbilitiesScripts
         private void EnterAbility(int idx)
         {
             idx--;
-            if (Abilities[idx] is ZoneAbility)
-                currentAim = new ZoneAim(zoneRadius, aimZonePrefab, groundLayers, maxDistFromCamera);
-            else if (Abilities[idx] is LandingAbility)
-                currentAim = new PointAim(groundLayers, maxDistFromCamera);
-            else
-                currentAim = new PointAim(enemyLayers, maxDistFromCamera);
+            var chosenAbility = Abilities[idx];
+            if (!chosenAbility.IsLoaded)
+            {
+                chosenAbility.TrySpendEnergy();
+                return;
+            }
+            if (!chosenAbility.IsReloaded()) return;
+            currentAim = Abilities[idx] switch
+            {
+                ZoneAbility => new ZoneAim(zoneRadius, aimZonePrefab, groundLayers, maxDistFromCamera),
+                LandingAbility => new PointAim(groundLayers, maxDistFromCamera),
+                _ => new PointAim(enemyLayers, maxDistFromCamera)
+            };
 
             currentAim.SpawnAimZone();
             _selected = idx;
