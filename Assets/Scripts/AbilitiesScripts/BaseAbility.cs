@@ -32,12 +32,10 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             if (IsReloaded()) return;
 
-            if (_isLoaded)
-            {
-                Reload += LoadingSpeed * delt;
-                if (IsReloaded())
-                    ReadyToShoot();
-            }
+            if (!_isLoaded) return;
+            Reload += LoadingSpeed * delt;
+            if (IsReloaded())
+                ReadyToShoot();
         }
 
         public bool IsReloaded() => GetReload() == 1f; //reload > 1 and pogreshnost ychtena v getReload()
@@ -47,10 +45,10 @@ namespace SustainTheStrain.AbilitiesScripts
         protected abstract void SuccessShootLogic(RaycastHit hit, int team);
 
         protected abstract void ReadyToShoot();
-        [field:SerializeField] public Sprite ButtonImage { get; private set; }
+        public Sprite ButtonImage { get; private set; }
         [Inject] public EnergyController EnergyController { get; set; }
-        [field:SerializeField] public int EnergySpendCount { get; private set; }
-        [field: Min(1)][field:SerializeField] public int MaxEnergy { get; private set; }
+        public int EnergySpendCount { get; private set; }
+        [field: Min(1)] public int MaxEnergy { get; private set; }
         public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
         public int CurrentEnergy 
         { 
@@ -72,6 +70,7 @@ namespace SustainTheStrain.AbilitiesScripts
 
         public void TrySpendEnergy()
         {
+            if (FreeEnergyCells<EnergySpendCount) return;
             if (EnergyController.TryGetEnergy(EnergySpendCount))
             {
                 CurrentEnergy += EnergySpendCount;
@@ -80,6 +79,7 @@ namespace SustainTheStrain.AbilitiesScripts
 
         public void TryRefillEnergy()
         {
+            if (_currentEnergy < EnergySpendCount) return;
             if (EnergyController.TryReturnEnergy(EnergySpendCount))
             {
                 CurrentEnergy -= EnergySpendCount;
