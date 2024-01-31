@@ -13,7 +13,7 @@ namespace SustainTheStrain
 
         public RaycastHit? GetAimInfo(Ray ray) => Physics.Raycast(ray, out var hit, maxDistFromCamera, layersToHit) ? hit : null;
 
-        public abstract void UpdateLogic(Vector3 point);
+        public abstract void UpdateLogic(RaycastHit hit);
 
         public abstract void SpawnAimZone();
 

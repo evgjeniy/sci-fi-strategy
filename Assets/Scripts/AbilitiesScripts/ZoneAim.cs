@@ -32,9 +32,9 @@ namespace SustainTheStrain
 
         public override void Destroy() => Object.Destroy(aimZone);
 
-        public override void UpdateLogic(Vector3 point)
+        public override void UpdateLogic(RaycastHit hit)
         {
-            aimZone.transform.position = point + offset;
+            aimZone.transform.position = hit.point + offset;
         }
     }
 }

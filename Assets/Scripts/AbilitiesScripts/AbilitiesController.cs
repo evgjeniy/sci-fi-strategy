@@ -89,7 +89,7 @@ namespace SustainTheStrain.AbilitiesScripts
             if (currentAim == null) return;
             var hit = currentAim.GetAimInfo(ray);
             if (hit.HasValue)
-                currentAim.UpdateLogic(hit.Value.point);
+                currentAim.UpdateLogic(hit.Value);
         }
 
         private void OnDisable()
@@ -143,6 +143,12 @@ namespace SustainTheStrain.AbilitiesScripts
 
         private void Update()
         {
+            if (_selected != -1 && Abilities[_selected] is ChainDamageAbility or EnemyHackAbility)
+            {
+                Ray ray = mainCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit, maxDistFromCamera, enemyLayers))
+                    hit.collider.GetComponent<OutLineControll>()?.setMark();
+            }
             for (var i = 0; i < Abilities.Count; i++)
             {
                 if (Abilities[i].IsReloaded()) continue;

@@ -1,6 +1,9 @@
+using SustainTheStrain.AbilitiesScripts;
+using SustainTheStrain.Units.Components;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SustainTheStrain
 {
@@ -22,9 +25,9 @@ namespace SustainTheStrain
             
         }
 
-        public override void UpdateLogic(Vector3 point)
+        public override void UpdateLogic(RaycastHit hit)
         {
-            
+
         }
     }
 }
