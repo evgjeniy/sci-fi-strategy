@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SustainTheStrain.AbilitiesScripts;
 using SustainTheStrain.ResourceSystems;
 using UnityEngine;
 using Zenject;
@@ -8,8 +9,11 @@ namespace SustainTheStrain.EnergySystem
 {
     public class EnergySystemsUIController : MonoBehaviour
     {
+        [Inject] public AbilitiesController MAbilitiesController { get; private set;}
+
+        [SerializeField] private AbilitiesUIController _abilitiesUIController;
         //[Inject] public ResourceManager Manager { get; private set; }
-        public EnergyController Controller { get; private set; }
+        public EnergyController EnergyController { get; private set; }
         [SerializeField] private EnergySystemUI UIPrefab;
         [SerializeField] private Transform _spawnParent;
 
@@ -21,6 +25,10 @@ namespace SustainTheStrain.EnergySystem
             // {
             //     var generatorUI = new GeneratorUI(uiButton.transform, (ResourceGenerator)system);
             // }
+            if (MAbilitiesController.Abilities.Contains((BaseAbility)system))
+            {
+                _abilitiesUIController.SpawnControlButton(uiButton.transform);
+            }
             ui.MaxBarsCount = system.MaxEnergy;
             uiButton.OnLeftMouseClick += system.TrySpendEnergy;
             uiButton.OnRightMouseClick += system.TryRefillEnergy;
@@ -30,17 +38,17 @@ namespace SustainTheStrain.EnergySystem
         [Inject]
         public void InitializeComponent(EnergyController controller)
         {
-            Controller = controller;
-            foreach (var system in Controller.Systems)
+            EnergyController = controller;
+            foreach (var system in EnergyController.Systems)
             {
                 GenerateNewUI(system);
             }
-            Controller.OnSystemAdded += GenerateNewUI;
+            EnergyController.OnSystemAdded += GenerateNewUI;
         }
 
         private void OnDisable()
         {
-            Controller.OnSystemAdded -= GenerateNewUI;
+            EnergyController.OnSystemAdded -= GenerateNewUI;
         }
     }
 }
