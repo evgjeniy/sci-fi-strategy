@@ -815,6 +815,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnterAbilityState"",
+                    ""type"": ""Value"",
+                    ""id"": ""b8c2cc72-f005-4dd8-abcc-30de0eac5f54"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ExitState"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc345f8f-7731-440e-8332-df7e33aff024"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -822,7 +840,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""a8959263-0c0b-47f3-a9c0-65fecde8b3f0"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Tap"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""LeftButton"",
@@ -835,8 +853,74 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05f01bcb-3d2f-4a1d-9724-02ce82b5583e"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""EnterAbilityState"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d393ffb3-0151-4828-902b-97ebf2001a68"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""EnterAbilityState"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""25363fc4-6853-4082-842e-438b62b37a68"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""EnterAbilityState"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c8c88bc-64c6-41b5-8a5d-d1e560fbbfde"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""EnterAbilityState"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40df01cc-d82b-47eb-9583-07d007015ef4"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=5)"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""EnterAbilityState"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa3ebe77-2308-44ce-863a-e77aabddc8a9"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ExitState"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -927,6 +1011,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
         m_Mouse_LeftButton = m_Mouse.FindAction("LeftButton", throwIfNotFound: true);
         m_Mouse_MousePosition = m_Mouse.FindAction("MousePosition", throwIfNotFound: true);
+        m_Mouse_EnterAbilityState = m_Mouse.FindAction("EnterAbilityState", throwIfNotFound: true);
+        m_Mouse_ExitState = m_Mouse.FindAction("ExitState", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1170,12 +1256,16 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private List<IMouseActions> m_MouseActionsCallbackInterfaces = new List<IMouseActions>();
     private readonly InputAction m_Mouse_LeftButton;
     private readonly InputAction m_Mouse_MousePosition;
+    private readonly InputAction m_Mouse_EnterAbilityState;
+    private readonly InputAction m_Mouse_ExitState;
     public struct MouseActions
     {
         private @InputActions m_Wrapper;
         public MouseActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @LeftButton => m_Wrapper.m_Mouse_LeftButton;
         public InputAction @MousePosition => m_Wrapper.m_Mouse_MousePosition;
+        public InputAction @EnterAbilityState => m_Wrapper.m_Mouse_EnterAbilityState;
+        public InputAction @ExitState => m_Wrapper.m_Mouse_ExitState;
         public InputActionMap Get() { return m_Wrapper.m_Mouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1191,6 +1281,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @EnterAbilityState.started += instance.OnEnterAbilityState;
+            @EnterAbilityState.performed += instance.OnEnterAbilityState;
+            @EnterAbilityState.canceled += instance.OnEnterAbilityState;
+            @ExitState.started += instance.OnExitState;
+            @ExitState.performed += instance.OnExitState;
+            @ExitState.canceled += instance.OnExitState;
         }
 
         private void UnregisterCallbacks(IMouseActions instance)
@@ -1201,6 +1297,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @EnterAbilityState.started -= instance.OnEnterAbilityState;
+            @EnterAbilityState.performed -= instance.OnEnterAbilityState;
+            @EnterAbilityState.canceled -= instance.OnEnterAbilityState;
+            @ExitState.started -= instance.OnExitState;
+            @ExitState.performed -= instance.OnExitState;
+            @ExitState.canceled -= instance.OnExitState;
         }
 
         public void RemoveCallbacks(IMouseActions instance)
@@ -1286,5 +1388,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     {
         void OnLeftButton(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnEnterAbilityState(InputAction.CallbackContext context);
+        void OnExitState(InputAction.CallbackContext context);
     }
 }

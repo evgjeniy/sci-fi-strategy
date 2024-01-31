@@ -21,6 +21,13 @@
       "dependencies": {},
       "hash": "b8ec502d517a44b12000503bba8bd2ef11144328"
     },
+    "com.nighttraincode.fsm": {
+      "version": "https://github.com/MeeXaSiK/FiniteStateMachine.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d9f3fef564e03eb7cd72a34a28b3b018ced9e750"
+    },
     "com.unity.ai.navigation": {
       "version": "1.1.5",
       "depth": 0,
