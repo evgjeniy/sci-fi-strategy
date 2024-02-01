@@ -17,6 +17,7 @@ namespace SustainTheStrain.Units.Components
         private List<Recruit> _recruits = new();
 
         public event Action OnRecruitRemoved;
+        public event Action OnGroupEmpty;
         
         private void Start()
         {
@@ -58,6 +59,8 @@ namespace SustainTheStrain.Units.Components
             _recruits.Remove(recruit);
             
             OnRecruitRemoved?.Invoke();
+            
+            if(_recruits.Count == 0) OnGroupEmpty?.Invoke();
             
             UpdateRecruits();
         }
