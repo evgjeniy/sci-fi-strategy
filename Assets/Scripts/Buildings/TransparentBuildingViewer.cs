@@ -1,5 +1,4 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using SustainTheStrain.Buildings.Data;
 using UnityEngine;
@@ -9,8 +8,8 @@ namespace SustainTheStrain.Buildings
 {
     public interface IBuildingViewer
     {
-        public void ShowPreview(BuildingPlaceholder placeholder);
-        public void HidePreview(BuildingPlaceholder buildingPlaceholder);
+        public void Show(BuildingPlaceholder placeholder);
+        public void Hide(BuildingPlaceholder placeholder);
         public void ChangeBuildingMeshPreview(BuildingData buildingData);
     }
 
@@ -49,8 +48,10 @@ namespace SustainTheStrain.Buildings
             await _tween.Play().ToUniTask();
         }
 
-        public async void ShowPreview(BuildingPlaceholder placeholder)
+        public async void Show(BuildingPlaceholder placeholder)
         {
+            if (placeholder.HasBuilding) return;
+            
             _cashedTransform.localScale = Vector3.zero;
             _cashedTransform.position = placeholder.BuildingRoot.position;
 
@@ -66,7 +67,7 @@ namespace SustainTheStrain.Buildings
             await _tween.Play().ToUniTask();
         }
 
-        public async void HidePreview(BuildingPlaceholder buildingPlaceholder)
+        public async void Hide(BuildingPlaceholder placeholder)
         {
             _cashedTransform.localScale = Vector3.one;
 

@@ -1,5 +1,6 @@
 using SustainTheStrain.Buildings;
 using SustainTheStrain.Buildings.Components;
+using SustainTheStrain.Buildings.Data;
 using UnityEngine;
 using Zenject;
 
@@ -11,8 +12,8 @@ namespace SustainTheStrain.Installers
     
         public override void InstallBindings()
         {
-            Container.Bind<IBuildingSystem>().FromComponentInNewPrefab(_buildingSystemPrefab).AsSingle().NonLazy();
-            Container.BindFactory<Building, Building.Factory>().FromFactory<BuildingFactory>();
+            Container.BindFactory<BuildingData, Building, Building.Factory>().FromFactory<BuildingFactory>();
+            Container.Bind<BuildingSystem>().FromComponentInNewPrefab(_buildingSystemPrefab).AsSingle().NonLazy();
         }
     }
 }

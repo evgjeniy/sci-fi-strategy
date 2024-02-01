@@ -1,6 +1,6 @@
 ﻿using SustainTheStrain.Buildings.Data;
 
-namespace SustainTheStrain.Buildings.UI
+namespace SustainTheStrain.Buildings.UI.Buttons.Creation
 {
     public class LaserCreateButton : BuildingCreateButton<LaserData> {}
 }

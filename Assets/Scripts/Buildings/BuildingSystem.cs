@@ -1,59 +1,111 @@
 using SustainTheStrain.Buildings.Components;
 using SustainTheStrain.Buildings.Data;
+using SustainTheStrain.Buildings.UI.Menus;
 using SustainTheStrain.Input;
 using UnityEngine;
-using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    public interface IBuildingSystem
+    public class BuildingSystem : MonoBehaviour
     {
-        BuildingData SelectedData { get; }
-    }
+        private IBuildingViewer _transparentBuildingViewer;
+        private IBuildingCreateMenu _buildingCreateMenu;
+        private IBuildingManagementMenu _buildingManagementMenu;
 
-    public class BuildingSystem : MonoBehaviour, IBuildingSystem
-    {
-        [SerializeField] private TransparentBuildingViewer _transparentBuildingViewer;
-        [SerializeField] private BuildingSelector _buildingSelector;
-        
         private ISelectableInput<BuildingPlaceholder> _input;
-        private LazyInject<Building.Factory> _buildingFactory;
+        private Building.Factory _buildingFactory;
 
-        public BuildingData SelectedData => _buildingSelector.SelectedData;
+        private BuildingPlaceholder CurrentPlaceholder { get; set; }
 
-        [Inject]
-        private void Construct(ISelectableInput<BuildingPlaceholder> input, LazyInject<Building.Factory> buildingFactory)
+        [Zenject.Inject]
+        private void Construct(ISelectableInput<BuildingPlaceholder> input, Building.Factory buildingFactory)
         {
             _input = input;
             _buildingFactory = buildingFactory;
         }
-        
+
+        private void Awake()
+        {
+            _transparentBuildingViewer = GetComponentInChildren<IBuildingViewer>();
+            _buildingCreateMenu = GetComponentInChildren<IBuildingCreateMenu>();
+            _buildingManagementMenu = GetComponentInChildren<IBuildingManagementMenu>();
+        }
+
         private void OnEnable()
         {
-            _input.OnSelected += _transparentBuildingViewer.ShowPreview;
-            _input.OnSelected += _buildingSelector.ShowSelectionMenu;
-            _input.OnDeselected += _transparentBuildingViewer.HidePreview;
-            _input.OnDeselected += _buildingSelector.HideSelectionMenu;
+            _input.OnSelected += OnPlaceholderSelected;
+            _input.OnDeselected += OnPlaceholderDeselected;
             
-            _buildingSelector.OnCreate += CreateBuilding;
-            _buildingSelector.OnBuildingDataChanged += _transparentBuildingViewer.ChangeBuildingMeshPreview;
+            _buildingCreateMenu.OnCreateRequested += CreateBuilding;
+            _buildingCreateMenu.OnBuildingDataChanged += _transparentBuildingViewer.ChangeBuildingMeshPreview;
+            
+            _buildingManagementMenu.OnUpgradeRequested += UpgradeBuilding;
+            _buildingManagementMenu.OnDestroyRequested += DestroyBuilding;
         }
 
         private void OnDisable()
         {
-            _input.OnSelected -= _transparentBuildingViewer.ShowPreview;
-            _input.OnSelected -= _buildingSelector.ShowSelectionMenu;
-            _input.OnDeselected -= _transparentBuildingViewer.HidePreview;
-            _input.OnDeselected -= _buildingSelector.HideSelectionMenu;
+            _input.OnSelected -= OnPlaceholderSelected;
+            _input.OnDeselected -= OnPlaceholderDeselected;
             
-            _buildingSelector.OnCreate -= CreateBuilding;
-            _buildingSelector.OnBuildingDataChanged -= _transparentBuildingViewer.ChangeBuildingMeshPreview;
+            _buildingCreateMenu.OnCreateRequested -= CreateBuilding;
+            _buildingCreateMenu.OnBuildingDataChanged -= _transparentBuildingViewer.ChangeBuildingMeshPreview;
+
+            _buildingManagementMenu.OnUpgradeRequested -= UpgradeBuilding;
+            _buildingManagementMenu.OnDestroyRequested -= DestroyBuilding;
+        }
+
+        private void OnPlaceholderSelected(BuildingPlaceholder placeholder)
+        {
+            CurrentPlaceholder = placeholder;
+
+            if (CurrentPlaceholder.HasBuilding)
+            {
+                _buildingManagementMenu.Show(CurrentPlaceholder);
+            }
+            else
+            {
+                _buildingCreateMenu.Show(CurrentPlaceholder);
+                _transparentBuildingViewer.Show(CurrentPlaceholder);
+            }
+        }
+
+        private void OnPlaceholderDeselected(BuildingPlaceholder placeholder)
+        {
+            _buildingCreateMenu.Hide(placeholder);
+            _buildingManagementMenu.Hide(placeholder);
+            _transparentBuildingViewer.Hide(placeholder);
         }
 
         private void CreateBuilding(BuildingData buildingData)
         {
-            var building = _buildingFactory.Value.Create();
-            building.transform.position = _transparentBuildingViewer.transform.position;
+            if (CurrentPlaceholder.HasBuilding) return;
+            
+            _buildingCreateMenu.Hide(CurrentPlaceholder);
+            _transparentBuildingViewer.Hide(CurrentPlaceholder);
+            
+            var newBuilding = _buildingFactory.Create(buildingData);
+            CurrentPlaceholder.SetBuilding(newBuilding);
+
+            _buildingManagementMenu.Show(CurrentPlaceholder);
+        }
+
+        private void UpgradeBuilding()
+        {
+            if (!CurrentPlaceholder.HasBuilding) return;
+
+            CurrentPlaceholder.Building.CurrentUpgradeLevel++;
+        }
+        
+        private void DestroyBuilding()
+        {
+            if (!CurrentPlaceholder.HasBuilding) return;
+            
+            _buildingManagementMenu.Hide(CurrentPlaceholder);
+            
+            CurrentPlaceholder.DestroyBuilding();
+            
+            _buildingCreateMenu.Show(CurrentPlaceholder);
         }
     }
 }

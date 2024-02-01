@@ -1,5 +1,6 @@
-﻿using NaughtyAttributes;
+﻿using SustainTheStrain.Buildings.Data;
 using UnityEngine;
+using Zenject;
 
 namespace SustainTheStrain.Buildings.Components
 {
@@ -16,17 +17,20 @@ namespace SustainTheStrain.Buildings.Components
             get => _currentUpgradeLevel;
             set
             {
-                if (value > MaxUpgradeLevel || value < 0 || _currentUpgradeLevel == value)
-                    return;
-                
+                if (value > MaxUpgradeLevel || value < 0 || _currentUpgradeLevel == value) return;
+
                 _currentUpgradeLevel = value;
                 OnLevelUpgrade?.Invoke(_currentUpgradeLevel);
             }
         }
 
-        [Button] private void UpgradeLevel() => CurrentUpgradeLevel++;
-        [Button] private void DegradeLevel() => CurrentUpgradeLevel--;
-
-        public class Factory : Zenject.PlaceholderFactory<Building> {}
+        public class Factory : PlaceholderFactory<BuildingData, Building> {}
+    }
+    
+    public class BuildingFactory : IFactory<BuildingData, Building>
+    {
+        private readonly DiContainer _diContainer;
+        public BuildingFactory(DiContainer diContainer) => _diContainer = diContainer;
+        public Building Create(BuildingData param) => _diContainer.InstantiatePrefabForComponent<Building>(param.Prefab);
     }
 }
