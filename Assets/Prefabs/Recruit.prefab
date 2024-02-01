@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 5579810907258726874}
   - component: {fileID: 2132817689220846837}
   - component: {fileID: 9139420997716089492}
+  - component: {fileID: 1925202636387091328}
+  - component: {fileID: -2486561499931800298}
   m_Layer: 3
   m_Name: Recruit
   m_TagString: Untagged
@@ -176,6 +178,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Priority>k__BackingField: 0
+--- !u!114 &1925202636387091328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235370898999074474}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e76b30fd04129744ac24605310c0aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 6.39
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &-2486561499931800298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235370898999074474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4362ae563bae84292e7cf77dc02748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &795949853038617089
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3532383264719287368}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: HpBarHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +417,7 @@ GameObject:
   - component: {fileID: 8381305435261377809}
   - component: {fileID: 191765931818698215}
   - component: {fileID: 1349094879150754455}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

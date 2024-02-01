@@ -91,7 +91,7 @@ namespace SustainTheStrain.AbilitiesScripts
                     }
                 }
 
-                if (nearestIdx == -1) continue;
+                if (nearestIdx == -1) return;
 
                 curTarget = curColliders[nearestIdx];
                 curTarget.GetComponent<Units.Components.Damageble>().Damage(damage);
