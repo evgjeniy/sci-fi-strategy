@@ -9,8 +9,7 @@ namespace SustainTheStrain.ResourceSystems
         [SerializeField] private TextMeshProUGUI _textField;
         private ResourceManager _resourceManager;
 
-        [Inject]
-        public void GetManager(ResourceManager resourceManager)
+        [Inject] public void GetManager(ResourceManager resourceManager)
         {
             _resourceManager = resourceManager;
             _resourceManager.OnGoldChanged += UpdateCount;

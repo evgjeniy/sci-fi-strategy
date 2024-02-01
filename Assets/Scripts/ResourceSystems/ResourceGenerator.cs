@@ -100,8 +100,8 @@ namespace SustainTheStrain.ResourceSystems
         
         protected void DowngradeAll()
         {
-            IncreaseGenerateSpeed(MGeneratorSettings.UpgradeStats.CooldownChange);
-            IncreaseGenerateCount(MGeneratorSettings.UpgradeStats.IncomeChange);
+            IncreaseGenerateSpeed(-MGeneratorSettings.UpgradeStats.CooldownChange);
+            IncreaseGenerateCount(-MGeneratorSettings.UpgradeStats.IncomeChange);
         }
 
         public void IncreaseGenerateCount(int count)
