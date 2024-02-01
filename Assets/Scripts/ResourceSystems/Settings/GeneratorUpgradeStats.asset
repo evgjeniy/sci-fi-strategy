@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555f73a69b0b46c5937f714dbba5d951, type: 3}
   m_Name: GeneratorUpgradeStats
   m_EditorClassIdentifier: 
-  _cooldownChangePerEnergy: 0.5
-  _incomeChangePerEnergy: 3
+  <CooldownChange>k__BackingField: 0.5
+  <IncomeChange>k__BackingField: 3

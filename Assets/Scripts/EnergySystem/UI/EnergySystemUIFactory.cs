@@ -32,6 +32,7 @@ namespace SustainTheStrain.EnergySystem.UI
                 {   
                     var s = Instantiate(_abilityChargeSliderPrefab, button.transform);
                     s.value = 0;
+                    button.transform.localScale *= 1.4f;
                     MAbilitiesUIController.AddControlButton(button.GetComponent<InputSystemButtonBridge>(),s);
                     break;
                 }
