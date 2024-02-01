@@ -11,8 +11,8 @@ namespace SustainTheStrain.Units
     [RequireComponent(typeof(Damageble))]
     public class Unit : MonoBehaviour
     {
-        [field:SerializeField] public float Damage { get; private set; }
-        [field:SerializeField] public float DamagePeriod { get; private set; }
+        [field:SerializeField] public float Damage { get; set; }
+        [field:SerializeField] public float DamagePeriod { get; set; }
 
         public IPathFollower CurrentPathFollower { get; protected set; }   
         protected StateMachine.StateMachine _stateMachine = new StateMachine.StateMachine();

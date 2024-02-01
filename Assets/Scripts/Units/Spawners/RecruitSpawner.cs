@@ -1,6 +1,5 @@
-using System;
 using NaughtyAttributes;
-using SustainTheStrain.Units.Components;
+using SustainTheStrain.Buildings.Data;
 using UnityEngine;
 
 namespace SustainTheStrain.Units.Spawners
@@ -11,9 +10,16 @@ namespace SustainTheStrain.Units.Spawners
         public override Recruit Spawn()
         {
             var unit = _factory.Create();
-            unit.transform.position = transform.position;
-            Debug.Log(string.Format("[RecruitSpawner {0}] Spawned recruit", gameObject.name));
+            unit.transform.position = SpawnPosition;
+            Debug.Log($"[RecruitSpawner {name}] Spawned recruit");
             return unit;
+        }
+
+        public Recruit Spawn(BarrackData.Stats stats)
+        {
+            var newUnit = Spawn();
+            newUnit.UpdateStats(stats);
+            return newUnit;
         }
     }
 }

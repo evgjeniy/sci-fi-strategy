@@ -1,3 +1,5 @@
+using SustainTheStrain.Buildings.Data;
+using SustainTheStrain.Units.Components;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
 using UnityEngine;
 using Zenject;
@@ -44,17 +46,23 @@ namespace SustainTheStrain.Units
             _guardPosition = position;
             _stateMachine.ChangeState(_recruitIdleState);
         }
+
+        public void UpdateStats(BarrackData.Stats stats)
+        {
+            Damage = stats.UnitAttackDamage;
+            DamagePeriod = stats.UnitAttackCooldown;
+            
+            if (TryGetComponent<IHealth>(out var health))
+                health.MaxHP = health.CurrentHP = stats.UnitMaxHealth;
+        }
         
         public class Factory : IFactory<Recruit>
         {
             private readonly Recruit _refRecruit;
 
-            public Factory(Recruit refRecruit)
-            {
-                this._refRecruit = refRecruit;
-            }
+            public Factory(Recruit refRecruit) => _refRecruit = refRecruit;
 
-            public Recruit Create() => GameObject.Instantiate(_refRecruit);
+            public Recruit Create() => Instantiate(_refRecruit);
         }
     }
 }

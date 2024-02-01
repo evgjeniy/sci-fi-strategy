@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SustainTheStrain.Units.Components
 {
@@ -10,15 +9,16 @@ namespace SustainTheStrain.Units.Components
     {
         [SerializeField] private List<Recruit> _predefinedRecruits;
         [SerializeField] private int _squadMaxSize = 3;
-        
-        [field:SerializeField]
-        public GuardPost GuardPost { get; set; }
-        
-        private List<Recruit> _recruits = new();
+
+        [field: SerializeField] public GuardPost GuardPost { get; set; }
+
+        private readonly List<Recruit> _recruits = new();
 
         public event Action OnRecruitRemoved;
         public event Action OnGroupEmpty;
-        
+
+        public List<Recruit> Recruits => _recruits;
+
         private void Start()
         {
             foreach (var recruit in _predefinedRecruits)
@@ -40,11 +40,11 @@ namespace SustainTheStrain.Units.Components
         public bool AddRecruit(Recruit recruit)
         {
             if (recruit == null || _recruits.Count >= _squadMaxSize) return false;
-            if(_recruits.Contains(recruit)) return false;
-            
+            if (_recruits.Contains(recruit)) return false;
+
             _recruits.Add(recruit);
             recruit.Duelable.Damageble.OnDied += RecruitDied;
-            
+
             UpdateRecruits();
             return true;
         }
@@ -55,21 +55,21 @@ namespace SustainTheStrain.Units.Components
             if (!_recruits.Contains(recruit)) return;
 
             recruit.Duelable.Damageble.OnDied -= RecruitDied;
-            
+
             _recruits.Remove(recruit);
-            
+
             OnRecruitRemoved?.Invoke();
-            
-            if(_recruits.Count == 0) OnGroupEmpty?.Invoke();
-            
+
+            if (_recruits.Count == 0) OnGroupEmpty?.Invoke();
+
             UpdateRecruits();
         }
 
         private void RecruitDied(Damageble recruit)
         {
             recruit.TryGetComponent<Recruit>(out var rec);
-            
-            if(rec != null)
+
+            if (rec != null)
                 RemoveRecruit(rec);
         }
 
@@ -78,13 +78,13 @@ namespace SustainTheStrain.Units.Components
         {
             Vector3[] positions = GetGuardPositions();
 
-            for(int i = 0; i < _recruits.Count; i++)
+            for (int i = 0; i < _recruits.Count; i++)
             {
                 _recruits[i].UpdatePosition(positions[i]);
             }
         }
 
-        private Vector3[] GetGuardPositions() 
+        private Vector3[] GetGuardPositions()
         {
             List<Vector3> positions = new List<Vector3>(_recruits.Count);
 
@@ -96,6 +96,7 @@ namespace SustainTheStrain.Units.Components
                     GuardPost.Position.z + GuardPost.Radius * Mathf.Cos(i)
                 ));
             }
+
             return positions.ToArray();
         }
 

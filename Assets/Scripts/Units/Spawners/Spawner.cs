@@ -1,32 +1,19 @@
-using SustainTheStrain.Units;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Extensions;
 using Zenject;
 
 namespace SustainTheStrain.Units.Spawners
 {
     public abstract class Spawner<T> : MonoBehaviour where T : Unit
     {
-        [SerializeField] protected Transform _spawnPositon;
-        protected IFactory<T> _factory;
+        [SerializeField] private GizmosData _sphereGizmos;
+        [SerializeField] private Transform _spawnPositon;
+        [Inject] protected IFactory<T> _factory;
 
-        [Inject]
-        private void InitFactory(IFactory<T> factory)
-        {
-            _factory = factory;
-        }
-
+        public Vector3 SpawnPosition => _spawnPositon == null ? transform.position : _spawnPositon.position;
+        
+        private void OnDrawGizmos() => _sphereGizmos.DrawSphere(SpawnPosition, 1.0f);
+        
         public abstract T Spawn();
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.yellow;
-
-            if (_spawnPositon != null)
-                Gizmos.DrawSphere(_spawnPositon.position, 1f);
-            else
-                Gizmos.DrawSphere(transform.position, 1f);
-        }
     }
 }

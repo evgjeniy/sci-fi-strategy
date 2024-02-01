@@ -1,7 +1,4 @@
 using Dreamteck.Splines;
-using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SustainTheStrain.Units.Spawners
@@ -13,10 +10,10 @@ namespace SustainTheStrain.Units.Spawners
         public override Enemy Spawn()
         {
             var unit = _factory.Create();
-            unit.transform.position = transform.position;
+            unit.transform.position = SpawnPosition;
             unit.GetComponent<SplineFollower>().spline = _spline;
             unit.GetComponent<SplineFollower>().RebuildImmediate();
-            Debug.Log(string.Format("[EnemySpawner {0}] Spawned unit", gameObject.name));
+            Debug.Log($"[EnemySpawner {name}] Spawned unit");
             return unit;
         }
     }
