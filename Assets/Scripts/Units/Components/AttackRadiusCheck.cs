@@ -45,7 +45,7 @@ namespace SustainTheStrain.Units.Components
                 {
                     OnUnitLeftAttackZone?.Invoke(_attackZoneUnits[i]);
                     _attackZoneUnits[i].Damageble.OnDied -= UnitDied;
-                    Debug.Log(string.Format("[AttackRadius] On {0} left {1} attack radius", _attackZoneUnits[i].name, name));
+                    //Debug.Log(string.Format("[AttackRadius] On {0} left {1} attack radius", _attackZoneUnits[i].name, name));
                     _attackZoneUnits.RemoveAt(i);
                     break;
                 }

@@ -10,10 +10,7 @@ using Zenject;
 
 namespace SustainTheStrain.Input
 {
-    public class InputService : IInitializable, IDisposable,
-        ISelectableInput<BuildingPlaceholder>,
-        ISelectableInput<Hero>,
-        IAbilityInput
+    public class InputService : IInitializable, IDisposable, IMouseMove, IBuildingPlaceholderInput, IHeroInput, IAbilityInput
     {
         #region Nested Classes
 
@@ -35,7 +32,7 @@ namespace SustainTheStrain.Input
         #endregion
 
         private readonly InputActions _actions = new();
-        
+
         private readonly MouseMoveState _mouseMoveState;
         private readonly PlaceholderPointerState _placeholderPointerState;
         private readonly PlaceholderSelectionState _placeholderSelectionState;
@@ -66,7 +63,7 @@ namespace SustainTheStrain.Input
         {
             _actions.Mouse.EnterAbilityState.performed += EnterAbilityState;
             _actions.Mouse.ExitState.performed += EnterMouseMoveState;
-            
+
             StateMachine = new StateMachine<InputService>
             (
                 _mouseMoveState, _placeholderPointerState, _placeholderSelectionState,
@@ -88,7 +85,9 @@ namespace SustainTheStrain.Input
         {
             _actions.Mouse.EnterAbilityState.performed -= EnterAbilityState;
             _actions.Mouse.ExitState.performed -= EnterMouseMoveState;
-            
+
+            StateMachine.CurrentState.OnExit();
+
             Disable();
         }
 
@@ -135,13 +134,13 @@ namespace SustainTheStrain.Input
             add => _placeholderPointerState.OnPlaceholderEnter += value;
             remove => _placeholderPointerState.OnPlaceholderEnter -= value;
         }
-        
+
         event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnPointerExit
         {
             add => _placeholderPointerState.OnPlaceholderExit += value;
             remove => _placeholderPointerState.OnPlaceholderExit -= value;
         }
-        
+
         event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnSelected
         {
             add => _placeholderSelectionState.OnPlaceholderSelected += value;
@@ -176,6 +175,12 @@ namespace SustainTheStrain.Input
         {
             add => _heroSelectionState.OnHeroDeselected += value;
             remove => _heroSelectionState.OnHeroDeselected -= value;
+        }
+
+        event Action<Hero, RaycastHit> IHeroInput.OnMove
+        {
+            add => _heroSelectionState.OnHeroMove += value;
+            remove => _heroSelectionState.OnHeroMove -= value;
         }
 
         #endregion

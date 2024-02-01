@@ -28,7 +28,7 @@ namespace SustainTheStrain.Units
         public bool IsOpponentInAttackZone { get; protected set; }
 
 
-        private void Start()
+        private void Awake()
         {
             Init();
         }

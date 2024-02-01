@@ -1,15 +1,16 @@
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 
 namespace SustainTheStrain.AbilitiesScripts
 {
     public class LandingAbility : PointAbility
     {
-        protected int squadSize;
+        protected GameObject SquadPrefab;
 
         public LandingAbility(LandingAbilitySettings settings)
         {
             LoadingSpeed = settings.ReloadingSpeed;
-            squadSize = settings.Size;
+            SquadPrefab = settings.Squad;
             SetEnergySettings(settings.EnergySettings);
         }
 
@@ -20,8 +21,10 @@ namespace SustainTheStrain.AbilitiesScripts
 
         protected override void SuccessShootLogic(RaycastHit hit, int team)
         {
-            //ifactory<squad>   there will be spawn
-            //   +setting team to squad units
+            var squad = GameObject.Instantiate(SquadPrefab, hit.point, Quaternion.identity);
+            var group = squad.GetComponent<RecruitGroup>();
+            group.GuardPost.Position = hit.point;
+            group.OnGroupEmpty += () => { GameObject.Destroy(squad); };
         }
 
         protected override void ReadyToShoot()

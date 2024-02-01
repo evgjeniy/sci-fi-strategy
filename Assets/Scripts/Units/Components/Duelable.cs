@@ -17,6 +17,11 @@ namespace SustainTheStrain.Units.Components
 
         private void OnEnable()
         {
+            Init();
+        }
+
+        protected virtual void Init()
+        {
             Damageble = GetComponent<Damageble>();
         }
 

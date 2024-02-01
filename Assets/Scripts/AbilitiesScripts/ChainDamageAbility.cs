@@ -49,8 +49,8 @@ namespace SustainTheStrain.AbilitiesScripts
             LineObject.SetActive(false);
             var line = LineObject.GetComponentInChildren<LineRenderer>();
             line.positionCount = 0;
-            line.startWidth = 0.4f;
-            line.endWidth = 0.4f;
+            line.startWidth = line.endWidth = 0.4f;
+            line.startColor = line.endColor = Color.blue;
             LineObject.SetActive(true);
             return line;
         }
@@ -91,7 +91,7 @@ namespace SustainTheStrain.AbilitiesScripts
                     }
                 }
 
-                if (nearestIdx == -1) continue;
+                if (nearestIdx == -1) break;
 
                 curTarget = curColliders[nearestIdx];
                 curTarget.GetComponent<Units.Components.Damageble>().Damage(damage);

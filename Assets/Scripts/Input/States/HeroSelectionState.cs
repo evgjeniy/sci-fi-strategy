@@ -7,7 +7,8 @@ namespace SustainTheStrain.Input.States
     public class HeroSelectionState : HeroPointerState
     {
         public event Action<Hero> OnHeroSelected;
-        public event Action<Hero> OnHeroDeselected; 
+        public event Action<Hero> OnHeroDeselected;
+        public event Action<Hero, RaycastHit> OnHeroMove;
         
         public HeroSelectionState(InputService initializer, InputActions.MouseActions mouseActions) : base(initializer, mouseActions) {}
         
@@ -28,11 +29,9 @@ namespace SustainTheStrain.Input.States
         protected override void LeftMouseButtonClick(RaycastHit hit)
         {
             if (hit.collider.TryGetComponent<Hero>(out var hero))
-            {
                 Initializer.CashedData.Hero = hero;
-                Initializer.StateMachine.SetState<HeroSelectionState>();
-            }
-            else Initializer.StateMachine.SetState<MouseMoveState>();
+            else
+                OnHeroMove?.Invoke(Initializer.CashedData.Hero, hit);
         }
     }
 }

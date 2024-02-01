@@ -44,17 +44,17 @@ namespace SustainTheStrain.Units
             _guardPosition = position;
             _stateMachine.ChangeState(_recruitIdleState);
         }
-    }
-
-    public class Factory : IFactory<Recruit>
-    {
-        private readonly Recruit _refRecruit;
-
-        public Factory(Recruit refRecruit)
+        
+        public class Factory : IFactory<Recruit>
         {
-            this._refRecruit = refRecruit;
-        }
+            private readonly Recruit _refRecruit;
 
-        public Recruit Create() => GameObject.Instantiate(_refRecruit);
+            public Factory(Recruit refRecruit)
+            {
+                this._refRecruit = refRecruit;
+            }
+
+            public Recruit Create() => GameObject.Instantiate(_refRecruit);
+        }
     }
 }

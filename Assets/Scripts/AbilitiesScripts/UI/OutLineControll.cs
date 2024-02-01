@@ -20,7 +20,7 @@ namespace SustainTheStrain.AbilitiesScripts
 
         private void LateUpdate()
         {
-            if(needMark)
+            if (needMark)
             {
                 if (!outline.enabled)
                     outline.enabled = true;

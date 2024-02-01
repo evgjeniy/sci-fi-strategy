@@ -13,7 +13,7 @@ namespace SustainTheStrain.Units.PathFollowers
         {
             this.agent = agent;
         }
-
+        
         public bool IsDestinationReached()
         {
             if (!agent.pathPending)
@@ -35,6 +35,19 @@ namespace SustainTheStrain.Units.PathFollowers
 
         }
 
+        public bool MoveToWithCheck(Vector3 position)
+        {
+            NavMeshPath navMeshPath = new NavMeshPath();
+
+            if (agent.CalculatePath(position, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
+            {
+                agent.SetPath(navMeshPath);
+                return true;
+            }
+
+            return false;
+        }
+        
         public void Start()
         {
             agent.isStopped = false;

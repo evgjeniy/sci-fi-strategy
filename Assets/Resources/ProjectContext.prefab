@@ -95,6 +95,9 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 127
     <MaxDistance>k__BackingField: 3.4028235e+38
+    <AbilityMask>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 255
 --- !u!1 &6696816297399331599
 GameObject:
   m_ObjectHideFlags: 0
