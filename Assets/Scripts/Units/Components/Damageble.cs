@@ -38,7 +38,7 @@ namespace SustainTheStrain.Units.Components
             }
         }
 
-        protected virtual void Die()
+        public virtual void Die()
         {
             OnDied?.Invoke(this);
             Destroy(gameObject);
