@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿/*
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -32,3 +33,4 @@ namespace SustainTheStrain.ResourceSystems
         }
     }
 }
+*/

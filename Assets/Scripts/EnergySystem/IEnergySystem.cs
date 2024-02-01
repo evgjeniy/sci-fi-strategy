@@ -1,4 +1,5 @@
 ﻿using System;
+using SustainTheStrain.EnergySystem.Settings;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -7,8 +8,9 @@ namespace SustainTheStrain.EnergySystem
 {
     public interface IEnergySystem
     {
+        public EnergySystemSettings EnergySettings { get; }
         public Sprite ButtonImage { get;}
-        [Inject] public EnergyController EnergyController { get; set; }
+        public EnergyController EnergyController { get; set; }
         public int EnergySpendCount { get; }
         public int FreeEnergyCells { get; }
 
@@ -22,5 +24,7 @@ namespace SustainTheStrain.EnergySystem
         public void TrySpendEnergy() {}
 
         public void TryRefillEnergy() {}
+
+        public void SetEnergySettings(EnergySystemSettings settings) { }
     }
 }

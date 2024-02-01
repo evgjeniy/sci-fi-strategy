@@ -9,7 +9,7 @@ namespace SustainTheStrain.AbilitiesScripts
     public abstract class BaseAbility : IEnergySystem
     {
         private const float Eps = 0.00001f;
-        protected float Reload = 1f;
+        protected float Reload = 0f;
         protected float LoadingSpeed;
         
         public float GetReload() => Mathf.Abs(Reload - 1f) < Eps ? 1f : Mathf.Min(Reload, 1f);
@@ -44,10 +44,11 @@ namespace SustainTheStrain.AbilitiesScripts
         protected abstract void SuccessShootLogic(RaycastHit hit, int team);
 
         protected abstract void ReadyToShoot();
+        public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage { get; private set; }
         [Inject] public EnergyController EnergyController { get; set; }
         public int EnergySpendCount { get; private set; }
-        [field: Min(1)] public int MaxEnergy { get; private set; }
+        public int MaxEnergy { get; private set; }
         public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
         public int CurrentEnergy 
         { 
@@ -89,7 +90,7 @@ namespace SustainTheStrain.AbilitiesScripts
             }
         }
 
-        protected void SetEnergySettings(EnergySystemSettings settings)
+        public void SetEnergySettings(EnergySystemSettings settings)
         {
             ButtonImage = settings.ButtonImage;
             EnergySpendCount = settings.EnergySpend;

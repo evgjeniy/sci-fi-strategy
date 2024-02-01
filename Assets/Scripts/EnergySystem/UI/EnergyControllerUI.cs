@@ -7,10 +7,16 @@ namespace SustainTheStrain.EnergySystem
 {
     public class EnergyControllerUI : MonoBehaviour
     {
-        [SerializeField] private EnergyController _energyController;
-
-        [Inject]
-        public void Bind(EnergyController controller)
+        [SerializeField] private Image _imagePrefab;
+        [SerializeField] private Color _filledColor;
+        
+        private EnergyController _energyController;
+        private List<Image> _images = new();
+        
+        private int _coloredCount = 0;
+        private int _enabledCount = 0;
+        
+        [Inject] public void Bind(EnergyController controller)
         {
             _energyController = controller;
             var manager = _energyController.Manager;
@@ -18,16 +24,6 @@ namespace SustainTheStrain.EnergySystem
             manager.OnEnergyChanged += ChangeEnergy;
             manager.OnMaxEnergyChanged += SetMax;
         }
-        
-        [SerializeField] private Image _imagePrefab;
-
-        [SerializeField] private List<Image> _images = new();
-
-        [SerializeField] private Color _filledColor;
-        
-        private int _coloredCount = 0;
-        private int _enabledCount = 0;
-        
         public int MaxBarsCount
         {
             get => _enabledCount;
@@ -45,6 +41,7 @@ namespace SustainTheStrain.EnergySystem
             }
         }
 
+        
         private void SetMax(int value)
         {
             MaxBarsCount = value;

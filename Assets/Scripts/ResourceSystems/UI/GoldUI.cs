@@ -7,7 +7,7 @@ namespace SustainTheStrain.ResourceSystems
     public class GoldUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textField;
-        [SerializeField] private ResourceManager _resourceManager;
+        private ResourceManager _resourceManager;
 
         [Inject]
         public void GetManager(ResourceManager resourceManager)

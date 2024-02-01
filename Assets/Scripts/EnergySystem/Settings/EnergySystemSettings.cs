@@ -6,7 +6,7 @@ namespace SustainTheStrain.EnergySystem.Settings
     public class EnergySystemSettings : ScriptableObject
     {
         public Sprite ButtonImage;
-        public int EnergySpend;
-        public int MaxEnergy;
+        [field: Min(1)] public int EnergySpend;
+        [field: Min(1)] public int MaxEnergy;
     }
 }

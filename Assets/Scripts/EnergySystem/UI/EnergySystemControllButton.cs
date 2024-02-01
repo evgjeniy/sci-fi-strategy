@@ -1,10 +1,11 @@
 ﻿using System;
+using SustainTheStrain.Input.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace SustainTheStrain.EnergySystem
 {
-    public class EnergySystemControllButton : Button
+    public class EnergySystemControllButton : InputSystemButton
     {
         public event Action OnLeftMouseClick;
         public event Action OnRightMouseClick;

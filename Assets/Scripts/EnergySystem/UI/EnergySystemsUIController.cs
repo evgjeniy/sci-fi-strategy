@@ -10,30 +10,20 @@ namespace SustainTheStrain.EnergySystem
 {
     public class EnergySystemsUIController : MonoBehaviour
     {
-        [Inject] public AbilitiesController MAbilitiesController { get; private set;}
-
         [SerializeField] private AbilitiesUIController _abilitiesUIController;
-        //[Inject] public ResourceManager Manager { get; private set; }
-        public EnergyController EnergyController { get; private set; }
         [SerializeField] private Transform _spawnParent;
+        
+        private EnergyController EnergyController { get; set; }
         private EnergySystemUIFactory _uiFactory;
         private Dictionary<IEnergySystem, EnergySystemUI> _systemsUis = new();
-
-        private void GenerateNewUI(IEnergySystem system)
-        {
-            var ui = _uiFactory.CreateUI(system, _spawnParent);
-            _systemsUis.TryAdd(ui.Key, ui.Value);
-        }
-
-        [Inject]
-        public void AddSystemsUIFactory(EnergySystemUIFactory energySystemUIFactory)
+        
+        [Inject] public void AddSystemsUIFactory(EnergySystemUIFactory energySystemUIFactory)
         {
             _uiFactory = energySystemUIFactory;
             _uiFactory.MAbilitiesUIController = _abilitiesUIController;
         }
         
-        [Inject]
-        public void InitializeComponent(EnergyController controller)
+        [Inject] public void InitializeComponent(EnergyController controller)
         {
             EnergyController = controller;
             foreach (var system in EnergyController.Systems)
@@ -43,6 +33,12 @@ namespace SustainTheStrain.EnergySystem
             EnergyController.OnSystemAdded += GenerateNewUI;
         }
 
+        private void GenerateNewUI(IEnergySystem system)
+        {
+            var ui = _uiFactory.CreateUI(system, _spawnParent);
+            _systemsUis.TryAdd(ui.Key, ui.Value);
+        }
+        
         private void OnDisable()
         {
             EnergyController.OnSystemAdded -= GenerateNewUI;

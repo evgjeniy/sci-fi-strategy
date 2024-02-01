@@ -10,11 +10,10 @@ namespace SustainTheStrain.EnergySystem.UI
 {
     public class EnergySystemUIFactory : MonoBehaviour
     {
+        [NonSerialized] public AbilitiesUIController MAbilitiesUIController;
         [SerializeField] private EnergySystemUI _energySystemUIPrefab;
         [SerializeField] private EnergySystemControllButton _energySystemControllButton;
-        [SerializeField] private InputSystemButtonBridge _abilityButtonPrefab;
         [SerializeField] private Slider _abilityChargeSliderPrefab;
-        [NonSerialized] public AbilitiesUIController MAbilitiesUIController;
         
         
         public KeyValuePair<IEnergySystem, EnergySystemUI> CreateUI(IEnergySystem system, Transform spawnParent)
@@ -31,10 +30,9 @@ namespace SustainTheStrain.EnergySystem.UI
             {
                 case BaseAbility:
                 {   
-                    var b = Instantiate(_abilityButtonPrefab, button.transform);
                     var s = Instantiate(_abilityChargeSliderPrefab, button.transform);
                     s.value = 0;
-                    MAbilitiesUIController.AddControlButton(b,s);
+                    MAbilitiesUIController.AddControlButton(button.GetComponent<InputSystemButtonBridge>(),s);
                     break;
                 }
                 case ResourceGenerator generator:

@@ -8,10 +8,14 @@ namespace SustainTheStrain.ResourceSystems
 {
     public class ResourceManager : MonoBehaviour
     {
-        private int _currentExplorePoints;
-        [SerializeField] private int _maxExplorePoints;
-        public event Action<int> OnExplorePointsChanged;
+        public List<IEnergySystem> Generators => _generators;
+        private List<IEnergySystem> _generators = new List<IEnergySystem>();
         
+        /*
+        public event Action<int> OnExplorePointsChanged;
+        [SerializeField] private int _maxExplorePoints;
+        private ExplorePointGenerator _explorePointGenerator;
+        private int _currentExplorePoints;
         public int CurrentExplorePoints
         {
             get => _currentExplorePoints;
@@ -21,12 +25,12 @@ namespace SustainTheStrain.ResourceSystems
                 _currentExplorePoints = value;
                 OnExplorePointsChanged?.Invoke(_currentExplorePoints);
             }
-        }
+        }*/
         
-        private int _currentGold;
-        [SerializeField] private int _maxGold;
         public event Action<int> OnGoldChanged;
-        
+        [SerializeField] private int _maxGold;
+        private GoldGenerator _goldGenerator;
+        private int _currentGold;
         public int CurrentGold
         {
             get => _currentGold;
@@ -37,19 +41,12 @@ namespace SustainTheStrain.ResourceSystems
                 OnGoldChanged?.Invoke(_currentGold);
             }
         }
-        
-        [SerializeField]private ExplorePointGenerator _explorePointGenerator;
-        [SerializeField]private GoldGenerator _goldGenerator;
-
-        private List<IEnergySystem> _generators = new List<IEnergySystem>();
-
-        public List<IEnergySystem> Generators => _generators;
 
         [Inject]
-        public void AddGenerators(ExplorePointGenerator explorePointGenerator, GoldGenerator goldGenerator)
+        public void AddGenerators(GoldGenerator goldGenerator/*, ExplorePointGenerator explorePointGenerator*/)
         {
-            _explorePointGenerator = explorePointGenerator;
-            _generators.Add(_explorePointGenerator);
+            //_explorePointGenerator = explorePointGenerator;
+            //_generators.Add(_explorePointGenerator);
             _goldGenerator = goldGenerator;
             _generators.Add(_goldGenerator);
             Subscribe();
@@ -58,7 +55,7 @@ namespace SustainTheStrain.ResourceSystems
         private void Subscribe()
         {
             _goldGenerator.OnResourceGenerated += AddGold;
-            _explorePointGenerator.OnResourceGenerated += AddExplorePoint;
+            //_explorePointGenerator.OnResourceGenerated += AddExplorePoint;
         }
         
         void AddGold(int count)
@@ -66,15 +63,15 @@ namespace SustainTheStrain.ResourceSystems
             CurrentGold += count;
         }
 
-        void AddExplorePoint(int count)
-        {
-            CurrentExplorePoints += count;
-        }
+        // void AddExplorePoint(int count)
+        // {
+        //     CurrentExplorePoints += count;
+        // }
         
         private void UnSubscribe()
         {
             _goldGenerator.OnResourceGenerated -= AddGold;
-            _explorePointGenerator.OnResourceGenerated -= AddExplorePoint;
+            //_explorePointGenerator.OnResourceGenerated -= AddExplorePoint;
         }
         
         private void OnDisable()
