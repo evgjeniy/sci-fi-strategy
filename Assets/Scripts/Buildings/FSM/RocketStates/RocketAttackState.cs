@@ -64,6 +64,7 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
                     if (attackedAmount >= Initializer.CurrentStats.MaxEnemiesTargets) break;
 
                     if (!collider.TryGetComponent<Damageble>(out var damageable)) continue;
+                    if (damageable.Team == 1) continue;
                     if (!IsInSector(damageable.transform)) continue;
 
                     var transform = Initializer.RocketTransform;

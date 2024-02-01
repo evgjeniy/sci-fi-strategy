@@ -64,6 +64,7 @@ namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
                 foreach (var entity in Initializer.Area.Entities)
                 {
                     if (!entity.TryGetComponent<Damageble>(out var damageable)) continue;
+                    if (damageable.Team == 1) continue;
 
                     Object.Instantiate
                     (
@@ -85,6 +86,8 @@ namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
                 for (var i = 0; i < _explodedSize; i++)
                 {
                     if (!_exploded[i].TryGetComponent<Damageble>(out var damageable)) continue;
+                    if (damageable.Team == 1) continue;
+                    
                     damageable.Damage(Initializer.CurrentStats.Damage);
                 }
             }

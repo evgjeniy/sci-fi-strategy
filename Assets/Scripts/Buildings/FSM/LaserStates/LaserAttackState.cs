@@ -58,6 +58,7 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
 
                 var collider = Initializer.Area.Entities.First();
                 if (!collider.TryGetComponent<Damageble>(out var damageable)) return;
+                if (damageable.Team == 1) return;
 
                 damageable.Damage(Initializer.CurrentStats.Damage);
 
