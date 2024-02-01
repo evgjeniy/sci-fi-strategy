@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929dc382e8454123b1f9bb25540a7d8e, type: 3}
+  m_Name: GeneratorSettings
+  m_EditorClassIdentifier: 
+  <GeneratingIndicator>k__BackingField: {fileID: 1221989384821869751, guid: 4731a8f8932c06a4f9e497c15594ab9c,
+    type: 3}
+  <UpgradeStats>k__BackingField: {fileID: 11400000, guid: b2860a554a1751f41856736b60b24934,
+    type: 2}
+  <BaseCooldown>k__BackingField: 2.5
+  <MinimalCooldown>k__BackingField: 0.5
+  <MaximalCooldown>k__BackingField: 3
+  <GenerateCount>k__BackingField: 5

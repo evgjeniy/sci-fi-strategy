@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 657abe40c3bc42b8a937e37d9926e80c, type: 3}
+  m_Name: LandingAbilitySettings
+  m_EditorClassIdentifier: 
+  EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
+  ReloadingSpeed: 1
+  Squad: {fileID: 319695344856091520, guid: cbe4fdeaada60114cabffb9a8919861d, type: 3}

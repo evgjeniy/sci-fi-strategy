@@ -8,20 +8,18 @@ namespace SustainTheStrain.EnergySystem
         public event Action<int> OnEnergyChanged;
         public event Action<int> OnMaxEnergyChanged;
         
+        [SerializeField] private int _currentCount;
         [Min(1)] [SerializeField] private int _maxCount;
+        
         public int MaxCount { 
             get => _maxCount; 
-            private set 
+            private set
             {
-                if (value > 0)
-                {
-                    _maxCount = value;
-                    OnMaxEnergyChanged?.Invoke(_maxCount);
-                }
+                if (value <= 0) return;
+                _maxCount = value;
+                OnMaxEnergyChanged?.Invoke(_maxCount);
             } 
         }
-
-        [SerializeField] private int _currentCount;
         public int CurrentCount
         {
             get => _currentCount;
@@ -32,6 +30,7 @@ namespace SustainTheStrain.EnergySystem
                 OnEnergyChanged?.Invoke(_currentCount);
             }
         }
+        
         
         private void OnEnable()
         {
@@ -48,7 +47,6 @@ namespace SustainTheStrain.EnergySystem
             if (CurrentCount < value) return false;
             CurrentCount -= value;
             return true;
-
         }
         
         public bool TryRefill(int value)
@@ -56,7 +54,6 @@ namespace SustainTheStrain.EnergySystem
             if (CurrentCount + value > _maxCount) return false;
             CurrentCount += value;
             return true;
-
         }
         
     }

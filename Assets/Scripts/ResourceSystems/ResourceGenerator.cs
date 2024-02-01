@@ -1,11 +1,27 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace SustainTheStrain.ResourceSystems
 {
     public abstract class ResourceGenerator : MonoBehaviour
     {
+        [field: SerializeField] public GeneratorSettings MGeneratorSettings { get; private set; }
+        
+        private float _generationTime;
+        protected float _cooldown;
+        protected float _minimalCooldown;
+        protected float _maximalCooldown;
+        protected int _generateCount;
+        
+        protected bool _canGenerate;
+        protected bool _generationReseted = true;
+        
+        protected Action<int> _resourceGenerated;
+        protected Action<float> _generatedPercentChanged;
+        
         public float Cooldown
         {
             get => _cooldown;
@@ -14,8 +30,18 @@ namespace SustainTheStrain.ResourceSystems
                 if (value < 0) return;
                 _cooldown = Math.Clamp(value, _minimalCooldown, _maximalCooldown);
                 EndGeneration();
-                StartGeneration();
             }
+        }
+        public event Action<float> OnGeneratedPercentChanged
+        { 
+            add
+            {
+                if (value != null)
+                {
+                    _generatedPercentChanged += value;
+                }
+            } 
+            remove => _generatedPercentChanged -= value;
         }
         public event Action<int> OnResourceGenerated
         {
@@ -28,36 +54,54 @@ namespace SustainTheStrain.ResourceSystems
             }
             remove => _resourceGenerated -= value;
         }
-        protected Action<int> _resourceGenerated;
-        [SerializeField] protected float _cooldown;
-        [SerializeField] protected float _minimalCooldown;
-        [SerializeField] protected float _maximalCooldown;
-        [SerializeField] protected int _generateCount;
-        
-        protected Coroutine _generatingRoutine;
-        protected bool _canGenerate;
         
         public void StartGeneration()
         {
-            _generatingRoutine = StartCoroutine(GenerateResource());
+            _canGenerate = true;
+        }
+        
+        private void Update()
+        {
+            if (_canGenerate)
+            {
+                _generationReseted = false;
+                _generationTime += Time.deltaTime;
+                CheckGeneration();
+                _generatedPercentChanged?.Invoke(_generationTime/Cooldown);
+            }
+            else
+            {
+                if (!_generationReseted)
+                {
+                    EndGeneration();
+                }
+            }
         }
 
-        public IEnumerator GenerateResource()
+        private void CheckGeneration()
         {
-            while (_canGenerate)
-            {
-                yield return new WaitForSeconds(Cooldown);
-                _resourceGenerated?.Invoke(_generateCount);
-            }
-            EndGeneration();
+            if (_generationTime < Cooldown) return;
+            _resourceGenerated?.Invoke(_generateCount);
+            _generationTime = 0;
         }
 
         public void EndGeneration()
         {
-            if (_generatingRoutine != null)
-            {
-                StopCoroutine(_generatingRoutine);
-            }
+            _generationTime = 0;
+            _generationReseted = true;
+            _generatedPercentChanged?.Invoke(0);
+        }
+
+        protected void UpgradeAll()
+        {
+            IncreaseGenerateSpeed(MGeneratorSettings.UpgradeStats.CooldownChange);
+            IncreaseGenerateCount(MGeneratorSettings.UpgradeStats.IncomeChange);
+        }
+        
+        protected void DowngradeAll()
+        {
+            IncreaseGenerateSpeed(MGeneratorSettings.UpgradeStats.CooldownChange);
+            IncreaseGenerateCount(MGeneratorSettings.UpgradeStats.IncomeChange);
         }
 
         public void IncreaseGenerateCount(int count)
@@ -68,6 +112,14 @@ namespace SustainTheStrain.ResourceSystems
         public void IncreaseGenerateSpeed(float count)
         {
             Cooldown -= count;
+        }
+
+        public virtual void LoadSettings()
+        {
+            _cooldown = MGeneratorSettings.BaseCooldown;
+            _minimalCooldown = MGeneratorSettings.MinimalCooldown;
+            _maximalCooldown = MGeneratorSettings.MaximalCooldown;
+            _generateCount = MGeneratorSettings.GenerateCount;
         }
         
     }
