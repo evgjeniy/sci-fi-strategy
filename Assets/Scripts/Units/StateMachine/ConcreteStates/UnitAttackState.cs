@@ -25,6 +25,8 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         {
             Debug.Log(string.Format("[StateMachine {0}] UnitAttackState entered", context.gameObject.name));
 
+            _attackTime = 0;
+            
             context.SwitchPathFollower(context.NavPathFollower);
             context.CurrentPathFollower.Stop();
         }

@@ -7,7 +7,7 @@ namespace SustainTheStrain.Units.Components
 {
     public class UnitDuelable : Duelable
     {
-        private Duelable _opponent;
+        protected Duelable _opponent;
 
         public override bool HasOpponent { get => Opponent; }
         public override Duelable Opponent { get => _opponent; }

@@ -17,7 +17,7 @@ namespace SustainTheStrain.Units.Spawners
             _factory = factory;
         }
 
-        public abstract void Spawn();
+        public abstract T Spawn();
 
         private void OnDrawGizmos()
         {

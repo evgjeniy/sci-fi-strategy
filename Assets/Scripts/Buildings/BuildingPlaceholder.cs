@@ -9,5 +9,7 @@ namespace SustainTheStrain.Buildings
         [field: SerializeField] public Transform SelectorUIRoot { get; private set; }
         
         private Building _building;
+
+        // [Zenject.Inject] private BuildingSystem _system;
     }
 }

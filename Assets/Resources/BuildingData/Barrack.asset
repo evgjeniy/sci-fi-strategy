@@ -12,6 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9947068ecb1a4fefac6cae11b2bc7685, type: 3}
   m_Name: Barrack
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 0}
-  <Mesh>k__BackingField: {fileID: 0}
-  <BarrackStats>k__BackingField: []
+  <Prefab>k__BackingField: {fileID: 7594623059986589967, guid: d8747da382f853c4ea5bd47dc2e9a356,
+    type: 3}
+  <Mesh>k__BackingField: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  <AttackMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 8
+  <BarrackStats>k__BackingField:
+  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 8aa5c836f2ca6c944b0d7086bdb00bda,
+      type: 3}
+    <Stats>k__BackingField:
+      <UnitMaxHealth>k__BackingField: 100
+      <UnitAttackDamage>k__BackingField: 5
+      <UnitAttackCooldown>k__BackingField: 5
+      <RespawnCooldown>k__BackingField: 10
+    <NextLevelPrice>k__BackingField: 1
+    <DestroyCompensation>k__BackingField: 1
+  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 1fc35353e3e55914d848f417107c58cf,
+      type: 3}
+    <Stats>k__BackingField:
+      <UnitMaxHealth>k__BackingField: 125
+      <UnitAttackDamage>k__BackingField: 15
+      <UnitAttackCooldown>k__BackingField: 3
+      <RespawnCooldown>k__BackingField: 7
+    <NextLevelPrice>k__BackingField: 1
+    <DestroyCompensation>k__BackingField: 1
+  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 332fc68cbfb57ea4d8db2f3783a323cf,
+      type: 3}
+    <Stats>k__BackingField:
+      <UnitMaxHealth>k__BackingField: 150
+      <UnitAttackDamage>k__BackingField: 25
+      <UnitAttackCooldown>k__BackingField: 2
+      <RespawnCooldown>k__BackingField: 5
+    <NextLevelPrice>k__BackingField: 1
+    <DestroyCompensation>k__BackingField: 1

@@ -14,7 +14,7 @@ namespace SustainTheStrain.Buildings.Data
         }
         
         [System.Serializable]
-        public class Stats
+        public class Stats : IStats
         {
             [field: SerializeField, Min(0.01f)] public float Damage { get; private set; } = 1.0f;
             [field: SerializeField, Min(0.01f)] public float AttackCooldown { get; private set; } = 1.0f;

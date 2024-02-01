@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace SustainTheStrain.Units.Components
@@ -53,6 +54,7 @@ namespace SustainTheStrain.Units.Components
 
         private void UnitDied(Damageble damageble)
         {
+            if (damageble == null) return;
             RemoveUnit(damageble.gameObject);
         }
     }

@@ -16,12 +16,26 @@ namespace SustainTheStrain.Units.PathFollowers
             follower.onNode += OnNode;
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         private void OnNode(List<SplineTracer.NodeConnection> passed)
         {
             UnityEngine.Debug.Log("Reached node " + passed[0].node.name + " connected at point " + passed[0].point);
             Node.Connection[] connections = passed[0].node.GetConnections();
             if (connections.Length == 1) return;
-            int newConnection = UnityEngine.Random.Range(0, connections.Length);
+
+            if(!passed[0].node.TryGetComponent<RoadSign>(out var roadSign)) return;
+
+            int newConnection = 0;
+            
+            for (int i = 0; i < roadSign.Guides.Length; i++)
+            {
+                if (roadSign.Guides[i])
+                {
+                    newConnection = i; 
+                    break;
+                }
+            }
+
             if (connections[newConnection].spline == follower.spline &&
                 connections[newConnection].pointIndex == passed[0].point)
             {

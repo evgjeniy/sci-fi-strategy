@@ -1,15 +1,22 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using SustainTheStrain.Buildings.Data;
-using SustainTheStrain.Input;
 using UnityEngine;
 using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
+    public interface IBuildingViewer
+    {
+        public void ShowPreview(BuildingPlaceholder placeholder);
+        public void HidePreview(BuildingPlaceholder buildingPlaceholder);
+        public void ChangeBuildingMeshPreview(BuildingData buildingData);
+    }
+
     [RequireComponent(typeof(MeshFilter))]
     [RequireComponent(typeof(MeshRenderer))]
-    public class TransparentBuildingViewer : MonoBehaviour
+    public class TransparentBuildingViewer : MonoBehaviour, IBuildingViewer
     {
         [SerializeField, Range(0.0f, 5.0f)] private float _scaleAnimationDuration = 0.5f;
 
@@ -18,42 +25,16 @@ namespace SustainTheStrain.Buildings
         private MeshFilter _meshFilter;
         private MeshRenderer _meshRenderer;
 
-        private ISelectableInput<BuildingPlaceholder> _input;
-
-        // private IBuildingSelector _buildingSelector;
-        // private IBuildingSystem _buildingSystem;
-        private RaycastHit _hit;
-
-        [Zenject.Inject]
-        private void Construct(
-            ISelectableInput<BuildingPlaceholder> buildingInput /*,
-            IBuildingSelector buildingSelector,
-            IBuildingSystem buildingSystem*/)
+        private void Awake()
         {
-            _input = buildingInput;
-            // _buildingSelector = buildingSelector;
-            // _buildingSystem = buildingSystem;
-
             _cashedTransform = transform;
             _meshFilter = GetComponent<MeshFilter>();
             _meshRenderer = GetComponent<MeshRenderer>();
         }
 
-        private void OnEnable()
-        {
-            _input.OnSelected += ShowPreview;
-            _input.OnDeselected += HidePreview;
-        }
-
-        private void OnDisable()
-        {
-            _input.OnSelected -= ShowPreview;
-            _input.OnDeselected -= HidePreview;
-        }
-
         private void OnDestroy() => _tween?.Kill();
 
-        private async void ChangeBuildingMeshPreview(BuildingData buildingData)
+        public async void ChangeBuildingMeshPreview(BuildingData buildingData)
         {
             var halfDuration = _scaleAnimationDuration / 2.0f;
 
@@ -68,7 +49,7 @@ namespace SustainTheStrain.Buildings
             await _tween.Play().ToUniTask();
         }
 
-        private async void ShowPreview(BuildingPlaceholder placeholder)
+        public async void ShowPreview(BuildingPlaceholder placeholder)
         {
             _cashedTransform.localScale = Vector3.zero;
             _cashedTransform.position = placeholder.BuildingRoot.position;
@@ -85,7 +66,7 @@ namespace SustainTheStrain.Buildings
             await _tween.Play().ToUniTask();
         }
 
-        private async void HidePreview(BuildingPlaceholder buildingPlaceholder)
+        public async void HidePreview(BuildingPlaceholder buildingPlaceholder)
         {
             _cashedTransform.localScale = Vector3.one;
 
