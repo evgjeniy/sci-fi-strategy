@@ -3,32 +3,42 @@ using UnityEngine;
 
 namespace SustainTheStrain.Units.Components
 {
-    public class Damageble : MonoBehaviour
+    public class Damageble : MonoBehaviour, IHealth, ITeam
     {
-        public float MaxHP { get; protected set; }
-        public float CurrentHP { get; protected set; }
-        public int Team { get; protected set; }
+        [field:SerializeField]
+        public float MaxHP { get; set; }
+
+        public float CurrentHP
+        {
+            get => _currentHp;
+            set { _currentHp = value; OnCurrentHPChanged?.Invoke(value); }
+        }
+
+        [field: SerializeField]
+        public int Team { get; set; }
 
         public event Action<Damageble> OnDied;
         public event Action<float> OnCurrentHPChanged;
+
+        private float _currentHp;
 
         private void Awake()
         {
             CurrentHP = MaxHP;
         }
 
-        public void Damage(float damage)
+        public virtual void Damage(float damage)
         {
             CurrentHP -= damage;
             OnCurrentHPChanged?.Invoke(CurrentHP);
 
-            if (CurrentHP < 0)
+            if (CurrentHP <= 0)
             {
                 Die();
             }
         }
 
-        public void Die()
+        public virtual void Die()
         {
             OnDied?.Invoke(this);
             Destroy(gameObject);

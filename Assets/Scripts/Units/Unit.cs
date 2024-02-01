@@ -1,34 +1,41 @@
 using SustainTheStrain.Units.Components;
 using SustainTheStrain.Units.PathFollowers;
+using SustainTheStrain.Units.StateMachine.ConcreteStates;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
+using static UnityEngine.UI.CanvasScaler;
 
 namespace SustainTheStrain.Units
 {
     [RequireComponent(typeof(Damageble))]
     public class Unit : MonoBehaviour
     {
+        [field:SerializeField] public float Damage { get; private set; }
+        [field:SerializeField] public float DamagePeriod { get; private set; }
+
+        public IPathFollower CurrentPathFollower { get; protected set; }   
         protected StateMachine.StateMachine _stateMachine = new StateMachine.StateMachine();
 
-        public Damageble Damageble { get; protected set; }
+        public Duelable Duelable { get; protected set; }
         public AggroRadiusCheck AggroRadiusCheck { get; protected set;}
         public AttackRadiusCheck AttackRadiusCheck { get; protected set;}
         public StateMachine.StateMachine StateMachine => _stateMachine;
         public NavPathFollower NavPathFollower { get; protected set; }
-        public Unit Opponent { get; protected set; }
 
+        public bool IsAnnoyed { get; protected set; } 
         public bool IsOpponentInAggroZone { get; protected set; }
         public bool IsOpponentInAttackZone { get; protected set; }
 
 
-        private void Start()
+        private void Awake()
         {
             Init();
         }
 
         protected virtual void Init()
         {
-            Damageble = GetComponent<Damageble>();
+            Duelable = GetComponent<Duelable>();
 
             AggroRadiusCheck = GetComponentInChildren<AggroRadiusCheck>();
             AggroRadiusCheck.OnUnitEnteredAggroZone += UnitEneterdAggroZone;
@@ -39,66 +46,44 @@ namespace SustainTheStrain.Units
             AttackRadiusCheck.OnUnitLeftAttackZone += UnitLeftAttackZone;
 
             NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
+
+            SwitchPathFollower(NavPathFollower);
         }
 
         #region UNIT_TRIGGER_LOGIC
 
-        private void UnitEneterdAggroZone(Unit unit)
+        private void UnitEneterdAggroZone(Duelable unit)
         {
-            if (Opponent != null) return;
+            IsAnnoyed = true;
         }
 
-        private void UnitLeftAggroZone(Unit unit)
+        private void UnitLeftAggroZone(Duelable unit)
         {
-            IsOpponentInAggroZone = Opponent == unit;
+            IsAnnoyed = AggroRadiusCheck.AggroZoneUnits.Count != 0;
+
+            IsOpponentInAggroZone = Duelable.Opponent == unit;
         }
 
-        private void UnitEneterdAttackZone(Unit unit)
+        private void UnitEneterdAttackZone(Duelable unit)
         {
-            IsOpponentInAttackZone = unit == Opponent;
+            IsOpponentInAttackZone = unit == Duelable.Opponent;
         }
 
-        private void UnitLeftAttackZone(Unit unit)
+        private void UnitLeftAttackZone(Duelable unit)
         {
-            IsOpponentInAttackZone = unit != Opponent;
-        }
-
-        public bool IsDuelPossible()
-        {
-            return Opponent == null;
-        }
-
-        public void RequestDuel(Unit unit)
-        {
-            if(unit.IsDuelPossible())
-            {
-                unit.SetOpponent(this);
-                SetOpponent(unit);
-            }
-        }
-
-        public void SetOpponent(Unit unit)
-        {
-            Opponent = unit;
-            unit.Damageble.OnDied += OpponentDead;
-        }
-
-        public void BreakDuel()
-        {
-
-        }
-
-        public void RemoveOpponent()
-        {
-
-        }
-
-        public void OpponentDead(Damageble damageble)
-        {
-            BreakDuel();
+            IsOpponentInAttackZone = !(unit == Duelable.Opponent);
         }
 
         #endregion
+
+        public void SwitchPathFollower(IPathFollower pathFollower)
+        {
+            if (pathFollower == null) return;
+
+            CurrentPathFollower?.Stop();
+            CurrentPathFollower = pathFollower;
+            CurrentPathFollower.Start();
+        }
 
         private void Update()
         {

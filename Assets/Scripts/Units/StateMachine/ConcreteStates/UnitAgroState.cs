@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
@@ -7,8 +8,8 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         private IState _attackState;
         private IState _idleState;
 
-        private float _disaggroTime = 0.5f;
-        private float _time;
+        private float _disaggroTime = 5f;
+        private float _time = 0f;
 
         public UnitAgroState(Unit context, StateMachine stateMachine) : base(context, stateMachine)
         {
@@ -22,25 +23,35 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void EnterState()
         {
+            context.SwitchPathFollower(context.NavPathFollower);
+            context.NavPathFollower.MoveTo(context.Duelable.Opponent.transform.position);
+
+            _time = 0;
+            
+            Debug.Log(string.Format("[StateMachine {0}] UnitAgroState entered", context.gameObject.name));
+            Debug.Log(string.Format("[StateMachine {0}] OPPONENT {1}", context.gameObject.name, context.Duelable.Opponent.gameObject.name));
         }
 
         public override void ExitState()
         {
-            context.NavPathFollower.Stop();
+            context.CurrentPathFollower.Stop();
         }
 
         public override void FrameUpdate()
         {
             if(!context.IsOpponentInAggroZone && _time > _disaggroTime)
             {
-                context.BreakDuel();
+                context.Duelable.BreakDuel();
                 return;
             }
 
-            if (context.Opponent == null )
+            if (context.Duelable.Opponent == null)
+            {
                 context.StateMachine.ChangeState(_idleState);
+                return;
+            }
 
-            context.NavPathFollower.MoveTo(context.Opponent.transform.position);
+            context.NavPathFollower.MoveTo(context.Duelable.Opponent.transform.position);
 
             if(context.IsOpponentInAttackZone)
                 context.StateMachine.ChangeState(_attackState);
