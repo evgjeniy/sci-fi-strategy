@@ -38,17 +38,25 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void FrameUpdate()
         {
-            if (context.Duelable.Opponent == null) context.StateMachine.ChangeState(_idleState);
+            _attackTime += Time.deltaTime;
 
-            if (!context.IsOpponentInAttackZone) context.StateMachine.ChangeState(_aggroState);
+            if (context.Duelable.Opponent == null)
+            {
+                context.StateMachine.ChangeState(_idleState);
+                return;
+            }
+
+            if (!context.IsOpponentInAttackZone)
+            {
+                context.StateMachine.ChangeState(_aggroState);
+                return;
+            }
 
             if(_attackTime > context.DamagePeriod)
             {
                 _attackTime = 0;
                 context.Duelable.Opponent.Damageble.Damage(context.Damage);
             }
-
-            _attackTime += Time.deltaTime;
         }
 
         public override void PhysicsUpdate()

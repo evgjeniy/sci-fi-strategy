@@ -68,7 +68,7 @@ namespace SustainTheStrain.Input
             (
                 _mouseMoveState, _placeholderPointerState, _placeholderSelectionState,
                 _heroPointerState, _heroSelectionState, _abilitySelectionState
-            );
+            ) { TransitionsEnabled = false };
 
             StateMachine.SetState<MouseMoveState>();
 

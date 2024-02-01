@@ -33,23 +33,32 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
             (
                 Initializer.RocketTransform.rotation,
                 GetRotationToTarget(),
-                Time.deltaTime * 3.0f
+                Time.deltaTime * 10.0f
             );
 
             private Quaternion GetRotationToTarget()
             {
                 var rocket = Initializer.RocketTransform;
-                var targetPosition = Initializer.Area.Entities.First().transform.position;
+                var target = GetTarget();
 
-                return Quaternion.LookRotation(targetPosition - rocket.position, rocket.up);
+                return target == null
+                    ? Initializer.RocketTransform.rotation
+                    : Quaternion.LookRotation(target.transform.position - rocket.position, rocket.up);
+            }
+
+            private Collider GetTarget()
+            {
+                return Initializer.Area.Entities.FirstOrDefault(e => e.TryGetComponent<Damageble>(out var d) && d.Team != 1);
             }
 
             private bool IsLookingToTarget()
             {
                 var rocket = Initializer.RocketTransform;
-                var targetPosition = Initializer.Area.Entities.First().transform.position;
+                var target = GetTarget();
 
-                return Vector3.Angle(targetPosition - rocket.position, rocket.forward) < 1.0f;
+                if (target == null) return false;
+
+                return Vector3.Angle(target.transform.position - rocket.position, rocket.forward) < 1.0f;
             }
 
             private void TryAttack()

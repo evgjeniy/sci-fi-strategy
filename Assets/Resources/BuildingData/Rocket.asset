@@ -28,7 +28,7 @@ MonoBehaviour:
       <MaxEnemiesTargets>k__BackingField: 1
       <Damage>k__BackingField: 1
       <AttackCooldown>k__BackingField: 5
-      <AttackRadius>k__BackingField: 5
+      <AttackRadius>k__BackingField: 10
       <AttackSectorAngle>k__BackingField: 30
     <NextLevelPrice>k__BackingField: 1
     <DestroyCompensation>k__BackingField: 1

@@ -16,6 +16,7 @@ namespace SustainTheStrain.Buildings
             Building = building;
             building.SetParent(BuildingRoot);
             building.transform.position = BuildingRoot.position;
+            building.transform.localScale = Vector3.one; // TEMP
         }
 
         public void DestroyBuilding()
