@@ -8,11 +8,13 @@ namespace SustainTheStrain.Installers
     {
         [SerializeField] private Enemy _refEnemyPrefab;
         [SerializeField] private Recruit _refRecruitPrefab;
+        [SerializeField] private Hero _hero;
         
         public override void InstallBindings()
         {
             Container.Bind<IFactory<Enemy>>().FromInstance(new Enemy.Factory(_refEnemyPrefab)).AsSingle();
             Container.Bind<IFactory<Recruit>>().FromInstance(new Recruit.Factory(_refRecruitPrefab)).AsSingle();
+            Container.Bind<Hero>().FromInstance(_hero).AsSingle();
         }
     }
 }

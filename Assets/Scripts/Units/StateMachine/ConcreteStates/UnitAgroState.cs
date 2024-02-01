@@ -25,6 +25,8 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         {
             context.SwitchPathFollower(context.NavPathFollower);
             context.NavPathFollower.MoveTo(context.Duelable.Opponent.transform.position);
+
+            _time = 0;
             
             Debug.Log(string.Format("[StateMachine {0}] UnitAgroState entered", context.gameObject.name));
             Debug.Log(string.Format("[StateMachine {0}] OPPONENT {1}", context.gameObject.name, context.Duelable.Opponent.gameObject.name));

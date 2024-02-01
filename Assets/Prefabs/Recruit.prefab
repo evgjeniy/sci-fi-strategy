@@ -217,7 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 817305729354731762}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: TriggerAreas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 3276184017640607325}
   - component: {fileID: 5081211773015276309}
   - component: {fileID: 3475451421703167451}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: AggroRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 8559317634245072269}
   - component: {fileID: 5349559354142085009}
   - component: {fileID: 1994540989562978272}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: FightDistance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
