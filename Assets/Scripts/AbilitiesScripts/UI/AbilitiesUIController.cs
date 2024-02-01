@@ -8,11 +8,6 @@ namespace SustainTheStrain.AbilitiesScripts
 {
     public class AbilitiesUIController : MonoBehaviour
     {
-        [SerializeField] private InputSystemButtonBridge ButtonPrefab;
-        [SerializeField] private Slider SliderPrefab;
-        [SerializeField] private GameObject buttonHolder;
-        [SerializeField] private GameObject sliderHolder;
-
         private readonly Color _readyColor = Color.green; //temporary UI
         private readonly Color _loadingColor = Color.red;
 
@@ -23,9 +18,9 @@ namespace SustainTheStrain.AbilitiesScripts
 
         
         [Inject]
-        private void Init(AbilitiesController Controller)
+        private void Init(AbilitiesController controller)
         {
-            _abilitiesController = Controller;
+            _abilitiesController = controller;
             _abilitiesController.Init(); //temporary, because now we don't have MainController
             _buttons = new AbilityControlButton[_abilitiesController.Abilities.Count];
         }
@@ -37,14 +32,9 @@ namespace SustainTheStrain.AbilitiesScripts
                 //_buttons[idx].GetButton().image.color = _buttons[idx].ChangeReady() ? _readyColor : _loadingColor;
         }
 
-        public void SpawnControlButton(Transform sliderHolder/*, Transform buttonHolder*/)
+        public void AddControlButton(InputSystemButtonBridge b, Slider s)
         {
-            var b = Instantiate(ButtonPrefab, /*buttonHolder*/ buttonHolder.transform);
-            var s = Instantiate(SliderPrefab, sliderHolder);
             _buttons[spawnedCount] = new AbilityControlButton(b, s);
-            s.value = 1;
-            //b.image.color = _readyColor;
-            b.GetComponentInChildren<TextMeshProUGUI>().text = _abilitiesController.Abilities[spawnedCount].GetType().Name;//temp
             b.SetNumberButton(spawnedCount + 1);
             _abilitiesController.ReloadListAdd(spawnedCount, SetZoneDamageButtonData);
             spawnedCount++;

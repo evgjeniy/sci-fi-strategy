@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SustainTheStrain.AbilitiesScripts;
+using SustainTheStrain.EnergySystem.UI;
 using SustainTheStrain.ResourceSystems;
 using UnityEngine;
 using Zenject;
@@ -14,25 +15,21 @@ namespace SustainTheStrain.EnergySystem
         [SerializeField] private AbilitiesUIController _abilitiesUIController;
         //[Inject] public ResourceManager Manager { get; private set; }
         public EnergyController EnergyController { get; private set; }
-        [SerializeField] private EnergySystemUI UIPrefab;
         [SerializeField] private Transform _spawnParent;
+        private EnergySystemUIFactory _uiFactory;
+        private Dictionary<IEnergySystem, EnergySystemUI> _systemsUis = new();
 
-        public void GenerateNewUI(IEnergySystem system)
+        private void GenerateNewUI(IEnergySystem system)
         {
-            var ui = Instantiate(UIPrefab, _spawnParent.transform);
-            var uiButton = ui.SpawnButton(system.ButtonImage);
-            // if (Manager.Generators.Contains(system))
-            // {
-            //     var generatorUI = new GeneratorUI(uiButton.transform, (ResourceGenerator)system);
-            // }
-            if (MAbilitiesController.Abilities.Contains((BaseAbility)system))
-            {
-                _abilitiesUIController.SpawnControlButton(uiButton.transform);
-            }
-            ui.MaxBarsCount = system.MaxEnergy;
-            uiButton.OnLeftMouseClick += system.TrySpendEnergy;
-            uiButton.OnRightMouseClick += system.TryRefillEnergy;
-            system.OnCurrentEnergyChanged += ui.ChangeEnergy;
+            var ui = _uiFactory.CreateUI(system, _spawnParent);
+            _systemsUis.TryAdd(ui.Key, ui.Value);
+        }
+
+        [Inject]
+        public void AddSystemsUIFactory(EnergySystemUIFactory energySystemUIFactory)
+        {
+            _uiFactory = energySystemUIFactory;
+            _uiFactory.MAbilitiesUIController = _abilitiesUIController;
         }
         
         [Inject]
