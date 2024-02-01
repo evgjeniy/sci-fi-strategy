@@ -10,10 +10,11 @@ namespace SustainTheStrain.Units.Components
     {
         [SerializeField] private List<Recruit> _predefinedRecruits;
         [SerializeField] private int _squadMaxSize = 3;
-        
-        [field:SerializeField]
-        public GuardPost GuardPost { get; set; }
-        
+
+        [SerializeField] private GuardPost _guardPost;
+
+        public GuardPost GuardPost => _guardPost;
+
         private List<Recruit> _recruits = new();
 
         public event Action OnRecruitRemoved;

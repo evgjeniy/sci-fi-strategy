@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SustainTheStrain.Units.Components
 {
     [Serializable]
-    public struct GuardPost
+    public class GuardPost
     {
         [SerializeField]
         private Vector3 _position;
