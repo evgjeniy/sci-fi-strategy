@@ -79,8 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ffc5a6a5fe64a1468d050ef1955b641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageble: {fileID: 1461103539748429110}
-  _shield: {fileID: 7457636850202280741}
+  _damageble: {fileID: 6456002651010474412}
+  _shield: {fileID: 0}
   _hpBar: {fileID: 4747790047915395938}
   _shieldBarsHolder: {fileID: 2719285697687897452}
   _shieldBarRef: {fileID: 7566107790692516826, guid: f591025cd2e0971478c6c6b5c0281750,
@@ -349,8 +349,7 @@ GameObject:
   - component: {fileID: 4148816034686865303}
   - component: {fileID: 1062942572181524570}
   - component: {fileID: 4280268013472226808}
-  - component: {fileID: 7457636850202280741}
-  - component: {fileID: 1461103539748429110}
+  - component: {fileID: 6456002651010474412}
   m_Layer: 3
   m_Name: Hero
   m_TagString: Untagged
@@ -496,7 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0464dcb9121899428e7564f831e1ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <EnergySettings>k__BackingField: {fileID: 0}
+  <EnergySettings>k__BackingField: {fileID: 11400000, guid: 18043ce5b3fadd34c9fbc919dedb9f12,
+    type: 2}
 --- !u!114 &4280268013472226808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Priority>k__BackingField: 0
   _duelOffset: {x: 0, y: -0.82, z: 0.65}
---- !u!114 &7457636850202280741
+--- !u!114 &6456002651010474412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -520,24 +520,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7577854815380967088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40557cea94440554b8833c905c394a67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cellsCount: 2
-  _cellHp: 2
-  _recoverDelay: 5
-  _recoverySpeed: 0.3
---- !u!114 &1461103539748429110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7577854815380967088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67fd0fa0834b988429f9548845bf0e89, type: 3}
+  m_Script: {fileID: 11500000, guid: 3272f43aba238a54790e000f24fd2199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxHP>k__BackingField: 10
   <Team>k__BackingField: 1
+  _recoverDelay: 2
+  _recoverySpeed: 0.3

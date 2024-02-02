@@ -11,7 +11,7 @@ namespace SustainTheStrain.Units.Components
         public float CurrentHP
         {
             get => _currentHp;
-            set { _currentHp = value; OnCurrentHPChanged?.Invoke(value); }
+            set { _currentHp = Mathf.Clamp(value, 0, MaxHP); OnCurrentHPChanged?.Invoke(value); }
         }
 
         [field: SerializeField]
@@ -19,6 +19,11 @@ namespace SustainTheStrain.Units.Components
 
         public event Action<Damageble> OnDied;
         public event Action<float> OnCurrentHPChanged;
+
+        public void InvokeOnCurrentHPChanged(float value)
+        {
+            OnCurrentHPChanged?.Invoke(value);
+        }
 
         private float _currentHp;
 

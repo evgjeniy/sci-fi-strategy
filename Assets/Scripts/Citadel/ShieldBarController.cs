@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static SustainTheStrain.EnergySystem.Shield;
+using static SustainTheStrain.Units.Components.Shield;
 
 namespace SustainTheStrain.UI
 {

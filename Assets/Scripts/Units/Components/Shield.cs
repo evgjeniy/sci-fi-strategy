@@ -1,11 +1,10 @@
-using SustainTheStrain.Units.Components;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace SustainTheStrain.EnergySystem
+namespace SustainTheStrain.Units.Components
 {
     public class Shield : MonoBehaviour
     {

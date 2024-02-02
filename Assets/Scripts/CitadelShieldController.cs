@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SustainTheStrain.EnergySystem;
 using SustainTheStrain.EnergySystem.Settings;
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 using Zenject;
 
