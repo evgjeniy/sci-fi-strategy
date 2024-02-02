@@ -1,3 +1,4 @@
+using System;
 using SustainTheStrain.Units.Components;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,5 @@ namespace SustainTheStrain
     [RequireComponent(typeof(Damageble))]
     public class Citadel : MonoBehaviour
     {
-
     }
 }

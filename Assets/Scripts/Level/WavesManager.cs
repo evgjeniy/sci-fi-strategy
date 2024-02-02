@@ -11,7 +11,22 @@ namespace SustainTheStrain.Level
     public class WavesManager : MonoBehaviour
     {
         [SerializeField] private LevelData _levelData;
-        [SerializeField] private List<Spawner<Enemy>> _spawners;
+        [SerializeField] private List<EnemySpawner> _spawners;
+
+        public int EnemiesAlive
+        {
+            get
+            {
+                int enemies = 0;
+                foreach (var spawner in _spawners)
+                {
+                    enemies += spawner.SpawnedEnemiesAlive;
+                }
+
+                return enemies;
+            }
+        }
+
 
         private readonly Dictionary<int, bool> _waveCoroutines = new();
         private int _currentWave = 0;

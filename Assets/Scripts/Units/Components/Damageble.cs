@@ -20,9 +20,9 @@ namespace SustainTheStrain.Units.Components
         public event Action<Damageble> OnDied;
         public event Action<float> OnCurrentHPChanged;
 
-        public void InvokeOnCurrentHPChanged(float value)
+        public void InvokeOnDied()
         {
-            OnCurrentHPChanged?.Invoke(value);
+            OnDied?.Invoke(this);
         }
 
         private float _currentHp;

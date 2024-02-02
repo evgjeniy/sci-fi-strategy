@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ChainAbilitySettings
   m_EditorClassIdentifier: 
   EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
-  ReloadingSpeed: 1
+  ReloadingSpeed: 5
   Damage: 5
   MaxTargets: 4
-  Distance: 100
+  Distance: 10
   LinePrefab: {fileID: 8947733846225897411, guid: c194d93a0f36c404ca74008a7d9d4b62,
     type: 3}
