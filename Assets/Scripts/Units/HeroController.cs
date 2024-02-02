@@ -38,6 +38,7 @@ namespace SustainTheStrain.Units
             {
                 if (value < 0 || value > MaxEnergy) return;
                 _currentEnergy = value;
+                //_hero.Damage += 5;
                 OnCurrentEnergyChanged?.Invoke(_currentEnergy);
             }
         }

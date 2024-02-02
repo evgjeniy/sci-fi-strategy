@@ -34,10 +34,9 @@ namespace SustainTheStrain.ResourceSystems
         public int CurrentGold
         {
             get => _currentGold;
-            private set
+            set
             {
-                if (value > _maxGold) return;
-                _currentGold = value;
+                _currentGold = Mathf.Clamp(value, 0, _maxGold);
                 OnGoldChanged?.Invoke(_currentGold);
             }
         }

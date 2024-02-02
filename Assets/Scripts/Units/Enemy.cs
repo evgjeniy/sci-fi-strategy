@@ -1,6 +1,9 @@
 using Dreamteck.Splines;
+using SustainTheStrain.ResourceSystems;
+using SustainTheStrain.Units.Components;
 using SustainTheStrain.Units.PathFollowers;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
+using UnityEngine;
 using Zenject;
 
 namespace SustainTheStrain.Units
@@ -15,6 +18,8 @@ namespace SustainTheStrain.Units
 
         #endregion
 
+        [SerializeField] public int _coinsDrop;
+        
         public SplinePathFollower SplinePathFollower { get; protected set; }
 
         private void Start()
@@ -37,8 +42,9 @@ namespace SustainTheStrain.Units
             _attackState.Init(_aggroState, _splineMoveState);
 
             _stateMachine.Initialize(_splineMoveState);
+            
         }
-
+        
         public class Factory : IFactory<Enemy>
         {
             private readonly Enemy _refEnemyPrefab;

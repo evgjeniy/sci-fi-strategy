@@ -214,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 1
   <DamagePeriod>k__BackingField: 0.5
+  _coinsDrop: 20
 --- !u!114 &7950700953650259592
 MonoBehaviour:
   m_ObjectHideFlags: 0
