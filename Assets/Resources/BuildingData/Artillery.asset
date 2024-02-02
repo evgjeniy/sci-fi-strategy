@@ -24,7 +24,7 @@ MonoBehaviour:
   - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: bf968cbe7271cb24692540a8604a26b7,
       type: 3}
     <Stats>k__BackingField:
-      <Damage>k__BackingField: 10
+      <Damage>k__BackingField: 3
       <AttackCooldown>k__BackingField: 3
       <AttackRadius>k__BackingField: 10
       <ExplosionRadius>k__BackingField: 3
@@ -33,8 +33,8 @@ MonoBehaviour:
   - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: ab5343c498d46494c80139e58cb20cab,
       type: 3}
     <Stats>k__BackingField:
-      <Damage>k__BackingField: 15
-      <AttackCooldown>k__BackingField: 2
+      <Damage>k__BackingField: 4
+      <AttackCooldown>k__BackingField: 3
       <AttackRadius>k__BackingField: 12.5
       <ExplosionRadius>k__BackingField: 4
     <NextLevelPrice>k__BackingField: 1
@@ -42,8 +42,8 @@ MonoBehaviour:
   - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 91d6ea2a63b7dc845a66b5f71d39a856,
       type: 3}
     <Stats>k__BackingField:
-      <Damage>k__BackingField: 20
-      <AttackCooldown>k__BackingField: 5
+      <Damage>k__BackingField: 5
+      <AttackCooldown>k__BackingField: 3
       <AttackRadius>k__BackingField: 15
       <ExplosionRadius>k__BackingField: 5
     <NextLevelPrice>k__BackingField: 1
