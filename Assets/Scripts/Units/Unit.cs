@@ -71,6 +71,12 @@ namespace SustainTheStrain.Units
 
         private void UnitLeftAttackZone(Duelable unit)
         {
+            if (!Duelable.HasOpponent)
+            {
+                IsOpponentInAttackZone = false;
+                return;
+            }
+            
             IsOpponentInAttackZone = !(unit == Duelable.Opponent);
         }
 

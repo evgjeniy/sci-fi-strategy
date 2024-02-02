@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5371437360750009807}
   - component: {fileID: 2199722708903427238}
   - component: {fileID: 4574005033715919133}
-  - component: {fileID: 4229654763242058276}
   m_Layer: 7
   m_Name: HPBar
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4229654763242058276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221301186423419771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ffc5a6a5fe64a1468d050ef1955b641, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damageble: {fileID: 3714704819440048923}
-  _maxHpSize: 5
 --- !u!1 &352702111144956991
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +338,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 352702111144956991}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.3
+  m_Radius: 0.1
   m_Speed: 5
   m_Acceleration: 100
   avoidancePriority: 50
@@ -430,6 +415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4119611173220569212}
+  - component: {fileID: 1022880775032652764}
   m_Layer: 7
   m_Name: HpBarHolder
   m_TagString: Untagged
@@ -453,6 +439,25 @@ Transform:
   - {fileID: 5371437360750009807}
   m_Father: {fileID: 4305895776624623204}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1022880775032652764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999889937310102540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ffc5a6a5fe64a1468d050ef1955b641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageble: {fileID: 3714704819440048923}
+  _shield: {fileID: 0}
+  _hpBar: {fileID: 5371437360750009807}
+  _shieldBarsHolder: {fileID: 0}
+  _shieldBarRef: {fileID: 0}
+  _cellOffset: 3
+  _maxHpSize: 5
 --- !u!1 &2146350565760254854
 GameObject:
   m_ObjectHideFlags: 0

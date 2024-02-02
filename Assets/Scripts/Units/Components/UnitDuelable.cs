@@ -10,7 +10,7 @@ namespace SustainTheStrain.Units.Components
         protected Duelable _opponent;
         [SerializeField]
         private Vector3 _duelOffset;
-        public override bool HasOpponent => Opponent;
+        public override bool HasOpponent => Opponent != null;
         public override Vector3 DuelPosition => transform.position + _duelOffset;
         public override Duelable Opponent => _opponent;
 

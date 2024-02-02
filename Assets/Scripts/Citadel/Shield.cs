@@ -9,6 +9,7 @@ namespace SustainTheStrain.EnergySystem
 {
     public class Shield : MonoBehaviour
     {
+        [SerializeField]
         private int _cellsCount = 0;
 
         public int CellsCount
@@ -52,10 +53,12 @@ namespace SustainTheStrain.EnergySystem
 
         private void Awake()
         {
-            for(int i = 0; i < _cellsCount; i++)
+            CellsCount = _cellsCount;
+            
+            /*for(int i = 0; i < _cellsCount; i++)
             {
                 _shieldCells.Add(new ShieldCell(_cellHp));
-            }
+            }*/
         }
 
         private void Update()
@@ -93,6 +96,7 @@ namespace SustainTheStrain.EnergySystem
             if( _recoveryCoroutine != null )
                 StopCoroutine( _recoveryCoroutine );
 
+            if (_shieldCells.Count == 0) return;
             _recoveryCoroutine = StartCoroutine(RecoverShieldCells());
         }
 

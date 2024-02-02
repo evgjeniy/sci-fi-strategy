@@ -42,6 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7279751917324000041}
+  - component: {fileID: 9890835569079283}
   m_Layer: 7
   m_Name: HpBarHolder
   m_TagString: Untagged
@@ -63,8 +64,29 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4747790047915395938}
+  - {fileID: 2719285697687897452}
   m_Father: {fileID: 6323556958791050048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9890835569079283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2611328757372419286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ffc5a6a5fe64a1468d050ef1955b641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageble: {fileID: 1394954439018934687}
+  _shield: {fileID: 7457636850202280741}
+  _hpBar: {fileID: 4747790047915395938}
+  _shieldBarsHolder: {fileID: 2719285697687897452}
+  _shieldBarRef: {fileID: 7566107790692516826, guid: f591025cd2e0971478c6c6b5c0281750,
+    type: 3}
+  _cellOffset: 3
+  _maxHpSize: 5
 --- !u!1 &3230557872947088829
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +164,6 @@ GameObject:
   - component: {fileID: 4747790047915395938}
   - component: {fileID: 9070674285040476154}
   - component: {fileID: 8388692714754154656}
-  - component: {fileID: 4707938008081651507}
   m_Layer: 7
   m_Name: HPBar
   m_TagString: Untagged
@@ -215,20 +236,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4707938008081651507
-MonoBehaviour:
+--- !u!1 &5097972365950072424
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4831956908326309070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ffc5a6a5fe64a1468d050ef1955b641, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damageble: {fileID: 1394954439018934687}
-  _maxHpSize: 5
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2719285697687897452}
+  m_Layer: 7
+  m_Name: ShieldBarHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2719285697687897452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097972365950072424}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.75, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7279751917324000041}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7567587866752341809
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +350,7 @@ GameObject:
   - component: {fileID: 4148816034686865303}
   - component: {fileID: 1062942572181524570}
   - component: {fileID: 4280268013472226808}
+  - component: {fileID: 7457636850202280741}
   m_Layer: 3
   m_Name: Hero
   m_TagString: Untagged
@@ -418,7 +457,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7577854815380967088}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.3
+  m_Radius: 0.1
   m_Speed: 5
   m_Acceleration: 100
   avoidancePriority: 50
@@ -485,3 +524,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Priority>k__BackingField: 0
   _duelOffset: {x: 0, y: -0.82, z: 0.65}
+--- !u!114 &7457636850202280741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7577854815380967088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40557cea94440554b8833c905c394a67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cellsCount: 2
+  _cellHp: 2
+  _recoverDelay: 5
+  _recoverySpeed: 0.3
