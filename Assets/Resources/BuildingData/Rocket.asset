@@ -26,8 +26,8 @@ MonoBehaviour:
       type: 3}
     <Stats>k__BackingField:
       <MaxEnemiesTargets>k__BackingField: 1
-      <Damage>k__BackingField: 1
-      <AttackCooldown>k__BackingField: 5
+      <Damage>k__BackingField: 3
+      <AttackCooldown>k__BackingField: 2
       <AttackRadius>k__BackingField: 10
       <AttackSectorAngle>k__BackingField: 30
     <NextLevelPrice>k__BackingField: 1
@@ -36,8 +36,8 @@ MonoBehaviour:
       type: 3}
     <Stats>k__BackingField:
       <MaxEnemiesTargets>k__BackingField: 2
-      <Damage>k__BackingField: 5
-      <AttackCooldown>k__BackingField: 3
+      <Damage>k__BackingField: 4
+      <AttackCooldown>k__BackingField: 2
       <AttackRadius>k__BackingField: 7
       <AttackSectorAngle>k__BackingField: 45
     <NextLevelPrice>k__BackingField: 1

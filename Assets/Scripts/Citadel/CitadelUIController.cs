@@ -1,6 +1,7 @@
 using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Units.Components;
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,15 +19,34 @@ namespace SustainTheStrain.UI
 
         [SerializeField] private ShieldBarController _shieldBarRef;
 
-        private void Start()
+        private List<ShieldBarController> _shieldBars = new();
+        
+        private void OnEnable()
         {
+            _damageble.OnCurrentHPChanged += UpdateHP; 
+            _shield.OnCellsCountChanged += RebuildShieldUI;
+        }
+
+        private void OnDisable()
+        {
+            _damageble.OnCurrentHPChanged += UpdateHP; 
+            _shield.OnCellsCountChanged += RebuildShieldUI;
+        }
+
+        private void RebuildShieldUI(int obj)
+        {
+            foreach (var bar in _shieldBars)
+            {
+                Destroy(bar.gameObject);
+            }
+            _shieldBars.Clear();
+            
             foreach(var cell in _shield.ShieldCells)
             {
                 var cellUI = Instantiate(_shieldBarRef, _shieldBarsHolder);
                 cellUI.Init(cell);
+                _shieldBars.Add(cellUI);
             }
-
-            _damageble.OnCurrentHPChanged += UpdateHP; 
         }
 
         private void UpdateHP(float value)

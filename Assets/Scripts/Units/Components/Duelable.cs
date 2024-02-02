@@ -14,6 +14,7 @@ namespace SustainTheStrain.Units.Components
 
         public abstract Duelable Opponent { get; }
         public abstract bool HasOpponent { get; }
+        public abstract Vector3 DuelPosition { get; }
 
         private void OnEnable()
         {

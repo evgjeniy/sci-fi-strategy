@@ -40,7 +40,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         {
             _attackTime += Time.deltaTime;
 
-            if (context.Duelable.Opponent == null)
+            if (!context.Duelable.HasOpponent)
             {
                 context.StateMachine.ChangeState(_idleState);
                 return;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,8 +9,15 @@ namespace SustainTheStrain.Units.Components
     public class CitadelDuelable : Duelable
     {
         private List<Duelable> _opponents = new List<Duelable>();
-
+        
+        [SerializeField]
+        private Vector3 _duelOffset;
         public override bool HasOpponent { get => _opponents.Count > 0; }
+        public override Vector3 DuelPosition
+        {
+            get => transform.position + _duelOffset;
+        }
+
         public override Duelable Opponent { 
             get    
             {
@@ -60,6 +68,12 @@ namespace SustainTheStrain.Units.Components
         private void OpponentDead(Damageble damageble)
         {
             BreakDuel();
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(DuelPosition, 0.5f);
         }
     }
 }

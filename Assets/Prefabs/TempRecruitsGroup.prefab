@@ -52,9 +52,9 @@ MonoBehaviour:
   - {fileID: 3711649207622569303}
   - {fileID: 8834375537645148958}
   _squadMaxSize: 5
-  _guardPost:
+  <GuardPost>k__BackingField:
     _position: {x: 0, y: 0, z: 0}
-    _radius: 3
+    _radius: 2.5
 --- !u!1001 &1807938471762527366
 PrefabInstance:
   m_ObjectHideFlags: 0

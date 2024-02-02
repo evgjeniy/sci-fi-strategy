@@ -32,9 +32,9 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void FrameUpdate()
         {
-            if(context.IsAnnoyed && context.Duelable.Opponent == null) InitiateDuel();
+            if(context.IsAnnoyed && !context.Duelable.HasOpponent) InitiateDuel();
 
-            if (context.Duelable.Opponent != null) context.StateMachine.ChangeState(_aggroState);
+            if (context.Duelable.HasOpponent) context.StateMachine.ChangeState(_aggroState);
         }
 
         public override void PhysicsUpdate()

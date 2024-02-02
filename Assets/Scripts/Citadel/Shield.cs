@@ -9,7 +9,32 @@ namespace SustainTheStrain.EnergySystem
 {
     public class Shield : MonoBehaviour
     {
-        [SerializeField] private int _cellsCount = 2;
+        private int _cellsCount = 0;
+
+        public int CellsCount
+        {
+            get => _cellsCount;
+            set
+            {
+                _cellsCount = value;
+                Debug.LogWarning($"Shield cells {_cellsCount}");
+                if(_shieldCells.Count > _cellsCount)
+                    while (_cellsCount < _shieldCells.Count)
+                    {
+                        _shieldCells.RemoveAt(_shieldCells.Count - 1);
+                    }
+                else
+                {
+                    while (_cellsCount > _shieldCells.Count)
+                    {
+                        _shieldCells.Add(new ShieldCell(_cellHp));
+                    }
+                }
+                OnCellsCountChanged?.Invoke(_cellsCount);
+                _calm = false;
+            }
+        }
+
         [SerializeField] private float _cellHp = 6;
         [SerializeField] private float _recoverDelay = 5;
         [SerializeField] private float _recoverySpeed = 0.3f;
@@ -18,11 +43,12 @@ namespace SustainTheStrain.EnergySystem
 
         public List<ShieldCell> ShieldCells => _shieldCells;
 
-        private float _lastDamageTime;
+        private float _lastDamageTime = 0;
         private bool _calm = true;
 
         private Coroutine _recoveryCoroutine;
 
+        public Action<int> OnCellsCountChanged;
 
         private void Awake()
         {
@@ -33,6 +59,11 @@ namespace SustainTheStrain.EnergySystem
         }
 
         private void Update()
+        {
+            CheckAndRecover();
+        }
+
+        private void CheckAndRecover()
         {
             if(!_calm && Time.time - _lastDamageTime  > _recoverDelay)
             {
@@ -94,7 +125,7 @@ namespace SustainTheStrain.EnergySystem
             public ShieldCell(float maxHp)
             {
                 MaxHP = maxHp;
-                CurrentHP = MaxHP;
+                CurrentHP = 0;
             }
 
             public void Damage(float damage)

@@ -8,13 +8,15 @@ namespace SustainTheStrain.Units.Components
     public class UnitDuelable : Duelable
     {
         protected Duelable _opponent;
-
-        public override bool HasOpponent { get => Opponent; }
-        public override Duelable Opponent { get => _opponent; }
+        [SerializeField]
+        private Vector3 _duelOffset;
+        public override bool HasOpponent => Opponent;
+        public override Vector3 DuelPosition => transform.position + _duelOffset;
+        public override Duelable Opponent => _opponent;
 
         public override bool IsDuelPossible(Duelable initiator)
         {
-            return _opponent == null && initiator.Damageble.Team != Damageble.Team;
+            return !HasOpponent && initiator.Damageble.Team != Damageble.Team;
         }
 
         public override bool RequestDuel(Duelable dueler)
@@ -51,6 +53,12 @@ namespace SustainTheStrain.Units.Components
         private void OpponentDead(Damageble damageble)
         {
             BreakDuel();
+        }
+        
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(DuelPosition, 0.5f);
         }
     }
 }

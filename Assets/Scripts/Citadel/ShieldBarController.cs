@@ -24,7 +24,7 @@ namespace SustainTheStrain.UI
 
         public void UpdateValue(float value)
         {
-            _text.text = string.Format("{0}/{1}", value, _cell.MaxHP);
+            _text.text = $"{(int)value}/{_cell.MaxHP}";
             if (_slider != null)
             {
                 _slider.value = value/_cell.MaxHP;

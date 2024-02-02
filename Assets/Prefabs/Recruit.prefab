@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 1
-  <DamagePeriod>k__BackingField: 2
+  <DamagePeriod>k__BackingField: 0.5
 --- !u!136 &2351310096217553143
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 235370898999074474}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.2
   m_Speed: 5
   m_Acceleration: 100
   avoidancePriority: 50
@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Priority>k__BackingField: 0
+  _duelOffset: {x: 0, y: -0.46, z: 0.65}
 --- !u!114 &1925202636387091328
 MonoBehaviour:
   m_ObjectHideFlags: 0
