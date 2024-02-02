@@ -65,7 +65,7 @@ namespace SustainTheStrain.Level
         {
             OnWaveEnded?.Invoke(_currentWave);
             Debug.Log($"[WaveManager] Wave {_currentWave} ended");
-            
+            _waveInProgress = false;
             if (_levelData.waves.Count <= _currentWave + 1)
             {
                 OnLastWaveEnded?.Invoke();

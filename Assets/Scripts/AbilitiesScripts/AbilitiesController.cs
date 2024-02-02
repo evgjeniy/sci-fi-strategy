@@ -113,7 +113,7 @@ namespace SustainTheStrain.AbilitiesScripts
             AddAbility(new ZoneDamageAbility(_abilitiesSettings.ZoneDamage));
             AddAbility(new ZoneSlownessAbility(_abilitiesSettings.ZoneSlowness));
             AddAbility(new ChainDamageAbility(_abilitiesSettings.ChainAbility));
-            AddAbility(new EnemyHackAbility(_abilitiesSettings.EnemyHack));
+            //AddAbility(new EnemyHackAbility(_abilitiesSettings.EnemyHack));
             AddAbility(new LandingAbility(_abilitiesSettings.LandingAbility));
             foreach (var ability in Abilities)
             {

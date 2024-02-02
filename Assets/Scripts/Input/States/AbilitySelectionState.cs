@@ -11,6 +11,11 @@ namespace SustainTheStrain.Input.States
             remove => OnMouseMoveRay -= value;
         }
 
+        protected override void MouseMove(RaycastHit hit)
+        {
+            
+        }
+
         public event Action<Ray> OnAbilityClick
         {
             add => OnLeftMouseButtonClickRay += value;

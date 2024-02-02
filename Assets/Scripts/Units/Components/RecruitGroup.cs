@@ -10,6 +10,8 @@ namespace SustainTheStrain.Units.Components
         [SerializeField] private List<Recruit> _predefinedRecruits;
         [SerializeField] private int _squadMaxSize = 3;
 
+        public int squadMaxSize => _squadMaxSize;
+
         [field: SerializeField] public GuardPost GuardPost { get; set; }
 
         private readonly List<Recruit> _recruits = new();
