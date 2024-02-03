@@ -19,6 +19,7 @@ MonoBehaviour:
   <AttackMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
+  <CreatePrice>k__BackingField: 5
   <Projectile>k__BackingField: {fileID: -3499578410909440990, guid: cd038acd54d433a4d99b1a15c22e5121,
     type: 3}
   <RocketStats>k__BackingField:
@@ -30,8 +31,8 @@ MonoBehaviour:
       <AttackCooldown>k__BackingField: 2
       <AttackRadius>k__BackingField: 10
       <AttackSectorAngle>k__BackingField: 30
-    <NextLevelPrice>k__BackingField: 1
-    <DestroyCompensation>k__BackingField: 1
+    <NextLevelPrice>k__BackingField: 10
+    <DestroyCompensation>k__BackingField: 5
   - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: e53f4b8ff72547549b050e73429f9568,
       type: 3}
     <Stats>k__BackingField:
@@ -40,8 +41,8 @@ MonoBehaviour:
       <AttackCooldown>k__BackingField: 2
       <AttackRadius>k__BackingField: 7
       <AttackSectorAngle>k__BackingField: 45
-    <NextLevelPrice>k__BackingField: 1
-    <DestroyCompensation>k__BackingField: 1
+    <NextLevelPrice>k__BackingField: 15
+    <DestroyCompensation>k__BackingField: 10
   - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 08fb596b7b6486e4886a39a166a178f6,
       type: 3}
     <Stats>k__BackingField:
@@ -50,5 +51,5 @@ MonoBehaviour:
       <AttackCooldown>k__BackingField: 2
       <AttackRadius>k__BackingField: 20
       <AttackSectorAngle>k__BackingField: 60
-    <NextLevelPrice>k__BackingField: 1
-    <DestroyCompensation>k__BackingField: 1
+    <NextLevelPrice>k__BackingField: 20
+    <DestroyCompensation>k__BackingField: 15

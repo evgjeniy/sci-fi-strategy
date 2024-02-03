@@ -2,6 +2,7 @@ using SustainTheStrain.Buildings.Components;
 using SustainTheStrain.Buildings.Data;
 using SustainTheStrain.Buildings.UI.Menus;
 using SustainTheStrain.Input;
+using SustainTheStrain.ResourceSystems;
 using UnityEngine;
 
 namespace SustainTheStrain.Buildings
@@ -14,14 +15,16 @@ namespace SustainTheStrain.Buildings
 
         private ISelectableInput<BuildingPlaceholder> _input;
         private Building.Factory _buildingFactory;
+        private ResourceManager _resourceManager;
 
         private BuildingPlaceholder CurrentPlaceholder { get; set; }
 
         [Zenject.Inject]
-        private void Construct(ISelectableInput<BuildingPlaceholder> input, Building.Factory buildingFactory)
+        private void Construct(ISelectableInput<BuildingPlaceholder> input, Building.Factory buildingFactory, ResourceManager resourceManager)
         {
             _input = input;
             _buildingFactory = buildingFactory;
+            _resourceManager = resourceManager;
         }
 
         private void Awake()
@@ -80,6 +83,7 @@ namespace SustainTheStrain.Buildings
         private void CreateBuilding(BuildingData buildingData)
         {
             if (CurrentPlaceholder.HasBuilding) return;
+            if (_resourceManager.CurrentGold < buildingData.CreatePrice) return;
             
             _buildingCreateMenu.Hide(CurrentPlaceholder);
             _transparentBuildingViewer.Hide(CurrentPlaceholder);
@@ -87,14 +91,19 @@ namespace SustainTheStrain.Buildings
             var newBuilding = _buildingFactory.Create(buildingData);
             CurrentPlaceholder.SetBuilding(newBuilding);
 
+            _resourceManager.CurrentGold -= buildingData.CreatePrice;
+
             _buildingManagementMenu.Show(CurrentPlaceholder);
         }
 
         private void UpgradeBuilding()
         {
             if (!CurrentPlaceholder.HasBuilding) return;
+            if (_resourceManager.CurrentGold < CurrentPlaceholder.Building.UpgradePrice) return;
 
             CurrentPlaceholder.Building.CurrentUpgradeLevel++;
+
+            _resourceManager.CurrentGold -= CurrentPlaceholder.Building.UpgradePrice;
         }
         
         private void DestroyBuilding()
@@ -102,9 +111,10 @@ namespace SustainTheStrain.Buildings
             if (!CurrentPlaceholder.HasBuilding) return;
             
             _buildingManagementMenu.Hide(CurrentPlaceholder);
-            
+
+            _resourceManager.CurrentGold += CurrentPlaceholder.Building.DestroyCompensation;
             CurrentPlaceholder.DestroyBuilding();
-            
+
             _buildingCreateMenu.Show(CurrentPlaceholder);
         }
     }

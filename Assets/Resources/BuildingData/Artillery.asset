@@ -18,6 +18,7 @@ MonoBehaviour:
   <AttackMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
+  <CreatePrice>k__BackingField: 10
   <Projectile>k__BackingField: {fileID: -3499578410909440990, guid: cd038acd54d433a4d99b1a15c22e5121,
     type: 3}
   <ArtilleryStats>k__BackingField:
@@ -28,8 +29,8 @@ MonoBehaviour:
       <AttackCooldown>k__BackingField: 3
       <AttackRadius>k__BackingField: 10
       <ExplosionRadius>k__BackingField: 3
-    <NextLevelPrice>k__BackingField: 1
-    <DestroyCompensation>k__BackingField: 1
+    <NextLevelPrice>k__BackingField: 15
+    <DestroyCompensation>k__BackingField: 10
   - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: ab5343c498d46494c80139e58cb20cab,
       type: 3}
     <Stats>k__BackingField:
@@ -37,8 +38,8 @@ MonoBehaviour:
       <AttackCooldown>k__BackingField: 3
       <AttackRadius>k__BackingField: 12.5
       <ExplosionRadius>k__BackingField: 4
-    <NextLevelPrice>k__BackingField: 1
-    <DestroyCompensation>k__BackingField: 1
+    <NextLevelPrice>k__BackingField: 20
+    <DestroyCompensation>k__BackingField: 15
   - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 91d6ea2a63b7dc845a66b5f71d39a856,
       type: 3}
     <Stats>k__BackingField:
@@ -46,5 +47,5 @@ MonoBehaviour:
       <AttackCooldown>k__BackingField: 3
       <AttackRadius>k__BackingField: 15
       <ExplosionRadius>k__BackingField: 5
-    <NextLevelPrice>k__BackingField: 1
-    <DestroyCompensation>k__BackingField: 1
+    <NextLevelPrice>k__BackingField: 25
+    <DestroyCompensation>k__BackingField: 20

@@ -8,6 +8,7 @@ namespace SustainTheStrain.Buildings.Data
         [field: SerializeField] public Building Prefab { get; private set; }
         [field: SerializeField] public Mesh Mesh { get; private set; }
         [field: SerializeField] public LayerMask AttackMask { get; private set; }
+        [field: SerializeField] public int CreatePrice { get; private set; } 
         
         public interface IStats {}
     }
