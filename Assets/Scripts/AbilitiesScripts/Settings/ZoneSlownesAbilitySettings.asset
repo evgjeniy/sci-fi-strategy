@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c3520a80c2c47bfad0b6a6d15c20c1a, type: 3}
-  m_Name: GeneratorSettings
+  m_Script: {fileID: 11500000, guid: 9f003441923e47318f67f6e8e25deff2, type: 3}
+  m_Name: ZoneSlownesAbilitySettings
   m_EditorClassIdentifier: 
-  ButtonImage: {fileID: 21300000, guid: 3e9e30ed805ff7649b2263031a9cb9cc, type: 3}
-  EnergySpend: 1
-  MaxEnergy: 3
+  EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
+  ReloadingSpeed: 1
+  ZoneRadius: 2
+  SpeedKoeficient: 0.5
+  DurationTime: 2

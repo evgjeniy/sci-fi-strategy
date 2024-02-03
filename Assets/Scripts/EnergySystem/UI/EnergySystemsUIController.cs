@@ -11,7 +11,6 @@ namespace SustainTheStrain.EnergySystem
     public class EnergySystemsUIController : MonoBehaviour
     {
         [SerializeField] private AbilitiesUIController _abilitiesUIController;
-        [SerializeField] private Transform _spawnParent;
         
         private EnergyController EnergyController { get; set; }
         private EnergySystemUIFactory _uiFactory;
@@ -35,7 +34,7 @@ namespace SustainTheStrain.EnergySystem
 
         private void GenerateNewUI(IEnergySystem system)
         {
-            var ui = _uiFactory.CreateUI(system, _spawnParent);
+            var ui = _uiFactory.CreateUI(system);
             _systemsUis.TryAdd(ui.Key, ui.Value);
         }
         
