@@ -57,6 +57,7 @@ namespace SustainTheStrain.AbilitiesScripts
         private void ExitAbilityl(int idx)
         {
             idx--;
+            if (idx != _selected) return;
             _selected = -1;
             currentAim?.Destroy();
             currentAim = null;
