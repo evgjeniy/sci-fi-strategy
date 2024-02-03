@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2665084421448429707}
   - component: {fileID: 4023847236005703353}
   m_Layer: 5
-  m_Name: BackGround
+  m_Name: KnobBackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
