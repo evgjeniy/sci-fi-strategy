@@ -15,3 +15,5 @@ MonoBehaviour:
   EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
   ReloadingSpeed: 1
   Squad: {fileID: 319695344856091520, guid: cbe4fdeaada60114cabffb9a8919861d, type: 3}
+  SpawnEffect: {fileID: 2600180956095412278, guid: 32b0fbcea4e174b4585440ebd827b221,
+    type: 3}
