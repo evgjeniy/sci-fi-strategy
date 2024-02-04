@@ -6,5 +6,6 @@ namespace SustainTheStrain
     public class LandingAbilitySettings : AbilitySettings
     {
         public GameObject Squad;
+        public GameObject SpawnEffect;
     }
 }

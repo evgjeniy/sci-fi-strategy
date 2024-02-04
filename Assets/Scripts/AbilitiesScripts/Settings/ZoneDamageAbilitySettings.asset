@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ZoneDamageAbilitySettings
   m_EditorClassIdentifier: 
   EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
-  ReloadingSpeed: 0.1
+  ReloadingSpeed: 1
   Damage: 15
   ZoneRadius: 4
+  ExplosionPrefab: {fileID: 9162217682920518536, guid: a67c749bc0e9e9647891ae0a54fe47a8,
+    type: 3}

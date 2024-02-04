@@ -50,13 +50,14 @@ namespace SustainTheStrain.AbilitiesScripts
 
         private void OnAbilityChanged(int obj)
         {
-            ExitAbilityl(obj);
+            ExitAbilityl(_selected + 1);
             EnterAbility(obj);
         }
 
         private void ExitAbilityl(int idx)
         {
             idx--;
+            if (idx != _selected) return;
             _selected = -1;
             currentAim?.Destroy();
             currentAim = null;

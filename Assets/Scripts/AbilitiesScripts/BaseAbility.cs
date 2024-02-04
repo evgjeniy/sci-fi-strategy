@@ -87,6 +87,8 @@ namespace SustainTheStrain.AbilitiesScripts
             if (EnergyController.TryReturnEnergy(EnergySpendCount))
             {
                 CurrentEnergy -= EnergySpendCount;
+                Reload = 0;
+                IsLoaded = false;
             }
         }
 

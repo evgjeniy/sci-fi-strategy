@@ -8,5 +8,6 @@ namespace SustainTheStrain
         public float ZoneRadius;
         public float SpeedKoeficient;
         public float DurationTime;
+        public GameObject ExplosionPrefab;
     }
 }

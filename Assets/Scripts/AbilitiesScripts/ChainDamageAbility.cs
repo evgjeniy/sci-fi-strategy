@@ -49,8 +49,7 @@ namespace SustainTheStrain.AbilitiesScripts
             LineObject.SetActive(false);
             var line = LineObject.GetComponentInChildren<LineRenderer>();
             line.positionCount = 0;
-            line.startWidth = line.endWidth = 0.4f;
-            line.startColor = line.endColor = Color.blue;
+            line.startWidth = line.endWidth = 0.2f;
             LineObject.SetActive(true);
             return line;
         }

@@ -7,5 +7,6 @@ namespace SustainTheStrain
     {
         public float Damage;
         public float ZoneRadius;
+        public GameObject ExplosionPrefab;
     }
 }
