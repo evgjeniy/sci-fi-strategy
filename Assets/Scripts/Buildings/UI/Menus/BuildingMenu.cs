@@ -38,8 +38,8 @@ namespace SustainTheStrain.Buildings.UI.Menus
                 var mainCameraPosition = mainCamera.position;
 
                 transform.position = Vector3.Lerp(placeholderPosition, mainCameraPosition, 0.15f);
-                transform.LookAt(placeholderPosition - mainCameraPosition);
-                yield return null;
+                transform.LookAt(placeholderPosition - mainCameraPosition, mainCamera.up);
+                yield break;
             }
         }
     }

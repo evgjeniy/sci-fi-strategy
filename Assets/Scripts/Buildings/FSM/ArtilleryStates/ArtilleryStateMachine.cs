@@ -15,6 +15,8 @@ namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
         private Transform ArtilleryTransform => _artillery.transform;
         private ArtilleryData.Stats CurrentStats => _artillery.CurrentStats;
         private Projectile ProjectilePrefab => _artillery.Data.Projectile;
+        private float DamageEnergyMultiplier => _artillery.BuildingSystem.DamageMultiplier;
+        private float CooldownEnergyMultiplier => _artillery.BuildingSystem.CooldownMultiplier;
 
         public ArtilleryStateMachine(Artillery artillery)
         {

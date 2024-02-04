@@ -10,54 +10,33 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
         {
             public AttackState(RocketStateMachine initializer) : base(initializer) {}
 
-            protected override bool CheckTransitions()
-            {
-                if (Initializer.Area.Entities.Count == 0)
-                {
-                    Initializer.SetState<IdleState>();
-                    return false;
-                }
-
-                return true;
-            }
+            protected override bool CheckTransitions() => true;
 
             protected override void OnOverridableRun()
             {
-                RotateToTarget();
+                var target = GetTarget();
+                if (target == null) { Initializer.SetState<IdleState>(); return; }
 
-                if (IsLookingToTarget())
-                    TryAttack();
+                RotateToTarget(target);
+                if (IsLookingToTarget(target)) TryAttack();
             }
 
-            private void RotateToTarget() => Initializer.RocketTransform.rotation = Quaternion.Slerp
+            private void RotateToTarget(Component target) => Initializer.RocketTransform.rotation = Quaternion.Slerp
             (
                 Initializer.RocketTransform.rotation,
-                GetRotationToTarget(),
+                GetRotationToTarget(target),
                 Time.deltaTime * 10.0f
             );
 
-            private Quaternion GetRotationToTarget()
+            private Quaternion GetRotationToTarget(Component target)
             {
                 var rocket = Initializer.RocketTransform;
-                var target = GetTarget();
-
-                return target == null
-                    ? Initializer.RocketTransform.rotation
-                    : Quaternion.LookRotation(target.transform.position - rocket.position, rocket.up);
+                return Quaternion.LookRotation(target.transform.position - rocket.position, rocket.up);
             }
 
-            private Collider GetTarget()
-            {
-                return Initializer.Area.Entities.FirstOrDefault(e => e.TryGetComponent<Damageble>(out var d) && d.Team != 1);
-            }
-
-            private bool IsLookingToTarget()
+            private bool IsLookingToTarget(Component target)
             {
                 var rocket = Initializer.RocketTransform;
-                var target = GetTarget();
-
-                if (target == null) return false;
-
                 return Vector3.Angle(target.transform.position - rocket.position, rocket.forward) < 1.0f;
             }
 
@@ -72,13 +51,15 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
                 {
                     if (attackedAmount >= Initializer.CurrentStats.MaxEnemiesTargets) break;
 
-                    if (!collider.TryGetComponent<Damageble>(out var damageable)) continue;
-                    if (damageable.Team == 1) continue;
+                    if (!collider.TryGetComponent<Damageble>(out var damageable) || damageable.Team == 1) continue;
                     if (!IsInSector(damageable.transform)) continue;
 
                     var transform = Initializer.RocketTransform;
                     var projectile = Object.Instantiate(Initializer.ProjectilePrefab, transform.position, transform.rotation);
-                    projectile.LaunchTo(damageable, d => d.Damage(Initializer.CurrentStats.Damage));
+                    projectile.LaunchTo(damageable, d =>
+                    {
+                        d.Damage(Initializer.CurrentStats.Damage * Initializer.DamageEnergyMultiplier);
+                    });
 
                     attackedAmount++;
                     isAttackSuccess = true;

@@ -1,4 +1,6 @@
-﻿using NTC.FiniteStateMachine;
+﻿using System.Linq;
+using NTC.FiniteStateMachine;
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 
 namespace SustainTheStrain.Buildings.FSM.RocketStates
@@ -12,7 +14,7 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
 
             public void OnRun()
             {
-                Initializer.Timer.Time -= Time.deltaTime;
+                Initializer.Timer.Time -= Time.deltaTime * Initializer.CooldownEnergyMultiplier;
                 Initializer.Area.Update();
 
                 if (!CheckTransitions()) return;
@@ -21,7 +23,7 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
 
             protected virtual bool CheckTransitions()
             {
-                if (Initializer.Area.Entities.Count != 0)
+                if (GetTarget() != null)
                 {
                     Initializer.SetState<AttackState>();
                     return false;
@@ -29,6 +31,9 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
 
                 return true;
             }
+
+            protected Collider GetTarget() => Initializer.Area.Entities
+                .FirstOrDefault(e => e.TryGetComponent<Damageble>(out var d) && d.Team != 1);
 
             protected virtual void OnOverridableRun() {}
         }
