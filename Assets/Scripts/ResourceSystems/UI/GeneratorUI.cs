@@ -14,7 +14,10 @@ namespace SustainTheStrain.ResourceSystems
 
         private void SetCompletionPercent(float percent)
         {
-            _completionBar.fillAmount = percent;
+            if (_completionBar != null)
+            {
+                _completionBar.fillAmount = percent;
+            }
         }
 
         public void Unsubscribe(ResourceGenerator generator)
