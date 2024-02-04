@@ -17,3 +17,5 @@ MonoBehaviour:
   ZoneRadius: 4
   SpeedKoeficient: 0.5
   DurationTime: 2
+  ExplosionPrefab: {fileID: 8188039341773610701, guid: be357c1ed0ce03543906152e90804b21,
+    type: 3}
