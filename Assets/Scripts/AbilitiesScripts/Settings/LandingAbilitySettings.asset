@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: LandingAbilitySettings
   m_EditorClassIdentifier: 
   EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
-  ReloadingSpeed: 0.05
+  ReloadingSpeed: 1
   Squad: {fileID: 319695344856091520, guid: cbe4fdeaada60114cabffb9a8919861d, type: 3}
