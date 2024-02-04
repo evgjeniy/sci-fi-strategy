@@ -50,7 +50,7 @@ namespace SustainTheStrain.AbilitiesScripts
 
         private void OnAbilityChanged(int obj)
         {
-            ExitAbilityl(obj);
+            ExitAbilityl(_selected + 1);
             EnterAbility(obj);
         }
 
