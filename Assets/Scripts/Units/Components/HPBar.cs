@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SustainTheStrain.EnergySystem;
 using UnityEngine;
@@ -28,6 +29,11 @@ namespace SustainTheStrain.Units.Components
             UpdateHP(_damageble.CurrentHP);
         }
 
+        private void Update()
+        {
+            
+        }
+
         private void OnDisable()
         {
             _damageble.OnCurrentHPChanged += UpdateHP; 
@@ -55,6 +61,8 @@ namespace SustainTheStrain.Units.Components
 
         private void UpdateHP(float value)
         {
+            _hpBar.gameObject.SetActive(!(Math.Abs(value - _damageble.MaxHP) < 0.1f));
+
             _hpBar.localScale = new Vector3(value / _damageble.MaxHP * _maxHpSize, 1, 1);
         }
     }

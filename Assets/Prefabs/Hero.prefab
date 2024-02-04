@@ -468,7 +468,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &4148816034686865303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,6 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 2
   <DamagePeriod>k__BackingField: 1
+  Animator: {fileID: 0}
 --- !u!114 &1062942572181524570
 MonoBehaviour:
   m_ObjectHideFlags: 0

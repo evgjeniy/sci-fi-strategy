@@ -9,6 +9,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         private IState _idleState;
 
         private float _attackTime;
+        private static readonly int AttackMode = Animator.StringToHash("AttackMode");
 
         public UnitAttackState(Unit context, StateMachine stateMachine) : base(context, stateMachine)
         {
@@ -24,7 +25,8 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         public override void EnterState()
         {
             Debug.Log(string.Format("[StateMachine {0}] UnitAttackState entered", context.gameObject.name));
-
+            if(context.Animator != null)
+                context.Animator.SetBool(AttackMode, true);
             _attackTime = 0;
             
             context.SwitchPathFollower(context.NavPathFollower);
@@ -33,7 +35,8 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void ExitState()
         {
-            
+            if(context.Animator != null)
+                context.Animator.SetBool(AttackMode, false);
         }
 
         public override void FrameUpdate()

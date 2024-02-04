@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units.PathFollowers
 {
@@ -51,11 +52,15 @@ namespace SustainTheStrain.Units.PathFollowers
         public void Start()
         {
             agent.isStopped = false;
+            agent.avoidancePriority = 100;
+            //agent.Enable();
         }
 
         public void Stop()
         {
             agent.isStopped = true;
+            agent.avoidancePriority = 50;
+            //agent.Disable();
         }
     }
 }

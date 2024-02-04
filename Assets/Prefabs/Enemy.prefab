@@ -214,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 1
   <DamagePeriod>k__BackingField: 0.5
+  Animator: {fileID: 0}
   _coinsDrop: 20
 --- !u!114 &7950700953650259592
 MonoBehaviour:
@@ -273,7 +274,7 @@ MonoBehaviour:
   triggerGroup: 0
   _direction: 1
   _dontLerpDirection: 0
-  _physicsMode: 0
+  _physicsMode: 1
   _motion:
     _hasOffset: 1
     _hasRotationOffset: 0
@@ -297,7 +298,7 @@ MonoBehaviour:
     applyScaleY: 0
     applyScaleZ: 0
     targetUser: {fileID: 7950700953650259592}
-  targetRigidbody: {fileID: 0}
+  targetRigidbody: {fileID: 5759341797323669258}
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 4305895776624623204}
   _result:
@@ -353,7 +354,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 1
+  m_ObstacleAvoidanceType: 0
 --- !u!54 &5759341797323669258
 Rigidbody:
   m_ObjectHideFlags: 0

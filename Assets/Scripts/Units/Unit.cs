@@ -14,6 +14,7 @@ namespace SustainTheStrain.Units
         [field:SerializeField] public float Damage { get; set; }
         [field:SerializeField] public float DamagePeriod { get; set; }
 
+        [SerializeField] public Animator Animator;
         public IPathFollower CurrentPathFollower { get; protected set; }   
         protected StateMachine.StateMachine _stateMachine = new StateMachine.StateMachine();
 

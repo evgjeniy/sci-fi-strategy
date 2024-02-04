@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Dreamteck.Splines;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units.PathFollowers
 {
@@ -56,13 +57,13 @@ namespace SustainTheStrain.Units.PathFollowers
 
         public void Stop()
         {
-            follower.enabled = false;
+            follower.Disable();
             follower.follow = false;
         }
 
         public void Start()
         {
-            follower.enabled = true;
+            follower.Enable();
             follower.follow = true;
         }
     }
