@@ -8,7 +8,7 @@ namespace SustainTheStrain.AbilitiesScripts
     {
         protected float zoneRadius;
         protected GameObject ExplosionPrefab;
-        protected readonly Vector3 offset = new(0, 0.5f, 0);
+        protected readonly Vector3 offset = new(0, 1.5f,-2.5f);
 
         protected Collider[] GetColliders(Vector3 point) => Physics.OverlapSphere(point, zoneRadius);
 
@@ -27,16 +27,8 @@ namespace SustainTheStrain.AbilitiesScripts
         protected void SpawnParticles(Vector3 point)
         {
             var Explosion = GameObject.Instantiate(ExplosionPrefab, point + offset, Quaternion.identity);
-            Explosion.SetActive(false);
-            var ps = Explosion.GetComponent<ParticleSystem>();
-            var main = ps.main;
-            var sizeCurve = new ParticleSystem.MinMaxCurve();
-            sizeCurve.mode = ParticleSystemCurveMode.TwoConstants;
-            sizeCurve.constantMin = Mathf.Max(0, zoneRadius - 0.5f);
-            sizeCurve.constantMax = zoneRadius + 0.5f;
-            main.startSize = sizeCurve;
-            Explosion.SetActive(true);
-            GameObject.Destroy(Explosion, 1);
+            Explosion.transform.localScale = Vector3.one * 3f;
+            GameObject.Destroy(Explosion, 3);
         }
     }
 }
