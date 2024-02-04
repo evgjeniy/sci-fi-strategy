@@ -14,6 +14,8 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
 
         private Transform LaserTransform => _laser.transform;
         private LaserData.Stats CurrentStats => _laser.CurrentStats;
+        private float DamageEnergyMultiplier => _laser.BuildingSystem.DamageMultiplier;
+        private float CooldownEnergyMultiplier => _laser.BuildingSystem.CooldownMultiplier;
 
         public LaserStateMachine(Laser laser)
         {

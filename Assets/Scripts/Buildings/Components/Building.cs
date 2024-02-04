@@ -6,11 +6,15 @@ namespace SustainTheStrain.Buildings.Components
 {
     public abstract class Building : MonoBehaviour
     {
+        [Inject] public BuildingSystem BuildingSystem { get; set; }
+
         private int _currentUpgradeLevel = -1;
 
         public event System.Action<int> OnLevelUpgrade;
 
         protected abstract int MaxUpgradeLevel { get; }
+        public abstract int UpgradePrice { get; }
+        public abstract int DestroyCompensation { get; }
 
         public int CurrentUpgradeLevel
         {
@@ -18,9 +22,7 @@ namespace SustainTheStrain.Buildings.Components
             set
             {
                 if (value > MaxUpgradeLevel || value < 0 || _currentUpgradeLevel == value) return;
-
-                _currentUpgradeLevel = value;
-                OnLevelUpgrade?.Invoke(_currentUpgradeLevel);
+                OnLevelUpgrade?.Invoke(_currentUpgradeLevel = value);
             }
         }
 

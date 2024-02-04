@@ -21,6 +21,8 @@ namespace SustainTheStrain.Buildings.Components
         public BarrackData Data { get; private set; }
         public BarrackData.Stats CurrentStats => Data.BarrackStats[CurrentUpgradeLevel].Stats;
         protected override int MaxUpgradeLevel => Data.BarrackStats.Length - 1;
+        public override int UpgradePrice => Data.BarrackStats[CurrentUpgradeLevel].NextLevelPrice;
+        public override int DestroyCompensation => Data.BarrackStats[CurrentUpgradeLevel].DestroyCompensation;
 
         [Zenject.Inject]
         private void Construct(IStaticDataService staticDataService)

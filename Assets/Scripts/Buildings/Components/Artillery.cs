@@ -14,6 +14,8 @@ namespace SustainTheStrain.Buildings.Components
         public ArtilleryData Data { get; private set; }
         public ArtilleryData.Stats CurrentStats => Data.ArtilleryStats[CurrentUpgradeLevel].Stats;
         protected override int MaxUpgradeLevel => Data.ArtilleryStats.Length - 1;
+        public override int UpgradePrice => Data.ArtilleryStats[CurrentUpgradeLevel].NextLevelPrice;
+        public override int DestroyCompensation => Data.ArtilleryStats[CurrentUpgradeLevel].DestroyCompensation;
 
         [Zenject.Inject]
         private void Construct(IStaticDataService staticDataService)

@@ -14,37 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 2741849864599189330, guid: 4c00a8e16ec8f8b42ba7a8852d949dc9,
     type: 3}
-  <Mesh>k__BackingField: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  <Mesh>k__BackingField: {fileID: -2432090755550338912, guid: 7aad8d026604fc04fac0de8ec53d7853,
+    type: 3}
   <AttackMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
+  <CreatePrice>k__BackingField: 10
   <Projectile>k__BackingField: {fileID: -3499578410909440990, guid: cd038acd54d433a4d99b1a15c22e5121,
     type: 3}
   <ArtilleryStats>k__BackingField:
-  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: bf968cbe7271cb24692540a8604a26b7,
+  - <Graphics>k__BackingField: {fileID: 919132149155446097, guid: 7aad8d026604fc04fac0de8ec53d7853,
       type: 3}
     <Stats>k__BackingField:
       <Damage>k__BackingField: 3
       <AttackCooldown>k__BackingField: 3
       <AttackRadius>k__BackingField: 10
       <ExplosionRadius>k__BackingField: 3
-    <NextLevelPrice>k__BackingField: 1
-    <DestroyCompensation>k__BackingField: 1
-  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: ab5343c498d46494c80139e58cb20cab,
+    <NextLevelPrice>k__BackingField: 15
+    <DestroyCompensation>k__BackingField: 10
+  - <Graphics>k__BackingField: {fileID: 919132149155446097, guid: 7aad8d026604fc04fac0de8ec53d7853,
       type: 3}
     <Stats>k__BackingField:
       <Damage>k__BackingField: 4
       <AttackCooldown>k__BackingField: 3
       <AttackRadius>k__BackingField: 12.5
       <ExplosionRadius>k__BackingField: 4
-    <NextLevelPrice>k__BackingField: 1
-    <DestroyCompensation>k__BackingField: 1
-  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 91d6ea2a63b7dc845a66b5f71d39a856,
+    <NextLevelPrice>k__BackingField: 20
+    <DestroyCompensation>k__BackingField: 15
+  - <Graphics>k__BackingField: {fileID: 919132149155446097, guid: 7aad8d026604fc04fac0de8ec53d7853,
       type: 3}
     <Stats>k__BackingField:
       <Damage>k__BackingField: 5
       <AttackCooldown>k__BackingField: 3
       <AttackRadius>k__BackingField: 15
       <ExplosionRadius>k__BackingField: 5
-    <NextLevelPrice>k__BackingField: 1
-    <DestroyCompensation>k__BackingField: 1
+    <NextLevelPrice>k__BackingField: 25
+    <DestroyCompensation>k__BackingField: 20

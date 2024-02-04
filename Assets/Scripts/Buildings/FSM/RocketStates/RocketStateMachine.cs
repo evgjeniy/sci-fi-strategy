@@ -15,6 +15,8 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
         private Transform RocketTransform => _rocket.transform;
         private RocketData.Stats CurrentStats => _rocket.CurrentStats;
         private Projectile ProjectilePrefab => _rocket.Data.Projectile;
+        private float DamageEnergyMultiplier => _rocket.BuildingSystem.DamageMultiplier;
+        private float CooldownEnergyMultiplier => _rocket.BuildingSystem.CooldownMultiplier;
 
         public RocketStateMachine(Rocket rocket)
         {

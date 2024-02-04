@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using SustainTheStrain.Units.Components;
+﻿using SustainTheStrain.Units.Components;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
 {
@@ -11,85 +8,64 @@ namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
         private class AttackState : IdleState
         {
             private int _explodedSize;
-            private readonly Collider[] _exploded = new Collider[16];
+            private readonly Collider[] _exploded = new Collider[32];
 
             public AttackState(ArtilleryStateMachine initializer) : base(initializer) {}
 
-            protected override bool CheckTransitions()
-            {
-                if (Initializer.Area.Entities.Count == 0)
-                {
-                    Initializer.SetState<IdleState>();
-                    return false;
-                }
-
-                return true;
-            }
+            protected override bool CheckTransitions() => true;
 
             protected override void OnOverridableRun()
             {
-                RotateToTarget();
+                var target = GetTarget();
+                if (target == null) { Initializer.SetState<IdleState>(); return; }
 
-                if (IsLookingToTarget())
-                    TryAttack();
+                RotateToTarget(target);
+                if (IsLookingToTarget(target)) TryAttack(target);
             }
 
-            private void RotateToTarget() => Initializer.ArtilleryTransform.rotation = Quaternion.Slerp
+            private void RotateToTarget(Component target) => Initializer.ArtilleryTransform.rotation = Quaternion.Slerp
             (
                 Initializer.ArtilleryTransform.rotation,
-                GetRotationToTarget(),
+                GetRotationToTarget(target),
                 Time.deltaTime * 3.0f
             );
 
-            private Quaternion GetRotationToTarget()
+            private Quaternion GetRotationToTarget(Component target)
             {
                 var artillery = Initializer.ArtilleryTransform;
-                var targetPosition = Initializer.Area.Entities.First().transform.position;
-
-                return Quaternion.LookRotation(targetPosition - artillery.position, artillery.up);
+                return Quaternion.LookRotation(target.transform.position - artillery.position, artillery.up);
             }
 
-            private bool IsLookingToTarget()
+            private bool IsLookingToTarget(Component target)
             {
                 var artillery = Initializer.ArtilleryTransform;
-                var targetPosition = Initializer.Area.Entities.First().transform.position;
-
-                return Vector3.Angle(targetPosition - artillery.position, artillery.forward) < 1.0f;
+                return Vector3.Angle(target.transform.position - artillery.position, artillery.forward) < 1.0f;
             }
 
-            private void TryAttack()
+            private void TryAttack(Component target)
             {
                 if (!Initializer.Timer.IsTimeOver) return;
+                if (!target.TryGetComponent<Damageble>(out var damageable) || damageable.Team == 1) return;
 
-                foreach (var entity in Initializer.Area.Entities)
-                {
-                    if (!entity.TryGetComponent<Damageble>(out var damageable)) continue;
-                    if (damageable.Team == 1) continue;
+                Object.Instantiate
+                (
+                    Initializer.ProjectilePrefab,
+                    Initializer.ArtilleryTransform.position,
+                    Initializer.ArtilleryTransform.rotation
+                ).LaunchTo(damageable, Explosion);
 
-                    Object.Instantiate
-                    (
-                        Initializer.ProjectilePrefab,
-                        Initializer.ArtilleryTransform.position,
-                        Initializer.ArtilleryTransform.rotation
-                    ).LaunchTo(damageable, Explosion);
-
-                    Initializer.Timer.Time = Initializer.CurrentStats.AttackCooldown;
-                    break;
-                }
+                Initializer.Timer.Time = Initializer.CurrentStats.AttackCooldown;
             }
 
             private void Explosion(Damageble target)
             {
-                Array.Clear(_exploded, 0, _explodedSize);
-                _explodedSize = Physics.OverlapSphereNonAlloc(target.transform.position, Initializer.CurrentStats.ExplosionRadius, _exploded);
+                System.Array.Clear(_exploded, 0, _explodedSize);
+                _explodedSize = Physics.OverlapSphereNonAlloc(target.transform.position,
+                    Initializer.CurrentStats.ExplosionRadius, _exploded);
 
                 for (var i = 0; i < _explodedSize; i++)
-                {
-                    if (!_exploded[i].TryGetComponent<Damageble>(out var damageable)) continue;
-                    if (damageable.Team == 1) continue;
-                    
-                    damageable.Damage(Initializer.CurrentStats.Damage);
-                }
+                    if (_exploded[i].TryGetComponent<Damageble>(out var damageable) && damageable.Team != 1)
+                        damageable.Damage(Initializer.CurrentStats.Damage * Initializer.DamageEnergyMultiplier);
             }
         }
     }

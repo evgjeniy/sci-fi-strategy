@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using SustainTheStrain.Units.Components;
+﻿using SustainTheStrain.Units.Components;
 using UnityEngine;
 
 namespace SustainTheStrain.Buildings.FSM.LaserStates
@@ -10,58 +9,42 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
         {
             public AttackState(LaserStateMachine initializer) : base(initializer) {}
 
-            protected override bool CheckTransitions()
-            {
-                if (Initializer.Area.Entities.Count == 0)
-                {
-                    Initializer.SetState<IdleState>();
-                    return false;
-                }
-
-                return true;
-            }
+            protected override bool CheckTransitions() => true;
 
             protected override void OnOverridableRun()
             {
-                RotateToTarget();
+                var target = GetTarget();
+                if (target == null) { Initializer.SetState<IdleState>(); return; }
 
-                if (IsLookingToTarget())
-                    TryAttack();
+                RotateToTarget(target);
+                if (IsLookingToTarget(target)) TryAttack(target);
             }
 
-            private void RotateToTarget() => Initializer.LaserTransform.rotation = Quaternion.Slerp
+            private void RotateToTarget(Component target) => Initializer.LaserTransform.rotation = Quaternion.Slerp
             (
                 Initializer.LaserTransform.rotation,
-                GetRotationToTarget(),
+                GetRotationToTarget(target),
                 Time.deltaTime * 3.0f
             );
 
-            private Quaternion GetRotationToTarget()
+            private Quaternion GetRotationToTarget(Component target)
             {
                 var laser = Initializer.LaserTransform;
-                var targetPosition = Initializer.Area.Entities.First().transform.position;
-
-                return Quaternion.LookRotation(targetPosition - laser.position, laser.up);
+                return Quaternion.LookRotation(target.transform.position - laser.position, laser.up);
             }
 
-            private bool IsLookingToTarget()
+            private bool IsLookingToTarget(Component target)
             {
                 var laser = Initializer.LaserTransform;
-                var targetPosition = Initializer.Area.Entities.First().transform.position;
-
-                return Vector3.Angle(targetPosition - laser.position, laser.forward) < 1.0f;
+                return Vector3.Angle(target.transform.position - laser.position, laser.forward) < 1.0f;
             }
 
-            private void TryAttack()
+            private void TryAttack(Component target)
             {
                 if (!Initializer.Timer.IsTimeOver) return;
+                if (!target.TryGetComponent<Damageble>(out var damageable) || damageable.Team == 1) return;
 
-                var collider = Initializer.Area.Entities.First();
-                if (!collider.TryGetComponent<Damageble>(out var damageable)) return;
-                if (damageable.Team == 1) return;
-
-                damageable.Damage(Initializer.CurrentStats.Damage);
-
+                damageable.Damage(Initializer.CurrentStats.Damage * Initializer.DamageEnergyMultiplier);
                 Initializer.Timer.Time = Initializer.CurrentStats.AttackCooldown;
             }
         }

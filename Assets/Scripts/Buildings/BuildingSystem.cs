@@ -1,12 +1,15 @@
+using SustainTheStrain.AbilitiesScripts;
 using SustainTheStrain.Buildings.Components;
 using SustainTheStrain.Buildings.Data;
 using SustainTheStrain.Buildings.UI.Menus;
+using SustainTheStrain.EnergySystem;
+using SustainTheStrain.EnergySystem.Settings;
 using SustainTheStrain.Input;
-using UnityEngine;
+using SustainTheStrain.ResourceSystems;
 
 namespace SustainTheStrain.Buildings
 {
-    public class BuildingSystem : MonoBehaviour
+    public class BuildingSystem : MonoEnergySystem
     {
         private IBuildingViewer _transparentBuildingViewer;
         private IBuildingCreateMenu _buildingCreateMenu;
@@ -14,14 +17,20 @@ namespace SustainTheStrain.Buildings
 
         private ISelectableInput<BuildingPlaceholder> _input;
         private Building.Factory _buildingFactory;
+        private ResourceManager _resourceManager;
+        private BuildingSystemSettings _buildingSettings;
 
-        private BuildingPlaceholder CurrentPlaceholder { get; set; }
+        private BuildingPlaceholder _currentPlaceholder;
+
+        public float DamageMultiplier => _buildingSettings.DamageMultipliers[CurrentEnergy];
+        public float CooldownMultiplier => _buildingSettings.CooldownMultipliers[CurrentEnergy];
 
         [Zenject.Inject]
-        private void Construct(ISelectableInput<BuildingPlaceholder> input, Building.Factory buildingFactory)
+        private void Construct(ISelectableInput<BuildingPlaceholder> input, Building.Factory buildingFactory, ResourceManager resourceManager)
         {
             _input = input;
             _buildingFactory = buildingFactory;
+            _resourceManager = resourceManager;
         }
 
         private void Awake()
@@ -35,10 +44,10 @@ namespace SustainTheStrain.Buildings
         {
             _input.OnSelected += OnPlaceholderSelected;
             _input.OnDeselected += OnPlaceholderDeselected;
-            
+
             _buildingCreateMenu.OnCreateRequested += CreateBuilding;
             _buildingCreateMenu.OnBuildingDataChanged += _transparentBuildingViewer.ChangeBuildingMeshPreview;
-            
+
             _buildingManagementMenu.OnUpgradeRequested += UpgradeBuilding;
             _buildingManagementMenu.OnDestroyRequested += DestroyBuilding;
         }
@@ -47,7 +56,7 @@ namespace SustainTheStrain.Buildings
         {
             _input.OnSelected -= OnPlaceholderSelected;
             _input.OnDeselected -= OnPlaceholderDeselected;
-            
+
             _buildingCreateMenu.OnCreateRequested -= CreateBuilding;
             _buildingCreateMenu.OnBuildingDataChanged -= _transparentBuildingViewer.ChangeBuildingMeshPreview;
 
@@ -57,16 +66,16 @@ namespace SustainTheStrain.Buildings
 
         private void OnPlaceholderSelected(BuildingPlaceholder placeholder)
         {
-            CurrentPlaceholder = placeholder;
+            _currentPlaceholder = placeholder;
 
-            if (CurrentPlaceholder.HasBuilding)
+            if (_currentPlaceholder.HasBuilding)
             {
-                _buildingManagementMenu.Show(CurrentPlaceholder);
+                _buildingManagementMenu.Show(_currentPlaceholder);
             }
             else
             {
-                _buildingCreateMenu.Show(CurrentPlaceholder);
-                _transparentBuildingViewer.Show(CurrentPlaceholder);
+                _buildingCreateMenu.Show(_currentPlaceholder);
+                _transparentBuildingViewer.Show(_currentPlaceholder);
             }
         }
 
@@ -79,33 +88,53 @@ namespace SustainTheStrain.Buildings
 
         private void CreateBuilding(BuildingData buildingData)
         {
-            if (CurrentPlaceholder.HasBuilding) return;
-            
-            _buildingCreateMenu.Hide(CurrentPlaceholder);
-            _transparentBuildingViewer.Hide(CurrentPlaceholder);
-            
-            var newBuilding = _buildingFactory.Create(buildingData);
-            CurrentPlaceholder.SetBuilding(newBuilding);
+            if (_currentPlaceholder.HasBuilding) return;
+            if (_resourceManager.CurrentGold < buildingData.CreatePrice) return;
 
-            _buildingManagementMenu.Show(CurrentPlaceholder);
+            _buildingCreateMenu.Hide(_currentPlaceholder);
+            _transparentBuildingViewer.Hide(_currentPlaceholder);
+
+            var newBuilding = _buildingFactory.Create(buildingData);
+
+            _currentPlaceholder.SetBuilding(newBuilding);
+
+            _resourceManager.CurrentGold -= buildingData.CreatePrice;
+
+            _buildingManagementMenu.Show(_currentPlaceholder);
         }
 
         private void UpgradeBuilding()
         {
-            if (!CurrentPlaceholder.HasBuilding) return;
+            if (!_currentPlaceholder.HasBuilding) return;
+            if (_resourceManager.CurrentGold < _currentPlaceholder.Building.UpgradePrice) return;
 
-            CurrentPlaceholder.Building.CurrentUpgradeLevel++;
+            _currentPlaceholder.Building.CurrentUpgradeLevel++;
+
+            _resourceManager.CurrentGold -= _currentPlaceholder.Building.UpgradePrice;
         }
-        
+
         private void DestroyBuilding()
         {
-            if (!CurrentPlaceholder.HasBuilding) return;
-            
-            _buildingManagementMenu.Hide(CurrentPlaceholder);
-            
-            CurrentPlaceholder.DestroyBuilding();
-            
-            _buildingCreateMenu.Show(CurrentPlaceholder);
+            if (!_currentPlaceholder.HasBuilding) return;
+
+            _buildingManagementMenu.Hide(_currentPlaceholder);
+
+            _resourceManager.CurrentGold += _currentPlaceholder.Building.DestroyCompensation;
+            _currentPlaceholder.DestroyBuilding();
+
+            _buildingCreateMenu.Show(_currentPlaceholder);
         }
+
+        #region Energy
+
+        public override void SetEnergySettings(EnergySystemSettings settings)
+        {
+            _buildingSettings = settings as BuildingSystemSettings;
+        }
+        
+        
+        
+
+        #endregion
     }
 }

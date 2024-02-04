@@ -77,6 +77,5 @@ namespace SustainTheStrain.ResourceSystems
         {
             UnSubscribe();
         }
-        
     }
 }
