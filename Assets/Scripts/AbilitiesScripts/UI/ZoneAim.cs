@@ -27,7 +27,7 @@ namespace SustainTheStrain
         public override void SpawnAimZone()
         {
             aimZone = Object.Instantiate(aimZonePrefab, _nullVector, Quaternion.Euler(90, 0, 0));
-            aimZone.GetComponent<DecalProjector>().size = new Vector3(2 * zoneRadius, 2 * zoneRadius, depth);
+            aimZone.GetComponent<DecalProjector>().size = new Vector3(2 * zoneRadius, 2.1f * zoneRadius, depth);
         }
 
         public override void Destroy() => Object.Destroy(aimZone);

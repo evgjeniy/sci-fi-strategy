@@ -6,6 +6,7 @@ namespace SustainTheStrain.AbilitiesScripts
     {
         protected float damage;
         protected GameObject ExplosionPrefab;
+        protected readonly Vector3 offset = new(0, 0.5f, 0);
         public ZoneDamageAbility(ZoneDamageAbilitySettings settings)
         {
             zoneRadius = settings.ZoneRadius;
@@ -23,14 +24,14 @@ namespace SustainTheStrain.AbilitiesScripts
         protected override void SuccessShootLogic(RaycastHit hit, int team)
         {
             Collider[] colliders = GetColliders(hit.point);
-            for(int i = 0; i < colliders.Length; i++)
+            for (int i = 0; i < colliders.Length; i++)
             {
                 var dmg = colliders[i]?.GetComponent<Units.Components.Damageble>();
                 if (dmg == null || dmg.Team == team) continue;
                 dmg.Damage(damage);
                 //Debug.Log(dmg.CurrentHP);
             }
-            var Explosion = GameObject.Instantiate(ExplosionPrefab, hit.transform, false);
+            var Explosion = GameObject.Instantiate(ExplosionPrefab, hit.point + offset, Quaternion.identity);
             Explosion.SetActive(false);
             var ps = Explosion.GetComponent<ParticleSystem>();
             var main = ps.main;
