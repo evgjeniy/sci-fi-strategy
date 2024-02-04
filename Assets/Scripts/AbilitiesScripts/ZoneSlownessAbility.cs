@@ -11,8 +11,9 @@ namespace SustainTheStrain.AbilitiesScripts
         {
             zoneRadius = settings.ZoneRadius;
             LoadingSpeed = settings.ReloadingSpeed;
-            speedCoefficient = settings.SpeedKoeficient;
-            slownessTime = settings.DurationTime == 0 ? 1 : settings.DurationTime;
+            speedCoefficient = settings.SpeedKoeficient == 0 ? 1 : settings.SpeedKoeficient;
+            slownessTime = settings.DurationTime;
+            ExplosionPrefab = settings.ExplosionPrefab;
             SetEnergySettings(settings.EnergySettings);
         }
 

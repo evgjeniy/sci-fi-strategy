@@ -10,7 +10,7 @@ namespace SustainTheStrain
         protected GameObject aimZone;
         protected Vector3 offset = new(0, 0.2f, 0);
         protected readonly Vector3 _nullVector = new(0, 0, 0);
-        protected readonly float depth = 1f; //kostyl
+        protected readonly float depth = 3f; //kostyl
 
         public ZoneAim(float radius, GameObject pref, LayerMask lm, int dst)
         {

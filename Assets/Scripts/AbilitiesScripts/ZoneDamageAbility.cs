@@ -5,8 +5,7 @@ namespace SustainTheStrain.AbilitiesScripts
     public class ZoneDamageAbility : ZoneAbility
     {
         protected float damage;
-        protected GameObject ExplosionPrefab;
-        protected readonly Vector3 offset = new(0, 0.5f, 0);
+
         public ZoneDamageAbility(ZoneDamageAbilitySettings settings)
         {
             zoneRadius = settings.ZoneRadius;
@@ -31,17 +30,6 @@ namespace SustainTheStrain.AbilitiesScripts
                 dmg.Damage(damage);
                 //Debug.Log(dmg.CurrentHP);
             }
-            var Explosion = GameObject.Instantiate(ExplosionPrefab, hit.point + offset, Quaternion.identity);
-            Explosion.SetActive(false);
-            var ps = Explosion.GetComponent<ParticleSystem>();
-            var main = ps.main;
-            var sizeCurve = new ParticleSystem.MinMaxCurve();
-            sizeCurve.mode = ParticleSystemCurveMode.TwoConstants;
-            sizeCurve.constantMin = Mathf.Max(0, zoneRadius - 0.5f);
-            sizeCurve.constantMax = zoneRadius + 0.5f;
-            main.startSize = sizeCurve;
-            Explosion.SetActive(true);
-            GameObject.Destroy(Explosion, 1);
         }
 
         protected override void ReadyToShoot()
