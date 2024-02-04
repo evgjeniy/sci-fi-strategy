@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 7594623059986589967, guid: d8747da382f853c4ea5bd47dc2e9a356,
     type: 3}
-  <Mesh>k__BackingField: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  <Mesh>k__BackingField: {fileID: -2432090755550338912, guid: 5ba17ae94cfd6fd43abb82930fe710b5,
+    type: 3}
   <AttackMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
   <CreatePrice>k__BackingField: 8
   <BarrackStats>k__BackingField:
-  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 8aa5c836f2ca6c944b0d7086bdb00bda,
+  - <Graphics>k__BackingField: {fileID: 919132149155446097, guid: 5ba17ae94cfd6fd43abb82930fe710b5,
       type: 3}
     <Stats>k__BackingField:
       <UnitMaxHealth>k__BackingField: 100
@@ -29,7 +30,7 @@ MonoBehaviour:
       <RespawnCooldown>k__BackingField: 10
     <NextLevelPrice>k__BackingField: 12
     <DestroyCompensation>k__BackingField: 8
-  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 1fc35353e3e55914d848f417107c58cf,
+  - <Graphics>k__BackingField: {fileID: 919132149155446097, guid: 5ba17ae94cfd6fd43abb82930fe710b5,
       type: 3}
     <Stats>k__BackingField:
       <UnitMaxHealth>k__BackingField: 125
@@ -38,7 +39,7 @@ MonoBehaviour:
       <RespawnCooldown>k__BackingField: 7
     <NextLevelPrice>k__BackingField: 18
     <DestroyCompensation>k__BackingField: 12
-  - <Graphics>k__BackingField: {fileID: 2387698185728741371, guid: 332fc68cbfb57ea4d8db2f3783a323cf,
+  - <Graphics>k__BackingField: {fileID: 919132149155446097, guid: 5ba17ae94cfd6fd43abb82930fe710b5,
       type: 3}
     <Stats>k__BackingField:
       <UnitMaxHealth>k__BackingField: 150
