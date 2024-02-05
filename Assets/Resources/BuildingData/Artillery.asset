@@ -20,7 +20,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   <CreatePrice>k__BackingField: 10
-  <Projectile>k__BackingField: {fileID: -3499578410909440990, guid: cd038acd54d433a4d99b1a15c22e5121,
+  <Projectile>k__BackingField: {fileID: 2508788176364590359, guid: 06347687b9a8b424c95b6862f55f5040,
     type: 3}
   <ArtilleryStats>k__BackingField:
   - <Graphics>k__BackingField: {fileID: 919132149155446097, guid: 7aad8d026604fc04fac0de8ec53d7853,
