@@ -1,5 +1,6 @@
 ﻿using SustainTheStrain.Units.Components;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings.FSM.LaserStates
 {
@@ -11,13 +12,26 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
 
             protected override bool CheckTransitions() => true;
 
+            public override void OnEnter() => Initializer.Context.Line.Enable();
+            public override void OnExit() => Initializer.Context.Line.Disable();
+
             protected override void OnOverridableRun()
             {
                 var target = GetTarget();
                 if (target == null) { Initializer.SetState<IdleState>(); return; }
 
                 RotateToTarget(target);
+                UpdateLineRenderer(target);
                 if (IsLookingToTarget(target)) TryAttack(target);
+            }
+
+            private void UpdateLineRenderer(Component target)
+            {
+                Initializer.Context.Line.SetPositions(new []
+                {
+                    Initializer.Context.transform.position,
+                    target.transform.position
+                });
             }
 
             private void RotateToTarget(Component target) => Initializer.LaserTransform.rotation = Quaternion.Slerp
