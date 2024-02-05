@@ -28,7 +28,7 @@ MonoBehaviour:
     <Stats>k__BackingField:
       <Damage>k__BackingField: 3
       <AttackCooldown>k__BackingField: 3
-      <AttackRadius>k__BackingField: 10
+      <AttackRadius>k__BackingField: 20
       <ExplosionRadius>k__BackingField: 3
     <NextLevelPrice>k__BackingField: 15
     <DestroyCompensation>k__BackingField: 10

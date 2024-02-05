@@ -29,7 +29,9 @@ namespace SustainTheStrain.ResourceSystems
         
         public event Action<int> OnGoldChanged;
         [SerializeField] private int _maxGold;
+        
         private GoldGenerator _goldGenerator;
+        [SerializeField]
         private int _currentGold;
         public int CurrentGold
         {

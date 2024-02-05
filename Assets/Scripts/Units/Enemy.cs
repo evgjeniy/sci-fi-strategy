@@ -25,6 +25,7 @@ namespace SustainTheStrain.Units
         private void Start()
         {
             Init();
+            InitLogic();
         }
 
         protected override void Init()
@@ -33,7 +34,10 @@ namespace SustainTheStrain.Units
 
             if (TryGetComponent<SplineFollower>(out var splineFollower))
                 SplinePathFollower = new SplinePathFollower(splineFollower);
+        }
 
+        protected virtual void InitLogic()
+        {
             _splineMoveState = new EnemySplineMoveState(this, _stateMachine);
             _attackState = new UnitAttackState(this, _stateMachine);
             _aggroState = new UnitAgroState(this, _stateMachine);
@@ -42,7 +46,6 @@ namespace SustainTheStrain.Units
             _attackState.Init(_aggroState, _splineMoveState);
 
             _stateMachine.Initialize(_splineMoveState);
-            
         }
         
         public class Factory : IFactory<Enemy>

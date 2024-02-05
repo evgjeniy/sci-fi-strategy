@@ -19,6 +19,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Artillery_Material_3
     second: {fileID: 2100000, guid: 5b0a45f974e422f4084a084525d9a2ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: defaultMat
+    second: {fileID: 2100000, guid: f8effc758869fa244a5eec0183004b18, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

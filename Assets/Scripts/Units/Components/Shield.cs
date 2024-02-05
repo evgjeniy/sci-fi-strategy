@@ -10,7 +10,7 @@ namespace SustainTheStrain.Units.Components
     {
         [SerializeField]
         private int _cellsCount = 0;
-
+        
         public int CellsCount
         {
             get => _cellsCount;

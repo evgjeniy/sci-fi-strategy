@@ -78,4 +78,4 @@ MonoBehaviour:
   ControllButton: {fileID: 0}
   _imagePrefab: {fileID: 7664057810937648228, guid: d759a88e2394dae48ba619b27ce81fa6,
     type: 3}
-  _filledColor: {r: 0.2753245, g: 0.1481844, b: 0.8490566, a: 1}
+  _filledColor: {r: 0, g: 0.5254902, b: 0.6901961, a: 1}

@@ -16,5 +16,5 @@ MonoBehaviour:
   ReloadingSpeed: 1
   Damage: 15
   ZoneRadius: 4
-  ExplosionPrefab: {fileID: 9162217682920518536, guid: a67c749bc0e9e9647891ae0a54fe47a8,
+  ExplosionPrefab: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
     type: 3}

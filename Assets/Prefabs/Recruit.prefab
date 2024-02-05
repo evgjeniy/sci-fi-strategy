@@ -107,6 +107,7 @@ MonoBehaviour:
   <Damage>k__BackingField: 1
   <DamagePeriod>k__BackingField: 0.5
   Animator: {fileID: 0}
+  _afterDeath: {fileID: 0}
 --- !u!136 &2351310096217553143
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -262,6 +263,7 @@ MonoBehaviour:
   _shieldBarRef: {fileID: 0}
   _cellOffset: 3
   _maxHpSize: 5
+  _visual: {fileID: 0}
 --- !u!1 &3300110456601824311
 GameObject:
   m_ObjectHideFlags: 0

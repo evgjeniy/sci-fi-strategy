@@ -3,6 +3,7 @@ using SustainTheStrain.Input;
 using SustainTheStrain.Input.States;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using Zenject;
 
 namespace SustainTheStrain.Units
@@ -46,6 +47,12 @@ namespace SustainTheStrain.Units
             _stateMachine.Initialize(_idleState);
         }
 
+        private void Update()
+        {
+            Animator.SetBool("Moving", !NavPathFollower.IsDestinationReached() || !NavPathFollower.IsStopped);
+            StateMachine.CurrentState.FrameUpdate();
+        }
+        
         public void Move(Vector3 destination)
         {
             _destination = destination;

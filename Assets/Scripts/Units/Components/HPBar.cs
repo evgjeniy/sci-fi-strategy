@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using SustainTheStrain.EnergySystem;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units.Components
 {
@@ -14,6 +15,7 @@ namespace SustainTheStrain.Units.Components
         [SerializeField] private ShieldBar _shieldBarRef;
         [SerializeField] private float _cellOffset = 3f;
         [SerializeField] private float _maxHpSize;
+        [SerializeField] private Transform _visual;
         
         private List<ShieldBar> _shieldBars = new();
         
@@ -31,7 +33,13 @@ namespace SustainTheStrain.Units.Components
 
         private void Update()
         {
-            
+            if (_shield != null)
+            {
+                if (_shield.ShieldCells[0].CurrentHP <= 0)
+                    _visual.gameObject.Deactivate();
+                else
+                    _visual.gameObject.Activate();
+            }
         }
 
         private void OnDisable()

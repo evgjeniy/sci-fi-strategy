@@ -10,6 +10,8 @@ namespace SustainTheStrain.Units.PathFollowers
 
         public float Speed { get => agent.speed; set => agent.speed = value; }
 
+        public bool IsStopped => agent.isStopped;
+        
         public NavPathFollower(NavMeshAgent agent)
         {
             this.agent = agent;

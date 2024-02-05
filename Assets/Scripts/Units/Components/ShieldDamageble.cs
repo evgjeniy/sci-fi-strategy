@@ -25,7 +25,7 @@ namespace SustainTheStrain.Units.Components
             }
             CurrentHP -= damage;
 
-            if (CurrentHP < 0)
+            if (CurrentHP <= 0)
             {
                 Die();
             }
