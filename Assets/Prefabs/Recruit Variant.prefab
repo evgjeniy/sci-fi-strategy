@@ -154,6 +154,12 @@ PrefabInstance:
       propertyPath: Animator
       value: 
       objectReference: {fileID: 8250298740611358943}
+    - target: {fileID: 3357532105762482792, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
+      propertyPath: _afterDeath
+      value: 
+      objectReference: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
+        type: 3}
     - target: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -400,6 +406,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 390f70e7119eadc44ab46a79dc88116e, type: 2}
+    - target: {fileID: 3090547275909776703, guid: bcf3b726a335b0046afb095e3e4b0842,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 296b3d325de9c9d4f8de004a69c73d66, type: 2}
     - target: {fileID: 3101258336821524534, guid: bcf3b726a335b0046afb095e3e4b0842,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

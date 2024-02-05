@@ -23,6 +23,8 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
             if (context.transform.position != context.GuardPosition)
                 context.NavPathFollower.MoveTo(context.GuardPosition);
+            
+            context.Animator.SetBool("Moving", false);
         }
 
         public override void ExitState()

@@ -30,6 +30,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
             
             Debug.Log(string.Format("[StateMachine {0}] UnitAgroState entered", context.gameObject.name));
             Debug.Log(string.Format("[StateMachine {0}] OPPONENT {1}", context.gameObject.name, context.Duelable.Opponent.gameObject.name));
+            context.Animator.SetBool("Moving", true);
         }
 
         public override void ExitState()

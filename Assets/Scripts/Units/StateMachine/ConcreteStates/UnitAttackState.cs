@@ -25,8 +25,12 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         public override void EnterState()
         {
             Debug.Log(string.Format("[StateMachine {0}] UnitAttackState entered", context.gameObject.name));
-            if(context.Animator != null)
+            if (context.Animator != null)
+            {
                 context.Animator.SetBool(AttackMode, true);
+                context.Animator.SetBool("Moving", false);
+            }
+
             _attackTime = 0;
             
             context.SwitchPathFollower(context.NavPathFollower);
