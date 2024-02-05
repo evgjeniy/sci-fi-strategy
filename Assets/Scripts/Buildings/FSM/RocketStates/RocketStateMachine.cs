@@ -7,20 +7,19 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
 {
     public partial class RocketStateMachine : StateMachine<RocketStateMachine>
     {
-        private readonly Rocket _rocket;
-
+        private Rocket Context { get; set; }
         private Area Area { get; }
         private Timer Timer { get; } = new();
 
-        private Transform RocketTransform => _rocket.transform;
-        private RocketData.Stats CurrentStats => _rocket.CurrentStats;
-        private Projectile ProjectilePrefab => _rocket.Data.Projectile;
-        private float DamageEnergyMultiplier => _rocket.BuildingSystem.DamageMultiplier;
-        private float CooldownEnergyMultiplier => _rocket.BuildingSystem.CooldownMultiplier;
+        private Transform RocketTransform => Context.transform;
+        private RocketData.Stats CurrentStats => Context.CurrentStats;
+        private Projectile ProjectilePrefab => Context.Data.Projectile;
+        private float DamageEnergyMultiplier => Context.BuildingSystem.DamageMultiplier;
+        private float CooldownEnergyMultiplier => Context.BuildingSystem.CooldownMultiplier;
 
         public RocketStateMachine(Rocket rocket)
         {
-            _rocket = rocket;
+            Context = rocket;
             Area = new Area(GetPosition, GetAttackRadius, GetAttackMask);
             TransitionsEnabled = false;
 
@@ -28,8 +27,8 @@ namespace SustainTheStrain.Buildings.FSM.RocketStates
             SetState<IdleState>();
         }
 
-        private Vector3 GetPosition() => _rocket.transform.position;
-        private float GetAttackRadius() => _rocket.CurrentStats.AttackRadius;
-        private int GetAttackMask() => _rocket.Data.AttackMask.value;
+        private Vector3 GetPosition() => Context.transform.position;
+        private float GetAttackRadius() => Context.CurrentStats.AttackRadius;
+        private int GetAttackMask() => Context.Data.AttackMask.value;
     }
 }

@@ -8,6 +8,8 @@ namespace SustainTheStrain.Buildings.Components
 {
     public class Laser : Building
     {
+        [field: SerializeField] public LineRenderer Line { get; private set; }
+
         private LaserStateMachine _stateMachine;
         private BuildingGraphics<LaserData.Stats> _graphics;
 

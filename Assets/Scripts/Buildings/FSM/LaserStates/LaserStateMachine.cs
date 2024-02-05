@@ -7,19 +7,18 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
 {
     public partial class LaserStateMachine : StateMachine<LaserStateMachine>
     {
-        private readonly Laser _laser;
-
+        private Laser Context { get; }
         private Area Area { get; }
         private Timer Timer { get; } = new();
 
-        private Transform LaserTransform => _laser.transform;
-        private LaserData.Stats CurrentStats => _laser.CurrentStats;
-        private float DamageEnergyMultiplier => _laser.BuildingSystem.DamageMultiplier;
-        private float CooldownEnergyMultiplier => _laser.BuildingSystem.CooldownMultiplier;
+        private Transform LaserTransform => Context.transform;
+        private LaserData.Stats CurrentStats => Context.CurrentStats;
+        private float DamageEnergyMultiplier => Context.BuildingSystem.DamageMultiplier;
+        private float CooldownEnergyMultiplier => Context.BuildingSystem.CooldownMultiplier;
 
         public LaserStateMachine(Laser laser)
         {
-            _laser = laser;
+            Context = laser;
             Area = new Area(GetPosition, GetAttackRadius, GetAttackMask);
             TransitionsEnabled = false;
 
@@ -27,8 +26,8 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
             SetState<IdleState>();
         }
 
-        private Vector3 GetPosition() => _laser.transform.position;
-        private float GetAttackRadius() => _laser.CurrentStats.AttackRadius;
-        private int GetAttackMask() => _laser.Data.AttackMask.value;
+        private Vector3 GetPosition() => Context.transform.position;
+        private float GetAttackRadius() => Context.CurrentStats.AttackRadius;
+        private int GetAttackMask() => Context.Data.AttackMask.value;
     }
 }

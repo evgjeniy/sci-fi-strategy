@@ -37,6 +37,8 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
                 .FirstOrDefault(e => e.TryGetComponent<Damageble>(out var d) && d.Team != 1);
 
             protected virtual void OnOverridableRun() {}
+            public virtual void OnEnter() {}
+            public virtual void OnExit() {}
         }
     }
 }

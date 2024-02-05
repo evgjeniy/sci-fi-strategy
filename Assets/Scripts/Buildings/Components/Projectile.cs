@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings.Components
 {
@@ -8,6 +9,7 @@ namespace SustainTheStrain.Buildings.Components
     {
         [SerializeField] private float flyingTime = 2.0f;
         [SerializeField] private AnimationCurve flyingCurve;
+        [SerializeField] private ParticleSystem particleSystem;
         
         public async void LaunchTo<T>(T target, Action<T> onComplete = null) where T : Component => await LaunchToAsync(target, onComplete);
 
@@ -30,7 +32,11 @@ namespace SustainTheStrain.Buildings.Components
 
             transform.position = Vector3.Lerp(startPosition, target.transform.position, flyingCurve.Evaluate(1.0f));
             onComplete?.Invoke(target);
-            Destroy(gameObject);
+
+            GetComponentInChildren<MeshRenderer>().IfNotNull(meshRenderer => meshRenderer.Disable());
+            particleSystem.Play();
+            
+            Destroy(gameObject, particleSystem.main.duration);
         } 
     }
 }
