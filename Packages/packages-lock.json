@@ -14,13 +14,6 @@
       "dependencies": {},
       "hash": "8a8fa5a9659a6d63f196391c71e06c4286c8acd7"
     },
-    "com.evgjeniy.unityextensions": {
-      "version": "https://github.com/evgjeniy/unity-extensions.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "b8ec502d517a44b12000503bba8bd2ef11144328"
-    },
     "com.nighttraincode.fsm": {
       "version": "https://github.com/MeeXaSiK/FiniteStateMachine.git",
       "depth": 0,
