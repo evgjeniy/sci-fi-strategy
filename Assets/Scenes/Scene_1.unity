@@ -4219,6 +4219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b0fe7cb21d82b498590bc2a2b423f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sphereGizmos:
+    drawType: 1
+    gizmosColor: {r: 1, g: 1, b: 1, a: 0.5}
   _spawnPositon: {fileID: 0}
   _spline: {fileID: 1969595215}
 --- !u!4 &1116007910
@@ -7239,6 +7242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b0fe7cb21d82b498590bc2a2b423f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sphereGizmos:
+    drawType: 1
+    gizmosColor: {r: 1, g: 1, b: 1, a: 0.5}
   _spawnPositon: {fileID: 0}
   _spline: {fileID: 1505037384}
 --- !u!114 &1813407859

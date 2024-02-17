@@ -1,0 +1,19 @@
+{
+    "name": "SustainTheStrain.Editor",
+    "rootNamespace": "SustainTheStrain.Editor",
+    "references": [
+        "SustainTheStrain",
+        "Dreamteck.Splines"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
