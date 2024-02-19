@@ -11,13 +11,13 @@ namespace SustainTheStrain.EnergySystem
         public EnergySystemSettings EnergySettings { get; }
         public Sprite ButtonImage { get;}
         public EnergyController EnergyController { get; set; }
-        public int EnergySpendCount { get; }
         public int FreeEnergyCells { get; }
-
         public int MaxEnergy { get; }
-        public int CurrentEnergy { get; }
+        public int CurrentEnergy { get; set; }
         public event Action<int> OnCurrentEnergyChanged;
         public event Action<int> OnMaxEnergyChanged;
+        public event Action<IEnergySystem> OnEnergyAddRequire;
+        public event Action<IEnergySystem> OnEnergyDeleteRequire;
         
         public void IncreaseMaxEnergy(int value){}
         

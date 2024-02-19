@@ -12,11 +12,12 @@ namespace SustainTheStrain.EnergySystem
         private int _currentEnergy;
 
         public virtual event Action<int> OnMaxEnergyChanged;
+        public virtual event Action<IEnergySystem> OnEnergyAddRequire;
+        public virtual event Action<IEnergySystem> OnEnergyDeleteRequire;
         public virtual event Action<int> OnCurrentEnergyChanged;
 
         public virtual EnergyController EnergyController { get; set; }
         public virtual Sprite ButtonImage => EnergySettings.ButtonImage;
-        public virtual int EnergySpendCount => EnergySettings.EnergySpend;
         public virtual int FreeEnergyCells => MaxEnergy - CurrentEnergy;
 
         public virtual int MaxEnergy
@@ -32,7 +33,7 @@ namespace SustainTheStrain.EnergySystem
         public virtual int CurrentEnergy
         {
             get => _currentEnergy;
-            protected set
+            set
             {
                 if (value < 0 || value > MaxEnergy) return;
                 OnCurrentEnergyChanged?.Invoke(_currentEnergy = value);
@@ -52,14 +53,12 @@ namespace SustainTheStrain.EnergySystem
 
         public virtual void TrySpendEnergy()
         {
-            if (FreeEnergyCells < EnergySpendCount) return;
-            if (EnergyController.TryGetEnergy(EnergySpendCount)) CurrentEnergy += EnergySpendCount;
+            OnEnergyAddRequire?.Invoke(this);
         }
 
         public virtual void TryRefillEnergy()
         {
-            if (_currentEnergy < EnergySpendCount) return;
-            if (EnergyController.TryReturnEnergy(EnergySpendCount)) CurrentEnergy -= EnergySpendCount;
+            OnEnergyDeleteRequire?.Invoke(this);
         }
 
         public virtual void SetEnergySettings(EnergySystemSettings settings) {}

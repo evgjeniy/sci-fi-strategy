@@ -12,16 +12,24 @@ namespace SustainTheStrain.EnergySystem
         public List<IEnergySystem> Systems => _systems;
         private List<IEnergySystem> _systems = new();
 
-        [Inject] public void AddEnergySystem(IEnergySystem system)
+        [Inject] 
+        public void AddEnergySystem(IEnergySystem system)
         {
             if (_systems.Contains(system)) return;
             _systems.Add(system);
+            system.OnEnergyAddRequire+=TryLoadEnergyToSystem;
+            system.OnEnergyDeleteRequire += TryReturnEnergyFromSystem;
             OnSystemAdded?.Invoke(system);
         }
 
-        public bool TryGetEnergy(int countOfEnergy)
+        private void TryLoadEnergyToSystem(IEnergySystem system)
         {
-            return Manager.TrySpend(countOfEnergy);
+            var countOfEnergy = system.EnergySettings.EnergySpend;
+            if (system.FreeEnergyCells<countOfEnergy) return;
+            if (Manager.TrySpend(countOfEnergy))
+            {
+                system.CurrentEnergy += countOfEnergy;
+            }
         }
     
         public void IncreaseMaxEnergy(int value)
@@ -29,9 +37,14 @@ namespace SustainTheStrain.EnergySystem
             Manager.IncreaseMaxEnergy(value);
         }
     
-        public bool TryReturnEnergy(int countOfEnergy)
+        private void TryReturnEnergyFromSystem(IEnergySystem system)
         {
-            return Manager.TryRefill(countOfEnergy);
+            var countOfEnergy = system.EnergySettings.EnergySpend;
+            if (system.CurrentEnergy < countOfEnergy) return;
+            if (Manager.TryRefill(countOfEnergy))
+            {
+                system.CurrentEnergy -= countOfEnergy;
+            }
         }
     
     }

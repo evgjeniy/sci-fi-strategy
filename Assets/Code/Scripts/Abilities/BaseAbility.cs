@@ -47,18 +47,21 @@ namespace SustainTheStrain.AbilitiesScripts
         public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage { get; private set; }
         [Inject] public EnergyController EnergyController { get; set; }
-        public int EnergySpendCount { get; private set; }
         public int MaxEnergy { get; private set; }
         public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
         public int CurrentEnergy 
         { 
             get => _currentEnergy;
-            private set
+            set
             {
                 if (value < 0 || value > MaxEnergy) return;
                 _currentEnergy = value;
                 OnCurrentEnergyChanged?.Invoke(_currentEnergy);
                 IsLoaded = value != 0;
+                if (!IsLoaded)
+                {
+                    Reload = 0;
+                }
             }
         }
 
@@ -71,31 +74,24 @@ namespace SustainTheStrain.AbilitiesScripts
         protected int _currentEnergy;
         public event Action<int> OnCurrentEnergyChanged;
         public event Action<int> OnMaxEnergyChanged;
+        public event Action<IEnergySystem> OnEnergyAddRequire;
+        public event Action<IEnergySystem> OnEnergyDeleteRequire;
 
         public void TrySpendEnergy()
         {
-            if (FreeEnergyCells<EnergySpendCount) return;
-            if (EnergyController.TryGetEnergy(EnergySpendCount))
-            {
-                CurrentEnergy += EnergySpendCount;
-            }
+            Debug.Log("TryingSpend");
+            OnEnergyAddRequire?.Invoke(this);
         }
 
         public void TryRefillEnergy()
         {
-            if (_currentEnergy < EnergySpendCount) return;
-            if (EnergyController.TryReturnEnergy(EnergySpendCount))
-            {
-                CurrentEnergy -= EnergySpendCount;
-                Reload = 0;
-                IsLoaded = false;
-            }
+            Debug.Log("TryingReffil");
+            OnEnergyDeleteRequire?.Invoke(this);
         }
 
         public void SetEnergySettings(EnergySystemSettings settings)
         {
-            ButtonImage = settings.ButtonImage;
-            EnergySpendCount = settings.EnergySpend;
+            EnergySettings = settings;
             MaxEnergy = settings.MaxEnergy;
         }
     }

@@ -15,10 +15,11 @@ namespace SustainTheStrain.Units
          public EnergyController EnergyController { get; set; }
         [field:SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage => EnergySettings.ButtonImage;
-        public int EnergySpendCount => EnergySettings.EnergySpend;
         public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
         public event Action<int> OnCurrentEnergyChanged;
         public event Action<int> OnMaxEnergyChanged;
+        public event Action<IEnergySystem> OnEnergyAddRequire;
+        public event Action<IEnergySystem> OnEnergyDeleteRequire;
         private int _currentEnergy;
         private int _maxEnergy;
 
@@ -34,7 +35,7 @@ namespace SustainTheStrain.Units
         public int CurrentEnergy
         {
             get => _currentEnergy;
-            private set
+            set
             {
                 if (value < 0 || value > MaxEnergy) return;
                 _currentEnergy = value;
@@ -73,20 +74,12 @@ namespace SustainTheStrain.Units
 
         public void TrySpendEnergy()
         {
-            if (FreeEnergyCells<EnergySpendCount) return;
-            if (EnergyController.TryGetEnergy(EnergySpendCount))
-            {
-                CurrentEnergy += EnergySpendCount;
-            }
+            OnEnergyAddRequire?.Invoke(this);
         }
 
         public void TryRefillEnergy()
         {
-            if (_currentEnergy < EnergySpendCount) return;
-            if (EnergyController.TryReturnEnergy(EnergySpendCount))
-            {
-                CurrentEnergy -= EnergySpendCount;
-            }
+            OnEnergyDeleteRequire?.Invoke(this);
         }
 
         private void LoadSettings()

@@ -55,8 +55,8 @@ namespace SustainTheStrain.EnergySystem.UI
             }
             
             ui.ControllButton = button;
-            button.image.sprite = system.ButtonImage;
-            ui.MaxBarsCount = system.MaxEnergy;
+            button.image.sprite = system.EnergySettings.ButtonImage;
+            ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
             button.OnLeftMouseClick += system.TrySpendEnergy;
             button.OnRightMouseClick += system.TryRefillEnergy;
             system.OnCurrentEnergyChanged += ui.ChangeEnergy;
