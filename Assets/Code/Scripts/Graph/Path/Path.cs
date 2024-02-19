@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SustainTheStrain.Graphs.Pathes
+namespace SustainTheStrain.Graph.Path
 {
     public class Path<T>
     {

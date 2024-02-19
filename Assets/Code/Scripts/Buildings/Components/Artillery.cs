@@ -1,7 +1,6 @@
-﻿using SustainTheStrain.Buildings.Components.GFX;
-using SustainTheStrain.Buildings.Data;
-using SustainTheStrain.Buildings.FSM.ArtilleryStates;
+﻿using SustainTheStrain.Buildings.FSM;
 using SustainTheStrain.Installers;
+using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
 
 namespace SustainTheStrain.Buildings.Components

@@ -1,10 +1,10 @@
 using System;
 using SustainTheStrain.EnergySystem;
-using SustainTheStrain.EnergySystem.Settings;
+using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
 using Zenject;
 
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public abstract class BaseAbility : IEnergySystem
     {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657abe40c3bc42b8a937e37d9926e80c, type: 3}
   m_Name: LandingAbilitySettings
   m_EditorClassIdentifier: 
-  EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
-  ReloadingSpeed: 1
-  Squad: {fileID: 7890181662156747867, guid: 511c35a78fe5eec4d8da6357e0cdd8d9, type: 3}
-  SpawnEffect: {fileID: 0}
+  <EnergySettings>k__BackingField: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
+  <ReloadingSpeed>k__BackingField: 1
+  <Squad>k__BackingField: {fileID: 7890181662156747867, guid: 511c35a78fe5eec4d8da6357e0cdd8d9, type: 3}
+  <SpawnEffect>k__BackingField: {fileID: 0}

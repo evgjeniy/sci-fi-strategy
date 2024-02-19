@@ -1,4 +1,4 @@
-namespace SustainTheStrain.Graphs.Pathes
+namespace SustainTheStrain.Graph.Path
 {
     public interface IPathAlgorithm<T>
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-using SustainTheStrain.EnergySystem.Settings;
+using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
 
 namespace SustainTheStrain.EnergySystem

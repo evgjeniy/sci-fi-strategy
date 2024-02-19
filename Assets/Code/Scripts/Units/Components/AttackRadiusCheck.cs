@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.CanvasScaler;
 
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Units
 {
     public class AttackRadiusCheck : MonoBehaviour
     {

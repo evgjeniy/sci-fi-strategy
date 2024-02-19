@@ -1,7 +1,7 @@
 ﻿using SustainTheStrain.Buildings.Components;
 using UnityEngine;
 
-namespace SustainTheStrain.Buildings.Data
+namespace SustainTheStrain.Scriptable.Buildings
 {
     public abstract class BuildingData : ScriptableObject
     {

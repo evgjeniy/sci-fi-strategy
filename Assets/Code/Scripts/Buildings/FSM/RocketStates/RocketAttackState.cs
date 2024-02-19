@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using SustainTheStrain.Units.Components;
+﻿using SustainTheStrain.Units;
 using UnityEngine;
 
-namespace SustainTheStrain.Buildings.FSM.RocketStates
+namespace SustainTheStrain.Buildings.FSM
 {
     public partial class RocketStateMachine
     {

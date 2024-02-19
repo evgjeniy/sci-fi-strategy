@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using SustainTheStrain.EnergySystem;
 using UnityEngine;
 using UnityEngine.Extensions;
 
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Units
 {
     public class HPBar : MonoBehaviour
     {

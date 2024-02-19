@@ -1,7 +1,6 @@
-﻿using SustainTheStrain.Buildings.UI.Menus;
-using UnityEngine.Events;
+﻿using UnityEngine.Events;
 
-namespace SustainTheStrain.Buildings.UI.Buttons.Management
+namespace SustainTheStrain.Buildings.UI
 {
     public class UpgradeBuildingButton : BaseBuildingButton<IBuildingManagementMenu>
     {

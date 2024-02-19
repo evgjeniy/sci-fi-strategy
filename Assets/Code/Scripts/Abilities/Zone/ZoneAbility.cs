@@ -1,8 +1,6 @@
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
-using UnityEngine.Rendering.Universal;
 
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public abstract class ZoneAbility : BaseAbility
     {

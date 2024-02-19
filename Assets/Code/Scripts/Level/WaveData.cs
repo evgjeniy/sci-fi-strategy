@@ -9,7 +9,7 @@ namespace SustainTheStrain.Level
     {
         [SerializeField] public List<SpawnerPart> _spawners;
 
-        public  List<SpawnerPart> SubwaveDatas => _spawners;
+        public  List<SpawnerPart> SubwaveDataList => _spawners;
     }
 
     [Serializable]

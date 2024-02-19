@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3520a80c2c47bfad0b6a6d15c20c1a, type: 3}
   m_Name: EnergySystemSettings
   m_EditorClassIdentifier: 
-  ButtonImage: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  EnergySpend: 2
-  MaxEnergy: 2
+  <ButtonImage>k__BackingField: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  <EnergySpend>k__BackingField: 2
+  <MaxEnergy>k__BackingField: 2

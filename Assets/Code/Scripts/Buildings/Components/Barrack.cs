@@ -1,9 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
-using SustainTheStrain.Buildings.Components.GFX;
-using SustainTheStrain.Buildings.Data;
 using SustainTheStrain.Buildings.FSM;
 using SustainTheStrain.Installers;
-using SustainTheStrain.Units.Components;
+using SustainTheStrain.Scriptable.Buildings;
+using SustainTheStrain.Units;
 using SustainTheStrain.Units.Spawners;
 using UnityEngine;
 using UnityEngine.Extensions;

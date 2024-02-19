@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Units
 {
     public class RecruitGroup : MonoBehaviour
     {

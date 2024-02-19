@@ -1,8 +1,7 @@
 ﻿using System;
 using SustainTheStrain.EnergySystem;
-using SustainTheStrain.EnergySystem.Settings;
+using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace SustainTheStrain.ResourceSystems
@@ -10,8 +9,8 @@ namespace SustainTheStrain.ResourceSystems
     public class GoldGenerator : ResourceGenerator, IEnergySystem
     {
         [Inject] public EnergyController EnergyController { get; set; }
-        
-        [field:SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
+
+        [field: SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage => EnergySettings.ButtonImage;
         public int EnergySpendCount => EnergySettings.EnergySpend;
         public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
@@ -19,7 +18,7 @@ namespace SustainTheStrain.ResourceSystems
         public event Action<int> OnMaxEnergyChanged;
         private int _currentEnergy;
         private int _maxEnergy;
-        
+
         public int CurrentEnergy
         {
             get => _currentEnergy;
@@ -30,18 +29,21 @@ namespace SustainTheStrain.ResourceSystems
                 {
                     StartGeneration();
                 }
+
                 _currentEnergy = value;
                 OnCurrentEnergyChanged?.Invoke(_currentEnergy);
                 _canGenerate = value != 0;
             }
         }
-        public int MaxEnergy {
-            get =>_maxEnergy;
+
+        public int MaxEnergy
+        {
+            get => _maxEnergy;
             private set
             {
                 _maxEnergy = value;
                 OnMaxEnergyChanged?.Invoke(value);
-            } 
+            }
         }
 
         private void OnEnable()
@@ -56,7 +58,7 @@ namespace SustainTheStrain.ResourceSystems
 
         public void TrySpendEnergy()
         {
-            if (FreeEnergyCells<EnergySpendCount) return;
+            if (FreeEnergyCells < EnergySpendCount) return;
             if (EnergyController.TryGetEnergy(EnergySpendCount))
             {
                 CurrentEnergy += EnergySpendCount;
@@ -73,7 +75,7 @@ namespace SustainTheStrain.ResourceSystems
                 DowngradeAll();
             }
         }
-        
+
         private void OnDisable()
         {
             EndGeneration();

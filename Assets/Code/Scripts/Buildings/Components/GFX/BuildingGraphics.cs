@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
 using UnityEngine.Extensions;
-using SustainTheStrain.Buildings.Data;
 
-namespace SustainTheStrain.Buildings.Components.GFX
+namespace SustainTheStrain.Buildings.Components
 {
     public class BuildingGraphics<TStats> where TStats : BuildingData.IStats, new()
     {

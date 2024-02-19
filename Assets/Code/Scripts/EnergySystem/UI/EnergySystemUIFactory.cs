@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using SustainTheStrain.AbilitiesScripts;
+using SustainTheStrain.Abilities;
 using SustainTheStrain.Input.UI;
 using SustainTheStrain.ResourceSystems;
+using SustainTheStrain.ResourceSystems.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SustainTheStrain.EnergySystem.UI

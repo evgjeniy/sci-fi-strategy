@@ -1,8 +1,8 @@
-using SustainTheStrain.Graphs.Pathes;
 using System.Collections.Generic;
+using SustainTheStrain.Graph.Path;
 using UnityEngine;
 
-namespace SustainTheStrain.Graphs
+namespace SustainTheStrain.Graph
 {
     [System.Serializable]
     public class Graph<T> : IGraph<T>

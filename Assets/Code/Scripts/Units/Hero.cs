@@ -1,9 +1,6 @@
-﻿using System;
-using SustainTheStrain.Input;
-using SustainTheStrain.Input.States;
+﻿using SustainTheStrain.Input;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using Zenject;
 
 namespace SustainTheStrain.Units

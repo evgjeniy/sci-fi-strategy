@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace SustainTheStrain.EnergySystem
+namespace SustainTheStrain.EnergySystem.UI
 {
     public class EnergyControllerUI : MonoBehaviour
     {

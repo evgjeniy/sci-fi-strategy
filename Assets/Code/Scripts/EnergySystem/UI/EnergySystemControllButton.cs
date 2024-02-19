@@ -1,9 +1,8 @@
 ﻿using System;
 using SustainTheStrain.Input.UI;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-namespace SustainTheStrain.EnergySystem
+namespace SustainTheStrain.EnergySystem.UI
 {
     public class EnergySystemControllButton : InputSystemButton
     {

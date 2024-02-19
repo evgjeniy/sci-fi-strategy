@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using SustainTheStrain.AbilitiesScripts;
-using SustainTheStrain.EnergySystem.UI;
-using SustainTheStrain.ResourceSystems;
+﻿using System.Collections.Generic;
+using SustainTheStrain.Abilities;
 using UnityEngine;
 using Zenject;
 
-namespace SustainTheStrain.EnergySystem
+namespace SustainTheStrain.EnergySystem.UI
 {
     public class EnergySystemsUIController : MonoBehaviour
     {

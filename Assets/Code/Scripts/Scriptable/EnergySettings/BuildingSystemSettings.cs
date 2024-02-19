@@ -1,7 +1,6 @@
-﻿using SustainTheStrain.EnergySystem.Settings;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace SustainTheStrain.Buildings
+namespace SustainTheStrain.Scriptable.EnergySettings
 {
     [CreateAssetMenu(fileName = "BuildingSystemSettings", menuName = "EnergySystemSettings/BuildingSystemSettings", order = 1)]
     public class BuildingSystemSettings : EnergySystemSettings

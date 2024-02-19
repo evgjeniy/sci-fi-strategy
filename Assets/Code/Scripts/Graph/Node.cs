@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SustainTheStrain.Graphs
+namespace SustainTheStrain.Graph
 {
     [System.Serializable]
     public class Node<T>

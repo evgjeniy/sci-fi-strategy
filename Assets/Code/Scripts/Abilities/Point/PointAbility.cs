@@ -1,4 +1,4 @@
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public abstract class PointAbility : BaseAbility
     {

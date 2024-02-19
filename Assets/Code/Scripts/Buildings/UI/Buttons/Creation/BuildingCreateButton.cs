@@ -1,12 +1,11 @@
-﻿using SustainTheStrain.Buildings.Data;
-using SustainTheStrain.Buildings.UI.Menus;
-using SustainTheStrain.Installers;
+﻿using SustainTheStrain.Installers;
+using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace SustainTheStrain.Buildings.UI.Buttons.Creation
+namespace SustainTheStrain.Buildings.UI
 {
     [RequireComponent(typeof(Button))]
     public abstract class BuildingCreateButton<T> : BaseBuildingButton<IBuildingCreateMenu>,

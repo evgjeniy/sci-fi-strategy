@@ -1,9 +1,7 @@
-using SustainTheStrain.EnergySystem;
-using System.Collections;
-using System.Collections.Generic;
+using SustainTheStrain.Units;
 using UnityEngine;
 
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Citadels
 {
     public class CitadelDamageble : Damageble
     {

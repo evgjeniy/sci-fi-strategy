@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace SustainTheStrain.ResourceSystems
+namespace SustainTheStrain.ResourceSystems.UI
 {
     public class GoldUI : MonoBehaviour
     {
