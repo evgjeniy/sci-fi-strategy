@@ -1,4 +1,4 @@
 namespace SustainTheStrain.AbilitiesNew
 {
-    public class ChainDamageAbilityView : AbilityView<ChainDamageAbilityData> {}
+    // public class ChainDamageAbilityView : AbilityView<ChainDamageAbilityData> {}
 }

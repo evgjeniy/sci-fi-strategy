@@ -2,10 +2,10 @@
 
 namespace SustainTheStrain.AbilitiesNew
 {
-    public sealed class ChainDamageAbility : Ability<ChainDamageAbilityData, ChainDamageAbilityView>
+    public sealed class ChainDamageAbility : Ability<ChainDamageAbilityData>
     {
         public override ChainDamageAbilityData Model { get; }
-        public override ChainDamageAbilityView View { get; }
+        public override AbilityView View { get; }
         
         public ChainDamageAbility(AbilityController abilityController, IStaticDataService staticDataService) : base(abilityController)
         {

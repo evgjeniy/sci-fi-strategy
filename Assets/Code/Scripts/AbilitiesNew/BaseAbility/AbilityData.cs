@@ -1,9 +1,12 @@
+using System;
+using SustainTheStrain._Architecture;
 using UnityEngine;
 
 namespace SustainTheStrain.AbilitiesNew
 {
-    public abstract class AbilityData : ScriptableObject
+    public abstract class AbilityData : ScriptableObject, IModel<AbilityData>
     {
+        [field: SerializeField] public AbilityView ViewPrefab { get; private set; }
         [field: SerializeField, Min(1.0f)] public float ReloadingSpeed { get; private set; }
         [field: SerializeField, Min(0.0f)] public float ReloadCooldown { get; private set; }
         
@@ -17,12 +20,12 @@ namespace SustainTheStrain.AbilitiesNew
                 var newReload = Mathf.Clamp(value, 0.0f, ReloadCooldown);
                 if (newReload != _currentReload) return;
                 _currentReload = newReload;
-                CurrentReloadChanged(_currentReload);
+                Changed?.Invoke(this);
             }
         }
 
         public bool IsReloaded => CurrentReload == ReloadCooldown;
 
-        protected virtual void CurrentReloadChanged(float _) {}
+        public event Action<AbilityData> Changed;
     }
 }
