@@ -276,6 +276,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building Placeholder (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2081410059413442064, guid: abba898a01b77864d93425950ee8f500,
+        type: 3}
+      propertyPath: _road
+      value: 
+      objectReference: {fileID: 1969595217}
     - target: {fileID: 9160291982357564305, guid: abba898a01b77864d93425950ee8f500,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1048,6 +1053,7 @@ GameObject:
   m_Component:
   - component: {fileID: 238006466}
   - component: {fileID: 238006465}
+  - component: {fileID: 238006467}
   m_Layer: 0
   m_Name: Spline2
   m_TagString: Untagged
@@ -1379,6 +1385,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1016166638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &238006467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238006464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54833d6fb7caae7499faa73e7ea86965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &241107918
 GameObject:
   m_ObjectHideFlags: 0
@@ -2712,6 +2730,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building Placeholder (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2081410059413442064, guid: abba898a01b77864d93425950ee8f500,
+        type: 3}
+      propertyPath: _road
+      value: 
+      objectReference: {fileID: 1969595217}
     - target: {fileID: 9160291982357564305, guid: abba898a01b77864d93425950ee8f500,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3351,6 +3374,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building Placeholder
       objectReference: {fileID: 0}
+    - target: {fileID: 2081410059413442064, guid: abba898a01b77864d93425950ee8f500,
+        type: 3}
+      propertyPath: _road
+      value: 
+      objectReference: {fileID: 238006467}
     - target: {fileID: 9160291982357564305, guid: abba898a01b77864d93425950ee8f500,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4705,6 +4733,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building Placeholder (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2081410059413442064, guid: abba898a01b77864d93425950ee8f500,
+        type: 3}
+      propertyPath: _road
+      value: 
+      objectReference: {fileID: 1969595217}
     - target: {fileID: 9160291982357564305, guid: abba898a01b77864d93425950ee8f500,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5200,6 +5233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1505037385}
   - component: {fileID: 1505037384}
+  - component: {fileID: 1505037386}
   m_Layer: 0
   m_Name: Spline1
   m_TagString: Untagged
@@ -5655,6 +5689,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1016166638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1505037386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505037383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54833d6fb7caae7499faa73e7ea86965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1542649420
 GameObject:
   m_ObjectHideFlags: 0
@@ -7094,6 +7140,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building Placeholder (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2081410059413442064, guid: abba898a01b77864d93425950ee8f500,
+        type: 3}
+      propertyPath: _road
+      value: 
+      objectReference: {fileID: 1969595217}
     - target: {fileID: 9160291982357564305, guid: abba898a01b77864d93425950ee8f500,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7288,6 +7339,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building Placeholder (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2081410059413442064, guid: abba898a01b77864d93425950ee8f500,
+        type: 3}
+      propertyPath: _road
+      value: 
+      objectReference: {fileID: 1505037386}
     - target: {fileID: 9160291982357564305, guid: abba898a01b77864d93425950ee8f500,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7577,6 +7633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1969595216}
   - component: {fileID: 1969595215}
+  - component: {fileID: 1969595217}
   m_Layer: 0
   m_Name: Spline
   m_TagString: Untagged
@@ -8093,6 +8150,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1016166638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1969595217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969595214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54833d6fb7caae7499faa73e7ea86965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2000493272
 GameObject:
   m_ObjectHideFlags: 0
@@ -8324,6 +8393,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building Placeholder (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2081410059413442064, guid: abba898a01b77864d93425950ee8f500,
+        type: 3}
+      propertyPath: _road
+      value: 
+      objectReference: {fileID: 1969595217}
     - target: {fileID: 9160291982357564305, guid: abba898a01b77864d93425950ee8f500,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -15,6 +15,7 @@ namespace SustainTheStrain.Buildings.Components
 
         public LaserData Data { get; private set; }
         public LaserData.Stats CurrentStats => Data.LaserStats[CurrentUpgradeLevel].Stats;
+        public override Vector3 Orientation { get; set; }
         protected override int MaxUpgradeLevel => Data.LaserStats.Length - 1;
         public override int UpgradePrice => Data.LaserStats[CurrentUpgradeLevel].NextLevelPrice;
         public override int DestroyCompensation => Data.LaserStats[CurrentUpgradeLevel].DestroyCompensation;

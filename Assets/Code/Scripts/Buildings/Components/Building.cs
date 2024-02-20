@@ -12,6 +12,8 @@ namespace SustainTheStrain.Buildings.Components
 
         public event System.Action<int> OnLevelUpgrade;
 
+        public virtual Vector3 Orientation { get; set; }
+
         protected abstract int MaxUpgradeLevel { get; }
         public abstract int UpgradePrice { get; }
         public abstract int DestroyCompensation { get; }

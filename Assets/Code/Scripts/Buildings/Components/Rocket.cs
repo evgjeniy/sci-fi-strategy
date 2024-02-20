@@ -14,6 +14,7 @@ namespace SustainTheStrain.Buildings.Components
 
         public RocketData Data { get; private set; }
         public RocketData.Stats CurrentStats => Data.RocketStats[CurrentUpgradeLevel].Stats;
+        public override Vector3 Orientation { get; set; }
         protected override int MaxUpgradeLevel => Data.RocketStats.Length - 1;
         public override int UpgradePrice => Data.RocketStats[CurrentUpgradeLevel].NextLevelPrice;
         public override int DestroyCompensation => Data.RocketStats[CurrentUpgradeLevel].DestroyCompensation;

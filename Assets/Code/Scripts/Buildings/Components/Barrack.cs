@@ -1,4 +1,6 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using SustainTheStrain.Buildings.Components.GFX;
 using SustainTheStrain.Buildings.Data;
 using SustainTheStrain.Buildings.FSM;
@@ -7,6 +9,7 @@ using SustainTheStrain.Units.Components;
 using SustainTheStrain.Units.Spawners;
 using UnityEngine;
 using UnityEngine.Extensions;
+using Quaternion = System.Numerics.Quaternion;
 
 namespace SustainTheStrain.Buildings.Components
 {
@@ -15,6 +18,8 @@ namespace SustainTheStrain.Buildings.Components
         [SerializeField] private RecruitGroup _recruitGroup;
         [SerializeField] private RecruitSpawner _recruitSpawner;
 
+        private Vector3 _orientation;
+        
         private Timer _timer;
         private BuildingGraphics<BarrackData.Stats> _graphics;
 
@@ -23,6 +28,17 @@ namespace SustainTheStrain.Buildings.Components
         protected override int MaxUpgradeLevel => Data.BarrackStats.Length - 1;
         public override int UpgradePrice => Data.BarrackStats[CurrentUpgradeLevel].NextLevelPrice;
         public override int DestroyCompensation => Data.BarrackStats[CurrentUpgradeLevel].DestroyCompensation;
+
+        private event Action<Vector3> OnOrientationChanged; 
+        
+        public override Vector3 Orientation {
+            get => _orientation;
+            set
+            {
+                _orientation = value;
+                OnOrientationChanged?.Invoke(value);
+            }
+        }
 
         [Zenject.Inject]
         private void Construct(IStaticDataService staticDataService)
@@ -34,8 +50,21 @@ namespace SustainTheStrain.Buildings.Components
             CurrentUpgradeLevel = 0;
 
             _timer = new Timer(CurrentStats.RespawnCooldown);
+
+            OnOrientationChanged += ChangeGroupPosition;
+            OnOrientationChanged += ChangeSpawnerPosition;
         }
 
+        private void ChangeSpawnerPosition(Vector3 position)
+        {
+            _recruitSpawner.SpawnPosition = transform.position + (position - transform.position).normalized * 3;
+        }
+
+        private void ChangeGroupPosition(Vector3 position)
+        {
+            _recruitGroup.GuardPost.Position = position;
+        }
+        
         private async void RespawnRecruit()
         {
             if (!_timer.IsTimeOver)
@@ -51,13 +80,14 @@ namespace SustainTheStrain.Buildings.Components
 
             _timer.Time = CurrentStats.RespawnCooldown;
         }
-
+        
         private void UpgradeStats(int _)
         {
             foreach (var recruit in _recruitGroup.Recruits)
                 recruit.UpdateStats(CurrentStats);
         }
         
+
         private void OnEnable()
         {
             _recruitGroup.OnRecruitRemoved += RespawnRecruit;
