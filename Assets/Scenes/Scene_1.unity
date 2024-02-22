@@ -4522,7 +4522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _refEnemyPrefab: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
     type: 3}
-  _refRecruitPrefab: {fileID: 3357532105762482792, guid: d26196ebbe3508543843b41c3962409d,
+  _refRecruitPrefab: {fileID: 7739865252239160787, guid: 1d6ac9b7b0f788642a419c5e1c3203dc,
     type: 3}
   _hero: {fileID: 1932103386}
 --- !u!4 &1271970389
@@ -7245,9 +7245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelData: {fileID: 11400000, guid: 41513d77e643f8543b5a59a403cbc2bf, type: 2}
-  _spawners:
-  - {fileID: 1116007909}
-  - {fileID: 1813407858}
+  _spawners: []
 --- !u!1 &1813407856
 GameObject:
   m_ObjectHideFlags: 0

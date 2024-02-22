@@ -9,6 +9,7 @@ using SustainTheStrain.Units.Components;
 using SustainTheStrain.Units.Spawners;
 using UnityEngine;
 using UnityEngine.Extensions;
+using UnityEngine.PlayerLoop;
 using Quaternion = System.Numerics.Quaternion;
 
 namespace SustainTheStrain.Buildings.Components
@@ -90,17 +91,34 @@ namespace SustainTheStrain.Buildings.Components
 
         private void OnEnable()
         {
-            _recruitGroup.OnRecruitRemoved += RespawnRecruit;
+            //_recruitGroup.OnRecruitRemoved += RespawnRecruit;
             OnLevelUpgrade += UpgradeStats;
         }
 
         private void OnDisable()
         {
-            _recruitGroup.OnRecruitRemoved -= RespawnRecruit;
+            //_recruitGroup.OnRecruitRemoved -= RespawnRecruit;
             OnLevelUpgrade -= UpgradeStats;
         }
 
-        private void Update() => _timer.Time -= Time.deltaTime;
+        private void Update()
+        {
+            _timer.Time -= Time.deltaTime;
+            
+            if (!_timer.IsTimeOver)
+                return;
+            if (_recruitGroup.Recruits.Count == _recruitGroup.squadMaxSize)
+                return;
+                
+            var newRecruit = _recruitSpawner.Spawn(CurrentStats);
+            //newRecruit.Deactivate();
+            
+            _recruitGroup.AddRecruit(newRecruit);
+            
+            //newRecruit.Activate();
+
+            _timer.Time = CurrentStats.RespawnCooldown;
+        }
 
         private void OnDestroy() => _graphics.Destroy();
     }

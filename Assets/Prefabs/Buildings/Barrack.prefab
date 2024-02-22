@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _predefinedRecruits: []
-  _squadMaxSize: 5
+  _squadMaxSize: 3
   <GuardPost>k__BackingField:
     _position: {x: 0, y: 0, z: 15}
-    _radius: 5
+    _radius: 2.5
