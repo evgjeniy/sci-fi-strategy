@@ -1,10 +1,10 @@
-﻿using SustainTheStrain.AbilitiesScripts;
+﻿using SustainTheStrain.Abilities;
 using UnityEngine;
 using Zenject;
 
 namespace SustainTheStrain.Installers
 {
-    public class AbillitiesControllerInstaller : MonoInstaller
+    public class AbilitiesControllerInstaller : MonoInstaller
     {
         [SerializeField] private AbilitiesController _controller;
 

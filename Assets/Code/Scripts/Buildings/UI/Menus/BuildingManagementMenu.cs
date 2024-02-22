@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SustainTheStrain.Buildings.UI.Menus
+namespace SustainTheStrain.Buildings.UI
 {
     public interface IBuildingManagementMenu
     {

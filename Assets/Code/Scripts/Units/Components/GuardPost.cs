@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Units
 {
     [Serializable]
     public class GuardPost

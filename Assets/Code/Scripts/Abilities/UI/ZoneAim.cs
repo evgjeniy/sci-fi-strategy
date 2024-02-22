@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.Abilities
 {
     public class ZoneAim : BaseAim
     {

@@ -10,7 +10,7 @@ namespace SustainTheStrain.ResourceSystems
     {
         public List<IEnergySystem> Generators => _generators;
         private List<IEnergySystem> _generators = new List<IEnergySystem>();
-        
+
         /*
         public event Action<int> OnExplorePointsChanged;
         [SerializeField] private int _maxExplorePoints;
@@ -26,13 +26,13 @@ namespace SustainTheStrain.ResourceSystems
                 OnExplorePointsChanged?.Invoke(_currentExplorePoints);
             }
         }*/
-        
+
         public event Action<int> OnGoldChanged;
         [SerializeField] private int _maxGold;
-        
+
         private GoldGenerator _goldGenerator;
-        [SerializeField]
-        private int _currentGold;
+        [SerializeField] private int _currentGold;
+
         public int CurrentGold
         {
             get => _currentGold;
@@ -44,7 +44,7 @@ namespace SustainTheStrain.ResourceSystems
         }
 
         [Inject]
-        public void AddGenerators(GoldGenerator goldGenerator/*, ExplorePointGenerator explorePointGenerator*/)
+        public void AddGenerators(GoldGenerator goldGenerator /*, ExplorePointGenerator explorePointGenerator*/)
         {
             //_explorePointGenerator = explorePointGenerator;
             //_generators.Add(_explorePointGenerator);
@@ -58,7 +58,7 @@ namespace SustainTheStrain.ResourceSystems
             _goldGenerator.OnResourceGenerated += AddGold;
             //_explorePointGenerator.OnResourceGenerated += AddExplorePoint;
         }
-        
+
         void AddGold(int count)
         {
             CurrentGold += count;
@@ -68,13 +68,13 @@ namespace SustainTheStrain.ResourceSystems
         // {
         //     CurrentExplorePoints += count;
         // }
-        
+
         private void UnSubscribe()
         {
             _goldGenerator.OnResourceGenerated -= AddGold;
             //_explorePointGenerator.OnResourceGenerated -= AddExplorePoint;
         }
-        
+
         private void OnDisable()
         {
             UnSubscribe();

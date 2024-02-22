@@ -1,8 +1,6 @@
 ﻿using System;
-using SustainTheStrain.EnergySystem.Settings;
+using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
 
 namespace SustainTheStrain.EnergySystem
 {

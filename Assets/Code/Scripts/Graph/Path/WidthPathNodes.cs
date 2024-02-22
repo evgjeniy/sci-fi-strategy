@@ -1,7 +1,7 @@
-using Dreamteck.Splines;
 using System.Collections.Generic;
+using Dreamteck.Splines;
 
-namespace SustainTheStrain.Graphs.Pathes
+namespace SustainTheStrain.Graph.Path
 {
     using SplineNode = Node;
 

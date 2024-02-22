@@ -1,14 +1,12 @@
-using SustainTheStrain.Input;
 using System;
 using System.Collections.Generic;
-using SustainTheStrain;
-using SustainTheStrain.AbilitiesScripts;
 using SustainTheStrain.EnergySystem;
+using SustainTheStrain.Input;
+using SustainTheStrain.Scriptable.AbilitySettings;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 using Zenject;
 
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public class AbilitiesController : MonoBehaviour
     {
@@ -166,14 +164,14 @@ namespace SustainTheStrain.AbilitiesScripts
             }
         }
     }
-}
 
-[Serializable]
-public class AbilitiesListSettings
-{
-    public ChainDamageAbilitySettings ChainAbility;
-    public EnemyHackAbilitySettings EnemyHack;
-    public LandingAbilitySettings LandingAbility;
-    public ZoneDamageAbilitySettings ZoneDamage;
-    public ZoneSlownesAbillitySettings ZoneSlowness;
+    [Serializable]
+    public class AbilitiesListSettings
+    {
+        public ChainDamageAbilitySettings ChainAbility;
+        public EnemyHackAbilitySettings EnemyHack;
+        public LandingAbilitySettings LandingAbility;
+        public ZoneDamageAbilitySettings ZoneDamage;
+        public ZoneSlownessAbilitySettings ZoneSlowness;
+    }
 }

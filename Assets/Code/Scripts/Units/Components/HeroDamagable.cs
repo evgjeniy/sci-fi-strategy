@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using SustainTheStrain.Units.Components;
 using UnityEngine;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.Units
 {
     public class HeroDamagable : Damageble
     {

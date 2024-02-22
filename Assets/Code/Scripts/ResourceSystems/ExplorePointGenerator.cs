@@ -1,17 +1,16 @@
 ﻿using System;
 using SustainTheStrain.EnergySystem;
-using SustainTheStrain.EnergySystem.Settings;
+using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace SustainTheStrain.ResourceSystems
 {
     public class ExplorePointGenerator : ResourceGenerator, IEnergySystem
     {
-         [Inject] public EnergyController EnergyController { get; set; }
-        
-        [field:SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
+        [Inject] public EnergyController EnergyController { get; set; }
+
+        [field: SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage => EnergySettings.ButtonImage;
         public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
         public event Action<int> OnCurrentEnergyChanged;
@@ -20,7 +19,7 @@ namespace SustainTheStrain.ResourceSystems
         public event Action<IEnergySystem> OnEnergyDeleteRequire;
         private int _currentEnergy;
         private int _maxEnergy;
-        
+
         public int CurrentEnergy
         {
             get => _currentEnergy;
@@ -32,27 +31,20 @@ namespace SustainTheStrain.ResourceSystems
                     StartGeneration();
                 }
 
-                if (value > _currentEnergy)
-                {
-                    UpgradeAll();
-                }
-
-                if (value < _currentEnergy)
-                {
-                    DowngradeAll();
-                }
                 _currentEnergy = value;
                 OnCurrentEnergyChanged?.Invoke(_currentEnergy);
                 _canGenerate = value != 0;
             }
         }
-        public int MaxEnergy {
-            get =>_maxEnergy;
+
+        public int MaxEnergy
+        {
+            get => _maxEnergy;
             private set
             {
                 _maxEnergy = value;
                 OnMaxEnergyChanged?.Invoke(value);
-            } 
+            }
         }
 
         private void OnEnable()
@@ -67,14 +59,19 @@ namespace SustainTheStrain.ResourceSystems
 
         public void TrySpendEnergy()
         {
-            OnEnergyAddRequire?.Invoke(this);
+            if (FreeEnergyCells < EnergySpendCount) return;
+            if (EnergyController.TryGetEnergy(EnergySpendCount))
+            {
+                CurrentEnergy += EnergySpendCount;
+                UpgradeAll();
+            }
         }
 
         public void TryRefillEnergy()
         {
             OnEnergyDeleteRequire?.Invoke(this);
         }
-        
+
         private void OnDisable()
         {
             EndGeneration();

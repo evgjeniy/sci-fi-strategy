@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using SustainTheStrain.EnergySystem;
-using SustainTheStrain.Units.Components;
 using UnityEngine;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.Units
 {
     public class ShieldBar : MonoBehaviour
     {

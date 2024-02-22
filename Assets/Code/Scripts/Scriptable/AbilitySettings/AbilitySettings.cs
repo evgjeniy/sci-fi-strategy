@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using SustainTheStrain.EnergySystem.Settings;
+using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.Scriptable.AbilitySettings
 {
     public abstract class AbilitySettings : ScriptableObject
     {
-        public EnergySystemSettings EnergySettings;
-        public float ReloadingSpeed;
+        [field: SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
+        [field: SerializeField] public float ReloadingSpeed { get; private set; }
     }
 }

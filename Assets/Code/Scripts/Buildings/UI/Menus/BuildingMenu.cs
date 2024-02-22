@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Extensions;
 
-namespace SustainTheStrain.Buildings.UI.Menus
+namespace SustainTheStrain.Buildings.UI
 {
     public abstract class BuildingMenu : MonoBehaviour
     {
@@ -39,7 +39,7 @@ namespace SustainTheStrain.Buildings.UI.Menus
 
                 transform.position = Vector3.Lerp(placeholderPosition, mainCameraPosition, 0.15f);
                 transform.LookAt(placeholderPosition - mainCameraPosition, mainCamera.up);
-                yield break;
+                yield return null;
             }
         }
     }

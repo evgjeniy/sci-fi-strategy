@@ -1,7 +1,7 @@
 ﻿using SustainTheStrain.Buildings.Components;
 using UnityEngine;
 
-namespace SustainTheStrain.Buildings.Data
+namespace SustainTheStrain.Scriptable.Buildings
 {
     [CreateAssetMenu(menuName = "Static Data/Buildings/Rocket", fileName = "Rocket")]
     public class RocketData : BuildingData

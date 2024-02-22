@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f003441923e47318f67f6e8e25deff2, type: 3}
   m_Name: ZoneSlownesAbilitySettings
   m_EditorClassIdentifier: 
-  EnergySettings: {fileID: 11400000, guid: 0ea66b49c831c334089fcc1da9b3d537, type: 2}
-  ReloadingSpeed: 1
-  ZoneRadius: 4
-  SpeedKoeficient: 0.5
-  DurationTime: 2
-  ExplosionPrefab: {fileID: 0}
+  <EnergySettings>k__BackingField: {fileID: 11400000, guid: 0ea66b49c831c334089fcc1da9b3d537, type: 2}
+  <ReloadingSpeed>k__BackingField: 1
+  <ZoneRadius>k__BackingField: 4
+  <SpeedMultiplier>k__BackingField: 0.5
+  <DurationTime>k__BackingField: 2
+  <ExplosionPrefab>k__BackingField: {fileID: 0}

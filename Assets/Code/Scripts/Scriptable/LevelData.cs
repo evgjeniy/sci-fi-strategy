@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using SustainTheStrain.Level;
 using UnityEngine;
 
-namespace SustainTheStrain.Level
+namespace SustainTheStrain.Scriptable
 {
     [CreateAssetMenu(fileName = "LevelData", menuName = "ScriptableObjects/LevelData")]
     public class LevelData : ScriptableObject

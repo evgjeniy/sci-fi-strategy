@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using SustainTheStrain.Buildings.Data;
+using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
 using UnityEngine.Extensions;
 

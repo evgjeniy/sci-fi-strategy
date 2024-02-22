@@ -1,11 +1,6 @@
-using SustainTheStrain.AbilitiesScripts;
-using SustainTheStrain.Units.Components;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.Abilities
 {
     public class PointAim : BaseAim
     {

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
     public class HeroMoveState : State<Hero>

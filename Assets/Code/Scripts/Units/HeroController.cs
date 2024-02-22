@@ -1,7 +1,7 @@
 using System;
 using SustainTheStrain.EnergySystem;
-using SustainTheStrain.EnergySystem.Settings;
 using SustainTheStrain.Input;
+using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
 using Zenject;
 

@@ -1,8 +1,8 @@
 using SustainTheStrain.EnergySystem;
-using SustainTheStrain.Units.Components;
+using SustainTheStrain.Units;
 using UnityEngine;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.Citadels
 {
     public class CitadelShieldController : MonoEnergySystem
     {

@@ -1,12 +1,10 @@
-using SustainTheStrain.EnergySystem;
-using SustainTheStrain.Units.Components;
-using System;
 using System.Collections.Generic;
+using SustainTheStrain.Units;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SustainTheStrain.UI
+namespace SustainTheStrain.Citadels
 {
     public class CitadelUIController : MonoBehaviour
     {

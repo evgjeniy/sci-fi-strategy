@@ -1,27 +1,25 @@
 ﻿using System;
-using System.Collections;
+using SustainTheStrain.Scriptable.ResourceSettings;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace SustainTheStrain.ResourceSystems
 {
     public abstract class ResourceGenerator : MonoBehaviour
     {
         [field: SerializeField] public GeneratorSettings MGeneratorSettings { get; private set; }
-        
+
         private float _generationTime;
         protected float _cooldown;
         protected float _minimalCooldown;
         protected float _maximalCooldown;
         protected int _generateCount;
-        
+
         protected bool _canGenerate;
         protected bool _generationReseted = true;
-        
+
         protected Action<int> _resourceGenerated;
         protected Action<float> _generatedPercentChanged;
-        
+
         public float Cooldown
         {
             get => _cooldown;
@@ -32,17 +30,19 @@ namespace SustainTheStrain.ResourceSystems
                 EndGeneration();
             }
         }
+
         public event Action<float> OnGeneratedPercentChanged
-        { 
+        {
             add
             {
                 if (value != null)
                 {
                     _generatedPercentChanged += value;
                 }
-            } 
+            }
             remove => _generatedPercentChanged -= value;
         }
+
         public event Action<int> OnResourceGenerated
         {
             add
@@ -54,12 +54,12 @@ namespace SustainTheStrain.ResourceSystems
             }
             remove => _resourceGenerated -= value;
         }
-        
+
         public void StartGeneration()
         {
             _canGenerate = true;
         }
-        
+
         private void Update()
         {
             if (_canGenerate)
@@ -67,7 +67,7 @@ namespace SustainTheStrain.ResourceSystems
                 _generationReseted = false;
                 _generationTime += Time.deltaTime;
                 CheckGeneration();
-                _generatedPercentChanged?.Invoke(_generationTime/Cooldown);
+                _generatedPercentChanged?.Invoke(_generationTime / Cooldown);
             }
             else
             {
@@ -97,7 +97,7 @@ namespace SustainTheStrain.ResourceSystems
             IncreaseGenerateSpeed(MGeneratorSettings.UpgradeStats.CooldownChange);
             IncreaseGenerateCount(MGeneratorSettings.UpgradeStats.IncomeChange);
         }
-        
+
         protected void DowngradeAll()
         {
             IncreaseGenerateSpeed(-MGeneratorSettings.UpgradeStats.CooldownChange);
@@ -121,6 +121,5 @@ namespace SustainTheStrain.ResourceSystems
             _maximalCooldown = MGeneratorSettings.MaximalCooldown;
             _generateCount = MGeneratorSettings.GenerateCount;
         }
-        
     }
 }

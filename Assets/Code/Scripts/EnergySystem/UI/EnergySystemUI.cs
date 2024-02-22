@@ -1,11 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using SustainTheStrain.EnergySystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.EnergySystem.UI
 {
     public class EnergySystemUI : MonoBehaviour
     {
