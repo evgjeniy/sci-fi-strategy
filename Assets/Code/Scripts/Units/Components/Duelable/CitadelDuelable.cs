@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -5,18 +6,29 @@ using UnityEngine;
 
 namespace SustainTheStrain.Units.Components
 {
-    public class UnitDuelable : Duelable
+    public class CitadelDuelable : Duelable
     {
-        protected Duelable _opponent;
+        private List<Duelable> _opponents = new List<Duelable>();
+        
         [SerializeField]
         private Vector3 _duelOffset;
-        public override bool HasOpponent => Opponent != null;
-        public override Vector3 DuelPosition => transform.position + _duelOffset;
-        public override Duelable Opponent => _opponent;
+        public override bool HasOpponent { get => _opponents.Count > 0; }
+        public override Vector3 DuelPosition
+        {
+            get => transform.position + _duelOffset;
+        }
+
+        public override Duelable Opponent { 
+            get    
+            {
+                if(_opponents.Count > 0) return _opponents[0];
+                else return null;
+            }
+        }
 
         public override bool IsDuelPossible(Duelable initiator)
         {
-            return !HasOpponent && initiator.Damageble.Team != Damageble.Team;
+            return initiator.Damageable.Team != Damageable.Team;
         }
 
         public override bool RequestDuel(Duelable dueler)
@@ -32,29 +44,32 @@ namespace SustainTheStrain.Units.Components
 
         public override void SetOpponent(Duelable dueler)
         {
-            _opponent = dueler;
-            dueler.Damageble.OnDied += OpponentDead;
+            if(_opponents.Contains(dueler)) return;
+            _opponents.Add(dueler);
+            dueler.Damageable.OnDied += OpponentDead;
         }
 
         public override void BreakDuel()
         {
-            if (_opponent == null) return;
+            if (_opponents.Count == 0) return;
 
-            _opponent.RemoveOpponent(this);
-            RemoveOpponent(_opponent);
+            //dueler.RemoveOpponent(this);
+            //RemoveOpponent(dueler);
         }
 
         public override void RemoveOpponent(Duelable dueler)
         {
-            _opponent.Damageble.OnDied -= OpponentDead;
-            _opponent = null;
+            if (!_opponents.Contains(dueler)) return;
+
+            dueler.Damageable.OnDied -= OpponentDead;
+            _opponents.Remove(dueler);
         }
 
         private void OpponentDead(Damageble damageble)
         {
             BreakDuel();
         }
-        
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;

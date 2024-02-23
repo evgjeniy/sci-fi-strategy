@@ -42,8 +42,8 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
                 return;
             }
 
-            context.Duelable.Opponent.Damageble.Damage(context.Damage);
-            context.Duelable.Damageble.Damage(1000);
+            context.Duelable.Opponent.Damageable.Damage(context.Damage);
+            context.Duelable.Damageable.Damage(1000);
         }
 
         public override void PhysicsUpdate()

@@ -34,7 +34,7 @@ namespace SustainTheStrain.Units.Components
             _aggroZoneUnits.Add(unit);
             OnUnitEnteredAggroZone?.Invoke(unit);
 
-            unit.Damageble.OnDied += UnitDied;
+            unit.Damageable.OnDied += UnitDied;
         }
 
         private void RemoveUnit(GameObject gameObject)
@@ -44,7 +44,7 @@ namespace SustainTheStrain.Units.Components
                 if (gameObject == _aggroZoneUnits[i].gameObject)
                 {
                     OnUnitLeftAggroZone?.Invoke(_aggroZoneUnits[i]);
-                    _aggroZoneUnits[i].Damageble.OnDied -= UnitDied;
+                    _aggroZoneUnits[i].Damageable.OnDied -= UnitDied;
                     //Debug.Log(string.Format("[AggroRadius] On {0} left {1} aggro radius", _aggroZoneUnits[i].name, name));
                     _aggroZoneUnits.RemoveAt(i);
                     break;

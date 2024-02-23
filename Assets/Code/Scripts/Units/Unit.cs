@@ -30,6 +30,11 @@ namespace SustainTheStrain.Units
         public bool IsOpponentInAggroZone { get; protected set; }
         public bool IsOpponentInAttackZone { get; protected set; }
 
+        [Zenject.Inject]
+        private void Construct(UnitData unitData) 
+        {
+            
+        }
 
         private void Awake()
         {

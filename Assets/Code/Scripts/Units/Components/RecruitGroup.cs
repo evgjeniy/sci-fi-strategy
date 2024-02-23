@@ -45,7 +45,7 @@ namespace SustainTheStrain.Units.Components
             if (_recruits.Contains(recruit)) return false;
 
             _recruits.Add(recruit);
-            recruit.Duelable.Damageble.OnDied += RecruitDied;
+            recruit.Duelable.Damageable.OnDied += RecruitDied;
 
             UpdateRecruits();
             return true;
@@ -56,7 +56,7 @@ namespace SustainTheStrain.Units.Components
             if (recruit == null) return;
             if (!_recruits.Contains(recruit)) return;
 
-            recruit.Duelable.Damageble.OnDied -= RecruitDied;
+            recruit.Duelable.Damageable.OnDied -= RecruitDied;
 
             _recruits.Remove(recruit);
 

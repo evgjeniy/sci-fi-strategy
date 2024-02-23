@@ -64,7 +64,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
             if(_attackTime > context.DamagePeriod)
             {
                 _attackTime = 0;
-                context.Duelable.Opponent.Damageble.Damage(context.Damage);
+                context.Duelable.Opponent.Damageable.Damage(context.Damage);
             }
         }
 

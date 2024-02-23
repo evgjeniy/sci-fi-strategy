@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SustainTheStrain.Units.Components
 {
-    public class Damageble : MonoBehaviour, IHealth, ITeam
+    public class Damageble : MonoBehaviour, IDamageable
     {
         [field:SerializeField]
         public float MaxHP { get; set; }

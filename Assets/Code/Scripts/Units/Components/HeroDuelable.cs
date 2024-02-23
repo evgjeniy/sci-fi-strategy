@@ -13,7 +13,7 @@ namespace SustainTheStrain.Units.Components
         
         public override bool IsDuelPossible(Duelable initiator)
         {
-            return _opponent == null && initiator.Damageble.Team != Damageble.Team && !_hero.IsMoving;
+            return _opponent == null && initiator.Damageable.Team != Damageable.Team && !_hero.IsMoving;
         }
     }
 }
