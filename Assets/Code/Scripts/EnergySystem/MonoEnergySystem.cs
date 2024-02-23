@@ -15,19 +15,22 @@ namespace SustainTheStrain.EnergySystem
         public virtual event Action<IEnergySystem> OnEnergyAddRequire;
         public virtual event Action<IEnergySystem> OnEnergyDeleteRequire;
         public virtual event Action<int> OnCurrentEnergyChanged;
-
+        public event Action<IEnergySystem> Changed;
+        
         public virtual EnergyController EnergyController { get; set; }
         public virtual Sprite ButtonImage => EnergySettings.ButtonImage;
-        public virtual int FreeEnergyCells => MaxEnergy - CurrentEnergy;
+        public virtual int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
 
         public virtual int MaxEnergy
         {
-            get => EnergySettings.MaxEnergy;
-            protected set
+            get => _maxEnergy;
+            set
             {
                 if (value < 1) return;
-                OnMaxEnergyChanged?.Invoke(EnergySettings.MaxEnergy = value);
+                _maxEnergy = value;
+                Changed?.Invoke(this);
             }
+            
         }
 
         public virtual int CurrentEnergy
@@ -36,12 +39,13 @@ namespace SustainTheStrain.EnergySystem
             set
             {
                 if (value < 0 || value > MaxEnergy) return;
-                OnCurrentEnergyChanged?.Invoke(_currentEnergy = value);
+                _currentEnergy = value;
+                Changed?.Invoke(this);
             }
         }
 
         [Zenject.Inject]
-        private void InjectEnergyController(EnergyController energyController)
+        private void Construct(EnergyController energyController)
         {
             EnergyController = energyController;
             EnergyController.AddEnergySystem(this);
@@ -49,16 +53,16 @@ namespace SustainTheStrain.EnergySystem
             SetEnergySettings(EnergySettings);
         }
 
-        public virtual void IncreaseMaxEnergy(int value = 1) => MaxEnergy += value;
-
-        public virtual void TrySpendEnergy()
+        public virtual bool TrySpendEnergy()
         {
-            OnEnergyAddRequire?.Invoke(this);
+            //logic
+            return true;
         }
 
-        public virtual void TryRefillEnergy()
+        public virtual bool TryRefillEnergy()
         {
-            OnEnergyDeleteRequire?.Invoke(this);
+            //logic
+            return true;
         }
 
         public virtual void SetEnergySettings(EnergySystemSettings settings) {}

@@ -48,7 +48,7 @@ namespace SustainTheStrain.Abilities
         public Sprite ButtonImage { get; private set; }
         [Inject] public EnergyController EnergyController { get; set; }
         public int MaxEnergy { get; private set; }
-        public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
+        public int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
         public int CurrentEnergy 
         { 
             get => _currentEnergy;

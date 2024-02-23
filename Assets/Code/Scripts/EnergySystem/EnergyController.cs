@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SustainTheStrain._Architecture;
 using UnityEngine;
 using Zenject;
 
@@ -11,33 +12,28 @@ namespace SustainTheStrain.EnergySystem
         public event Action<IEnergySystem> OnSystemAdded;
         public List<IEnergySystem> Systems => _systems;
         private List<IEnergySystem> _systems = new();
-
-        [Inject] 
+        
+        [Inject]
         public void AddEnergySystem(IEnergySystem system)
         {
             if (_systems.Contains(system)) return;
             _systems.Add(system);
-            system.OnEnergyAddRequire+=TryLoadEnergyToSystem;
-            system.OnEnergyDeleteRequire += TryReturnEnergyFromSystem;
             OnSystemAdded?.Invoke(system);
         }
 
-        private void TryLoadEnergyToSystem(IEnergySystem system)
+        //используется в ui
+        public void TryLoadEnergyToSystem(IEnergySystem system)
         {
             var countOfEnergy = system.EnergySettings.EnergySpend;
-            if (system.FreeEnergyCells<countOfEnergy) return;
+            if (system.FreeEnergyCellsCount < countOfEnergy) return;
             if (Manager.TrySpend(countOfEnergy))
             {
                 system.CurrentEnergy += countOfEnergy;
             }
         }
-    
-        public void IncreaseMaxEnergy(int value)
-        {
-            Manager.IncreaseMaxEnergy(value);
-        }
-    
-        private void TryReturnEnergyFromSystem(IEnergySystem system)
+
+        //используется в ui
+        public void TryReturnEnergyFromSystem(IEnergySystem system)
         {
             var countOfEnergy = system.EnergySettings.EnergySpend;
             if (system.CurrentEnergy < countOfEnergy) return;
@@ -46,6 +42,5 @@ namespace SustainTheStrain.EnergySystem
                 system.CurrentEnergy -= countOfEnergy;
             }
         }
-    
     }
 }

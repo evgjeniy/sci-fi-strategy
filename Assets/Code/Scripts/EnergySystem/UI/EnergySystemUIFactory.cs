@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace SustainTheStrain.EnergySystem.UI
 {
-    public class EnergySystemUIFactory : MonoBehaviour
+    public class EnergySystemUIFactory : MonoBehaviour //non monobeh
     {
         [NonSerialized] public AbilitiesUIController MAbilitiesUIController;
         [SerializeField] private EnergySystemUI _energySystemUIPrefab;
@@ -19,7 +19,9 @@ namespace SustainTheStrain.EnergySystem.UI
         [SerializeField] private Transform _abilitiesUIParent;
         [SerializeField] private Image _standartBackgroundImageSprite;
         [SerializeField] private Image _abilityBackgroundImage;
-        
+
+
+        private EnergyController _energyController;
         
         public KeyValuePair<IEnergySystem, EnergySystemUI> CreateUI(IEnergySystem system)
         {
@@ -57,12 +59,17 @@ namespace SustainTheStrain.EnergySystem.UI
             ui.ControllButton = button;
             button.image.sprite = system.EnergySettings.ButtonImage;
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
-            button.OnLeftMouseClick += system.TrySpendEnergy;
-            button.OnRightMouseClick += system.TryRefillEnergy;
-            system.OnCurrentEnergyChanged += ui.ChangeEnergy;
+            button.OnLeftMouseClick += () =>
+            {
+                _energyController.TryLoadEnergyToSystem(system);
+            };
+            button.OnRightMouseClick += () =>
+            {
+                _energyController.TryReturnEnergyFromSystem(system);
+            };
+            system.Changed += ui.ChangeEnergy; //перенести в UIController
 
             return new KeyValuePair<IEnergySystem, EnergySystemUI>(system, ui);
-
         }
     }
 }

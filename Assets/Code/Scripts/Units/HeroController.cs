@@ -15,7 +15,7 @@ namespace SustainTheStrain.Units
          public EnergyController EnergyController { get; set; }
         [field:SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage => EnergySettings.ButtonImage;
-        public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
+        public int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
         public event Action<int> OnCurrentEnergyChanged;
         public event Action<int> OnMaxEnergyChanged;
         public event Action<IEnergySystem> OnEnergyAddRequire;
