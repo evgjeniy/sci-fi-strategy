@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SustainTheStrain.EnergySystem;
+using UnityEngine;
 
 namespace SustainTheStrain.Scriptable.EnergySettings
 {
@@ -8,5 +9,6 @@ namespace SustainTheStrain.Scriptable.EnergySettings
         [field: SerializeField] public Sprite ButtonImage { get; private set; }
         [field: SerializeField, Min(1)] public int EnergySpend { get; private set; }
         [field: SerializeField, Min(1)] public int MaxEnergy { get; set; }
+        [field: SerializeField] public EnergySystemType SystemType { get; private set; }
     }
 }

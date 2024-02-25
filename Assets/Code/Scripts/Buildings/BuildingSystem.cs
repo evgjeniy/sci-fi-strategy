@@ -129,6 +129,8 @@ namespace SustainTheStrain.Buildings
         public override void SetEnergySettings(EnergySystemSettings settings)
         {
             _buildingSettings = settings as BuildingSystemSettings;
+            _maxEnergy = settings.MaxEnergy;
+            _currentEnergy = 0;
         }
         
         

@@ -9,7 +9,7 @@ namespace SustainTheStrain.EnergySystem
     {
         public EnergySystemSettings EnergySettings { get; }
         public int FreeEnergyCellsCount { get; }
-        public int MaxEnergy { get; set; }
+        public int MaxEnergy { get; }
         public int CurrentEnergy { get; set; }
         public bool TrySpendEnergy();
         public bool TryRefillEnergy();

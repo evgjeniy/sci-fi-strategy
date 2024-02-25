@@ -16,10 +16,7 @@ namespace SustainTheStrain.Units
         [field:SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage => EnergySettings.ButtonImage;
         public int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
-        public event Action<int> OnCurrentEnergyChanged;
-        public event Action<int> OnMaxEnergyChanged;
-        public event Action<IEnergySystem> OnEnergyAddRequire;
-        public event Action<IEnergySystem> OnEnergyDeleteRequire;
+        
         private int _currentEnergy;
         private int _maxEnergy;
 
@@ -39,18 +36,13 @@ namespace SustainTheStrain.Units
             {
                 if (value < 0 || value > MaxEnergy) return;
                 _currentEnergy = value;
-                //_hero.Damage += 5;
-                OnCurrentEnergyChanged?.Invoke(_currentEnergy);
+                Changed?.Invoke(this);
             }
         }
         
         public int MaxEnergy {
             get =>_maxEnergy;
-            private set
-            {
-                _maxEnergy = value;
-                OnMaxEnergyChanged?.Invoke(value);
-            } 
+            private set => _maxEnergy = value;
         }
 
         private void OnEnable()
@@ -72,14 +64,14 @@ namespace SustainTheStrain.Units
             MaxEnergy += value;
         }
 
-        public void TrySpendEnergy()
+        public bool TrySpendEnergy()
         {
-            OnEnergyAddRequire?.Invoke(this);
+            return true;
         }
 
-        public void TryRefillEnergy()
+        public bool TryRefillEnergy()
         {
-            OnEnergyDeleteRequire?.Invoke(this);
+            return true;
         }
 
         private void LoadSettings()
@@ -97,5 +89,7 @@ namespace SustainTheStrain.Units
         {
             Debug.LogWarning("HeroSelected");
         }
+
+        public event Action<IEnergySystem> Changed;
     }
 }

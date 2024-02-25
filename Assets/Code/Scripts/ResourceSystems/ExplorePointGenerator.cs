@@ -13,10 +13,7 @@ namespace SustainTheStrain.ResourceSystems
         [field: SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage => EnergySettings.ButtonImage;
         public int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
-        public event Action<int> OnCurrentEnergyChanged;
-        public event Action<int> OnMaxEnergyChanged;
-        public event Action<IEnergySystem> OnEnergyAddRequire;
-        public event Action<IEnergySystem> OnEnergyDeleteRequire;
+ 
         private int _currentEnergy;
         private int _maxEnergy;
 
@@ -30,21 +27,25 @@ namespace SustainTheStrain.ResourceSystems
                 {
                     StartGeneration();
                 }
+                if (value > _currentEnergy)
+                {
+                    TrySpendEnergy();
+                }
 
+                if (value < _currentEnergy)
+                {
+                    TryRefillEnergy();
+                }
                 _currentEnergy = value;
-                OnCurrentEnergyChanged?.Invoke(_currentEnergy);
                 _canGenerate = value != 0;
+                Changed?.Invoke(this);
             }
         }
 
         public int MaxEnergy
         {
             get => _maxEnergy;
-            private set
-            {
-                _maxEnergy = value;
-                OnMaxEnergyChanged?.Invoke(value);
-            }
+            private set => _maxEnergy = value;
         }
 
         private void OnEnable()
@@ -57,14 +58,16 @@ namespace SustainTheStrain.ResourceSystems
             MaxEnergy += value;
         }
 
-        public void TrySpendEnergy()
+        public bool TrySpendEnergy()
         {
-            
+            UpgradeAll();
+            return true;
         }
 
-        public void TryRefillEnergy()
+        public bool TryRefillEnergy()
         {
-            OnEnergyDeleteRequire?.Invoke(this);
+            DowngradeAll();
+            return true;
         }
 
         private void OnDisable()
@@ -77,5 +80,7 @@ namespace SustainTheStrain.ResourceSystems
             base.LoadSettings();
             MaxEnergy = EnergySettings.MaxEnergy;
         }
+
+        public event Action<IEnergySystem> Changed;
     }
 }

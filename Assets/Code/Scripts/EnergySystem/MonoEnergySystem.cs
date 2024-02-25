@@ -8,12 +8,9 @@ namespace SustainTheStrain.EnergySystem
     {
         [field: SerializeField] public EnergySystemSettings EnergySettings { get; protected set; }
 
-        private int _maxEnergy;
-        private int _currentEnergy;
-
-        public virtual event Action<int> OnMaxEnergyChanged;
-        public virtual event Action<IEnergySystem> OnEnergyAddRequire;
-        public virtual event Action<IEnergySystem> OnEnergyDeleteRequire;
+        protected int _maxEnergy;
+        protected int _currentEnergy;
+        
         public virtual event Action<int> OnCurrentEnergyChanged;
         public event Action<IEnergySystem> Changed;
         

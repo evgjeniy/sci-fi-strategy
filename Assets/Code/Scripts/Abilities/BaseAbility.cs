@@ -56,12 +56,12 @@ namespace SustainTheStrain.Abilities
             {
                 if (value < 0 || value > MaxEnergy) return;
                 _currentEnergy = value;
-                OnCurrentEnergyChanged?.Invoke(_currentEnergy);
                 IsLoaded = value != 0;
                 if (!IsLoaded)
                 {
                     Reload = 0;
                 }
+                Changed?.Invoke(this);
             }
         }
 
@@ -72,21 +72,16 @@ namespace SustainTheStrain.Abilities
         }
 
         protected int _currentEnergy;
-        public event Action<int> OnCurrentEnergyChanged;
-        public event Action<int> OnMaxEnergyChanged;
-        public event Action<IEnergySystem> OnEnergyAddRequire;
-        public event Action<IEnergySystem> OnEnergyDeleteRequire;
+       
 
-        public void TrySpendEnergy()
+        public bool TrySpendEnergy()
         {
-            Debug.Log("TryingSpend");
-            OnEnergyAddRequire?.Invoke(this);
+            return true;
         }
 
-        public void TryRefillEnergy()
+        public bool TryRefillEnergy()
         {
-            Debug.Log("TryingReffil");
-            OnEnergyDeleteRequire?.Invoke(this);
+            return true;
         }
 
         public void SetEnergySettings(EnergySystemSettings settings)
@@ -94,5 +89,7 @@ namespace SustainTheStrain.Abilities
             EnergySettings = settings;
             MaxEnergy = settings.MaxEnergy;
         }
+
+        public event Action<IEnergySystem> Changed;
     }
 }

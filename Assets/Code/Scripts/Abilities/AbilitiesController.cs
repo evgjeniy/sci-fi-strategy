@@ -67,7 +67,6 @@ namespace SustainTheStrain.Abilities
             var chosenAbility = Abilities[idx];
             if (!chosenAbility.IsLoaded)
             {
-                chosenAbility.TrySpendEnergy();
                 return;
             }
             if (!chosenAbility.IsReloaded()) return;

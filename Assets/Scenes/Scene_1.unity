@@ -385,6 +385,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4519674630115074691, guid: 5da990ec0dad63544bbbda4bf1df61b6,
+        type: 3}
+      propertyPath: <EnergySettings>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 90baee497e37a384d8cadafd9d02c68a,
+        type: 2}
     - target: {fileID: 4925764818830990335, guid: 5da990ec0dad63544bbbda4bf1df61b6,
         type: 3}
       propertyPath: m_Controller
@@ -1700,7 +1706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299095c3e2838c047b6e8c6fb6bb9734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <EnergySettings>k__BackingField: {fileID: 11400000, guid: 18043ce5b3fadd34c9fbc919dedb9f12,
+  <EnergySettings>k__BackingField: {fileID: 11400000, guid: 4d303c98ab8948f4c83a7f1faa67135e,
     type: 2}
   _shield: {fileID: 297678428}
 --- !u!65 &297678433
@@ -3589,6 +3595,108 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864724078}
   m_CullTransparentMesh: 1
+--- !u!1 &872411132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 872411133}
+  - component: {fileID: 872411134}
+  m_Layer: 0
+  m_Name: Resource Generators UI Factory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &872411133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872411132}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1895753326}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &872411134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872411132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d49911a86c4e46b5ed90dde120ff2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiPrefab: {fileID: 5388658601182942965, guid: e291e600d311bed46aa3fc3dd08045f7,
+    type: 3}
+  _spawnParent: {fileID: 1758601574}
+  _backgroundImage: {fileID: 4023847236005703353, guid: c018b33ec6411cb419c101d7ae51764f,
+    type: 3}
+  _controllButton: {fileID: 7329792667511988553, guid: 3e7afe66033c3e24fa9c4159a4a87cff,
+    type: 3}
+--- !u!1 &875386622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 875386623}
+  - component: {fileID: 875386624}
+  m_Layer: 0
+  m_Name: Energy Systems UI Factory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &875386623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875386622}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1895753326}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &875386624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875386622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1746d95bf6814e99abb50986eef4b33f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiPrefab: {fileID: 5388658601182942965, guid: e291e600d311bed46aa3fc3dd08045f7,
+    type: 3}
+  _spawnParent: {fileID: 1758601574}
+  _backgroundImage: {fileID: 4023847236005703353, guid: c018b33ec6411cb419c101d7ae51764f,
+    type: 3}
+  _controllButton: {fileID: 7329792667511988553, guid: 3e7afe66033c3e24fa9c4159a4a87cff,
+    type: 3}
 --- !u!1 &920860411
 GameObject:
   m_ObjectHideFlags: 0
@@ -4447,7 +4555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154cc8dc9672431bb42b3bca2a581af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _factory: {fileID: 1895753327}
+  _manager: {fileID: 1895753327}
 --- !u!4 &1265519255
 Transform:
   m_ObjectHideFlags: 0
@@ -6650,9 +6758,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2063938356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.052376624, y: 0.031780347}
-  m_AnchorMax: {x: 0.13115044, y: 0.27938035}
-  m_AnchoredPosition: {x: 277, y: 0}
+  m_AnchorMin: {x: 0.24026042, y: 0.031780347}
+  m_AnchorMax: {x: 0.32000002, y: 0.27938035}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1641735684
@@ -7460,7 +7568,7 @@ GameObject:
   - component: {fileID: 1895753326}
   - component: {fileID: 1895753327}
   m_Layer: 0
-  m_Name: EnergySystemsUIFactory
+  m_Name: EnergySystemsUIFactoryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7478,7 +7586,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1995631452}
+  - {fileID: 872411133}
+  - {fileID: 875386623}
   m_Father: {fileID: 342792331}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1895753327
@@ -7490,21 +7601,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1895753325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e227782fe2f44ab1a55377fb36f7bc02, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c7d5d7a6344435f9bf52fb6b784d066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _energySystemUIPrefab: {fileID: 5388658601182942965, guid: e291e600d311bed46aa3fc3dd08045f7,
-    type: 3}
-  _energySystemControllButton: {fileID: 7329792667511988553, guid: 3e7afe66033c3e24fa9c4159a4a87cff,
-    type: 3}
-  _abilityChargeSliderPrefab: {fileID: 5991963656336610182, guid: bd8ec5c015f17cf4f98b51641ea45ac9,
-    type: 3}
-  _standartUIParent: {fileID: 1758601574}
-  _abilitiesUIParent: {fileID: 1641735683}
-  _standartBackgroundImageSprite: {fileID: 4023847236005703353, guid: c018b33ec6411cb419c101d7ae51764f,
-    type: 3}
-  _abilityBackgroundImage: {fileID: 8681508400972709621, guid: 4cb67f715da9e7e498aa07ffe9cfd8d3,
-    type: 3}
+  Factories:
+  - SystemType: 0
+    Factory: {fileID: 875386624}
+  - SystemType: 1
+    Factory: {fileID: 872411134}
+  - SystemType: 2
+    Factory: {fileID: 1995631453}
+  - SystemType: 3
+    Factory: {fileID: 875386624}
+  - SystemType: 5
+    Factory: {fileID: 875386624}
 --- !u!1 &1915493774
 GameObject:
   m_ObjectHideFlags: 0
@@ -8093,6 +8203,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1016166638}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1995631451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1995631452}
+  - component: {fileID: 1995631453}
+  m_Layer: 0
+  m_Name: Abilities UI Factory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1995631452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995631451}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1895753326}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1995631453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995631451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06f72d19805480f8d3eda5320e550ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiPrefab: {fileID: 5388658601182942965, guid: e291e600d311bed46aa3fc3dd08045f7,
+    type: 3}
+  _spawnParent: {fileID: 1641735683}
+  _backgroundImage: {fileID: 8681508400972709621, guid: 4cb67f715da9e7e498aa07ffe9cfd8d3,
+    type: 3}
+  _controllButton: {fileID: 7329792667511988553, guid: 3e7afe66033c3e24fa9c4159a4a87cff,
+    type: 3}
+  mAbilitiesUIController: {fileID: 1064222983}
+  _scaleMultiplayer: 1.4
+  _sliderPrefab: {fileID: 5991963656336610182, guid: bd8ec5c015f17cf4f98b51641ea45ac9,
+    type: 3}
 --- !u!1 &2000493272
 GameObject:
   m_ObjectHideFlags: 0
