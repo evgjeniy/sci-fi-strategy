@@ -14,7 +14,6 @@ namespace SustainTheStrain.EnergySystem
         public virtual event Action<int> OnCurrentEnergyChanged;
         public event Action<IEnergySystem> Changed;
         
-        public virtual EnergyController EnergyController { get; set; }
         public virtual Sprite ButtonImage => EnergySettings.ButtonImage;
         public virtual int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
 
@@ -44,10 +43,9 @@ namespace SustainTheStrain.EnergySystem
         [Zenject.Inject]
         private void Construct(EnergyController energyController)
         {
-            EnergyController = energyController;
-            EnergyController.AddEnergySystem(this);
-
             SetEnergySettings(EnergySettings);
+
+            energyController.AddEnergySystem(this);
         }
 
         public virtual bool TrySpendEnergy()
@@ -56,6 +54,7 @@ namespace SustainTheStrain.EnergySystem
             return true;
         }
 
+        //используй эти методы вместо прямого назначения
         public virtual bool TryRefillEnergy()
         {
             //logic
