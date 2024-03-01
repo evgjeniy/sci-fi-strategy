@@ -1,11 +1,20 @@
 using NaughtyAttributes;
 using SustainTheStrain.Buildings.Data;
 using UnityEngine;
+using Zenject;
 
 namespace SustainTheStrain.Units.Spawners
 {
     public class RecruitSpawner : Spawner<Recruit>
     {
+        private IFactory<Recruit> _factory;
+
+        [Inject]
+        private void Construct(IFactory<Recruit> factory)
+        {
+            _factory = factory;
+        }
+
         [Button("Spawn")]
         public override Recruit Spawn()
         {

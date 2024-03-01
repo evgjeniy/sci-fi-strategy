@@ -10,11 +10,11 @@ namespace SustainTheStrain.Level
         [SerializeField] private float _delay;
         [SerializeField] private float _spawnPeriod;
         [SerializeField] private int _enemyCount;
-        [SerializeField] private Enemy _enemyType;
+        [SerializeField] private string _enemyType;
 
         public float spawnPeriod => _spawnPeriod;
         public int enemyCount => _enemyCount;
-        public Enemy enemyType => _enemyType;
+        public string enemyType => _enemyType;
         public float delay => _delay;
     }
 }
