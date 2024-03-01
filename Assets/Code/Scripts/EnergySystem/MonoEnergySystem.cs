@@ -48,16 +48,16 @@ namespace SustainTheStrain.EnergySystem
             energyController.AddEnergySystem(this);
         }
 
-        public virtual bool TrySpendEnergy()
+        public virtual bool TrySpendEnergy(int count)
         {
-            //logic
+            CurrentEnergy += count;
             return true;
         }
 
         //используй эти методы вместо прямого назначения
-        public virtual bool TryRefillEnergy()
+        public virtual bool TryRefillEnergy(int count)
         {
-            //logic
+            CurrentEnergy -= count;
             return true;
         }
 

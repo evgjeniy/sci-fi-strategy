@@ -5,7 +5,7 @@ using Zenject;
 
 namespace SustainTheStrain.EnergySystem.UI.Factories
 {
-    public abstract class MonoUIFactory : MonoBehaviour, IEnergySystemUIFactory
+    public abstract class MonoUIFactory : MonoBehaviour, IFactory<IEnergySystem, EnergySystemUI>
     {
         [Inject] protected EnergyController _energyController;
         [SerializeField] protected EnergySystemUI _uiPrefab;

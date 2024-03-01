@@ -74,13 +74,15 @@ namespace SustainTheStrain.Abilities
         protected int _currentEnergy;
        
 
-        public bool TrySpendEnergy()
+        public bool TrySpendEnergy(int count)
         {
+            CurrentEnergy += count;
             return true;
         }
 
-        public bool TryRefillEnergy()
+        public bool TryRefillEnergy(int count)
         {
+            CurrentEnergy -= count;
             return true;
         }
 

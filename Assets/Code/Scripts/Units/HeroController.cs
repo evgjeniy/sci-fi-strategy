@@ -7,19 +7,13 @@ using Zenject;
 
 namespace SustainTheStrain.Units
 {
-    public class HeroController : MonoBehaviour, IEnergySystem
+    public class HeroController : MonoEnergySystem
     {
         [Inject] private IHeroInput _heroInput;
         [Inject] private Hero _hero;
         
-         public EnergyController EnergyController { get; set; }
-        [field:SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
-        public Sprite ButtonImage => EnergySettings.ButtonImage;
-        public int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
+        public EnergyController EnergyController { get; set; }
         
-        private int _currentEnergy;
-        private int _maxEnergy;
-
         [Inject]
         private void Init(EnergyController controller)
         {
@@ -29,22 +23,6 @@ namespace SustainTheStrain.Units
             
         }
         
-        public int CurrentEnergy
-        {
-            get => _currentEnergy;
-            set
-            {
-                if (value < 0 || value > MaxEnergy) return;
-                _currentEnergy = value;
-                Changed?.Invoke(this);
-            }
-        }
-        
-        public int MaxEnergy {
-            get =>_maxEnergy;
-            private set => _maxEnergy = value;
-        }
-
         private void OnEnable()
         {
             _heroInput.OnSelected += HeroSelected;
@@ -64,16 +42,6 @@ namespace SustainTheStrain.Units
             MaxEnergy += value;
         }
 
-        public bool TrySpendEnergy()
-        {
-            return true;
-        }
-
-        public bool TryRefillEnergy()
-        {
-            return true;
-        }
-
         private void LoadSettings()
         {
             MaxEnergy = EnergySettings.MaxEnergy;
@@ -90,6 +58,5 @@ namespace SustainTheStrain.Units
             Debug.LogWarning("HeroSelected");
         }
 
-        public event Action<IEnergySystem> Changed;
     }
 }

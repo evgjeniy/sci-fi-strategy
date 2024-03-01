@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Zenject;
 
 namespace SustainTheStrain.EnergySystem.UI.Factories
 {
@@ -14,15 +16,15 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
             return Find(system)?.Create(system);
         }
 
-        private IEnergySystemUIFactory Find(IEnergySystem system)
+        private IFactory<IEnergySystem, EnergySystemUI> Find(IEnergySystem system)
         {
-            return (from factory in Factories where factory.SystemType == system.EnergySettings.SystemType select factory.Factory).FirstOrDefault();
+            return (from factory in Factories where factory.systemUIType == system.EnergySettings.SystemUIType select factory.Factory).FirstOrDefault();
         }
         
         [Serializable]
         public struct SystemFactoryPair
         {
-            public EnergySystemType SystemType;
+            public EnergySystemUIType systemUIType;
             public MonoUIFactory Factory;
         }
     }

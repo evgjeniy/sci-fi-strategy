@@ -26,15 +26,6 @@ namespace SustainTheStrain.ResourceSystems
                 {
                     StartGeneration();
                 }
-                if (value > _currentEnergy)
-                {
-                    TrySpendEnergy();
-                }
-
-                if (value < _currentEnergy)
-                {
-                    TryRefillEnergy();
-                }
                 _currentEnergy = value;
                 _canGenerate = value != 0;
                 Changed?.Invoke(this);
@@ -53,14 +44,16 @@ namespace SustainTheStrain.ResourceSystems
             MaxEnergy += value;
         }
 
-        public bool TrySpendEnergy()
+        public bool TrySpendEnergy(int count)
         {
+            CurrentEnergy += count;
             UpgradeAll();
             return true;
         }
 
-        public bool TryRefillEnergy()
+        public bool TryRefillEnergy(int count)
         {
+            CurrentEnergy -= count;
             DowngradeAll();
             return true;
         }

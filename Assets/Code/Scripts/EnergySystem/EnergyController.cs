@@ -28,7 +28,7 @@ namespace SustainTheStrain.EnergySystem
             if (system.FreeEnergyCellsCount < countOfEnergy) return;
             if (Manager.TrySpend(countOfEnergy))
             {
-                system.CurrentEnergy += countOfEnergy;
+                system.TrySpendEnergy(countOfEnergy);
             }
         }
 
@@ -39,7 +39,7 @@ namespace SustainTheStrain.EnergySystem
             if (system.CurrentEnergy < countOfEnergy) return;
             if (Manager.TryRefill(countOfEnergy))
             {
-                system.CurrentEnergy -= countOfEnergy;
+                system.TryRefillEnergy(countOfEnergy);
             }
         }
     }
