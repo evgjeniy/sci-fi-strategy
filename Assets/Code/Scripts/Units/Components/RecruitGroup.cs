@@ -67,7 +67,7 @@ namespace SustainTheStrain.Units.Components
             UpdateRecruits();
         }
 
-        private void RecruitDied(Damageble recruit)
+        private void RecruitDied(Damageable recruit)
         {
             recruit.TryGetComponent<Recruit>(out var rec);
 

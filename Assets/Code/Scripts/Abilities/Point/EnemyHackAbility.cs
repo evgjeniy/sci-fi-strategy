@@ -17,7 +17,7 @@ namespace SustainTheStrain.AbilitiesScripts
                 FailShootLogic();
                 return;
             }
-            var stdmg = hit.collider?.GetComponent<Units.Components.Damageble>();
+            var stdmg = hit.collider?.GetComponent<Units.Components.Damageable>();
             if (stdmg == null || stdmg.Team == team)
             {
                 FailShootLogic();
@@ -34,7 +34,7 @@ namespace SustainTheStrain.AbilitiesScripts
 
         protected override void SuccessShootLogic(RaycastHit hit, int team)
         {
-            var dmg = hit.collider?.GetComponent<Units.Components.Damageble>();
+            var dmg = hit.collider?.GetComponent<Units.Components.Damageable>();
             dmg.Team = team;
         }
 

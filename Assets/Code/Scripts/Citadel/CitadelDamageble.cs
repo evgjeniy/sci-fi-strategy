@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SustainTheStrain.Units.Components
 {
-    public class CitadelDamageble : Damageble
+    public class CitadelDamageable : Damageable
     {
         [SerializeField] private Shield _shield;
 

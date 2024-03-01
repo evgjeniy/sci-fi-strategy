@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Dreamteck.Splines;
 using SustainTheStrain.Units;
 using SustainTheStrain.Units.PathFollowers;
-using SustainTheStrain.Units.StateMachine.ConcreteStates;
+using SustainTheStrain.Units.StateMachines.ConcreteStates;
 using UnityEngine;
 
 namespace SustainTheStrain

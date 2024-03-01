@@ -16,7 +16,7 @@ namespace SustainTheStrain.Level
         
         private void OnEnable()
         {
-            _citadel.GetComponent<Damageble>().OnDied += _ =>
+            _citadel.GetComponent<Damageable>().OnDied += _ =>
             {
                 Debug.LogWarning("Lost");
                 OnGameLost?.Invoke();

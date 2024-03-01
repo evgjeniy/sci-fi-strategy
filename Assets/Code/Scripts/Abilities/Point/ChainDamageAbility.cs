@@ -33,7 +33,7 @@ namespace SustainTheStrain.AbilitiesScripts
                 FailShootLogic();
                 return;
             }
-            var stdmg = hit.collider.GetComponent<Units.Components.Damageble>();
+            var stdmg = hit.collider.GetComponent<Units.Components.Damageable>();
             if (stdmg == null || stdmg.Team == team)
             {
                 FailShootLogic();
@@ -63,12 +63,12 @@ namespace SustainTheStrain.AbilitiesScripts
             List<Collider> used = new(maxTargetsCount);
 
             used.Add(hit.collider);
-            curTarget.GetComponent<Units.Components.Damageble>().Damage(damage);
+            curTarget.GetComponent<Units.Components.Damageable>().Damage(damage);
 
             line.positionCount++;
             line.SetPosition(line.positionCount - 1, curTarget.transform.position);
 
-            //Debug.Log(curTarget.GetComponent<Units.Components.Damageble>().Team);
+            //Debug.Log(curTarget.GetComponent<Units.Components.Damageable>().Team);
             while (line.positionCount < maxTargetsCount)
             {
                 curColliders = Physics.OverlapSphere(curTarget.transform.position, maxDistanceBetween);
@@ -78,7 +78,7 @@ namespace SustainTheStrain.AbilitiesScripts
                 for (int i = 0;i < curColliders.Length; i++)
                 {
                     var temp = curColliders[i];
-                    var dmg = temp?.GetComponent<Units.Components.Damageble>();
+                    var dmg = temp?.GetComponent<Units.Components.Damageable>();
 
                     if (dmg == null || dmg.Team == team || used.Contains(temp)) continue;
 
@@ -93,7 +93,7 @@ namespace SustainTheStrain.AbilitiesScripts
                 if (nearestIdx == -1) break;
 
                 curTarget = curColliders[nearestIdx];
-                curTarget.GetComponent<Units.Components.Damageble>().Damage(damage);
+                curTarget.GetComponent<Units.Components.Damageable>().Damage(damage);
                 used.Add(curTarget);
                 //Debug.Log(dmg.Team);
 

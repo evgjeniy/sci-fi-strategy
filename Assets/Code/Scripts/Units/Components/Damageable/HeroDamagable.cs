@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SustainTheStrain
 {
-    public class HeroDamagable : Damageble
+    public class HeroDamagable : Damageable
     {
         private float _lastDamageTime;
         private bool _calm = true;

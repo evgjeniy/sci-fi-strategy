@@ -50,7 +50,7 @@ namespace SustainTheStrain.Units.Components
             _opponent = null;
         }
 
-        private void OpponentDead(Damageble damageble)
+        private void OpponentDead(IDamageable damageble)
         {
             BreakDuel();
         }

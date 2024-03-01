@@ -5,17 +5,17 @@ using UnityEngine;
 
 namespace SustainTheStrain.Units.Components
 {
-    [RequireComponent(typeof(Damageble))]
+    [RequireComponent(typeof(Damageable))]
     public class TimerKiller : MonoBehaviour
     {
         [SerializeField] private float _time = 5f;
 
-        private Damageble _damageble;
+        private IDamageable _damageble;
         private Timer _timer = new();
 
         private void Start()
         {
-            _damageble = GetComponent<Damageble>();
+            _damageble = GetComponent<IDamageable>();
             
             _timer.Time = _time;
         }

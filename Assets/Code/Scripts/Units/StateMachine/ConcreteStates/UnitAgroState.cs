@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace SustainTheStrain.Units.StateMachine.ConcreteStates
+namespace SustainTheStrain.Units.StateMachines.ConcreteStates
 {
     public class UnitAgroState : State<Unit>
     {

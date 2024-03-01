@@ -5,7 +5,7 @@ using UnityEngine;
 namespace SustainTheStrain.Units.Components
 {
     [RequireComponent(typeof(Shield))]
-    public class ShieldDamageble : Damageble
+    public class ShieldDamageable : Damageable
     {
         private Shield _shield;
 

@@ -10,7 +10,7 @@ namespace SustainTheStrain.UI
 {
     public class CitadelUIController : MonoBehaviour
     {
-        [SerializeField] private Damageble _damageble;
+        [SerializeField] private IDamageable _damageble;
         [SerializeField] private Shield _shield;
 
         [SerializeField] private Slider _healthSlider;

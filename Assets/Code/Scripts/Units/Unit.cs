@@ -1,40 +1,34 @@
-using System;
 using SustainTheStrain.Units.Components;
 using SustainTheStrain.Units.PathFollowers;
-using SustainTheStrain.Units.StateMachine.ConcreteStates;
+using SustainTheStrain.Units.StateMachines;
 using UnityEngine;
 using UnityEngine.AI;
-using Zenject;
-using static UnityEngine.UI.CanvasScaler;
 
 namespace SustainTheStrain.Units
 {
-    [RequireComponent(typeof(Damageble))]
+    [RequireComponent(typeof(IDamageable))]
     public class Unit : MonoBehaviour
     {
-        [field:SerializeField] public float Damage { get; set; }
-        [field:SerializeField] public float DamagePeriod { get; set; }
 
         [SerializeField] public Animator Animator;
         [SerializeField] public GameObject _afterDeath;
-        public IPathFollower CurrentPathFollower { get; protected set; }   
-        protected StateMachine.StateMachine _stateMachine = new StateMachine.StateMachine();
-    
+        [SerializeField] private UnitData _unitData;
         public Duelable Duelable { get; protected set; }
         public AggroRadiusCheck AggroRadiusCheck { get; protected set;}
         public AttackRadiusCheck AttackRadiusCheck { get; protected set;}
-        public StateMachine.StateMachine StateMachine => _stateMachine;
+        public StateMachine StateMachine => _stateMachine;
         public NavPathFollower NavPathFollower { get; protected set; }
+
+        public float Damage => _unitData.Damage;
+        public float DamagePeriod => _unitData.AttackCooldown;
+
+        public IPathFollower CurrentPathFollower { get; protected set; }   
+    
+        protected StateMachine _stateMachine = new StateMachine();
 
         public bool IsAnnoyed { get; protected set; } 
         public bool IsOpponentInAggroZone { get; protected set; }
         public bool IsOpponentInAttackZone { get; protected set; }
-
-        //[Zenject.Inject]
-        //private void Construct(UnitData unitData) 
-        //{
-            
-        //}
 
         private void Awake()
         {
@@ -56,6 +50,11 @@ namespace SustainTheStrain.Units
             NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
 
             SwitchPathFollower(NavPathFollower);
+        }
+
+        protected void InitSettings()
+        {
+
         }
 
         #region UNIT_TRIGGER_LOGIC

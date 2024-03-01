@@ -9,8 +9,9 @@ namespace SustainTheStrain
     {
         [field: SerializeField] public float MaxHP;
         [field: SerializeField] public float Damage;
-        [field: SerializeField] public bool HasShield;
         [field: SerializeField] public float Speed;
         [field: SerializeField] public float AttackCooldown;
+        [field: SerializeField] public ShieldData shieldData;
+        public bool HasShield => shieldData != null;
     }
 }

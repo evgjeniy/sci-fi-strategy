@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SustainTheStrain.Units.Components
 {
-    public class Damageble : MonoBehaviour, IDamageable
+    public class Damageable : MonoBehaviour, IDamageable
     {
         [field:SerializeField]
         public float MaxHP { get; set; }
@@ -17,7 +17,7 @@ namespace SustainTheStrain.Units.Components
         [field: SerializeField]
         public int Team { get; set; }
 
-        public event Action<Damageble> OnDied;
+        public event Action<Damageable> OnDied;
         public event Action<float> OnCurrentHPChanged;
 
         public void InvokeOnDied()

@@ -56,7 +56,7 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
             private void TryAttack(Component target)
             {
                 if (!Initializer.Timer.IsTimeOver) return;
-                if (!target.TryGetComponent<Damageble>(out var damageable) || damageable.Team == 1) return;
+                if (!target.TryGetComponent<Damageable>(out var damageable) || damageable.Team == 1) return;
 
                 damageable.Damage(Initializer.CurrentStats.Damage * Initializer.DamageEnergyMultiplier);
                 Initializer.Timer.Time = Initializer.CurrentStats.AttackCooldown;

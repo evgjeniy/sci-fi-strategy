@@ -2,7 +2,7 @@ using Dreamteck.Splines;
 using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.Units.Components;
 using SustainTheStrain.Units.PathFollowers;
-using SustainTheStrain.Units.StateMachine.ConcreteStates;
+using SustainTheStrain.Units.StateMachines.ConcreteStates;
 using UnityEngine;
 using Zenject;
 

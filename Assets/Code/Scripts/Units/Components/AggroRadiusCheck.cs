@@ -52,7 +52,7 @@ namespace SustainTheStrain.Units.Components
             }
         }
 
-        private void UnitDied(Damageble damageble)
+        private void UnitDied(Damageable damageble)
         {
             if (damageble == null) return;
             RemoveUnit(damageble.gameObject);

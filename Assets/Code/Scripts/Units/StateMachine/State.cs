@@ -1,4 +1,4 @@
-namespace SustainTheStrain.Units.StateMachine
+namespace SustainTheStrain.Units.StateMachines
 {
     public abstract class State<T> : IState
     {

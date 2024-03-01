@@ -34,7 +34,7 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
             }
 
             protected Collider GetTarget() => Initializer.Area.Entities
-                .FirstOrDefault(e => e.TryGetComponent<Damageble>(out var d) && d.Team != 1);
+                .FirstOrDefault(e => e.TryGetComponent<Damageable>(out var d) && d.Team != 1);
 
             protected virtual void OnOverridableRun() {}
             public virtual void OnEnter() {}

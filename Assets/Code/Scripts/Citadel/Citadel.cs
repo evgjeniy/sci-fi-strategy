@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SustainTheStrain
 {
-    [RequireComponent(typeof(Damageble))]
+    [RequireComponent(typeof(IDamageable))]
     public class Citadel : MonoBehaviour
     {
     }

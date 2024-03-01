@@ -25,7 +25,7 @@ namespace SustainTheStrain.AbilitiesScripts
             Collider[] colliders = GetColliders(hit.point);
             for (int i = 0; i < colliders.Length; i++)
             {
-                var dmg = colliders[i]?.GetComponent<Units.Components.Damageble>();
+                var dmg = colliders[i]?.GetComponent<Units.Components.Damageable>();
                 if (dmg == null || dmg.Team == team) continue;
                 dmg.Damage(damage);
                 //Debug.Log(dmg.CurrentHP);

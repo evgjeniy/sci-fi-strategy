@@ -45,7 +45,7 @@ namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
             private void TryAttack(Component target)
             {
                 if (!Initializer.Timer.IsTimeOver) return;
-                if (!target.TryGetComponent<Damageble>(out var damageable) || damageable.Team == 1) return;
+                if (!target.TryGetComponent<Damageable>(out var damageable) || damageable.Team == 1) return;
 
                 Object.Instantiate
                 (
@@ -57,14 +57,14 @@ namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
                 Initializer.Timer.Time = Initializer.CurrentStats.AttackCooldown;
             }
 
-            private void Explosion(Damageble target)
+            private void Explosion(Damageable target)
             {
                 System.Array.Clear(_exploded, 0, _explodedSize);
                 _explodedSize = Physics.OverlapSphereNonAlloc(target.transform.position,
                     Initializer.CurrentStats.ExplosionRadius, _exploded);
 
                 for (var i = 0; i < _explodedSize; i++)
-                    if (_exploded[i].TryGetComponent<Damageble>(out var damageable) && damageable.Team != 1)
+                    if (_exploded[i].TryGetComponent<IDamageable>(out var damageable) && damageable.Team != 1)
                         damageable.Damage(Initializer.CurrentStats.Damage * Initializer.DamageEnergyMultiplier);
             }
         }

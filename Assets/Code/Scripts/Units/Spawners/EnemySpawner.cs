@@ -40,7 +40,7 @@ namespace SustainTheStrain.Units.Spawners
             unit.GetComponent<SplineFollower>().spline = _spline;
             unit.GetComponent<SplineFollower>().RebuildImmediate();
             _spawnedEnemies.Add(unit);
-            unit.GetComponent<Damageble>().OnDied += (Damageble d) => { _resourceManager.CurrentGold += unit._coinsDrop;
+            unit.GetComponent<Damageable>().OnDied += (Damageable d) => { _resourceManager.CurrentGold += unit._coinsDrop;
                 _spawnedEnemies.Remove(unit);
             };
             Debug.Log($"[EnemySpawner {name}] Spawned unit");

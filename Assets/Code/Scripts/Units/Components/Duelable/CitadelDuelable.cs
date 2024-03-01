@@ -65,7 +65,7 @@ namespace SustainTheStrain.Units.Components
             _opponents.Remove(dueler);
         }
 
-        private void OpponentDead(Damageble damageble)
+        private void OpponentDead(IDamageable damageble)
         {
             BreakDuel();
         }

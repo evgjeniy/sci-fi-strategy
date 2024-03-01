@@ -1,7 +1,7 @@
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-namespace SustainTheStrain.Units.StateMachine.ConcreteStates
+namespace SustainTheStrain.Units.StateMachines.ConcreteStates
 {
     public class UnitAttackState : State<Unit>
     {

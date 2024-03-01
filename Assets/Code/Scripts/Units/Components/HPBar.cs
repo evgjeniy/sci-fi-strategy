@@ -8,7 +8,7 @@ namespace SustainTheStrain.Units.Components
 {
     public class HPBar : MonoBehaviour
     {
-        [SerializeField] private Damageble _damageble;
+        [SerializeField] private Damageable _damageble;
         [SerializeField] private Shield _shield;
         [SerializeField] private Transform _hpBar;
         [SerializeField] private Transform _shieldBarsHolder;
