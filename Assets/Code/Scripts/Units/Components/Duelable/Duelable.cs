@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace SustainTheStrain.Units.Components
 {
-    public abstract class Duelable : MonoBehaviour
+    public abstract class Duelable : MonoBehaviour, IDuelable
     {
         [field: SerializeField]
         public int Priority { get; protected set; }
 
-        public Damageble Damageble { get; protected set; }
+        public IDamageable Damageable { get; protected set; }
 
         public abstract Duelable Opponent { get; }
         public abstract bool HasOpponent { get; }
@@ -23,17 +23,13 @@ namespace SustainTheStrain.Units.Components
 
         protected virtual void Init()
         {
-            Damageble = GetComponent<Damageble>();
+            Damageable = GetComponent<IDamageable>();
         }
 
         public abstract bool IsDuelPossible(Duelable initiator);
-
         public abstract bool RequestDuel(Duelable dueler);
-
-        public abstract void SetOpponent(Duelable dueler);
-
         public abstract void BreakDuel();
-
+        public abstract void SetOpponent(Duelable dueler);
         public abstract void RemoveOpponent(Duelable dueler);
     }
 }

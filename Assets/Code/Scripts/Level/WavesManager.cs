@@ -96,7 +96,7 @@ namespace SustainTheStrain.Level
             StartWave(_levelData.waves[_currentWave]);
         }
 
-        private IEnumerator Wave(SpawnerPart part, Spawner<Enemy> spawner, int index)
+        private IEnumerator Wave(SpawnerPart part, EnemySpawner spawner, int index)
         {
             if (part.delay > 0)
                 yield return new WaitForSeconds(part.delay);
@@ -105,7 +105,7 @@ namespace SustainTheStrain.Level
             {
                 for (int i = 0; i < subwave.enemyCount; i++)
                 {
-                    spawner.Spawn();
+                    spawner.Spawn(subwave.enemyType);
                     yield return new WaitForSeconds(subwave.spawnPeriod);
                 }
                 yield return new WaitForSeconds(subwave.delay);

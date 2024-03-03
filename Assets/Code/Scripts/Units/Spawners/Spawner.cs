@@ -8,7 +8,6 @@ namespace SustainTheStrain.Units.Spawners
     {
         [SerializeField] private GizmosData _sphereGizmos;
         [SerializeField] private Transform _spawnPositon;
-        [Inject] protected IFactory<T> _factory;
 
         public Vector3 SpawnPosition
         {
