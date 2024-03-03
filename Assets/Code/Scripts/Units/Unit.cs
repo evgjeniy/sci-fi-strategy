@@ -7,20 +7,16 @@ using UnityEngine.AI;
 namespace SustainTheStrain.Units
 {
     [RequireComponent(typeof(IDamageable))]
-    public class Unit : MonoBehaviour
+    public class Unit : MonoBehaviour, IDamagger, IDataProvider<IDamagger>
     {
-
         [SerializeField] public Animator Animator;
         [SerializeField] public GameObject _afterDeath;
         [SerializeField] private UnitData _unitData;
         public Duelable Duelable { get; protected set; }
         public AggroRadiusCheck AggroRadiusCheck { get; protected set;}
-        public AttackRadiusCheck AttackRadiusCheck { get; protected set;}
+        private AttackRadiusCheck AttackRadiusCheck { get; set;}
         public StateMachine StateMachine => _stateMachine;
         public NavPathFollower NavPathFollower { get; protected set; }
-
-        public float Damage => _unitData.Damage;
-        public float DamagePeriod => _unitData.AttackCooldown;
 
         public IPathFollower CurrentPathFollower { get; protected set; }   
     
@@ -29,9 +25,32 @@ namespace SustainTheStrain.Units
         public bool IsAnnoyed { get; protected set; } 
         public bool IsOpponentInAggroZone { get; protected set; }
         public bool IsOpponentInAttackZone { get; protected set; }
+        
+        #region SETTINGS 
+        
+        private IDataProvider<IDamagger> _dataSource;
+        public IDamagger Value => _dataSource.Value;
 
+        public float Damage => Value.Damage; //гавно рекурсивное
+        public float DamagePeriod => Value.DamagePeriod;
+        
+        private void InitSettings()
+        {
+            if (TryGetComponent<IDataProvider<IDamagger>>(out var provider))
+            {
+                _dataSource = provider;
+            }
+            else
+            {
+                _dataSource = this;
+            }
+        }
+        
+        #endregion
+        
         private void Awake()
         {
+            InitSettings();
             Init();
         }
 
@@ -50,11 +69,6 @@ namespace SustainTheStrain.Units
             NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
 
             SwitchPathFollower(NavPathFollower);
-        }
-
-        protected void InitSettings()
-        {
-
         }
 
         #region UNIT_TRIGGER_LOGIC

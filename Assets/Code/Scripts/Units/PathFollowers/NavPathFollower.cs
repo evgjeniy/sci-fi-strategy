@@ -35,7 +35,6 @@ namespace SustainTheStrain.Units.PathFollowers
         public void MoveTo(Vector3 position)
         {
             agent.destination = position;
-
         }
 
         public bool MoveToWithCheck(Vector3 position)
