@@ -1,8 +1,8 @@
-﻿using SustainTheStrain.Units.Components;
+﻿using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 
-namespace SustainTheStrain.Buildings.FSM.LaserStates
+namespace SustainTheStrain.Buildings.FSM
 {
     public partial class LaserStateMachine
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace SustainTheStrain.ResourceSystems
+namespace SustainTheStrain.Scriptable.ResourceSettings
 {
     [CreateAssetMenu(fileName = "GeneratorSettings", menuName = "Generator Settings/Generator Settings", order = 1)]
     public class GeneratorSettings : ScriptableObject

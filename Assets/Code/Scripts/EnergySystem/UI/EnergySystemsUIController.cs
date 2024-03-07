@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using SustainTheStrain.AbilitiesScripts;
-using SustainTheStrain.EnergySystem.UI;
-using SustainTheStrain.ResourceSystems;
+﻿using System.Collections.Generic;
+using SustainTheStrain.Abilities;
+using SustainTheStrain.EnergySystem.UI.Factories;
 using UnityEngine;
 using Zenject;
 
-namespace SustainTheStrain.EnergySystem
+namespace SustainTheStrain.EnergySystem.UI
 {
     public class EnergySystemsUIController : MonoBehaviour
     {
         [SerializeField] private AbilitiesUIController _abilitiesUIController;
         
         private EnergyController EnergyController { get; set; }
-        private EnergySystemUIFactory _uiFactory;
-        private Dictionary<IEnergySystem, EnergySystemUI> _systemsUis = new();
+        private EnergySystemUIFactoryManager _uiFactory;
         
-        [Inject] public void AddSystemsUIFactory(EnergySystemUIFactory energySystemUIFactory)
+        [Inject] public void AddSystemsUIFactory(EnergySystemUIFactoryManager energySystemUIFactory)
         {
             _uiFactory = energySystemUIFactory;
-            _uiFactory.MAbilitiesUIController = _abilitiesUIController;
         }
         
         [Inject] public void InitializeComponent(EnergyController controller)
@@ -34,8 +30,8 @@ namespace SustainTheStrain.EnergySystem
 
         private void GenerateNewUI(IEnergySystem system)
         {
-            var ui = _uiFactory.CreateUI(system);
-            _systemsUis.TryAdd(ui.Key, ui.Value);
+            var ui = _uiFactory.Create(system);
+            system.Changed += ui.ChangeEnergy;
         }
         
         private void OnDisable()

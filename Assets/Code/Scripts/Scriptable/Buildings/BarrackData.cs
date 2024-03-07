@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SustainTheStrain.Buildings.Data
+namespace SustainTheStrain.Scriptable.Buildings
 {
     [CreateAssetMenu(menuName = "Static Data/Buildings/Barrack", fileName = "Barrack")]
     public class BarrackData : BuildingData

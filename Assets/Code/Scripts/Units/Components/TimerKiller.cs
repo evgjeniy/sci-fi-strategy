@@ -1,9 +1,7 @@
-using System;
-using Dreamteck.Splines.Primitives;
 using SustainTheStrain.Buildings.FSM;
 using UnityEngine;
 
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Units
 {
     [RequireComponent(typeof(Damageble))]
     public class TimerKiller : MonoBehaviour

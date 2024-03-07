@@ -1,4 +1,4 @@
-namespace SustainTheStrain.Units.PathFollowers
+namespace SustainTheStrain.Units
 {
     public interface IPathFollower
     {

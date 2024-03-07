@@ -1,9 +1,7 @@
-using SustainTheStrain.Buildings.Components.GFX;
-using SustainTheStrain.Buildings.Data;
-using SustainTheStrain.Buildings.FSM.RocketStates;
+using SustainTheStrain.Buildings.FSM;
 using SustainTheStrain.Installers;
+using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace SustainTheStrain.Buildings.Components
 {

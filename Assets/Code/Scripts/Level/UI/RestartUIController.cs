@@ -1,12 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using SustainTheStrain.Level;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.Level.UI
 {
     public class RestartUIController : MonoBehaviour
     {

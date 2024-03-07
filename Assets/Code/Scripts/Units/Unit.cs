@@ -1,11 +1,5 @@
-using System;
-using SustainTheStrain.Units.Components;
-using SustainTheStrain.Units.PathFollowers;
-using SustainTheStrain.Units.StateMachine.ConcreteStates;
 using UnityEngine;
 using UnityEngine.AI;
-using Zenject;
-using static UnityEngine.UI.CanvasScaler;
 
 namespace SustainTheStrain.Units
 {

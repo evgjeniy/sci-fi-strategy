@@ -1,17 +1,19 @@
+using SustainTheStrain.Scriptable.AbilitySettings;
+using SustainTheStrain.Units;
 using UnityEngine;
 
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public class ZoneSlownessAbility : ZoneAbility
     {
         protected float speedCoefficient;
         protected float slownessTime;
 
-        public ZoneSlownessAbility(ZoneSlownesAbillitySettings settings)
+        public ZoneSlownessAbility(ZoneSlownessAbilitySettings settings)
         {
             zoneRadius = settings.ZoneRadius;
             LoadingSpeed = settings.ReloadingSpeed;
-            speedCoefficient = settings.SpeedKoeficient == 0 ? 1 : settings.SpeedKoeficient;
+            speedCoefficient = settings.SpeedMultiplier == 0 ? 1 : settings.SpeedMultiplier;
             slownessTime = settings.DurationTime;
             ExplosionPrefab = settings.ExplosionPrefab;
             SetEnergySettings(settings.EnergySettings);
@@ -28,7 +30,7 @@ namespace SustainTheStrain.AbilitiesScripts
             for (int i = 0; i < colliders.Length; i++)
             {
                 var spd = colliders[i]?.GetComponent<Units.Unit>()?.CurrentPathFollower;
-                var dmg = colliders[i]?.GetComponent<Units.Components.Damageble>();
+                var dmg = colliders[i]?.GetComponent<Damageble>();
                 if (spd == null || dmg == null || dmg.Team == team) continue;
                 spd.Speed *= speedCoefficient;
                 System.Timers.Timer timer = new System.Timers.Timer(slownessTime * 1000); // Convert seconds to milliseconds
@@ -39,7 +41,7 @@ namespace SustainTheStrain.AbilitiesScripts
             }
         }
 
-        private void RestoreSpeed(Units.PathFollowers.IPathFollower spd)
+        private void RestoreSpeed(IPathFollower spd)
         {
             if (spd == null) return;
             spd.Speed /= speedCoefficient;

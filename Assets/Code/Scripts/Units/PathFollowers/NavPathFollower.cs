@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Extensions;
 
-namespace SustainTheStrain.Units.PathFollowers
+namespace SustainTheStrain.Units
 {
     public class NavPathFollower : IPathFollower
     {

@@ -1,9 +1,9 @@
 ﻿using NTC.FiniteStateMachine;
 using SustainTheStrain.Buildings.Components;
-using SustainTheStrain.Buildings.Data;
+using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
 
-namespace SustainTheStrain.Buildings.FSM.LaserStates
+namespace SustainTheStrain.Buildings.FSM
 {
     public partial class LaserStateMachine : StateMachine<LaserStateMachine>
     {

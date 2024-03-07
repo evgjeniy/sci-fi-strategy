@@ -1,10 +1,10 @@
 using System;
 using SustainTheStrain.EnergySystem;
-using SustainTheStrain.EnergySystem.Settings;
+using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
 using Zenject;
 
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public abstract class BaseAbility : IEnergySystem
     {
@@ -47,18 +47,21 @@ namespace SustainTheStrain.AbilitiesScripts
         public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage { get; private set; }
         [Inject] public EnergyController EnergyController { get; set; }
-        public int EnergySpendCount { get; private set; }
         public int MaxEnergy { get; private set; }
-        public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
+        public int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
         public int CurrentEnergy 
         { 
             get => _currentEnergy;
-            private set
+            set
             {
                 if (value < 0 || value > MaxEnergy) return;
                 _currentEnergy = value;
-                OnCurrentEnergyChanged?.Invoke(_currentEnergy);
                 IsLoaded = value != 0;
+                if (!IsLoaded)
+                {
+                    Reload = 0;
+                }
+                Changed?.Invoke(this);
             }
         }
 
@@ -69,34 +72,26 @@ namespace SustainTheStrain.AbilitiesScripts
         }
 
         protected int _currentEnergy;
-        public event Action<int> OnCurrentEnergyChanged;
-        public event Action<int> OnMaxEnergyChanged;
+       
 
-        public void TrySpendEnergy()
+        public bool TrySpendEnergy(int count)
         {
-            if (FreeEnergyCells<EnergySpendCount) return;
-            if (EnergyController.TryGetEnergy(EnergySpendCount))
-            {
-                CurrentEnergy += EnergySpendCount;
-            }
+            CurrentEnergy += count;
+            return true;
         }
 
-        public void TryRefillEnergy()
+        public bool TryRefillEnergy(int count)
         {
-            if (_currentEnergy < EnergySpendCount) return;
-            if (EnergyController.TryReturnEnergy(EnergySpendCount))
-            {
-                CurrentEnergy -= EnergySpendCount;
-                Reload = 0;
-                IsLoaded = false;
-            }
+            CurrentEnergy -= count;
+            return true;
         }
 
         public void SetEnergySettings(EnergySystemSettings settings)
         {
-            ButtonImage = settings.ButtonImage;
-            EnergySpendCount = settings.EnergySpend;
+            EnergySettings = settings;
             MaxEnergy = settings.MaxEnergy;
         }
+
+        public event Action<IEnergySystem> Changed;
     }
 }

@@ -1,9 +1,9 @@
 ﻿using NTC.FiniteStateMachine;
 using SustainTheStrain.Buildings.Components;
-using SustainTheStrain.Buildings.Data;
+using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
 
-namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
+namespace SustainTheStrain.Buildings.FSM
 {
     public partial class ArtilleryStateMachine : StateMachine<ArtilleryStateMachine>
     {

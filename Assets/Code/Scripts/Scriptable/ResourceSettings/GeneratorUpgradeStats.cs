@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace SustainTheStrain.ResourceSystems
+namespace SustainTheStrain.Scriptable.ResourceSettings
 {
     [CreateAssetMenu(fileName = "GeneratorUpgradeStats", menuName = "Generator Settings/Generator Upgrade Stats", order = 1)]
     public class GeneratorUpgradeStats : ScriptableObject

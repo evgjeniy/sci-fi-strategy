@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SustainTheStrain.Graphs
+namespace SustainTheStrain.Graph
 {
     public interface IReadOnlyGraph<T>
     {

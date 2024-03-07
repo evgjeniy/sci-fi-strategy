@@ -1,7 +1,7 @@
 ﻿using System;
-using SustainTheStrain.Buildings.Data;
+using SustainTheStrain.Scriptable.Buildings;
 
-namespace SustainTheStrain.Buildings.UI.Menus
+namespace SustainTheStrain.Buildings.UI
 {
     public interface IBuildingCreateMenu
     {

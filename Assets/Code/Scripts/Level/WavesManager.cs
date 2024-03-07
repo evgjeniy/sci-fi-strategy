@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using SustainTheStrain.Scriptable;
 using SustainTheStrain.Units;
 using SustainTheStrain.Units.Spawners;
 using UnityEngine;

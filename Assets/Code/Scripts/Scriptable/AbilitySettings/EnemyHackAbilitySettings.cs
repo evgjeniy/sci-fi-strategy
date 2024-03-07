@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.Scriptable.AbilitySettings
 {
     [CreateAssetMenu(fileName = "EnemyHackAbilitySettings", menuName = "AbilitySettings/EnemyHack", order = 1)]
-    public class EnemyHackAbilitySettings : AbilitySettings
-    {
-        
-    }
+    public class EnemyHackAbilitySettings : AbilitySettings {}
 }

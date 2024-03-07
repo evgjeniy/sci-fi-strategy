@@ -1,4 +1,4 @@
-namespace SustainTheStrain.Graphs
+namespace SustainTheStrain.Graph
 {
     public interface IGraph<T> : IReadOnlyGraph<T>
     {

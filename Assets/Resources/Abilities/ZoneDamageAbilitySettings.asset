@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9204838c67c8417cb5effd0a234c11e7, type: 3}
   m_Name: ZoneDamageAbilitySettings
   m_EditorClassIdentifier: 
-  EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
-  ReloadingSpeed: 1
-  Damage: 15
-  ZoneRadius: 4
-  ExplosionPrefab: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
+  <EnergySettings>k__BackingField: {fileID: 11400000, guid: 48986234cf6d44e429fa84e0edf45015,
+    type: 2}
+  <ReloadingSpeed>k__BackingField: 1
+  <Damage>k__BackingField: 15
+  <ZoneRadius>k__BackingField: 4
+  <ExplosionPrefab>k__BackingField: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
     type: 3}

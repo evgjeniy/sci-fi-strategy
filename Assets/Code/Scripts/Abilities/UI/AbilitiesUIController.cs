@@ -1,10 +1,9 @@
 using SustainTheStrain.Input.UI;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public class AbilitiesUIController : MonoBehaviour
     {

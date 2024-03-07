@@ -1,27 +1,19 @@
 using System;
 using SustainTheStrain.EnergySystem;
-using SustainTheStrain.EnergySystem.Settings;
 using SustainTheStrain.Input;
+using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
 using Zenject;
 
 namespace SustainTheStrain.Units
 {
-    public class HeroController : MonoBehaviour, IEnergySystem
+    public class HeroController : MonoEnergySystem
     {
         [Inject] private IHeroInput _heroInput;
         [Inject] private Hero _hero;
         
-         public EnergyController EnergyController { get; set; }
-        [field:SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
-        public Sprite ButtonImage => EnergySettings.ButtonImage;
-        public int EnergySpendCount => EnergySettings.EnergySpend;
-        public int FreeEnergyCells => MaxEnergy - CurrentEnergy;
-        public event Action<int> OnCurrentEnergyChanged;
-        public event Action<int> OnMaxEnergyChanged;
-        private int _currentEnergy;
-        private int _maxEnergy;
-
+        public EnergyController EnergyController { get; set; }
+        
         [Inject]
         private void Init(EnergyController controller)
         {
@@ -31,27 +23,6 @@ namespace SustainTheStrain.Units
             
         }
         
-        public int CurrentEnergy
-        {
-            get => _currentEnergy;
-            private set
-            {
-                if (value < 0 || value > MaxEnergy) return;
-                _currentEnergy = value;
-                //_hero.Damage += 5;
-                OnCurrentEnergyChanged?.Invoke(_currentEnergy);
-            }
-        }
-        
-        public int MaxEnergy {
-            get =>_maxEnergy;
-            private set
-            {
-                _maxEnergy = value;
-                OnMaxEnergyChanged?.Invoke(value);
-            } 
-        }
-
         private void OnEnable()
         {
             _heroInput.OnSelected += HeroSelected;
@@ -71,24 +42,6 @@ namespace SustainTheStrain.Units
             MaxEnergy += value;
         }
 
-        public void TrySpendEnergy()
-        {
-            if (FreeEnergyCells<EnergySpendCount) return;
-            if (EnergyController.TryGetEnergy(EnergySpendCount))
-            {
-                CurrentEnergy += EnergySpendCount;
-            }
-        }
-
-        public void TryRefillEnergy()
-        {
-            if (_currentEnergy < EnergySpendCount) return;
-            if (EnergyController.TryReturnEnergy(EnergySpendCount))
-            {
-                CurrentEnergy -= EnergySpendCount;
-            }
-        }
-
         private void LoadSettings()
         {
             MaxEnergy = EnergySettings.MaxEnergy;
@@ -104,5 +57,6 @@ namespace SustainTheStrain.Units
         {
             Debug.LogWarning("HeroSelected");
         }
+
     }
 }

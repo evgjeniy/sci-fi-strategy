@@ -10,7 +10,7 @@ namespace SustainTheStrain.Installers
         [Header("Temp")]
         [SerializeField] private Recruit _refRecruitPrefab;
         [SerializeField] private Hero _hero;
-        
+
         public override void InstallBindings()
         {
             Container.Bind<EnemyFactoryManager>().FromInstance(BindFactories(_bestiary)).AsSingle();

@@ -1,12 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Dreamteck.Splines;
-using SustainTheStrain.Units;
-using SustainTheStrain.Units.PathFollowers;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
-using UnityEngine;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.Units
 {
     public class Kamikaze : Enemy
     {

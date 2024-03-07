@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8073d5abbe4c39ac4e614591e34059, type: 3}
   m_Name: EnemyHackAbilitySettings
   m_EditorClassIdentifier: 
-  EnergySettings: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
-  ReloadingSpeed: 1
+  <EnergySettings>k__BackingField: {fileID: 11400000, guid: efebd9c6952eab945abdad41d71174ef, type: 2}
+  <ReloadingSpeed>k__BackingField: 1
