@@ -1,10 +1,12 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
-using SustainTheStrain.Buildings.Components.GFX;
-using SustainTheStrain.Buildings.Data;
+using SustainTheStrain.Buildings.Components;
+using SustainTheStrain.Buildings;
 using SustainTheStrain.Buildings.FSM;
 using SustainTheStrain.Installers;
+using SustainTheStrain.Scriptable.Buildings;
+using SustainTheStrain.Units;
 using SustainTheStrain.Units.Components;
 using SustainTheStrain.Units.Spawners;
 using UnityEngine;
