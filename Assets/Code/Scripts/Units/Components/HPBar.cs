@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Extensions;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace SustainTheStrain.Units
 {
@@ -9,7 +11,7 @@ namespace SustainTheStrain.Units
     {
         [SerializeField] private Damageble _damageble;
         [SerializeField] private Shield _shield;
-        [SerializeField] private Transform _hpBar;
+        [SerializeField] private RectTransform _hpBar;
         [SerializeField] private Transform _shieldBarsHolder;
         [SerializeField] private ShieldBar _shieldBarRef;
         [SerializeField] private float _cellOffset = 3f;
@@ -17,7 +19,10 @@ namespace SustainTheStrain.Units
         [SerializeField] private Transform _visual;
         
         private List<ShieldBar> _shieldBars = new();
-        
+        private UnityEngine.UI.Slider _slider;
+
+        public static Vector3 _camForward;
+
         private void OnEnable()
         {
             _damageble.OnCurrentHPChanged += UpdateHP;
@@ -30,6 +35,11 @@ namespace SustainTheStrain.Units
             UpdateHP(_damageble.CurrentHP);
         }
 
+        private void Start()
+        {
+            _slider = _hpBar.gameObject.GetComponent<UnityEngine.UI.Slider>();
+        }
+
         private void Update()
         {
             if (_shield != null)
@@ -39,6 +49,11 @@ namespace SustainTheStrain.Units
                 else
                     _visual.gameObject.Activate();
             }
+        }
+
+        private void LateUpdate()
+        {
+            _hpBar.LookAt(_hpBar.position + _camForward);
         }
 
         private void OnDisable()
@@ -70,7 +85,7 @@ namespace SustainTheStrain.Units
         {
             _hpBar.gameObject.SetActive(!(Math.Abs(value - _damageble.MaxHP) < 0.1f));
 
-            _hpBar.localScale = new Vector3(value / _damageble.MaxHP * _maxHpSize, 1, 1);
+            _slider.value = value / _damageble.MaxHP;
         }
     }
 }
