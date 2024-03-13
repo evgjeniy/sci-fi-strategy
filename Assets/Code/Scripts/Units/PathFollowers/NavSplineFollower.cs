@@ -27,7 +27,7 @@ namespace SustainTheStrain
         public bool autoStartPosition = false;
         public float followSpeed
         {
-            get { return _followSpeed; }
+            get { return _navMeshAgent.speed; }
             set
             {
                 if (_followSpeed != value)
@@ -66,12 +66,13 @@ namespace SustainTheStrain
         
         void Move()
         {
-            
+            _movingRoutine = StartCoroutine(Moving());
         }
 
         protected override void OnEnable()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            Move();
         }
 
         private IEnumerator Moving()

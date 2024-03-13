@@ -16,9 +16,8 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
         {
             var ui = Instantiate(_uiPrefab, _spawnParent);
             var bg = Instantiate(_backgroundImage, ui.transform);
-            var transform = bg.transform;
-            transform.localScale *= _scaleMultiplayer;
-            var slider = Instantiate(_sliderPrefab, transform);
+            bg.transform.localScale *= _scaleMultiplayer;
+            var slider = Instantiate(_sliderPrefab, bg.transform);
             slider.value = 0;
             var button = Instantiate(_controllButton, slider.transform);
             mAbilitiesUIController.AddControlButton(button.GetComponent<InputSystemButtonBridge>(), slider);
