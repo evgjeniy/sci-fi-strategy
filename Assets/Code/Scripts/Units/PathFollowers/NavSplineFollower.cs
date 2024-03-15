@@ -12,6 +12,7 @@ namespace SustainTheStrain
     public class NavSplineFollower : SplineTracer
     {
         [SerializeField] private GameObject markerPrefab;
+        [SerializeField] private float _splineStep;
         private NavMeshAgent _navMeshAgent;
         private Coroutine _movingRoutine = null;
         
@@ -42,17 +43,16 @@ namespace SustainTheStrain
 
         private IEnumerator Moving()
         {
-            int i=0;
-            var splinePoints = spline.GetPoints();
-            for (; i < splinePoints.Length; i++)
+            for (float i=0; i <= 1; i+=_splineStep)
             {
-                NavMesh.SamplePosition(splinePoints[i].position, out var hit, 100f, 1);
+                var nextStep = spline.Evaluate(i);
+                NavMesh.SamplePosition(nextStep.position, out var hit, 100f, 1);
                 _navMeshAgent.SetDestination(hit.position);
-                markerPrefab.SetActive(true);
-                markerPrefab.transform.position = hit.position;
+                //markerPrefab.SetActive(true);
+                //markerPrefab.transform.position = hit.position;
                 //Debug.Log($"Distance is {_navMeshAgent.remainingDistance}");
                 yield return new WaitUntil(()=>!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance );
-                markerPrefab.SetActive(false);
+                //markerPrefab.SetActive(false);
             }
             
             yield return new WaitUntil(() => _navMeshAgent.velocity.sqrMagnitude < 0.1);
