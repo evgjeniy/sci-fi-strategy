@@ -17,9 +17,9 @@ namespace SustainTheStrain.Units
         [SerializeField] private float _cellOffset = 3f;
         [SerializeField] private float _maxHpSize;
         [SerializeField] private Transform _visual;
-        
+        [SerializeField] private UnityEngine.UI.Slider _slider;
+
         private List<ShieldBar> _shieldBars = new();
-        private UnityEngine.UI.Slider _slider;
 
         public static Vector3 _camForward;
 
@@ -35,13 +35,9 @@ namespace SustainTheStrain.Units
             UpdateHP(_damageble.CurrentHP);
         }
 
-        private void Start()
-        {
-            _slider = _hpBar.gameObject.GetComponent<UnityEngine.UI.Slider>();
-        }
-
         private void Update()
         {
+
             if (_shield != null)
             {
                 if (_shield.ShieldCells[0].CurrentHP <= 0)
