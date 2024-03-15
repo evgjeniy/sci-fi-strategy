@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿/*using System.Collections.Generic;
 using Dreamteck.Splines;
 using UnityEngine;
 using UnityEngine.Extensions;
@@ -11,12 +11,12 @@ namespace SustainTheStrain.Units
 
         public float Speed { get => follower.followSpeed; set => follower.followSpeed = value; }
 
-        /* public SplinePathFollower(SplineFollower splineFollower)
+        public SplinePathFollower(SplineFollower splineFollower)
         {
             follower = splineFollower;
 
             follower.onNode += OnNode;
-        }*/
+        }
 
         // ReSharper disable Unity.PerformanceAnalysis
         private void OnNode(List<SplineTracer.NodeConnection> passed)
@@ -68,4 +68,4 @@ namespace SustainTheStrain.Units
             follower.follow = true;
         }
     }
-}
+}*/
