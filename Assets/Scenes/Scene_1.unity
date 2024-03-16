@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &28385805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 28385806}
+  - component: {fileID: 28385807}
+  m_Layer: 0
+  m_Name: Energy Systems UI Factories Installer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &28385806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28385805}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1654117041}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &28385807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28385805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9192ee5aca684e4a8bddf6d9aed4bc57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabsHolder: {fileID: 0}
 --- !u!1 &69818066 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cf72ff68c2080e4dad643e786b02068,
@@ -2214,6 +2259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1746d95bf6814e99abb50986eef4b33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energyController: {fileID: 0}
   _uiPrefab: {fileID: 5388658601182942965, guid: e291e600d311bed46aa3fc3dd08045f7,
     type: 3}
   _spawnParent: {fileID: 1758601574}
@@ -3034,6 +3080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06f72d19805480f8d3eda5320e550ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energyController: {fileID: 0}
   _uiPrefab: {fileID: 5388658601182942965, guid: e291e600d311bed46aa3fc3dd08045f7,
     type: 3}
   _spawnParent: {fileID: 1641735683}
@@ -3779,6 +3826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d49911a86c4e46b5ed90dde120ff2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energyController: {fileID: 0}
   _uiPrefab: {fileID: 5388658601182942965, guid: e291e600d311bed46aa3fc3dd08045f7,
     type: 3}
   _spawnParent: {fileID: 1758601574}
@@ -7374,6 +7422,7 @@ Transform:
   - {fileID: 379524130}
   - {fileID: 1265519255}
   - {fileID: 1182464771}
+  - {fileID: 28385806}
   m_Father: {fileID: 1116428992}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1699296427
@@ -8075,11 +8124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Factories:
   - systemUIType: 2
-    Factory: {fileID: 664634240}
   - systemUIType: 1
-    Factory: {fileID: 907111836}
   - systemUIType: 0
-    Factory: {fileID: 394294310}
 --- !u!1 &1915493774
 GameObject:
   m_ObjectHideFlags: 0

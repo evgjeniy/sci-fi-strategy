@@ -6,20 +6,38 @@ using Zenject;
 
 namespace SustainTheStrain.EnergySystem.UI.Factories
 {
-    public class AbilityUIFactory : MonoUIFactory
+    public class AbilityUIFactory : IFactory<IEnergySystem, EnergySystemUI>
     {
-        [SerializeField] private AbilitiesUIController mAbilitiesUIController;
-        [SerializeField] private float _scaleMultiplayer;
-        [SerializeField] private Slider _sliderPrefab;
+        private EnergyController _energyController;
+        private EnergySystemUI _uiPrefab;
+        private Transform _spawnParent;
+        private Image _backgroundImage;
+        private EnergySystemControllButton _controllButton;
+        private AbilitiesUIController mAbilitiesUIController;
+        private float _scaleMultiplayer;
+        private Slider _sliderPrefab;
         
-        public override EnergySystemUI Create(IEnergySystem system)
+        public AbilityUIFactory(EnergyController controller, EnergySystemUI uiPrefab, Transform spawnParent,
+            Image background, EnergySystemControllButton button, AbilitiesUIController abilitiesController, float scaleMultiplayer, Slider slider)
         {
-            var ui = Instantiate(_uiPrefab, _spawnParent);
-            var bg = Instantiate(_backgroundImage, ui.transform);
+            _energyController = controller;
+            _uiPrefab = uiPrefab;
+            _spawnParent = spawnParent;
+            _backgroundImage = background;
+            _controllButton = button;
+            mAbilitiesUIController = abilitiesController;
+            _scaleMultiplayer = scaleMultiplayer;
+            _sliderPrefab = slider;
+        }
+        
+        public EnergySystemUI Create(IEnergySystem system)
+        {
+            var ui = Object.Instantiate(_uiPrefab, _spawnParent);
+            var bg = Object.Instantiate(_backgroundImage, ui.transform);
             bg.transform.localScale *= _scaleMultiplayer;
-            var slider = Instantiate(_sliderPrefab, bg.transform);
+            var slider = Object.Instantiate(_sliderPrefab, bg.transform);
             slider.value = 0;
-            var button = Instantiate(_controllButton, slider.transform);
+            var button = Object.Instantiate(_controllButton, slider.transform);
             mAbilitiesUIController.AddControlButton(button.GetComponent<InputSystemButtonBridge>(), slider);
             ui.ControllButton = button;
             button.image.sprite = system.EnergySettings.ButtonImage;

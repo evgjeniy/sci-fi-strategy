@@ -25,7 +25,7 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
         public struct SystemFactoryPair
         {
             public EnergySystemUIType systemUIType;
-            public MonoUIFactory Factory;
+            public IFactory<IEnergySystem, EnergySystemUI> Factory;
         }
     }
 }
