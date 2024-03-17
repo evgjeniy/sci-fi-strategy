@@ -72,7 +72,7 @@ namespace SustainTheStrain.Abilities
             if (!chosenAbility.IsReloaded()) return;
             currentAim = Abilities[idx] switch
             {
-                ZoneAbility => new ZoneAim(zoneRadius, aimZonePrefab, groundLayers, maxDistFromCamera),
+                ZoneAbility => new ZoneAim((Abilities[idx] as ZoneAbility).getZoneRadius(), aimZonePrefab, groundLayers, maxDistFromCamera),
                 LandingAbility => new PointAim(groundLayers, maxDistFromCamera),
                 _ => new PointAim(enemyLayers, maxDistFromCamera)
             };
@@ -148,7 +148,7 @@ namespace SustainTheStrain.Abilities
 
         private void Update()
         {
-            /*if (_selected != -1 && Abilities[_selected] is ChainDamageAbility or EnemyHackAbility)
+            if (_selected != -1 && Abilities[_selected] is ChainDamageAbility or EnemyHackAbility)
             {
                 Ray ray = mainCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit, maxDistFromCamera, enemyLayers))
@@ -160,7 +160,7 @@ namespace SustainTheStrain.Abilities
                 
                 Abilities[i].Load(Time.deltaTime);
                 _reloadList[i].Invoke(i, Abilities[i].GetReload(), Abilities[i].IsReloaded());
-            }*/
+            }
         }
     }
 

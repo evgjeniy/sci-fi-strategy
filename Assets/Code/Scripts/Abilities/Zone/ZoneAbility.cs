@@ -8,6 +8,8 @@ namespace SustainTheStrain.Abilities
         protected GameObject ExplosionPrefab;
         protected readonly Vector3 offset = new(0, 1.5f,0);
 
+        public float getZoneRadius() => zoneRadius;
+
         protected Collider[] GetColliders(Vector3 point) => Physics.OverlapSphere(point, zoneRadius);
 
         public override void Shoot(RaycastHit hit, int team)
