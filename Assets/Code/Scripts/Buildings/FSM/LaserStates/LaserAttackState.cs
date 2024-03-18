@@ -50,7 +50,7 @@ namespace SustainTheStrain.Buildings.FSM
             private bool IsLookingToTarget(Component target)
             {
                 var laser = Initializer.LaserTransform;
-                return Vector3.Angle(target.transform.position - laser.position, laser.forward) < 1.0f;
+                return Vector3.Angle(target.transform.position - laser.position, laser.forward) < 20.0f;
             }
 
             private void TryAttack(Component target)
