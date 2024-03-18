@@ -19,7 +19,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "69c340465ae825690d4fa81290bb46abcf7ad6fd"
+      "hash": "a0c9765cacbe4f48838910c7e1e62223f7c38ddf"
     },
     "com.nighttraincode.fsm": {
       "version": "https://github.com/MeeXaSiK/FiniteStateMachine.git",

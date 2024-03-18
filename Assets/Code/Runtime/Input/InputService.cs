@@ -61,8 +61,8 @@ namespace SustainTheStrain.Input
 
         public void Initialize()
         {
-            _actions.Mouse.EnterAbilityState.performed += EnterAbilityState;
-            _actions.Mouse.ExitState.performed += EnterMouseMoveState;
+           //_actions.Mouse.EnterAbilityState.performed += EnterAbilityState;
+           //_actions.Mouse.ExitState.performed += EnterMouseMoveState;
 
             StateMachine = new StateMachine<InputService>
             (
@@ -83,8 +83,8 @@ namespace SustainTheStrain.Input
 
         public void Dispose()
         {
-            _actions.Mouse.EnterAbilityState.performed -= EnterAbilityState;
-            _actions.Mouse.ExitState.performed -= EnterMouseMoveState;
+            //_actions.Mouse.EnterAbilityState.performed -= EnterAbilityState;
+            //_actions.Mouse.ExitState.performed -= EnterMouseMoveState;
 
             StateMachine.CurrentState.OnExit();
 

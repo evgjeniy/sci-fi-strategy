@@ -28,14 +28,14 @@ namespace SustainTheStrain.Input.States
 
         public virtual void OnEnter()
         {
-            _mouseActions.MousePosition.performed += MouseMovePerformed;
-            _mouseActions.LeftButton.performed += MouseLeftButtonPerformed;
+            //_mouseActions.MousePosition.performed += MouseMovePerformed;
+            //_mouseActions.LeftButton.performed += MouseLeftButtonPerformed;
         }
 
         public virtual void OnExit()
         {
-            _mouseActions.MousePosition.performed -= MouseMovePerformed;
-            _mouseActions.LeftButton.performed -= MouseLeftButtonPerformed;
+            //_mouseActions.MousePosition.performed -= MouseMovePerformed;
+            //_mouseActions.LeftButton.performed -= MouseLeftButtonPerformed;
         }
 
         private void MouseMovePerformed(InputAction.CallbackContext context)
