@@ -8,7 +8,6 @@ namespace SustainTheStrain.Buildings.FSM
     public partial class ArtilleryStateMachine : StateMachine<ArtilleryStateMachine>
     {
         private readonly Artillery _artillery;
-        private readonly ParticleSystem _buildingRadius;
 
         private Area Area { get; }
         private Timer Timer { get; } = new();
@@ -22,9 +21,7 @@ namespace SustainTheStrain.Buildings.FSM
         public ArtilleryStateMachine(Artillery artillery)
         {
             _artillery = artillery;
-            _buildingRadius = Object.Instantiate(Resources.Load<ParticleSystem>("BuildingData/Radius"), artillery.transform);
-            _buildingRadius.transform.localPosition = Vector3.zero;
-
+            
             Area = new Area(GetPosition, GetAttackRadius, GetAttackMask);
             TransitionsEnabled = false;
 
@@ -35,9 +32,9 @@ namespace SustainTheStrain.Buildings.FSM
         public new void Run()
         {
             base.Run();
-            
-            var shape = _buildingRadius.shape;
-            shape.radius = GetAttackRadius();
+
+            _artillery.ZoneVisualizer.Angle = 360f;
+            _artillery.ZoneVisualizer.Radius = GetAttackRadius();
         }
 
         private Vector3 GetPosition() => _artillery.transform.position;

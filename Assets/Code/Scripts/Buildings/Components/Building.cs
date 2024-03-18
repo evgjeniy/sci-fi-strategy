@@ -10,6 +10,8 @@ namespace SustainTheStrain.Buildings.Components
 
         private int _currentUpgradeLevel = -1;
 
+        private IZoneVisualizer _zoneVisualizer;
+
         public event System.Action<int> OnLevelUpgrade;
 
         public virtual Vector3 Orientation { get; set; }
@@ -17,6 +19,8 @@ namespace SustainTheStrain.Buildings.Components
         protected abstract int MaxUpgradeLevel { get; }
         public abstract int UpgradePrice { get; }
         public abstract int DestroyCompensation { get; }
+
+        public IZoneVisualizer  ZoneVisualizer => _zoneVisualizer;
 
         public int CurrentUpgradeLevel
         {
@@ -26,6 +30,11 @@ namespace SustainTheStrain.Buildings.Components
                 if (value > MaxUpgradeLevel || value < 0 || _currentUpgradeLevel == value) return;
                 OnLevelUpgrade?.Invoke(_currentUpgradeLevel = value);
             }
+        }
+
+        private void Awake()
+        {
+           _zoneVisualizer = GetComponentInChildren<ZoneVisualizer>();
         }
 
         public class Factory : PlaceholderFactory<BuildingData, Building> {}

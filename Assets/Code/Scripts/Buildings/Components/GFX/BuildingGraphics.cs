@@ -28,6 +28,9 @@ namespace SustainTheStrain.Buildings.Components
             
             _graphicsInstance = _graphicsObjects[currentLevel].Spawn(_building.transform);
             _graphicsInstance.transform.position = _building.transform.position;
+
+            var renderer = _graphicsInstance.GetComponentInChildren<MeshRenderer>();
+            renderer.renderingLayerMask = 0x10;
         }
     }
 }

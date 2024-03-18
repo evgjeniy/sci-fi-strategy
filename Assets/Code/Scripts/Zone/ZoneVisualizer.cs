@@ -51,7 +51,7 @@ namespace SustainTheStrain
 
         public void UpdateRadius()
         {
-            _projector.size = new Vector3(_radius * _scaleFactor, _radius * _scaleFactor, _projectionDepth);
+            _projector.size = new Vector3(_radius * _scaleFactor * 2, _radius * _scaleFactor * 2, _projectionDepth);
         }
     }
 }

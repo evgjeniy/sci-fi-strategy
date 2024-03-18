@@ -7,8 +7,6 @@ namespace SustainTheStrain.Buildings.FSM
 {
     public partial class RocketStateMachine : StateMachine<RocketStateMachine>
     {
-        private readonly ParticleSystem _buildingRadius;
-
         private Rocket Context { get; }
         private Area Area { get; }
         private Timer Timer { get; } = new();
@@ -22,8 +20,6 @@ namespace SustainTheStrain.Buildings.FSM
         public RocketStateMachine(Rocket rocket)
         {
             Context = rocket;
-            _buildingRadius = Object.Instantiate(Resources.Load<ParticleSystem>("BuildingData/Radius"), rocket.transform);
-            _buildingRadius.transform.localPosition = Vector3.zero;
 
             Area = new Area(GetPosition, GetAttackRadius, GetAttackMask);
             TransitionsEnabled = false;
@@ -35,9 +31,9 @@ namespace SustainTheStrain.Buildings.FSM
         public new void Run()
         {
             base.Run();
-            
-            var shape = _buildingRadius.shape;
-            shape.radius = GetAttackRadius();
+
+            Context.ZoneVisualizer.Angle = 360f;
+            Context.ZoneVisualizer.Radius = GetAttackRadius();
         }
 
         private Vector3 GetPosition() => Context.transform.position;

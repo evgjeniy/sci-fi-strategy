@@ -7,8 +7,6 @@ namespace SustainTheStrain.Buildings.FSM
 {
     public partial class LaserStateMachine : StateMachine<LaserStateMachine>
     {
-        private readonly ParticleSystem _buildingRadius;
-
         private Laser Context { get; }
         private Area Area { get; }
         private Timer Timer { get; } = new();
@@ -21,8 +19,6 @@ namespace SustainTheStrain.Buildings.FSM
         public LaserStateMachine(Laser laser)
         {
             Context = laser;
-            _buildingRadius = Object.Instantiate(Resources.Load<ParticleSystem>("BuildingData/Radius"), laser.transform);
-            _buildingRadius.transform.localPosition = Vector3.zero;
 
             Area = new Area(GetPosition, GetAttackRadius, GetAttackMask);
             TransitionsEnabled = false;
@@ -34,9 +30,9 @@ namespace SustainTheStrain.Buildings.FSM
         public new void Run()
         {
             base.Run();
-            
-            var shape = _buildingRadius.shape;
-            shape.radius = GetAttackRadius();
+
+            Context.ZoneVisualizer.Angle = 360f;
+            Context.ZoneVisualizer.Radius = GetAttackRadius();
         }
 
         private Vector3 GetPosition() => Context.transform.position;
