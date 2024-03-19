@@ -20,11 +20,11 @@ namespace SustainTheStrain._Contracts.BuildingSystem
         
         private Building _building;
         private IInputSystem _inputSystem;
-        private BuildingCreateMenu.Factory _createMenuFactory;
+        private IBuildingCreateMenuFactory _createMenuFactory;
         private BuildingCreateMenu _createMenu;
 
         [Inject]
-        private void Construct(BuildingCreateMenu.Factory createMenuFactory, IInputSystem inputSystem)
+        private void Construct(IBuildingCreateMenuFactory createMenuFactory, IInputSystem inputSystem)
         {
             _createMenuFactory = createMenuFactory;
             _inputSystem = inputSystem;
@@ -33,11 +33,15 @@ namespace SustainTheStrain._Contracts.BuildingSystem
         public void SetBuilding(Building building)
         {
             Cashed2.Disable();
-            building.transform.parent = buildingRoot;
-            building.transform.localPosition = Vector3.zero;
-
+            
             _building = building;
+            
+            _building.transform.parent = buildingRoot;
+            _building.transform.localPosition = Vector3.zero;
+
             _createMenu.IfNotNull(x => x.DestroyObject());
+            
+            _inputSystem.Select(building);
         }
 
         public void DestroyBuilding()

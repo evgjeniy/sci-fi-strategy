@@ -7,13 +7,8 @@ namespace SustainTheStrain._Contracts.Installers
     {
         public override void InstallBindings()
         {
-            Container
-                .BindFactory<IPlaceholder, BuildingCreateMenu, BuildingCreateMenu.Factory>()
-                .FromFactory<BuildingCreateMenuFactory>();
-
-            Container
-                .BindFactory<BuildingType, IPlaceholder, Building, Building.Factory>()
-                .FromFactory<BuildingFactory>();
+            Container.Bind<IBuildingFactory>().To<BuildingFactory>();
+            Container.Bind<IBuildingCreateMenuFactory>().To<BuildingCreateMenuFactory>();
         }
     }
 }

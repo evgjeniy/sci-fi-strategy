@@ -211,7 +211,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3131805384285257002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,10 +279,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de087e6ddf44f3d93ce8a013365dd87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createRocket: {fileID: 3569459177272562338}
-  _createLaser: {fileID: 4267214326253585685}
-  _createArtillery: {fileID: 8756991241951628525}
-  _createBarrack: {fileID: 4258641978782075965}
+  <CreateRocket>k__BackingField: {fileID: 3569459177272562338}
+  <CreateLaser>k__BackingField: {fileID: 4267214326253585685}
+  <CreateArtillery>k__BackingField: {fileID: 8756991241951628525}
+  <CreateBarrack>k__BackingField: {fileID: 4258641978782075965}
 --- !u!1 &1402479778497207936
 GameObject:
   m_ObjectHideFlags: 0

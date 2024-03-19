@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace SustainTheStrain._Contracts.BuildingSystem
 {
@@ -10,7 +9,5 @@ namespace SustainTheStrain._Contracts.BuildingSystem
         [field: SerializeField] public Button CreateLaser { get; private set; }
         [field: SerializeField] public Button CreateArtillery { get; private set; }
         [field: SerializeField] public Button CreateBarrack { get; private set; }
-
-        public class Factory : PlaceholderFactory<IPlaceholder, BuildingCreateMenu> {}
     }
 }
