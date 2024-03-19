@@ -2224,7 +2224,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 394294309}
-  - component: {fileID: 394294310}
   m_Layer: 0
   m_Name: Base system UI factory
   m_TagString: Untagged
@@ -2247,26 +2246,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1895753326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &394294310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 394294308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1746d95bf6814e99abb50986eef4b33f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _energyController: {fileID: 0}
-  _uiPrefab: {fileID: 5388658601182942965, guid: e291e600d311bed46aa3fc3dd08045f7,
-    type: 3}
-  _spawnParent: {fileID: 1758601574}
-  _backgroundImage: {fileID: 4023847236005703353, guid: c018b33ec6411cb419c101d7ae51764f,
-    type: 3}
-  _controllButton: {fileID: 7329792667511988553, guid: 3e7afe66033c3e24fa9c4159a4a87cff,
-    type: 3}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -3045,7 +3024,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 664634239}
-  - component: {fileID: 664634240}
   m_Layer: 0
   m_Name: Ability UI factory
   m_TagString: Untagged
@@ -3068,30 +3046,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1895753326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &664634240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 664634238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d06f72d19805480f8d3eda5320e550ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _energyController: {fileID: 0}
-  _uiPrefab: {fileID: 5388658601182942965, guid: e291e600d311bed46aa3fc3dd08045f7,
-    type: 3}
-  _spawnParent: {fileID: 1641735683}
-  _backgroundImage: {fileID: 4023847236005703353, guid: c018b33ec6411cb419c101d7ae51764f,
-    type: 3}
-  _controllButton: {fileID: 7329792667511988553, guid: 3e7afe66033c3e24fa9c4159a4a87cff,
-    type: 3}
-  mAbilitiesUIController: {fileID: 1064222983}
-  _scaleMultiplayer: 1.3
-  _sliderPrefab: {fileID: 6673945333405373458, guid: 15fd4789c5203f840a56e7a55cb094f9,
-    type: 3}
 --- !u!1 &685563767
 GameObject:
   m_ObjectHideFlags: 0
@@ -3791,7 +3745,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 907111835}
-  - component: {fileID: 907111836}
   m_Layer: 0
   m_Name: Generator UI factory
   m_TagString: Untagged
@@ -3814,26 +3767,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1895753326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &907111836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 907111834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72d49911a86c4e46b5ed90dde120ff2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _energyController: {fileID: 0}
-  _uiPrefab: {fileID: 5388658601182942965, guid: e291e600d311bed46aa3fc3dd08045f7,
-    type: 3}
-  _spawnParent: {fileID: 1758601574}
-  _backgroundImage: {fileID: 4023847236005703353, guid: c018b33ec6411cb419c101d7ae51764f,
-    type: 3}
-  _controllButton: {fileID: 7329792667511988553, guid: 3e7afe66033c3e24fa9c4159a4a87cff,
-    type: 3}
 --- !u!1 &920860411
 GameObject:
   m_ObjectHideFlags: 0
@@ -5292,7 +5225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1452143722
 Transform:
   m_ObjectHideFlags: 0
@@ -6286,7 +6219,6 @@ MonoBehaviour:
     color: {r: 0, g: 0, b: 0, a: 0}
     size: 0
     percent: 0
-  markerPrefab: {fileID: 1570062958}
   _splineStep: 0.05
 --- !u!195 &1556119097
 NavMeshAgent:
@@ -7788,7 +7720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1780355684
 Transform:
   m_ObjectHideFlags: 0
@@ -7811,13 +7743,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780355683}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 781fc38dc81b13846bf0404f36753820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _levelData: {fileID: 11400000, guid: 41513d77e643f8543b5a59a403cbc2bf, type: 2}
-  _spawners: []
+  _spawners:
+  - {fileID: 1116007909}
+  - {fileID: 1813407858}
 --- !u!1 &1813407856
 GameObject:
   m_ObjectHideFlags: 0

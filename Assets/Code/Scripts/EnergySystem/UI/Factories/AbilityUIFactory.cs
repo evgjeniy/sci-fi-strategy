@@ -8,38 +8,24 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
 {
     public class AbilityUIFactory : IFactory<IEnergySystem, EnergySystemUI>
     {
-        private EnergyController _energyController;
+        [Inject] private EnergyController _energyController;
         private EnergySystemUI _uiPrefab;
         private Transform _spawnParent;
-        private Image _backgroundImage;
-        private EnergySystemControllButton _controllButton;
-        private AbilitiesUIController mAbilitiesUIController;
-        private float _scaleMultiplayer;
-        private Slider _sliderPrefab;
-        
-        public AbilityUIFactory(EnergyController controller, EnergySystemUI uiPrefab, Transform spawnParent,
-            Image background, EnergySystemControllButton button, AbilitiesUIController abilitiesController, float scaleMultiplayer, Slider slider)
+        [Inject] private AbilitiesUIController mAbilitiesUIController;
+
+        public AbilityUIFactory(EnergySystemUISettings settings)
         {
-            _energyController = controller;
-            _uiPrefab = uiPrefab;
-            _spawnParent = spawnParent;
-            _backgroundImage = background;
-            _controllButton = button;
-            mAbilitiesUIController = abilitiesController;
-            _scaleMultiplayer = scaleMultiplayer;
-            _sliderPrefab = slider;
+            _uiPrefab = settings.UIPrefab;
+            _spawnParent = settings.SpawnParent;
         }
         
         public EnergySystemUI Create(IEnergySystem system)
         {
             var ui = Object.Instantiate(_uiPrefab, _spawnParent);
-            var bg = Object.Instantiate(_backgroundImage, ui.transform);
-            bg.transform.localScale *= _scaleMultiplayer;
-            var slider = Object.Instantiate(_sliderPrefab, bg.transform);
+            var button = ui.ControllButton;
+            var slider = button.transform.parent.GetComponent<Slider>();
             slider.value = 0;
-            var button = Object.Instantiate(_controllButton, slider.transform);
             mAbilitiesUIController.AddControlButton(button.GetComponent<InputSystemButtonBridge>(), slider);
-            ui.ControllButton = button;
             button.image.sprite = system.EnergySettings.ButtonImage;
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
             button.OnLeftMouseClick += () =>

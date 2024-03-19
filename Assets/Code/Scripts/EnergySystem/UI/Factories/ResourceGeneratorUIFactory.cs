@@ -8,29 +8,21 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
 {
     public class ResourceGeneratorUIFactory : IFactory<IEnergySystem, EnergySystemUI>
     {
-        private EnergyController _energyController;
+        [Inject] private EnergyController _energyController;
         private EnergySystemUI _uiPrefab;
         private Transform _spawnParent;
-        private Image _backgroundImage;
-        private EnergySystemControllButton _controllButton;
         
-        public ResourceGeneratorUIFactory(EnergyController controller, EnergySystemUI uiPrefab, Transform spawnParent,
-            Image background, EnergySystemControllButton button)
+        public ResourceGeneratorUIFactory(EnergySystemUISettings settings)
         {
-            _energyController = controller;
-            _uiPrefab = uiPrefab;
-            _spawnParent = spawnParent;
-            _backgroundImage = background;
-            _controllButton = button;
+            _uiPrefab = settings.UIPrefab;
+            _spawnParent = settings.SpawnParent;
         }
         
         public EnergySystemUI Create(IEnergySystem system)
         {
             var ui = Object.Instantiate(_uiPrefab, _spawnParent);
-            var bg = Object.Instantiate(_backgroundImage, ui.transform);
-            var button = Object.Instantiate(_controllButton, bg.transform);
+            var button = ui.ControllButton;
             var generatorUI = new GeneratorUI(button.transform, system as ResourceGenerator);
-            ui.ControllButton = button;
             button.image.sprite = system.EnergySettings.ButtonImage;
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
             button.OnLeftMouseClick += () =>

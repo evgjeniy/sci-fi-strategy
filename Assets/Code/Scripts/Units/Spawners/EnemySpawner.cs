@@ -36,8 +36,8 @@ namespace SustainTheStrain.Units.Spawners
             }
 
             unit.transform.position = SpawnPosition;
-            unit.GetComponent<SplineFollower>().spline = _spline;
-            unit.GetComponent<SplineFollower>().RebuildImmediate();
+            unit.GetComponent<SplineTracer>().spline = _spline;
+            unit.GetComponent<SplineTracer>().RebuildImmediate();
             _spawnedEnemies.Add(unit);
             unit.GetComponent<Damageble>().OnDied += (Damageble d) => { _resourceManager.CurrentGold += unit.CoinsDrop;
                 _spawnedEnemies.Remove(unit);

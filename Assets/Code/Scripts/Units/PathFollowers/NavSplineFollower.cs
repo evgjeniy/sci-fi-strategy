@@ -11,10 +11,12 @@ namespace SustainTheStrain
     [RequireComponent(typeof(NavMeshAgent))]
     public class NavSplineFollower : SplineTracer
     {
-        [SerializeField] private GameObject markerPrefab;
+        //[SerializeField] private GameObject markerPrefab;
         [SerializeField] private float _splineStep;
         private NavMeshAgent _navMeshAgent;
         private Coroutine _movingRoutine = null;
+
+        public NavMeshAgent NavMeshAgent => _navMeshAgent;
         
         void Move()
         {

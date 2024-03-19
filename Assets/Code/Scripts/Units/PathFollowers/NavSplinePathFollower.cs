@@ -1,17 +1,17 @@
-﻿/*using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Dreamteck.Splines;
 using UnityEngine;
 using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units
 {
-    public class NavSplinePathFollower : MonoBehaviour, IPathFollower
+    public class NavSplinePathFollower : IPathFollower
     {
         private readonly NavSplineFollower follower;
 
-        public float Speed { get => follower.followSpeed; set => follower.followSpeed = value; }
+        public float Speed { get => follower.NavMeshAgent.speed; set => follower.NavMeshAgent.speed = value; }
 
-        public SplinePathFollower(SplineFollower splineFollower)
+        public NavSplinePathFollower(NavSplineFollower splineFollower)
         {
             follower = splineFollower;
 
@@ -59,13 +59,13 @@ namespace SustainTheStrain.Units
         public void Stop()
         {
             follower.Disable();
-            follower.follow = false;
+            follower.NavMeshAgent.isStopped = true;
         }
 
         public void Start()
         {
             follower.Enable();
-            follower.follow = true;
+            follower.NavMeshAgent.isStopped = false;
         }
     }
-}*/
+}

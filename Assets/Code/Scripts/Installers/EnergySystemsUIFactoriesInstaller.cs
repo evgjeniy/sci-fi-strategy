@@ -8,7 +8,7 @@ namespace SustainTheStrain.Installers
 {
     public class EnergySystemsUIFactoriesInstaller : MonoInstaller
     {
-        [SerializeField] private EnergySystemsUIPrefabsHolder _prefabsHolder;
+        //[SerializeField] private EnergySystemsUIPrefabsHolder _prefabsHolder;
         //[SerializeReference] private IFactory<IEnergySystem, EnergySystemUI> factory;
         
         
