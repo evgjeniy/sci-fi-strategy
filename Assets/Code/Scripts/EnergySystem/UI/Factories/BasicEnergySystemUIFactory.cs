@@ -6,14 +6,15 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
 {
     public class BasicEnergySystemUIFactory : IFactory<IEnergySystem, EnergySystemUI>
     {
-        [Inject] private EnergyController _energyController;
         private EnergySystemUI _uiPrefab;
         private Transform _spawnParent;
+        private BaseEnergyUIController _energyUIController;
 
-        public BasicEnergySystemUIFactory(EnergySystemUISettings settings)
+        public BasicEnergySystemUIFactory(EnergySystemUISettings settings, BaseEnergyUIController energyUIController)
         {
             _uiPrefab = settings.UIPrefab;
             _spawnParent = settings.SpawnParent;
+            _energyUIController = energyUIController;
         }
         
         public EnergySystemUI Create(IEnergySystem system)
@@ -22,14 +23,7 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
             var button = ui.ControllButton;
             button.image.sprite = system.EnergySettings.ButtonImage;
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
-            button.OnLeftMouseClick += () =>
-            {
-                _energyController.TryLoadEnergyToSystem(system);
-            };
-            button.OnRightMouseClick += () =>
-            {
-                _energyController.TryReturnEnergyFromSystem(system);
-            };
+            _energyUIController.MakeSubscriptions(ui, system);
             return ui;
         }
     }

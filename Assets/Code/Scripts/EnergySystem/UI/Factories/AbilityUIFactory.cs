@@ -8,15 +8,15 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
 {
     public class AbilityUIFactory : IFactory<IEnergySystem, EnergySystemUI>
     {
-        [Inject] private EnergyController _energyController;
         private EnergySystemUI _uiPrefab;
         private Transform _spawnParent;
-        [Inject] private AbilitiesUIController mAbilitiesUIController;
+        private AbilityUIController _abilityUIController;   
 
-        public AbilityUIFactory(EnergySystemUISettings settings)
+        public AbilityUIFactory(EnergySystemUISettings settings, AbilityUIController abilityUIController)
         {
             _uiPrefab = settings.UIPrefab;
             _spawnParent = settings.SpawnParent;
+            _abilityUIController = abilityUIController;
         }
         
         public EnergySystemUI Create(IEnergySystem system)
@@ -25,17 +25,9 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
             var button = ui.ControllButton;
             var slider = button.transform.parent.GetComponent<Slider>();
             slider.value = 0;
-            mAbilitiesUIController.AddControlButton(button.GetComponent<InputSystemButtonBridge>(), slider);
             button.image.sprite = system.EnergySettings.ButtonImage;
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
-            button.OnLeftMouseClick += () =>
-            {
-                _energyController.TryLoadEnergyToSystem(system);
-            };
-            button.OnRightMouseClick += () =>
-            {
-                _energyController.TryReturnEnergyFromSystem(system);
-            };
+            _abilityUIController.MakeSubscriptions(ui, system, slider);
             return ui;
         }
     }
