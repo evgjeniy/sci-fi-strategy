@@ -12,6 +12,7 @@ namespace SustainTheStrain._Contracts
         public Vector2 MousePosition { get; private set; }
         public InputSettings Settings { get; }
 
+        public void Idle() => ChangeState(_ => new IdleState());
         public void Select(IInputSelectable selectable) => ChangeState(_ => new SelectableState(selectable));
         public void Enable() => _inputActions.Enable();
         public void Disable() => _inputActions.Disable();

@@ -1,6 +1,6 @@
-﻿using SustainTheStrain.Abilities;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Extensions;
+using Zenject;
 using Outline = SustainTheStrain.Abilities.Outline;
 
 namespace SustainTheStrain._Contracts.Buildings
@@ -13,18 +13,39 @@ namespace SustainTheStrain._Contracts.Buildings
     }
     
     [RequireComponent(typeof(Outline))]
-    public class Placeholder : MonoCashed<Outline>, IInputSelectable, IPlaceholder
+    [RequireComponent(typeof(Collider))]
+    public class Placeholder : MonoCashed<Outline, Collider>, IInputSelectable, IPlaceholder
     {
         private Building _building;
+        private IInputSystem _inputSystem;
+        private BuildingCreateMenu.Factory _createMenuFactory;
+        private BuildingCreateMenu _createMenu;
 
-        public void SetBuilding(Building building) {}
-        public void DestroyBuilding() {}
+        [Inject]
+        private void Construct(BuildingCreateMenu.Factory createMenuFactory, IInputSystem inputSystem)
+        {
+            _createMenuFactory = createMenuFactory;
+            _inputSystem = inputSystem;
+        }
+
+        public void SetBuilding(Building building)
+        {
+            Cashed2.Disable();
+        }
+
+        public void DestroyBuilding()
+        {
+            Cashed2.Enable();
+        }
         
         public void OnPointerEnter() => Cashed1.With(x => x.Enable());
         public void OnPointerExit() => Cashed1.With(x => x.Disable());
-        public void OnSelected() => Cashed1.With(x => x.Enable()).With(x => x.OutlineColor = Color.red);
-        public void OnDeselected() => Cashed1.With(x => x.Disable()).With(x => x.OutlineColor = Color.white);
 
-        public void OnLeftClick(Ray ray) {}
+        public void OnSelected() => _createMenu = _createMenuFactory.Create(this);
+        public void OnDeselected() => _createMenu.IfNotNull(x => x.DestroyObject());
+
+        public void OnSelectedRightClick(Ray ray) => _inputSystem.Idle();
+        public void OnSelectedLeftClick(Ray ray) {}
+        public void OnSelectedUpdate(Ray ray) {}
     }
 }

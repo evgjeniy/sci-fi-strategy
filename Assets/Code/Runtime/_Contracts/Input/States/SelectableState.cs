@@ -13,7 +13,7 @@
         public IInputState ProcessMouseMove(IInputSystem context)
         {
             if (context.MousePosition.TryGetCameraRay(out var screenRay))
-                _selectable.OnUpdateSelected(screenRay);
+                _selectable.OnSelectedUpdate(screenRay);
 
             return this;
         }
@@ -25,7 +25,7 @@
             if (screenRay.TryGetRaycastComponent<IInputSelectable>(context.Settings, out var selectable))
                 return _selectable == selectable ? this : new SelectableState(selectable);
 
-            _selectable.OnClickSelected(screenRay);
+            _selectable.OnSelectedLeftClick(screenRay);
             return this;
         }
 

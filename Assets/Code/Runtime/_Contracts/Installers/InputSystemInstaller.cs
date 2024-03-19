@@ -7,9 +7,9 @@ namespace SustainTheStrain._Contracts.Installers
     {
         [SerializeField] private InputSettings _settings;
 
-        public override void InstallBindings()
-        {
-            Container.BindInterfacesTo<InputSystem>().AsSingle().WithArguments(_settings);
-        }
+        public override void InstallBindings() => Container
+            .BindInterfacesTo<InputSystem>()
+            .AsSingle()
+            .WithArguments(_settings);
     }
 }

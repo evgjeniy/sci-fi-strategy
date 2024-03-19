@@ -9,14 +9,16 @@ namespace SustainTheStrain._Contracts
         public void OnPointerExit() {}
         public void OnSelected() {}
         public void OnDeselected() {}
-        public void OnClickSelected(Ray ray) {}
-        public void OnUpdateSelected(Ray ray) {}
+        public void OnSelectedLeftClick(Ray ray) {}
+        public void OnSelectedRightClick(Ray ray) {}
+        public void OnSelectedUpdate(Ray ray) {}
     }
 
     public interface IInputSystem
     {
         public Vector2 MousePosition { get; }
         public InputSettings Settings { get; }
+        public void Idle();
         public void Select(IInputSelectable selectable);
         public void Enable();
         public void Disable();
