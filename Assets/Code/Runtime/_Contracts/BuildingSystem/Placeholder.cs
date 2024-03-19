@@ -3,7 +3,7 @@ using UnityEngine.Extensions;
 using Zenject;
 using Outline = SustainTheStrain.Abilities.Outline;
 
-namespace SustainTheStrain._Contracts.Buildings
+namespace SustainTheStrain._Contracts.BuildingSystem
 {
     public interface IPlaceholder
     {
@@ -16,6 +16,8 @@ namespace SustainTheStrain._Contracts.Buildings
     [RequireComponent(typeof(Collider))]
     public class Placeholder : MonoCashed<Outline, Collider>, IInputSelectable, IPlaceholder
     {
+        [SerializeField] private Transform buildingRoot;
+        
         private Building _building;
         private IInputSystem _inputSystem;
         private BuildingCreateMenu.Factory _createMenuFactory;
@@ -31,10 +33,18 @@ namespace SustainTheStrain._Contracts.Buildings
         public void SetBuilding(Building building)
         {
             Cashed2.Disable();
+            building.transform.parent = buildingRoot;
+            building.transform.localPosition = Vector3.zero;
+
+            _building = building;
+            _createMenu.IfNotNull(x => x.DestroyObject());
         }
 
         public void DestroyBuilding()
         {
+            _createMenu = _createMenuFactory.Create(this);
+            _building.IfNotNull(x => x.DestroyObject());
+            
             Cashed2.Enable();
         }
         

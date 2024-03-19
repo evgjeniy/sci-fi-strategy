@@ -1,4 +1,4 @@
-namespace SustainTheStrain._Contracts.Buildings
+namespace SustainTheStrain._Contracts.BuildingSystem
 {
     public class Artillery : Building
     {

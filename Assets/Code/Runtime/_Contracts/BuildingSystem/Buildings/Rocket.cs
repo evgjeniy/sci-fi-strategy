@@ -3,7 +3,7 @@ using SustainTheStrain._Contracts.Configs.Buildings;
 using UnityEngine;
 using Zenject;
 
-namespace SustainTheStrain._Contracts.Buildings
+namespace SustainTheStrain._Contracts.BuildingSystem
 {
     public class Rocket : Building
     {
