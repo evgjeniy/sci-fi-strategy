@@ -9,5 +9,8 @@ namespace SustainTheStrain._Contracts.Configs.Buildings
         [field: SerializeField, Min(0.01f)] public float UnitAttackDamage { get; private set; } = 1.0f;
         [field: SerializeField, Min(0.01f)] public float UnitAttackCooldown { get; private set; } = 1.0f;
         [field: SerializeField, Min(0.01f)] public float RespawnCooldown { get; private set; } = 1.0f;
+        
+        [field: Space]
+        [field: SerializeField] public BarrackBuildingConfig NextLevelConfig { get; private set; }
     }
 }

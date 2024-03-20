@@ -1,4 +1,4 @@
-﻿using SustainTheStrain._Contracts.BuildingSystem;
+﻿using SustainTheStrain._Contracts.Buildings;
 using Zenject;
 
 namespace SustainTheStrain._Contracts.Installers
@@ -7,8 +7,9 @@ namespace SustainTheStrain._Contracts.Installers
     {
         public override void InstallBindings()
         {
-            Container.Bind<IBuildingFactory>().To<BuildingFactory>();
-            Container.Bind<IBuildingCreateMenuFactory>().To<BuildingCreateMenuFactory>();
+            Container.Bind<IBuildingFactory>().To<BuildingFactory>().AsSingle();
+            Container.Bind<IBuildingCreateMenuFactory>().To<BuildingCreateMenuFactory>().AsSingle();
+            Container.Bind<IBuildingViewFactory>().To<BuildingViewFactory>().AsSingle();
         }
     }
 }

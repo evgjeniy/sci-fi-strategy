@@ -1,4 +1,6 @@
-﻿namespace SustainTheStrain._Contracts.Configs
+﻿using UnityEngine;
+
+namespace SustainTheStrain._Contracts.Configs
 {
     public partial class ConfigProviderService
     {
@@ -9,8 +11,14 @@
             if (_energySystemConfigs.TryGetValue(type, out var config)) return config;
 
             configName ??= type + "Config";
-            if (!type.TryLoadTypedConfig(rootPath, configName, out EnergySystemConfig loadedConfig))
+            var loadedConfig = Resources.Load<EnergySystemConfig>($"{rootPath}/{configName}");
+            if (loadedConfig == null)
+            {
+#if UNITY_EDITOR
                 throw new System.IO.FileNotFoundException($"File {configName} not founded by path: {rootPath}");
+#endif
+                return null;
+            }
                 
             _energySystemConfigs.Add(loadedConfig.Type, loadedConfig);
             return loadedConfig;

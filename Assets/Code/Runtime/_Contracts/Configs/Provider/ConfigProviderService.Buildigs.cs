@@ -1,4 +1,5 @@
 ﻿using SustainTheStrain._Contracts.Configs.Buildings;
+using UnityEngine;
 
 namespace SustainTheStrain._Contracts.Configs
 {
@@ -10,10 +11,16 @@ namespace SustainTheStrain._Contracts.Configs
             if (_buildingConfigs.TryGetValue(typeof(TConfig).Name + upgrade, out var config)) return config as TConfig;
 
             configName ??= typeof(TConfig).Name + upgrade;
-            if (!Load.TryLoadConfig<TConfig>(rootPath, configName, out var loadedConfig))
+            var loadedConfig = Resources.Load<TConfig>($"{rootPath}/{configName}");
+            if (loadedConfig == null)
+            {
+#if !UNITY_EDITOR
                 throw new System.IO.FileNotFoundException($"File {configName} not founded by path: {rootPath}");
+#endif
+                return null;
+            }
 
-            _buildingConfigs.Add(typeof(TConfig).Name + loadedConfig.Level, loadedConfig);
+            _buildingConfigs.TryAdd(typeof(TConfig).Name + loadedConfig.Level, loadedConfig);
             return loadedConfig;
         }
     }

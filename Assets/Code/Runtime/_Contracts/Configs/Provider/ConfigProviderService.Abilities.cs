@@ -1,20 +1,28 @@
 ﻿using System;
 using SustainTheStrain._Contracts.Configs.Abilities;
+using UnityEngine;
 
 namespace SustainTheStrain._Contracts.Configs
 {
     public partial class ConfigProviderService
     {
-        public TConfig GetAbilityConfig<TConfig>(string configName = nameof(TConfig),
+        public TConfig GetAbilityConfig<TConfig>(string configName = null,
             string rootPath = Const.ResourcePath.Abilities.Configs.Root) where TConfig : AbilityConfig
         {
             _abilityConfigs ??= Load.Configs<Type, AbilityConfig>(rootPath, c => c.GetType());
             if (_abilityConfigs.TryGetValue(typeof(TConfig), out var config)) return config as TConfig;
             
-            if (!Load.TryLoadConfig<TConfig>(rootPath, configName, out var loadedConfig))
+            configName ??= typeof(TConfig).Name;
+            var loadedConfig = Resources.Load<TConfig>($"{rootPath}/{configName}");
+            if (loadedConfig == null)
+            {
+#if UNITY_EDITOR
                 throw new System.IO.FileNotFoundException($"File {configName} not founded by path: {rootPath}");
+#endif
+                return null;
+            }
 
-            _abilityConfigs.Add(typeof(TConfig), loadedConfig);
+            _abilityConfigs.TryAdd(typeof(TConfig), loadedConfig);
             return loadedConfig;
         }
     }

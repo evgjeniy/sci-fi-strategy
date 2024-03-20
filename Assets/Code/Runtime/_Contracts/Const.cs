@@ -28,10 +28,10 @@
                     public const string Barrack = Root + "/" + nameof(Barrack);
 
                     public const string BuildingCreateMenu = Root + "/UI/" + nameof(BuildingCreateMenu);
-                    public const string RocketCreateButton = Root + "/UI/" + nameof(RocketCreateButton);
-                    public const string LaserCreateButton = Root + "/UI/" + nameof(LaserCreateButton);
-                    public const string ArtilleryCreateButton = Root + "/UI/" + nameof(ArtilleryCreateButton);
-                    public const string BarrackCreateButton = Root + "/UI/" + nameof(BarrackCreateButton);
+                    public const string RocketView = Root + "/UI/" + nameof(RocketView);
+                    public const string LaserView = Root + "/UI/" + nameof(LaserView);
+                    public const string ArtilleryView = Root + "/UI/" + nameof(ArtilleryView);
+                    public const string BarrackView = Root + "/UI/" + nameof(BarrackView);
                 }
             }
 
@@ -62,7 +62,15 @@
                 }
             }
 
-            public const string Units = "Units";
+            public static class Units
+            {
+                public const string Root = nameof(Units);
+
+                public static class Configs
+                {
+                    public const string Root = Units.Root + "/" + nameof(Units);
+                }
+            }
         }
 
         public static class Order

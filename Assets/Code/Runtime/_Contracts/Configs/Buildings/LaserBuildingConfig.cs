@@ -7,5 +7,8 @@ namespace SustainTheStrain._Contracts.Configs.Buildings
     {
         [field: SerializeField, Min(0.0f)] public float Damage { get; private set; } = 1.0f;
         [field: SerializeField, Min(0.0f)] public float Cooldown { get; private set; } = 1.0f;
+        
+        [field: Space]
+        [field: SerializeField] public LaserBuildingConfig NextLevelConfig { get; private set; }
     }
 }

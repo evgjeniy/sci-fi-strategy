@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: RocketBuildingConfig1
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 1
-  <Price>k__BackingField: 0
-  <Compensation>k__BackingField: 0
+  <Price>k__BackingField: 50
+  <Compensation>k__BackingField: 30
   <Radius>k__BackingField: 7.78
   <Damage>k__BackingField: 1
   <Cooldown>k__BackingField: 1
   <MaxTargets>k__BackingField: 1
   <SectorAngle>k__BackingField: 45
+  <NextLevelConfig>k__BackingField: {fileID: 11400000, guid: d47fb7760466238469a8870afe1b3736,
+    type: 2}
