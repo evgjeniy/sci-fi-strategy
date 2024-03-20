@@ -1,5 +1,4 @@
-﻿using SustainTheStrain._Contracts.Configs;
-using SustainTheStrain._Contracts.Configs.Buildings;
+﻿using SustainTheStrain._Contracts.Configs.Buildings;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
@@ -18,10 +17,10 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private event System.Action<LaserModel> OnChangedEvent = _ => { };
 
-        public LaserModel(Laser laser, IConfigProviderService configProvider, int upgradeLevel = 1)
+        public LaserModel(Laser laser, LaserBuildingConfig startConfig)
         {
             Laser = laser;
-            _config = configProvider.GetBuildingConfig<LaserBuildingConfig>(upgradeLevel);
+            _config = startConfig;
         }
 
         public void IncreaseLevel()

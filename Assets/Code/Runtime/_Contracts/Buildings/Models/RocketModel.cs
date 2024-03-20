@@ -1,6 +1,4 @@
-﻿using System;
-using SustainTheStrain._Contracts.Configs;
-using SustainTheStrain._Contracts.Configs.Buildings;
+﻿using SustainTheStrain._Contracts.Configs.Buildings;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
@@ -21,10 +19,10 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private event System.Action<RocketModel> OnChangedEvent = _ => { };
 
-        public RocketModel(Rocket rocket, IConfigProviderService configProvider, int upgradeLevel = 1)
+        public RocketModel(Rocket rocket, RocketBuildingConfig startConfig)
         {
             Rocket = rocket;
-            _config = configProvider.GetBuildingConfig<RocketBuildingConfig>(upgradeLevel);
+            _config = startConfig;
         }
 
         public void IncreaseLevel()

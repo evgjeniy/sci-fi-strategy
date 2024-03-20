@@ -1,5 +1,4 @@
-﻿using SustainTheStrain._Contracts.Configs;
-using SustainTheStrain._Contracts.Configs.Buildings;
+﻿using SustainTheStrain._Contracts.Configs.Buildings;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
@@ -7,7 +6,7 @@ namespace SustainTheStrain._Contracts.Buildings
     {
         private BarrackBuildingConfig _config;
 
-        public Barrack Artillery { get; }
+        public Barrack Barrack { get; }
         public int Level => _config.Level;
         public int Price => _config.Price;
         public int NextLevelPrice => _config.NextLevelPrice;
@@ -20,10 +19,10 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private event System.Action<BarrackModel> OnChangedEvent = _ => { };
 
-        public BarrackModel(Barrack artillery, IConfigProviderService configProvider, int upgradeLevel = 1)
+        public BarrackModel(Barrack barrack, BarrackBuildingConfig startConfig)
         {
-            Artillery = artillery;
-            _config = configProvider.GetBuildingConfig<BarrackBuildingConfig>(upgradeLevel);
+            Barrack = barrack;
+            _config = startConfig;
         }
 
         public void IncreaseLevel()

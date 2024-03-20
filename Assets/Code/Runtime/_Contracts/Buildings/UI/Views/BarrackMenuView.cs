@@ -29,8 +29,8 @@ namespace SustainTheStrain._Contracts.Buildings
             _barrackModel.Changed += Display;
             _resourceManager.Gold.Changed += OnGoldChanged;
             
-            _upgradeButton.onClick.AddListener(_barrackModel.Artillery.Upgrade);
-            _destroyButton.onClick.AddListener(_barrackModel.Artillery.Destroy);
+            _upgradeButton.onClick.AddListener(_barrackModel.Barrack.Upgrade);
+            _destroyButton.onClick.AddListener(_barrackModel.Barrack.Destroy);
             _unitsPointButton.onClick.AddListener(() => Debug.Log("SET UNITS POINT"));
         }
 
@@ -39,24 +39,24 @@ namespace SustainTheStrain._Contracts.Buildings
             _barrackModel.Changed -= Display;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
-            _upgradeButton.onClick.RemoveListener(_barrackModel.Artillery.Upgrade);
-            _destroyButton.onClick.RemoveListener(_barrackModel.Artillery.Destroy);
+            _upgradeButton.onClick.RemoveListener(_barrackModel.Barrack.Upgrade);
+            _destroyButton.onClick.RemoveListener(_barrackModel.Barrack.Destroy);
         }
 
-        private void Display(BarrackModel laserModel)
+        private void Display(BarrackModel barrackModel)
         {
-            if (laserModel.NextLevelPrice == int.MaxValue)
+            if (barrackModel.NextLevelPrice == int.MaxValue)
             {
                 _upgradeButton.interactable = false;
                 _upgradePriceText.text = "MAX";
             }
             else
             {
-                _upgradeButton.interactable = _resourceManager.Gold.Value >= laserModel.NextLevelPrice;
-                _upgradePriceText.text = $"{laserModel.NextLevelPrice}";
+                _upgradeButton.interactable = _resourceManager.Gold.Value >= barrackModel.NextLevelPrice;
+                _upgradePriceText.text = $"{barrackModel.NextLevelPrice}";
             }
             
-            _compensationText.text = $"{laserModel.Compensation}";
+            _compensationText.text = $"{barrackModel.Compensation}";
         }
 
         private void OnGoldChanged(int currentGold) => Display(_barrackModel);

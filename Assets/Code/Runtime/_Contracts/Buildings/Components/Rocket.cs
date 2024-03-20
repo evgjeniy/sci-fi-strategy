@@ -1,4 +1,5 @@
 ﻿using SustainTheStrain._Contracts.Configs;
+using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain._Contracts.Installers;
 using UnityEngine.Extensions;
 using Zenject;
@@ -24,7 +25,7 @@ namespace SustainTheStrain._Contracts.Buildings
             _resourceManager = resourceManager;
             _buildingViewFactory = buildingViewFactory;
 
-            Model = new RocketModel(this, configProvider);
+            Model = new RocketModel(this, configProvider.GetBuildingConfig<RocketBuildingConfig>(1));
         }
 
         public override void OnSelected()

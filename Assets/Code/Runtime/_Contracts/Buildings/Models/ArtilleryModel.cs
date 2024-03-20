@@ -1,5 +1,4 @@
-﻿using SustainTheStrain._Contracts.Configs;
-using SustainTheStrain._Contracts.Configs.Buildings;
+﻿using SustainTheStrain._Contracts.Configs.Buildings;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
@@ -19,10 +18,10 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private event System.Action<ArtilleryModel> OnChangedEvent = _ => { };
 
-        public ArtilleryModel(Artillery artillery, IConfigProviderService configProvider, int upgradeLevel = 1)
+        public ArtilleryModel(Artillery artillery, ArtilleryBuildingConfig startConfig)
         {
             Artillery = artillery;
-            _config = configProvider.GetBuildingConfig<ArtilleryBuildingConfig>(upgradeLevel);
+            _config = startConfig;
         }
 
         public void IncreaseLevel()
