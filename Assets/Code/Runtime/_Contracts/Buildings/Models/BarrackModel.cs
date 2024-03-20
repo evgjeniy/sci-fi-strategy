@@ -10,9 +10,13 @@ namespace SustainTheStrain._Contracts.Buildings
         public Barrack Artillery { get; }
         public int Level => _config.Level;
         public int Price => _config.Price;
-        public int NextLevelPrice => _config.NextLevelConfig == null ? int.MaxValue : _config.NextLevelConfig.Price;
+        public int NextLevelPrice => _config.NextLevelPrice;
         public int Compensation => _config.Compensation;
         public float Radius => _config.Radius;
+        public float UnitMaxHealth => _config.UnitMaxHealth;
+        public float UnitAttackDamage => _config.UnitAttackDamage;
+        public float UnitAttackCooldown => _config.UnitAttackCooldown;
+        public float RespawnCooldown => _config.RespawnCooldown;
 
         private event System.Action<BarrackModel> OnChangedEvent = _ => { };
 

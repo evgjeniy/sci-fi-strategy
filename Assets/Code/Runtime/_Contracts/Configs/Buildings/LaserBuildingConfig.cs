@@ -10,5 +10,7 @@ namespace SustainTheStrain._Contracts.Configs.Buildings
         
         [field: Space]
         [field: SerializeField] public LaserBuildingConfig NextLevelConfig { get; private set; }
+        
+        public int NextLevelPrice => NextLevelConfig == null ? int.MaxValue : NextLevelConfig.Price;
     }
 }

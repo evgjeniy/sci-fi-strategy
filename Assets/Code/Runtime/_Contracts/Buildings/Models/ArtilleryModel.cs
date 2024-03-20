@@ -10,7 +10,7 @@ namespace SustainTheStrain._Contracts.Buildings
         public Artillery Artillery { get; }
         public int Level => _config.Level;
         public int Price => _config.Price;
-        public int NextLevelPrice => _config.NextLevelConfig == null ? int.MaxValue : _config.NextLevelConfig.Price;
+        public int NextLevelPrice => _config.NextLevelPrice;
         public int Compensation => _config.Compensation;
         public float Radius => _config.Radius;
         public float Damage => _config.Damage;
