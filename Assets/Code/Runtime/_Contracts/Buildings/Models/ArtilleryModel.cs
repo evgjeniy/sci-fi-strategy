@@ -1,36 +1,11 @@
-﻿using SustainTheStrain._Contracts.Configs.Buildings;
+﻿using SustainTheStrain._Contracts.Configs;
+using SustainTheStrain._Contracts.Configs.Buildings;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
     public class ArtilleryModel : IObservable<ArtilleryModel>
     {
-        private ArtilleryBuildingConfig _config;
-
-        public Artillery Artillery { get; }
-        public int Level => _config.Level;
-        public int Price => _config.Price;
-        public int NextLevelPrice => _config.NextLevelPrice;
-        public int Compensation => _config.Compensation;
-        public float Radius => _config.Radius;
-        public float Damage => _config.Damage;
-        public float Cooldown => _config.Cooldown;
-        public float ExplosionRadius => _config.ExplosionRadius;
-
         private event System.Action<ArtilleryModel> OnChangedEvent = _ => { };
-
-        public ArtilleryModel(Artillery artillery, ArtilleryBuildingConfig startConfig)
-        {
-            Artillery = artillery;
-            _config = startConfig;
-        }
-
-        public void IncreaseLevel()
-        {
-            if (_config.NextLevelConfig == null) return;
-            _config = _config.NextLevelConfig;
-
-            OnChangedEvent(this);
-        }
 
         public event System.Action<ArtilleryModel> Changed
         {
@@ -40,6 +15,18 @@ namespace SustainTheStrain._Contracts.Buildings
                 value(this);
             }
             remove => OnChangedEvent -= value;
+        }
+
+        public ArtilleryBuildingConfig Config { get; private set; }
+
+        public ArtilleryModel(ArtilleryBuildingConfig startConfig) => Config = startConfig;
+
+        public void IncreaseLevel()
+        {
+            if (Config.NextLevelConfig == null) return;
+            Config = Config.NextLevelConfig;
+
+            OnChangedEvent(this);
         }
     }
 }

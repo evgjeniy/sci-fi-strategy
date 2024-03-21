@@ -13,12 +13,7 @@ namespace SustainTheStrain._Contracts.Configs
             configName ??= typeof(TConfig).Name + upgrade;
             var loadedConfig = Resources.Load<TConfig>($"{rootPath}/{configName}");
             if (loadedConfig == null)
-            {
-#if !UNITY_EDITOR
-                throw new System.IO.FileNotFoundException($"File {configName} not founded by path: {rootPath}");
-#endif
                 return null;
-            }
 
             _buildingConfigs.TryAdd(typeof(TConfig).Name + loadedConfig.Level, loadedConfig);
             return loadedConfig;

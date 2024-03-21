@@ -13,50 +13,50 @@ namespace SustainTheStrain._Contracts.Buildings
         [SerializeField] private TMP_Text _upgradePriceText;
         [SerializeField] private TMP_Text _compensationText;
 
-        private LaserModel _laserModel;
+        private Laser _laser;
         private IResourceManager _resourceManager;
 
         [Inject]
-        private void Construct(LaserModel laserModel, IResourceManager resourceManager)
+        private void Construct(Laser laser, IResourceManager resourceManager)
         {
-            _laserModel = laserModel;
+            _laser = laser;
             _resourceManager = resourceManager;
         }
 
         private void OnEnable()
         {
-            _laserModel.Changed += Display;
+            _laser.Model.Changed += Display;
             _resourceManager.Gold.Changed += OnGoldChanged;
             
-            _upgradeButton.onClick.AddListener(_laserModel.Laser.Upgrade);
-            _destroyButton.onClick.AddListener(_laserModel.Laser.Destroy);
+            _upgradeButton.onClick.AddListener(_laser.Upgrade);
+            _destroyButton.onClick.AddListener(_laser.Destroy);
         }
 
         private void OnDisable()
         {
-            _laserModel.Changed -= Display;
+            _laser.Model.Changed -= Display;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
-            _upgradeButton.onClick.RemoveListener(_laserModel.Laser.Upgrade);
-            _destroyButton.onClick.RemoveListener(_laserModel.Laser.Destroy);
+            _upgradeButton.onClick.RemoveListener(_laser.Upgrade);
+            _destroyButton.onClick.RemoveListener(_laser.Destroy);
         }
 
         private void Display(LaserModel laserModel)
         {
-            if (laserModel.NextLevelPrice == int.MaxValue)
+            if (laserModel.Config.NextLevelPrice == int.MaxValue)
             {
                 _upgradeButton.interactable = false;
                 _upgradePriceText.text = "MAX";
             }
             else
             {
-                _upgradeButton.interactable = _resourceManager.Gold.Value >= laserModel.NextLevelPrice;
-                _upgradePriceText.text = $"{laserModel.NextLevelPrice}";
+                _upgradeButton.interactable = _resourceManager.Gold.Value >= laserModel.Config.NextLevelPrice;
+                _upgradePriceText.text = $"{laserModel.Config.NextLevelPrice}";
             }
             
-            _compensationText.text = $"{laserModel.Compensation}";
+            _compensationText.text = $"{laserModel.Config.Compensation}";
         }
 
-        private void OnGoldChanged(int currentGold) => Display(_laserModel);
+        private void OnGoldChanged(int currentGold) => Display(_laser.Model);
     }
 }

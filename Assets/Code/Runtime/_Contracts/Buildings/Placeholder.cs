@@ -8,7 +8,7 @@ namespace SustainTheStrain._Contracts.Buildings
     public interface IPlaceholder
     {
         public Transform transform { get; }
-        public void SetBuilding(Building building);
+        public void SetBuilding(IBuilding building);
         public void DestroyBuilding();
     }
     
@@ -20,7 +20,7 @@ namespace SustainTheStrain._Contracts.Buildings
         private IInputSystem _inputSystem;
 
         private BuildingCreateMenu _createMenu;
-        private Building _building;
+        private IBuilding _building;
 
         [Inject]
         private void Construct(IBuildingCreateMenuFactory createMenuFactory, IInputSystem inputSystem)
@@ -29,7 +29,7 @@ namespace SustainTheStrain._Contracts.Buildings
             _inputSystem = inputSystem;
         }
 
-        public void SetBuilding(Building building)
+        public void SetBuilding(IBuilding building)
         {
             Cashed2.Disable();
             
@@ -43,7 +43,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void DestroyBuilding()
         {
-            _building.IfNotNull(x => x.DestroyObject());
+            _building.IfNotNull(x => x.transform.DestroyObject());
             _inputSystem.Select(this);
 
             Cashed2.Enable();

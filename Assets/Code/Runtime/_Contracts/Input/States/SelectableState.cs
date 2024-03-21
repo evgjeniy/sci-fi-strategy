@@ -20,7 +20,8 @@
 
         public IInputState ProcessLeftClick(IInputSystem context)
         {
-            if (context.MousePosition.TryGetCameraRay(out var screenRay)) return this;
+            if (context.MousePosition.TryGetCameraRay(out var screenRay) is false)
+                return this;
 
             if (screenRay.TryGetRaycastComponent<IInputSelectable>(context.Settings, out var selectable))
                 return _selectable == selectable ? this : new SelectableState(selectable);

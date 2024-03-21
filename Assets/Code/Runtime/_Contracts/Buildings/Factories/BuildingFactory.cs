@@ -4,7 +4,7 @@ namespace SustainTheStrain._Contracts.Buildings
 {
     public interface IBuildingFactory
     {
-        public TBuilding Create<TBuilding>(IPlaceholder placeholder) where TBuilding : Building;
+        public TBuilding Create<TBuilding>(IPlaceholder placeholder) where TBuilding : IBuilding;
     }
     
     public class BuildingFactory : IBuildingFactory
@@ -13,7 +13,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public BuildingFactory(IInstantiator instantiator) => _instantiator = instantiator;
 
-        public TBuilding Create<TBuilding>(IPlaceholder placeholder) where TBuilding : Building
+        public TBuilding Create<TBuilding>(IPlaceholder placeholder) where TBuilding : IBuilding
         {
             var path = Const.ResourcePath.Buildings.Prefabs.Root + $"/{typeof(TBuilding).Name}";
             var building = _instantiator.InstantiatePrefabResourceForComponent<TBuilding>(path, new [] { placeholder });

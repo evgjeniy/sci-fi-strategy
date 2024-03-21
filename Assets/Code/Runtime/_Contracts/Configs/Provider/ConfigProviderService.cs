@@ -20,7 +20,7 @@ namespace SustainTheStrain._Contracts.Configs
 
         private Dictionary<EnergySystemType, EnergySystemConfig> _energySystemConfigs = Load.Configs<EnergySystemType, EnergySystemConfig>
         (
-            Const.ResourcePath.Units.Configs.Root, config => config.Type
+            Const.ResourcePath.EnergySystems.Configs.Root, config => config.Type
         );
 
         private Dictionary<UnitType, UnitConfig> _unitConfigs = Load.Configs<UnitType, UnitConfig>

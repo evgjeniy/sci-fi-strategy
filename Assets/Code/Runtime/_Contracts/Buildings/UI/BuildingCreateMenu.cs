@@ -62,11 +62,11 @@ namespace SustainTheStrain._Contracts.Buildings
         {
             _createRocket.onClick.AddListener(() => OnCreateClick<Rocket>(_rocketPrice));
             _createLaser.onClick.AddListener(() => OnCreateClick<Laser>(_laserPrice));
-            _createArtillery.onClick.AddListener(() => OnCreateClick<Artillery>(_rocketPrice));
-            _createBarrack.onClick.AddListener(() => OnCreateClick<Barrack>(_rocketPrice));
+            _createArtillery.onClick.AddListener(() => OnCreateClick<Artillery>(_artilleryPrice));
+            _createBarrack.onClick.AddListener(() => OnCreateClick<Barrack>(_barrackPrice));
             return;
 
-            void OnCreateClick<TBuilding>(int price) where TBuilding : Building
+            void OnCreateClick<TBuilding>(int price) where TBuilding : IBuilding
             {
                 buildingFactory.Create<TBuilding>(placeholder);
                 _resourceManager.Gold.Value -= price;

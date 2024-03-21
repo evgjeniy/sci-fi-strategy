@@ -1,12 +1,13 @@
 ﻿using SustainTheStrain._Contracts.Configs;
 using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain._Contracts.Installers;
+using SustainTheStrain.Abilities;
 using UnityEngine.Extensions;
 using Zenject;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class Rocket : Building
+    public class Rocket : MonoCashed<Outline>, IBuilding
     {
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
@@ -25,31 +26,35 @@ namespace SustainTheStrain._Contracts.Buildings
             _resourceManager = resourceManager;
             _buildingViewFactory = buildingViewFactory;
 
-            Model = new RocketModel(this, configProvider.GetBuildingConfig<RocketBuildingConfig>(1));
+            Model = new RocketModel(configProvider.GetBuildingConfig<RocketBuildingConfig>(1));
         }
 
-        public override void OnSelected()
+        public void OnPointerEnter() => Cashed1.Enable();
+        public void OnPointerExit() => Cashed1.Disable();
+
+        public void OnSelected()
         {
-            _menuView = _buildingViewFactory.Create<RocketMenuView, RocketModel>(Model)
+            _menuView = _buildingViewFactory.Create<RocketMenuView, Rocket>(this)
                 .With(x => x.SetParent(transform))
                 .With(x => x.transform.LookAtCamera(transform));
         }
 
-        public override void OnDeselected()
+        public void OnDeselected()
         {
             _menuView.IfNotNull(x => x.DestroyObject());
         }
 
-        public override void Upgrade()
+
+        public void Upgrade()
         {
-            if (_resourceManager.TrySpend(Model.NextLevelPrice) is false) return;
+            if (_resourceManager.TrySpend(Model.Config.NextLevelPrice) is false) return;
             Model.IncreaseLevel();
         }
 
-        public override void Destroy()
+        public void Destroy()
         {
             _placeholder.DestroyBuilding();
-            _resourceManager.Gold.Value += Model.Compensation;
+            _resourceManager.Gold.Value += Model.Config.Compensation;
         }
     }
 }

@@ -4,8 +4,8 @@ namespace SustainTheStrain._Contracts.Buildings
 {
     public interface IBuildingViewFactory
     {
-        public TView Create<TView, TModel>(TModel model, string configName = null)
-            where TView : BuildingMenuView where TModel : class;
+        public TView Create<TView, TBuilding>(TBuilding building, string configName = null)
+            where TView : BuildingMenuView where TBuilding : class;
     }
 
     public class BuildingViewFactory : IBuildingViewFactory
@@ -17,12 +17,12 @@ namespace SustainTheStrain._Contracts.Buildings
             _instantiator = instantiator;
         }
 
-        public TView Create<TView, TModel>(TModel model, string configName = null)
-            where TView : BuildingMenuView where TModel : class
+        public TView Create<TView, TBuilding>(TBuilding building, string configName = null)
+            where TView : BuildingMenuView where TBuilding : class
         {
             configName ??= typeof(TView).Name;
             var path = Const.ResourcePath.Buildings.Prefabs.Root + "/UI/" + configName;
-            return _instantiator.InstantiatePrefabResourceForComponent<TView>(path, new []{ model });
+            return _instantiator.InstantiatePrefabResourceForComponent<TView>(path, new []{ building });
         }
     }
 }

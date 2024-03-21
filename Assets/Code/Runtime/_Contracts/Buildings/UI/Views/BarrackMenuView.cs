@@ -14,51 +14,52 @@ namespace SustainTheStrain._Contracts.Buildings
         [SerializeField] private TMP_Text _upgradePriceText;
         [SerializeField] private TMP_Text _compensationText;
 
-        private BarrackModel _barrackModel;
+        private Barrack _barrack;
         private IResourceManager _resourceManager;
 
         [Inject]
-        private void Construct(BarrackModel barrackModel, IResourceManager resourceManager)
+        private void Construct(Barrack barrack, IResourceManager resourceManager)
         {
-            _barrackModel = barrackModel;
+            _barrack = barrack;
             _resourceManager = resourceManager;
         }
 
         private void OnEnable()
         {
-            _barrackModel.Changed += Display;
+            _barrack.Model.Changed += Display;
             _resourceManager.Gold.Changed += OnGoldChanged;
             
-            _upgradeButton.onClick.AddListener(_barrackModel.Barrack.Upgrade);
-            _destroyButton.onClick.AddListener(_barrackModel.Barrack.Destroy);
-            _unitsPointButton.onClick.AddListener(() => Debug.Log("SET UNITS POINT"));
+            _upgradeButton.onClick.AddListener(_barrack.Upgrade);
+            _destroyButton.onClick.AddListener(_barrack.Destroy);
+            _unitsPointButton.onClick.AddListener(_barrack.UnitsPointStateToggle);
         }
 
         private void OnDisable()
         {
-            _barrackModel.Changed -= Display;
+            _barrack.Model.Changed -= Display;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
-            _upgradeButton.onClick.RemoveListener(_barrackModel.Barrack.Upgrade);
-            _destroyButton.onClick.RemoveListener(_barrackModel.Barrack.Destroy);
+            _upgradeButton.onClick.RemoveListener(_barrack.Upgrade);
+            _destroyButton.onClick.RemoveListener(_barrack.Destroy);
+            _unitsPointButton.onClick.RemoveListener(_barrack.UnitsPointStateToggle);
         }
 
         private void Display(BarrackModel barrackModel)
         {
-            if (barrackModel.NextLevelPrice == int.MaxValue)
+            if (barrackModel.Config.NextLevelPrice == int.MaxValue)
             {
                 _upgradeButton.interactable = false;
                 _upgradePriceText.text = "MAX";
             }
             else
             {
-                _upgradeButton.interactable = _resourceManager.Gold.Value >= barrackModel.NextLevelPrice;
-                _upgradePriceText.text = $"{barrackModel.NextLevelPrice}";
+                _upgradeButton.interactable = _resourceManager.Gold.Value >= barrackModel.Config.NextLevelPrice;
+                _upgradePriceText.text = $"{barrackModel.Config.NextLevelPrice}";
             }
             
-            _compensationText.text = $"{barrackModel.Compensation}";
+            _compensationText.text = $"{barrackModel.Config.Compensation}";
         }
 
-        private void OnGoldChanged(int currentGold) => Display(_barrackModel);
+        private void OnGoldChanged(int currentGold) => Display(_barrack.Model);
     }
 }

@@ -13,50 +13,50 @@ namespace SustainTheStrain._Contracts.Buildings
         [SerializeField] private TMP_Text _upgradePriceText;
         [SerializeField] private TMP_Text _compensationText;
 
-        private RocketModel _rocketModel;
+        private Rocket _rocket;
         private IResourceManager _resourceManager;
 
         [Inject]
-        private void Construct(RocketModel rocketModel, IResourceManager resourceManager)
+        private void Construct(Rocket rocket, IResourceManager resourceManager)
         {
-            _rocketModel = rocketModel;
+            _rocket = rocket;
             _resourceManager = resourceManager;
         }
 
         private void OnEnable()
         {
-            _rocketModel.Changed += Display;
+            _rocket.Model.Changed += Display;
             _resourceManager.Gold.Changed += OnGoldChanged;
             
-            _upgradeButton.onClick.AddListener(_rocketModel.Rocket.Upgrade);
-            _destroyButton.onClick.AddListener(_rocketModel.Rocket.Destroy);
+            _upgradeButton.onClick.AddListener(_rocket.Upgrade);
+            _destroyButton.onClick.AddListener(_rocket.Destroy);
         }
 
         private void OnDisable()
         {
-            _rocketModel.Changed -= Display;
+            _rocket.Model.Changed -= Display;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
-            _upgradeButton.onClick.RemoveListener(_rocketModel.Rocket.Upgrade);
-            _destroyButton.onClick.RemoveListener(_rocketModel.Rocket.Destroy);
+            _upgradeButton.onClick.RemoveListener(_rocket.Upgrade);
+            _destroyButton.onClick.RemoveListener(_rocket.Destroy);
         }
 
         private void Display(RocketModel rocketModel)
         {
-            if (rocketModel.NextLevelPrice == int.MaxValue)
+            if (rocketModel.Config.NextLevelPrice == int.MaxValue)
             {
                 _upgradeButton.interactable = false;
                 _upgradePriceText.text = "MAX";
             }
             else
             {
-                _upgradeButton.interactable = _resourceManager.Gold.Value >= rocketModel.NextLevelPrice;
-                _upgradePriceText.text = $"{rocketModel.NextLevelPrice}";
+                _upgradeButton.interactable = _resourceManager.Gold.Value >= rocketModel.Config.NextLevelPrice;
+                _upgradePriceText.text = $"{rocketModel.Config.NextLevelPrice}";
             }
             
-            _compensationText.text = $"{rocketModel.Compensation}";
+            _compensationText.text = $"{rocketModel.Config.Compensation}";
         }
 
-        private void OnGoldChanged(int currentGold) => Display(_rocketModel);
+        private void OnGoldChanged(int currentGold) => Display(_rocket.Model);
     }
 }
