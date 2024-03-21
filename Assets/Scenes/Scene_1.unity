@@ -123,50 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &28385805
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 28385806}
-  - component: {fileID: 28385807}
-  m_Layer: 0
-  m_Name: Energy Systems UI Factories Installer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &28385806
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28385805}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1654117041}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &28385807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28385805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9192ee5aca684e4a8bddf6d9aed4bc57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &69818066 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cf72ff68c2080e4dad643e786b02068,
@@ -4059,52 +4015,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1019922381}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1064222981
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1064222982}
-  - component: {fileID: 1064222983}
-  m_Layer: 0
-  m_Name: Abilities UI controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1064222982
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064222981}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1230632022}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1064222983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064222981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08825778d211ed04a94ce800444ea831, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _abilitiesController: {fileID: 0}
-  spawnedCount: 0
 --- !u!1001 &1088819922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4442,7 +4352,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1064222982}
+  - {fileID: 1961702113}
   m_Father: {fileID: 2063938356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1230632023
@@ -4494,51 +4404,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245822710}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1654117041}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1265519253
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1265519255}
-  - component: {fileID: 1265519254}
-  m_Layer: 0
-  m_Name: Energy Systems UI Factory Installer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1265519254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1265519253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 154cc8dc9672431bb42b3bca2a581af0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _manager: {fileID: 0}
---- !u!4 &1265519255
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1265519253}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -5818,7 +5683,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 761883344}
-  _settings: []
+  _abilitiesUIController: {fileID: 1961702112}
+  _settings:
+  - {fileID: 11400000, guid: f4d33845b913b554e98936684bd2e8cb, type: 2}
+  - {fileID: 11400000, guid: d9ed03f052f4f064e81f2cfae46e7ad9, type: 2}
+  - {fileID: 11400000, guid: 147c79c9cf9b8a54abf3e225d92d1097, type: 2}
+  baseSpawnTransform: {fileID: 1758601574}
+  abilitySpawnTransform: {fileID: 1641735683}
 --- !u!4 &1542649422
 Transform:
   m_ObjectHideFlags: 0
@@ -7106,9 +6977,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2063938356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.052376624, y: 0.031780347}
-  m_AnchorMax: {x: 0.13115044, y: 0.27938035}
-  m_AnchoredPosition: {x: 277, y: 0}
+  m_AnchorMin: {x: 0.2376771, y: 0.031780347}
+  m_AnchorMax: {x: 0.32135418, y: 0.27938035}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1641735684
@@ -7218,10 +7089,9 @@ MonoBehaviour:
   - {fileID: 211882816}
   - {fileID: 1651586374}
   - {fileID: 1542649421}
-  - {fileID: 1245822711}
   - {fileID: 379524129}
-  - {fileID: 1265519254}
   - {fileID: 1182464770}
+  - {fileID: 1245822711}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -7259,9 +7129,7 @@ Transform:
   - {fileID: 1542649422}
   - {fileID: 1245822712}
   - {fileID: 379524130}
-  - {fileID: 1265519255}
   - {fileID: 1182464771}
-  - {fileID: 28385806}
   m_Father: {fileID: 1116428992}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1699296427
@@ -7978,6 +7846,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd8888a6c53476d81c3e43e9b3997ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1961702111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1961702113}
+  - component: {fileID: 1961702112}
+  m_Layer: 0
+  m_Name: Abilities UI Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1961702112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961702111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08825778d211ed04a94ce800444ea831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1961702113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961702111}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1230632022}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1969595214
 GameObject:
   m_ObjectHideFlags: 0

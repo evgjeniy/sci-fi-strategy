@@ -5,7 +5,7 @@ using Zenject;
 
 namespace SustainTheStrain.Abilities
 {
-    public class AbilitiesUIController 
+    public class AbilitiesUIController : MonoBehaviour
     {
 
         private AbilityControlButton[] _buttons;

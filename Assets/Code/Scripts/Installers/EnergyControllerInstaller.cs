@@ -4,6 +4,7 @@ using SustainTheStrain.EnergySystem;
 using SustainTheStrain.EnergySystem.UI;
 using SustainTheStrain.EnergySystem.UI.Factories;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace SustainTheStrain.Installers
@@ -11,7 +12,10 @@ namespace SustainTheStrain.Installers
     public class EnergyControllerInstaller : MonoInstaller
     {
         [SerializeField] private EnergyController _controller;
+        [SerializeField] private AbilitiesUIController _abilitiesUIController;
         [SerializeField] private List<EnergySystemUISettings> _settings;
+        [SerializeField] private Transform baseSpawnTransform;
+        [SerializeField] private Transform abilitySpawnTransform;
 
         public override void InstallBindings()
         {
@@ -40,11 +44,11 @@ namespace SustainTheStrain.Installers
             switch (settings.UIType)
             {
                 case EnergySystemUIType.Generator:
-                    return new ResourceGeneratorUIFactory(settings, new ResourceGeneratorUIController(_controller));
+                    return new ResourceGeneratorUIFactory(settings, new ResourceGeneratorUIController(_controller), baseSpawnTransform);
                 case EnergySystemUIType.Ability:
-                    return new AbilityUIFactory(settings, new AbilityUIController(_controller, new AbilitiesUIController()));
+                    return new AbilityUIFactory(settings, new AbilityUIController(_controller, _abilitiesUIController), abilitySpawnTransform);
                 default:
-                    return new BasicEnergySystemUIFactory(settings, new BaseEnergyUIController(_controller));
+                    return new BasicEnergySystemUIFactory(settings, new BaseEnergyUIController(_controller), baseSpawnTransform);
             }
         }
     }

@@ -10,10 +10,10 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
         private Transform _spawnParent;
         private BaseEnergyUIController _energyUIController;
 
-        public BasicEnergySystemUIFactory(EnergySystemUISettings settings, BaseEnergyUIController energyUIController)
+        public BasicEnergySystemUIFactory(EnergySystemUISettings settings, BaseEnergyUIController energyUIController, Transform spawnParent)
         {
             _uiPrefab = settings.UIPrefab;
-            _spawnParent = settings.SpawnParent;
+            _spawnParent = spawnParent;
             _energyUIController = energyUIController;
         }
         
