@@ -54,6 +54,7 @@ namespace SustainTheStrain.Units
             follower.RebuildImmediate();
             double startpercent = follower.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
             follower.SetPercent(startpercent+0.01);
+            follower.Move();
         }
 
         public void Stop()
@@ -66,6 +67,7 @@ namespace SustainTheStrain.Units
         {
             follower.Enable();
             follower.NavMeshAgent.isStopped = false;
+            follower.Move();
         }
     }
 }

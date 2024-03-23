@@ -21,7 +21,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void EnterState()
         {
-            Debug.Log(string.Format("[StateMachine {0}] EnemySplineMoveState entered", context.gameObject.name));
+            //Debug.Log(string.Format("[StateMachine {0}] EnemySplineMoveState entered", context.gameObject.name));
 
             if (!IsOnSpline(out var splineSample))
             {

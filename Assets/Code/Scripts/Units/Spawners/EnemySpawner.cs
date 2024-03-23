@@ -31,7 +31,7 @@ namespace SustainTheStrain.Units.Spawners
 
             if (unit == null)
             {
-                Debug.LogError($"[EnemySpawner {name}] Enemy spaw failed");
+                //Debug.LogError($"[EnemySpawner {name}] Enemy spaw failed");
                 return null;
             }
 

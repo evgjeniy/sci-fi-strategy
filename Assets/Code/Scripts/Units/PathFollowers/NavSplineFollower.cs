@@ -18,20 +18,34 @@ namespace SustainTheStrain
 
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
         
-        void Move()
+        public void Move()
         {
-            if (_movingRoutine != null) return;
+            //if (_movingRoutine != null) return;
             _movingRoutine = StartCoroutine(Moving());
         }
         
         protected override void Start()
         {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
 #if UNITY_EDITOR
             if (!Application.isPlaying) return;
 #endif
-            Move();
+            
             //StartCoroutine(DebugMe());
+        }
+        
+        public bool IsDestinationReached()
+        {
+            if (!_navMeshAgent.pathPending)
+            {
+                if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
+                {
+                    if (!_navMeshAgent.hasPath || _navMeshAgent.velocity.sqrMagnitude == 0f)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private IEnumerator DebugMe()
@@ -45,19 +59,18 @@ namespace SustainTheStrain
 
         private IEnumerator Moving()
         {
-            for (float i=0; i <= 1; i+=_splineStep)
+            float i = 0;
+            for (; i <= 1; i+=_splineStep)
             {
                 var nextStep = spline.Evaluate(i);
                 NavMesh.SamplePosition(nextStep.position, out var hit, 100f, 1);
                 _navMeshAgent.SetDestination(hit.position);
-                //markerPrefab.SetActive(true);
-                //markerPrefab.transform.position = hit.position;
-                //Debug.Log($"Distance is {_navMeshAgent.remainingDistance}");
-                yield return new WaitUntil(()=>!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance );
-                //markerPrefab.SetActive(false);
+                yield return new WaitUntil(IsDestinationReached);
+                
             }
-            
-            yield return new WaitUntil(() => _navMeshAgent.velocity.sqrMagnitude < 0.1);
+            CheckNodes(0, 1);
+            //CheckTriggers(_splineStep, 1);
+            yield return new WaitUntil(IsDestinationReached);
             InvokeNodes();
         }
 
@@ -65,5 +78,11 @@ namespace SustainTheStrain
         {
             Debug.Log("Hello");
         }
+
+        protected override void Awake()
+        {
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+        }
+        
     }
 }

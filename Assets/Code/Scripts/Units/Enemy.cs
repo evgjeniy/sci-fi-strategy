@@ -20,7 +20,7 @@ namespace SustainTheStrain.Units
 
         private void Start()
         {
-            Init();
+            //Init();
             InitLogic();
         }
 
