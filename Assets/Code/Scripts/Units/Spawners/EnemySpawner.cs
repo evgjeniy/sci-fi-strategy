@@ -42,7 +42,7 @@ namespace SustainTheStrain.Units.Spawners
             unit.GetComponent<Damageble>().OnDied += (Damageble d) => { _resourceManager.CurrentGold += unit.CoinsDrop;
                 _spawnedEnemies.Remove(unit);
             };
-            Debug.Log($"[EnemySpawner {name}] Spawned unit");
+            //Debug.Log($"[EnemySpawner {name}] Spawned unit");
             return unit;
         }
 
