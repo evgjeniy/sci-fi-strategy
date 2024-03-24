@@ -52,8 +52,6 @@ namespace SustainTheStrain.Units
             follower.spline = to.spline;
 
             follower.RebuildImmediate();
-            double startpercent = follower.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
-            follower.SetPercent(startpercent+0.01);
             follower.Move();
         }
 
