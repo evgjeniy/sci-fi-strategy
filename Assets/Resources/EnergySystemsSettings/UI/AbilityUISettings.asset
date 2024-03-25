@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c3520a80c2c47bfad0b6a6d15c20c1a, type: 3}
-  m_Name: GeneratorEnergy
+  m_Script: {fileID: 11500000, guid: 80097f798eae48c1973f589c5ef809ec, type: 3}
+  m_Name: AbilityUISettings
   m_EditorClassIdentifier: 
-  <ButtonImage>k__BackingField: {fileID: 21300000, guid: 3e9e30ed805ff7649b2263031a9cb9cc,
+  <SpawnParent>k__BackingField: {fileID: 0}
+  <UIPrefab>k__BackingField: {fileID: 2476350870348513621, guid: 28db9a705a1d25d4fbbde5dd39ddda98,
     type: 3}
-  <EnergySpend>k__BackingField: 1
-  <MaxEnergy>k__BackingField: 3
-  <SystemUIType>k__BackingField: 1
+  <UIType>k__BackingField: 2
