@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80097f798eae48c1973f589c5ef809ec, type: 3}
   m_Name: AbilityUISettings
   m_EditorClassIdentifier: 
-  <SpawnParent>k__BackingField: {fileID: 0}
-  <UIPrefab>k__BackingField: {fileID: 2476350870348513621, guid: 28db9a705a1d25d4fbbde5dd39ddda98,
+  <UIPrefab>k__BackingField: {fileID: 2476350870348513621, guid: e46008d78f5bdbe4e8d57881f9c95a0e,
     type: 3}
   <UIType>k__BackingField: 2
