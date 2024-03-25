@@ -8,6 +8,7 @@ namespace SustainTheStrain.EnergySystem.UI
 {
     public class EnergySystemsUIController : MonoBehaviour
     {
+        [SerializeField] private AbilitiesUIController _abilitiesUIController;
         
         private EnergyController EnergyController { get; set; }
         private EnergySystemUIFactoryManager _uiFactory;

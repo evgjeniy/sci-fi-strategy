@@ -29,7 +29,7 @@ namespace SustainTheStrain.Units
         {
             if (unit == null) return;
 
-            //Debug.Log(string.Format("[AggroRadius] On {0} entered {1} aggro radius", unit.name, name));
+            Debug.Log(string.Format("[AggroRadius] On {0} entered {1} aggro radius", unit.name, name));
             _aggroZoneUnits.Add(unit);
             OnUnitEnteredAggroZone?.Invoke(unit);
 

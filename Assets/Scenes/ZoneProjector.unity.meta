@@ -1,10 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scenes/ZoneProjector.unity.meta
 guid: 737052fbf683182429f1848df17e2f3d
-========
-guid: 4936e8fe96b809e418bf72f3760b1605
-folderAsset: yes
->>>>>>>> spline_follower:Assets/Code/Scripts/EnergySystem/UI/Factories/Controllers.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

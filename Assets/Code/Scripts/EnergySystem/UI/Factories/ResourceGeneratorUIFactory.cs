@@ -1,31 +1,28 @@
 ﻿using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.ResourceSystems.UI;
-using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
 
 namespace SustainTheStrain.EnergySystem.UI.Factories
 {
-    public class ResourceGeneratorUIFactory : IFactory<IEnergySystem, EnergySystemUI>
+    public class ResourceGeneratorUIFactory : MonoUIFactory
     {
-        private ResourceGeneratorUIController _uiController;
-        private EnergySystemUI _uiPrefab;
-        private Transform _spawnParent;
-        
-        public ResourceGeneratorUIFactory(EnergySystemUISettings settings, ResourceGeneratorUIController controller, Transform spawnParent)
+        public override EnergySystemUI Create(IEnergySystem system)
         {
-            _uiPrefab = settings.UIPrefab;
-            _spawnParent = spawnParent;
-            _uiController = controller;
-        }
-        
-        public EnergySystemUI Create(IEnergySystem system)
-        {
-            var ui = Object.Instantiate(_uiPrefab, _spawnParent);
-            var button = ui.ControllButton;
+            var ui = Instantiate(_uiPrefab, _spawnParent);
+            var bg = Instantiate(_backgroundImage, ui.transform);
+            var button = Instantiate(_controllButton, bg.transform);
+            var generatorUI = new GeneratorUI(button.transform, system as ResourceGenerator);
+            ui.ControllButton = button;
             button.image.sprite = system.EnergySettings.ButtonImage;
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
-            _uiController.MakeSubscriptions(ui,system);
+            button.OnLeftMouseClick += () =>
+            {
+                _energyController.TryLoadEnergyToSystem(system);
+            };
+            button.OnRightMouseClick += () =>
+            {
+                _energyController.TryReturnEnergyFromSystem(system);
+            };
+            system.Changed += ui.ChangeEnergy; //перенести в UIController
             return ui;
         }
     }

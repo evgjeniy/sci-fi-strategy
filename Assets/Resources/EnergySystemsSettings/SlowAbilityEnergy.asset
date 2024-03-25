@@ -16,4 +16,4 @@ MonoBehaviour:
     type: 3}
   <EnergySpend>k__BackingField: 2
   <MaxEnergy>k__BackingField: 2
-  <SystemUIType>k__BackingField: 2
+  <SystemType>k__BackingField: 2

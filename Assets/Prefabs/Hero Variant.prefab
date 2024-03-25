@@ -8,12 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1062942572181524570, guid: 7fbf7881ac1028844a19fd84e78c01c2,
-        type: 3}
-      propertyPath: <EnergySettings>k__BackingField
-      value: 
-      objectReference: {fileID: 11400000, guid: 2562f827fcaffd0488412c45ba0851bd,
-        type: 2}
     - target: {fileID: 4148816034686865303, guid: 7fbf7881ac1028844a19fd84e78c01c2,
         type: 3}
       propertyPath: Animator
