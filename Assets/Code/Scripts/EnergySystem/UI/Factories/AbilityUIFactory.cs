@@ -6,33 +6,28 @@ using Zenject;
 
 namespace SustainTheStrain.EnergySystem.UI.Factories
 {
-    public class AbilityUIFactory : MonoUIFactory
+    public class AbilityUIFactory : IFactory<IEnergySystem, EnergySystemUI>
     {
-        [SerializeField] private AbilitiesUIController mAbilitiesUIController;
-        [SerializeField] private float _scaleMultiplayer;
-        [SerializeField] private Slider _sliderPrefab;
-        
-        public override EnergySystemUI Create(IEnergySystem system)
+        private EnergySystemUI _uiPrefab;
+        private Transform _spawnParent;
+        private AbilityUIController _abilityUIController;   
+
+        public AbilityUIFactory(EnergySystemUISettings settings, AbilityUIController abilityUIController, Transform spawnParent)
         {
-            var ui = Instantiate(_uiPrefab, _spawnParent);
-            var bg = Instantiate(_backgroundImage, ui.transform);
-            var transform = bg.transform;
-            transform.localScale *= _scaleMultiplayer;
-            var slider = Instantiate(_sliderPrefab, transform);
+            _uiPrefab = settings.UIPrefab;
+            _spawnParent = spawnParent;
+            _abilityUIController = abilityUIController;
+        }
+        
+        public EnergySystemUI Create(IEnergySystem system)
+        {
+            var ui = Object.Instantiate(_uiPrefab, _spawnParent);
+            var button = ui.ControllButton;
+            var slider = button.transform.parent.GetComponent<Slider>();
             slider.value = 0;
-            var button = Instantiate(_controllButton, slider.transform);
-            mAbilitiesUIController.AddControlButton(button.GetComponent<InputSystemButtonBridge>(), slider);
-            ui.ControllButton = button;
             button.image.sprite = system.EnergySettings.ButtonImage;
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
-            button.OnLeftMouseClick += () =>
-            {
-                _energyController.TryLoadEnergyToSystem(system);
-            };
-            button.OnRightMouseClick += () =>
-            {
-                _energyController.TryReturnEnergyFromSystem(system);
-            };
+            _abilityUIController.MakeSubscriptions(ui, system, slider);
             return ui;
         }
     }

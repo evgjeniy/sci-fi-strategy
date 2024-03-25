@@ -16,11 +16,11 @@ namespace SustainTheStrain.Units
 
         public int CoinsDrop;
         
-        public SplinePathFollower SplinePathFollower { get; protected set; }
+        public NavSplinePathFollower SplinePathFollower { get; protected set; }
 
         private void Start()
         {
-            Init();
+            //Init();
             InitLogic();
         }
 
@@ -28,8 +28,8 @@ namespace SustainTheStrain.Units
         {
             base.Init();
 
-            if (TryGetComponent<SplineFollower>(out var splineFollower))
-                SplinePathFollower = new SplinePathFollower(splineFollower);
+            if (TryGetComponent<NavSplineFollower>(out var splineFollower))
+                SplinePathFollower = new NavSplinePathFollower(splineFollower);
         }
 
         protected virtual void InitLogic()
