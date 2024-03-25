@@ -1,4 +1,5 @@
-﻿using SustainTheStrain._Contracts.Installers;
+﻿using SustainTheStrain._Contracts.Configs.Buildings;
+using SustainTheStrain._Contracts.Installers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +26,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnEnable()
         {
-            _laser.Model.Changed += Display;
+            _laser.Model.Config.Changed += Display;
             _resourceManager.Gold.Changed += OnGoldChanged;
             
             _upgradeButton.onClick.AddListener(_laser.Upgrade);
@@ -34,29 +35,29 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnDisable()
         {
-            _laser.Model.Changed -= Display;
+            _laser.Model.Config.Changed -= Display;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
             _upgradeButton.onClick.RemoveListener(_laser.Upgrade);
             _destroyButton.onClick.RemoveListener(_laser.Destroy);
         }
 
-        private void Display(LaserModel laserModel)
+        private void Display(LaserBuildingConfig laserConfig)
         {
-            if (laserModel.Config.NextLevelPrice == int.MaxValue)
+            if (laserConfig.NextLevelPrice == int.MaxValue)
             {
                 _upgradeButton.interactable = false;
                 _upgradePriceText.text = "MAX";
             }
             else
             {
-                _upgradeButton.interactable = _resourceManager.Gold.Value >= laserModel.Config.NextLevelPrice;
-                _upgradePriceText.text = $"{laserModel.Config.NextLevelPrice}";
+                _upgradeButton.interactable = _resourceManager.Gold >= laserConfig.NextLevelPrice;
+                _upgradePriceText.text = $"{laserConfig.NextLevelPrice}";
             }
             
-            _compensationText.text = $"{laserModel.Config.Compensation}";
+            _compensationText.text = $"{laserConfig.Compensation}";
         }
 
-        private void OnGoldChanged(int currentGold) => Display(_laser.Model);
+        private void OnGoldChanged(int currentGold) => Display(_laser.Model.Config);
     }
 }

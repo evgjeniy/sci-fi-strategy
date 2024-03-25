@@ -1,4 +1,5 @@
-﻿using SustainTheStrain._Contracts.Installers;
+﻿using SustainTheStrain._Contracts.Configs.Buildings;
+using SustainTheStrain._Contracts.Installers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +26,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnEnable()
         {
-            _artillery.Model.Changed += Display;
+            _artillery.Model.Config.Changed += Display;
             _resourceManager.Gold.Changed += OnGoldChanged;
             
             _upgradeButton.onClick.AddListener(_artillery.Upgrade);
@@ -34,29 +35,29 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnDisable()
         {
-            _artillery.Model.Changed -= Display;
+            _artillery.Model.Config.Changed -= Display;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
             _upgradeButton.onClick.RemoveListener(_artillery.Upgrade);
             _destroyButton.onClick.RemoveListener(_artillery.Destroy);
         }
 
-        private void Display(ArtilleryModel laserModel)
+        private void Display(ArtilleryBuildingConfig artilleryConfig)
         {
-            if (laserModel.Config.NextLevelPrice == int.MaxValue)
+            if (artilleryConfig.NextLevelPrice == int.MaxValue)
             {
                 _upgradeButton.interactable = false;
                 _upgradePriceText.text = "MAX";
             }
             else
             {
-                _upgradeButton.interactable = _resourceManager.Gold.Value >= laserModel.Config.NextLevelPrice;
-                _upgradePriceText.text = $"{laserModel.Config.NextLevelPrice}";
+                _upgradeButton.interactable = _resourceManager.Gold >= artilleryConfig.NextLevelPrice;
+                _upgradePriceText.text = $"{artilleryConfig.NextLevelPrice}";
             }
             
-            _compensationText.text = $"{laserModel.Config.Compensation}";
+            _compensationText.text = $"{artilleryConfig.Compensation}";
         }
 
-        private void OnGoldChanged(int currentGold) => Display(_artillery.Model);
+        private void OnGoldChanged(int currentGold) => Display(_artillery.Model.Config);
     }
 }

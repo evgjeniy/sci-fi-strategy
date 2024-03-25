@@ -10,6 +10,8 @@
         private TValue _value;
         private event System.Action<TValue> OnChangedEvent = _ => {};
 
+        public Observable(TValue value = default) => _value = value;
+
         public TValue Value
         {
             get => _value;
@@ -29,5 +31,7 @@
             }
             remove => OnChangedEvent -= value;
         }
+
+        public static implicit operator TValue(Observable<TValue> observable) => observable.Value;
     }
 }

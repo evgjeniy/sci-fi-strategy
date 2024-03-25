@@ -3,30 +3,19 @@ using SustainTheStrain._Contracts.Configs.Buildings;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class ArtilleryModel : IObservable<ArtilleryModel>
+    public class ArtilleryModel
     {
-        private event System.Action<ArtilleryModel> OnChangedEvent = _ => { };
+        public Observable<ArtilleryBuildingConfig> Config { get; }
 
-        public event System.Action<ArtilleryModel> Changed
+        public ArtilleryModel(ArtilleryBuildingConfig startConfig)
         {
-            add
-            {
-                OnChangedEvent += value;
-                value(this);
-            }
-            remove => OnChangedEvent -= value;
+            Config = new Observable<ArtilleryBuildingConfig>(startConfig);
         }
-
-        public ArtilleryBuildingConfig Config { get; private set; }
-
-        public ArtilleryModel(ArtilleryBuildingConfig startConfig) => Config = startConfig;
 
         public void IncreaseLevel()
         {
-            if (Config.NextLevelConfig == null) return;
-            Config = Config.NextLevelConfig;
-
-            OnChangedEvent(this);
+            if (Config.Value.NextLevelConfig == null) return;
+            Config.Value = Config.Value.NextLevelConfig;
         }
     }
 }

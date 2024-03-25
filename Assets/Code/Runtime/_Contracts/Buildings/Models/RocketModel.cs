@@ -2,30 +2,19 @@
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class RocketModel : IObservable<RocketModel>
+    public class RocketModel
     {
-        private event System.Action<RocketModel> OnChangedEvent = _ => { };
+        public Observable<RocketBuildingConfig> Config { get; }
 
-        public event System.Action<RocketModel> Changed
+        public RocketModel(RocketBuildingConfig startConfig)
         {
-            add
-            {
-                OnChangedEvent += value;
-                value(this);
-            }
-            remove => OnChangedEvent -= value;
+            Config = new Observable<RocketBuildingConfig>(startConfig);
         }
-
-        public RocketBuildingConfig Config { get; private set; }
-
-        public RocketModel(RocketBuildingConfig startConfig) => Config = startConfig;
 
         public void IncreaseLevel()
         {
-            if (Config.NextLevelConfig == null) return;
-            Config = Config.NextLevelConfig;
-
-            OnChangedEvent(this);
+            if (Config.Value.NextLevelConfig == null) return;
+            Config.Value = Config.Value.NextLevelConfig;
         }
     }
 }

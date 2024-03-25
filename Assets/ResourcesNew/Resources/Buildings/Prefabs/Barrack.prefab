@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8323125385054294663}
   - component: {fileID: 6940151713158248022}
-  - component: {fileID: 5330164932878876092}
+  - component: {fileID: 2916277550919127607}
   - component: {fileID: 5503780973189230458}
+  - component: {fileID: 5330164932878876092}
   m_Layer: 0
   m_Name: Barrack
   m_TagString: Untagged
@@ -59,18 +60,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5330164932878876092
+--- !u!114 &2916277550919127607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6413587623103112745}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e60663495fd406ba5994ceda7aab6bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e76b30fd04129744ac24605310c0aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!114 &5503780973189230458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +98,18 @@ MonoBehaviour:
   <GuardPost>k__BackingField:
     _position: {x: 17.48, y: 0, z: -11.45}
     _radius: 3
+--- !u!114 &5330164932878876092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6413587623103112745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e60663495fd406ba5994ceda7aab6bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8276764189853113279
 GameObject:
   m_ObjectHideFlags: 0

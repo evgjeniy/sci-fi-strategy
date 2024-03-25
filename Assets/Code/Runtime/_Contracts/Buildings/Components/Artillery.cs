@@ -11,7 +11,7 @@ namespace SustainTheStrain._Contracts.Buildings
     {
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
-        private IBuildingViewFactory _buildingViewFactory;
+        private System.Func<Artillery, string, ArtilleryMenuView> _createMenu;
         private ArtilleryMenuView _menuView;
 
         public ArtilleryModel Model { get; private set; }
@@ -24,36 +24,26 @@ namespace SustainTheStrain._Contracts.Buildings
         {
             _placeholder = placeholder;
             _resourceManager = resourceManager;
-            _buildingViewFactory = buildingViewFactory;
+            _createMenu = buildingViewFactory.Create<ArtilleryMenuView, Artillery>;
 
-            Model = new ArtilleryModel(configProvider.GetBuildingConfig<ArtilleryBuildingConfig>(1));
+            Model = new ArtilleryModel(configProvider.GetBuildingConfig<ArtilleryBuildingConfig>());
         }
 
         public void OnPointerEnter() => Cashed1.Enable();
         public void OnPointerExit() => Cashed1.Disable();
-
-        public void OnSelected()
-        {
-            _menuView = _buildingViewFactory.Create<ArtilleryMenuView, Artillery>(this)
-                .With(x => x.SetParent(transform))
-                .With(x => x.transform.LookAtCamera(transform));
-        }
-
-        public void OnDeselected()
-        {
-            _menuView.IfNotNull(x => x.DestroyObject());
-        }
+        public void OnSelected() => _menuView.IfNull(() => _menuView = _createMenu(this, null)).Enable();
+        public void OnDeselected() => _menuView.Disable();
 
         public void Upgrade()
         {
-            if (_resourceManager.TrySpend(Model.Config.NextLevelPrice) is false) return;
+            if (_resourceManager.TrySpend(Model.Config.Value.NextLevelPrice) is false) return;
             Model.IncreaseLevel();
         }
 
         public void Destroy()
         {
             _placeholder.DestroyBuilding();
-            _resourceManager.Gold.Value += Model.Config.Compensation;
+            _resourceManager.Gold.Value += Model.Config.Value.Compensation;
         }
     }
 }

@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class BuildingMenuView : MonoBehaviour {}
+    public class BuildingMenuView : MonoBehaviour
+    {
+        [SerializeField] private Canvas _menuRoot;
+
+        public void Enable() => _menuRoot.Activate();
+        public void Disable() => _menuRoot.Deactivate();
+    }
 }

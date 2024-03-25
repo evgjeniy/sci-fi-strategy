@@ -13,7 +13,7 @@ namespace SustainTheStrain._Contracts.Buildings
     {
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
-        private IBuildingViewFactory _buildingViewFactory;
+        private System.Func<Barrack, string, BarrackMenuView> _createMenu;
         private BarrackMenuView _menuView;
 
         public BarrackModel Model { get; private set; }
@@ -26,29 +26,19 @@ namespace SustainTheStrain._Contracts.Buildings
         {
             _placeholder = placeholder;
             _resourceManager = resourceManager;
-            _buildingViewFactory = buildingViewFactory;
+            _createMenu = buildingViewFactory.Create<BarrackMenuView, Barrack>;
 
-            Model = new BarrackModel(configProvider.GetBuildingConfig<BarrackBuildingConfig>(1));
+            Model = new BarrackModel(configProvider.GetBuildingConfig<BarrackBuildingConfig>());
         }
 
         public void OnPointerEnter() => Cashed1.Enable();
         public void OnPointerExit() => Cashed1.Disable();
-
-        public void OnSelected()
-        {
-            _menuView = _buildingViewFactory.Create<BarrackMenuView, Barrack>(this)
-                .With(x => x.SetParent(transform))
-                .With(x => x.transform.LookAtCamera(transform));
-        }
-
-        public void OnDeselected()
-        {
-            _menuView.IfNotNull(x => x.DestroyObject());
-        }
+        public void OnSelected() => _menuView.IfNull(() => _menuView = _createMenu(this, null)).Enable();
+        public void OnDeselected() => _menuView.Disable();
 
         public void OnSelectedLeftClick(Ray ray)
         {
-            if (!Model.IsUnitsPointState) return;
+            if (!Model.IsUnitsPointState.Value) return;
             if (!Physics.Raycast(ray, out var hit)) return;
 
             Cashed2.GuardPost.Position = hit.point;
@@ -56,14 +46,14 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void Upgrade()
         {
-            if (_resourceManager.TrySpend(Model.Config.NextLevelPrice) is false) return;
+            if (_resourceManager.TrySpend(Model.Config.Value.NextLevelPrice) is false) return;
             Model.IncreaseLevel();
         }
 
         public void Destroy()
         {
             _placeholder.DestroyBuilding();
-            _resourceManager.Gold.Value += Model.Config.Compensation;
+            _resourceManager.Gold.Value += Model.Config.Value.Compensation;
         }
 
         public void UnitsPointStateToggle()

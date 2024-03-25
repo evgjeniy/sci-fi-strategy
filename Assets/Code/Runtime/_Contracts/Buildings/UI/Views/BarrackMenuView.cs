@@ -1,4 +1,5 @@
-﻿using SustainTheStrain._Contracts.Installers;
+﻿using SustainTheStrain._Contracts.Configs.Buildings;
+using SustainTheStrain._Contracts.Installers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +27,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnEnable()
         {
-            _barrack.Model.Changed += Display;
+            _barrack.Model.Config.Changed += Display;
             _resourceManager.Gold.Changed += OnGoldChanged;
             
             _upgradeButton.onClick.AddListener(_barrack.Upgrade);
@@ -36,7 +37,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnDisable()
         {
-            _barrack.Model.Changed -= Display;
+            _barrack.Model.Config.Changed -= Display;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
             _upgradeButton.onClick.RemoveListener(_barrack.Upgrade);
@@ -44,22 +45,22 @@ namespace SustainTheStrain._Contracts.Buildings
             _unitsPointButton.onClick.RemoveListener(_barrack.UnitsPointStateToggle);
         }
 
-        private void Display(BarrackModel barrackModel)
+        private void Display(BarrackBuildingConfig barrackConfig)
         {
-            if (barrackModel.Config.NextLevelPrice == int.MaxValue)
+            if (barrackConfig.NextLevelPrice == int.MaxValue)
             {
                 _upgradeButton.interactable = false;
                 _upgradePriceText.text = "MAX";
             }
             else
             {
-                _upgradeButton.interactable = _resourceManager.Gold.Value >= barrackModel.Config.NextLevelPrice;
-                _upgradePriceText.text = $"{barrackModel.Config.NextLevelPrice}";
+                _upgradeButton.interactable = _resourceManager.Gold >= barrackConfig.NextLevelPrice;
+                _upgradePriceText.text = $"{barrackConfig.NextLevelPrice}";
             }
             
-            _compensationText.text = $"{barrackModel.Config.Compensation}";
+            _compensationText.text = $"{barrackConfig.Compensation}";
         }
 
-        private void OnGoldChanged(int currentGold) => Display(_barrack.Model);
+        private void OnGoldChanged(int currentGold) => Display(_barrack.Model.Config);
     }
 }

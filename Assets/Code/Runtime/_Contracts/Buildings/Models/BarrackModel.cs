@@ -2,33 +2,22 @@
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class BarrackModel : IObservable<BarrackModel>
+    public class BarrackModel
     {
-        private event System.Action<BarrackModel> OnChangedEvent = _ => { };
+        public Observable<BarrackBuildingConfig> Config { get; }
+        public Observable<bool> IsUnitsPointState { get; } = new();
 
-        public event System.Action<BarrackModel> Changed
+        public BarrackModel(BarrackBuildingConfig startConfig)
         {
-            add
-            {
-                OnChangedEvent += value;
-                value(this);
-            }
-            remove => OnChangedEvent -= value;
+            Config = new Observable<BarrackBuildingConfig>(startConfig);
         }
-
-        public BarrackBuildingConfig Config { get; private set; }
-        public bool IsUnitsPointState { get; private set; }
-
-        public BarrackModel(BarrackBuildingConfig startConfig) => Config = startConfig;
 
         public void IncreaseLevel()
         {
-            if (Config.NextLevelConfig == null) return;
-            Config = Config.NextLevelConfig;
-
-            OnChangedEvent(this);
+            if (Config.Value.NextLevelConfig == null) return;
+            Config.Value = Config.Value.NextLevelConfig;
         }
 
-        public void ToggleUnitsPointState() => IsUnitsPointState = !IsUnitsPointState;
+        public void ToggleUnitsPointState() => IsUnitsPointState.Value = !IsUnitsPointState.Value;
     }
 }

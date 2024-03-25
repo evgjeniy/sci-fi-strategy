@@ -1,3 +1,4 @@
+using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain._Contracts.Installers;
 using TMPro;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnEnable()
         {
-            _rocket.Model.Changed += Display;
+            _rocket.Model.Config.Changed += Display;
             _resourceManager.Gold.Changed += OnGoldChanged;
             
             _upgradeButton.onClick.AddListener(_rocket.Upgrade);
@@ -34,29 +35,29 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnDisable()
         {
-            _rocket.Model.Changed -= Display;
+            _rocket.Model.Config.Changed -= Display;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
             _upgradeButton.onClick.RemoveListener(_rocket.Upgrade);
             _destroyButton.onClick.RemoveListener(_rocket.Destroy);
         }
 
-        private void Display(RocketModel rocketModel)
+        private void Display(RocketBuildingConfig rocketConfig)
         {
-            if (rocketModel.Config.NextLevelPrice == int.MaxValue)
+            if (rocketConfig.NextLevelPrice == int.MaxValue)
             {
                 _upgradeButton.interactable = false;
                 _upgradePriceText.text = "MAX";
             }
             else
             {
-                _upgradeButton.interactable = _resourceManager.Gold.Value >= rocketModel.Config.NextLevelPrice;
-                _upgradePriceText.text = $"{rocketModel.Config.NextLevelPrice}";
+                _upgradeButton.interactable = _resourceManager.Gold >= rocketConfig.NextLevelPrice;
+                _upgradePriceText.text = $"{rocketConfig.NextLevelPrice}";
             }
             
-            _compensationText.text = $"{rocketModel.Config.Compensation}";
+            _compensationText.text = $"{rocketConfig.Compensation}";
         }
 
-        private void OnGoldChanged(int currentGold) => Display(_rocket.Model);
+        private void OnGoldChanged(int currentGold) => Display(_rocket.Model.Config);
     }
 }
