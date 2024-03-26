@@ -7,6 +7,8 @@ namespace SustainTheStrain.Buildings.FSM
     {
         private class AttackState : IdleState
         {
+            private readonly float _attackAngle = 25f;
+            
             public AttackState(RocketStateMachine initializer) : base(initializer) {}
 
             protected override bool CheckTransitions() => true;
@@ -30,13 +32,14 @@ namespace SustainTheStrain.Buildings.FSM
             private Quaternion GetRotationToTarget(Component target)
             {
                 var rocket = Initializer.RocketTransform;
-                return Quaternion.LookRotation(target.transform.position - rocket.position, rocket.up);
+                var euler = Quaternion.LookRotation(target.transform.position - rocket.position, rocket.up).eulerAngles;
+                return Quaternion.Euler(Vector3.up * euler.y);
             }
 
             private bool IsLookingToTarget(Component target)
             {
                 var rocket = Initializer.RocketTransform;
-                return Vector3.Angle(target.transform.position - rocket.position, rocket.forward) < 1.0f;
+                return Vector3.Angle(target.transform.position - rocket.position, rocket.forward) < _attackAngle;
             }
 
             private void TryAttack()
