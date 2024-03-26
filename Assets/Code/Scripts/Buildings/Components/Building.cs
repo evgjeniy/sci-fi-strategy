@@ -8,9 +8,9 @@ namespace SustainTheStrain.Buildings.Components
     {
         [Inject] public BuildingSystem BuildingSystem { get; set; }
 
+        [SerializeField] private ZoneVisualizer _zoneVisualizer;
+        
         private int _currentUpgradeLevel = -1;
-
-        private IZoneVisualizer _zoneVisualizer;
 
         public event System.Action<int> OnLevelUpgrade;
 
@@ -30,11 +30,6 @@ namespace SustainTheStrain.Buildings.Components
                 if (value > MaxUpgradeLevel || value < 0 || _currentUpgradeLevel == value) return;
                 OnLevelUpgrade?.Invoke(_currentUpgradeLevel = value);
             }
-        }
-
-        private void Awake()
-        {
-           _zoneVisualizer = GetComponentInChildren<ZoneVisualizer>();
         }
 
         public class Factory : PlaceholderFactory<BuildingData, Building> {}

@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Zone
+  m_Name: ZoneOrange
   m_Shader: {fileID: -6465566751694194690, guid: 126fcdf2057551e4483c42e3c113db1f,
     type: 3}
   m_Parent: {fileID: 0}

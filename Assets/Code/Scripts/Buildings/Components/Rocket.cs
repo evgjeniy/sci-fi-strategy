@@ -7,6 +7,10 @@ namespace SustainTheStrain.Buildings.Components
 {
     public class Rocket : Building
     {
+        [SerializeField] private ZoneVisualizer _attackZoneVisualizer;
+
+        public IZoneVisualizer AttackZoneVisualizer => _attackZoneVisualizer;
+
         private RocketStateMachine _stateMachine;
         private BuildingGraphics<RocketData.Stats> _graphics;
 
@@ -27,7 +31,7 @@ namespace SustainTheStrain.Buildings.Components
             
             CurrentUpgradeLevel = 0;
         }
-
+        
         private void Update() => _stateMachine.Run();
 
         private void OnDestroy() => _graphics.Destroy();

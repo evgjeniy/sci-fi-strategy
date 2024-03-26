@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60cad1bc35bf4143bbc38bffc764855c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _zoneVisualizer: {fileID: 6111500570874101545}
   <Line>k__BackingField: {fileID: 1663781393074138159}
 --- !u!1 &6751058091708341099
 GameObject:
@@ -257,3 +258,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3320334540896431966}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6111500570874101545 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8846296516270968951, guid: 637d4fcd76af37a4d9a8f1c229992e8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3320334540896431966}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55a3c5b45776034bbc600d4892571d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -34,6 +34,10 @@ namespace SustainTheStrain.Buildings.FSM
 
             Context.ZoneVisualizer.Angle = 360f;
             Context.ZoneVisualizer.Radius = GetAttackRadius();
+
+            Context.AttackZoneVisualizer.Radius = GetAttackRadius();
+            Context.AttackZoneVisualizer.Angle = Context.CurrentStats.AttackSectorAngle;
+            Context.AttackZoneVisualizer.Direction = Context.transform.rotation.eulerAngles.y;
         }
 
         private Vector3 GetPosition() => Context.transform.position;
