@@ -10,13 +10,10 @@
 
         public void Exit() => _selectable.OnDeselected();
 
-        public IInputState ProcessMouseMove(IInputSystem context)
-        {
-            if (context.MousePosition.TryGetCameraRay(out var screenRay))
-                _selectable.OnSelectedUpdate(screenRay);
-
-            return this;
-        }
+        public IInputState ProcessMouseMove(IInputSystem context) =>
+            context.MousePosition.TryGetCameraRay(out var screenRay)
+                ? _selectable.OnSelectedUpdate(this, screenRay)
+                : this;
 
         public IInputState ProcessLeftClick(IInputSystem context)
         {
@@ -26,10 +23,12 @@
             if (screenRay.TryGetRaycastComponent<IInputSelectable>(context.Settings, out var selectable))
                 return _selectable == selectable ? this : new SelectableState(selectable);
 
-            _selectable.OnSelectedLeftClick(screenRay);
-            return this;
+            return _selectable.OnSelectedLeftClick(this, screenRay);
         }
 
-        public IInputState ProcessRightClick(IInputSystem _) => new IdleState();
+        public IInputState ProcessRightClick(IInputSystem context) =>
+            context.MousePosition.TryGetCameraRay(out var screenRay)
+                ? _selectable.OnSelectedRightClick(this, screenRay)
+                : this;
     }
 }

@@ -26,7 +26,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnEnable()
         {
-            _rocket.Model.Config.Changed += Display;
+            _rocket.Data.Config.Changed += Display;
             _resourceManager.Gold.Changed += OnGoldChanged;
             
             _upgradeButton.onClick.AddListener(_rocket.Upgrade);
@@ -35,7 +35,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnDisable()
         {
-            _rocket.Model.Config.Changed -= Display;
+            _rocket.Data.Config.Changed -= Display;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
             _upgradeButton.onClick.RemoveListener(_rocket.Upgrade);
@@ -58,6 +58,6 @@ namespace SustainTheStrain._Contracts.Buildings
             _compensationText.text = $"{rocketConfig.Compensation}";
         }
 
-        private void OnGoldChanged(int currentGold) => Display(_rocket.Model.Config);
+        private void OnGoldChanged(int currentGold) => Display(_rocket.Data.Config);
     }
 }

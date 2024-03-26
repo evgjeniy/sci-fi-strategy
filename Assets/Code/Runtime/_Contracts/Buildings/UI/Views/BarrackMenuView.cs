@@ -27,7 +27,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnEnable()
         {
-            _barrack.Model.Config.Changed += Display;
+            _barrack.Data.Config.Changed += Display;
             _resourceManager.Gold.Changed += OnGoldChanged;
             
             _upgradeButton.onClick.AddListener(_barrack.Upgrade);
@@ -37,7 +37,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnDisable()
         {
-            _barrack.Model.Config.Changed -= Display;
+            _barrack.Data.Config.Changed -= Display;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
             _upgradeButton.onClick.RemoveListener(_barrack.Upgrade);
@@ -61,6 +61,6 @@ namespace SustainTheStrain._Contracts.Buildings
             _compensationText.text = $"{barrackConfig.Compensation}";
         }
 
-        private void OnGoldChanged(int currentGold) => Display(_barrack.Model.Config);
+        private void OnGoldChanged(int currentGold) => Display(_barrack.Data.Config);
     }
 }

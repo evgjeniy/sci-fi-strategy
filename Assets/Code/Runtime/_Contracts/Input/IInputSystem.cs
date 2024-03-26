@@ -9,9 +9,9 @@ namespace SustainTheStrain._Contracts
         public void OnPointerExit() {}
         public void OnSelected() {}
         public void OnDeselected() {}
-        public void OnSelectedLeftClick(Ray ray) {}
-        public void OnSelectedRightClick(Ray ray) {}
-        public void OnSelectedUpdate(Ray ray) {}
+        public IInputState OnSelectedLeftClick(IInputState currentState, Ray ray) => currentState;
+        public IInputState OnSelectedRightClick(IInputState currentState, Ray ray) => new IdleState();
+        public IInputState OnSelectedUpdate(IInputState currentState, Ray ray) => currentState;
     }
 
     public interface IInputSystem

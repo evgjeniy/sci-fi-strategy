@@ -18,7 +18,7 @@ namespace SustainTheStrain._Contracts.Installers
 
     public class ResourceManager : IResourceManager
     {
-        public Observable<int> Gold { get; } = new() { Value = 1000 };
+        public Observable<int> Gold { get; } = new(1000);
         
         public bool TrySpend(int spendValue)
         {

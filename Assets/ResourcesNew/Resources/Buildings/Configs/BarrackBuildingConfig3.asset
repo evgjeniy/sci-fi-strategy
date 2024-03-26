@@ -15,8 +15,9 @@ MonoBehaviour:
   <Level>k__BackingField: 3
   <Price>k__BackingField: 160
   <Compensation>k__BackingField: 120
-  <Radius>k__BackingField: 5
+  <Radius>k__BackingField: 20
   <UnitMaxHealth>k__BackingField: 100
   <UnitAttackDamage>k__BackingField: 1
   <UnitAttackCooldown>k__BackingField: 1
   <RespawnCooldown>k__BackingField: 1
+  <NextLevelConfig>k__BackingField: {fileID: 0}

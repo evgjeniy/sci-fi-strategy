@@ -1,21 +1,22 @@
-﻿using System;
-using SustainTheStrain._Contracts.Configs;
+﻿using SustainTheStrain._Contracts.Configs;
 using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain._Contracts.Installers;
 using SustainTheStrain.Abilities;
+using UnityEngine;
 using UnityEngine.Extensions;
 using Zenject;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class Rocket : MonoCashed<Outline>, IBuilding
+    public class Rocket : MonoBehaviour, IBuilding
     {
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
-        private Func<Rocket, string, RocketMenuView> _createMenu;
+        private IBuildingViewFactory _buildingViewFactory;
+
         private RocketMenuView _menuView;
 
-        public RocketModel Model { get; private set; }
+        public RocketData Data { get; private set; }
 
         [Inject]
         private void Construct(IPlaceholder placeholder, IResourceManager resourceManager,
@@ -23,26 +24,42 @@ namespace SustainTheStrain._Contracts.Buildings
         {
             _placeholder = placeholder;
             _resourceManager = resourceManager;
-            _createMenu = buildingViewFactory.Create<RocketMenuView, Rocket>;
-            
-            Model = new RocketModel(configProvider.GetBuildingConfig<RocketBuildingConfig>());
+            _buildingViewFactory = buildingViewFactory;
+
+            Data = new RocketData
+            (
+                startConfig: configProvider.GetBuildingConfig<RocketBuildingConfig>(),
+                outline: GetComponent<Outline>()
+            );
         }
 
-        public void OnSelected() => _menuView.IfNull(() => _menuView = _createMenu(this, null)).Enable();
-        public void OnDeselected() => _menuView.Disable();
-        public void OnPointerEnter() => Cashed1.Enable();
-        public void OnPointerExit() => Cashed1.Disable();
+        public void OnPointerEnter() => Data.Outline.Enable();
+        public void OnPointerExit() => Data.Outline.Disable();
+
+        public void OnSelected()
+        {
+            _menuView.IfNull(() => _menuView = _buildingViewFactory.Create<RocketMenuView, Rocket>(this)).Enable();
+            Debug.Log("[ROCKET] Show Radius");
+        }
+
+        public void OnDeselected()
+        {
+            _menuView.Disable();
+            Debug.Log("[ROCKET] Hide Radius");
+        }
 
         public void Upgrade()
         {
-            if (_resourceManager.TrySpend(Model.Config.Value.NextLevelPrice) is false) return;
-            Model.IncreaseLevel();
+            if (_resourceManager.TrySpend(Data.Config.Value.NextLevelPrice) is false) return;
+            if (Data.Config.Value.NextLevelConfig == null) return;
+
+            Data.Config.Value = Data.Config.Value.NextLevelConfig;
         }
 
         public void Destroy()
         {
             _placeholder.DestroyBuilding();
-            _resourceManager.Gold.Value += Model.Config.Value.Compensation;
+            _resourceManager.Gold.Value += Data.Config.Value.Compensation;
         }
     }
 }

@@ -73,7 +73,7 @@ namespace SustainTheStrain._Contracts
         private void ChangeState(Func<IInputSystem, IInputState> getNewState)
         {
             var newState = getNewState(this);
-            if (newState == _currentState) return;
+            if (Equals(newState, _currentState)) return;
 
             _currentState.Exit();
             _currentState = newState;

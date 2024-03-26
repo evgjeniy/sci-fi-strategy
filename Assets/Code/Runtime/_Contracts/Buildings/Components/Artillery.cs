@@ -2,48 +2,64 @@ using SustainTheStrain._Contracts.Configs;
 using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain._Contracts.Installers;
 using SustainTheStrain.Abilities;
+using UnityEngine;
 using UnityEngine.Extensions;
 using Zenject;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class Artillery : MonoCashed<Outline>, IBuilding
+    public class Artillery : MonoBehaviour, IBuilding
     {
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
-        private System.Func<Artillery, string, ArtilleryMenuView> _createMenu;
+        private IBuildingViewFactory _buildingViewFactory;
+
         private ArtilleryMenuView _menuView;
 
-        public ArtilleryModel Model { get; private set; }
+        public ArtilleryData Data { get; private set; }
 
         [Inject]
-        private void Construct(IPlaceholder placeholder,
-            IResourceManager resourceManager,
-            IConfigProviderService configProvider,
-            IBuildingViewFactory buildingViewFactory)
+        private void Construct(IPlaceholder placeholder, IResourceManager resourceManager,
+            IConfigProviderService configProvider, IBuildingViewFactory buildingViewFactory)
         {
+            _buildingViewFactory = buildingViewFactory;
             _placeholder = placeholder;
             _resourceManager = resourceManager;
-            _createMenu = buildingViewFactory.Create<ArtilleryMenuView, Artillery>;
 
-            Model = new ArtilleryModel(configProvider.GetBuildingConfig<ArtilleryBuildingConfig>());
+            Data = new ArtilleryData
+            (
+                startConfig: configProvider.GetBuildingConfig<ArtilleryBuildingConfig>(),
+                outline: GetComponent<Outline>()
+            );
         }
 
-        public void OnPointerEnter() => Cashed1.Enable();
-        public void OnPointerExit() => Cashed1.Disable();
-        public void OnSelected() => _menuView.IfNull(() => _menuView = _createMenu(this, null)).Enable();
-        public void OnDeselected() => _menuView.Disable();
+        public void OnPointerEnter() => Data.Outline.Enable();
+        public void OnPointerExit() => Data.Outline.Disable();
+
+        public void OnSelected()
+        {
+            _menuView.IfNull(() => _menuView = _buildingViewFactory.Create<ArtilleryMenuView, Artillery>(this)).Enable();
+            Debug.Log("[ARTILLERY] Show Radius");
+        }
+
+        public void OnDeselected()
+        {
+            _menuView.Disable();
+            Debug.Log("[ARTILLERY] Hide Radius");
+        }
 
         public void Upgrade()
         {
-            if (_resourceManager.TrySpend(Model.Config.Value.NextLevelPrice) is false) return;
-            Model.IncreaseLevel();
+            if (_resourceManager.TrySpend(Data.Config.Value.NextLevelPrice) is false) return;
+            if (Data.Config.Value.NextLevelConfig == null) return;
+
+            Data.Config.Value = Data.Config.Value.NextLevelConfig;
         }
 
         public void Destroy()
         {
             _placeholder.DestroyBuilding();
-            _resourceManager.Gold.Value += Model.Config.Value.Compensation;
+            _resourceManager.Gold.Value += Data.Config.Value.Compensation;
         }
     }
 }

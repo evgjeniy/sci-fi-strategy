@@ -2,6 +2,7 @@
 {
     public interface IObservable<out TValue>
     {
+        public TValue Value { get; }
         event System.Action<TValue> Changed;
     }
     

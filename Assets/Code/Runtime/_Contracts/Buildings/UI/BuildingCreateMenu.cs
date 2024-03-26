@@ -47,10 +47,10 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void DisplayCreateBuildingsPrice(IConfigProviderService configProvider)
         {
-            _rocketPrice = configProvider.GetBuildingConfig<RocketBuildingConfig>(1).Price;
-            _laserPrice = configProvider.GetBuildingConfig<LaserBuildingConfig>(1).Price;
-            _artilleryPrice = configProvider.GetBuildingConfig<ArtilleryBuildingConfig>(1).Price;
-            _barrackPrice = configProvider.GetBuildingConfig<BarrackBuildingConfig>(1).Price;
+            _rocketPrice = configProvider.GetBuildingConfig<RocketBuildingConfig>().Price;
+            _laserPrice = configProvider.GetBuildingConfig<LaserBuildingConfig>().Price;
+            _artilleryPrice = configProvider.GetBuildingConfig<ArtilleryBuildingConfig>().Price;
+            _barrackPrice = configProvider.GetBuildingConfig<BarrackBuildingConfig>().Price;
             
             _rocketPriceText.text = $"{_rocketPrice}";
             _laserPriceText.text = $"{_laserPrice}";

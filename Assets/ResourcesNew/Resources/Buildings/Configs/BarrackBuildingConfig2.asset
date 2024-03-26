@@ -15,7 +15,7 @@ MonoBehaviour:
   <Level>k__BackingField: 2
   <Price>k__BackingField: 130
   <Compensation>k__BackingField: 90
-  <Radius>k__BackingField: 5
+  <Radius>k__BackingField: 15
   <UnitMaxHealth>k__BackingField: 100
   <UnitAttackDamage>k__BackingField: 1
   <UnitAttackCooldown>k__BackingField: 1

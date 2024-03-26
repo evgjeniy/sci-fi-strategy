@@ -54,9 +54,5 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void OnSelected() => _createMenu = _createMenuFactory.Create(this);
         public void OnDeselected() => _createMenu.IfNotNull(x => x.DestroyObject());
-
-        public void OnSelectedRightClick(Ray ray) => _inputSystem.Idle();
-        public void OnSelectedLeftClick(Ray ray) {}
-        public void OnSelectedUpdate(Ray ray) {}
     }
 }

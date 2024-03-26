@@ -26,7 +26,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnEnable()
         {
-            _artillery.Model.Config.Changed += Display;
+            _artillery.Data.Config.Changed += Display;
             _resourceManager.Gold.Changed += OnGoldChanged;
             
             _upgradeButton.onClick.AddListener(_artillery.Upgrade);
@@ -35,7 +35,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnDisable()
         {
-            _artillery.Model.Config.Changed -= Display;
+            _artillery.Data.Config.Changed -= Display;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
             _upgradeButton.onClick.RemoveListener(_artillery.Upgrade);
@@ -58,6 +58,6 @@ namespace SustainTheStrain._Contracts.Buildings
             _compensationText.text = $"{artilleryConfig.Compensation}";
         }
 
-        private void OnGoldChanged(int currentGold) => Display(_artillery.Model.Config);
+        private void OnGoldChanged(int currentGold) => Display(_artillery.Data.Config);
     }
 }
