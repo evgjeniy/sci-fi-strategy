@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: 352702111144956991, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
       propertyPath: m_Name
-      value: TankEnemy
+      value: MobEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 752340526721805729, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
       propertyPath: m_Speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3714704819440048923, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
       propertyPath: <MaxHP>k__BackingField
-      value: 300
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3820965047363471534, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
@@ -31,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 3820965047363471534, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
       propertyPath: _coinsDrop
-      value: 27
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4119611173220569212, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
@@ -88,15 +88,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4697024416808928064, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5371437360750009807, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.18806
+      value: 0.18385
       objectReference: {fileID: 0}
     - target: {fileID: 7950700953650259592, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
       propertyPath: _followSpeed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7950700953650259592, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
@@ -166,17 +171,17 @@ PrefabInstance:
     - target: {fileID: 9065877204720194915, guid: bcf3b726a335b0046afb095e3e4b0842,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 9065877204720194915, guid: bcf3b726a335b0046afb095e3e4b0842,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 9065877204720194915, guid: bcf3b726a335b0046afb095e3e4b0842,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 9065877204720194915, guid: bcf3b726a335b0046afb095e3e4b0842,
         type: 3}

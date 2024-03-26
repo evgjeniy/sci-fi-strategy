@@ -24,27 +24,27 @@ MonoBehaviour:
   - <Graphics>k__BackingField: {fileID: 919132149155446097, guid: 5ba17ae94cfd6fd43abb82930fe710b5,
       type: 3}
     <Stats>k__BackingField:
-      <UnitMaxHealth>k__BackingField: 100
-      <UnitAttackDamage>k__BackingField: 5
-      <UnitAttackCooldown>k__BackingField: 5
-      <RespawnCooldown>k__BackingField: 10
-    <NextLevelPrice>k__BackingField: 12
-    <DestroyCompensation>k__BackingField: 8
+      <UnitMaxHealth>k__BackingField: 50
+      <UnitAttackDamage>k__BackingField: 3
+      <UnitAttackCooldown>k__BackingField: 1
+      <RespawnCooldown>k__BackingField: 14
+    <NextLevelPrice>k__BackingField: 100
+    <DestroyCompensation>k__BackingField: 100
   - <Graphics>k__BackingField: {fileID: 919132149155446097, guid: 5ba17ae94cfd6fd43abb82930fe710b5,
       type: 3}
     <Stats>k__BackingField:
-      <UnitMaxHealth>k__BackingField: 125
-      <UnitAttackDamage>k__BackingField: 15
-      <UnitAttackCooldown>k__BackingField: 3
-      <RespawnCooldown>k__BackingField: 7
-    <NextLevelPrice>k__BackingField: 18
-    <DestroyCompensation>k__BackingField: 12
+      <UnitMaxHealth>k__BackingField: 90
+      <UnitAttackDamage>k__BackingField: 6
+      <UnitAttackCooldown>k__BackingField: 1
+      <RespawnCooldown>k__BackingField: 14
+    <NextLevelPrice>k__BackingField: 190
+    <DestroyCompensation>k__BackingField: 290
   - <Graphics>k__BackingField: {fileID: 919132149155446097, guid: 5ba17ae94cfd6fd43abb82930fe710b5,
       type: 3}
     <Stats>k__BackingField:
-      <UnitMaxHealth>k__BackingField: 150
-      <UnitAttackDamage>k__BackingField: 25
-      <UnitAttackCooldown>k__BackingField: 2
-      <RespawnCooldown>k__BackingField: 5
-    <NextLevelPrice>k__BackingField: 25
-    <DestroyCompensation>k__BackingField: 18
+      <UnitMaxHealth>k__BackingField: 140
+      <UnitAttackDamage>k__BackingField: 10
+      <UnitAttackCooldown>k__BackingField: 1
+      <RespawnCooldown>k__BackingField: 14
+    <NextLevelPrice>k__BackingField: 225
+    <DestroyCompensation>k__BackingField: 515
