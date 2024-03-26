@@ -1,6 +1,7 @@
 ﻿using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain.Abilities;
 using SustainTheStrain.Units;
+using UnityEngine;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
@@ -10,7 +11,7 @@ namespace SustainTheStrain._Contracts.Buildings
         public readonly Outline Outline;
         public readonly RecruitGroup RecruitGroup;
 
-        public bool IsUnitsPointState { get; set; }
+        public GameObject RecruitsPointer { get; set; }
 
         public BarrackData(BarrackBuildingConfig startConfig, Outline outline, RecruitGroup recruitGroup)
         {

@@ -20,7 +20,6 @@ namespace SustainTheStrain._Contracts.Buildings
         private IBuildingViewFactory _buildingViewFactory;
 
         private BarrackMenuView _menuView;
-        private GameObject _tempPointer;
 
         public BarrackData Data { get; private set; }
 
@@ -57,20 +56,18 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public IInputState OnSelectedLeftClick(IInputState currentState, Ray ray)
         {
-            if (Data.IsUnitsPointState is false)
+            if (Data.RecruitsPointer == null)
                 return currentState;
 
-            Data.RecruitGroup.GuardPost.Position = _tempPointer.transform.position;
-            Data.IsUnitsPointState = false;
-
-            Destroy(_tempPointer);
+            Data.RecruitGroup.GuardPost.Position = Data.RecruitsPointer.transform.position;
+            Data.RecruitsPointer.DestroyObject();
 
             return new IdleState();
         }
 
         public IInputState OnSelectedUpdate(IInputState currentState, Ray ray)
         {
-            if (Data.IsUnitsPointState is false)
+            if (Data.RecruitsPointer == null)
                 return currentState;
 
             if (Physics.Raycast(ray, out var hit, float.MaxValue, _terrainLayer) is false)
@@ -80,7 +77,7 @@ namespace SustainTheStrain._Contracts.Buildings
             var directionToPoint = hit.point - barrackPosition;
             var distance = Mathf.Min(directionToPoint.magnitude, Data.Config.Value.Radius);
 
-            _tempPointer.transform.position = barrackPosition + directionToPoint.normalized * distance;
+            Data.RecruitsPointer.transform.position = barrackPosition + directionToPoint.normalized * distance;
             return currentState;
         }
 
@@ -100,12 +97,11 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void UnitsPointStateToggle()
         {
-            Data.IsUnitsPointState = true;
+            Data.RecruitsPointer = GameObject.CreatePrimitive(PrimitiveType.Sphere)
+                .With(x => x.GetComponent<MeshRenderer>().material.color = Color.red)
+                .With(x => x.SetParent(transform));;
 
             _menuView.Disable();
-            _tempPointer = GameObject.CreatePrimitive(PrimitiveType.Sphere)
-                .With(x => x.GetComponent<MeshRenderer>().material.color = Color.red)
-                .With(x => x.SetParent(transform));
         }
     }
 }
