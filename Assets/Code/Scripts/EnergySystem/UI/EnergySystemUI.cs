@@ -6,7 +6,7 @@ namespace SustainTheStrain.EnergySystem.UI
 {
     public class EnergySystemUI : MonoBehaviour
     {
-        public EnergySystemControllButton ControllButton;
+        [field: SerializeField] public EnergySystemControllButton ControllButton { get; private set; }
         
         [SerializeField] private Image _imagePrefab;
         [SerializeField] private Color _filledColor;

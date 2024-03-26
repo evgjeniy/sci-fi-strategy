@@ -7,11 +7,11 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
     {
         private IState _aggroState;
         private bool _isOnSpline = false;
-        private SplineFollower _splineFollower;
+        private SplineTracer _splineFollower;
 
         public EnemySplineMoveState(Enemy context, StateMachine stateMachine) : base(context, stateMachine) 
         {
-            _splineFollower = context.GetComponent<SplineFollower>();
+            _splineFollower = context.GetComponent<SplineTracer>();
         }
 
         public void Init(IState aggroState)
@@ -21,7 +21,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void EnterState()
         {
-            Debug.Log(string.Format("[StateMachine {0}] EnemySplineMoveState entered", context.gameObject.name));
+            //Debug.Log(string.Format("[StateMachine {0}] EnemySplineMoveState entered", context.gameObject.name));
 
             if (!IsOnSpline(out var splineSample))
             {

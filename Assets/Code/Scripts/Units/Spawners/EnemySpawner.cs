@@ -31,18 +31,18 @@ namespace SustainTheStrain.Units.Spawners
 
             if (unit == null)
             {
-                Debug.LogError($"[EnemySpawner {name}] Enemy spaw failed");
+                //Debug.LogError($"[EnemySpawner {name}] Enemy spaw failed");
                 return null;
             }
 
             unit.transform.position = SpawnPosition;
-            unit.GetComponent<SplineFollower>().spline = _spline;
-            unit.GetComponent<SplineFollower>().RebuildImmediate();
+            unit.GetComponent<SplineTracer>().spline = _spline;
+            unit.GetComponent<SplineTracer>().RebuildImmediate();
             _spawnedEnemies.Add(unit);
             unit.GetComponent<Damageble>().OnDied += (Damageble d) => { _resourceManager.CurrentGold += unit.CoinsDrop;
                 _spawnedEnemies.Remove(unit);
             };
-            Debug.Log($"[EnemySpawner {name}] Spawned unit");
+            //Debug.Log($"[EnemySpawner {name}] Spawned unit");
             return unit;
         }
 

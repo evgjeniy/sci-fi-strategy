@@ -115,7 +115,7 @@ namespace SustainTheStrain.Abilities
             AddAbility(new LandingAbility(_abilitiesSettings.LandingAbility));
             foreach (var ability in Abilities)
             {
-                ability.EnergyController = _energyController;
+
                 _energyController.AddEnergySystem(ability);
             }
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû

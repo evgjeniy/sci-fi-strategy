@@ -79,6 +79,7 @@ namespace SustainTheStrain.Units
 
         private void UpdateHP(float value)
         {
+            if (!_hpBar) return;
             _hpBar.gameObject.SetActive(!(Math.Abs(value - _damageble.MaxHP) < 0.1f));
 
             _slider.value = value / _damageble.MaxHP;

@@ -25,12 +25,17 @@ MonoBehaviour:
         _spawnPeriod: 2
         _enemyCount: 10
         _enemyType: Tank
-    - _delay: 5
-      _index: 1
+  - _spawners:
+    - _delay: 0
+      _index: 0
       _subwaves:
       - _delay: 0
         _spawnPeriod: 2
-        _enemyCount: 6
+        _enemyCount: 10
+        _enemyType: Tank
+      - _delay: 2
+        _spawnPeriod: 2
+        _enemyCount: 10
         _enemyType: Tank
   - _spawners:
     - _delay: 0
@@ -44,12 +49,17 @@ MonoBehaviour:
         _spawnPeriod: 2
         _enemyCount: 10
         _enemyType: Tank
-    - _delay: 5
-      _index: 1
+  - _spawners:
+    - _delay: 0
+      _index: 0
       _subwaves:
       - _delay: 0
         _spawnPeriod: 2
-        _enemyCount: 6
+        _enemyCount: 10
+        _enemyType: Tank
+      - _delay: 2
+        _spawnPeriod: 2
+        _enemyCount: 10
         _enemyType: Tank
   - _spawners:
     - _delay: 0
@@ -63,13 +73,6 @@ MonoBehaviour:
         _spawnPeriod: 2
         _enemyCount: 10
         _enemyType: Tank
-    - _delay: 5
-      _index: 1
-      _subwaves:
-      - _delay: 0
-        _spawnPeriod: 2
-        _enemyCount: 6
-        _enemyType: Tank
   - _spawners:
     - _delay: 0
       _index: 0
@@ -81,49 +84,4 @@ MonoBehaviour:
       - _delay: 2
         _spawnPeriod: 2
         _enemyCount: 10
-        _enemyType: Tank
-    - _delay: 5
-      _index: 1
-      _subwaves:
-      - _delay: 0
-        _spawnPeriod: 2
-        _enemyCount: 6
-        _enemyType: Tank
-  - _spawners:
-    - _delay: 0
-      _index: 0
-      _subwaves:
-      - _delay: 0
-        _spawnPeriod: 2
-        _enemyCount: 10
-        _enemyType: Tank
-      - _delay: 2
-        _spawnPeriod: 2
-        _enemyCount: 10
-        _enemyType: Tank
-    - _delay: 5
-      _index: 1
-      _subwaves:
-      - _delay: 0
-        _spawnPeriod: 2
-        _enemyCount: 6
-        _enemyType: Tank
-  - _spawners:
-    - _delay: 0
-      _index: 0
-      _subwaves:
-      - _delay: 0
-        _spawnPeriod: 2
-        _enemyCount: 10
-        _enemyType: Tank
-      - _delay: 2
-        _spawnPeriod: 2
-        _enemyCount: 10
-        _enemyType: Tank
-    - _delay: 5
-      _index: 1
-      _subwaves:
-      - _delay: 0
-        _spawnPeriod: 2
-        _enemyCount: 6
         _enemyType: Tank
