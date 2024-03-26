@@ -12,19 +12,19 @@ namespace SustainTheStrain._Contracts.Buildings
     {
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
-        private IBuildingViewFactory _buildingViewFactory;
+        private IBuildingFactoryUI _uiFactory;
 
-        private RocketMenuView _menuView;
+        private RocketManagementMenu _managementMenu;
 
         public RocketData Data { get; private set; }
 
         [Inject]
         private void Construct(IPlaceholder placeholder, IResourceManager resourceManager,
-            IConfigProviderService configProvider, IBuildingViewFactory buildingViewFactory)
+            IConfigProviderService configProvider, IBuildingFactoryUI uiFactory)
         {
             _placeholder = placeholder;
             _resourceManager = resourceManager;
-            _buildingViewFactory = buildingViewFactory;
+            _uiFactory = uiFactory;
 
             Data = new RocketData
             (
@@ -38,13 +38,13 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void OnSelected()
         {
-            _menuView.IfNull(() => _menuView = _buildingViewFactory.Create<RocketMenuView, Rocket>(this)).Enable();
+            _managementMenu.IfNull(() => _managementMenu = _uiFactory.Create<RocketManagementMenu>(this)).Enable();
             Debug.Log("[ROCKET] Show Radius");
         }
 
         public void OnDeselected()
         {
-            _menuView.Disable();
+            _managementMenu.Disable();
             Debug.Log("[ROCKET] Hide Radius");
         }
 

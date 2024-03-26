@@ -3,7 +3,7 @@ using UnityEngine.Extensions;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class BuildingMenuView : MonoBehaviour
+    public class BuildingManagementMenu : MonoBehaviour
     {
         [SerializeField] private Canvas _menuRoot;
 

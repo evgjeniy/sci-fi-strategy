@@ -16,16 +16,16 @@ namespace SustainTheStrain._Contracts.Buildings
     [RequireComponent(typeof(Collider))]
     public class Placeholder : MonoCashed<Outline, Collider>, IPlaceholder, IInputSelectable
     {
-        private IBuildingCreateMenuFactory _createMenuFactory;
+        private IBuildingFactoryUI _uiFactory;
         private IInputSystem _inputSystem;
 
-        private BuildingCreateMenu _createMenu;
+        private BuildingSelectorMenu _selectorMenu;
         private IBuilding _building;
 
         [Inject]
-        private void Construct(IBuildingCreateMenuFactory createMenuFactory, IInputSystem inputSystem)
+        private void Construct(IBuildingFactoryUI uiFactory, IInputSystem inputSystem)
         {
-            _createMenuFactory = createMenuFactory;
+            _uiFactory = uiFactory;
             _inputSystem = inputSystem;
         }
 
@@ -37,7 +37,7 @@ namespace SustainTheStrain._Contracts.Buildings
             _building.transform.parent = transform;
             _building.transform.localPosition = Vector3.zero;
 
-            _createMenu.IfNotNull(x => x.DestroyObject());
+            _selectorMenu.IfNotNull(x => x.DestroyObject());
             _inputSystem.Select(building);
         }
 
@@ -52,7 +52,7 @@ namespace SustainTheStrain._Contracts.Buildings
         public void OnPointerEnter() => Cashed1.Enable();
         public void OnPointerExit() => Cashed1.Disable();
 
-        public void OnSelected() => _createMenu = _createMenuFactory.Create(this);
-        public void OnDeselected() => _createMenu.IfNotNull(x => x.DestroyObject());
+        public void OnSelected() => _selectorMenu = _uiFactory.CreateSelector(this);
+        public void OnDeselected() => _selectorMenu.IfNotNull(x => x.DestroyObject());
     }
 }

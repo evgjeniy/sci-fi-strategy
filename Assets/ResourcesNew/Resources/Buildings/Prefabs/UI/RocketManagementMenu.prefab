@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 7843081739109157699}
   - component: {fileID: 3095560684558362450}
   m_Layer: 0
-  m_Name: RocketMenuView
+  m_Name: RocketManagementMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

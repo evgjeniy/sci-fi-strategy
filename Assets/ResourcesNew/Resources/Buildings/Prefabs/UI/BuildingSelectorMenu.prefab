@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 298779843343832108}
   - component: {fileID: 9179180698040775431}
   m_Layer: 0
-  m_Name: BuildingCreateMenu
+  m_Name: BuildingSelectorMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

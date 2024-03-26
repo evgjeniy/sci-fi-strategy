@@ -12,19 +12,19 @@ namespace SustainTheStrain._Contracts.Buildings
     {
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
-        private IBuildingViewFactory _buildingViewFactory;
+        private IBuildingFactoryUI _uiFactory;
 
-        private ArtilleryMenuView _menuView;
+        private ArtilleryManagementMenu _managementMenu;
 
         public ArtilleryData Data { get; private set; }
 
         [Inject]
         private void Construct(IPlaceholder placeholder, IResourceManager resourceManager,
-            IConfigProviderService configProvider, IBuildingViewFactory buildingViewFactory)
+            IConfigProviderService configProvider, IBuildingFactoryUI uiFactory)
         {
-            _buildingViewFactory = buildingViewFactory;
             _placeholder = placeholder;
             _resourceManager = resourceManager;
+            _uiFactory = uiFactory;
 
             Data = new ArtilleryData
             (
@@ -38,13 +38,13 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void OnSelected()
         {
-            _menuView.IfNull(() => _menuView = _buildingViewFactory.Create<ArtilleryMenuView, Artillery>(this)).Enable();
+            _managementMenu.IfNull(() => _managementMenu = _uiFactory.Create<ArtilleryManagementMenu>(this)).Enable();
             Debug.Log("[ARTILLERY] Show Radius");
         }
 
         public void OnDeselected()
         {
-            _menuView.Disable();
+            _managementMenu.Disable();
             Debug.Log("[ARTILLERY] Hide Radius");
         }
 

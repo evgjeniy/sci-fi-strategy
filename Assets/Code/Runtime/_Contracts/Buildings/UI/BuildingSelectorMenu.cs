@@ -8,7 +8,7 @@ using Zenject;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class BuildingCreateMenu : MonoBehaviour
+    public class BuildingSelectorMenu : MonoBehaviour
     {
         [field: SerializeField] private Button _createRocket;
         [field: SerializeField] private Button _createLaser;

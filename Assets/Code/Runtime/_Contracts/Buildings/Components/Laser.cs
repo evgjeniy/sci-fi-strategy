@@ -12,19 +12,19 @@ namespace SustainTheStrain._Contracts.Buildings
     {
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
-        private IBuildingViewFactory _buildingViewFactory;
+        private IBuildingFactoryUI _uiFactory;
 
-        private LaserMenuView _menuView;
+        private LaserManagementMenu _managementMenu;
 
         public LaserData Data { get; private set; }
 
         [Inject]
         private void Construct(IPlaceholder placeholder, IResourceManager resourceManager,
-            IConfigProviderService configProvider, IBuildingViewFactory buildingViewFactory)
+            IConfigProviderService configProvider, IBuildingFactoryUI uiFactory)
         {
             _placeholder = placeholder;
             _resourceManager = resourceManager;
-            _buildingViewFactory = buildingViewFactory;
+            _uiFactory = uiFactory;
 
             Data = new LaserData
             (
@@ -38,13 +38,13 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void OnSelected()
         {
-            _menuView.IfNull(() => _menuView = _buildingViewFactory.Create<LaserMenuView, Laser>(this)).Enable();
+            _managementMenu.IfNull(() => _managementMenu = _uiFactory.Create<LaserManagementMenu>(this)).Enable();
             Debug.Log("[LASER] Show Radius");
         }
 
         public void OnDeselected()
         {
-            _menuView.Disable();
+            _managementMenu.Disable();
             Debug.Log("[LASER] Hide Radius");
         }
 

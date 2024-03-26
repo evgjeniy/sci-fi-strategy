@@ -1013,7 +1013,7 @@ GameObject:
   - component: {fileID: 7843081739109157699}
   - component: {fileID: -7994974338309724485}
   m_Layer: 0
-  m_Name: BarrackMenuView
+  m_Name: BarrackManagementMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

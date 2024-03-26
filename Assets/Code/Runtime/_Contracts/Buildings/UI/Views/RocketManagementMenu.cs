@@ -7,7 +7,7 @@ using Zenject;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class RocketMenuView : BuildingMenuView
+    public class RocketManagementMenu : BuildingManagementMenu
     {
         [SerializeField] private Button _upgradeButton;
         [SerializeField] private Button _destroyButton;

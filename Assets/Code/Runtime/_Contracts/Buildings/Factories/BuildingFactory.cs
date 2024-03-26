@@ -15,8 +15,11 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public TBuilding Create<TBuilding>(IPlaceholder placeholder) where TBuilding : IBuilding
         {
-            var path = Const.ResourcePath.Buildings.Prefabs.Root + $"/{typeof(TBuilding).Name}";
-            var building = _instantiator.InstantiatePrefabResourceForComponent<TBuilding>(path, new [] { placeholder });
+            var building = _instantiator.InstantiatePrefabResourceForComponent<TBuilding>
+            (
+                resourcePath: Const.ResourcePath.Buildings.Prefabs.Root + $"/{typeof(TBuilding).Name}",
+                extraArgs: new[] { placeholder }
+            );
             
             placeholder.SetBuilding(building);
             return building;

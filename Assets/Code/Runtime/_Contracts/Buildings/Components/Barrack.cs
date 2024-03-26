@@ -17,19 +17,19 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
-        private IBuildingViewFactory _buildingViewFactory;
+        private IBuildingFactoryUI _uiFactory;
 
-        private BarrackMenuView _menuView;
+        private BarrackManagementMenu _managementMenu;
 
         public BarrackData Data { get; private set; }
 
         [Inject]
         private void Construct(IPlaceholder placeholder, IResourceManager resourceManager,
-            IConfigProviderService configProvider, IBuildingViewFactory buildingViewFactory)
+            IConfigProviderService configProvider, IBuildingFactoryUI uiFactory)
         {
             _placeholder = placeholder;
             _resourceManager = resourceManager;
-            _buildingViewFactory = buildingViewFactory;
+            _uiFactory = uiFactory;
 
             Data = new BarrackData
             (
@@ -44,14 +44,16 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void OnSelected()
         {
-            _menuView.IfNull(() => _menuView = _buildingViewFactory.Create<BarrackMenuView, Barrack>(this)).Enable();
+            _managementMenu.IfNull(() => _managementMenu = _uiFactory.Create<BarrackManagementMenu>(this)).Enable();
             Debug.Log("[BARRACK] Show Radius");
         }
 
         public void OnDeselected()
         {
-            _menuView.Disable();
+            _managementMenu.Disable();
             Debug.Log("[BARRACK] Hide Radius");
+
+            Data.RecruitsPointer.IfNotNull(x => x.DestroyObject());
         }
 
         public IInputState OnSelectedLeftClick(IInputState currentState, Ray ray)
@@ -60,8 +62,6 @@ namespace SustainTheStrain._Contracts.Buildings
                 return currentState;
 
             Data.RecruitGroup.GuardPost.Position = Data.RecruitsPointer.transform.position;
-            Data.RecruitsPointer.DestroyObject();
-
             return new IdleState();
         }
 
@@ -95,13 +95,13 @@ namespace SustainTheStrain._Contracts.Buildings
             _resourceManager.Gold.Value += Data.Config.Value.Compensation;
         }
 
-        public void UnitsPointStateToggle()
+        public void SetUnitsPointState()
         {
             Data.RecruitsPointer = GameObject.CreatePrimitive(PrimitiveType.Sphere)
                 .With(x => x.GetComponent<MeshRenderer>().material.color = Color.red)
                 .With(x => x.SetParent(transform));;
 
-            _menuView.Disable();
+            _managementMenu.Disable();
         }
     }
 }

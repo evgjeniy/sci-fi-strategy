@@ -7,7 +7,7 @@ using Zenject;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class BarrackMenuView : BuildingMenuView
+    public class BarrackManagementMenu : BuildingManagementMenu
     {
         [SerializeField] private Button _upgradeButton;
         [SerializeField] private Button _unitsPointButton;
@@ -32,7 +32,7 @@ namespace SustainTheStrain._Contracts.Buildings
             
             _upgradeButton.onClick.AddListener(_barrack.Upgrade);
             _destroyButton.onClick.AddListener(_barrack.Destroy);
-            _unitsPointButton.onClick.AddListener(_barrack.UnitsPointStateToggle);
+            _unitsPointButton.onClick.AddListener(_barrack.SetUnitsPointState);
         }
 
         private void OnDisable()
@@ -42,7 +42,7 @@ namespace SustainTheStrain._Contracts.Buildings
             
             _upgradeButton.onClick.RemoveListener(_barrack.Upgrade);
             _destroyButton.onClick.RemoveListener(_barrack.Destroy);
-            _unitsPointButton.onClick.RemoveListener(_barrack.UnitsPointStateToggle);
+            _unitsPointButton.onClick.RemoveListener(_barrack.SetUnitsPointState);
         }
 
         private void Display(BarrackBuildingConfig barrackConfig)
