@@ -1,11 +1,9 @@
-﻿using System;
-using SustainTheStrain._Architecture;
+﻿using SustainTheStrain._Contracts;
 using SustainTheStrain.Scriptable.EnergySettings;
-using UnityEngine;
 
 namespace SustainTheStrain.EnergySystem
 {
-    public interface IEnergySystem : IModel<IEnergySystem>
+    public interface IEnergySystem : IObservable<IEnergySystem>
     {
         public EnergySystemSettings EnergySettings { get; }
         public int FreeEnergyCellsCount { get; }

@@ -12,6 +12,8 @@ namespace SustainTheStrain.EnergySystem
         protected int _currentEnergy;
         
         public virtual event Action<int> OnCurrentEnergyChanged;
+
+        IEnergySystem _Contracts.IObservable<IEnergySystem>.Value => this;
         public event Action<IEnergySystem> Changed;
         
         public virtual Sprite ButtonImage => EnergySettings.ButtonImage;

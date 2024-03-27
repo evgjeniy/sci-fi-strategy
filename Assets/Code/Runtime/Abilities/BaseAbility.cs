@@ -92,6 +92,7 @@ namespace SustainTheStrain.Abilities
             MaxEnergy = settings.MaxEnergy;
         }
 
+        IEnergySystem _Contracts.IObservable<IEnergySystem>.Value => this;
         public event Action<IEnergySystem> Changed;
     }
 }
