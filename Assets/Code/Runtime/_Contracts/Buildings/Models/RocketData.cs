@@ -8,13 +8,13 @@ namespace SustainTheStrain._Contracts.Buildings
     {
         public readonly Outline Outline;
         public readonly Observable<RocketBuildingConfig> Config;
-        public readonly Observable<Quaternion> Orientation;
+        public readonly Observable<Vector3> Orientation;
 
         public RocketData(RocketBuildingConfig startConfig, Outline outline)
         {
             Outline = outline;
             Config = new Observable<RocketBuildingConfig>(startConfig);
-            Orientation = new Observable<Quaternion>();
+            Orientation = new Observable<Vector3>();
         }
     }
 }

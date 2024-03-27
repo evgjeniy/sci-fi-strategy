@@ -44,7 +44,10 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void OnSelected()
         {
-            _managementMenu.IfNull(() => _managementMenu = _uiFactory.Create<BarrackManagementMenu>(this)).Enable();
+            if (_managementMenu == null)
+                _managementMenu = _uiFactory.Create<BarrackManagementMenu>(this);
+            
+            _managementMenu.Enable();
             Debug.Log("[BARRACK] Show Radius");
         }
 

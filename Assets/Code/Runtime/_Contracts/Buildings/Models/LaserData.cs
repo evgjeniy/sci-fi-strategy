@@ -1,4 +1,5 @@
-﻿using SustainTheStrain._Contracts.Configs.Buildings;
+﻿using System;
+using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain.Abilities;
 using UnityEngine;
 
@@ -8,13 +9,13 @@ namespace SustainTheStrain._Contracts.Buildings
     {
         public readonly Outline Outline;
         public readonly Observable<LaserBuildingConfig> Config;
-        public readonly Observable<Quaternion> Orientation;
+        public readonly Observable<Vector3> Orientation;
 
         public LaserData(LaserBuildingConfig startConfig, Outline outline)
         {
             Outline = outline;
             Config = new Observable<LaserBuildingConfig>(startConfig);
-            Orientation = new Observable<Quaternion>();
+            Orientation = new Observable<Vector3>();
         }
     }
 }

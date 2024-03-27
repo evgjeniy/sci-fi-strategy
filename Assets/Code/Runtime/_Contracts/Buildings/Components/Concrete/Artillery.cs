@@ -1,4 +1,4 @@
-﻿using SustainTheStrain._Contracts.Configs;
+using SustainTheStrain._Contracts.Configs;
 using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain._Contracts.Installers;
 using SustainTheStrain.Abilities;
@@ -8,15 +8,15 @@ using Zenject;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public class Rocket : MonoBehaviour, IBuilding
+    public class Artillery : MonoBehaviour, IBuilding
     {
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
         private IBuildingFactoryUI _uiFactory;
 
-        private RocketManagementMenu _managementMenu;
+        private ArtilleryManagementMenu _managementMenu;
 
-        public RocketData Data { get; private set; }
+        public ArtilleryData Data { get; private set; }
 
         [Inject]
         private void Construct(IPlaceholder placeholder, IResourceManager resourceManager,
@@ -26,9 +26,9 @@ namespace SustainTheStrain._Contracts.Buildings
             _resourceManager = resourceManager;
             _uiFactory = uiFactory;
 
-            Data = new RocketData
+            Data = new ArtilleryData
             (
-                startConfig: configProvider.GetBuildingConfig<RocketBuildingConfig>(),
+                startConfig: configProvider.GetBuildingConfig<ArtilleryBuildingConfig>(),
                 outline: GetComponent<Outline>()
             );
         }
@@ -38,14 +38,17 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void OnSelected()
         {
-            _managementMenu.IfNull(() => _managementMenu = _uiFactory.Create<RocketManagementMenu>(this)).Enable();
-            Debug.Log("[ROCKET] Show Radius");
+            if (_managementMenu == null)
+                _managementMenu = _uiFactory.Create<ArtilleryManagementMenu>(this);
+            
+            _managementMenu.Enable();
+            Debug.Log("[ARTILLERY] Show Radius");
         }
 
         public void OnDeselected()
         {
             _managementMenu.Disable();
-            Debug.Log("[ROCKET] Hide Radius");
+            Debug.Log("[ARTILLERY] Hide Radius");
         }
 
         public void Upgrade()

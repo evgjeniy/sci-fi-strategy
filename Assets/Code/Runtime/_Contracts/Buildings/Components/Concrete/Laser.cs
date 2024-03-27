@@ -1,3 +1,4 @@
+using System;
 using SustainTheStrain._Contracts.Configs;
 using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain._Contracts.Installers;
@@ -38,7 +39,10 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void OnSelected()
         {
-            _managementMenu.IfNull(() => _managementMenu = _uiFactory.Create<LaserManagementMenu>(this)).Enable();
+            if (_managementMenu == null)
+                _managementMenu = _uiFactory.Create<LaserManagementMenu>(this);
+            
+            _managementMenu.Enable();
             Debug.Log("[LASER] Show Radius");
         }
 

@@ -10,5 +10,7 @@ namespace SustainTheStrain._Contracts.Configs.Buildings
 
         [field: Header("Stats")]
         [field: SerializeField, Min(0)] public float Radius { get; private set; } = 5.0f;
+
+        public abstract int NextLevelPrice { get; }
     }
 }
