@@ -50,7 +50,7 @@ namespace SustainTheStrain.Units
         private void SwitchSpline(Node.Connection to)
         {
             follower.spline = to.spline;
-
+            follower.MovingPercent = 0;
             follower.RebuildImmediate();
             follower.Move();
         }
@@ -59,6 +59,7 @@ namespace SustainTheStrain.Units
         {
             follower.Disable();
             follower.NavMeshAgent.isStopped = true;
+            follower.CancelMoving();
         }
 
         public void Start()
@@ -67,5 +68,6 @@ namespace SustainTheStrain.Units
             follower.NavMeshAgent.isStopped = false;
             follower.Move();
         }
+        
     }
 }
