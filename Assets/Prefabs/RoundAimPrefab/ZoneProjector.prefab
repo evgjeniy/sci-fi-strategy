@@ -87,4 +87,5 @@ MonoBehaviour:
   startRadius: 0
   endRadius: 0.25
   growSpeed: 0.7
-  lifeTimeAfterGrow: 0.75
+  decreaseSpeed: 0.7
+  delayTime: 0.5
