@@ -1,5 +1,7 @@
 using Dreamteck.Splines;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
+using UnityEngine.AI;
+using UnityEngine.Extensions;
 using Zenject;
 
 namespace SustainTheStrain.Units
@@ -22,6 +24,13 @@ namespace SustainTheStrain.Units
         {
             //Init();
             InitLogic();
+        }
+
+        private void OnEnable()
+        {
+            var agent = GetComponent<NavMeshAgent>();
+            agent.Disable();
+            agent.Enable();
         }
 
         protected override void Init()

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Dreamteck.Splines;
 using SustainTheStrain.ResourceSystems;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Extensions;
 using Zenject;
 
 namespace SustainTheStrain.Units.Spawners
@@ -42,6 +44,7 @@ namespace SustainTheStrain.Units.Spawners
             unit.GetComponent<Damageble>().OnDied += (Damageble d) => { _resourceManager.CurrentGold += unit.CoinsDrop;
                 _spawnedEnemies.Remove(unit);
             };
+            var agent = unit.GetComponent<NavMeshAgent>();;
             //Debug.Log($"[EnemySpawner {name}] Spawned unit");
             return unit;
         }

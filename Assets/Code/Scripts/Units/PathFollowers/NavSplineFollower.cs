@@ -24,14 +24,14 @@ namespace SustainTheStrain
             _movingRoutine = StartCoroutine(Moving());
         }
         
-        protected override void Start()
-        {
-#if UNITY_EDITOR
-            if (!Application.isPlaying) return;
-#endif
+//        protected override void Start()
+//        {
+//#if UNITY_EDITOR
+//            if (!Application.isPlaying) return;
+//#endif
             
-            //StartCoroutine(DebugMe());
-        }
+//            //StartCoroutine(DebugMe());
+//        }
         
         public bool IsDestinationReached()
         {
