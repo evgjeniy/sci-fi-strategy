@@ -1,15 +1,12 @@
 using SustainTheStrain.Input.UI;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public class AbilitiesUIController : MonoBehaviour
     {
-        private readonly Color _readyColor = Color.green; //temporary UI
-        private readonly Color _loadingColor = Color.red;
 
         private AbilityControlButton[] _buttons;
         private AbilitiesController _abilitiesController;

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
 using UnityEngine.Extensions;
-using SustainTheStrain.Buildings.Data;
 
-namespace SustainTheStrain.Buildings.Components.GFX
+namespace SustainTheStrain.Buildings.Components
 {
     public class BuildingGraphics<TStats> where TStats : BuildingData.IStats, new()
     {
@@ -28,6 +28,9 @@ namespace SustainTheStrain.Buildings.Components.GFX
             
             _graphicsInstance = _graphicsObjects[currentLevel].Spawn(_building.transform);
             _graphicsInstance.transform.position = _building.transform.position;
+
+            var renderer = _graphicsInstance.GetComponentInChildren<MeshRenderer>();
+            renderer.renderingLayerMask = 0x10;
         }
     }
 }

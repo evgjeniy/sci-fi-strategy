@@ -1,7 +1,8 @@
-using SustainTheStrain.Units.Components;
+using SustainTheStrain.Scriptable.AbilitySettings;
+using SustainTheStrain.Units;
 using UnityEngine;
 
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public class LandingAbility : PointAbility
     {

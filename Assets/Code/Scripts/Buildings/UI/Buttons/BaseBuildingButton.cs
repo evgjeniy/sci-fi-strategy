@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace SustainTheStrain.Buildings.UI.Buttons
+namespace SustainTheStrain.Buildings.UI
 {
     [RequireComponent(typeof(Button))]
     public abstract class BaseBuildingButton<TMenu> : MonoBehaviour

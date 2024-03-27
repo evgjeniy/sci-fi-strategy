@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using SustainTheStrain.EnergySystem;
+using UnityEngine;
 
-namespace SustainTheStrain.EnergySystem.Settings
+namespace SustainTheStrain.Scriptable.EnergySettings
 {
     [CreateAssetMenu(fileName = "EnergySystemSettings", menuName = "EnergySystemSettings/EnergySystemSettings", order = 1)]
     public class EnergySystemSettings : ScriptableObject
     {
-        public Sprite ButtonImage;
-        [field: Min(1)] public int EnergySpend;
-        [field: Min(1)] public int MaxEnergy;
+        [field: SerializeField] public Sprite ButtonImage { get; private set; }
+        [field: SerializeField, Min(1)] public int EnergySpend { get; private set; }
+        [field: SerializeField, Min(1)] public int MaxEnergy { get; set; }
+        [field: SerializeField] public EnergySystemUIType SystemUIType { get; private set; }
     }
 }

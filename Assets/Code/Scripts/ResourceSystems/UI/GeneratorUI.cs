@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace SustainTheStrain.ResourceSystems
+namespace SustainTheStrain.ResourceSystems.UI
 {
     public class GeneratorUI
     {

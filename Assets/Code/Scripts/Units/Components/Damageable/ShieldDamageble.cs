@@ -1,8 +1,6 @@
-using System;
-using SustainTheStrain.EnergySystem;
 using UnityEngine;
 
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Units
 {
     [RequireComponent(typeof(Shield))]
     public class ShieldDamageble : Damageble

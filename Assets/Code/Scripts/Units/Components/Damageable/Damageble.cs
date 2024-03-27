@@ -1,7 +1,9 @@
+using SustainTheStrain.Units.Components;
 using System;
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Units
 {
     public class Damageble : MonoBehaviour, IDamageable
     {

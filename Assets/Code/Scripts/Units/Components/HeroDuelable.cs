@@ -1,4 +1,4 @@
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Units
 {
     public class HeroDuelable : UnitDuelable
     {

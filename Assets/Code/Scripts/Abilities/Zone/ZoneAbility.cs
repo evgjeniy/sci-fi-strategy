@@ -1,14 +1,14 @@
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
-using UnityEngine.Rendering.Universal;
 
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public abstract class ZoneAbility : BaseAbility
     {
         protected float zoneRadius;
         protected GameObject ExplosionPrefab;
         protected readonly Vector3 offset = new(0, 1.5f,0);
+
+        public float getZoneRadius() => zoneRadius;
 
         protected Collider[] GetColliders(Vector3 point) => Physics.OverlapSphere(point, zoneRadius);
 

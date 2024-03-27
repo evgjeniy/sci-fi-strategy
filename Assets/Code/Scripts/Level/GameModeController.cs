@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
-using SustainTheStrain.Units.Components;
+using SustainTheStrain.Citadels;
+using SustainTheStrain.Units;
 using UnityEngine;
 using Zenject;
 
@@ -12,8 +13,8 @@ namespace SustainTheStrain.Level
         [Inject] private Citadel _citadel;
 
         public event Action OnGameLost;
-        public event Action OnGameWon; 
-        
+        public event Action OnGameWon;
+
         private void OnEnable()
         {
             _citadel.GetComponent<Damageble>().OnDied += _ =>
@@ -21,10 +22,7 @@ namespace SustainTheStrain.Level
                 Debug.LogWarning("Lost");
                 OnGameLost?.Invoke();
             };
-            _wavesManager.OnLastWaveEnded += () =>
-            {
-                StartCoroutine(CheckWhenLastEnemyDie());
-            };
+            _wavesManager.OnLastWaveEnded += () => { StartCoroutine(CheckWhenLastEnemyDie()); };
         }
 
 
@@ -39,6 +37,7 @@ namespace SustainTheStrain.Level
             {
                 yield return null;
             }
+
             Debug.LogWarning("Won");
             OnGameWon?.Invoke();
         }

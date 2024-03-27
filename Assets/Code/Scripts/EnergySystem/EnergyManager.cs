@@ -13,7 +13,7 @@ namespace SustainTheStrain.EnergySystem
         
         public int MaxCount { 
             get => _maxCount; 
-            private set
+            set
             {
                 if (value <= 0) return;
                 _maxCount = value;
@@ -31,15 +31,9 @@ namespace SustainTheStrain.EnergySystem
             }
         }
         
-        
         private void OnEnable()
         {
             CurrentCount = _maxCount;
-        }
-        
-        public void IncreaseMaxEnergy(int value)
-        {
-            MaxCount += value;
         }
 
         public bool TrySpend(int value)

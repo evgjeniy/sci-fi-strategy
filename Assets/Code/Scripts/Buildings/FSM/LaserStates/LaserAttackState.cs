@@ -1,13 +1,15 @@
-﻿using SustainTheStrain.Units.Components;
+﻿using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 
-namespace SustainTheStrain.Buildings.FSM.LaserStates
+namespace SustainTheStrain.Buildings.FSM
 {
     public partial class LaserStateMachine
     {
         private class AttackState : IdleState
         {
+            private readonly float _attackAngle = 25f;
+            
             public AttackState(LaserStateMachine initializer) : base(initializer) {}
 
             protected override bool CheckTransitions() => true;
@@ -44,13 +46,14 @@ namespace SustainTheStrain.Buildings.FSM.LaserStates
             private Quaternion GetRotationToTarget(Component target)
             {
                 var laser = Initializer.LaserTransform;
-                return Quaternion.LookRotation(target.transform.position - laser.position, laser.up);
+                var euler = Quaternion.LookRotation(target.transform.position - laser.position, laser.up).eulerAngles;
+                return Quaternion.Euler(Vector3.up * euler.y);
             }
 
             private bool IsLookingToTarget(Component target)
             {
                 var laser = Initializer.LaserTransform;
-                return Vector3.Angle(target.transform.position - laser.position, laser.forward) < 1.0f;
+                return Vector3.Angle(target.transform.position - laser.position, laser.forward) < _attackAngle;
             }
 
             private void TryAttack(Component target)

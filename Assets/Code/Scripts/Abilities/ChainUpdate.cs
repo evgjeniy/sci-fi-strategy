@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.Abilities
 {
     public class ChainUpdate : MonoBehaviour
     {

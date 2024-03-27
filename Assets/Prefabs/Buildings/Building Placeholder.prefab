@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b5fa15e91331d3489208b49837eeab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _road: {fileID: 0}
   <BuildingRoot>k__BackingField: {fileID: 7959630662135637744}
 --- !u!1 &5854404975312105911
 GameObject:
@@ -126,7 +127,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d3a02517fa970cf46a58e0344b0e46c9, type: 2}

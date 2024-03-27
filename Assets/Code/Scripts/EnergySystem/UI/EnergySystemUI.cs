@@ -1,15 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
-using SustainTheStrain.EnergySystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace SustainTheStrain
+namespace SustainTheStrain.EnergySystem.UI
 {
     public class EnergySystemUI : MonoBehaviour
     {
-        public EnergySystemControllButton ControllButton;
+        [field: SerializeField] public EnergySystemControllButton ControllButton { get; private set; }
         
         [SerializeField] private Image _imagePrefab;
         [SerializeField] private Color _filledColor;
@@ -58,10 +55,10 @@ namespace SustainTheStrain
             _enabledCount++;
         }
 
-        public void ChangeEnergy(int count)
+        public void ChangeEnergy(IEnergySystem system)
         {
-            if (count < 0 || count > _images.Count) return;
-            _coloredCount = count;
+            if (system.CurrentEnergy < 0 || system.CurrentEnergy > _images.Count) return;
+            _coloredCount = system.CurrentEnergy;
             ReColorBars();
         }
 

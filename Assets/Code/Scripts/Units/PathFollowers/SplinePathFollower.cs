@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Dreamteck.Splines;
 using UnityEngine.Extensions;
 
-namespace SustainTheStrain.Units.PathFollowers
+namespace SustainTheStrain.Units
 {
     public class SplinePathFollower : IPathFollower
     {

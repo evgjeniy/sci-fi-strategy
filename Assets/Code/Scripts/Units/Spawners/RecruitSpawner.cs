@@ -1,5 +1,5 @@
 using NaughtyAttributes;
-using SustainTheStrain.Buildings.Data;
+using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
 using Zenject;
 

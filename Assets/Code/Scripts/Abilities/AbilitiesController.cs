@@ -1,14 +1,12 @@
-using SustainTheStrain.Input;
 using System;
 using System.Collections.Generic;
-using SustainTheStrain;
-using SustainTheStrain.AbilitiesScripts;
 using SustainTheStrain.EnergySystem;
+using SustainTheStrain.Input;
+using SustainTheStrain.Scriptable.AbilitySettings;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 using Zenject;
 
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public class AbilitiesController : MonoBehaviour
     {
@@ -69,13 +67,12 @@ namespace SustainTheStrain.AbilitiesScripts
             var chosenAbility = Abilities[idx];
             if (!chosenAbility.IsLoaded)
             {
-                chosenAbility.TrySpendEnergy();
                 return;
             }
             if (!chosenAbility.IsReloaded()) return;
             currentAim = Abilities[idx] switch
             {
-                ZoneAbility => new ZoneAim(zoneRadius, aimZonePrefab, groundLayers, maxDistFromCamera),
+                ZoneAbility => new ZoneAim((Abilities[idx] as ZoneAbility).getZoneRadius(), aimZonePrefab, groundLayers, maxDistFromCamera),
                 LandingAbility => new PointAim(groundLayers, maxDistFromCamera),
                 _ => new PointAim(enemyLayers, maxDistFromCamera)
             };
@@ -118,7 +115,7 @@ namespace SustainTheStrain.AbilitiesScripts
             AddAbility(new LandingAbility(_abilitiesSettings.LandingAbility));
             foreach (var ability in Abilities)
             {
-                ability.EnergyController = _energyController;
+
                 _energyController.AddEnergySystem(ability);
             }
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû
@@ -166,14 +163,14 @@ namespace SustainTheStrain.AbilitiesScripts
             }
         }
     }
-}
 
-[Serializable]
-public class AbilitiesListSettings
-{
-    public ChainDamageAbilitySettings ChainAbility;
-    public EnemyHackAbilitySettings EnemyHack;
-    public LandingAbilitySettings LandingAbility;
-    public ZoneDamageAbilitySettings ZoneDamage;
-    public ZoneSlownesAbillitySettings ZoneSlowness;
+    [Serializable]
+    public class AbilitiesListSettings
+    {
+        public ChainDamageAbilitySettings ChainAbility;
+        public EnemyHackAbilitySettings EnemyHack;
+        public LandingAbilitySettings LandingAbility;
+        public ZoneDamageAbilitySettings ZoneDamage;
+        public ZoneSlownessAbilitySettings ZoneSlowness;
+    }
 }

@@ -78,3 +78,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 *.vsconfig
+Assets/Plugins/Dreamteck/Splines/TMPro.unitypackage.meta
+Assets/Plugins/Dreamteck/Splines/Examples.unitypackage.meta
+Assets/Plugins/Dreamteck/Splines/PlaymakerActions.unitypackage.meta

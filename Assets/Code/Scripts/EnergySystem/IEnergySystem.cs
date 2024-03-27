@@ -1,30 +1,17 @@
 ﻿using System;
-using SustainTheStrain.EnergySystem.Settings;
+using SustainTheStrain._Architecture;
+using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
 
 namespace SustainTheStrain.EnergySystem
 {
-    public interface IEnergySystem
+    public interface IEnergySystem : IModel<IEnergySystem>
     {
         public EnergySystemSettings EnergySettings { get; }
-        public Sprite ButtonImage { get;}
-        public EnergyController EnergyController { get; set; }
-        public int EnergySpendCount { get; }
-        public int FreeEnergyCells { get; }
-
+        public int FreeEnergyCellsCount { get; }
         public int MaxEnergy { get; }
-        public int CurrentEnergy { get; }
-        public event Action<int> OnCurrentEnergyChanged;
-        public event Action<int> OnMaxEnergyChanged;
-        
-        public void IncreaseMaxEnergy(int value){}
-        
-        public void TrySpendEnergy() {}
-
-        public void TryRefillEnergy() {}
-
-        public void SetEnergySettings(EnergySystemSettings settings) { }
+        public int CurrentEnergy { get; set; }
+        public bool TrySpendEnergy(int count);
+        public bool TryRefillEnergy(int count);
     }
 }

@@ -1,16 +1,12 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using JetBrains.Annotations;
-using SustainTheStrain.Buildings.Components.GFX;
-using SustainTheStrain.Buildings.Data;
 using SustainTheStrain.Buildings.FSM;
 using SustainTheStrain.Installers;
-using SustainTheStrain.Units.Components;
+using SustainTheStrain.Scriptable.Buildings;
+using SustainTheStrain.Units;
 using SustainTheStrain.Units.Spawners;
 using UnityEngine;
 using UnityEngine.Extensions;
-using UnityEngine.PlayerLoop;
-using Quaternion = System.Numerics.Quaternion;
 
 namespace SustainTheStrain.Buildings.Components
 {
@@ -107,7 +103,7 @@ namespace SustainTheStrain.Buildings.Components
             
             if (!_timer.IsTimeOver)
                 return;
-            if (_recruitGroup.Recruits.Count == _recruitGroup.squadMaxSize)
+            if (_recruitGroup.Recruits.Count >= _recruitGroup.squadMaxSize)
                 return;
                 
             var newRecruit = _recruitSpawner.Spawn(CurrentStats);

@@ -1,5 +1,5 @@
 ﻿using System;
-using SustainTheStrain.EnergySystem.Settings;
+using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
 
 namespace SustainTheStrain.EnergySystem
@@ -8,58 +8,57 @@ namespace SustainTheStrain.EnergySystem
     {
         [field: SerializeField] public EnergySystemSettings EnergySettings { get; protected set; }
 
-        private int _maxEnergy;
-        private int _currentEnergy;
-
-        public virtual event Action<int> OnMaxEnergyChanged;
+        protected int _maxEnergy;
+        protected int _currentEnergy;
+        
         public virtual event Action<int> OnCurrentEnergyChanged;
-
-        public virtual EnergyController EnergyController { get; set; }
+        public event Action<IEnergySystem> Changed;
+        
         public virtual Sprite ButtonImage => EnergySettings.ButtonImage;
-        public virtual int EnergySpendCount => EnergySettings.EnergySpend;
-        public virtual int FreeEnergyCells => MaxEnergy - CurrentEnergy;
+        public virtual int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
 
         public virtual int MaxEnergy
         {
-            get => EnergySettings.MaxEnergy;
-            protected set
+            get => _maxEnergy;
+            set
             {
                 if (value < 1) return;
-                OnMaxEnergyChanged?.Invoke(EnergySettings.MaxEnergy = value);
+                _maxEnergy = value;
+                Changed?.Invoke(this);
             }
+            
         }
 
         public virtual int CurrentEnergy
         {
             get => _currentEnergy;
-            protected set
+            set
             {
                 if (value < 0 || value > MaxEnergy) return;
-                OnCurrentEnergyChanged?.Invoke(_currentEnergy = value);
+                _currentEnergy = value;
+                Changed?.Invoke(this);
             }
         }
 
         [Zenject.Inject]
-        private void InjectEnergyController(EnergyController energyController)
+        private void Construct(EnergyController energyController)
         {
-            EnergyController = energyController;
-            EnergyController.AddEnergySystem(this);
-
             SetEnergySettings(EnergySettings);
+
+            energyController.AddEnergySystem(this);
         }
 
-        public virtual void IncreaseMaxEnergy(int value = 1) => MaxEnergy += value;
-
-        public virtual void TrySpendEnergy()
+        public virtual bool TrySpendEnergy(int count)
         {
-            if (FreeEnergyCells < EnergySpendCount) return;
-            if (EnergyController.TryGetEnergy(EnergySpendCount)) CurrentEnergy += EnergySpendCount;
+            CurrentEnergy += count;
+            return true;
         }
 
-        public virtual void TryRefillEnergy()
+        //используй эти методы вместо прямого назначения
+        public virtual bool TryRefillEnergy(int count)
         {
-            if (_currentEnergy < EnergySpendCount) return;
-            if (EnergyController.TryReturnEnergy(EnergySpendCount)) CurrentEnergy -= EnergySpendCount;
+            CurrentEnergy -= count;
+            return true;
         }
 
         public virtual void SetEnergySettings(EnergySystemSettings settings) {}

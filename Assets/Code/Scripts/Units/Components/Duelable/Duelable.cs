@@ -1,9 +1,7 @@
 using SustainTheStrain.Units.Components;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Units
 {
     public abstract class Duelable : MonoBehaviour, IDuelable
     {

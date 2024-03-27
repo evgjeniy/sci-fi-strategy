@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using NTC.FiniteStateMachine;
-using SustainTheStrain.Units.Components;
+using SustainTheStrain.Units;
 using UnityEngine;
 
-namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
+namespace SustainTheStrain.Buildings.FSM
 {
     public partial class ArtilleryStateMachine
     {

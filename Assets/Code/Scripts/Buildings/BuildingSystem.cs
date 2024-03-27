@@ -1,11 +1,10 @@
-using SustainTheStrain.AbilitiesScripts;
 using SustainTheStrain.Buildings.Components;
-using SustainTheStrain.Buildings.Data;
-using SustainTheStrain.Buildings.UI.Menus;
+using SustainTheStrain.Buildings.UI;
 using SustainTheStrain.EnergySystem;
-using SustainTheStrain.EnergySystem.Settings;
 using SustainTheStrain.Input;
 using SustainTheStrain.ResourceSystems;
+using SustainTheStrain.Scriptable.Buildings;
+using SustainTheStrain.Scriptable.EnergySettings;
 
 namespace SustainTheStrain.Buildings
 {
@@ -130,6 +129,8 @@ namespace SustainTheStrain.Buildings
         public override void SetEnergySettings(EnergySystemSettings settings)
         {
             _buildingSettings = settings as BuildingSystemSettings;
+            _maxEnergy = settings.MaxEnergy;
+            _currentEnergy = 0;
         }
         
         

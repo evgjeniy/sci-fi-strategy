@@ -1,7 +1,7 @@
-﻿using SustainTheStrain.Units.Components;
+﻿using SustainTheStrain.Units;
 using UnityEngine;
 
-namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
+namespace SustainTheStrain.Buildings.FSM
 {
     public partial class ArtilleryStateMachine
     {
@@ -10,6 +10,8 @@ namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
             private int _explodedSize;
             private readonly Collider[] _exploded = new Collider[32];
 
+            private readonly float _attackAngle = 25f;
+            
             public AttackState(ArtilleryStateMachine initializer) : base(initializer) {}
 
             protected override bool CheckTransitions() => true;
@@ -33,13 +35,14 @@ namespace SustainTheStrain.Buildings.FSM.ArtilleryStates
             private Quaternion GetRotationToTarget(Component target)
             {
                 var artillery = Initializer.ArtilleryTransform;
-                return Quaternion.LookRotation(target.transform.position - artillery.position, artillery.up);
+                var euler = Quaternion.LookRotation(target.transform.position - artillery.position, artillery.up).eulerAngles;
+                return Quaternion.Euler(Vector3.up * euler.y);
             }
 
             private bool IsLookingToTarget(Component target)
             {
                 var artillery = Initializer.ArtilleryTransform;
-                return Vector3.Angle(target.transform.position - artillery.position, artillery.forward) < 1.0f;
+                return Vector3.Angle(target.transform.position - artillery.position, artillery.forward) < _attackAngle;
             }
 
             private void TryAttack(Component target)

@@ -1,4 +1,4 @@
-﻿using SustainTheStrain.Buildings.Data;
+﻿using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +8,8 @@ namespace SustainTheStrain.Buildings.Components
     {
         [Inject] public BuildingSystem BuildingSystem { get; set; }
 
+        [SerializeField] private ZoneVisualizer _zoneVisualizer;
+        
         private int _currentUpgradeLevel = -1;
 
         public event System.Action<int> OnLevelUpgrade;
@@ -17,6 +19,8 @@ namespace SustainTheStrain.Buildings.Components
         protected abstract int MaxUpgradeLevel { get; }
         public abstract int UpgradePrice { get; }
         public abstract int DestroyCompensation { get; }
+
+        public IZoneVisualizer  ZoneVisualizer => _zoneVisualizer;
 
         public int CurrentUpgradeLevel
         {

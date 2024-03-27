@@ -1,14 +1,16 @@
-using SustainTheStrain.Buildings.Components.GFX;
-using SustainTheStrain.Buildings.Data;
-using SustainTheStrain.Buildings.FSM.RocketStates;
+using SustainTheStrain.Buildings.FSM;
 using SustainTheStrain.Installers;
+using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace SustainTheStrain.Buildings.Components
 {
     public class Rocket : Building
     {
+        [SerializeField] private ZoneVisualizer _attackZoneVisualizer;
+
+        public IZoneVisualizer AttackZoneVisualizer => _attackZoneVisualizer;
+
         private RocketStateMachine _stateMachine;
         private BuildingGraphics<RocketData.Stats> _graphics;
 
@@ -29,7 +31,7 @@ namespace SustainTheStrain.Buildings.Components
             
             CurrentUpgradeLevel = 0;
         }
-
+        
         private void Update() => _stateMachine.Run();
 
         private void OnDestroy() => _graphics.Destroy();

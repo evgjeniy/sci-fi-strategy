@@ -1,24 +1,28 @@
 using System;
 using System.Collections.Generic;
-using SustainTheStrain.EnergySystem;
 using UnityEngine;
 using UnityEngine.Extensions;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Units
 {
     public class HPBar : MonoBehaviour
     {
         [SerializeField] private Damageble _damageble;
         [SerializeField] private Shield _shield;
-        [SerializeField] private Transform _hpBar;
+        [SerializeField] private RectTransform _hpBar;
         [SerializeField] private Transform _shieldBarsHolder;
         [SerializeField] private ShieldBar _shieldBarRef;
         [SerializeField] private float _cellOffset = 3f;
         [SerializeField] private float _maxHpSize;
         [SerializeField] private Transform _visual;
-        
+        [SerializeField] private UnityEngine.UI.Slider _slider;
+
         private List<ShieldBar> _shieldBars = new();
-        
+
+        public static Vector3 _camForward;
+
         private void OnEnable()
         {
             _damageble.OnCurrentHPChanged += UpdateHP;
@@ -33,6 +37,7 @@ namespace SustainTheStrain.Units.Components
 
         private void Update()
         {
+
             if (_shield != null)
             {
                 if (_shield.ShieldCells[0].CurrentHP <= 0)
@@ -40,6 +45,11 @@ namespace SustainTheStrain.Units.Components
                 else
                     _visual.gameObject.Activate();
             }
+        }
+
+        private void LateUpdate()
+        {
+            _hpBar.LookAt(_hpBar.position + _camForward);
         }
 
         private void OnDisable()
@@ -69,9 +79,10 @@ namespace SustainTheStrain.Units.Components
 
         private void UpdateHP(float value)
         {
+            if (!_hpBar) return;
             _hpBar.gameObject.SetActive(!(Math.Abs(value - _damageble.MaxHP) < 0.1f));
 
-            _hpBar.localScale = new Vector3(value / _damageble.MaxHP * _maxHpSize, 1, 1);
+            _slider.value = value / _damageble.MaxHP;
         }
     }
 }

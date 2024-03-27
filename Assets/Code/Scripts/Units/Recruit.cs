@@ -1,5 +1,4 @@
-using SustainTheStrain.Buildings.Data;
-using SustainTheStrain.Units.Components;
+using SustainTheStrain.Scriptable.Buildings;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
 using UnityEngine;
 using Zenject;

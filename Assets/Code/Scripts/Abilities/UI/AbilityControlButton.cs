@@ -1,8 +1,7 @@
-using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Input.UI;
 using UnityEngine.UI;
 
-namespace SustainTheStrain.AbilitiesScripts
+namespace SustainTheStrain.Abilities
 {
     public class AbilityControlButton// : EnergySystemControllButton
     {

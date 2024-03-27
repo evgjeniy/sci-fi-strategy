@@ -1,9 +1,5 @@
 using Dreamteck.Splines;
-using SustainTheStrain.ResourceSystems;
-using SustainTheStrain.Units.Components;
-using SustainTheStrain.Units.PathFollowers;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
-using UnityEngine;
 using Zenject;
 
 namespace SustainTheStrain.Units
@@ -18,13 +14,13 @@ namespace SustainTheStrain.Units
 
         #endregion
 
-        [SerializeField] public int _coinsDrop;
+        public int CoinsDrop;
         
-        public SplinePathFollower SplinePathFollower { get; protected set; }
+        public NavSplinePathFollower SplinePathFollower { get; protected set; }
 
         private void Start()
         {
-            Init();
+            //Init();
             InitLogic();
         }
 
@@ -32,8 +28,8 @@ namespace SustainTheStrain.Units
         {
             base.Init();
 
-            if (TryGetComponent<SplineFollower>(out var splineFollower))
-                SplinePathFollower = new SplinePathFollower(splineFollower);
+            if (TryGetComponent<NavSplineFollower>(out var splineFollower))
+                SplinePathFollower = new NavSplinePathFollower(splineFollower);
         }
 
         protected virtual void InitLogic()

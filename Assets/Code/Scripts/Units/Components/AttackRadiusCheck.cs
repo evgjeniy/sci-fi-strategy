@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.CanvasScaler;
 
-namespace SustainTheStrain.Units.Components
+namespace SustainTheStrain.Units
 {
     public class AttackRadiusCheck : MonoBehaviour
     {
@@ -30,7 +29,7 @@ namespace SustainTheStrain.Units.Components
         {
             if (unit == null) return;
 
-            Debug.Log(string.Format("[AttackRadius] On {0} entered {1} attack radius", unit.name, name));
+            //Debug.Log(string.Format("[AttackRadius] On {0} entered {1} attack radius", unit.name, name));
             _attackZoneUnits.Add(unit);
             OnUnitEnteredAttackZone?.Invoke(unit);
 
