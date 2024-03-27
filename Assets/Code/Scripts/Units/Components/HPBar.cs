@@ -21,7 +21,7 @@ namespace SustainTheStrain.Units
 
         private List<ShieldBar> _shieldBars = new();
 
-        public static Vector3 _camForward;
+        private Vector3 _camForward;
 
         private void OnEnable()
         {
@@ -31,6 +31,8 @@ namespace SustainTheStrain.Units
                 _shield.OnCellsCountChanged += RebuildShield;
                 RebuildShield(_shield.CellsCount);
             }
+
+            _camForward = Camera.main.transform.forward;
 
             UpdateHP(_damageble.CurrentHP);
         }

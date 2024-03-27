@@ -390,6 +390,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2775007464522618614, guid: 5da990ec0dad63544bbbda4bf1df61b6,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775007464522618614, guid: 5da990ec0dad63544bbbda4bf1df61b6,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4519674630115074691, guid: 5da990ec0dad63544bbbda4bf1df61b6,
         type: 3}
       propertyPath: <EnergySettings>k__BackingField
