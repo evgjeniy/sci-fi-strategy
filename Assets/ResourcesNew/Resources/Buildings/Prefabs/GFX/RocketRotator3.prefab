@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7745400493448023476}
   - component: {fileID: 1121172672467375723}
   m_Layer: 0
-  m_Name: BuildingRotator
+  m_Name: RocketRotator3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

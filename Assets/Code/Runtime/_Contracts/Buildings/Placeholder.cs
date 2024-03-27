@@ -16,14 +16,14 @@ namespace SustainTheStrain._Contracts.Buildings
     [RequireComponent(typeof(Collider))]
     public class Placeholder : MonoCashed<Outline, Collider>, IPlaceholder, IInputSelectable
     {
-        private IBuildingFactoryUI _uiFactory;
+        private IBuildingFactory _uiFactory;
         private IInputSystem _inputSystem;
 
         private BuildingSelectorMenu _selectorMenu;
         private IBuilding _building;
 
         [Inject]
-        private void Construct(IBuildingFactoryUI uiFactory, IInputSystem inputSystem)
+        private void Construct(IBuildingFactory uiFactory, IInputSystem inputSystem)
         {
             _uiFactory = uiFactory;
             _inputSystem = inputSystem;

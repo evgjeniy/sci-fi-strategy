@@ -18,5 +18,7 @@ MonoBehaviour:
   <Radius>k__BackingField: 5
   <Damage>k__BackingField: 1
   <Cooldown>k__BackingField: 1
+  <GfxPrefab>k__BackingField: {fileID: 1121172672467375723, guid: e59534160f0e2964394710c20125a0ff,
+    type: 3}
   <NextLevelConfig>k__BackingField: {fileID: 11400000, guid: dc24cccf31ad6154c90472064c824861,
     type: 2}

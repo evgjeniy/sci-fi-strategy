@@ -20,3 +20,6 @@ MonoBehaviour:
   <Cooldown>k__BackingField: 1
   <MaxTargets>k__BackingField: 1
   <SectorAngle>k__BackingField: 45
+  <GfxPrefab>k__BackingField: {fileID: 1121172672467375723, guid: 3a281615751321b41b4e869065424951,
+    type: 3}
+  <NextLevelConfig>k__BackingField: {fileID: 0}

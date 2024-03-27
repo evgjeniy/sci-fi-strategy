@@ -8,7 +8,6 @@ namespace SustainTheStrain._Contracts.Installers
         public override void InstallBindings()
         {
             Container.Bind<IBuildingFactory>().To<BuildingFactory>().AsSingle();
-            Container.Bind<IBuildingFactoryUI>().To<BuildingUIFactory>().AsSingle();
         }
     }
 }

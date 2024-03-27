@@ -68,7 +68,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
             void OnCreateClick<TBuilding>(int price) where TBuilding : IBuilding
             {
-                buildingFactory.Create<TBuilding>(placeholder);
+                buildingFactory.CreateBuilding<TBuilding>(placeholder);
                 _resourceManager.Gold.Value -= price;
             }
         }

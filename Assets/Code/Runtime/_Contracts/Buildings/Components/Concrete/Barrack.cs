@@ -1,3 +1,4 @@
+using System;
 using SustainTheStrain._Contracts.Configs;
 using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain._Contracts.Installers;
@@ -17,19 +18,20 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
-        private IBuildingFactoryUI _uiFactory;
+        private IBuildingFactory _buildingFactory;
 
         private BarrackManagementMenu _managementMenu;
+        private GameObject _currentGfx;
 
         public BarrackData Data { get; private set; }
 
         [Inject]
         private void Construct(IPlaceholder placeholder, IResourceManager resourceManager,
-            IConfigProviderService configProvider, IBuildingFactoryUI uiFactory)
+            IConfigProviderService configProvider, IBuildingFactory buildingFactory)
         {
             _placeholder = placeholder;
             _resourceManager = resourceManager;
-            _uiFactory = uiFactory;
+            _buildingFactory = buildingFactory;
 
             Data = new BarrackData
             (
@@ -39,13 +41,16 @@ namespace SustainTheStrain._Contracts.Buildings
             );
         }
 
+        private void OnEnable() => Data.Config.Changed += UpgradeGraphics;
+        private void OnDisable() => Data.Config.Changed -= UpgradeGraphics;
+
         public void OnPointerEnter() => Data.Outline.Enable();
         public void OnPointerExit() => Data.Outline.Disable();
 
         public void OnSelected()
         {
             if (_managementMenu == null)
-                _managementMenu = _uiFactory.Create<BarrackManagementMenu>(this);
+                _managementMenu = _buildingFactory.CreateMenu<BarrackManagementMenu>(this);
             
             _managementMenu.Enable();
             Debug.Log("[BARRACK] Show Radius");
@@ -86,8 +91,8 @@ namespace SustainTheStrain._Contracts.Buildings
 
         public void Upgrade()
         {
-            if (_resourceManager.TrySpend(Data.Config.Value.NextLevelPrice) is false) return;
             if (Data.Config.Value.NextLevelConfig == null) return;
+            if (_resourceManager.TrySpend(Data.Config.Value.NextLevelPrice) is false) return;
 
             Data.Config.Value = Data.Config.Value.NextLevelConfig;
         }
@@ -105,6 +110,12 @@ namespace SustainTheStrain._Contracts.Buildings
                 .With(x => x.SetParent(transform));;
 
             _managementMenu.Disable();
+        }
+
+        private void UpgradeGraphics(BarrackBuildingConfig config)
+        {
+            _currentGfx.IfNotNull(x => x.DestroyObject());
+            _currentGfx = Instantiate(config.GfxPrefab, transform);
         }
     }
 }

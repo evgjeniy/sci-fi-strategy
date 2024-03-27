@@ -80,6 +80,9 @@ namespace SustainTheStrain.Abilities
         + "Precompute disabled: Per-vertex calculations are performed at runtime in Awake(). This may cause a pause for large meshes.")]
         private bool precomputeOutline;
 
+        [SerializeField]
+        private bool recacheOnEnable;
+
         [SerializeField, HideInInspector]
         private List<Mesh> bakeKeys = new List<Mesh>();
 
@@ -114,6 +117,8 @@ namespace SustainTheStrain.Abilities
 
         void OnEnable()
         {
+            if (recacheOnEnable) renderers = GetComponentsInChildren<Renderer>();
+            
             foreach (var renderer in renderers)
             {
 
