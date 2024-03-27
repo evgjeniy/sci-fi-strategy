@@ -103,7 +103,7 @@ namespace SustainTheStrain.Buildings.Components
             
             if (!_timer.IsTimeOver)
                 return;
-            if (_recruitGroup.Recruits.Count == _recruitGroup.squadMaxSize)
+            if (_recruitGroup.Recruits.Count >= _recruitGroup.squadMaxSize)
                 return;
                 
             var newRecruit = _recruitSpawner.Spawn(CurrentStats);

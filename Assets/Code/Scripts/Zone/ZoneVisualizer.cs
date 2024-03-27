@@ -36,6 +36,8 @@ namespace SustainTheStrain
         private void Awake()
         {
             _projector = GetComponent<DecalProjector>();
+
+            _projector.material = new Material(_projector.material);
         }
 
         private void OnEnable()
