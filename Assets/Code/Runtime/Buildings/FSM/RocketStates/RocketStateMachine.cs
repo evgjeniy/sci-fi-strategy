@@ -10,7 +10,7 @@ namespace SustainTheStrain.Buildings.FSM
         private readonly ParticleSystem _buildingRadius;
 
         private Rocket Context { get; }
-        private Area Area { get; }
+        private Area<Collider> Area { get; }
         private Timer Timer { get; } = new();
 
         private Transform RocketTransform => Context.transform;
@@ -25,7 +25,7 @@ namespace SustainTheStrain.Buildings.FSM
             _buildingRadius = Object.Instantiate(Resources.Load<ParticleSystem>("BuildingData/Radius"), rocket.transform);
             _buildingRadius.transform.localPosition = Vector3.zero;
 
-            Area = new Area(GetPosition, GetAttackRadius, GetAttackMask);
+            Area = new Area<Collider>(GetPosition, GetAttackRadius, GetAttackMask);
             TransitionsEnabled = false;
 
             AddStates(new IdleState(this), new AttackState(this));

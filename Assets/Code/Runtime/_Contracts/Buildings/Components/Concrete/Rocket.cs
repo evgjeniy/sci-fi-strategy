@@ -16,6 +16,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private RocketManagementMenu _managementMenu;
         private BuildingRotator _currentGfx;
+        private IRocketState _currentState = new RocketIdleState();
 
         public RocketData Data { get; private set; }
 
@@ -36,6 +37,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnEnable() => Data.Config.Changed += UpgradeGraphics;
         private void OnDisable() => Data.Config.Changed -= UpgradeGraphics;
+        private void Update() => _currentState = _currentState.Update(this);
 
         public void OnPointerEnter() => Data.Outline.Enable();
         public void OnPointerExit() => Data.Outline.Disable();
@@ -53,18 +55,6 @@ namespace SustainTheStrain._Contracts.Buildings
         {
             _managementMenu.Disable();
             Debug.Log("[ROCKET] Hide Radius");
-        }
-
-        private void Update()
-        {
-            var position = new Vector3
-            (
-                x: Mathf.Cos(Time.time) * Data.Config.Value.Radius,
-                y: transform.position.y + Mathf.Cos(Time.time),
-                z: Mathf.Sin(Time.time) * Data.Config.Value.Radius
-            );
-
-            Data.Orientation.Value = transform.position + position;
         }
 
         public void Upgrade()

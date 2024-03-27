@@ -15,6 +15,9 @@ MonoBehaviour:
   <Level>k__BackingField: 2
   <Price>k__BackingField: 75
   <Compensation>k__BackingField: 45
+  <Mask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 8
   <Radius>k__BackingField: 5
   <Damage>k__BackingField: 1
   <Cooldown>k__BackingField: 1

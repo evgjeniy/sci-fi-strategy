@@ -16,6 +16,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private LaserManagementMenu _managementMenu;
         private BuildingRotator _currentGfx;
+        private ILaserState _currentState = new LaserIdleState();
 
         public LaserData Data { get; private set; }
 
@@ -36,6 +37,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnEnable() => Data.Config.Changed += UpgradeGraphics;
         private void OnDisable() => Data.Config.Changed -= UpgradeGraphics;
+        private void Update() => _currentState = _currentState.Update(this);
 
         public void OnPointerEnter() => Data.Outline.Enable();
         public void OnPointerExit() => Data.Outline.Disable();

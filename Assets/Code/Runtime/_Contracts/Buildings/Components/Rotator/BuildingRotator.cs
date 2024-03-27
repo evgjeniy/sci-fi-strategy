@@ -18,9 +18,10 @@ namespace SustainTheStrain._Contracts.Buildings
         private void Rotate(Vector3 targetPosition)
         {
             var lookRotation = Quaternion.LookRotation(targetPosition - _verticalRotationBone.position);
+            var lookRotationEuler = lookRotation.eulerAngles; // TODO : fix, returns incorrect euler angle
 
-            var horizontalAngle = lookRotation.eulerAngles.y;
-            var verticalAngle = Mathf.Clamp(lookRotation.eulerAngles.x, _verticalClamp.x, _verticalClamp.y);
+            var horizontalAngle = lookRotationEuler.y;
+            var verticalAngle = Mathf.Clamp(lookRotationEuler.x, _verticalClamp.x, _verticalClamp.y);
 
             _horizontalRotationBone.localEulerAngles = Vector3.up * horizontalAngle;
             _verticalRotationBone.localEulerAngles = Vector3.right * verticalAngle;

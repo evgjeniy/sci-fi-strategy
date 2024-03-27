@@ -1,31 +1,24 @@
-﻿using UnityEngine;
+﻿using SustainTheStrain.Abilities;
+using UnityEngine;
 using UnityEngine.Extensions;
 using Zenject;
-using Outline = SustainTheStrain.Abilities.Outline;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
-    public interface IPlaceholder
-    {
-        public Transform transform { get; }
-        public void SetBuilding(IBuilding building);
-        public void DestroyBuilding();
-    }
-    
     [RequireComponent(typeof(Outline))]
     [RequireComponent(typeof(Collider))]
     public class Placeholder : MonoCashed<Outline, Collider>, IPlaceholder, IInputSelectable
     {
-        private IBuildingFactory _uiFactory;
+        private IBuildingFactory _buildingFactory;
         private IInputSystem _inputSystem;
 
         private BuildingSelectorMenu _selectorMenu;
         private IBuilding _building;
 
         [Inject]
-        private void Construct(IBuildingFactory uiFactory, IInputSystem inputSystem)
+        private void Construct(IBuildingFactory buildingFactory, IInputSystem inputSystem)
         {
-            _uiFactory = uiFactory;
+            _buildingFactory = buildingFactory;
             _inputSystem = inputSystem;
         }
 
@@ -52,7 +45,7 @@ namespace SustainTheStrain._Contracts.Buildings
         public void OnPointerEnter() => Cashed1.Enable();
         public void OnPointerExit() => Cashed1.Disable();
 
-        public void OnSelected() => _selectorMenu = _uiFactory.CreateSelector(this);
+        public void OnSelected() => _selectorMenu = _buildingFactory.CreateSelector(this);
         public void OnDeselected() => _selectorMenu.IfNotNull(x => x.DestroyObject());
     }
 }

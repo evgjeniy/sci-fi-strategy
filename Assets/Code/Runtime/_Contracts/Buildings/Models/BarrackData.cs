@@ -2,6 +2,7 @@
 using SustainTheStrain.Abilities;
 using SustainTheStrain.Units;
 using UnityEngine;
+using Timer = SustainTheStrain.Buildings.FSM.Timer;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
@@ -10,6 +11,7 @@ namespace SustainTheStrain._Contracts.Buildings
         public readonly Observable<BarrackBuildingConfig> Config;
         public readonly Outline Outline;
         public readonly RecruitGroup RecruitGroup;
+        public readonly Timer Timer;
 
         public GameObject RecruitsPointer { get; set; }
 
@@ -18,6 +20,7 @@ namespace SustainTheStrain._Contracts.Buildings
             Outline = outline;
             RecruitGroup = recruitGroup;
             Config = new Observable<BarrackBuildingConfig>(startConfig);
+            Timer = new Timer(startConfig.RespawnCooldown);
         }
     }
 }

@@ -15,11 +15,14 @@ MonoBehaviour:
   <Level>k__BackingField: 1
   <Price>k__BackingField: 50
   <Compensation>k__BackingField: 30
-  <Radius>k__BackingField: 7.78
+  <Mask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 8
+  <Radius>k__BackingField: 7.5
   <Damage>k__BackingField: 1
   <Cooldown>k__BackingField: 1
   <MaxTargets>k__BackingField: 1
-  <SectorAngle>k__BackingField: 45
+  <SectorAngle>k__BackingField: 30
   <GfxPrefab>k__BackingField: {fileID: 1121172672467375723, guid: a76f019e36c651c499a8e72708c76540,
     type: 3}
   <NextLevelConfig>k__BackingField: {fileID: 11400000, guid: d47fb7760466238469a8870afe1b3736,
