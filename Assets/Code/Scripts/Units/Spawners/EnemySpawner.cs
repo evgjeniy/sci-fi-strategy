@@ -37,7 +37,7 @@ namespace SustainTheStrain.Units.Spawners
                 return null;
             }
 
-            unit.transform.position = SpawnPosition;
+            unit.GetComponent<NavMeshAgent>().Warp(SpawnPosition);
             unit.GetComponent<SplineTracer>().spline = _spline;
             unit.GetComponent<SplineTracer>().RebuildImmediate();
             _spawnedEnemies.Add(unit);

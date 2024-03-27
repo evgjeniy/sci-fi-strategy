@@ -26,13 +26,6 @@ namespace SustainTheStrain.Units
             InitLogic();
         }
 
-        private void OnEnable()
-        {
-            var agent = GetComponent<NavMeshAgent>();
-            agent.Disable();
-            agent.Enable();
-        }
-
         protected override void Init()
         {
             base.Init();

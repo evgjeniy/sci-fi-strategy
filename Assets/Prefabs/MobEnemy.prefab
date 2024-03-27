@@ -128,7 +128,7 @@ MonoBehaviour:
   _cellOffset: 3
   _maxHpSize: 5
   _visual: {fileID: 0}
-  _slider: {fileID: 0}
+  _slider: {fileID: 4286687772805582}
 --- !u!1 &5567215130393660325
 GameObject:
   m_ObjectHideFlags: 0
