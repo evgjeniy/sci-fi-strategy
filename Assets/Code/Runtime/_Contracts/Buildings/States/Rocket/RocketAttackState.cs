@@ -15,9 +15,10 @@ namespace SustainTheStrain._Contracts.Buildings
         {
             var rocketData = rocket.Data;
             var rocketConfig = rocketData.Config.Value;
-            
+            var rocketTransform = rocket.transform;
+
             rocketData.Timer.Time -= Time.deltaTime;
-            rocketData.Area.Update(rocket.transform.position, rocketConfig.Radius, rocketConfig.Mask);
+            rocketData.Area.Update(rocketTransform.position, rocketConfig.Radius, rocketConfig.Mask);
             
             if (rocketData.Area.Entities.Contains(_target) is false)
                 return new RocketIdleState();
@@ -36,14 +37,8 @@ namespace SustainTheStrain._Contracts.Buildings
                 if (damageable.Team == 1) continue;
                 if (!IsInSector(rocket, damageable.transform)) continue;
 
-                // var transform = rocket.transform;
-                // Projectile projectile = Object.Instantiate(rocket.Data.Config.ProjectilePrefab, transform.position, transform.rotation);
-                // projectile.LaunchTo(damageable, d =>
-                // {
-                //     d.Damage(rocket.Data.Config.Value.Damage);
-                // });
-                
-                Debug.Log($"ATTACK {damageable}");
+                var projectile = Object.Instantiate(rocketConfig.ProjectilePrefab, rocketTransform.position, rocketTransform.rotation);
+                projectile.LaunchTo(damageable, d => d.Damage(rocket.Data.Config.Value.Damage));
 
                 attackedAmount++;
             }

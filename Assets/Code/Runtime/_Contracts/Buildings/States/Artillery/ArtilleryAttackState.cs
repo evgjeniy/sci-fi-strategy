@@ -27,7 +27,8 @@ namespace SustainTheStrain._Contracts.Buildings
             
             if (artilleryData.Timer.IsTimeOver)
             {
-                // Attack (Launch artillery projectile to target), after invoke `Explosion`
+                var projectile = Object.Instantiate(artilleryConfig.ProjectilePrefab, artillery.transform);
+                projectile.LaunchTo(_target, onComplete: damageable => Explosion(artilleryConfig, damageable));
                 
                 artilleryData.Timer.Time = artilleryConfig.Cooldown;
             }

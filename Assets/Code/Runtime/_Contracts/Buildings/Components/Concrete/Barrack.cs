@@ -22,6 +22,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private BarrackManagementMenu _managementMenu;
         private GameObject _currentGfx;
+        private IBarrackState _currentState = new BarrackIdleState();
 
         public BarrackData Data { get; private set; }
 
@@ -43,6 +44,7 @@ namespace SustainTheStrain._Contracts.Buildings
 
         private void OnEnable() => Data.Config.Changed += UpgradeGraphics;
         private void OnDisable() => Data.Config.Changed -= UpgradeGraphics;
+        private void Update() => _currentState = _currentState.Update(this);
 
         public void OnPointerEnter() => Data.Outline.Enable();
         public void OnPointerExit() => Data.Outline.Disable();
