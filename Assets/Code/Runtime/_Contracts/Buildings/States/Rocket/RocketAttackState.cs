@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using SustainTheStrain.Units;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
@@ -30,15 +31,14 @@ namespace SustainTheStrain._Contracts.Buildings
            
             var attackedAmount = 0;
 
-            foreach (var damageable in rocketData.Area.Entities)
+            foreach (var target in rocketData.Area.Entities)
             {
                 if (attackedAmount >= rocketConfig.MaxTargets) break;
+                if (!IsInSector(rocket, target.transform)) continue;
 
-                if (damageable.Team == 1) continue;
-                if (!IsInSector(rocket, damageable.transform)) continue;
-
-                var projectile = Object.Instantiate(rocketConfig.ProjectilePrefab, rocketTransform.position, rocketTransform.rotation);
-                projectile.LaunchTo(damageable, d => d.Damage(rocket.Data.Config.Value.Damage));
+                Object.Instantiate(rocketConfig.ProjectilePrefab, rocketData.ProjectileSpawnPoint)
+                    .With(x => x.transform.position = rocketData.ProjectileSpawnPoint.position)
+                    .LaunchTo(target, onComplete: x => x.Damage(rocket.Data.Config.Value.Damage));
 
                 attackedAmount++;
             }

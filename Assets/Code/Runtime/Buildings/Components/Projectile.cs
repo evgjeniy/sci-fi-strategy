@@ -34,9 +34,16 @@ namespace SustainTheStrain.Buildings.Components
             onComplete?.Invoke(target);
 
             GetComponentInChildren<MeshRenderer>().IfNotNull(meshRenderer => meshRenderer.Disable());
-            particleSystem.Play();
-            
-            Destroy(gameObject, particleSystem.main.duration);
+
+            if (particleSystem == null)
+            {
+                gameObject.DestroyObject();
+            }
+            else
+            {
+                particleSystem.Play();
+                gameObject.DestroyObject(particleSystem.main.duration);
+            }
         } 
     }
 }

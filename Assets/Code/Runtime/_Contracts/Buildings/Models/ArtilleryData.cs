@@ -14,6 +14,8 @@ namespace SustainTheStrain._Contracts.Buildings
         public readonly Timer Timer;
         public readonly Area<Damageble> Area;
 
+        public Transform ProjectileSpawnPoint { get; set; }
+
         public ArtilleryData(ArtilleryBuildingConfig startConfig, Outline outline)
         {
             Outline = outline;

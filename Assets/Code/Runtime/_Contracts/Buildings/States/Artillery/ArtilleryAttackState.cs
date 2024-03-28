@@ -2,6 +2,7 @@
 using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain.Units;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain._Contracts.Buildings
 {
@@ -19,16 +20,17 @@ namespace SustainTheStrain._Contracts.Buildings
 
             artilleryData.Timer.Time -= Time.deltaTime;
             artilleryData.Area.Update(artillery.transform.position, artilleryConfig.Radius, artilleryConfig.Mask);
-            
+
             if (artilleryData.Area.Entities.Contains(_target) is false)
                 return new ArtilleryIdleState();
-            
+
             artilleryData.Orientation.Value = _target.transform.position;
-            
+
             if (artilleryData.Timer.IsTimeOver)
             {
-                var projectile = Object.Instantiate(artilleryConfig.ProjectilePrefab, artillery.transform);
-                projectile.LaunchTo(_target, onComplete: damageable => Explosion(artilleryConfig, damageable));
+                Object.Instantiate(artilleryConfig.ProjectilePrefab, artilleryData.ProjectileSpawnPoint)
+                    .With(x => x.transform.position = artilleryData.ProjectileSpawnPoint.position)
+                    .LaunchTo(_target, onComplete: damageable => Explosion(artilleryConfig, damageable));
                 
                 artilleryData.Timer.Time = artilleryConfig.Cooldown;
             }
