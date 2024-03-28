@@ -4,6 +4,7 @@ using SustainTheStrain._Contracts.Configs.Buildings;
 using SustainTheStrain._Contracts.Installers;
 using SustainTheStrain.Abilities;
 using SustainTheStrain.Units;
+using SustainTheStrain.Units.Spawners;
 using UnityEngine;
 using UnityEngine.Extensions;
 using Zenject;
@@ -12,6 +13,7 @@ namespace SustainTheStrain._Contracts.Buildings
 {
     [RequireComponent(typeof(Outline))]
     [RequireComponent(typeof(RecruitGroup))]
+    [RequireComponent(typeof(RecruitSpawner))]
     public class Barrack : MonoBehaviour, IBuilding
     {
         [SerializeField] private LayerMask _terrainLayer;
@@ -38,7 +40,8 @@ namespace SustainTheStrain._Contracts.Buildings
             (
                 startConfig: configProvider.GetBuildingConfig<BarrackBuildingConfig>(),
                 outline: GetComponent<Outline>(),
-                recruitGroup: GetComponent<RecruitGroup>()
+                recruitGroup: GetComponent<RecruitGroup>(),
+                recruitSpawner: GetComponent<RecruitSpawner>()
             );
         }
 

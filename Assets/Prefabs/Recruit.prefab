@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4424908747409459731}
   - component: {fileID: 7358440343129375846}
   - component: {fileID: 2256109187306574386}
+  - component: {fileID: 1795451277360461822}
   - component: {fileID: 3357532105762482792}
   - component: {fileID: 2351310096217553143}
   - component: {fileID: 5579810907258726874}
@@ -92,6 +93,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &1795451277360461822
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235370898999074474}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3357532105762482792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Damage>k__BackingField: 1
   <DamagePeriod>k__BackingField: 0.5
-  Animator: {fileID: 0}
+  Animator: {fileID: 1795451277360461822}
   _afterDeath: {fileID: 0}
 --- !u!136 &2351310096217553143
 CapsuleCollider:
@@ -197,6 +219,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 6.39
   precomputeOutline: 0
+  recacheOnEnable: 0
   bakeKeys: []
   bakeValues: []
 --- !u!114 &-2486561499931800298
