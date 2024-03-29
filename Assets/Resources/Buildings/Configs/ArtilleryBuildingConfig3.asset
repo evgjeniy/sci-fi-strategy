@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: ArtilleryBuildingConfig3
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 3
-  <Price>k__BackingField: 150
-  <Compensation>k__BackingField: 95
+  <Price>k__BackingField: 320
+  <Compensation>k__BackingField: 665
   <Mask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
   <Radius>k__BackingField: 9
-  <Damage>k__BackingField: 1
-  <Cooldown>k__BackingField: 1
-  <ExplosionRadius>k__BackingField: 1
+  <Damage>k__BackingField: 42
+  <Cooldown>k__BackingField: 3
+  <ExplosionRadius>k__BackingField: 5
   <GfxPrefab>k__BackingField: {fileID: 1121172672467375723, guid: ac0e26741dda312498dad7b4ad679299,
     type: 3}
   <ProjectilePrefab>k__BackingField: {fileID: 3020685036469273396, guid: 06347687b9a8b424c95b6862f55f5040,
