@@ -89,7 +89,7 @@ namespace SustainTheStrain.Abilities
         [SerializeField, HideInInspector]
         private List<ListVector3> bakeValues = new List<ListVector3>();
 
-        private Renderer[] renderers;
+        private MeshRenderer[] renderers;
         private Material outlineMaskMaterial;
         private Material outlineFillMaterial;
 
@@ -99,7 +99,7 @@ namespace SustainTheStrain.Abilities
         {
 
             // Cache renderers
-            renderers = GetComponentsInChildren<Renderer>();
+            renderers = GetComponentsInChildren<MeshRenderer>();
 
             // Instantiate outline materials
             outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
@@ -117,7 +117,7 @@ namespace SustainTheStrain.Abilities
 
         void OnEnable()
         {
-            if (recacheOnEnable) renderers = GetComponentsInChildren<Renderer>();
+            if (recacheOnEnable) renderers = GetComponentsInChildren<MeshRenderer>();
             
             foreach (var renderer in renderers)
             {
