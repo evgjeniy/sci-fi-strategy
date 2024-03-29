@@ -1,4 +1,4 @@
-using SustainTheStrain.Buildings.FSM;
+using SustainTheStrain.Buildings;
 using UnityEngine;
 
 namespace SustainTheStrain.Units

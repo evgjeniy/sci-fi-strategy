@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: ab1c9a21f71c6164ab7c886238478669
+<<<<<<<< HEAD:Assets/Code/Models/maptestfull.meta
+guid: 5ff6e52e826ead34ba9c274a39bb025e
+========
+guid: aed914449398cc84292c7b605320a940
+>>>>>>>> prototype:Assets/Code/Scripts/AbilitiesNew.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

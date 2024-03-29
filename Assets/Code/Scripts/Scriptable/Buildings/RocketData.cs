@@ -1,4 +1,4 @@
-﻿using SustainTheStrain.Buildings.Components;
+﻿using SustainTheStrain.Buildings;
 using UnityEngine;
 
 namespace SustainTheStrain.Scriptable.Buildings

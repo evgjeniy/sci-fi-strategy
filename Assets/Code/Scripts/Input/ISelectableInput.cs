@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SustainTheStrain.Input
 {
-    public interface IBuildingPlaceholderInput : ISelectableInput<BuildingPlaceholder> {}
+    /*public interface IBuildingPlaceholderInput : ISelectableInput<BuildingPlaceholder> {}*/
 
     public interface IHeroInput : ISelectableInput<Hero>
     {

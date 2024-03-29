@@ -10,7 +10,7 @@ namespace SustainTheStrain.Installers
 
         public override void InstallBindings()
         {
-            Container.Bind<ResourceManager>().FromInstance(_resourceManager).AsSingle();
+            Container.BindInterfacesAndSelfTo<ResourceManager>().FromInstance(_resourceManager).AsSingle();
         }
     }
 }

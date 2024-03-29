@@ -4,25 +4,26 @@ using Zenject;
 
 namespace SustainTheStrain.EnergySystem.UI.Factories
 {
-    public class BasicEnergySystemUIFactory : MonoUIFactory
+    public class BasicEnergySystemUIFactory : IFactory<IEnergySystem, EnergySystemUI>
     {
-        
-        public override EnergySystemUI Create(IEnergySystem system)
+        private EnergySystemUI _uiPrefab;
+        private Transform _spawnParent;
+        private BaseEnergyUIController _energyUIController;
+
+        public BasicEnergySystemUIFactory(EnergySystemUISettings settings, BaseEnergyUIController energyUIController, Transform spawnParent)
         {
-            var ui = Instantiate(_uiPrefab, _spawnParent);
-            var bg = Instantiate(_backgroundImage, ui.transform);
-            var button = Instantiate(_controllButton, bg.transform);
-            ui.ControllButton = button;
+            _uiPrefab = settings.UIPrefab;
+            _spawnParent = spawnParent;
+            _energyUIController = energyUIController;
+        }
+        
+        public EnergySystemUI Create(IEnergySystem system)
+        {
+            var ui = GameObject.Instantiate(_uiPrefab, _spawnParent);
+            var button = ui.ControllButton;
             button.image.sprite = system.EnergySettings.ButtonImage;
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
-            button.OnLeftMouseClick += () =>
-            {
-                _energyController.TryLoadEnergyToSystem(system);
-            };
-            button.OnRightMouseClick += () =>
-            {
-                _energyController.TryReturnEnergyFromSystem(system);
-            };
+            _energyUIController.MakeSubscriptions(ui, system);
             return ui;
         }
     }

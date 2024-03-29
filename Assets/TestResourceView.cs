@@ -1,4 +1,4 @@
-using SustainTheStrain._Contracts.Installers;
+using SustainTheStrain.ResourceSystems;
 using TMPro;
 using UnityEngine.Extensions;
 using Zenject;

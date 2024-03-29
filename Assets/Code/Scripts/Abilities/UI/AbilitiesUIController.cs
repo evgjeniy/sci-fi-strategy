@@ -7,8 +7,6 @@ namespace SustainTheStrain.Abilities
 {
     public class AbilitiesUIController : MonoBehaviour
     {
-        private readonly Color _readyColor = Color.green; //temporary UI
-        private readonly Color _loadingColor = Color.red;
 
         private AbilityControlButton[] _buttons;
         private AbilitiesController _abilitiesController;

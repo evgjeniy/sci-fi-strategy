@@ -72,7 +72,7 @@ namespace SustainTheStrain.Abilities
             if (!chosenAbility.IsReloaded()) return;
             currentAim = Abilities[idx] switch
             {
-                ZoneAbility => new ZoneAim(zoneRadius, aimZonePrefab, groundLayers, maxDistFromCamera),
+                ZoneAbility => new ZoneAim((Abilities[idx] as ZoneAbility).getZoneRadius(), aimZonePrefab, groundLayers, maxDistFromCamera),
                 LandingAbility => new PointAim(groundLayers, maxDistFromCamera),
                 _ => new PointAim(enemyLayers, maxDistFromCamera)
             };
@@ -115,7 +115,7 @@ namespace SustainTheStrain.Abilities
             AddAbility(new LandingAbility(_abilitiesSettings.LandingAbility));
             foreach (var ability in Abilities)
             {
-                ability.EnergyController = _energyController;
+
                 _energyController.AddEnergySystem(ability);
             }
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû

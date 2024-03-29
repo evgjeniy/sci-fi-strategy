@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Dreamteck.Splines;
 using SustainTheStrain.ResourceSystems;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
 namespace SustainTheStrain.Units.Spawners
@@ -31,18 +32,19 @@ namespace SustainTheStrain.Units.Spawners
 
             if (unit == null)
             {
-                Debug.LogError($"[EnemySpawner {name}] Enemy spaw failed");
+                //Debug.LogError($"[EnemySpawner {name}] Enemy spaw failed");
                 return null;
             }
 
-            unit.transform.position = SpawnPosition;
-            unit.GetComponent<SplineFollower>().spline = _spline;
-            unit.GetComponent<SplineFollower>().RebuildImmediate();
+            unit.GetComponent<NavMeshAgent>().Warp(SpawnPosition);
+            unit.GetComponent<SplineTracer>().spline = _spline;
+            unit.GetComponent<SplineTracer>().RebuildImmediate();
             _spawnedEnemies.Add(unit);
-            unit.GetComponent<Damageble>().OnDied += (Damageble d) => { _resourceManager.CurrentGold += unit.CoinsDrop;
+            unit.GetComponent<Damageble>().OnDied += (Damageble d) => { _resourceManager.Gold.Value += unit.CoinsDrop;
                 _spawnedEnemies.Remove(unit);
             };
-            Debug.Log($"[EnemySpawner {name}] Spawned unit");
+            var agent = unit.GetComponent<NavMeshAgent>();;
+            //Debug.Log($"[EnemySpawner {name}] Spawned unit");
             return unit;
         }
 

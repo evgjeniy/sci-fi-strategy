@@ -1,11 +1,10 @@
-﻿using SustainTheStrain.Buildings.Components;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SustainTheStrain.Scriptable.Buildings
 {
     public abstract class BuildingData : ScriptableObject
     {
-        [field: SerializeField] public Building Prefab { get; private set; }
+        [field: SerializeField] public GameObject Prefab { get; private set; }
         [field: SerializeField] public Mesh Mesh { get; private set; }
         [field: SerializeField] public LayerMask AttackMask { get; private set; }
         [field: SerializeField] public int CreatePrice { get; private set; } 

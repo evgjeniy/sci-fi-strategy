@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using SustainTheStrain.Scriptable.Buildings;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
 namespace SustainTheStrain.Units.Spawners
@@ -19,7 +20,7 @@ namespace SustainTheStrain.Units.Spawners
         public override Recruit Spawn()
         {
             var unit = _factory.Create();
-            unit.transform.position = SpawnPosition;
+            unit.GetComponent<NavMeshAgent>().Warp(SpawnPosition);
             Debug.Log($"[RecruitSpawner {name}] Spawned recruit");
             return unit;
         }

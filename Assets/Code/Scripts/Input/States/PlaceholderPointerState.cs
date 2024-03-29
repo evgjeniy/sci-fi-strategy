@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using SustainTheStrain.Buildings;
 using SustainTheStrain.Units;
 using UnityEngine;
@@ -26,7 +26,7 @@ namespace SustainTheStrain.Input.States
 
         protected override void MouseMove(RaycastHit hit)
         {
-            if (hit.collider.TryGetComponent<BuildingPlaceholder>(out _)) { /* ignore, maybe Action<BuildingPlaceholder> OnPlaceholderPointerMove callback */ }
+            if (hit.collider.TryGetComponent<BuildingPlaceholder>(out _)) { /* ignore, maybe Action<BuildingPlaceholder> OnPlaceholderPointerMove callback #1# }
             else if (hit.collider.TryGetComponent<Hero>(out var hero))
             {
                 Initializer.CashedData.Hero = hero;
@@ -40,4 +40,4 @@ namespace SustainTheStrain.Input.States
             Initializer.StateMachine.SetState<PlaceholderSelectionState>();
         }
     }
-}
+}*/

@@ -46,7 +46,7 @@ namespace SustainTheStrain.Abilities
         protected abstract void ReadyToShoot();
         public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage { get; private set; }
-        [Inject] public EnergyController EnergyController { get; set; }
+        
         public int MaxEnergy { get; private set; }
         public int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
         public int CurrentEnergy 
@@ -92,7 +92,7 @@ namespace SustainTheStrain.Abilities
             MaxEnergy = settings.MaxEnergy;
         }
 
-        IEnergySystem _Contracts.IObservable<IEnergySystem>.Value => this;
+        IEnergySystem IObservable<IEnergySystem>.Value => this;
         public event Action<IEnergySystem> Changed;
     }
 }

@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/New Buildings Demo Scene/NavMesh-Plane.asset.meta
+guid: 34a6d1fe6f781214b8e2265c269ed2ec
+========
+guid: dbae0ada0652a9a4e922af945c346692
+>>>>>>>> origin/gd-prototype:Assets/Scenes/Prototype Scene 1/NavMesh-Plane.asset.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 23800000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

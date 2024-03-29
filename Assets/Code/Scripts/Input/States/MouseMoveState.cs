@@ -42,7 +42,7 @@ namespace SustainTheStrain.Input.States
         {
             _mousePosition = context.ReadValue<Vector2>();
             
-            if (_mousePosition.IsPointerUnderUI(Initializer.Settings.EventSystem)) return;
+            if (_mousePosition.IsPointerUnderUI()) return;
 
             var ray = Camera.main.ScreenPointToRay(_mousePosition);
             OnMouseMoveRay?.Invoke(ray);
@@ -52,7 +52,7 @@ namespace SustainTheStrain.Input.States
 
         private void MouseLeftButtonPerformed(InputAction.CallbackContext context)
         {
-            if (_mousePosition.IsPointerUnderUI(Initializer.Settings.EventSystem)) return;
+            if (_mousePosition.IsPointerUnderUI()) return;
             
             var ray = Camera.main.ScreenPointToRay(_mousePosition);
             OnLeftMouseButtonClickRay?.Invoke(ray);
@@ -62,12 +62,12 @@ namespace SustainTheStrain.Input.States
 
         protected virtual void MouseMove(RaycastHit hit)
         {
-            if (hit.collider.TryGetComponent<BuildingPlaceholder>(out var placeholder))
+            /*if (hit.collider.TryGetComponent<BuildingPlaceholder>(out var placeholder))
             {
                 Initializer.CashedData.Placeholder = placeholder;
                 Initializer.StateMachine.SetState<PlaceholderPointerState>();
             }
-            else if (hit.collider.TryGetComponent<Hero>(out var hero))
+            else */if (hit.collider.TryGetComponent<Hero>(out var hero))
             {
                 Initializer.CashedData.Hero = hero;
                 Initializer.StateMachine.SetState<HeroPointerState>();

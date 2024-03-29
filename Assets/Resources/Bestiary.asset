@@ -22,3 +22,6 @@ MonoBehaviour:
   - name: Shield
     id: 2
     enemy: {fileID: 5466643690414773136, guid: c967dbd03c9d7db4099ff3c8aa4983e4, type: 3}
+  - name: Mob
+    id: 3
+    enemy: {fileID: 7899189236986033438, guid: 826df1b61eee9524a87e95793d295b8d, type: 3}

@@ -27,11 +27,11 @@ namespace SustainTheStrain.Input.States
         protected override void MouseMove(RaycastHit hit)
         {
             if (hit.collider.TryGetComponent<Hero>(out _)) { /* ignore, maybe Action<Hero> OnHeroPointerMove callback */ }
-            else if (hit.collider.TryGetComponent<BuildingPlaceholder>(out var placeholder))
+            /*else if (hit.collider.TryGetComponent<BuildingPlaceholder>(out var placeholder))
             {
                 Initializer.CashedData.Placeholder = placeholder;
                 Initializer.StateMachine.SetState<PlaceholderPointerState>();
-            }
+            }*/
             else Initializer.StateMachine.SetState<MouseMoveState>();
         }
 

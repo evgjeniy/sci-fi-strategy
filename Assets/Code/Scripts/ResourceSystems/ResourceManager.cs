@@ -1,15 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SustainTheStrain.EnergySystem;
 using UnityEngine;
 using Zenject;
 
 namespace SustainTheStrain.ResourceSystems
 {
-    public class ResourceManager : MonoBehaviour
+    public interface IResourceManager
     {
+        public Observable<int> Gold { get; }
+        public bool TrySpend(int spendValue);
+        public void AddGold(int count);
+    }
+
+    public class ResourceManager : MonoBehaviour, IResourceManager
+    {
+        [SerializeField] private int _currentGold;
+        
         public List<IEnergySystem> Generators => _generators;
         private List<IEnergySystem> _generators = new List<IEnergySystem>();
+        
+        private GoldGenerator _goldGenerator;
 
         /*
         public event Action<int> OnExplorePointsChanged;
@@ -26,42 +36,35 @@ namespace SustainTheStrain.ResourceSystems
                 OnExplorePointsChanged?.Invoke(_currentExplorePoints);
             }
         }*/
-
-        public event Action<int> OnGoldChanged;
-        [SerializeField] private int _maxGold;
-
-        private GoldGenerator _goldGenerator;
-        [SerializeField] private int _currentGold;
-
-        public int CurrentGold
-        {
-            get => _currentGold;
-            set
-            {
-                _currentGold = Mathf.Clamp(value, 0, _maxGold);
-                OnGoldChanged?.Invoke(_currentGold);
-            }
-        }
+        
+        public Observable<int> Gold { get; private set; }
 
         [Inject]
-        public void AddGenerators(GoldGenerator goldGenerator /*, ExplorePointGenerator explorePointGenerator*/)
+        public void AddGenerators([Inject(Optional = true)] GoldGenerator goldGenerator /*, ExplorePointGenerator explorePointGenerator*/)
         {
             //_explorePointGenerator = explorePointGenerator;
             //_generators.Add(_explorePointGenerator);
             _goldGenerator = goldGenerator;
             _generators.Add(_goldGenerator);
-            Subscribe();
+
+            Gold = new Observable<int>(_currentGold);
         }
 
-        private void Subscribe()
+        private void OnEnable()
         {
             _goldGenerator.OnResourceGenerated += AddGold;
             //_explorePointGenerator.OnResourceGenerated += AddExplorePoint;
         }
 
-        void AddGold(int count)
+        private void OnDisable()
         {
-            CurrentGold += count;
+            _goldGenerator.OnResourceGenerated -= AddGold;
+            //_explorePointGenerator.OnResourceGenerated -= AddExplorePoint;
+        }
+
+        public void AddGold(int count)
+        {
+            Gold.Value += count;
         }
 
         // void AddExplorePoint(int count)
@@ -69,15 +72,13 @@ namespace SustainTheStrain.ResourceSystems
         //     CurrentExplorePoints += count;
         // }
 
-        private void UnSubscribe()
+        public bool TrySpend(int spendValue)
         {
-            _goldGenerator.OnResourceGenerated -= AddGold;
-            //_explorePointGenerator.OnResourceGenerated -= AddExplorePoint;
-        }
+            var goldAfterSpend = Gold.Value - spendValue;
+            if (goldAfterSpend < 0) return false;
 
-        private void OnDisable()
-        {
-            UnSubscribe();
+            Gold.Value = goldAfterSpend;
+            return true;
         }
     }
 }

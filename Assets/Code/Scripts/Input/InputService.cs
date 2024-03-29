@@ -10,7 +10,7 @@ using Zenject;
 
 namespace SustainTheStrain.Input
 {
-    public class InputService : IInitializable, IDisposable, IMouseMove, IBuildingPlaceholderInput, IHeroInput, IAbilityInput
+    public class InputService : IInitializable, IDisposable, IMouseMove, /*IBuildingPlaceholderInput,*/ IHeroInput, IAbilityInput
     {
         #region Nested Classes
 
@@ -25,7 +25,7 @@ namespace SustainTheStrain.Input
 
         public class InputData
         {
-            public BuildingPlaceholder Placeholder;
+            /*public BuildingPlaceholder Placeholder;*/
             public Hero Hero;
         }
 
@@ -34,8 +34,8 @@ namespace SustainTheStrain.Input
         private readonly InputActions _actions = new();
 
         private readonly MouseMoveState _mouseMoveState;
-        private readonly PlaceholderPointerState _placeholderPointerState;
-        private readonly PlaceholderSelectionState _placeholderSelectionState;
+        /*private readonly PlaceholderPointerState _placeholderPointerState;
+        private readonly PlaceholderSelectionState _placeholderSelectionState;*/
         private readonly HeroPointerState _heroPointerState;
         private readonly HeroSelectionState _heroSelectionState;
         private readonly AbilitySelectionState _abilitySelectionState;
@@ -49,8 +49,8 @@ namespace SustainTheStrain.Input
             Settings = inputSettings;
 
             _mouseMoveState = new MouseMoveState(this, _actions.Mouse);
-            _placeholderPointerState = new PlaceholderPointerState(this, _actions.Mouse);
-            _placeholderSelectionState = new PlaceholderSelectionState(this, _actions.Mouse);
+            /*_placeholderPointerState = new PlaceholderPointerState(this, _actions.Mouse);
+            _placeholderSelectionState = new PlaceholderSelectionState(this, _actions.Mouse);*/
             _heroPointerState = new HeroPointerState(this, _actions.Mouse);
             _heroSelectionState = new HeroSelectionState(this, _actions.Mouse);
             _abilitySelectionState = new AbilitySelectionState(this, _actions.Mouse);
@@ -66,7 +66,7 @@ namespace SustainTheStrain.Input
 
             StateMachine = new StateMachine<InputService>
             (
-                _mouseMoveState, _placeholderPointerState, _placeholderSelectionState,
+                _mouseMoveState, /*_placeholderPointerState, _placeholderSelectionState,*/
                 _heroPointerState, _heroSelectionState, _abilitySelectionState
             ) { TransitionsEnabled = false };
 
@@ -129,7 +129,7 @@ namespace SustainTheStrain.Input
             remove => _abilitySelectionState.OnAbilityClick -= value;
         }
 
-        event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnPointerEnter
+        /*event Action<BuildingPlaceholder> ISelectableInput<BuildingPlaceholder>.OnPointerEnter
         {
             add => _placeholderPointerState.OnPlaceholderEnter += value;
             remove => _placeholderPointerState.OnPlaceholderEnter -= value;
@@ -151,7 +151,7 @@ namespace SustainTheStrain.Input
         {
             add => _placeholderSelectionState.OnPlaceholderDeselected += value;
             remove => _placeholderSelectionState.OnPlaceholderDeselected -= value;
-        }
+        }*/
 
         event Action<Hero> ISelectableInput<Hero>.OnPointerEnter
         {
