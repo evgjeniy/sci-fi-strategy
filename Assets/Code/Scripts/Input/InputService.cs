@@ -17,7 +17,6 @@ namespace SustainTheStrain.Input
         [Serializable]
         public class InputSettings
         {
-            [field: SerializeField] public EventSystem EventSystem { get; private set; }
             [field: SerializeField] public LayerMask RayCastMask { get; private set; } = 255;
             [field: SerializeField] public float MaxDistance { get; private set; } = float.MaxValue;
             [field: SerializeField] public LayerMask AbilityMask { get; private set; } = 255;
