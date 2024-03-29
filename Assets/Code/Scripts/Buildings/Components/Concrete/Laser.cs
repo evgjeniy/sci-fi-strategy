@@ -31,7 +31,8 @@ namespace SustainTheStrain.Buildings
             Data = new LaserData
             (
                 startConfig: configProvider.GetBuildingConfig<LaserBuildingConfig>(),
-                outline: GetComponent<Outline>()
+                outline: GetComponent<Outline>(),
+                radiusVisualizer: GetComponentInChildren<IZoneVisualizer>()
             );
         }
 
@@ -48,13 +49,13 @@ namespace SustainTheStrain.Buildings
                 _managementMenu = _buildingFactory.CreateMenu<LaserManagementMenu>(this);
             
             _managementMenu.Enable();
-            Debug.Log("[LASER] Show Radius");
+            Data.RadiusVisualizer.Radius = Data.Config.Value.Radius;
         }
 
         public void OnDeselected()
         {
             _managementMenu.Disable();
-            Debug.Log("[LASER] Hide Radius");
+            Data.RadiusVisualizer.Radius = 0;
         }
 
         public void Upgrade()
@@ -75,6 +76,7 @@ namespace SustainTheStrain.Buildings
         {
             _currentGfx.IfNotNull(x => x.DestroyObject());
             _currentGfx = _buildingFactory.CreateGfx(config.GfxPrefab, transform, Data.Orientation);
+            Data.RadiusVisualizer.Radius = config.Radius;
         }
     }
 }

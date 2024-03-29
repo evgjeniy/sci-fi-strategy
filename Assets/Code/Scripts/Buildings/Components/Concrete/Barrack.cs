@@ -41,7 +41,8 @@ namespace SustainTheStrain.Buildings
                 startConfig: configProvider.GetBuildingConfig<BarrackBuildingConfig>(),
                 outline: GetComponent<Outline>(),
                 recruitGroup: GetComponent<RecruitGroup>(),
-                recruitSpawner: GetComponent<RecruitSpawner>()
+                recruitSpawner: GetComponent<RecruitSpawner>(),
+                radiusVisualizer: GetComponentInChildren<IZoneVisualizer>()
             );
         }
 
@@ -58,13 +59,13 @@ namespace SustainTheStrain.Buildings
                 _managementMenu = _buildingFactory.CreateMenu<BarrackManagementMenu>(this);
             
             _managementMenu.Enable();
-            Debug.Log("[BARRACK] Show Radius");
+            Data.RadiusVisualizer.Radius = Data.Config.Value.Radius;
         }
 
         public void OnDeselected()
         {
             _managementMenu.Disable();
-            Debug.Log("[BARRACK] Hide Radius");
+            Data.RadiusVisualizer.Radius = 0;
 
             Data.RecruitsPointer.IfNotNull(x => x.DestroyObject());
         }
@@ -121,6 +122,8 @@ namespace SustainTheStrain.Buildings
         {
             _currentGfx.IfNotNull(x => x.DestroyObject());
             _currentGfx = Instantiate(config.GfxPrefab, transform);
+            
+            Data.RadiusVisualizer.Radius = config.Radius;
         }
     }
 }

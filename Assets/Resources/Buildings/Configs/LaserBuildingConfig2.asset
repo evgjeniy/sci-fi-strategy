@@ -18,7 +18,7 @@ MonoBehaviour:
   <Mask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
-  <Radius>k__BackingField: 5
+  <Radius>k__BackingField: 7
   <Damage>k__BackingField: 1
   <Cooldown>k__BackingField: 1
   <GfxPrefab>k__BackingField: {fileID: 1121172672467375723, guid: caf0e6bd82db6e04b98c91731dfd0dbd,

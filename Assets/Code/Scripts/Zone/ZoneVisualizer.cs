@@ -33,7 +33,8 @@ namespace SustainTheStrain
             set => transform.rotation = Quaternion.Euler(90, value, 0); 
         }
 
-        private void Awake()
+        [Zenject.Inject]
+        private void Initialize()
         {
             _projector = GetComponent<DecalProjector>();
 

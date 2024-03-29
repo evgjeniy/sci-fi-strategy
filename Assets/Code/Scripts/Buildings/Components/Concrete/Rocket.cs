@@ -1,4 +1,5 @@
-﻿using SustainTheStrain.Abilities;
+﻿using System;
+using SustainTheStrain.Abilities;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.ResourceSystems;
@@ -31,10 +32,14 @@ namespace SustainTheStrain.Buildings
             Data = new RocketData
             (
                 startConfig: configProvider.GetBuildingConfig<RocketBuildingConfig>(),
-                outline: GetComponent<Outline>()
+                outline: GetComponent<Outline>(),
+                radiusVisualizer: transform.GetChild(0).GetComponent<IZoneVisualizer>(),
+                sectorVisualizer: transform.GetChild(1).GetComponent<IZoneVisualizer>()
             );
         }
 
+        private void Awake() => Data.Orientation.Changed += OrientationOnChanged;
+        private void OnDestroy() => Data.Orientation.Changed -= OrientationOnChanged;
         private void OnEnable() => Data.Config.Changed += UpgradeGraphics;
         private void OnDisable() => Data.Config.Changed -= UpgradeGraphics;
         private void Update() => _currentState = _currentState.Update(this);
@@ -48,13 +53,13 @@ namespace SustainTheStrain.Buildings
                 _managementMenu = _buildingFactory.CreateMenu<RocketManagementMenu>(this);
             
             _managementMenu.Enable();
-            Debug.Log("[ROCKET] Show Radius");
+            Data.RadiusVisualizer.Radius = Data.SectorVisualizer.Radius = Data.Config.Value.Radius;
         }
 
         public void OnDeselected()
         {
             _managementMenu.Disable();
-            Debug.Log("[ROCKET] Hide Radius");
+            Data.RadiusVisualizer.Radius = Data.SectorVisualizer.Radius = 0;
         }
 
         public void Upgrade()
@@ -76,6 +81,15 @@ namespace SustainTheStrain.Buildings
             _currentGfx.IfNotNull(x => x.DestroyObject());
             _currentGfx = _buildingFactory.CreateGfx(config.GfxPrefab, transform, Data.Orientation);
             Data.ProjectileSpawnPoint = _currentGfx.ProjectileSpawnPoint;
+
+            Data.RadiusVisualizer.Radius = Data.SectorVisualizer.Radius = config.Radius;
+            Data.SectorVisualizer.Angle = config.SectorAngle;
+        }
+
+        private void OrientationOnChanged(Vector3 orientation)
+        {
+            var lookRotation = Quaternion.LookRotation(orientation - transform.position);
+            Data.SectorVisualizer.Direction = lookRotation.eulerAngles.y;
         }
     }
 }

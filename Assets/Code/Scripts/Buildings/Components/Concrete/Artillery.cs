@@ -31,7 +31,8 @@ namespace SustainTheStrain.Buildings
             Data = new ArtilleryData
             (
                 startConfig: configProvider.GetBuildingConfig<ArtilleryBuildingConfig>(),
-                outline: GetComponent<Outline>()
+                outline: GetComponent<Outline>(),
+                radiusVisualizer: GetComponentInChildren<IZoneVisualizer>()
             );
         }
 
@@ -48,13 +49,13 @@ namespace SustainTheStrain.Buildings
                 _managementMenu = _buildingFactory.CreateMenu<ArtilleryManagementMenu>(this);
             
             _managementMenu.Enable();
-            Debug.Log("[ARTILLERY] Show Radius");
+            Data.RadiusVisualizer.Radius = Data.Config.Value.Radius;
         }
 
         public void OnDeselected()
         {
             _managementMenu.Disable();
-            Debug.Log("[ARTILLERY] Hide Radius");
+            Data.RadiusVisualizer.Radius = 0;
         }
 
         public void Upgrade()
@@ -76,6 +77,7 @@ namespace SustainTheStrain.Buildings
             _currentGfx.IfNotNull(x => x.DestroyObject());
             _currentGfx = _buildingFactory.CreateGfx(config.GfxPrefab, transform, Data.Orientation);
             Data.ProjectileSpawnPoint = _currentGfx.ProjectileSpawnPoint;
+            Data.RadiusVisualizer.Radius = config.Radius;
         }
     }
 }
