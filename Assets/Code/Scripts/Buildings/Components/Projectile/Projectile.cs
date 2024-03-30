@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Extensions;
 
@@ -12,10 +11,13 @@ namespace SustainTheStrain.Buildings
         [SerializeField] private AnimationCurve flyingCurve;
         [SerializeField] private ParticleSystem explosionParticle;
         
-        public async void LaunchTo<T>(T target, Action<T> onComplete = null) where T : Component => await LaunchToAsync(target, onComplete).ToUniTask();
+        public void LaunchTo<T>(T target, Action<T> onComplete = null) where T : Component
+        {
+            StartCoroutine(LaunchToAsync(target, onComplete));
+        }
 
         // TODO: Redo (need's to be a homing missile)
-        public IEnumerator LaunchToAsync<T>(T target, Action<T> onComplete = null) where T : Component
+        private IEnumerator LaunchToAsync<T>(T target, Action<T> onComplete = null) where T : Component
         {
             var startPosition = transform.position;
             
@@ -34,15 +36,14 @@ namespace SustainTheStrain.Buildings
             transform.position = Vector3.Lerp(startPosition, target.transform.position, flyingCurve.Evaluate(1.0f));
             onComplete?.Invoke(target);
 
-            GetComponentInChildren<MeshRenderer>().IfNotNull(meshRenderer => meshRenderer.Disable());
-
             if (explosionParticle != null)
             {
                 explosionParticle.Play();
+                GetComponentInChildren<MeshRenderer>().IfNotNull(meshRenderer => meshRenderer.Disable());
                 yield return new WaitForSeconds(explosionParticle.main.duration);
             }
 
             gameObject.DestroyObject();
-        } 
+        }
     }
 }
