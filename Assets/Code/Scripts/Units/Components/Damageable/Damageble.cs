@@ -1,11 +1,14 @@
 using SustainTheStrain.Units.Components;
 using System;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units
 {
     public class Damageble : MonoBehaviour, IDamageable
     {
+        [SerializeField] public GameObject _afterDeath;
+
         [field:SerializeField]
         public float MaxHP { get; set; }
 
@@ -47,6 +50,8 @@ namespace SustainTheStrain.Units
         public virtual void Die()
         {
             OnDied?.Invoke(this);
+
+            _afterDeath.IfNotNull(x => Instantiate(x, transform.position, Quaternion.identity));
             Destroy(gameObject);
         }
     }

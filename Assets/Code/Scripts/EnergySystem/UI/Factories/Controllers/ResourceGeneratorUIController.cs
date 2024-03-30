@@ -19,15 +19,13 @@ namespace SustainTheStrain
         public void MakeSubscriptions(EnergySystemUI ui, IEnergySystem system)
         {
             var button = ui.ControllButton;
-            var generatorUI = new GeneratorUI(button.transform, system as ResourceGenerator);
-            button.OnLeftMouseClick += () =>
+            if (system is ResourceGenerator generator)
             {
-                _energyController.TryLoadEnergyToSystem(system);
-            };
-            button.OnRightMouseClick += () =>
-            {
-                _energyController.TryReturnEnergyFromSystem(system);
-            };
+                var generatorUI = new GeneratorUI(button.transform, generator);
+            }
+
+            button.OnLeftMouseClick += () => _energyController.TryLoadEnergyToSystem(system);
+            button.OnRightMouseClick += () => _energyController.TryReturnEnergyFromSystem(system);
             system.Changed += ui.ChangeEnergy;
         }
     }

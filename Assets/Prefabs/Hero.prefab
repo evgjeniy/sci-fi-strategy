@@ -486,8 +486,6 @@ MonoBehaviour:
   <Damage>k__BackingField: 2
   <DamagePeriod>k__BackingField: 1
   Animator: {fileID: 0}
-  _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
-    type: 3}
 --- !u!114 &1062942572181524570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,6 +526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3272f43aba238a54790e000f24fd2199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
+    type: 3}
   <MaxHP>k__BackingField: 10
   <Team>k__BackingField: 1
   _recoverDelay: 2

@@ -215,8 +215,6 @@ MonoBehaviour:
   <Damage>k__BackingField: 1
   <DamagePeriod>k__BackingField: 0.5
   Animator: {fileID: 0}
-  _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
-    type: 3}
   CoinsDrop: 0
 --- !u!195 &752340526721805729
 NavMeshAgent:
@@ -279,6 +277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc838324d2690045a19506f5e1cb70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
+    type: 3}
   <MaxHP>k__BackingField: 5
   <Team>k__BackingField: 0
 --- !u!114 &5367921590081931393
@@ -311,6 +311,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
+  recacheOnEnable: 0
   bakeKeys: []
   bakeValues: []
 --- !u!114 &2145467868494169081

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Extensions;
@@ -9,12 +10,12 @@ namespace SustainTheStrain.Buildings
     {
         [SerializeField] private float flyingTime = 2.0f;
         [SerializeField] private AnimationCurve flyingCurve;
-        [SerializeField] private ParticleSystem particleSystem;
+        [SerializeField] private ParticleSystem explosionParticle;
         
-        public async void LaunchTo<T>(T target, Action<T> onComplete = null) where T : Component => await LaunchToAsync(target, onComplete);
+        public async void LaunchTo<T>(T target, Action<T> onComplete = null) where T : Component => await LaunchToAsync(target, onComplete).ToUniTask();
 
         // TODO: Redo (need's to be a homing missile)
-        public async UniTask LaunchToAsync<T>(T target, Action<T> onComplete = null) where T : Component
+        public IEnumerator LaunchToAsync<T>(T target, Action<T> onComplete = null) where T : Component
         {
             var startPosition = transform.position;
             
@@ -23,11 +24,11 @@ namespace SustainTheStrain.Buildings
                 if (target == null)
                 {
                     Destroy(gameObject);
-                    return;
+                    yield break;
                 }
                 
                 transform.position = Vector3.Lerp(startPosition, target.transform.position, flyingCurve.Evaluate(t));
-                await UniTask.NextFrame();
+                yield return null;
             }
 
             transform.position = Vector3.Lerp(startPosition, target.transform.position, flyingCurve.Evaluate(1.0f));
@@ -35,15 +36,13 @@ namespace SustainTheStrain.Buildings
 
             GetComponentInChildren<MeshRenderer>().IfNotNull(meshRenderer => meshRenderer.Disable());
 
-            if (particleSystem == null)
+            if (explosionParticle != null)
             {
-                gameObject.DestroyObject();
+                explosionParticle.Play();
+                yield return new WaitForSeconds(explosionParticle.main.duration);
             }
-            else
-            {
-                particleSystem.Play();
-                gameObject.DestroyObject(particleSystem.main.duration);
-            }
+
+            gameObject.DestroyObject();
         } 
     }
 }

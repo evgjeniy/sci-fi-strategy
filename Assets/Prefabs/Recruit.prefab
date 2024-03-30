@@ -129,7 +129,6 @@ MonoBehaviour:
   <Damage>k__BackingField: 1
   <DamagePeriod>k__BackingField: 0.5
   Animator: {fileID: 1795451277360461822}
-  _afterDeath: {fileID: 0}
 --- !u!136 &2351310096217553143
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -187,6 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc838324d2690045a19506f5e1cb70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
+    type: 3}
   <MaxHP>k__BackingField: 6
   <Team>k__BackingField: 1
 --- !u!114 &9139420997716089492
@@ -287,6 +288,7 @@ MonoBehaviour:
   _cellOffset: 3
   _maxHpSize: 5
   _visual: {fileID: 0}
+  _slider: {fileID: 0}
 --- !u!1 &3300110456601824311
 GameObject:
   m_ObjectHideFlags: 0

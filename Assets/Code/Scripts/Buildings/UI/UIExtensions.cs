@@ -12,8 +12,10 @@ namespace SustainTheStrain.Buildings
             var cameraPosition = worldCamera.transform.position;
             var fromPosition = from.position;
 
-            uiTransform.position = Vector3.Lerp(fromPosition, cameraPosition, positionLerpOffset);
-            uiTransform.LookAt(fromPosition - cameraPosition, worldCamera.transform.up);
+            var lookDirection = fromPosition - cameraPosition;
+
+            uiTransform.position = cameraPosition + lookDirection * (1 - positionLerpOffset);
+            uiTransform.LookAt(uiTransform.position + lookDirection, worldCamera.transform.up + Vector3.up);
         }
     }
 }
