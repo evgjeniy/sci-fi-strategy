@@ -2,6 +2,8 @@ namespace SustainTheStrain.Units
 {
     public interface ITeam
     {
-        public int Team { get; set; }
+        public Team Team { get; set; }
     }
+    
+    public enum Team { Enemy, Player }
 }

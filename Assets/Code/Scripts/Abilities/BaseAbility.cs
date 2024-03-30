@@ -1,8 +1,8 @@
 using System;
 using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Scriptable.EnergySettings;
+using SustainTheStrain.Units;
 using UnityEngine;
-using Zenject;
 
 namespace SustainTheStrain.Abilities
 {
@@ -16,7 +16,7 @@ namespace SustainTheStrain.Abilities
 
         public void SetLoadingSpeed(float speed) => LoadingSpeed = speed; //ne znayu nuzhen li no pust budet))
 
-        public virtual void Shoot(RaycastHit hit, int team)
+        public virtual void Shoot(RaycastHit hit, Team team)
         {
             if (!IsReloaded())
             {
@@ -41,7 +41,7 @@ namespace SustainTheStrain.Abilities
 
         protected abstract void FailShootLogic();
 
-        protected abstract void SuccessShootLogic(RaycastHit hit, int team);
+        protected abstract void SuccessShootLogic(RaycastHit hit, Team team);
 
         protected abstract void ReadyToShoot();
         public EnergySystemSettings EnergySettings { get; private set; }

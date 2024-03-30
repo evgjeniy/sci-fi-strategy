@@ -1,6 +1,7 @@
 ﻿using SustainTheStrain.Abilities;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Units;
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 
 namespace SustainTheStrain.Buildings
@@ -22,7 +23,7 @@ namespace SustainTheStrain.Buildings
             Orientation = new Observable<Vector3>();
             Config = new Observable<LaserBuildingConfig>(startConfig);
             Timer = new Timer(startConfig.Cooldown);
-            Area = new Area<Damageble>(conditions: damageable => damageable.Team != 1);
+            Area = new Area<Damageble>(conditions: damageable => damageable.Team != Team.Player);
         }
     }
 }

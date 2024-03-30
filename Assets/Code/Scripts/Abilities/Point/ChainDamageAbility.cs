@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using SustainTheStrain.Scriptable.AbilitySettings;
 using SustainTheStrain.Units;
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 
 namespace SustainTheStrain.Abilities
@@ -28,7 +29,7 @@ namespace SustainTheStrain.Abilities
             Debug.Log("CHAIN failed to shoot");
         }
 
-        public override void Shoot(RaycastHit hit, int team)
+        public override void Shoot(RaycastHit hit, Team team)
         {
             if (!IsReloaded())
             {
@@ -56,7 +57,7 @@ namespace SustainTheStrain.Abilities
             return line;
         }
 
-        protected override void SuccessShootLogic(RaycastHit hit, int team)
+        protected override void SuccessShootLogic(RaycastHit hit, Team team)
         {
             var line = setLineRenderer();
 

@@ -1,5 +1,6 @@
 using SustainTheStrain.Scriptable.AbilitySettings;
 using SustainTheStrain.Units;
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 
 namespace SustainTheStrain.Abilities
@@ -22,7 +23,7 @@ namespace SustainTheStrain.Abilities
             Debug.Log("zoneDGM failed to shoot");
         }
 
-        protected override void SuccessShootLogic(RaycastHit hit, int team)
+        protected override void SuccessShootLogic(RaycastHit hit, Team team)
         {
             Collider[] colliders = GetColliders(hit.point);
             for (int i = 0; i < colliders.Length; i++)

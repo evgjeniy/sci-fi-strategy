@@ -1,5 +1,6 @@
 using SustainTheStrain.Scriptable.AbilitySettings;
 using SustainTheStrain.Units;
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 
 namespace SustainTheStrain.Abilities
@@ -12,7 +13,7 @@ namespace SustainTheStrain.Abilities
             SetEnergySettings(settings.EnergySettings);
         }
 
-        public override void Shoot(RaycastHit hit, int team)
+        public override void Shoot(RaycastHit hit, Team team)
         {
             if (!IsReloaded())
             {
@@ -34,7 +35,7 @@ namespace SustainTheStrain.Abilities
             Debug.Log("HACK failed to shoot");
         }
 
-        protected override void SuccessShootLogic(RaycastHit hit, int team)
+        protected override void SuccessShootLogic(RaycastHit hit, Team team)
         {
             var dmg = hit.collider?.GetComponent<Damageble>();
             dmg.Team = team;

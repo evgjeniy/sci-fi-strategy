@@ -1,5 +1,6 @@
 using SustainTheStrain.Scriptable.AbilitySettings;
 using SustainTheStrain.Units;
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 
 namespace SustainTheStrain.Abilities
@@ -23,7 +24,7 @@ namespace SustainTheStrain.Abilities
             Debug.Log("LAND failed to shoot");
         }
 
-        protected override void SuccessShootLogic(RaycastHit hit, int team)
+        protected override void SuccessShootLogic(RaycastHit hit, Team team)
         {
             var squad = GameObject.Instantiate(SquadPrefab, hit.point, Quaternion.identity);
             var group = squad.GetComponent<RecruitGroup>();

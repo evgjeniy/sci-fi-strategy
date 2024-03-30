@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Input;
 using SustainTheStrain.Scriptable.AbilitySettings;
+using SustainTheStrain.Units;
 using UnityEngine;
 using Zenject;
 
@@ -17,7 +18,7 @@ namespace SustainTheStrain.Abilities
         [SerializeField] private LayerMask enemyLayers;
         [SerializeField] private int maxDistFromCamera;
         [SerializeField] private float zoneRadius;
-        [SerializeField] private int team;
+        [SerializeField] private Team team = Team.Player;
         [Inject] private EnergyController _energyController;
 
         private BaseAim currentAim;
@@ -121,7 +122,7 @@ namespace SustainTheStrain.Abilities
             ReloadListSyncSize(); //êîãäà âñå àáèëêè äîáàâëåíû
         }
 
-        public void setTeamOpponent(int team) => this.team = team;
+        public void setTeamOpponent(Team team) => this.team = team;
 
         public void ReloadListSyncSize()
         {

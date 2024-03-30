@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Units;
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 using UnityEngine.Extensions;
 
@@ -8,7 +9,7 @@ namespace SustainTheStrain.Buildings
 {
     public class ArtilleryAttackState : IArtilleryState
     {
-        private readonly Area<Damageble> _explodeArea = new(conditions: damageable => damageable.Team != 1);
+        private readonly Area<Damageble> _explodeArea = new(conditions: damageable => damageable.Team != Team.Player);
         private readonly Damageble _target;
 
         public ArtilleryAttackState(Damageble target) => _target = target;

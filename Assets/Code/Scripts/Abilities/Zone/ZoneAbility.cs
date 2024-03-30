@@ -1,3 +1,4 @@
+using SustainTheStrain.Units;
 using UnityEngine;
 
 namespace SustainTheStrain.Abilities
@@ -12,7 +13,7 @@ namespace SustainTheStrain.Abilities
 
         protected Collider[] GetColliders(Vector3 point) => Physics.OverlapSphere(point, zoneRadius);
 
-        public override void Shoot(RaycastHit hit, int team)
+        public override void Shoot(RaycastHit hit, Team team)
         {
             if (!IsReloaded())
             {

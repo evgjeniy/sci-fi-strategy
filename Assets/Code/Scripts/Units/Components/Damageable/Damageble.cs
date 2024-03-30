@@ -19,7 +19,7 @@ namespace SustainTheStrain.Units
         }
 
         [field: SerializeField]
-        public int Team { get; set; }
+        public Team Team { get; set; }
 
         public event Action<Damageble> OnDied;
         public event Action<float> OnCurrentHPChanged;
