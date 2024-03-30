@@ -22,17 +22,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         public override void EnterState()
         {
             //Debug.Log(string.Format("[StateMachine {0}] EnemySplineMoveState entered", context.gameObject.name));
-
-            if (!IsOnSpline(out var splineSample))
-            {
-                _isOnSpline = false;
-                context.SwitchPathFollower(context.NavPathFollower);
-                context.NavPathFollower.MoveTo(splineSample.position);
-            }
-            else
-            {
                 context.SwitchPathFollower(context.SplinePathFollower);
-            }
         }
 
         public override void ExitState()
@@ -43,26 +33,10 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         public override void FrameUpdate()
         {
             if (context.IsAnnoyed && !context.Duelable.HasOpponent) InitiateDuel();
-
-            if (!_isOnSpline)
-                if (context.NavPathFollower.IsDestinationReached())
-                {
-                    _isOnSpline = true;
-                    context.SwitchPathFollower(context.SplinePathFollower);
-                }
-
+            
             if (context.Duelable.HasOpponent) context.StateMachine.ChangeState(_aggroState);   
         }
-
-        public bool IsOnSpline(out SplineSample resultSample)
-        {
-            SplineSample result = new SplineSample();
-            _splineFollower.Project(context.transform.position, ref result);
-
-            resultSample = result;
-
-            return context.transform.position == result.position;
-        }
+        
 
         public override void PhysicsUpdate()
         {

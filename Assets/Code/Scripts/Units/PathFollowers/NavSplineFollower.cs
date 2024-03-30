@@ -17,6 +17,7 @@ namespace SustainTheStrain
         private Coroutine _movingRoutine = null;
 
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
+        public float MovingPercent { get; set; }
         
         public void Move()
         {
@@ -30,22 +31,20 @@ namespace SustainTheStrain
 //            if (!Application.isPlaying) return;
 //#endif
             
-//            //StartCoroutine(DebugMe());
-//        }
+            //StartCoroutine(DebugMe());
+            
+        }
         
         public bool IsDestinationReached()
         {
-            if (!_navMeshAgent.pathPending)
+            if (!NavMeshAgent.isOnNavMesh)
             {
-                if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
-                {
-                    if (!_navMeshAgent.hasPath || _navMeshAgent.velocity.sqrMagnitude == 0f)
-                    {
-                        return true;
-                    }
-                }
+                return false;
             }
-            return false;
+
+            if (_navMeshAgent.pathPending) return false;
+            if (!(_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)) return false;
+            return !_navMeshAgent.hasPath || _navMeshAgent.velocity.sqrMagnitude == 0f;
         }
 
         private IEnumerator DebugMe()
@@ -59,10 +58,9 @@ namespace SustainTheStrain
 
         private IEnumerator Moving()
         {
-            float i = 0;
-            for (; i <= 1; i+=_splineStep)
+            for (; MovingPercent <= 1; MovingPercent+=_splineStep)
             {
-                var nextStep = spline.Evaluate(i);
+                var nextStep = spline.Evaluate(MovingPercent);
                 NavMesh.SamplePosition(nextStep.position, out var hit, 100f, 1);
                 _navMeshAgent.SetDestination(hit.position);
                 yield return new WaitUntil(IsDestinationReached);
@@ -83,6 +81,11 @@ namespace SustainTheStrain
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
         }
-        
+
+        public void CancelMoving()
+        {
+            StopCoroutine(_movingRoutine);
+        }
+
     }
 }
