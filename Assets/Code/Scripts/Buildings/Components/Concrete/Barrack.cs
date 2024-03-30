@@ -12,12 +12,8 @@ using Zenject;
 namespace SustainTheStrain.Buildings
 {
     [RequireComponent(typeof(Outline))]
-    [RequireComponent(typeof(RecruitGroup))]
-    [RequireComponent(typeof(RecruitSpawner))]
     public class Barrack : MonoBehaviour, IBuilding
     {
-        [SerializeField] private LayerMask _terrainLayer;
-
         private IPlaceholder _placeholder;
         private IResourceManager _resourceManager;
         private IBuildingFactory _buildingFactory;
@@ -40,8 +36,8 @@ namespace SustainTheStrain.Buildings
             (
                 startConfig: configProvider.GetBuildingConfig<BarrackBuildingConfig>(),
                 outline: GetComponent<Outline>(),
-                recruitGroup: GetComponent<RecruitGroup>(),
-                recruitSpawner: GetComponent<RecruitSpawner>(),
+                recruitGroup: GetComponentInChildren<RecruitGroup>(),
+                recruitSpawner: GetComponentInChildren<RecruitSpawner>(),
                 radiusVisualizer: GetComponentInChildren<IZoneVisualizer>()
             );
         }
@@ -84,7 +80,7 @@ namespace SustainTheStrain.Buildings
             if (Data.RecruitsPointer == null)
                 return currentState;
 
-            if (Physics.Raycast(ray, out var hit, float.MaxValue, _terrainLayer) is false)
+            if (Physics.Raycast(ray, out var hit, float.MaxValue, Data.Config.Value.Mask) is false)
                 return currentState;
 
             var barrackPosition = transform.position;
