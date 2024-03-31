@@ -10,7 +10,7 @@ namespace SustainTheStrain.Input.States
         public event Action<Hero> OnHeroDeselected;
         public event Action<Hero, RaycastHit> OnHeroMove;
         
-        public HeroSelectionState(InputService initializer, InputActions.MouseActions mouseActions) : base(initializer, mouseActions) {}
+        public HeroSelectionState(InputService initializer, global::InputActions.MouseActions mouseActions) : base(initializer, mouseActions) {}
         
         public override void OnEnter()
         {

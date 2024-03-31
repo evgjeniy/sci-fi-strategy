@@ -34,7 +34,7 @@ namespace SustainTheStrain
         }
 
         [Zenject.Inject]
-        private void Initialize()
+        private void Awake()
         {
             _projector = GetComponent<DecalProjector>();
 

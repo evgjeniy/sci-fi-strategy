@@ -10,7 +10,7 @@ namespace SustainTheStrain.Input.States
         public event Action<Hero> OnHeroEnter;
         public event Action<Hero> OnHeroExit;
 
-        public HeroPointerState(InputService initializer, InputActions.MouseActions mouseActions) : base(initializer, mouseActions) {}
+        public HeroPointerState(InputService initializer, global::InputActions.MouseActions mouseActions) : base(initializer, mouseActions) {}
 
         public override void OnEnter()
         {

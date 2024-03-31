@@ -30,7 +30,7 @@ namespace SustainTheStrain.Input
 
         #endregion
 
-        private readonly InputActions _actions = new();
+        private readonly global::InputActions _actions = new();
 
         private readonly MouseMoveState _mouseMoveState;
         /*private readonly PlaceholderPointerState _placeholderPointerState;
@@ -60,8 +60,8 @@ namespace SustainTheStrain.Input
 
         public void Initialize()
         {
-           //_actions.Mouse.EnterAbilityState.performed += EnterAbilityState;
-           //_actions.Mouse.ExitState.performed += EnterMouseMoveState;
+           _actions.Mouse.EnterAbilityState.performed += EnterAbilityState;
+           _actions.Mouse.ExitState.performed += EnterMouseMoveState;
 
             StateMachine = new StateMachine<InputService>
             (
@@ -77,13 +77,16 @@ namespace SustainTheStrain.Input
         private void EnterMouseMoveState(InputAction.CallbackContext context) =>
             StateMachine.SetState<MouseMoveState>();
 
-        private void EnterAbilityState(InputAction.CallbackContext context) =>
+        private void EnterAbilityState(InputAction.CallbackContext context)
+        {
             _abilitySelectionState.CurrentAbilityIndex = (int)context.ReadValue<float>();
+            StateMachine.SetState<AbilitySelectionState>();
+        }
 
         public void Dispose()
         {
-            //_actions.Mouse.EnterAbilityState.performed -= EnterAbilityState;
-            //_actions.Mouse.ExitState.performed -= EnterMouseMoveState;
+            _actions.Mouse.EnterAbilityState.performed -= EnterAbilityState;
+            _actions.Mouse.ExitState.performed -= EnterMouseMoveState;
 
             StateMachine.CurrentState.OnExit();
 
