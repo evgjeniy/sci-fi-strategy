@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 5367921590081931393}
   - component: {fileID: 4983479498594913281}
   - component: {fileID: 2145467868494169081}
-  - component: {fileID: -1107495979449248873}
+  - component: {fileID: -3151490091240472385}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Untagged
@@ -215,6 +215,7 @@ MonoBehaviour:
   <Damage>k__BackingField: 1
   <DamagePeriod>k__BackingField: 0.5
   Animator: {fileID: 0}
+  _afterDeath: {fileID: 0}
   CoinsDrop: 0
 --- !u!195 &752340526721805729
 NavMeshAgent:
@@ -326,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4362ae563bae84292e7cf77dc02748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1107495979449248873
+--- !u!114 &-3151490091240472385
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -335,7 +336,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 352702111144956991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30903cf41f2039743a8950e3cf2f7915, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ddc1a2536715a24095c464a2c394d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   updateMethod: 0
@@ -425,7 +426,24 @@ MonoBehaviour:
     color: {r: 0, g: 0, b: 0, a: 0}
     size: 0
     percent: 0
-  _splineStep: 0.05
+  wrapMode: 0
+  followMode: 0
+  autoStartPosition: 0
+  _follow: 1
+  _startPosition: 0
+  preserveUniformSpeedWithOffset: 0
+  _followSpeed: 1
+  _followDuration: 1
+  _speedModifier:
+    blend: 1
+    useClippedPercent: 0
+    keys: []
+  _unityOnEndReached:
+    m_PersistentCalls:
+      m_Calls: []
+  _unityOnBeginningReached:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1999889937310102540
 GameObject:
   m_ObjectHideFlags: 0

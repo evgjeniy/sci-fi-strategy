@@ -88,6 +88,21 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 926314085104909583, guid: 826df1b61eee9524a87e95793d295b8d,
+        type: 3}
+      propertyPath: _followSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 926314085104909583, guid: 826df1b61eee9524a87e95793d295b8d,
+        type: 3}
+      propertyPath: _motion._offset.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 926314085104909583, guid: 826df1b61eee9524a87e95793d295b8d,
+        type: 3}
+      propertyPath: _motion._hasOffset
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 953522966142406616, guid: 826df1b61eee9524a87e95793d295b8d,
         type: 3}
       propertyPath: m_RenderingLayerMask
