@@ -123,7 +123,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
-  recacheOnEnable: 0
+  recacheOnEnable: 1
   bakeKeys: []
   bakeValues: []
 --- !u!114 &8048651684212546078
