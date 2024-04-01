@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3520a80c2c47bfad0b6a6d15c20c1a, type: 3}
   m_Name: ChainAbilityEnergy
   m_EditorClassIdentifier: 
-  <ButtonImage>k__BackingField: {fileID: 21300000, guid: be6386ba7593bdf4b8f65186ebb21275,
+  <ButtonImage>k__BackingField: {fileID: 21300000, guid: aa129fd1baea13f4fb243d5684b15345,
     type: 3}
   <EnergySpend>k__BackingField: 2
   <MaxEnergy>k__BackingField: 2
