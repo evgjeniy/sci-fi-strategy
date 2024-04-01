@@ -12,7 +12,7 @@ namespace SustainTheStrain
         [SerializeField] [Min(0)] private float _radius = 5;
 
         private DecalProjector _projector;
-        private float _projectionDepth = 50;
+        private float _projectionDepth = 6;
         private float _scaleFactor = 1.1f;
 
         public float Radius 

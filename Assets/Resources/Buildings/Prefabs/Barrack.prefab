@@ -175,6 +175,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4817317826247891249, guid: 511c35a78fe5eec4d8da6357e0cdd8d9,
+        type: 3}
+      propertyPath: _predefinedRecruits.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5319822508534251664, guid: 511c35a78fe5eec4d8da6357e0cdd8d9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -231,7 +236,10 @@ PrefabInstance:
       value: TempReecruitGroup
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7912257911841518739, guid: 511c35a78fe5eec4d8da6357e0cdd8d9, type: 3}
+    - {fileID: 7186303104667016672, guid: 511c35a78fe5eec4d8da6357e0cdd8d9, type: 3}
+    - {fileID: 8689377484873977561, guid: 511c35a78fe5eec4d8da6357e0cdd8d9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 511c35a78fe5eec4d8da6357e0cdd8d9, type: 3}
