@@ -349,6 +349,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1107495979449248873, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _splineStep
+      value: 0.08
+      objectReference: {fileID: 0}
     - target: {fileID: 221301186423419771, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
       propertyPath: m_IsActive
@@ -373,6 +378,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 752340526721805729, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: m_AutoRepath
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 752340526721805729, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: m_AutoBraking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 752340526721805729, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1022880775032652764, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
