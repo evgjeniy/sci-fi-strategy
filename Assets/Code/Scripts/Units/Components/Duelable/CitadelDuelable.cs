@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SustainTheStrain.Units
@@ -8,11 +10,11 @@ namespace SustainTheStrain.Units
         private List<Duelable> _opponents = new List<Duelable>();
         
         [SerializeField]
-        private Vector3 _duelOffset;
+        private List<Vector3> _duelOffsets;
         public override bool HasOpponent { get => _opponents.Count > 0; }
         public override Vector3 DuelPosition
         {
-            get => transform.position + _duelOffset;
+            get => transform.position;
         }
 
         public override Duelable Opponent { 
@@ -23,11 +25,21 @@ namespace SustainTheStrain.Units
             }
         }
 
+        public override Vector3 GetNearestDuelPosition(Vector3 position)
+        {
+            int minIndex = 0;
+            for (int i = 0; i < _duelOffsets.Count; i++)
+                if (Vector3.Distance(position, transform.position + _duelOffsets[i]) < Vector3.Distance(position, transform.position + _duelOffsets[minIndex]))
+                    minIndex = i;
+            return transform.position + _duelOffsets[minIndex];
+        }
+
         public override bool IsDuelPossible(Duelable initiator)
         {
             return initiator.Damageable.Team != Damageable.Team;
         }
 
+        
         public override bool RequestDuel(Duelable dueler)
         {
             if (dueler.IsDuelPossible(this))
@@ -70,7 +82,10 @@ namespace SustainTheStrain.Units
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(DuelPosition, 0.5f);
+            foreach (var offset in _duelOffsets)
+            {
+                Gizmos.DrawWireSphere(transform.position + offset, 0.5f);
+            }
         }
     }
 }

@@ -12,12 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fa98590c6fd614598d276ac775bd38, type: 3}
   m_Name: LevelData 1
   m_EditorClassIdentifier: 
-  _waves:
-  - _spawners:
-    - _delay: 0
-      _index: 0
-      _subwaves:
-      - _delay: 0
-        _spawnPeriod: 0
-        _enemyCount: 1
-        _enemyType: {fileID: 0}
+  _waves: []

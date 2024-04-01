@@ -23,12 +23,10 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         {
             Debug.Log(string.Format("[StateMachine {0}] EnemySplineMoveState entered", context.gameObject.name));
             SwitchNavigation();
-            context.SplinePathFollower.OnNavigatePointChanged += SwitchNavigation;
         }
 
         public override void ExitState()
         {
-            context.SplinePathFollower.OnNavigatePointChanged -= SwitchNavigation;
             context.CurrentPathFollower.Stop();
         }
 

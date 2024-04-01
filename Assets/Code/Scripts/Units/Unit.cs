@@ -40,11 +40,11 @@ namespace SustainTheStrain.Units
             Duelable = GetComponent<Duelable>();
 
             AggroRadiusCheck = GetComponentInChildren<AggroRadiusCheck>();
-            AggroRadiusCheck.OnUnitEnteredAggroZone += UnitEneterdAggroZone;
+            AggroRadiusCheck.OnUnitEnteredAggroZone += UnitEnteredAggroZone;
             AggroRadiusCheck.OnUnitLeftAggroZone += UnitLeftAggroZone;
 
             AttackRadiusCheck = GetComponentInChildren<AttackRadiusCheck>();
-            AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEneterdAttackZone;
+            AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEnteredAttackZone;
             AttackRadiusCheck.OnUnitLeftAttackZone += UnitLeftAttackZone;
 
             NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
@@ -54,7 +54,7 @@ namespace SustainTheStrain.Units
 
         #region UNIT_TRIGGER_LOGIC
 
-        private void UnitEneterdAggroZone(Duelable unit)
+        private void UnitEnteredAggroZone(Duelable unit)
         {
             IsAnnoyed = true;
         }
@@ -66,12 +66,7 @@ namespace SustainTheStrain.Units
             IsOpponentInAggroZone = Duelable.Opponent == unit;
         }
 
-        private void UnitEneterdAttackZone(Duelable unit)
-        {
-            IsOpponentInAttackZone = unit == Duelable.Opponent;
-        }
-
-        private void UnitLeftAttackZone(Duelable unit)
+        private void UnitEnteredAttackZone(Duelable unit)
         {
             if (!Duelable.HasOpponent)
             {
@@ -79,7 +74,21 @@ namespace SustainTheStrain.Units
                 return;
             }
             
-            IsOpponentInAttackZone = !(unit == Duelable.Opponent);
+            if(IsOpponentInAttackZone) return;
+            
+            IsOpponentInAttackZone = unit == Duelable.Opponent;
+        }
+
+        private void UnitLeftAttackZone(Duelable unit)
+        {
+            if (!Duelable.HasOpponent) 
+            {
+                IsOpponentInAttackZone = false;
+                return;
+            }
+            
+            if(IsOpponentInAttackZone)
+                IsOpponentInAttackZone = !(unit == Duelable.Opponent);
         }
 
         #endregion

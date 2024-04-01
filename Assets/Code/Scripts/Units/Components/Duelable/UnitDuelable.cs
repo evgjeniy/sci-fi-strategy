@@ -11,6 +11,11 @@ namespace SustainTheStrain.Units
         public override Vector3 DuelPosition => transform.position + _duelOffset;
         public override Duelable Opponent => _opponent;
 
+        public override Vector3 GetNearestDuelPosition(Vector3 position)
+        {
+            return transform.position + _duelOffset;
+        }
+
         public override bool IsDuelPossible(Duelable initiator)
         {
             return !HasOpponent && initiator.Damageable.Team != Damageable.Team;

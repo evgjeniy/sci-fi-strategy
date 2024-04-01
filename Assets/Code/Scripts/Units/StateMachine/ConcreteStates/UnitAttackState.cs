@@ -41,7 +41,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
             if(context.Animator != null)
                 context.Animator.SetBool(AttackMode, false);
             
-            context.NavPathFollower.MoveTo(context.transform.position);
+            //context.NavPathFollower.MoveTo(context.transform.position);
         }
 
         public override void FrameUpdate()
