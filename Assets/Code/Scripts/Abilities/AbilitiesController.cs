@@ -13,7 +13,6 @@ namespace SustainTheStrain.Abilities
     {
         [SerializeField] private AbilitiesListSettings _abilitiesSettings;
         [SerializeField] private GameObject aimZonePrefab;
-        [SerializeField] private Camera mainCamera;
         [SerializeField] private LayerMask groundLayers;
         [SerializeField] private LayerMask enemyLayers;
         [SerializeField] private int maxDistFromCamera;
@@ -151,7 +150,7 @@ namespace SustainTheStrain.Abilities
         {
             if (_selected != -1 && Abilities[_selected] is ChainDamageAbility or EnemyHackAbility)
             {
-                Ray ray = mainCamera.ScreenPointToRay(UnityEngine.Input.mousePosition);
+                Ray ray = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit, maxDistFromCamera, enemyLayers))
                     hit.collider.GetComponent<OutLineControll>()?.setMark();
             }
