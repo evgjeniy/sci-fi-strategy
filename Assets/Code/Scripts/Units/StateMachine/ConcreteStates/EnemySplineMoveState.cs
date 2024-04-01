@@ -7,11 +7,11 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
     {
         private IState _aggroState;
         private bool _isOnSpline = false;
-        private SplineTracer _splineFollower;
+        private SplineFollower _splineFollower;
 
         public EnemySplineMoveState(Enemy context, StateMachine stateMachine) : base(context, stateMachine) 
         {
-            _splineFollower = context.GetComponent<SplineTracer>();
+            _splineFollower = context.GetComponent<SplineFollower>();
         }
 
         public void Init(IState aggroState)
@@ -21,26 +21,58 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void EnterState()
         {
-            //Debug.Log(string.Format("[StateMachine {0}] EnemySplineMoveState entered", context.gameObject.name));
-                context.SwitchPathFollower(context.SplinePathFollower);
+            Debug.Log(string.Format("[StateMachine {0}] EnemySplineMoveState entered", context.gameObject.name));
+            SwitchNavigation();
+            context.SplinePathFollower.OnNavigatePointChanged += SwitchNavigation;
         }
 
         public override void ExitState()
         {
+            context.SplinePathFollower.OnNavigatePointChanged -= SwitchNavigation;
             context.CurrentPathFollower.Stop();
         }
 
         public override void FrameUpdate()
         {
             if (context.IsAnnoyed && !context.Duelable.HasOpponent) InitiateDuel();
-            
+
+            if (!_isOnSpline)
+                if (context.NavPathFollower.IsDestinationReached())
+                {
+                    _isOnSpline = true;
+                    context.SwitchPathFollower(context.SplinePathFollower);
+                }
+
             if (context.Duelable.HasOpponent) context.StateMachine.ChangeState(_aggroState);   
         }
-        
+
+        public bool IsOnSpline(out SplineSample resultSample)
+        {
+            SplineSample result = new SplineSample();
+            _splineFollower.Project(context.transform.position, ref result);
+
+            resultSample = result;
+
+            return context.transform.position == result.position;
+        }
 
         public override void PhysicsUpdate()
         {
 
+        }
+
+        private void SwitchNavigation()
+        {
+            if (!IsOnSpline(out var splineSample))
+            {
+                _isOnSpline = false;
+                context.SwitchPathFollower(context.NavPathFollower);
+                context.NavPathFollower.MoveTo(splineSample.position);
+            }
+            else
+            {
+                context.SwitchPathFollower(context.SplinePathFollower);
+            }
         }
 
         private void InitiateDuel()
