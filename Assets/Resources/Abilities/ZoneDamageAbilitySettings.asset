@@ -17,4 +17,5 @@ MonoBehaviour:
   <ReloadingSpeed>k__BackingField: 1
   <Damage>k__BackingField: 20
   <ZoneRadius>k__BackingField: 5
-  <ExplosionPrefab>k__BackingField: {fileID: 0}
+  <ExplosionPrefab>k__BackingField: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
+    type: 3}
