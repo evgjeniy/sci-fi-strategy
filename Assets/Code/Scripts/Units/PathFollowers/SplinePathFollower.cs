@@ -54,9 +54,10 @@ namespace SustainTheStrain.Units
         {
             follower.spline = to.spline;
 
-            //follower.RebuildImmediate();
-            //double startpercent = follower.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
-            //var sample = to.spline.EvaluatePosition(startpercent+0.01);
+            follower.RebuildImmediate();
+            double startpercent = follower.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
+            var sample = to.spline.EvaluatePosition(startpercent);
+            follower.SetPercent(startpercent+0.00001);
             OnNavigatePointChanged?.Invoke();
         }
 
