@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using SustainTheStrain.Units;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
@@ -18,6 +19,9 @@ namespace SustainTheStrain.Buildings
             laserData.Timer.Time -= Time.deltaTime;
             laserData.Area.Update(laser.transform.position, laserConfig.Radius, laserConfig.Mask);
             
+            laserData.Line.Enable();
+            laserData.Line.SetPositions(new []{laserData.ProjectileSpawnPoint.position, _target.transform.position});
+            
             if (laserData.Area.Entities.Contains(_target) is false)
                 return new LaserIdleState();
             
@@ -26,7 +30,6 @@ namespace SustainTheStrain.Buildings
             
             _target.Damage(laserConfig.Damage);
             laserData.Timer.Time = laserConfig.Cooldown;
-
             return this;
         }
     }

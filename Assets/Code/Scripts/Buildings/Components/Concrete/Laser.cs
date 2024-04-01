@@ -76,6 +76,7 @@ namespace SustainTheStrain.Buildings
         {
             _currentGfx.IfNotNull(x => x.DestroyObject());
             _currentGfx = _buildingFactory.CreateGfx(config.GfxPrefab, transform, Data.Orientation);
+            Data.ProjectileSpawnPoint = _currentGfx.ProjectileSpawnPoint;
             Data.RadiusVisualizer.Radius = config.Radius;
         }
     }

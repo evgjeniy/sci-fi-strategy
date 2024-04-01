@@ -3,6 +3,7 @@ using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Units;
 using SustainTheStrain.Units.Components;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
@@ -14,7 +15,10 @@ namespace SustainTheStrain.Buildings
         public readonly Observable<Vector3> Orientation;
         public readonly Timer Timer;
         public readonly Area<Damageble> Area;
+        public readonly LineRenderer Line;
 
+        public Transform ProjectileSpawnPoint { get; set; }
+        
         public LaserData(LaserBuildingConfig startConfig, Outline outline, IZoneVisualizer radiusVisualizer)
         {
             Outline = outline;
@@ -24,6 +28,7 @@ namespace SustainTheStrain.Buildings
             Config = new Observable<LaserBuildingConfig>(startConfig);
             Timer = new Timer(startConfig.Cooldown);
             Area = new Area<Damageble>(conditions: damageable => damageable.Team != Team.Player);
+            Line = startConfig.LineRenderer.Spawn();
         }
     }
 }
