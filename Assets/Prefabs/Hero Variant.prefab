@@ -407,7 +407,7 @@ PrefabInstance:
         type: 3}
       propertyPath: <EnergySettings>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 2562f827fcaffd0488412c45ba0851bd,
+      objectReference: {fileID: 11400000, guid: 90baee497e37a384d8cadafd9d02c68a,
         type: 2}
     - target: {fileID: 4148816034686865303, guid: 7fbf7881ac1028844a19fd84e78c01c2,
         type: 3}
@@ -417,17 +417,17 @@ PrefabInstance:
     - target: {fileID: 6323556958791050048, guid: 7fbf7881ac1028844a19fd84e78c01c2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 6323556958791050048, guid: 7fbf7881ac1028844a19fd84e78c01c2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 6323556958791050048, guid: 7fbf7881ac1028844a19fd84e78c01c2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -11.89963
       objectReference: {fileID: 0}
     - target: {fileID: 6323556958791050048, guid: 7fbf7881ac1028844a19fd84e78c01c2,
         type: 3}

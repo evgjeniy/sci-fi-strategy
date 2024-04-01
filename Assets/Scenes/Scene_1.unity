@@ -123,6 +123,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &27702841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 27702843}
+  - component: {fileID: 27702842}
+  m_Layer: 0
+  m_Name: Testing Energy System (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &27702842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27702841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c6631590a8e8e44a2cadb4aa7b4452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnergySettings>k__BackingField: {fileID: 11400000, guid: 0aab17141430e2649b32169a031f5c82,
+    type: 2}
+--- !u!4 &27702843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27702841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &69818066 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cf72ff68c2080e4dad643e786b02068,
@@ -188,6 +234,52 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7912166791378137202, guid: 9cf72ff68c2080e4dad643e786b02068, type: 3}
+--- !u!1 &75623881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 75623883}
+  - component: {fileID: 75623882}
+  m_Layer: 0
+  m_Name: Testing Energy System (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &75623882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75623881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c6631590a8e8e44a2cadb4aa7b4452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnergySettings>k__BackingField: {fileID: 11400000, guid: b3db0fd1429befa40859fcf0ddbba15c,
+    type: 2}
+--- !u!4 &75623883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75623881}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &77356835
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,8 +457,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098c695adb836b440b038f121723a591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildingSystemPrefab: {fileID: 5739378985637882526, guid: 0c8a3c50823da4b499590dae0e7cdde8,
-    type: 3}
 --- !u!4 &131884533
 Transform:
   m_ObjectHideFlags: 0
@@ -400,26 +490,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4519674630115074691, guid: 5da990ec0dad63544bbbda4bf1df61b6,
-        type: 3}
-      propertyPath: <EnergySettings>k__BackingField
-      value: 
-      objectReference: {fileID: 11400000, guid: 2562f827fcaffd0488412c45ba0851bd,
-        type: 2}
-    - target: {fileID: 4925764818830990335, guid: 5da990ec0dad63544bbbda4bf1df61b6,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 296b3d325de9c9d4f8de004a69c73d66, type: 2}
     - target: {fileID: 6435848703857900649, guid: 5da990ec0dad63544bbbda4bf1df61b6,
         type: 3}
       propertyPath: m_Name
       value: Hero Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 6435848703857900649, guid: 5da990ec0dad63544bbbda4bf1df61b6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7473865482616902041, guid: 5da990ec0dad63544bbbda4bf1df61b6,
         type: 3}
@@ -471,8 +545,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4836552733836553704, guid: 5da990ec0dad63544bbbda4bf1df61b6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1596,6 +1669,52 @@ MonoBehaviour:
     type: 2}
   <EnergySettings>k__BackingField: {fileID: 11400000, guid: 18043ce5b3fadd34c9fbc919dedb9f12,
     type: 2}
+--- !u!1 &267025776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 267025778}
+  - component: {fileID: 267025777}
+  m_Layer: 0
+  m_Name: Testing Energy System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &267025777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267025776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c6631590a8e8e44a2cadb4aa7b4452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnergySettings>k__BackingField: {fileID: 11400000, guid: 2562f827fcaffd0488412c45ba0851bd,
+    type: 2}
+--- !u!4 &267025778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267025776}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &278005450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,7 +1829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Priority>k__BackingField: 0
-  _duelOffset: {x: 3.58, y: 0, z: -2.75}
+  _duelOffsets: []
 --- !u!114 &297678431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1836,6 +1955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25eccd4dc428c2646a808725e04412bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _afterDeath: {fileID: 0}
   <MaxHP>k__BackingField: 100
   <Team>k__BackingField: 1
   _shield: {fileID: 297678428}
@@ -3089,7 +3209,6 @@ MonoBehaviour:
     ZoneSlowness: {fileID: 11400000, guid: 43edd6ce121f6a34c9cdb25db423cda7, type: 2}
   aimZonePrefab: {fileID: 7495390952849731377, guid: dec463a7aab7ab7489701ffb37bc966f,
     type: 3}
-  mainCamera: {fileID: 706948202}
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -3338,6 +3457,52 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1607686290}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &752424423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 752424425}
+  - component: {fileID: 752424424}
+  m_Layer: 0
+  m_Name: Testing Energy System (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &752424424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752424423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c6631590a8e8e44a2cadb4aa7b4452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EnergySettings>k__BackingField: {fileID: 11400000, guid: e4f3ed3c29e7bfa48ba5fac5a49ebfbe,
+    type: 2}
+--- !u!4 &752424425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752424423}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &761883342
 GameObject:
   m_ObjectHideFlags: 0
@@ -5920,94 +6085,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30903cf41f2039743a8950e3cf2f7915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateMethod: 1
-  _spline: {fileID: 1969595215}
-  _autoUpdate: 0
-  _rotationModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _offsetModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _colorModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _sizeModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _clipFromSample:
-    position: {x: 29.885918, y: -1.2734752, z: 19.80711}
-    up: {x: -0.04919183, y: 0.9987815, z: 0.003973815}
-    forward: {x: -0.9816573, y: -0.0056140875, z: 0.19057108}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0
-  _clipToSample:
-    position: {x: 7.3283215, y: -1.0999999, z: -11.556147}
-    up: {x: 0.027609246, y: 0.99923116, z: -0.027834935}
-    forward: {x: -0.058450356, y: 0.0304881, z: -0.9978247}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 1
-  _loopSamples: 0
-  _clipFrom: 0
-  _clipTo: 1
-  animClipFrom: 0.00592289
-  animClipTo: 1
-  multithreaded: 0
-  buildOnAwake: 0
-  buildOnEnable: 0
-  applyDirectionRotation: 1
-  useTriggers: 0
-  triggerGroup: 0
-  _direction: 1
-  _dontLerpDirection: 0
-  _physicsMode: 0
-  _motion:
-    _hasOffset: 0
-    _hasRotationOffset: 0
-    _offset: {x: 0, y: 0}
-    _rotationOffset: {x: 0, y: 0, z: 0}
-    _baseScale: {x: 1, y: 1, z: 1}
-    _2dMode: 0
-    velocityHandleMode: 0
-    applyPositionX: 1
-    applyPositionY: 1
-    applyPositionZ: 1
-    applyPosition2D: 1
-    retainLocalPosition: 0
-    direction: 1
-    applyRotationX: 1
-    applyRotationY: 1
-    applyRotationZ: 1
-    applyRotation2D: 1
-    retainLocalRotation: 0
-    applyScaleX: 0
-    applyScaleY: 0
-    applyScaleZ: 0
-    targetUser: {fileID: 1556119096}
-  targetRigidbody: {fileID: 0}
-  targetRigidbody2D: {fileID: 0}
-  targetTransform: {fileID: 1556119101}
-  _result:
-    position: {x: 0, y: 0, z: 0}
-    up: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 0}
-    size: 0
-    percent: 0
-  _finalResult:
-    position: {x: 0, y: 0, z: 0}
-    up: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 0}
-    size: 0
-    percent: 0
-  _splineStep: 0.05
 --- !u!195 &1556119097
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6686,7 +6763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88df3f3e68f45cbab137fec00cd0df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxGold: 500000
   _currentGold: 200
 --- !u!1 &1609227719
 GameObject:
@@ -9160,3 +9236,7 @@ SceneRoots:
   - {fileID: 153779180}
   - {fileID: 1570062961}
   - {fileID: 1452143722}
+  - {fileID: 267025778}
+  - {fileID: 75623883}
+  - {fileID: 752424425}
+  - {fileID: 27702843}
