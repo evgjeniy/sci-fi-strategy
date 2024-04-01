@@ -16,15 +16,15 @@ namespace SustainTheStrain.Buildings
         public readonly Timer Timer;
         public readonly Area<Damageble> Area;
         public readonly LineRenderer Line;
-
-        public Transform ProjectileSpawnPoint { get; set; }
         
-        public LaserData(LaserBuildingConfig startConfig, Outline outline, IZoneVisualizer radiusVisualizer)
+        public Transform ProjectileSpawnPoint { get; set; }
+
+        public LaserData(LaserBuildingConfig startConfig, Outline outline, IZoneVisualizer radiusVisualizer, Vector3 startOrientation)
         {
             Outline = outline;
             RadiusVisualizer = radiusVisualizer;
             
-            Orientation = new Observable<Vector3>();
+            Orientation = new Observable<Vector3>(startOrientation);
             Config = new Observable<LaserBuildingConfig>(startConfig);
             Timer = new Timer(startConfig.Cooldown);
             Area = new Area<Damageble>(conditions: damageable => damageable.Team != Team.Player);

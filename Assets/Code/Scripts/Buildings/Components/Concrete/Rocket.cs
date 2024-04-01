@@ -34,7 +34,8 @@ namespace SustainTheStrain.Buildings
                 startConfig: configProvider.GetBuildingConfig<RocketBuildingConfig>(),
                 outline: GetComponent<Outline>(),
                 radiusVisualizer: transform.GetChild(0).GetComponent<IZoneVisualizer>(),
-                sectorVisualizer: transform.GetChild(1).GetComponent<IZoneVisualizer>()
+                sectorVisualizer: transform.GetChild(1).GetComponent<IZoneVisualizer>(),
+                startOrientation: placeholder.Road.Project(placeholder.transform.position)
             );
         }
 

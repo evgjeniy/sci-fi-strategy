@@ -42,6 +42,13 @@ namespace SustainTheStrain.Buildings
             );
         }
 
+        private void Start()
+        {
+            var spawnPosition = _placeholder.Road.Project(_placeholder.transform.position) + Vector3.up * 2.5f;
+            Data.RecruitSpawner.SpawnPosition = spawnPosition;
+            Data.RecruitGroup.GuardPost.Position = spawnPosition;
+        }
+
         private void OnEnable() => Data.Config.Changed += UpgradeGraphics;
         private void OnDisable() => Data.Config.Changed -= UpgradeGraphics;
         private void Update() => _currentState = _currentState.Update(this);
@@ -71,7 +78,9 @@ namespace SustainTheStrain.Buildings
             if (Data.RecruitsPointer == null)
                 return currentState;
 
-            Data.RecruitGroup.GuardPost.Position = Data.RecruitsPointer.transform.position;
+            var pointerPosition = Data.RecruitsPointer.transform.position;
+            Data.RecruitGroup.GuardPost.Position = pointerPosition;
+            Data.RecruitSpawner.SpawnPosition = pointerPosition;
             return new IdleState();
         }
 

@@ -19,13 +19,13 @@ namespace SustainTheStrain.Buildings
         public Transform ProjectileSpawnPoint { get; set; }
 
         public RocketData(RocketBuildingConfig startConfig, Outline outline, IZoneVisualizer radiusVisualizer,
-            IZoneVisualizer sectorVisualizer)
+            IZoneVisualizer sectorVisualizer, Vector3 startOrientation)
         {
             Outline = outline;
             RadiusVisualizer = radiusVisualizer;
             SectorVisualizer = sectorVisualizer;
 
-            Orientation = new Observable<Vector3>(Vector3.forward);
+            Orientation = new Observable<Vector3>(startOrientation);
             Config = new Observable<RocketBuildingConfig>(startConfig);
             Timer = new Timer(startConfig.Cooldown);
             Area = new Area<Damageble>(conditions: damageable => damageable.Team != Team.Player);

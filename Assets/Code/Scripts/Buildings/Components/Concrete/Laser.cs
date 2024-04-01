@@ -32,8 +32,8 @@ namespace SustainTheStrain.Buildings
             (
                 startConfig: configProvider.GetBuildingConfig<LaserBuildingConfig>(),
                 outline: GetComponent<Outline>(),
-                radiusVisualizer: GetComponentInChildren<IZoneVisualizer>()
-            );
+                radiusVisualizer: GetComponentInChildren<IZoneVisualizer>(),
+                startOrientation: placeholder.Road.Project(placeholder.transform.position));
         }
 
         private void OnEnable() => Data.Config.Changed += UpgradeGraphics;
