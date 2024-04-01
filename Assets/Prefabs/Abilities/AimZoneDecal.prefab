@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1660183363778970947}
   - component: {fileID: 7140163344742071951}
+  - component: {fileID: -7253956914196207495}
   m_Layer: 0
   m_Name: AimZoneDecal
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7495390952849731377}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 13.22, y: 0.5, z: 14.07}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,3 +57,17 @@ MonoBehaviour:
   m_Offset: {x: 0, y: 0, z: 0.5}
   m_Size: {x: 5, y: 5, z: 1}
   m_FadeFactor: 1
+--- !u!114 &-7253956914196207495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495390952849731377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b55a3c5b45776034bbc600d4892571d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _angle: 360
+  _radius: 5

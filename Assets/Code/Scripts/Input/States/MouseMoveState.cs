@@ -9,7 +9,7 @@ namespace SustainTheStrain.Input.States
 {
     public class MouseMoveState : IState<InputService>
     {
-        private readonly InputActions.MouseActions _mouseActions;
+        private readonly global::InputActions.MouseActions _mouseActions;
 
         public event Action<Ray> OnMouseMoveRay;
         public event Action<Ray> OnLeftMouseButtonClickRay;
@@ -20,7 +20,7 @@ namespace SustainTheStrain.Input.States
 
         public InputService Initializer { get; }
 
-        public MouseMoveState(InputService initializer, InputActions.MouseActions mouseActions)
+        public MouseMoveState(InputService initializer, global::InputActions.MouseActions mouseActions)
         {
             Initializer = initializer;
             _mouseActions = mouseActions;
@@ -28,14 +28,14 @@ namespace SustainTheStrain.Input.States
 
         public virtual void OnEnter()
         {
-            //_mouseActions.MousePosition.performed += MouseMovePerformed;
-            //_mouseActions.LeftButton.performed += MouseLeftButtonPerformed;
+            _mouseActions.MousePosition.performed += MouseMovePerformed;
+            _mouseActions.LeftButton.performed += MouseLeftButtonPerformed;
         }
 
         public virtual void OnExit()
         {
-            //_mouseActions.MousePosition.performed -= MouseMovePerformed;
-            //_mouseActions.LeftButton.performed -= MouseLeftButtonPerformed;
+            _mouseActions.MousePosition.performed -= MouseMovePerformed;
+            _mouseActions.LeftButton.performed -= MouseLeftButtonPerformed;
         }
 
         private void MouseMovePerformed(InputAction.CallbackContext context)

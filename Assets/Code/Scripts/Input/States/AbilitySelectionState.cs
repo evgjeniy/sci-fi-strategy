@@ -49,7 +49,7 @@ namespace SustainTheStrain.Input.States
         }
 
         public AbilitySelectionState(InputService initializer,
-            InputActions.MouseActions mouseActions) : base(initializer, mouseActions) {}
+            global::InputActions.MouseActions mouseActions) : base(initializer, mouseActions) {}
 
         public override void OnEnter()
         {
