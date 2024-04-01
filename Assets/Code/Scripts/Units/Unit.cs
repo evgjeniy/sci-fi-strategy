@@ -43,7 +43,7 @@ namespace SustainTheStrain.Units
             AggroRadiusCheck.OnUnitLeftAggroZone += UnitLeftAggroZone;
 
             AttackRadiusCheck = GetComponentInChildren<AttackRadiusCheck>();
-            AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEneterdAttackZone;
+            AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEnteredAttackZone;
             AttackRadiusCheck.OnUnitLeftAttackZone += UnitLeftAttackZone;
 
             NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
@@ -65,12 +65,7 @@ namespace SustainTheStrain.Units
             IsOpponentInAggroZone = Duelable.Opponent == unit;
         }
 
-        private void UnitEneterdAttackZone(Duelable unit)
-        {
-            IsOpponentInAttackZone = unit == Duelable.Opponent;
-        }
-
-        private void UnitLeftAttackZone(Duelable unit)
+        private void UnitEnteredAttackZone(Duelable unit)
         {
             if (!Duelable.HasOpponent)
             {
@@ -78,7 +73,21 @@ namespace SustainTheStrain.Units
                 return;
             }
             
-            IsOpponentInAttackZone = !(unit == Duelable.Opponent);
+            if(IsOpponentInAttackZone) return;
+            
+            IsOpponentInAttackZone = unit == Duelable.Opponent;
+        }
+
+        private void UnitLeftAttackZone(Duelable unit)
+        {
+            if (!Duelable.HasOpponent) 
+            {
+                IsOpponentInAttackZone = false;
+                return;
+            }
+            
+            if(IsOpponentInAttackZone)
+                IsOpponentInAttackZone = !(unit == Duelable.Opponent);
         }
 
         #endregion
