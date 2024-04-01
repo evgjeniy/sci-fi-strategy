@@ -10,6 +10,7 @@ namespace SustainTheStrain.Units
         [field:SerializeField] public float DamagePeriod { get; set; }
 
         [SerializeField] public Animator Animator;
+        [SerializeField] public GameObject _afterDeath;
         public IPathFollower CurrentPathFollower { get; protected set; }   
         protected StateMachine.StateMachine _stateMachine = new StateMachine.StateMachine();
     
@@ -43,7 +44,7 @@ namespace SustainTheStrain.Units
             AggroRadiusCheck.OnUnitLeftAggroZone += UnitLeftAggroZone;
 
             AttackRadiusCheck = GetComponentInChildren<AttackRadiusCheck>();
-            AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEnteredAttackZone;
+            AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEneterdAttackZone;
             AttackRadiusCheck.OnUnitLeftAttackZone += UnitLeftAttackZone;
 
             NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
@@ -65,7 +66,12 @@ namespace SustainTheStrain.Units
             IsOpponentInAggroZone = Duelable.Opponent == unit;
         }
 
-        private void UnitEnteredAttackZone(Duelable unit)
+        private void UnitEneterdAttackZone(Duelable unit)
+        {
+            IsOpponentInAttackZone = unit == Duelable.Opponent;
+        }
+
+        private void UnitLeftAttackZone(Duelable unit)
         {
             if (!Duelable.HasOpponent)
             {
@@ -73,24 +79,16 @@ namespace SustainTheStrain.Units
                 return;
             }
             
-            if(IsOpponentInAttackZone) return;
-            
-            IsOpponentInAttackZone = unit == Duelable.Opponent;
-        }
-
-        private void UnitLeftAttackZone(Duelable unit)
-        {
-            if (!Duelable.HasOpponent) 
-            {
-                IsOpponentInAttackZone = false;
-                return;
-            }
-            
-            if(IsOpponentInAttackZone)
-                IsOpponentInAttackZone = !(unit == Duelable.Opponent);
+            IsOpponentInAttackZone = !(unit == Duelable.Opponent);
         }
 
         #endregion
+
+        private void OnDestroy()
+        {
+            if(_afterDeath != null)
+                Instantiate(_afterDeath, transform.position, Quaternion.identity);
+        }
 
         public void SwitchPathFollower(IPathFollower pathFollower)
         {

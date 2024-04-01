@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using Dreamteck.Splines;
+using UnityEngine;
 using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units
@@ -7,6 +9,8 @@ namespace SustainTheStrain.Units
     public class SplinePathFollower : IPathFollower
     {
         private readonly SplineFollower follower;
+        
+        public event Action OnNavigatePointChanged;
 
         public float Speed { get => follower.followSpeed; set => follower.followSpeed = value; }
 
@@ -50,9 +54,10 @@ namespace SustainTheStrain.Units
         {
             follower.spline = to.spline;
 
-            follower.RebuildImmediate();
-            double startpercent = follower.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
-            follower.SetPercent(startpercent+0.01);
+            //follower.RebuildImmediate();
+            //double startpercent = follower.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
+            //var sample = to.spline.EvaluatePosition(startpercent+0.01);
+            OnNavigatePointChanged?.Invoke();
         }
 
         public void Stop()
