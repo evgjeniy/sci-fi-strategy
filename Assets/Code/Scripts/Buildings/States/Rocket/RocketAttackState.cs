@@ -1,18 +1,19 @@
 ﻿using System.Linq;
+using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
-    public class RocketAttackState : IRocketState
+    public class RocketAttackState : IUpdatableState<Rocket>
     {
         private readonly Damageble _target;
         private Quaternion _currentRotation;
 
         public RocketAttackState(Damageble target) => _target = target;
 
-        public IRocketState Update(Rocket rocket)
+        public IUpdatableState<Rocket> Update(Rocket rocket)
         {
             var rocketData = rocket.Data;
             var rocketConfig = rocketData.Config.Value;

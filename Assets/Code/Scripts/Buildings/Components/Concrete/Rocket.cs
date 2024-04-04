@@ -1,5 +1,6 @@
 ﻿using System;
 using SustainTheStrain.Abilities;
+using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.ResourceSystems;
@@ -17,7 +18,7 @@ namespace SustainTheStrain.Buildings
 
         private RocketManagementMenu _managementMenu;
         private BuildingRotator _currentGfx;
-        private IRocketState _currentState = new RocketIdleState();
+        private IUpdatableState<Rocket> _currentState = new RocketIdleState();
 
         public RocketData Data { get; private set; }
 

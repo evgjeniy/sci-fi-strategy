@@ -1,20 +1,20 @@
 ﻿using System.Linq;
+using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Units;
-using SustainTheStrain.Units.Components;
 using UnityEngine;
 using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
-    public class ArtilleryAttackState : IArtilleryState
+    public class ArtilleryAttackState : IUpdatableState<Artillery>
     {
         private readonly Area<Damageble> _explodeArea = new(conditions: damageable => damageable.Team != Team.Player);
         private readonly Damageble _target;
 
         public ArtilleryAttackState(Damageble target) => _target = target;
 
-        public IArtilleryState Update(Artillery artillery)
+        public IUpdatableState<Artillery> Update(Artillery artillery)
         {
             var artilleryData = artillery.Data;
             var artilleryConfig = artilleryData.Config.Value;

@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using SustainTheStrain.Buildings.States;
+using UnityEngine;
 
 namespace SustainTheStrain.Buildings
 {
-    public class ArtilleryIdleState : IArtilleryState
+    public class ArtilleryIdleState : IUpdatableState<Artillery>
     {
-        public IArtilleryState Update(Artillery artillery)
+        public IUpdatableState<Artillery> Update(Artillery artillery)
         {
             var artilleryData = artillery.Data;
             var artilleryConfig = artilleryData.Config.Value;

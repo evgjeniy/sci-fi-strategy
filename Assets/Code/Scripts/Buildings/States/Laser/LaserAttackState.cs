@@ -1,19 +1,20 @@
 ﻿using System.Linq;
 using Cysharp.Threading.Tasks;
+using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
-    public class LaserAttackState : ILaserState
+    public class LaserAttackState : IUpdatableState<Laser>
     {
         private const float LineVisualDuration = 0.5f;
         private readonly Damageble _target;
 
         public LaserAttackState(Damageble target) => _target = target;
 
-        public ILaserState Update(Laser laser)
+        public IUpdatableState<Laser> Update(Laser laser)
         {
             var laserData = laser.Data;
             var laserConfig = laserData.Config.Value;

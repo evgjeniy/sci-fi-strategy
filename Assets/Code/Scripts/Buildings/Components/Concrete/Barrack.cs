@@ -1,4 +1,5 @@
 using SustainTheStrain.Abilities;
+using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Input;
@@ -20,7 +21,7 @@ namespace SustainTheStrain.Buildings
 
         private BarrackManagementMenu _managementMenu;
         private GameObject _currentGfx;
-        private IBarrackState _currentState = new BarrackIdleState();
+        private IUpdatableState<Barrack> _currentState = new BarrackIdleState();
 
         public BarrackData Data { get; private set; }
 

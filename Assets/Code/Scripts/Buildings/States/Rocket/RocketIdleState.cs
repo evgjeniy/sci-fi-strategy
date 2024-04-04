@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using SustainTheStrain.Buildings.States;
+using UnityEngine;
 
 namespace SustainTheStrain.Buildings
 {
-    public class RocketIdleState : IRocketState
+    public class RocketIdleState : IUpdatableState<Rocket>
     {
-        public IRocketState Update(Rocket rocket)
+        public IUpdatableState<Rocket> Update(Rocket rocket)
         {
             var rocketData = rocket.Data;
             var rocketConfig = rocketData.Config.Value;

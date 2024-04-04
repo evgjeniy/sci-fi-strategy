@@ -1,4 +1,5 @@
 using SustainTheStrain.Abilities;
+using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.ResourceSystems;
@@ -16,7 +17,7 @@ namespace SustainTheStrain.Buildings
 
         private LaserManagementMenu _managementMenu;
         private BuildingRotator _currentGfx;
-        private ILaserState _currentState = new LaserIdleState();
+        private IUpdatableState<Laser> _currentState = new LaserIdleState();
 
         public LaserData Data { get; private set; }
 

@@ -1,4 +1,5 @@
 using SustainTheStrain.Abilities;
+using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.ResourceSystems;
@@ -16,7 +17,7 @@ namespace SustainTheStrain.Buildings
 
         private ArtilleryManagementMenu _managementMenu;
         private BuildingRotator _currentGfx;
-        private IArtilleryState _currentState = new ArtilleryIdleState();
+        private IUpdatableState<Artillery> _currentState = new ArtilleryIdleState();
 
         public ArtilleryData Data { get; private set; }
 
