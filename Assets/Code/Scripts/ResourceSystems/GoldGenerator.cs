@@ -12,7 +12,6 @@ namespace SustainTheStrain.ResourceSystems
 
         [field: SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage => EnergySettings.ButtonImage;
-        public int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
    
         private int _currentEnergy;
 

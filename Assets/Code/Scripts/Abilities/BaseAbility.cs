@@ -48,7 +48,6 @@ namespace SustainTheStrain.Abilities
         public Sprite ButtonImage { get; private set; }
         
         public int MaxEnergy { get; private set; }
-        public int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
         public int CurrentEnergy 
         { 
             get => _currentEnergy;
@@ -92,7 +91,6 @@ namespace SustainTheStrain.Abilities
             MaxEnergy = settings.MaxEnergy;
         }
 
-        IEnergySystem IObservable<IEnergySystem>.Value => this;
         public event Action<IEnergySystem> Changed;
     }
 }
