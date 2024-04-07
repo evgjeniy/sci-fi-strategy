@@ -408,6 +408,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Recruit Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2132817689220846837, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
+      propertyPath: <MaxHP>k__BackingField
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3357532105762482792, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
       propertyPath: Animator
@@ -419,6 +424,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
         type: 3}
+    - target: {fileID: 3357532105762482792, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
+      propertyPath: <Damage>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357532105762482792, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
+      propertyPath: <DamagePeriod>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -468,6 +483,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579810907258726874, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
+      propertyPath: m_Speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9139420997716089492, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}

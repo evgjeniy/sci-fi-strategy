@@ -88,6 +88,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7715807382400100011, guid: d11d8725d54934741b6c008f48bd65a8,
+        type: 3}
+      propertyPath: <MaxHP>k__BackingField
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8, type: 3}
     - {fileID: 2898110286951984679, guid: d11d8725d54934741b6c008f48bd65a8, type: 3}
@@ -128,12 +133,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec789af5990d3e4eadcba70a01f6f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 18
   <DamagePeriod>k__BackingField: 0.1
   Animator: {fileID: 0}
   _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
     type: 3}
-  CoinsDrop: 0
+  CoinsDrop: 10
 --- !u!1001 &6214077512151166896
 PrefabInstance:
   m_ObjectHideFlags: 0

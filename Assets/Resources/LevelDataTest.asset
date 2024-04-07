@@ -1,0 +1,293 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24fa98590c6fd614598d276ac775bd38, type: 3}
+  m_Name: LevelDataTest
+  m_EditorClassIdentifier: 
+  _waves:
+  - _spawners:
+    - _delay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 2
+        _enemyCount: 5
+        _enemyType: Mob
+  - _spawners:
+    - _delay: 25
+      _index: 2
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 2
+        _enemyCount: 3
+        _enemyType: Shield
+  - _spawners:
+    - _delay: 10
+      _index: 1
+      _subwaves:
+      - _delay: 0
+        _spawnPeriod: 2
+        _enemyCount: 3
+        _enemyType: Mob
+  - _spawners:
+    - _delay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 2
+        _enemyCount: 9
+        _enemyType: Mob
+  - _spawners:
+    - _delay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 2
+        _enemyCount: 10
+        _enemyType: Mob
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 5
+        _enemyType: Mob
+  - _spawners:
+    - _delay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 6
+        _enemyType: Tank
+    - _delay: 0
+      _index: 2
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 4
+        _enemyType: Tank
+  - _spawners:
+    - _delay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 13
+        _enemyType: Mob
+    - _delay: 0
+      _index: 2
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 10
+        _enemyType: Mob
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 3
+        _enemyType: Tank
+    - _delay: 0
+      _index: 1
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 7
+        _enemyType: Mob
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 2
+        _enemyType: Tank
+  - _spawners:
+    - _delay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 15
+        _enemyType: Mob
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 4
+        _enemyType: Tank
+    - _delay: 0
+      _index: 1
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 2
+        _enemyCount: 20
+        _enemyType: Mob
+  - _spawners:
+    - _delay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 2
+        _enemyCount: 7
+        _enemyType: Kamikadze
+    - _delay: 0
+      _index: 2
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 2
+        _enemyCount: 9
+        _enemyType: Kamikadze
+  - _spawners:
+    - _delay: 2
+      _index: 2
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 2
+        _enemyCount: 9
+        _enemyType: Shield
+    - _delay: 2
+      _index: 1
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 6
+        _enemyType: Shield
+  - _spawners:
+    - _delay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 2
+        _enemyCount: 12
+        _enemyType: Tank
+    - _delay: 2
+      _index: 2
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 4
+        _enemyType: Tank
+      - _delay: 4
+        _spawnPeriod: 4
+        _enemyCount: 4
+        _enemyType: Shield
+  - _spawners:
+    - _delay: 0
+      _index: 2
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 3
+        _enemyCount: 3
+        _enemyType: Kamikadze
+    - _delay: 3
+      _index: 1
+      _subwaves:
+      - _delay: 0
+        _spawnPeriod: 2
+        _enemyCount: 5
+        _enemyType: Kamikadze
+    - _delay: 1
+      _index: 0
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 1
+        _enemyCount: 4
+        _enemyType: Kamikadze
+  - _spawners:
+    - _delay: 2
+      _index: 0
+      _subwaves:
+      - _delay: 0
+        _spawnPeriod: 2
+        _enemyCount: 5
+        _enemyType: Shield
+      - _delay: 3
+        _spawnPeriod: 2
+        _enemyCount: 9
+        _enemyType: Mob
+    - _delay: 0
+      _index: 2
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 4
+        _enemyType: Shield
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 13
+        _enemyType: Mob
+  - _spawners:
+    - _delay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 1
+        _spawnPeriod: 2
+        _enemyCount: 25
+        _enemyType: Mob
+    - _delay: 5
+      _index: 2
+      _subwaves:
+      - _delay: 2
+        _spawnPeriod: 1
+        _enemyCount: 18
+        _enemyType: Mob
+      - _delay: 6
+        _spawnPeriod: 3
+        _enemyCount: 3
+        _enemyType: Tank
+    - _delay: 2
+      _index: 1
+      _subwaves:
+      - _delay: 3
+        _spawnPeriod: 2
+        _enemyCount: 15
+        _enemyType: Mob
+      - _delay: 2
+        _spawnPeriod: 5
+        _enemyCount: 6
+        _enemyType: Mob_Shield
+  - _spawners:
+    - _delay: 3
+      _index: 0
+      _subwaves:
+      - _delay: 0
+        _spawnPeriod: 3
+        _enemyCount: 10
+        _enemyType: Shield
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 8
+        _enemyType: Mob
+      - _delay: 2
+        _spawnPeriod: 4
+        _enemyCount: 5
+        _enemyType: Tank
+    - _delay: 0
+      _index: 2
+      _subwaves:
+      - _delay: 8
+        _spawnPeriod: 2
+        _enemyCount: 1
+        _enemyType: BOSS
+      - _delay: 0
+        _spawnPeriod: 5
+        _enemyCount: 5
+        _enemyType: Tank
+      - _delay: 3
+        _spawnPeriod: 3
+        _enemyCount: 12
+        _enemyType: Mob_Shield
+    - _delay: 5
+      _index: 1
+      _subwaves:
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 7
+        _enemyType: Kamikadze
+      - _delay: 10
+        _spawnPeriod: 2
+        _enemyCount: 13
+        _enemyType: Mob
+      - _delay: 12
+        _spawnPeriod: 3
+        _enemyCount: 7
+        _enemyType: Mob_Shield

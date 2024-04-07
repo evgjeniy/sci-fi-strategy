@@ -58,10 +58,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5466643690414773136, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
+        type: 3}
+      propertyPath: <Damage>k__BackingField
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931212609518137421, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
+        type: 3}
+      propertyPath: _cellHp
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931212609518137421, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
+        type: 3}
+      propertyPath: _cellsCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064178535992659472, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
+        type: 3}
+      propertyPath: <MaxHP>k__BackingField
+      value: 7000
+      objectReference: {fileID: 0}
     - target: {fileID: 8808667852251221761, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
         type: 3}
       propertyPath: m_Name
-      value: TankEnemyShield
+      value: BOSS
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
