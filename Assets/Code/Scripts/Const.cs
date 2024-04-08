@@ -1,7 +1,9 @@
-﻿namespace SustainTheStrain._Contracts
+﻿namespace SustainTheStrain
 {
     public static class Const
     {
+        public static Observable<bool> IsDebugRadius { get; private set; } = new(true);
+
         public static class ResourcePath
         {
             public static class Buildings

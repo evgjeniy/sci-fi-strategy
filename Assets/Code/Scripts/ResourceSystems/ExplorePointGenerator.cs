@@ -12,7 +12,6 @@ namespace SustainTheStrain.ResourceSystems
 
         [field: SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
         public Sprite ButtonImage => EnergySettings.ButtonImage;
-        public int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
  
         private int _currentEnergy;
         private int _maxEnergy;
@@ -74,7 +73,6 @@ namespace SustainTheStrain.ResourceSystems
             MaxEnergy = EnergySettings.MaxEnergy;
         }
 
-        IEnergySystem IObservable<IEnergySystem>.Value => this;
         public event Action<IEnergySystem> Changed;
     }
 }

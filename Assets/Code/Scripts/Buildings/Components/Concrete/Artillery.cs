@@ -1,4 +1,5 @@
 using SustainTheStrain.Abilities;
+using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.ResourceSystems;
@@ -16,7 +17,7 @@ namespace SustainTheStrain.Buildings
 
         private ArtilleryManagementMenu _managementMenu;
         private BuildingRotator _currentGfx;
-        private IArtilleryState _currentState = new ArtilleryIdleState();
+        private IUpdatableState<Artillery> _currentState = new ArtilleryIdleState();
 
         public ArtilleryData Data { get; private set; }
 
@@ -56,6 +57,11 @@ namespace SustainTheStrain.Buildings
         public void OnDeselected()
         {
             _managementMenu.Disable();
+
+#if UNITY_EDITOR
+            if (Const.IsDebugRadius) return;
+#endif
+
             Data.RadiusVisualizer.Radius = 0;
         }
 
@@ -80,5 +86,16 @@ namespace SustainTheStrain.Buildings
             Data.ProjectileSpawnPoint = _currentGfx.ProjectileSpawnPoint;
             Data.RadiusVisualizer.Radius = config.Radius;
         }
+        
+#if UNITY_EDITOR
+
+        private void Awake() => Const.IsDebugRadius.Changed += OnDebugRadiusChanged;
+        private void OnDestroy() => Const.IsDebugRadius.Changed -= OnDebugRadiusChanged;
+        private bool IsDebugRadius => Const.IsDebugRadius;
+        [NaughtyAttributes.Button, NaughtyAttributes.DisableIf(nameof(IsDebugRadius))] private void ShowDebugRadius() => Const.IsDebugRadius.Value = true;
+        [NaughtyAttributes.Button, NaughtyAttributes.EnableIf(nameof(IsDebugRadius))] private void HideDebugRadius() => Const.IsDebugRadius.Value = false;
+        private void OnDebugRadiusChanged(bool isDebugRadius) => Data.RadiusVisualizer.Radius = isDebugRadius ? Data.Config.Value.Radius : Data.RadiusVisualizer.Radius;
+
+#endif
     }
 }

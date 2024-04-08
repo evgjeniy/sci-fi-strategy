@@ -670,7 +670,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4564332625868289269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,7 +702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1048,8 +1048,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuRoot: {fileID: 4202943634526864556}
-  _upgradeButton: {fileID: 8206229992987909570}
-  _unitsPointButton: {fileID: 934943357389987673}
-  _destroyButton: {fileID: 8431140157435631746}
   _upgradePriceText: {fileID: 8389601190720864186}
   _compensationText: {fileID: 2218181104603723011}
+  _upgradeButton: {fileID: 8206229992987909570}
+  _destroyButton: {fileID: 8431140157435631746}
+  _unitsPointButton: {fileID: 934943357389987673}

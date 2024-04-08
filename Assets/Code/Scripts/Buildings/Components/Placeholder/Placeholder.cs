@@ -9,7 +9,7 @@ namespace SustainTheStrain.Buildings
 {
     [RequireComponent(typeof(Outline))]
     [RequireComponent(typeof(Collider))]
-    public class Placeholder : MonoCashed<Outline, Collider>, IPlaceholder, IInputSelectable
+    public class Placeholder : MonoCashed<Outline, Collider>, IPlaceholder
     {
         [field: SerializeField] public Road Road { get; private set; }
 

@@ -1,14 +1,13 @@
-﻿using SustainTheStrain.Input;
+﻿using SustainTheStrain.Abilities;
+using SustainTheStrain.Input;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
 using UnityEngine;
-using Zenject;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units
 {
-    public class Hero : Unit
+    public class Hero : Unit, IInputSelectable, IInputPointerable
     {
-        [Inject] private IHeroInput _heroInput;
-
         #region State Machine Variables
 
         protected HeroIdleState _idleState;
@@ -49,11 +48,22 @@ namespace SustainTheStrain.Units
             Animator.SetBool("Moving", !NavPathFollower.IsDestinationReached() || !NavPathFollower.IsStopped);
             StateMachine.CurrentState.FrameUpdate();
         }
-        
+
+        public IInputState OnSelectedLeftClick(IInputState currentState, Ray ray)
+        {
+            if (Physics.Raycast(ray, out var hit) is false)
+                return currentState;
+            
+            Move(hit.point);
+            return new InputIdleState();
+        }
+
+        public void OnPointerEnter() => GetComponent<Outline>().IfNotNull(x => x.Enable());
+        public void OnPointerExit() => GetComponent<Outline>().IfNotNull(x => x.Disable());
+
         public void Move(Vector3 destination)
         {
             _destination = destination;
-            
             _stateMachine.ChangeState(_moveState);
         }
     }

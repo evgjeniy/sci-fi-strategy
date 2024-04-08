@@ -1,7 +1,4 @@
-using System;
 using SustainTheStrain.EnergySystem;
-using SustainTheStrain.Input;
-using SustainTheStrain.Scriptable.EnergySettings;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +6,6 @@ namespace SustainTheStrain.Units
 {
     public class HeroController : MonoEnergySystem
     {
-        [Inject] private IHeroInput _heroInput;
         [Inject] private Hero _hero;
         
         public EnergyController EnergyController { get; set; }
@@ -21,20 +17,6 @@ namespace SustainTheStrain.Units
             LoadSettings();
             EnergyController.AddEnergySystem(this);
             
-        }
-        
-        private void OnEnable()
-        {
-            _heroInput.OnSelected += HeroSelected;
-            _heroInput.OnPointerEnter += HeroSelected;
-            _heroInput.OnMove += HeroMove;
-        }
-
-        private void OnDisable()
-        {
-            _heroInput.OnSelected -= HeroSelected;
-            _heroInput.OnPointerEnter -= HeroSelected;
-            _heroInput.OnMove -= HeroMove;
         }
         
         public void IncreaseMaxEnergy(int value)

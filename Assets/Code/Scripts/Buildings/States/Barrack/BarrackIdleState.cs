@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using SustainTheStrain.Buildings.States;
+using UnityEngine;
 using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
-    public class BarrackIdleState : IBarrackState
+    public class BarrackIdleState : IUpdatableState<Barrack>
     {
-        public IBarrackState Update(Barrack barrack)
+        public IUpdatableState<Barrack> Update(Barrack barrack)
         {
             var barrackData = barrack.Data;
             var barrackConfig = barrackData.Config.Value;

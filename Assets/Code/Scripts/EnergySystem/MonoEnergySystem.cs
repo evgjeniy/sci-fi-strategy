@@ -13,11 +13,9 @@ namespace SustainTheStrain.EnergySystem
         
         public virtual event Action<int> OnCurrentEnergyChanged;
 
-        IEnergySystem IObservable<IEnergySystem>.Value => this;
         public event Action<IEnergySystem> Changed;
         
         public virtual Sprite ButtonImage => EnergySettings.ButtonImage;
-        public virtual int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
 
         public virtual int MaxEnergy
         {

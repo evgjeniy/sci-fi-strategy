@@ -18,12 +18,12 @@ namespace SustainTheStrain.Input.UI
             base.Awake();
         }
 
-        private async void Press()
+        private void Press()
         {
             if (!IsActive() || !IsInteractable()) return;
 
             UISystemProfilerApi.AddMarker($"{nameof(InputSystemButton)}.{nameof(OnClick)}", this);
-            await _bridge.Click();
+            _bridge.Click();
             OnClick.Invoke();
         }
 

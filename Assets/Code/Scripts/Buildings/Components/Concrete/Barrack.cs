@@ -1,4 +1,5 @@
 using SustainTheStrain.Abilities;
+using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Input;
@@ -20,7 +21,7 @@ namespace SustainTheStrain.Buildings
 
         private BarrackManagementMenu _managementMenu;
         private GameObject _currentGfx;
-        private IBarrackState _currentState = new BarrackIdleState();
+        private IUpdatableState<Barrack> _currentState = new BarrackIdleState();
 
         public BarrackData Data { get; private set; }
 
@@ -68,6 +69,11 @@ namespace SustainTheStrain.Buildings
         public void OnDeselected()
         {
             _managementMenu.Disable();
+
+#if UNITY_EDITOR
+            if (Const.IsDebugRadius) return;
+#endif
+
             Data.RadiusVisualizer.Radius = 0;
 
             Data.RecruitsPointer.IfNotNull(x => x.DestroyObject());
@@ -81,7 +87,7 @@ namespace SustainTheStrain.Buildings
             var pointerPosition = Data.RecruitsPointer.transform.position;
             Data.RecruitGroup.GuardPost.Position = pointerPosition;
             Data.RecruitSpawner.SpawnPosition = pointerPosition;
-            return new IdleState();
+            return new InputIdleState();
         }
 
         public IInputState OnSelectedUpdate(IInputState currentState, Ray ray)
@@ -130,5 +136,16 @@ namespace SustainTheStrain.Buildings
             
             Data.RadiusVisualizer.Radius = config.Radius;
         }
+        
+#if UNITY_EDITOR
+
+        private void Awake() => Const.IsDebugRadius.Changed += OnDebugRadiusChanged;
+        private void OnDestroy() => Const.IsDebugRadius.Changed -= OnDebugRadiusChanged;
+        private bool IsDebugRadius => Const.IsDebugRadius;
+        [NaughtyAttributes.Button, NaughtyAttributes.DisableIf(nameof(IsDebugRadius))] private void ShowDebugRadius() => Const.IsDebugRadius.Value = true;
+        [NaughtyAttributes.Button, NaughtyAttributes.EnableIf(nameof(IsDebugRadius))] private void HideDebugRadius() => Const.IsDebugRadius.Value = false;
+        private void OnDebugRadiusChanged(bool isDebugRadius) => Data.RadiusVisualizer.Radius = isDebugRadius ? Data.Config.Value.Radius : Data.RadiusVisualizer.Radius;
+
+#endif
     }
 }

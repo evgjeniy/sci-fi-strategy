@@ -5,8 +5,8 @@
         public void Enter() {}
         public void Exit() {}
 
-        public IInputState ProcessMouseMove(IInputSystem context);
-        public IInputState ProcessLeftClick(IInputSystem context);
-        public IInputState ProcessRightClick(IInputSystem context);
+        public IInputState ProcessFrame(IInputData inputData);
+        public IInputState ProcessLeftClick(IInputData inputData);
+        public IInputState ProcessRightClick(IInputData inputData);
     }
 }

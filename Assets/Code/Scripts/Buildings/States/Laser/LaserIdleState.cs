@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using SustainTheStrain.Buildings.States;
+using UnityEngine;
 
 namespace SustainTheStrain.Buildings
 {
-    public class LaserIdleState : ILaserState
+    public class LaserIdleState : IUpdatableState<Laser>
     {
-        public ILaserState Update(Laser laser)
+        public IUpdatableState<Laser> Update(Laser laser)
         {
             var laserData = laser.Data;
             var laserConfig = laserData.Config.Value;
