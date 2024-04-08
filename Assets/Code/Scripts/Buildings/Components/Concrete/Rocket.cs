@@ -1,5 +1,4 @@
-﻿using System;
-using SustainTheStrain.Abilities;
+﻿using SustainTheStrain.Abilities;
 using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
@@ -40,8 +39,8 @@ namespace SustainTheStrain.Buildings
             );
         }
 
-        private void Awake() => Data.Orientation.Changed += OrientationOnChanged;
-        private void OnDestroy() => Data.Orientation.Changed -= OrientationOnChanged;
+        private void Awake() { Data.Orientation.Changed += OrientationOnChanged; Const.IsDebugRadius.Changed += OnDebugRadiusChanged; }
+        private void OnDestroy() { Data.Orientation.Changed -= OrientationOnChanged; Const.IsDebugRadius.Changed -= OnDebugRadiusChanged; }
         private void OnEnable() => Data.Config.Changed += UpgradeGraphics;
         private void OnDisable() => Data.Config.Changed -= UpgradeGraphics;
         private void Update() => _currentState = _currentState.Update(this);
@@ -61,6 +60,11 @@ namespace SustainTheStrain.Buildings
         public void OnDeselected()
         {
             _managementMenu.Disable();
+
+#if UNITY_EDITOR
+            if (Const.IsDebugRadius) return;
+#endif
+
             Data.RadiusVisualizer.Radius = Data.SectorVisualizer.Radius = 0;
         }
 
@@ -93,5 +97,14 @@ namespace SustainTheStrain.Buildings
             var lookRotation = Quaternion.LookRotation(orientation - transform.position);
             Data.SectorVisualizer.Direction = lookRotation.eulerAngles.y;
         }
+        
+#if UNITY_EDITOR
+
+        private bool IsDebugRadius => Const.IsDebugRadius;
+        [NaughtyAttributes.Button, NaughtyAttributes.DisableIf(nameof(IsDebugRadius))] private void ShowDebugRadius() => Const.IsDebugRadius.Value = true;
+        [NaughtyAttributes.Button, NaughtyAttributes.EnableIf(nameof(IsDebugRadius))] private void HideDebugRadius() => Const.IsDebugRadius.Value = false;
+        private void OnDebugRadiusChanged(bool isDebugRadius) => Data.RadiusVisualizer.Radius = isDebugRadius ? Data.Config.Value.Radius : Data.RadiusVisualizer.Radius;
+
+#endif
     }
 }

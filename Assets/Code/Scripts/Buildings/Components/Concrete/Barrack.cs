@@ -3,7 +3,6 @@ using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Input;
-using SustainTheStrain.Input.States;
 using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.Units;
 using SustainTheStrain.Units.Spawners;
@@ -55,7 +54,7 @@ namespace SustainTheStrain.Buildings
         private void OnDisable() => Data.Config.Changed -= UpgradeGraphics;
         private void Update() => _currentState = _currentState.Update(this);
 
-        public void OnPointered() => Data.Outline.Enable();
+        public void OnPointerEnter() => Data.Outline.Enable();
         public void OnPointerExit() => Data.Outline.Disable();
 
         public void OnSelected()
@@ -70,6 +69,11 @@ namespace SustainTheStrain.Buildings
         public void OnDeselected()
         {
             _managementMenu.Disable();
+
+#if UNITY_EDITOR
+            if (Const.IsDebugRadius) return;
+#endif
+
             Data.RadiusVisualizer.Radius = 0;
 
             Data.RecruitsPointer.IfNotNull(x => x.DestroyObject());
@@ -132,5 +136,16 @@ namespace SustainTheStrain.Buildings
             
             Data.RadiusVisualizer.Radius = config.Radius;
         }
+        
+#if UNITY_EDITOR
+
+        private void Awake() => Const.IsDebugRadius.Changed += OnDebugRadiusChanged;
+        private void OnDestroy() => Const.IsDebugRadius.Changed -= OnDebugRadiusChanged;
+        private bool IsDebugRadius => Const.IsDebugRadius;
+        [NaughtyAttributes.Button, NaughtyAttributes.DisableIf(nameof(IsDebugRadius))] private void ShowDebugRadius() => Const.IsDebugRadius.Value = true;
+        [NaughtyAttributes.Button, NaughtyAttributes.EnableIf(nameof(IsDebugRadius))] private void HideDebugRadius() => Const.IsDebugRadius.Value = false;
+        private void OnDebugRadiusChanged(bool isDebugRadius) => Data.RadiusVisualizer.Radius = isDebugRadius ? Data.Config.Value.Radius : Data.RadiusVisualizer.Radius;
+
+#endif
     }
 }
