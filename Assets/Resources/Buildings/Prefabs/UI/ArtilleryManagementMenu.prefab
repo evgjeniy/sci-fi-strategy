@@ -292,7 +292,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2077972467260416572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -654,10 +654,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuRoot: {fileID: 1420538813501609627}
-  _upgradeButton: {fileID: 8853321244879510329}
-  _destroyButton: {fileID: 8749802362103849240}
   _upgradePriceText: {fileID: 4242090141925247689}
   _compensationText: {fileID: 8998488098359732155}
+  _upgradeButton: {fileID: 8853321244879510329}
+  _destroyButton: {fileID: 8749802362103849240}
 --- !u!1 &8946522750364444465
 GameObject:
   m_ObjectHideFlags: 0

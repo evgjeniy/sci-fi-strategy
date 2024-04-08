@@ -23,7 +23,7 @@ namespace SustainTheStrain.Input.UI
             }
         }
 
-        public async UniTask Click()
+        public async void Click()
         {
             SendValueToControl(1.0f);
             await UniTask.NextFrame();

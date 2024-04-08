@@ -3,6 +3,7 @@ using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Input;
+using SustainTheStrain.Input.States;
 using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.Units;
 using SustainTheStrain.Units.Spawners;
@@ -54,7 +55,7 @@ namespace SustainTheStrain.Buildings
         private void OnDisable() => Data.Config.Changed -= UpgradeGraphics;
         private void Update() => _currentState = _currentState.Update(this);
 
-        public void OnPointerEnter() => Data.Outline.Enable();
+        public void OnPointered() => Data.Outline.Enable();
         public void OnPointerExit() => Data.Outline.Disable();
 
         public void OnSelected()
@@ -82,7 +83,7 @@ namespace SustainTheStrain.Buildings
             var pointerPosition = Data.RecruitsPointer.transform.position;
             Data.RecruitGroup.GuardPost.Position = pointerPosition;
             Data.RecruitSpawner.SpawnPosition = pointerPosition;
-            return new IdleState();
+            return new InputIdleState();
         }
 
         public IInputState OnSelectedUpdate(IInputState currentState, Ray ray)

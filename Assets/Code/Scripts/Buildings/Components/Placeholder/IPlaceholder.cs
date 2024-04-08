@@ -1,9 +1,10 @@
-﻿using SustainTheStrain.Roads;
+﻿using SustainTheStrain.Input;
+using SustainTheStrain.Roads;
 using UnityEngine;
 
 namespace SustainTheStrain.Buildings
 {
-    public interface IPlaceholder
+    public interface IPlaceholder : IInputSelectable, IInputPointerable
     {
         public Transform transform { get; }
         public Road Road { get; }

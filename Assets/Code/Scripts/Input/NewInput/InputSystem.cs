@@ -1,29 +1,23 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using Zenject;
-
-namespace SustainTheStrain.Input
+﻿namespace SustainTheStrain.Input
 {
-    public class InputSystem : IInputSystem, IInitializable, ITickable, IDisposable
+    public class InputSystem : IInputSystem, Zenject.IInitializable, Zenject.ITickable, System.IDisposable
     {
+        private readonly InputActions _inputActions = new();
+        private readonly InputData _inputData;
+
+        private IInputState _currentState = new InputIdleState();
+
+        public InputSystem(InputData inputData) => _inputData = inputData;
+
         #region Implementation of IInputSystem
 
-        public Vector2 MousePosition { get; private set; }
-        public InputSettings Settings { get; }
-
-        public void Idle() => ChangeState(_ => new IdleState());
-        public void Select(IInputSelectable selectable) => ChangeState(_ => new SelectableState(selectable));
+        public IInputData InputData => _inputData;
+        public void Idle() => ChangeState(_ => new InputIdleState());
+        public void Select(IInputSelectable selectable) => ChangeState(_ => new InputSelectState(selectable));
         public void Enable() => _inputActions.Enable();
         public void Disable() => _inputActions.Disable();
 
         #endregion
-
-        private readonly InputActions _inputActions = new();
-
-        private IInputState _currentState = new IdleState();
-
-        public InputSystem(InputSettings inputSettings) => Settings = inputSettings;
 
         public void Initialize()
         {
@@ -49,30 +43,30 @@ namespace SustainTheStrain.Input
 
         public void Tick()
         {
-            if (MousePosition.IsPointerUnderUI()) return;
-            ChangeState(_currentState.ProcessMouseMove);
+            if (_inputData.MousePosition.IsPointerUnderUI()) return;
+            ChangeState(_currentState.ProcessFrame);
         }
 
-        private void PerformMouseMove(InputAction.CallbackContext context)
+        private void PerformMouseMove(UnityEngine.InputSystem.InputAction.CallbackContext context)
         {
-            MousePosition = context.ReadValue<Vector2>();
+            _inputData.MousePosition = context.ReadValue<UnityEngine.Vector2>();
         }
 
-        private void PerformLeftClick(InputAction.CallbackContext _)
+        private void PerformLeftClick(UnityEngine.InputSystem.InputAction.CallbackContext _)
         {
-            if (MousePosition.IsPointerUnderUI()) return;
+            if (_inputData.MousePosition.IsPointerUnderUI()) return;
             ChangeState(_currentState.ProcessLeftClick);
         }
 
-        private void PerformRightClick(InputAction.CallbackContext _)
+        private void PerformRightClick(UnityEngine.InputSystem.InputAction.CallbackContext _)
         {
-            if (MousePosition.IsPointerUnderUI()) return;
+            if (_inputData.MousePosition.IsPointerUnderUI()) return;
             ChangeState(_currentState.ProcessRightClick);
         }
 
-        private void ChangeState(Func<IInputSystem, IInputState> getNewState)
+        private void ChangeState(System.Func<IInputData, IInputState> getNewState)
         {
-            var newState = getNewState(this);
+            var newState = getNewState(_inputData);
             if (Equals(newState, _currentState)) return;
 
             _currentState.Exit();

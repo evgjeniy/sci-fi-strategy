@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SustainTheStrain.Buildings
 {
-    public interface IBuilding : IInputSelectable
+    public interface IBuilding : IInputSelectable, IInputPointerable
     {
         public Transform transform { get; }
 
