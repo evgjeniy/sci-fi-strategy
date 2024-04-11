@@ -16,7 +16,7 @@ namespace SustainTheStrain.Abilities
         [SerializeField] private LayerMask groundLayers;
         [SerializeField] private LayerMask enemyLayers;
         [SerializeField] private int maxDistFromCamera;
-        [SerializeField] private float zoneRadius;
+        [SerializeField] private float recruitAimRadius;
         [SerializeField] private Team team = Team.Player;
         [Inject] private EnergyController _energyController;
 
@@ -73,7 +73,8 @@ namespace SustainTheStrain.Abilities
             currentAim = Abilities[idx] switch
             {
                 ZoneAbility => new ZoneAim((Abilities[idx] as ZoneAbility).getZoneRadius(), aimZonePrefab, groundLayers, maxDistFromCamera),
-                LandingAbility => new PointAim(groundLayers, maxDistFromCamera),
+                LandingAbility => new ZoneAim(recruitAimRadius, aimZonePrefab, groundLayers, maxDistFromCamera),
+                //LandingAbility => new PointAim(groundLayers, maxDistFromCamera),
                 _ => new PointAim(enemyLayers, maxDistFromCamera)
             };
 
