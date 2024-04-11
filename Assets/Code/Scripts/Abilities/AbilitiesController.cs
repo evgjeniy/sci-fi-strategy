@@ -74,7 +74,6 @@ namespace SustainTheStrain.Abilities
             {
                 ZoneAbility => new ZoneAim((Abilities[idx] as ZoneAbility).getZoneRadius(), aimZonePrefab, groundLayers, maxDistFromCamera),
                 LandingAbility => new ZoneAim(recruitAimRadius, aimZonePrefab, groundLayers, maxDistFromCamera),
-                //LandingAbility => new PointAim(groundLayers, maxDistFromCamera),
                 _ => new PointAim(enemyLayers, maxDistFromCamera)
             };
 
