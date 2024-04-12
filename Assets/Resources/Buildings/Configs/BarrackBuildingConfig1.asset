@@ -18,11 +18,11 @@ MonoBehaviour:
   <Mask>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  <Radius>k__BackingField: 7
+  <Radius>k__BackingField: 8
   <UnitMaxHealth>k__BackingField: 50
   <UnitAttackDamage>k__BackingField: 3
   <UnitAttackCooldown>k__BackingField: 1
-  <RespawnCooldown>k__BackingField: 7
+  <RespawnCooldown>k__BackingField: 14
   <GfxPrefab>k__BackingField: {fileID: 919132149155446097, guid: 5ba17ae94cfd6fd43abb82930fe710b5,
     type: 3}
   <NextLevelConfig>k__BackingField: {fileID: 11400000, guid: 782ee31570eeb8b49a24989aaf34f56f,
