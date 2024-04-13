@@ -1,4 +1,5 @@
 using System;
+using SustainTheStrain.Scriptable;
 using UnityEngine;
 
 namespace SustainTheStrain.EnergySystem
@@ -7,9 +8,15 @@ namespace SustainTheStrain.EnergySystem
     {
         public event Action<int> OnEnergyChanged;
         public event Action<int> OnMaxEnergyChanged;
+        public event Action<int> OnUpgradeCostChanged;
         
         [SerializeField] private int _currentCount;
         [Min(1)] [SerializeField] private int _maxCount;
+        private int _currentUpgradeLevel = 0;
+
+        public int UpgradeCost => _upgradeCostSettings.UpgradeCostList[_currentUpgradeLevel];
+        [SerializeField] private EnergyManagerUpgradeCostList _upgradeCostSettings;
+        
         
         public int MaxCount { 
             get => _maxCount; 
@@ -34,6 +41,7 @@ namespace SustainTheStrain.EnergySystem
         private void OnEnable()
         {
             CurrentCount = _maxCount;
+            OnUpgradeCostChanged?.Invoke(UpgradeCost);
         }
 
         public bool TrySpend(int value)
@@ -48,6 +56,13 @@ namespace SustainTheStrain.EnergySystem
             if (CurrentCount + value > _maxCount) return false;
             CurrentCount += value;
             return true;
+        }
+
+        public void UpgradeEnergyCount()
+        {
+            _currentUpgradeLevel++;
+            MaxCount++;
+            OnUpgradeCostChanged?.Invoke(UpgradeCost);
         }
         
     }

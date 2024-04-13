@@ -9,8 +9,12 @@ namespace SustainTheStrain.EnergySystem
     {
         [Inject] public EnergyManager Manager { get; private set; }
         public event Action<IEnergySystem> OnSystemAdded;
+        
         public List<IEnergySystem> Systems => _systems;
         private List<IEnergySystem> _systems = new();
+
+        public delegate bool CheckGoldDelegate(int x);
+        private CheckGoldDelegate _checkGoldAction;
         
         [Inject]
         public void AddEnergySystem(IEnergySystem system)
@@ -19,8 +23,7 @@ namespace SustainTheStrain.EnergySystem
             _systems.Add(system);
             OnSystemAdded?.Invoke(system);
         }
-
-        //используется в ui
+        
         public void TryLoadEnergyToSystem(IEnergySystem system)
         {
             var countOfEnergy = system.EnergySettings.EnergySpend;
@@ -30,8 +33,6 @@ namespace SustainTheStrain.EnergySystem
                 system.TrySpendEnergy(countOfEnergy);
             }
         }
-
-        //используется в ui
         public void TryReturnEnergyFromSystem(IEnergySystem system)
         {
             var countOfEnergy = system.EnergySettings.EnergySpend;
@@ -41,5 +42,18 @@ namespace SustainTheStrain.EnergySystem
                 system.TryRefillEnergy(countOfEnergy);
             }
         }
+
+        public void SetCheckGoldAction( CheckGoldDelegate action)
+        {
+            _checkGoldAction = action;
+        }
+
+        public void BuyMaxEnergy()
+        {
+            if (!_checkGoldAction.Invoke(Manager.UpgradeCost)) return;
+            Manager.UpgradeEnergyCount();
+        }
+        
+        
     }
 }
