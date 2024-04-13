@@ -1,6 +1,4 @@
-﻿using SustainTheStrain.Buildings.States;
-using UnityEngine;
-using UnityEngine.Extensions;
+﻿using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
@@ -8,8 +6,6 @@ namespace SustainTheStrain.Buildings
     {
         public IUpdatableState<Barrack> Update(Barrack barrack)
         {
-            barrack.Timer.Time -= Time.deltaTime;
-
             if (barrack.Timer.IsTimeOver)
             {
                 barrack.RecruitGroup.Recruits.RemoveAll(x => x == null);
@@ -27,7 +23,7 @@ namespace SustainTheStrain.Buildings
                     
                     
                     barrack.RecruitGroup.AddRecruit(recruit);
-                    barrack.Timer.Time = barrack.Config.RespawnCooldown;
+                    barrack.Timer.ResetTime(barrack.Config.RespawnCooldown);
                 }
             }
 

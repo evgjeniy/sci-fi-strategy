@@ -8,7 +8,6 @@ namespace SustainTheStrain.Installers
         public override void InstallBindings()
         {
             Container.Bind<IBuildingFactory>().To<BuildingFactory>().AsSingle();
-            Container.Bind<Timer>().FromNew().AsTransient();
         }
     }
 }

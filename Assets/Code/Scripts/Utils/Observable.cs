@@ -1,4 +1,6 @@
-﻿namespace SustainTheStrain
+﻿using UnityEngine;
+
+namespace SustainTheStrain
 {
     public interface IObservable<out TValue>
     {
@@ -6,14 +8,16 @@
         event System.Action<TValue> Changed;
     }
     
+    [System.Serializable]
     public class Observable<TValue> : IObservable<TValue>
     {
-        private TValue _value;
+        [SerializeField] private TValue _value;
+
         private event System.Action<TValue> OnChangedEvent = _ => {};
 
         public Observable(TValue value = default) => _value = value;
 
-        public TValue Value
+        public virtual TValue Value
         {
             get => _value;
             set

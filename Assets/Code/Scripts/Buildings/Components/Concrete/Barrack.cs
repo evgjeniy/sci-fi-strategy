@@ -1,4 +1,3 @@
-using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Input;
 using SustainTheStrain.ResourceSystems;
@@ -45,7 +44,7 @@ namespace SustainTheStrain.Buildings
             SpawnPoint = spawnPoint.Value;
             
             Timer = timer;
-            Timer.Time = config.Value.RespawnCooldown;
+            Timer.ResetTime(config.Value.RespawnCooldown);
         }
 
         private void Update() => _currentState = _currentState.Update(this);

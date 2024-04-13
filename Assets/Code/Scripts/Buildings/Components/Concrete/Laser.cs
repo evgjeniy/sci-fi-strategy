@@ -1,4 +1,3 @@
-using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.Units;
@@ -40,7 +39,7 @@ namespace SustainTheStrain.Buildings
             _selection = selection;
             
             Timer = timer;
-            Timer.Time = config.Value.Cooldown;
+            Timer.ResetTime(config.Value.Cooldown);
         }
 
         private void Update() => _currentState = _currentState.Update(this);

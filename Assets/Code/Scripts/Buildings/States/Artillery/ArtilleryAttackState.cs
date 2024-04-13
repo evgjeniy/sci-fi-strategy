@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Units;
 using UnityEngine;
@@ -16,7 +15,6 @@ namespace SustainTheStrain.Buildings
 
         public IUpdatableState<Artillery> Update(Artillery artillery)
         {
-            artillery.Timer.Time -= Time.deltaTime;
             artillery.Area.Update(artillery.transform.position, artillery.Config.Radius, artillery.Config.Mask);
 
             if (artillery.Area.Entities.Contains(_target) is false)
@@ -30,7 +28,7 @@ namespace SustainTheStrain.Buildings
                     .With(x => x.transform.position = artillery.SpawnPointProvider.SpawnPoint.position)
                     .LaunchTo(_target, onComplete: damageable => Explosion(artillery.Config, damageable));
                 
-                artillery.Timer.Time = artillery.Config.Cooldown;
+                artillery.Timer.ResetTime(artillery.Config.Cooldown);
             }
 
             return this;

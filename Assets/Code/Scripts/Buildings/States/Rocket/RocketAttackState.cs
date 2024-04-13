@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
@@ -15,7 +14,6 @@ namespace SustainTheStrain.Buildings
 
         public IUpdatableState<Rocket> Update(Rocket rocket)
         {
-            rocket.Timer.Time -= Time.deltaTime;
             rocket.Area.Update(rocket.transform.position, rocket.Config.Radius, rocket.Config.Mask);
             
             if (rocket.Area.Entities.Contains(_target) is false)
@@ -41,7 +39,7 @@ namespace SustainTheStrain.Buildings
             }
 
             if (attackedAmount != 0)
-                rocket.Timer.Time = rocket.Config.Cooldown;
+                rocket.Timer.ResetTime(rocket.Config.Cooldown);
 
             return this;
         }

@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Cysharp.Threading.Tasks;
-using SustainTheStrain.Buildings.States;
 using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
@@ -16,7 +15,6 @@ namespace SustainTheStrain.Buildings
 
         public IUpdatableState<Laser> Update(Laser laser)
         {
-            laser.Timer.Time -= Time.deltaTime;
             laser.Area.Update(laser.transform.position, laser.Config.Radius, laser.Config.Mask);
             
             if (laser.Area.Entities.Contains(_target) is false)
@@ -26,7 +24,7 @@ namespace SustainTheStrain.Buildings
             if (!laser.Timer.IsTimeOver) return this;
             
             _target.Damage(laser.Config.Damage);
-            laser.Timer.Time = laser.Config.Cooldown;
+            laser.Timer.ResetTime(laser.Config.Cooldown);
 
             EnableLineAttack(laser);
             

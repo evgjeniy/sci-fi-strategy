@@ -90,4 +90,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1160168745f6efb46999e755e1c52e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _time: 5
+  _timer:
+    <Time>k__BackingField: 5
+    <IsPaused>k__BackingField: 0

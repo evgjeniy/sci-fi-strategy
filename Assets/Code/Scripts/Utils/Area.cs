@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace SustainTheStrain.Buildings
+namespace SustainTheStrain
 {
     public class Area<TComponent> where TComponent : Component
     {
