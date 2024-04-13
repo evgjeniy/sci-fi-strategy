@@ -64,7 +64,7 @@ namespace SustainTheStrain.Buildings
 
         public void Destroy()
         {
-            GetComponentInParent<Placeholder>().IfNotNull(placeholder =>
+            GetComponentInParent<IPlaceholder>().IfNotNull(placeholder =>
             {
                 placeholder.DestroyBuilding();
                 _resourceManager.Gold.Value += _config.Value.Compensation;
