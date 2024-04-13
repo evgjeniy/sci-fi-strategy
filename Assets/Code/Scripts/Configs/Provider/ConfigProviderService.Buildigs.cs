@@ -5,7 +5,8 @@ namespace SustainTheStrain.Configs
 {
     public partial class ConfigProviderService
     {
-        public TConfig GetBuildingConfig<TConfig>(byte upgrade, string configName, string rootPath) where TConfig : BuildingConfig
+        public TConfig GetBuildingConfig<TConfig>(int upgrade, string configName = null,
+            string rootPath = Const.ResourcePath.Buildings.Configs.Root) where TConfig : BuildingConfig
         {
             _buildingConfigs ??= Load.Configs<string, BuildingConfig>(rootPath, c => c.GetType().Name + c.Level);
             

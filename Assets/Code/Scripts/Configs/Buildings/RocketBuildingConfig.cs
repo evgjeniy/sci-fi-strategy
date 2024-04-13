@@ -1,4 +1,3 @@
-using SustainTheStrain._Contracts;
 using SustainTheStrain.Buildings;
 using UnityEngine;
 
@@ -13,7 +12,6 @@ namespace SustainTheStrain.Configs.Buildings
         [field: SerializeField, Range(0.0f, 360.0f)] public float SectorAngle { get; private set; } = 45.0f;
 
         [field: Header("Prefabs")]
-        [field: SerializeField] public BuildingRotator GfxPrefab { get; private set; }
         [field: SerializeField] public Projectile ProjectilePrefab { get; set; }
 
         [field: Space, SerializeField] public RocketBuildingConfig NextLevelConfig { get; private set; }

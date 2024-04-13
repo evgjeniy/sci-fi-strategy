@@ -81,7 +81,7 @@ namespace SustainTheStrain.Abilities
         private bool precomputeOutline;
 
         [SerializeField]
-        private bool recacheOnEnable;
+        private bool recacheOnEnable = true;
 
         [SerializeField, HideInInspector]
         private List<Mesh> bakeKeys = new List<Mesh>();
@@ -177,7 +177,7 @@ namespace SustainTheStrain.Abilities
             }
         }
 
-        void OnDestroy()
+        protected virtual void OnDestroy()
         {
 
             // Destroy material instances

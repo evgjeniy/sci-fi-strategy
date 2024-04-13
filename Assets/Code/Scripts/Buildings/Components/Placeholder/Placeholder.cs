@@ -31,10 +31,6 @@ namespace SustainTheStrain.Buildings
             Cashed2.Disable();
             
             _building = building;
-            _building.transform.parent = transform;
-            _building.transform.localPosition = Vector3.zero;
-
-            _selectorMenu.IfNotNull(x => x.DestroyObject());
             _inputSystem.Select(building);
         }
 

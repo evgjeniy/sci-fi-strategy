@@ -15,37 +15,33 @@ namespace SustainTheStrain.Buildings
 
         public IUpdatableState<Rocket> Update(Rocket rocket)
         {
-            var rocketData = rocket.Data;
-            var rocketConfig = rocketData.Config.Value;
-            var rocketTransform = rocket.transform;
-
-            rocketData.Timer.Time -= Time.deltaTime;
-            rocketData.Area.Update(rocketTransform.position, rocketConfig.Radius, rocketConfig.Mask);
+            rocket.Timer.Time -= Time.deltaTime;
+            rocket.Area.Update(rocket.transform.position, rocket.Config.Radius, rocket.Config.Mask);
             
-            if (rocketData.Area.Entities.Contains(_target) is false)
+            if (rocket.Area.Entities.Contains(_target) is false)
                 return new RocketIdleState();
             
-            rocketData.Orientation.Value = _target.transform.position;
+            rocket.Orientation = _target.transform.position;
 
-            if (!rocketData.Timer.IsTimeOver)
+            if (!rocket.Timer.IsTimeOver)
                 return this;
            
             var attackedAmount = 0;
 
-            foreach (var target in rocketData.Area.Entities)
+            foreach (var target in rocket.Area.Entities)
             {
-                if (attackedAmount >= rocketConfig.MaxTargets) break;
+                if (attackedAmount >= rocket.Config.MaxTargets) break;
                 if (!IsInSector(rocket, target.transform)) continue;
 
-                Object.Instantiate(rocketConfig.ProjectilePrefab, rocketData.ProjectileSpawnPoint)
-                    .With(x => x.transform.position = rocketData.ProjectileSpawnPoint.position)
-                    .LaunchTo(target, onComplete: x => x.Damage(rocket.Data.Config.Value.Damage));
+                Object.Instantiate(rocket.Config.ProjectilePrefab, rocket.SpawnPointProvider.SpawnPoint)
+                    .With(x => x.transform.position = rocket.SpawnPointProvider.SpawnPoint.position)
+                    .LaunchTo(target, onComplete: x => x.Damage(rocket.Config.Damage));
 
                 attackedAmount++;
             }
 
             if (attackedAmount != 0)
-                rocketData.Timer.Time = rocketConfig.Cooldown;
+                rocket.Timer.Time = rocket.Config.Cooldown;
 
             return this;
         }
@@ -54,11 +50,11 @@ namespace SustainTheStrain.Buildings
         {
             var rocketPosition = rocket.transform.position;
             
-            var currentDirection = rocket.Data.Orientation - rocketPosition;
+            var currentDirection = rocket.Orientation - rocketPosition;
             var targetDirection = target.position - rocketPosition;
 
             var angle = Vector3.Angle(currentDirection, targetDirection);
-            return angle <= rocket.Data.Config.Value.SectorAngle * 0.5f;
+            return angle <= rocket.Config.SectorAngle * 0.5f;
         }
     }
 }

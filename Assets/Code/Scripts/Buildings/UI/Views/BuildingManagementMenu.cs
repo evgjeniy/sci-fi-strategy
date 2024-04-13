@@ -2,43 +2,46 @@
 using SustainTheStrain.ResourceSystems;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Extensions;
 using UnityEngine.UI;
 using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    public class BuildingManagementMenu : MonoBehaviour
+    public abstract class BuildingManagementMenu<TConfig> : MonoBehaviour where TConfig : BuildingConfig
     {
-        [SerializeField] private Canvas _menuRoot;
         [SerializeField] private TMP_Text _upgradePriceText;
         [SerializeField] private TMP_Text _compensationText;
         [SerializeField] private Button _upgradeButton;
         [SerializeField] private Button _destroyButton;
 
         [Inject] private IResourceManager _resourceManager;
+        [Inject] private IObservable<SelectionType> _selection;
+        [Inject] private IObservable<TConfig> _config;
 
         private int _currentGold;
         private int _nextLevelPrice;
         private int _buildingDestroyCompensation;
+        
+        protected abstract IBuilding Building { get; }
 
-        public void Enable() => _menuRoot.Activate();
-        public void Disable() => _menuRoot.IfNotNull(x => x.Deactivate());
-
-        protected void SubscribeBaseEvents(IBuilding building)
+        protected virtual void Awake()
         {
+            _config.Changed += OnConfigChanged;
+            _selection.Changed += OnSelectionChanged;
             _resourceManager.Gold.Changed += OnGoldChanged;
-            
-            _upgradeButton.onClick.AddListener(building.Upgrade);
-            _destroyButton.onClick.AddListener(building.Destroy);
+
+            _upgradeButton.onClick.AddListener(Building.Upgrade);
+            _destroyButton.onClick.AddListener(Building.Destroy);
         }
 
-        protected void UnsubscribeBaseEvents(IBuilding building)
+        protected virtual void OnDestroy()
         {
+            _config.Changed -= OnConfigChanged;
+            _selection.Changed -= OnSelectionChanged;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             
-            _upgradeButton.onClick.RemoveListener(building.Upgrade);
-            _destroyButton.onClick.RemoveListener(building.Destroy);
+            _upgradeButton.onClick.RemoveListener(Building.Upgrade);
+            _destroyButton.onClick.RemoveListener(Building.Destroy);
         }
         
         protected virtual void OnGoldChanged(int currentGold)
@@ -48,12 +51,17 @@ namespace SustainTheStrain.Buildings
             Display();
         }
 
-        protected virtual void OnConfigChanged(BuildingConfig buildingConfig)
+        protected virtual void OnConfigChanged(TConfig buildingConfig)
         {
             _nextLevelPrice = buildingConfig.NextLevelPrice;
             _buildingDestroyCompensation = buildingConfig.Compensation;
 
             Display();
+        }
+
+        protected virtual void OnSelectionChanged(SelectionType selectionType)
+        {
+            gameObject.SetActive(selectionType == SelectionType.Select);
         }
 
         protected virtual void Display()

@@ -1,4 +1,3 @@
-using SustainTheStrain._Contracts;
 using SustainTheStrain.Buildings;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace SustainTheStrain.Configs.Buildings
         [field: SerializeField, Min(0.0f)] public float Damage { get; private set; } = 1.0f;
         [field: SerializeField, Min(0.0f)] public float Cooldown { get; private set; } = 1.0f;
         
-        [field: Space, SerializeField] public BuildingRotator GfxPrefab { get; private set; }
+        [field: Header("Prefabs")]
         [field: SerializeField] public LineRenderer LineRenderer { get; private set; }
 
         [field: Space, SerializeField] public LaserBuildingConfig NextLevelConfig { get; private set; }

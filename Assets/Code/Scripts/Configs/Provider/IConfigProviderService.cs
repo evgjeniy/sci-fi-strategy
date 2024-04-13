@@ -8,7 +8,7 @@ namespace SustainTheStrain.Configs
     {
         public TConfig GetAbilityConfig<TConfig>(string configName = null,
             string rootPath = Const.ResourcePath.Abilities.Configs.Root) where TConfig : AbilityConfig;
-        public TConfig GetBuildingConfig<TConfig>(byte upgrade = 1, string configName = null,
+        public TConfig GetBuildingConfig<TConfig>(int upgrade = 1, string configName = null,
             string rootPath = Const.ResourcePath.Buildings.Configs.Root) where TConfig : BuildingConfig;
         public EnergySystemConfig GetEnergySystemConfig(EnergySystemType type, string configName = null,
             string rootPath = Const.ResourcePath.EnergySystems.Configs.Root);

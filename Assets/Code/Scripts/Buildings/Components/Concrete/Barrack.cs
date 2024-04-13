@@ -1,6 +1,4 @@
-using SustainTheStrain.Abilities;
 using SustainTheStrain.Buildings.States;
-using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Input;
 using SustainTheStrain.ResourceSystems;
@@ -12,140 +10,97 @@ using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    [RequireComponent(typeof(Outline))]
     public class Barrack : MonoBehaviour, IBuilding
     {
-        private IPlaceholder _placeholder;
-        private IResourceManager _resourceManager;
-        private IBuildingFactory _buildingFactory;
+        [field: SerializeField] public RecruitGroup RecruitGroup { get; private set; }
+        [field: SerializeField] public RecruitSpawner RecruitSpawner { get; private set; } 
 
-        private BarrackManagementMenu _managementMenu;
-        private GameObject _currentGfx;
         private IUpdatableState<Barrack> _currentState = new BarrackIdleState();
+        private IResourceManager _resourceManager;
+        private Observable<BarrackBuildingConfig> _config;
+        private Observable<Vector3> _spawnPoint;
+        private Observable<SelectionType> _selection;
+        private GameObject _recruitsPointer;
 
-        public BarrackData Data { get; private set; }
+        public Timer Timer { get; private set; }
+
+        public BarrackBuildingConfig Config => _config.Value;
+
+        public Vector3 SpawnPoint
+        {
+            get => RecruitGroup.GuardPost.Position;
+            set => RecruitGroup.GuardPost.Position = RecruitSpawner.SpawnPosition = value;
+        }
 
         [Inject]
-        private void Construct(IPlaceholder placeholder, IResourceManager resourceManager,
-            IConfigProviderService configProvider, IBuildingFactory buildingFactory)
+        private void Construct(Timer timer, IResourceManager resourceManager,
+            Observable<BarrackBuildingConfig> config,
+            Observable<Vector3> spawnPoint,
+            Observable<SelectionType> selection)
         {
-            _placeholder = placeholder;
             _resourceManager = resourceManager;
-            _buildingFactory = buildingFactory;
+            _config = config;
+            _selection = selection;
 
-            Data = new BarrackData
-            (
-                startConfig: configProvider.GetBuildingConfig<BarrackBuildingConfig>(),
-                outline: GetComponent<Outline>(),
-                recruitGroup: GetComponentInChildren<RecruitGroup>(),
-                recruitSpawner: GetComponentInChildren<RecruitSpawner>(),
-                radiusVisualizer: GetComponentInChildren<IZoneVisualizer>()
-            );
+            SpawnPoint = spawnPoint.Value;
+            
+            Timer = timer;
+            Timer.Time = config.Value.RespawnCooldown;
         }
 
-        private void Start()
-        {
-            var spawnPosition = _placeholder.Road.Project(_placeholder.transform.position) + Vector3.up * 2.5f;
-            Data.RecruitSpawner.SpawnPosition = spawnPosition;
-            Data.RecruitGroup.GuardPost.Position = spawnPosition;
-        }
-
-        private void OnEnable() => Data.Config.Changed += UpgradeGraphics;
-        private void OnDisable() => Data.Config.Changed -= UpgradeGraphics;
         private void Update() => _currentState = _currentState.Update(this);
 
-        public void OnPointerEnter() => Data.Outline.Enable();
-        public void OnPointerExit() => Data.Outline.Disable();
+        public void OnPointerEnter() => _selection.Value = SelectionType.Pointer;
+        public void OnPointerExit() => _selection.Value = SelectionType.None;
+        public void OnSelected() => _selection.Value = SelectionType.Select;
+        public void OnDeselected() { _selection.Value = SelectionType.None; _recruitsPointer.IfNotNull(x => x.DestroyObject()); }
 
-        public void OnSelected()
+        public void Upgrade()
         {
-            if (_managementMenu == null)
-                _managementMenu = _buildingFactory.CreateMenu<BarrackManagementMenu>(this);
-            
-            _managementMenu.Enable();
-            Data.RadiusVisualizer.Radius = Data.Config.Value.Radius;
+            if (_config.Value.NextLevelConfig == null) return;
+            if (_resourceManager.TrySpend(_config.Value.NextLevelPrice) is false) return;
+
+            _config.Value = _config.Value.NextLevelConfig;
         }
 
-        public void OnDeselected()
+        public void Destroy()
         {
-            _managementMenu.Disable();
-
-#if UNITY_EDITOR
-            if (Const.IsDebugRadius) return;
-#endif
-
-            Data.RadiusVisualizer.Radius = 0;
-
-            Data.RecruitsPointer.IfNotNull(x => x.DestroyObject());
+            GetComponentInParent<Placeholder>().IfNotNull(placeholder =>
+            {
+                placeholder.DestroyBuilding();
+                _resourceManager.Gold.Value += _config.Value.Compensation;
+            });
         }
 
         public IInputState OnSelectedLeftClick(IInputState currentState, Ray ray)
         {
-            if (Data.RecruitsPointer == null)
+            if (_recruitsPointer == null)
                 return currentState;
 
-            var pointerPosition = Data.RecruitsPointer.transform.position;
-            Data.RecruitGroup.GuardPost.Position = pointerPosition;
-            Data.RecruitSpawner.SpawnPosition = pointerPosition;
+            SpawnPoint = _recruitsPointer.transform.position;
             return new InputIdleState();
         }
 
         public IInputState OnSelectedUpdate(IInputState currentState, Ray ray)
         {
-            if (Data.RecruitsPointer == null)
+            if (_recruitsPointer == null)
                 return currentState;
 
-            if (Physics.Raycast(ray, out var hit, float.MaxValue, Data.Config.Value.Mask) is false)
+            if (Physics.Raycast(ray, out var hit, float.MaxValue, Config.Mask) is false)
                 return currentState;
 
             var barrackPosition = transform.position;
             var directionToPoint = hit.point - barrackPosition;
-            var distance = Mathf.Min(directionToPoint.magnitude, Data.Config.Value.Radius);
+            var distance = Mathf.Min(directionToPoint.magnitude, Config.Radius);
 
-            Data.RecruitsPointer.transform.position = barrackPosition + directionToPoint.normalized * distance;
+            _recruitsPointer.transform.position = barrackPosition + directionToPoint.normalized * distance;
             return currentState;
-        }
-
-        public void Upgrade()
-        {
-            if (Data.Config.Value.NextLevelConfig == null) return;
-            if (_resourceManager.TrySpend(Data.Config.Value.NextLevelPrice) is false) return;
-
-            Data.Config.Value = Data.Config.Value.NextLevelConfig;
-        }
-
-        public void Destroy()
-        {
-            _placeholder.DestroyBuilding();
-            _resourceManager.Gold.Value += Data.Config.Value.Compensation;
         }
 
         public void SetUnitsPointState()
         {
-            Data.RecruitsPointer = GameObject.CreatePrimitive(PrimitiveType.Sphere)
-                .With(x => x.GetComponent<MeshRenderer>().material.color = Color.red)
-                .With(x => x.SetParent(transform));;
-
-            _managementMenu.Disable();
+            var zoneVisualizer = _config.Value.RecruitSpawnAimPrefab.Spawn();
+            _recruitsPointer = zoneVisualizer.gameObject.With(x => x.SetParent(transform));
         }
-
-        private void UpgradeGraphics(BarrackBuildingConfig config)
-        {
-            _currentGfx.IfNotNull(x => x.DestroyObject());
-            _currentGfx = Instantiate(config.GfxPrefab, transform);
-            
-            Data.RadiusVisualizer.Radius = config.Radius;
-        }
-        
-#if UNITY_EDITOR
-
-        private void Awake() => Const.IsDebugRadius.Changed += OnDebugRadiusChanged;
-        private void OnDestroy() => Const.IsDebugRadius.Changed -= OnDebugRadiusChanged;
-        private bool IsDebugRadius => Const.IsDebugRadius;
-        [NaughtyAttributes.Button, NaughtyAttributes.DisableIf(nameof(IsDebugRadius))] private void ShowDebugRadius() => Const.IsDebugRadius.Value = true;
-        [NaughtyAttributes.Button, NaughtyAttributes.EnableIf(nameof(IsDebugRadius))] private void HideDebugRadius() => Const.IsDebugRadius.Value = false;
-        private void OnDebugRadiusChanged(bool isDebugRadius) => Data.RadiusVisualizer.Radius = isDebugRadius ? Data.Config.Value.Radius : Data.RadiusVisualizer.Radius;
-
-#endif
     }
 }

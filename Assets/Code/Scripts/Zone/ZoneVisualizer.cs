@@ -1,60 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 namespace SustainTheStrain
 {
-    [RequireComponent(typeof(DecalProjector))]
-    public class ZoneVisualizer : MonoBehaviour, IZoneVisualizer
+    public class ZoneVisualizer : DecalProjector, IZoneVisualizer
     {
-        [SerializeField] [Range(0f, 360f)] private float _angle = 90;
-        [SerializeField] [Min(0)] private float _radius = 5;
+        private static readonly int AngleMaterialNameID = Shader.PropertyToID("_Angle");
+        private const float ScaleFactor = 1.1f;
 
-        private DecalProjector _projector;
-        private float _projectionDepth = 6;
-        private float _scaleFactor = 1.1f;
-
-        public float Radius 
-        { 
-            get => _radius; 
-            set { _radius = value; UpdateRadius(); }
+        public float Radius
+        {
+            get => size.x / (ScaleFactor * 2);
+            set => size = new Vector3(value * ScaleFactor * 2, value * ScaleFactor * 2, size.z);
         }
 
-        public float Angle 
-        { 
-            get => _angle;
-            set { _angle = Mathf.Clamp(value, 0f, 360f); UpdateMaterial(); }
+        public float Angle
+        {
+            get => material.GetFloat(AngleMaterialNameID);
+            set => material.SetFloat(AngleMaterialNameID, Mathf.Clamp(value, 0f, 360f));
         }
 
-        public float Direction 
-        { 
+        public float Direction
+        {
             get => transform.rotation.y;
-            set => transform.rotation = Quaternion.Euler(90, value, 0); 
+            set => transform.rotation = Quaternion.Euler(90, value, 0);
         }
 
-        [Zenject.Inject]
-        private void Awake()
-        {
-            _projector = GetComponent<DecalProjector>();
-
-            _projector.material = new Material(_projector.material);
-        }
-
-        private void OnEnable()
-        {
-            UpdateMaterial();
-            UpdateRadius();
-        }
-
-        public void UpdateMaterial()
-        {
-            _projector.material.SetFloat("_Angle", _angle);
-        }
-
-        public void UpdateRadius()
-        {
-            _projector.size = new Vector3(_radius * _scaleFactor * 2, _radius * _scaleFactor * 2, _projectionDepth);
-        }
+        protected virtual void Awake() => material = new Material(material);
     }
 }

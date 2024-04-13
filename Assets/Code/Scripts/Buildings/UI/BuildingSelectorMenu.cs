@@ -60,25 +60,26 @@ namespace SustainTheStrain.Buildings
 
         private void RegisterCreateButtons(IPlaceholder placeholder, IBuildingFactory buildingFactory)
         {
-            _createRocket.onClick.AddListener(() => OnCreateClick<Rocket>(_rocketPrice));
-            _createLaser.onClick.AddListener(() => OnCreateClick<Laser>(_laserPrice));
-            _createArtillery.onClick.AddListener(() => OnCreateClick<Artillery>(_artilleryPrice));
-            _createBarrack.onClick.AddListener(() => OnCreateClick<Barrack>(_barrackPrice));
-            return;
-
-            void OnCreateClick<TBuilding>(int price) where TBuilding : IBuilding
-            {
-                buildingFactory.CreateBuilding<TBuilding>(placeholder);
-                _resourceManager.Gold.Value -= price;
-            }
+            _createRocket.onClick.AddListener(() => CreateBuilding(buildingFactory.CreateRocket, placeholder, _rocketPrice));
+            _createLaser.onClick.AddListener(() => CreateBuilding(buildingFactory.CreateLaser, placeholder, _laserPrice));
+            _createArtillery.onClick.AddListener(() => CreateBuilding(buildingFactory.CreateArtillery, placeholder, _artilleryPrice));
+            _createBarrack.onClick.AddListener(() => CreateBuilding(buildingFactory.CreateBarrack, placeholder, _barrackPrice));
         }
 
-        private void DisplayButtonInteraction(int gold)
+        private void CreateBuilding(System.Func<IPlaceholder, IBuilding> createBuilding, IPlaceholder placeholder, int price)
         {
-            _createRocket.interactable = gold >= _rocketPrice;
-            _createLaser.interactable = gold >= _laserPrice;
-            _createArtillery.interactable = gold >= _artilleryPrice;
-            _createBarrack.interactable = gold >= _barrackPrice;
+            if (!_resourceManager.TrySpend(price)) return;
+            
+            var building = createBuilding(placeholder);
+            placeholder.SetBuilding(building);
+        }
+
+        private void DisplayButtonInteraction(int currentGold)
+        {
+            _createRocket.interactable = currentGold >= _rocketPrice;
+            _createLaser.interactable = currentGold >= _laserPrice;
+            _createArtillery.interactable = currentGold >= _artilleryPrice;
+            _createBarrack.interactable = currentGold >= _barrackPrice;
         }
     }
 }

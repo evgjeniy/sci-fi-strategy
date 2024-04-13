@@ -7,13 +7,10 @@ namespace SustainTheStrain.Buildings
     {
         public IUpdatableState<Laser> Update(Laser laser)
         {
-            var laserData = laser.Data;
-            var laserConfig = laserData.Config.Value;
+            laser.Timer.Time -= Time.deltaTime;
+            laser.Area.Update(laser.transform.position, laser.Config.Radius, laser.Config.Mask);
             
-            laserData.Timer.Time -= Time.deltaTime;
-            laserData.Area.Update(laser.transform.position, laserConfig.Radius, laserConfig.Mask);
-            
-            foreach (var damageable in laserData.Area.Entities)
+            foreach (var damageable in laser.Area.Entities)
                 return new LaserAttackState(damageable);
 
             return this;

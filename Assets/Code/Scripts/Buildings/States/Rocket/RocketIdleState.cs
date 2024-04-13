@@ -7,13 +7,10 @@ namespace SustainTheStrain.Buildings
     {
         public IUpdatableState<Rocket> Update(Rocket rocket)
         {
-            var rocketData = rocket.Data;
-            var rocketConfig = rocketData.Config.Value;
+            rocket.Timer.Time -= Time.deltaTime;
+            rocket.Area.Update(rocket.transform.position, rocket.Config.Radius, rocket.Config.Mask);
             
-            rocketData.Timer.Time -= Time.deltaTime;
-            rocketData.Area.Update(rocket.transform.position, rocketConfig.Radius, rocketConfig.Mask);
-            
-            foreach (var entity in rocketData.Area.Entities)
+            foreach (var entity in rocket.Area.Entities)
                 return new RocketAttackState(entity);
 
             return this;

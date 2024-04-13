@@ -16,24 +16,21 @@ namespace SustainTheStrain.Buildings
 
         public IUpdatableState<Artillery> Update(Artillery artillery)
         {
-            var artilleryData = artillery.Data;
-            var artilleryConfig = artilleryData.Config.Value;
+            artillery.Timer.Time -= Time.deltaTime;
+            artillery.Area.Update(artillery.transform.position, artillery.Config.Radius, artillery.Config.Mask);
 
-            artilleryData.Timer.Time -= Time.deltaTime;
-            artilleryData.Area.Update(artillery.transform.position, artilleryConfig.Radius, artilleryConfig.Mask);
-
-            if (artilleryData.Area.Entities.Contains(_target) is false)
+            if (artillery.Area.Entities.Contains(_target) is false)
                 return new ArtilleryIdleState();
 
-            artilleryData.Orientation.Value = _target.transform.position;
+            artillery.Orientation = _target.transform.position;
 
-            if (artilleryData.Timer.IsTimeOver)
+            if (artillery.Timer.IsTimeOver)
             {
-                Object.Instantiate(artilleryConfig.ProjectilePrefab, artilleryData.ProjectileSpawnPoint)
-                    .With(x => x.transform.position = artilleryData.ProjectileSpawnPoint.position)
-                    .LaunchTo(_target, onComplete: damageable => Explosion(artilleryConfig, damageable));
+                Object.Instantiate(artillery.Config.ProjectilePrefab, artillery.SpawnPointProvider.SpawnPoint)
+                    .With(x => x.transform.position = artillery.SpawnPointProvider.SpawnPoint.position)
+                    .LaunchTo(_target, onComplete: damageable => Explosion(artillery.Config, damageable));
                 
-                artilleryData.Timer.Time = artilleryConfig.Cooldown;
+                artillery.Timer.Time = artillery.Config.Cooldown;
             }
 
             return this;

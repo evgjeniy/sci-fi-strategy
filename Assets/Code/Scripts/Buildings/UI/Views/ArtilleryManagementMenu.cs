@@ -1,23 +1,10 @@
-﻿using Zenject;
+﻿using SustainTheStrain.Configs.Buildings;
+using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    public class ArtilleryManagementMenu : BuildingManagementMenu
+    public class ArtilleryManagementMenu : BuildingManagementMenu<ArtilleryBuildingConfig>
     {
-        [Inject] private Artillery _artillery;
-
-        private void OnEnable()
-        {
-            SubscribeBaseEvents(_artillery);
-
-            _artillery.Data.Config.Changed += OnConfigChanged;
-        }
-
-        private void OnDisable()
-        {
-            UnsubscribeBaseEvents(_artillery);
-
-            _artillery.Data.Config.Changed -= OnConfigChanged;
-        }
+        [Inject] protected override IBuilding Building { get; }
     }
 }
