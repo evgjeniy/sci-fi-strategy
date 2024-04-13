@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Extensions;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 namespace SustainTheStrain.Units
 {

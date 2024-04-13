@@ -1,4 +1,3 @@
-using SustainTheStrain._Contracts;
 using UnityEngine;
 
 namespace SustainTheStrain.Configs.Buildings

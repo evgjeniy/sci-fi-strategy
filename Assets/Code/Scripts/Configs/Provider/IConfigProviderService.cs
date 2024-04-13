@@ -1,5 +1,4 @@
-﻿using SustainTheStrain._Contracts;
-using SustainTheStrain.Configs.Abilities;
+﻿using SustainTheStrain.Configs.Abilities;
 using SustainTheStrain.Configs.Buildings;
 
 namespace SustainTheStrain.Configs

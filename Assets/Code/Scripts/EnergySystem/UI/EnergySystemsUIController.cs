@@ -1,5 +1,4 @@
-﻿using SustainTheStrain.Abilities;
-using SustainTheStrain.EnergySystem.UI.Factories;
+﻿using SustainTheStrain.EnergySystem.UI.Factories;
 using UnityEngine;
 using Zenject;
 

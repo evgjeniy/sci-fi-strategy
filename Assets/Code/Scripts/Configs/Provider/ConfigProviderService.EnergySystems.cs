@@ -1,5 +1,4 @@
-﻿using SustainTheStrain._Contracts;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SustainTheStrain.Configs
 {

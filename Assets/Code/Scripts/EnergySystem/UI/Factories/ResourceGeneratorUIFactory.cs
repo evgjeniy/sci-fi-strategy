@@ -1,7 +1,4 @@
-﻿using SustainTheStrain.ResourceSystems;
-using SustainTheStrain.ResourceSystems.UI;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using Zenject;
 
 namespace SustainTheStrain.EnergySystem.UI.Factories

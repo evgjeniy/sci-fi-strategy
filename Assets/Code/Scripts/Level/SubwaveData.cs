@@ -1,5 +1,4 @@
 using System;
-using SustainTheStrain.Units;
 using UnityEngine;
 
 namespace SustainTheStrain.Level

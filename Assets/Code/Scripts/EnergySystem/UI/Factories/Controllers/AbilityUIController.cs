@@ -3,7 +3,6 @@ using SustainTheStrain.EnergySystem;
 using SustainTheStrain.EnergySystem.UI;
 using SustainTheStrain.Input.UI;
 using UnityEngine.UI;
-using Zenject;
 
 namespace SustainTheStrain
 {

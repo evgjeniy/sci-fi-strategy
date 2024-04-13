@@ -1,4 +1,3 @@
-using SustainTheStrain.Buildings;
 using UnityEngine;
 
 namespace SustainTheStrain.Configs.Buildings
