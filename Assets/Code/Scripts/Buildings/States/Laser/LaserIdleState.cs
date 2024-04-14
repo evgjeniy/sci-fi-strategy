@@ -7,7 +7,7 @@
             laser.Area.Update(laser.transform.position, laser.Config.Radius, laser.Config.Mask);
             
             foreach (var damageable in laser.Area.Entities)
-                return new LaserAttackState(damageable);
+                return new LaserRotationState(damageable, laser.Orientation, laser.transform.position);
 
             return this;
         }

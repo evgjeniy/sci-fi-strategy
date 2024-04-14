@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
@@ -17,7 +16,7 @@ namespace SustainTheStrain.Buildings
         {
             laser.Area.Update(laser.transform.position, laser.Config.Radius, laser.Config.Mask);
             
-            if (laser.Area.Entities.Contains(_target) is false)
+            if (_target.IsNotIn(laser.Area))
                 return new LaserIdleState();
             
             laser.Orientation = _target.transform.position;

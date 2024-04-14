@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using SustainTheStrain.Configs.Buildings;
+﻿using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
@@ -17,7 +16,7 @@ namespace SustainTheStrain.Buildings
         {
             artillery.Area.Update(artillery.transform.position, artillery.Config.Radius, artillery.Config.Mask);
 
-            if (artillery.Area.Entities.Contains(_target) is false)
+            if (_target.IsNotIn(artillery.Area))
                 return new ArtilleryIdleState();
 
             artillery.Orientation = _target.transform.position;

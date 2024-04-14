@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using SustainTheStrain.Units;
+﻿using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 
@@ -8,7 +7,6 @@ namespace SustainTheStrain.Buildings
     public class RocketAttackState : IUpdatableState<Rocket>
     {
         private readonly Damageble _target;
-        private Quaternion _currentRotation;
 
         public RocketAttackState(Damageble target) => _target = target;
 
@@ -16,7 +14,7 @@ namespace SustainTheStrain.Buildings
         {
             rocket.Area.Update(rocket.transform.position, rocket.Config.Radius, rocket.Config.Mask);
             
-            if (rocket.Area.Entities.Contains(_target) is false)
+            if (_target.IsNotIn(rocket.Area))
                 return new RocketIdleState();
             
             rocket.Orientation = _target.transform.position;

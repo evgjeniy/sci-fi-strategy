@@ -5,7 +5,13 @@ using UnityEngine;
 
 namespace SustainTheStrain
 {
-    public class Area<TComponent> where TComponent : Component
+    public static class AreaExtensions
+    {
+        public static bool IsIn<TComponent>(this TComponent component, Area<TComponent> area) => area.Entities.Contains(component);
+        public static bool IsNotIn<TComponent>(this TComponent component, Area<TComponent> area) => !area.Entities.Contains(component);
+    }
+
+    public class Area<TComponent>
     {
         private readonly Dictionary<Collider, TComponent> _entities = new(16);
         private readonly Collider[] _buffer = new Collider[32];
