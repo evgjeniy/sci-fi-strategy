@@ -101,6 +101,18 @@ namespace SustainTheStrain.Units
             CurrentPathFollower.Start();
         }
 
+        public void Freeze()
+        {
+            CurrentPathFollower.Speed = 0;
+            Debug.Log("FREEZED");
+        }
+
+        public void Unfreeze(float oldSpeed)
+        {
+            CurrentPathFollower.Speed = oldSpeed;
+            Debug.Log("UNFREEZ");
+        }
+
         private void Update()
         {
             _stateMachine.CurrentState.FrameUpdate();

@@ -20,6 +20,8 @@ namespace SustainTheStrain.Abilities
         [SerializeField] private Team team = Team.Player;
         [Inject] private EnergyController _energyController;
 
+        public static bool freezeSelected = false;
+
         private BaseAim currentAim;
 
         private IAbilityInput _abilityInput;
@@ -59,6 +61,7 @@ namespace SustainTheStrain.Abilities
             _selected = -1;
             currentAim?.Destroy();
             currentAim = null;
+            freezeSelected = false;
         }
 
         private void EnterAbility(int idx)
@@ -72,18 +75,30 @@ namespace SustainTheStrain.Abilities
             if (!chosenAbility.IsReloaded()) return;
             currentAim = Abilities[idx] switch
             {
+                FreezeAbility => null,
                 ZoneAbility => new ZoneAim((Abilities[idx] as ZoneAbility).getZoneRadius(), aimZonePrefab, groundLayers, maxDistFromCamera),
                 LandingAbility => new ZoneAim(recruitAimRadius, aimZonePrefab, groundLayers, maxDistFromCamera),
                 _ => new PointAim(enemyLayers, maxDistFromCamera)
             };
 
-            currentAim.SpawnAimZone();
+            if (currentAim != null)
+                currentAim.SpawnAimZone();
             _selected = idx;
+
+            if (Abilities[_selected] is FreezeAbility)
+                freezeSelected = true;
         }
 
         private void UseAbility(Ray ray)
         {
             if (_selected == -1) return;
+
+            if (Abilities[_selected] is FreezeAbility)
+            {
+                Abilities[_selected].Shoot(new RaycastHit(), team);
+                return;
+            }
+
             var hit = currentAim.GetAimInfo(ray);
             if (hit.HasValue)
                 Abilities[_selected].Shoot(hit.Value, team);
@@ -99,6 +114,7 @@ namespace SustainTheStrain.Abilities
 
         private void OnDisable()
         {
+            ExitAbilityl(_selected + 1);
             _abilityInput.OnAbilityChanged -= OnAbilityChanged;
             _abilityInput.OnAbilityMove -= MoveMethod;
             _abilityInput.OnAbilityClick -= UseAbility; 
@@ -109,7 +125,8 @@ namespace SustainTheStrain.Abilities
         public void Init() //temporary, because now we don't have MainController
         {
             AddAbility(new ZoneDamageAbility(_abilitiesSettings.ZoneDamage));
-            AddAbility(new ZoneSlownessAbility(_abilitiesSettings.ZoneSlowness));
+            //AddAbility(new ZoneSlownessAbility(_abilitiesSettings.ZoneSlowness));
+            AddAbility(new FreezeAbility(_abilitiesSettings.ZoneSlowness));
             AddAbility(new ChainDamageAbility(_abilitiesSettings.ChainAbility));
             //AddAbility(new EnemyHackAbility(_abilitiesSettings.EnemyHack));
             AddAbility(new LandingAbility(_abilitiesSettings.LandingAbility));
