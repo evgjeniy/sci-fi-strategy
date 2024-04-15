@@ -17,12 +17,12 @@ MonoBehaviour:
     - _delay: 0
       _index: 0
       _subwaves:
-      - _delay: 2
+      - _delay: 0
         _spawnPeriod: 2
-        _enemyCount: 5
+        _enemyCount: 10
         _enemyType: Mob
   - _spawners:
-    - _delay: 25
+    - _delay: 0
       _index: 2
       _subwaves:
       - _delay: 2
