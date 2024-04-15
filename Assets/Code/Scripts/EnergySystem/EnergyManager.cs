@@ -14,8 +14,7 @@ namespace SustainTheStrain.EnergySystem
         [Min(1)] [SerializeField] private int _maxCount;
         private int _currentUpgradeLevel = 0;
 
-        public int UpgradeCost => _upgradeCostSettings.UpgradeCostList[_currentUpgradeLevel];
-        [SerializeField] private EnergyManagerUpgradeCostList _upgradeCostSettings;
+        public int UpgradeCost => _currentUpgradeLevel * 500;
         
         
         public int MaxCount { 
