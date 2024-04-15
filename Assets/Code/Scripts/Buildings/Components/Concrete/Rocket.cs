@@ -1,4 +1,5 @@
-﻿using SustainTheStrain.Configs.Buildings;
+﻿using System;
+using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.Units;
 using UnityEngine;
@@ -7,7 +8,7 @@ using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    public class Rocket : MonoBehaviour, IBuilding
+    public class Rocket : MonoBehaviour, ITurret
     {
         private IUpdatableState<Rocket> _currentState = new RocketIdleState();
         private IResourceManager _resourceManager;
@@ -20,6 +21,13 @@ namespace SustainTheStrain.Buildings
         public ISpawnPointProvider SpawnPointProvider { get; set; }
 
         public RocketBuildingConfig Config => _config.Value;
+        public event Action<BuildingConfig> ConfigChanged
+        {
+            add => _config.Changed += value;
+            remove => _config.Changed += value;
+        }
+
+        BuildingConfig IBuilding.Config => Config;
 
         public Vector3 Orientation
         {

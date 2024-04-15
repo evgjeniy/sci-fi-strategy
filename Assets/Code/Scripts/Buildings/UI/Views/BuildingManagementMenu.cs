@@ -26,7 +26,7 @@ namespace SustainTheStrain.Buildings
 
         protected virtual void Awake()
         {
-            _config.Changed += OnConfigChanged;
+            Building.ConfigChanged += OnConfigChanged;
             _selection.Changed += OnSelectionChanged;
             _resourceManager.Gold.Changed += OnGoldChanged;
 
@@ -34,9 +34,17 @@ namespace SustainTheStrain.Buildings
             _destroyButton.onClick.AddListener(Building.Destroy);
         }
 
+        private void OnConfigChanged(BuildingConfig buildingConfig)
+        {
+            _nextLevelPrice = buildingConfig.NextLevelPrice;
+            _buildingDestroyCompensation = buildingConfig.Compensation;
+            
+            Display();
+        }
+
         protected virtual void OnDestroy()
         {
-            _config.Changed -= OnConfigChanged;
+            Building.ConfigChanged -= OnConfigChanged;
             _selection.Changed -= OnSelectionChanged;
             _resourceManager.Gold.Changed -= OnGoldChanged;
             

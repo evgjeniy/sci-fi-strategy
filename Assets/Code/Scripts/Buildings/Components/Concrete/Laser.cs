@@ -1,3 +1,4 @@
+using System;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.Units;
@@ -6,7 +7,7 @@ using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    public class Laser : MonoBehaviour, IBuilding
+    public class Laser : MonoBehaviour, ITurret
     {
         [field: SerializeField] public LineRenderer Line { get; private set; }
         
@@ -21,6 +22,9 @@ namespace SustainTheStrain.Buildings
         public ISpawnPointProvider SpawnPointProvider { get; set; }
 
         public LaserBuildingConfig Config => _config.Value;
+        public event Action<BuildingConfig> ConfigChanged;
+        BuildingConfig IBuilding.Config => Config;
+
         public Vector3 Orientation
         {
             get => _orientation.Value;

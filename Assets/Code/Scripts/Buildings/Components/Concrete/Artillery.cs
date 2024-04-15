@@ -1,3 +1,4 @@
+using System;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.Units;
@@ -7,7 +8,7 @@ using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    public class Artillery : MonoBehaviour, IBuilding
+    public class Artillery : MonoBehaviour, ITurret
     {
         private IUpdatableState<Artillery> _currentState = new ArtilleryIdleState();
         private IResourceManager _resourceManager;
@@ -20,6 +21,8 @@ namespace SustainTheStrain.Buildings
         public ISpawnPointProvider SpawnPointProvider { get; set; }
 
         public ArtilleryBuildingConfig Config => _config.Value;
+        public event Action<BuildingConfig> ConfigChanged;
+        BuildingConfig IBuilding.Config => Config;
 
         public Vector3 Orientation
         {

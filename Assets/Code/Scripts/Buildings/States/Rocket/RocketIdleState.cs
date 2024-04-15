@@ -6,8 +6,8 @@
         {
             rocket.Area.Update(rocket.transform.position, rocket.Config.Radius, rocket.Config.Mask);
 
-            foreach (var entity in rocket.Area.Entities)
-                return new RocketRotationState(entity, rocket.Orientation, rocket.transform.position);
+            foreach (var damageable in rocket.Area.Entities)
+                return new RocketRotationState(damageable, rocket.Orientation, rocket.transform.position);
 
             return this;
         }
