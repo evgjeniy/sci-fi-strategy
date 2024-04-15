@@ -43,10 +43,28 @@ namespace SustainTheStrain.Buildings
             _config = config;
             _selection = selection;
 
-            SpawnPoint = spawnPoint.Value;
+            SpawnPoint = spawnPoint.Value + Vector3.up * 2f;
             
             Timer = timer;
             Timer.ResetTime(config.Value.RespawnCooldown);
+
+            while (RecruitGroup.Recruits.Count < RecruitGroup.squadMaxSize)
+            {
+
+                var recruit = RecruitSpawner.Spawn()
+                                        .With(x => x.SetParent(transform))
+                                        .With(x => x.Damage = Config.UnitAttackDamage)
+                                        .With(x => x.Duelable.Damageable.MaxHP = Config.UnitMaxHealth)
+                                        .With(x => x.Duelable.Damageable.CurrentHP = Config.UnitMaxHealth)
+                                        .With(x => x.DamagePeriod = Config.UnitAttackCooldown);
+
+                RecruitGroup.AddRecruit(recruit);
+            }
+        }
+
+        private void OnEnable()
+        {
+            RecruitGroup.UpdateRecruits();
         }
 
         private void Update() => _currentState = _currentState.Update(this);
