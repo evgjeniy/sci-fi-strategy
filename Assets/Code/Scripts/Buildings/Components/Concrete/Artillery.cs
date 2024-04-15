@@ -21,7 +21,6 @@ namespace SustainTheStrain.Buildings
         public ISpawnPointProvider SpawnPointProvider { get; set; }
 
         public ArtilleryBuildingConfig Config => _config.Value;
-        public event Action<BuildingConfig> ConfigChanged;
         BuildingConfig IBuilding.Config => Config;
 
         public Vector3 Orientation

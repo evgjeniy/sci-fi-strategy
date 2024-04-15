@@ -34,12 +34,6 @@ namespace SustainTheStrain.Buildings
             _sectorVisualizer.Angle = config.SectorAngle;
         }
 
-        protected override void UpdateSelection(SelectionType selectionType)
-        {
-            base.UpdateSelection(selectionType);
-            gameObject.SetActive(selectionType == SelectionType.Select);
-        }
-
         private void UpdateDirection(Vector3 orientation)
         {
             var lookRotation = Quaternion.LookRotation(orientation - transform.position);

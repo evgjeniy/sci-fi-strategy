@@ -10,8 +10,6 @@ namespace SustainTheStrain.Buildings
         public Transform transform { get; }
         public BuildingConfig Config { get; }
 
-        public event System.Action<BuildingConfig> ConfigChanged; 
-
         public void Upgrade();
         public void Destroy();
     }

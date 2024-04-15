@@ -25,7 +25,6 @@ namespace SustainTheStrain.Buildings
         public Timer Timer { get; private set; }
 
         public BarrackBuildingConfig Config => _config.Value;
-        public event Action<BuildingConfig> ConfigChanged;
         BuildingConfig IBuilding.Config => Config;
 
         public Vector3 SpawnPoint

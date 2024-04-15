@@ -21,12 +21,6 @@ namespace SustainTheStrain.Buildings
         public ISpawnPointProvider SpawnPointProvider { get; set; }
 
         public RocketBuildingConfig Config => _config.Value;
-        public event Action<BuildingConfig> ConfigChanged
-        {
-            add => _config.Changed += value;
-            remove => _config.Changed += value;
-        }
-
         BuildingConfig IBuilding.Config => Config;
 
         public Vector3 Orientation
