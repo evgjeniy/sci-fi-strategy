@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SustainTheStrain.ResourceSystems;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -9,6 +10,7 @@ namespace SustainTheStrain.EnergySystem.UI
     {
         [SerializeField] private Image _imagePrefab;
         [SerializeField] private Color _filledColor;
+        [SerializeField] private EnergyCellBuyButton _buyButton;
         
         private EnergyController _energyController;
         private List<Image> _images = new();
@@ -16,14 +18,25 @@ namespace SustainTheStrain.EnergySystem.UI
         private int _coloredCount = 0;
         private int _enabledCount = 0;
         
-        [Inject] public void Bind(EnergyController controller)
+        [Inject] 
+        public void Bind(EnergyController controller)
         {
             _energyController = controller;
             var manager = _energyController.Manager;
             MaxBarsCount = manager.MaxCount;
             manager.OnEnergyChanged += ChangeEnergy;
             manager.OnMaxEnergyChanged += SetMax;
+            manager.OnUpgradeCostChanged += _buyButton.SetUpgradeCost;
         }
+
+        [Inject]
+        public void BindResourceManager(ResourceManager manager)
+        {
+            EnergyController.CheckGoldDelegate delegat = manager.TrySpend;
+            _energyController.SetCheckGoldAction(delegat);
+            _buyButton.MButton.onClick.AddListener(_energyController.BuyMaxEnergy);
+        }
+        
         public int MaxBarsCount
         {
             get => _enabledCount;
@@ -126,6 +139,7 @@ namespace SustainTheStrain.EnergySystem.UI
             var manager = _energyController.Manager;
             manager.OnEnergyChanged -= ChangeEnergy;
             manager.OnMaxEnergyChanged -= SetMax;
+            manager.OnUpgradeCostChanged -= _buyButton.SetUpgradeCost;
         }
     }
 }
