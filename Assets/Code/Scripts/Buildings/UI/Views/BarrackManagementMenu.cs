@@ -1,29 +1,25 @@
-﻿using UnityEngine;
+﻿using SustainTheStrain.Configs.Buildings;
+using UnityEngine;
+using UnityEngine.Extensions;
 using UnityEngine.UI;
 using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    public class BarrackManagementMenu : BuildingManagementMenu
+    public class BarrackManagementMenu : BuildingManagementMenu<BarrackBuildingConfig>
     {
         [SerializeField] private Button _unitsPointButton;
-
         [Inject] private Barrack _barrack;
 
-        private void OnEnable()
+        protected override IBuilding Building => _barrack;
+
+        protected override void Awake()     { base.Awake();     _unitsPointButton.onClick.AddListener(SetUnitsPointState);    }
+        protected override void OnDestroy() { base.OnDestroy(); _unitsPointButton.onClick.RemoveListener(SetUnitsPointState); }
+
+        private void SetUnitsPointState()
         {
-            SubscribeBaseEvents(_barrack);
-
-            _barrack.Data.Config.Changed += OnConfigChanged;
-            _unitsPointButton.onClick.AddListener(_barrack.SetUnitsPointState);
-        }
-
-        private void OnDisable()
-        {
-            UnsubscribeBaseEvents(_barrack);
-
-            _barrack.Data.Config.Changed -= OnConfigChanged;
-            _unitsPointButton.onClick.RemoveListener(_barrack.SetUnitsPointState);
+            _barrack.SetUnitsPointState();
+            gameObject.Deactivate();
         }
     }
 }

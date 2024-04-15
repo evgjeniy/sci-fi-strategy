@@ -1,101 +1,71 @@
-using SustainTheStrain.Abilities;
-using SustainTheStrain.Buildings.States;
-using SustainTheStrain.Configs;
+using System;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.ResourceSystems;
+using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    public class Artillery : MonoBehaviour, IBuilding
+    public class Artillery : MonoBehaviour, ITurret
     {
-        private IPlaceholder _placeholder;
-        private IResourceManager _resourceManager;
-        private IBuildingFactory _buildingFactory;
-
-        private ArtilleryManagementMenu _managementMenu;
-        private BuildingRotator _currentGfx;
         private IUpdatableState<Artillery> _currentState = new ArtilleryIdleState();
+        private IResourceManager _resourceManager;
+        private Observable<ArtilleryBuildingConfig> _config;
+        private Observable<Vector3> _orientation;
+        private Observable<SelectionType> _selection;
 
-        public ArtilleryData Data { get; private set; }
+        public Area<Damageble> Area { get; } = new(conditions: damageable => damageable.Team != Team.Player);
+        public Timer Timer { get; private set; }
+        public ISpawnPointProvider SpawnPointProvider { get; set; }
+
+        public ArtilleryBuildingConfig Config => _config.Value;
+        BuildingConfig IBuilding.Config => Config;
+
+        public Vector3 Orientation
+        {
+            get => _orientation.Value;
+            set => _orientation.Value = value;
+        }
 
         [Inject]
-        private void Construct(IPlaceholder placeholder, IResourceManager resourceManager,
-            IConfigProviderService configProvider, IBuildingFactory buildingFactory)
+        private void Construct(Timer timer, IResourceManager resourceManager,
+            Observable<ArtilleryBuildingConfig> config,
+            Observable<Vector3> orientation,
+            Observable<SelectionType> selection)
         {
-            _placeholder = placeholder;
             _resourceManager = resourceManager;
-            _buildingFactory = buildingFactory;
-
-            Data = new ArtilleryData
-            (
-                startConfig: configProvider.GetBuildingConfig<ArtilleryBuildingConfig>(),
-                outline: GetComponent<Outline>(),
-                radiusVisualizer: GetComponentInChildren<IZoneVisualizer>(),
-                startOrientation: placeholder.Road.Project(placeholder.transform.position)
-            );
+            _config = config;
+            _selection = selection;
+            _orientation = orientation;
+            
+            Timer = timer;
+            Timer.ResetTime(config.Value.Cooldown);
         }
 
-        private void OnEnable() => Data.Config.Changed += UpgradeGraphics;
-        private void OnDisable() => Data.Config.Changed -= UpgradeGraphics;
         private void Update() => _currentState = _currentState.Update(this);
 
-        public void OnPointerEnter() => Data.Outline.Enable();
-        public void OnPointerExit() => Data.Outline.Disable();
-
-        public void OnSelected()
-        {
-            if (_managementMenu == null)
-                _managementMenu = _buildingFactory.CreateMenu<ArtilleryManagementMenu>(this);
-            
-            _managementMenu.Enable();
-            Data.RadiusVisualizer.Radius = Data.Config.Value.Radius;
-        }
-
-        public void OnDeselected()
-        {
-            _managementMenu.Disable();
-
-#if UNITY_EDITOR
-            if (Const.IsDebugRadius) return;
-#endif
-
-            Data.RadiusVisualizer.Radius = 0;
-        }
+        public void OnPointerEnter() => _selection.Value = SelectionType.Pointer;
+        public void OnPointerExit() => _selection.Value = SelectionType.None;
+        public void OnSelected() => _selection.Value = SelectionType.Select;
+        public void OnDeselected() => _selection.Value = SelectionType.None;
 
         public void Upgrade()
         {
-            if (Data.Config.Value.NextLevelConfig == null) return;
-            if (_resourceManager.TrySpend(Data.Config.Value.NextLevelPrice) is false) return;
+            if (_config.Value.NextLevelConfig == null) return;
+            if (_resourceManager.TrySpend(_config.Value.NextLevelPrice) is false) return;
 
-            Data.Config.Value = Data.Config.Value.NextLevelConfig;
+            _config.Value = _config.Value.NextLevelConfig;
         }
 
         public void Destroy()
         {
-            _placeholder.DestroyBuilding();
-            _resourceManager.Gold.Value += Data.Config.Value.Compensation;
+            GetComponentInParent<IPlaceholder>().IfNotNull(placeholder =>
+            {
+                placeholder.DestroyBuilding();
+                _resourceManager.Gold.Value += _config.Value.Compensation;
+            });
         }
-
-        private void UpgradeGraphics(ArtilleryBuildingConfig config)
-        {
-            _currentGfx.IfNotNull(x => x.DestroyObject());
-            _currentGfx = _buildingFactory.CreateGfx(config.GfxPrefab, transform, Data.Orientation);
-            Data.ProjectileSpawnPoint = _currentGfx.ProjectileSpawnPoint;
-            Data.RadiusVisualizer.Radius = config.Radius;
-        }
-        
-#if UNITY_EDITOR
-
-        private void Awake() => Const.IsDebugRadius.Changed += OnDebugRadiusChanged;
-        private void OnDestroy() => Const.IsDebugRadius.Changed -= OnDebugRadiusChanged;
-        private bool IsDebugRadius => Const.IsDebugRadius;
-        [NaughtyAttributes.Button, NaughtyAttributes.DisableIf(nameof(IsDebugRadius))] private void ShowDebugRadius() => Const.IsDebugRadius.Value = true;
-        [NaughtyAttributes.Button, NaughtyAttributes.EnableIf(nameof(IsDebugRadius))] private void HideDebugRadius() => Const.IsDebugRadius.Value = false;
-        private void OnDebugRadiusChanged(bool isDebugRadius) => Data.RadiusVisualizer.Radius = isDebugRadius ? Data.Config.Value.Radius : Data.RadiusVisualizer.Radius;
-
-#endif
     }
 }

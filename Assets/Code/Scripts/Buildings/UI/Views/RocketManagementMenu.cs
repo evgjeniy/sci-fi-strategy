@@ -1,23 +1,10 @@
+using SustainTheStrain.Configs.Buildings;
 using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    public class RocketManagementMenu : BuildingManagementMenu
+    public class RocketManagementMenu : BuildingManagementMenu<RocketBuildingConfig>
     {
-        [Inject] private Rocket _rocket;
-
-        private void OnEnable()
-        {
-            SubscribeBaseEvents(_rocket);
-
-            _rocket.Data.Config.Changed += OnConfigChanged;
-        }
-
-        private void OnDisable()
-        {
-            _rocket.Data.Config.Changed -= OnConfigChanged;
-
-            UnsubscribeBaseEvents(_rocket);
-        }
+        [Inject] protected override IBuilding Building { get; }
     }
 }

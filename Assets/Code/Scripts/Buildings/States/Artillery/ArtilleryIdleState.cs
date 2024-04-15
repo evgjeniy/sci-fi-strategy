@@ -1,20 +1,13 @@
-﻿using SustainTheStrain.Buildings.States;
-using UnityEngine;
-
-namespace SustainTheStrain.Buildings
+﻿namespace SustainTheStrain.Buildings
 {
     public class ArtilleryIdleState : IUpdatableState<Artillery>
     {
         public IUpdatableState<Artillery> Update(Artillery artillery)
         {
-            var artilleryData = artillery.Data;
-            var artilleryConfig = artilleryData.Config.Value;
+            artillery.Area.Update(artillery.transform.position, artillery.Config.Radius, artillery.Config.Mask);
 
-            artilleryData.Timer.Time -= Time.deltaTime;
-            artilleryData.Area.Update(artillery.transform.position, artilleryConfig.Radius, artilleryConfig.Mask);
-
-            foreach (var damageable in artilleryData.Area.Entities)
-                return new ArtilleryAttackState(damageable);
+            foreach (var damageable in artillery.Area.Entities)
+                return new ArtilleryRotationState(damageable, artillery.Orientation, artillery.transform.position);
 
             return this;
         }

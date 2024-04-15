@@ -1,20 +1,13 @@
-﻿using SustainTheStrain.Buildings.States;
-using UnityEngine;
-
-namespace SustainTheStrain.Buildings
+﻿namespace SustainTheStrain.Buildings
 {
     public class RocketIdleState : IUpdatableState<Rocket>
     {
         public IUpdatableState<Rocket> Update(Rocket rocket)
         {
-            var rocketData = rocket.Data;
-            var rocketConfig = rocketData.Config.Value;
-            
-            rocketData.Timer.Time -= Time.deltaTime;
-            rocketData.Area.Update(rocket.transform.position, rocketConfig.Radius, rocketConfig.Mask);
-            
-            foreach (var entity in rocketData.Area.Entities)
-                return new RocketAttackState(entity);
+            rocket.Area.Update(rocket.transform.position, rocket.Config.Radius, rocket.Config.Mask);
+
+            foreach (var damageable in rocket.Area.Entities)
+                return new RocketRotationState(damageable, rocket.Orientation, rocket.transform.position);
 
             return this;
         }

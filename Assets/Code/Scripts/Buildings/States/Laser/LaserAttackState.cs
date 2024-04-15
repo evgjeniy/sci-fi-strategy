@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Cysharp.Threading.Tasks;
-using SustainTheStrain.Buildings.States;
+﻿using Cysharp.Threading.Tasks;
 using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
@@ -16,33 +14,29 @@ namespace SustainTheStrain.Buildings
 
         public IUpdatableState<Laser> Update(Laser laser)
         {
-            var laserData = laser.Data;
-            var laserConfig = laserData.Config.Value;
-
-            laserData.Timer.Time -= Time.deltaTime;
-            laserData.Area.Update(laser.transform.position, laserConfig.Radius, laserConfig.Mask);
+            laser.Area.Update(laser.transform.position, laser.Config.Radius, laser.Config.Mask);
             
-            if (laserData.Area.Entities.Contains(_target) is false)
+            if (_target.IsNotIn(laser.Area))
                 return new LaserIdleState();
             
-            laserData.Orientation.Value = _target.transform.position;
-            if (!laserData.Timer.IsTimeOver) return this;
+            laser.Orientation = _target.transform.position;
+            if (!laser.Timer.IsTimeOver) return this;
             
-            _target.Damage(laserConfig.Damage);
-            laserData.Timer.Time = laserConfig.Cooldown;
+            _target.Damage(laser.Config.Damage);
+            laser.Timer.ResetTime(laser.Config.Cooldown);
 
-            EnableLineAttack(laserData);
+            EnableLineAttack(laser);
             
             return this;
         }
 
-        private async void EnableLineAttack(LaserData laserData)
+        private async void EnableLineAttack(Laser laser)
         {
-            laserData.Line.Enable();
+            laser.Line.Enable();
 
             for (var time = 0.0f; time < LineVisualDuration; time += Time.deltaTime)
             {
-                var isLineNull = laserData.Line == null;
+                var isLineNull = laser.Line == null;
 
                 if (_target == null)
                 {
@@ -50,19 +44,13 @@ namespace SustainTheStrain.Buildings
                     break;
                 }
 
-                if (!isLineNull)
-                {
-                    laserData.Line.SetPositions(new[]
-                    {
-                        laserData.ProjectileSpawnPoint.position,
-                        _target.transform.position
-                    });
-                }
+                if (!isLineNull) 
+                    laser.Line.SetPositions(new[] { laser.SpawnPointProvider.SpawnPoint.position, _target.transform.position });
 
                 await UniTask.NextFrame();
             }
 
-            laserData.Line.Disable();
+            laser.Line.Disable();
         }
     }
 }

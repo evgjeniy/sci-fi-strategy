@@ -1,6 +1,5 @@
 using SustainTheStrain.Scriptable.AbilitySettings;
 using SustainTheStrain.Units;
-using SustainTheStrain.Units.Components;
 using UnityEngine;
 
 namespace SustainTheStrain.Abilities

@@ -1,6 +1,4 @@
-﻿using SustainTheStrain.Buildings.States;
-using UnityEngine;
-using UnityEngine.Extensions;
+﻿using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
@@ -8,30 +6,24 @@ namespace SustainTheStrain.Buildings
     {
         public IUpdatableState<Barrack> Update(Barrack barrack)
         {
-            var barrackData = barrack.Data;
-            var barrackConfig = barrackData.Config.Value;
-            
-            barrackData.Timer.Time -= Time.deltaTime;
-
-            if (barrackData.Timer.IsTimeOver)
+            if (barrack.Timer.IsTimeOver)
             {
-                barrackData.RecruitGroup.Recruits.RemoveAll(x => x == null);
+                barrack.RecruitGroup.Recruits.RemoveAll(x => x == null);
 
-                var needToSpawn = barrackData.RecruitGroup.Recruits.Count < barrackData.RecruitGroup.squadMaxSize;
+                var needToSpawn = barrack.RecruitGroup.Recruits.Count < barrack.RecruitGroup.squadMaxSize;
                 
                 if (needToSpawn)
                 {
-                    var recruit = barrackData.RecruitSpawner.Spawn()
+                    var recruit = barrack.RecruitSpawner.Spawn()
                         .With(x => x.SetParent(barrack.transform))
-                        .With(x => x.Damage = barrackConfig.UnitAttackDamage)
-                        .With(x => x.Duelable.Damageable.MaxHP = barrackConfig.UnitMaxHealth)
-                        .With(x => x.Duelable.Damageable.CurrentHP = barrackConfig.UnitMaxHealth)
-                        .With(x => x.DamagePeriod = barrackConfig.UnitAttackCooldown);
+                        .With(x => x.Damage = barrack.Config.UnitAttackDamage)
+                        .With(x => x.Duelable.Damageable.MaxHP = barrack.Config.UnitMaxHealth)
+                        .With(x => x.Duelable.Damageable.CurrentHP = barrack.Config.UnitMaxHealth)
+                        .With(x => x.DamagePeriod = barrack.Config.UnitAttackCooldown);
                     
                     
-                    barrackData.RecruitGroup.AddRecruit(recruit);
-                    
-                    barrackData.Timer.Time = barrackConfig.RespawnCooldown;
+                    barrack.RecruitGroup.AddRecruit(recruit);
+                    barrack.Timer.ResetTime(barrack.Config.RespawnCooldown);
                 }
             }
 

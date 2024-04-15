@@ -4,7 +4,6 @@ using SustainTheStrain.EnergySystem;
 using SustainTheStrain.EnergySystem.UI;
 using SustainTheStrain.EnergySystem.UI.Factories;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace SustainTheStrain.Installers

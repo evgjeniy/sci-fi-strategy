@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Dreamteck.Splines;
-using UnityEngine;
 using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units

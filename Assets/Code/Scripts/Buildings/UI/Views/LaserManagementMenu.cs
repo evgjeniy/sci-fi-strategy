@@ -1,23 +1,10 @@
-﻿using Zenject;
+﻿using SustainTheStrain.Configs.Buildings;
+using Zenject;
 
 namespace SustainTheStrain.Buildings
 {
-    public class LaserManagementMenu : BuildingManagementMenu
+    public class LaserManagementMenu : BuildingManagementMenu<LaserBuildingConfig>
     {
-        [Inject] private Laser _laser;
-
-        private void OnEnable()
-        {
-            SubscribeBaseEvents(_laser);
-            
-            _laser.Data.Config.Changed += OnConfigChanged;
-        }
-
-        private void OnDisable()
-        {
-            UnsubscribeBaseEvents(_laser);
-            
-            _laser.Data.Config.Changed -= OnConfigChanged;
-        }
+        [Inject] protected override IBuilding Building { get; }
     }
 }

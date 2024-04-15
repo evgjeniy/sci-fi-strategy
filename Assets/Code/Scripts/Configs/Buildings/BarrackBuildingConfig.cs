@@ -1,4 +1,3 @@
-using SustainTheStrain._Contracts;
 using UnityEngine;
 
 namespace SustainTheStrain.Configs.Buildings
@@ -11,7 +10,8 @@ namespace SustainTheStrain.Configs.Buildings
         [field: SerializeField, Min(0.01f)] public float UnitAttackCooldown { get; private set; } = 1.0f;
         [field: SerializeField, Min(0.01f)] public float RespawnCooldown { get; private set; } = 1.0f;
         
-        [field: Space, SerializeField] public GameObject GfxPrefab { get; private set; }
+        [field: Header("Prefabs")]
+        [field: SerializeField] public ZoneVisualizer RecruitSpawnAimPrefab { get; private set; }
 
         [field: Space, SerializeField] public BarrackBuildingConfig NextLevelConfig { get; private set; }
 

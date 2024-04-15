@@ -2,6 +2,7 @@
 {
     public static class Const
     {
+        public const float RotationSpeed = 180.0f; // Degrees Per Seconds
         public static Observable<bool> IsDebugRadius { get; private set; } = new(true);
 
         public static class ResourcePath
@@ -24,16 +25,23 @@
                 {
                     public const string Root = Buildings.Root + "/" + nameof(Prefabs);
 
-                    public const string Rocket = Root + "/" + nameof(Rocket);
-                    public const string Laser = Root + "/" + nameof(Laser);
-                    public const string Artillery = Root + "/" + nameof(Artillery);
-                    public const string Barrack = Root + "/" + nameof(Barrack);
+                    public const string BuildingSelectorMenu = Root + "/UI/" + nameof(BuildingSelectorMenu);
 
-                    public const string BuildingCreateMenu = Root + "/UI/" + nameof(BuildingCreateMenu);
-                    public const string RocketView = Root + "/UI/" + nameof(RocketView);
-                    public const string LaserView = Root + "/UI/" + nameof(LaserView);
-                    public const string ArtilleryView = Root + "/UI/" + nameof(ArtilleryView);
-                    public const string BarrackView = Root + "/UI/" + nameof(BarrackView);
+                    public const string Rocket = Root + "/" + nameof(Rocket);
+                    public const string RocketRadiusVisualizer = Root + "/" + nameof(RocketRadiusVisualizer);
+                    public const string RocketManagementMenu = Root + "/UI/" + nameof(RocketManagementMenu);
+
+                    public const string Laser = Root + "/" + nameof(Laser);
+                    public const string LaserRadiusVisualizer = Root + "/" + nameof(LaserRadiusVisualizer);
+                    public const string LaserManagementMenu = Root + "/UI/" + nameof(LaserManagementMenu);
+
+                    public const string Artillery = Root + "/" + nameof(Artillery);
+                    public const string ArtilleryRadiusVisualizer = Root + "/" + nameof(ArtilleryRadiusVisualizer);
+                    public const string ArtilleryManagementMenu = Root + "/UI/" + nameof(ArtilleryManagementMenu);
+
+                    public const string Barrack = Root + "/" + nameof(Barrack);
+                    public const string BarrackRadiusVisualizer = Root + "/" + nameof(BarrackRadiusVisualizer);
+                    public const string BarrackManagementMenu = Root + "/UI/" + nameof(BarrackManagementMenu);
                 }
             }
 

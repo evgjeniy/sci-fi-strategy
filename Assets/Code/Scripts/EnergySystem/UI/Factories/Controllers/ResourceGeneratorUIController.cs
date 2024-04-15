@@ -2,7 +2,6 @@
 using SustainTheStrain.EnergySystem.UI;
 using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.ResourceSystems.UI;
-using Zenject;
 
 namespace SustainTheStrain
 {

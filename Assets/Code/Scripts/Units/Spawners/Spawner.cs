@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Extensions;
-using Zenject;
 
 namespace SustainTheStrain.Units.Spawners
 {

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using SustainTheStrain.Buildings.States;
-using SustainTheStrain.Configs.Buildings;
+﻿using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
@@ -16,24 +14,20 @@ namespace SustainTheStrain.Buildings
 
         public IUpdatableState<Artillery> Update(Artillery artillery)
         {
-            var artilleryData = artillery.Data;
-            var artilleryConfig = artilleryData.Config.Value;
+            artillery.Area.Update(artillery.transform.position, artillery.Config.Radius, artillery.Config.Mask);
 
-            artilleryData.Timer.Time -= Time.deltaTime;
-            artilleryData.Area.Update(artillery.transform.position, artilleryConfig.Radius, artilleryConfig.Mask);
-
-            if (artilleryData.Area.Entities.Contains(_target) is false)
+            if (_target.IsNotIn(artillery.Area))
                 return new ArtilleryIdleState();
 
-            artilleryData.Orientation.Value = _target.transform.position;
+            artillery.Orientation = _target.transform.position;
 
-            if (artilleryData.Timer.IsTimeOver)
+            if (artillery.Timer.IsTimeOver)
             {
-                Object.Instantiate(artilleryConfig.ProjectilePrefab, artilleryData.ProjectileSpawnPoint)
-                    .With(x => x.transform.position = artilleryData.ProjectileSpawnPoint.position)
-                    .LaunchTo(_target, onComplete: damageable => Explosion(artilleryConfig, damageable));
+                Object.Instantiate(artillery.Config.ProjectilePrefab, artillery.SpawnPointProvider.SpawnPoint)
+                    .With(x => x.transform.position = artillery.SpawnPointProvider.SpawnPoint.position)
+                    .LaunchTo(_target, onComplete: damageable => Explosion(artillery.Config, damageable));
                 
-                artilleryData.Timer.Time = artilleryConfig.Cooldown;
+                artillery.Timer.ResetTime(artillery.Config.Cooldown);
             }
 
             return this;

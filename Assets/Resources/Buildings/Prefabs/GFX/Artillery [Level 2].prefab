@@ -195,8 +195,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _horizontalRotationBone: {fileID: 4190201933528465788}
   _verticalRotationBone: {fileID: 3561997584566331025}
-  _projectileSpawnPoint: {fileID: 8649778863637532319}
   _verticalClamp: {x: -45, y: 45}
+  _projectileSpawnPoints:
+  - {fileID: 8649778863637532319}
 --- !u!1 &5418985343848186989
 GameObject:
   m_ObjectHideFlags: 0

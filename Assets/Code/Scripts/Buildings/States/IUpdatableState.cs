@@ -1,4 +1,4 @@
-﻿namespace SustainTheStrain.Buildings.States
+﻿namespace SustainTheStrain.Buildings
 {
     public interface IUpdatableState<in TContext>
     {
