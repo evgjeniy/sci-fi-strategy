@@ -10,9 +10,9 @@ namespace SustainTheStrain.EnergySystem
         public event Action<int> OnMaxEnergyChanged;
         public event Action<int> OnUpgradeCostChanged;
         
-        [SerializeField] private int _currentCount;
+        private int _currentCount;
         [Min(1)] [SerializeField] private int _maxCount;
-        private int _currentUpgradeLevel = 0;
+        private int _currentUpgradeLevel = 1;
 
         public int UpgradeCost => _currentUpgradeLevel * 500;
         
@@ -61,6 +61,7 @@ namespace SustainTheStrain.EnergySystem
         {
             _currentUpgradeLevel++;
             MaxCount++;
+            CurrentCount++;
             OnUpgradeCostChanged?.Invoke(UpgradeCost);
         }
         
