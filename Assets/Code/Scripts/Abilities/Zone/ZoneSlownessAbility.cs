@@ -1,5 +1,8 @@
 using SustainTheStrain.Scriptable.AbilitySettings;
 using SustainTheStrain.Units;
+using SustainTheStrain.Units.Components;
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace SustainTheStrain.Abilities
@@ -32,20 +35,18 @@ namespace SustainTheStrain.Abilities
                 var spd = colliders[i]?.GetComponent<Units.Unit>()?.CurrentPathFollower;
                 var dmg = colliders[i]?.GetComponent<Damageble>();
                 if (spd == null || dmg == null || dmg.Team == team) continue;
+
                 spd.Speed *= speedCoefficient;
-                System.Timers.Timer timer = new System.Timers.Timer(slownessTime * 1000); // Convert seconds to milliseconds
-                timer.AutoReset = false; // Make the timer fire only once
-                timer.Elapsed += (sender, e) => RestoreSpeed(spd); // Set the event handler
-                timer.Start();
-                //Debug.Log(dmg.Speed);
+                RestoreSpeed(slownessTime, spd);
             }
         }
 
-        private void RestoreSpeed(IPathFollower spd)
+        private async void RestoreSpeed(float delay, IPathFollower spd)
         {
+            await Task.Delay(TimeSpan.FromSeconds(delay));
+            Debug.Log("RESTORE");
             if (spd == null) return;
             spd.Speed /= speedCoefficient;
-            //Debug.Log(dmg.Speed);
         }
 
         protected override void ReadyToShoot()

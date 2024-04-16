@@ -17,7 +17,7 @@ namespace SustainTheStrain.Abilities
 
         private void LateUpdate()
         {
-            if (needMark)
+            if (needMark || AbilitiesController.freezeSelected)
             {
                 if (!outline.enabled)
                     outline.enabled = true;
