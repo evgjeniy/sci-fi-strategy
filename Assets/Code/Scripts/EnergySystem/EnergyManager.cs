@@ -15,7 +15,7 @@ namespace SustainTheStrain.EnergySystem
         [Min(1)] [SerializeField] private int _maxCount;
         private int _currentUpgradeLevel = 1;
 
-        public int UpgradeCost => _currentUpgradeLevel * _buyCoeff;
+        public int UpgradeCost => (int)(_currentUpgradeLevel * _buyCoeff);
         
         
         public int MaxCount { 
