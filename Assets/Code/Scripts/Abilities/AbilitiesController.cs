@@ -21,6 +21,8 @@ namespace SustainTheStrain.Abilities
         [Inject] private EnergyController _energyController;
 
         public static bool freezeSelected = false;
+        public static List<GameObject> activeSquads = new();
+        public static int maxSquads = 2;
 
         private BaseAim currentAim;
 
