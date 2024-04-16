@@ -18,7 +18,7 @@ MonoBehaviour:
   <Mask>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  <Radius>k__BackingField: 8
+  <Radius>k__BackingField: 8.1
   <UnitMaxHealth>k__BackingField: 50
   <UnitAttackDamage>k__BackingField: 3
   <UnitAttackCooldown>k__BackingField: 1
