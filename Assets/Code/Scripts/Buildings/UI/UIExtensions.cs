@@ -4,7 +4,7 @@ namespace SustainTheStrain.Buildings
 {
     public static class UIExtensions
     {
-        public static void LookAtCamera(this Transform uiTransform, Transform from, float positionLerpOffset = 0.1f)
+        public static void LookAtCamera(this Transform uiTransform, Transform from, float positionLerpOffset = 0.2f)
         {
             var worldCamera = Camera.main;
             if (worldCamera == null) return;

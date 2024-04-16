@@ -15,7 +15,7 @@ namespace SustainTheStrain.Buildings
         [field: SerializeField] public RecruitGroup RecruitGroup { get; private set; }
         [field: SerializeField] public RecruitSpawner RecruitSpawner { get; private set; } 
 
-        private IUpdatableState<Barrack> _currentState = new BarrackIdleState();
+        private IUpdatableState<Barrack> _currentState = new BarrackInitState();
         private IResourceManager _resourceManager;
         private Observable<BarrackBuildingConfig> _config;
         private Observable<Vector3> _spawnPoint;
@@ -47,24 +47,6 @@ namespace SustainTheStrain.Buildings
             
             Timer = timer;
             Timer.ResetTime(config.Value.RespawnCooldown);
-
-            while (RecruitGroup.Recruits.Count < RecruitGroup.squadMaxSize)
-            {
-
-                var recruit = RecruitSpawner.Spawn()
-                                        .With(x => x.SetParent(transform))
-                                        .With(x => x.Damage = Config.UnitAttackDamage)
-                                        .With(x => x.Duelable.Damageable.MaxHP = Config.UnitMaxHealth)
-                                        .With(x => x.Duelable.Damageable.CurrentHP = Config.UnitMaxHealth)
-                                        .With(x => x.DamagePeriod = Config.UnitAttackCooldown);
-
-                RecruitGroup.AddRecruit(recruit);
-            }
-        }
-
-        private void OnEnable()
-        {
-            RecruitGroup.UpdateRecruits();
         }
 
         private void Update() => _currentState = _currentState.Update(this);
