@@ -11,10 +11,11 @@ namespace SustainTheStrain.EnergySystem
         public event Action<int> OnUpgradeCostChanged;
         
         private int _currentCount;
+        private float _buyCoeff = 500f;
         [Min(1)] [SerializeField] private int _maxCount;
         private int _currentUpgradeLevel = 1;
 
-        public int UpgradeCost => _currentUpgradeLevel * 500;
+        public int UpgradeCost => _currentUpgradeLevel * _buyCoeff;
         
         
         public int MaxCount { 
