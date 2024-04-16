@@ -64,14 +64,14 @@ MonoBehaviour:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 6
-        _enemyType: Tank
+        _enemyType: Shield
     - _delay: 0
       _index: 2
       _subwaves:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 4
-        _enemyType: Tank
+        _enemyType: Shield
   - _spawners:
     - _delay: 0
       _index: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 2
-        _enemyType: Tank
+        _enemyType: Shield
   - _spawners:
     - _delay: 0
       _index: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 4
-        _enemyType: Tank
+        _enemyType: Shield
     - _delay: 0
       _index: 1
       _subwaves:
@@ -158,14 +158,14 @@ MonoBehaviour:
       - _delay: 2
         _spawnPeriod: 2
         _enemyCount: 12
-        _enemyType: Tank
+        _enemyType: Shield
     - _delay: 2
       _index: 2
       _subwaves:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 4
-        _enemyType: Tank
+        _enemyType: Shield
       - _delay: 4
         _spawnPeriod: 4
         _enemyCount: 4
@@ -233,7 +233,7 @@ MonoBehaviour:
       - _delay: 6
         _spawnPeriod: 3
         _enemyCount: 3
-        _enemyType: Tank
+        _enemyType: Shield
     - _delay: 2
       _index: 1
       _subwaves:
@@ -260,7 +260,7 @@ MonoBehaviour:
       - _delay: 2
         _spawnPeriod: 4
         _enemyCount: 5
-        _enemyType: Tank
+        _enemyType: Shield
     - _delay: 0
       _index: 2
       _subwaves:
@@ -271,7 +271,7 @@ MonoBehaviour:
       - _delay: 0
         _spawnPeriod: 5
         _enemyCount: 5
-        _enemyType: Tank
+        _enemyType: Shield
       - _delay: 3
         _spawnPeriod: 3
         _enemyCount: 12
