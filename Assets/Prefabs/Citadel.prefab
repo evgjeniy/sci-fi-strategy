@@ -23364,6 +23364,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -264430861247414160, guid: 2072502d1a366a54495d40ce556d7430,
         type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -264430861247414160, guid: 2072502d1a366a54495d40ce556d7430,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 98e13909f46de4a438dcbae9068dcd64, type: 2}
@@ -24849,6 +24854,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 70cb65660ce3a404294dd0b50ebefa65,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a55780f106c78984585e4821c8b000cd, type: 2}
     - target: {fileID: 919132149155446097, guid: 70cb65660ce3a404294dd0b50ebefa65,
         type: 3}
       propertyPath: m_Name
