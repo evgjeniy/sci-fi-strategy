@@ -21,7 +21,7 @@ namespace SustainTheStrain.Buildings
 
             artillery.Orientation = _target.transform.position;
 
-            if (artillery.Timer.IsTimeOver)
+            if (artillery.Timer.IsOver)
             {
                 Object.Instantiate(artillery.Config.ProjectilePrefab, artillery.SpawnPointProvider.SpawnPoint)
                     .With(x => x.transform.position = artillery.SpawnPointProvider.SpawnPoint.position)

@@ -19,7 +19,7 @@ namespace SustainTheStrain.Buildings
             
             rocket.Orientation = _target.transform.position;
 
-            if (!rocket.Timer.IsTimeOver)
+            if (!rocket.Timer.IsOver)
                 return this;
            
             var attackedAmount = 0;

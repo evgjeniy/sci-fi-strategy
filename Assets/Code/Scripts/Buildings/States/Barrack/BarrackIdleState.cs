@@ -6,7 +6,7 @@ namespace SustainTheStrain.Buildings
     {
         public IUpdatableState<Barrack> Update(Barrack barrack)
         {
-            if (barrack.Timer.IsTimeOver)
+            if (barrack.Timer.IsOver)
             {
                 barrack.RecruitGroup.Recruits.RemoveAll(x => x == null);
 

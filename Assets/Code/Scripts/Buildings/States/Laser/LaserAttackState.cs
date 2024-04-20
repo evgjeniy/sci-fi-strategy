@@ -20,7 +20,7 @@ namespace SustainTheStrain.Buildings
                 return new LaserIdleState();
             
             laser.Orientation = _target.transform.position;
-            if (!laser.Timer.IsTimeOver) return this;
+            if (!laser.Timer.IsOver) return this;
             
             _target.Damage(laser.Config.Damage);
             laser.Timer.ResetTime(laser.Config.Cooldown);
