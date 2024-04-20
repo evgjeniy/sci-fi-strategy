@@ -5,8 +5,7 @@ namespace SustainTheStrain.Configs.Buildings
     [CreateAssetMenu(fileName = nameof(LaserBuildingConfig), menuName = "Configs/" + nameof(LaserBuildingConfig), order = Const.Order.BuildingConfigs)]
     public class LaserBuildingConfig : BuildingConfig
     {
-        [SerializeField, Min(0.0f)] public float _damage = 1.0f;
-        [field: SerializeField, Min(0.0f)] public float Damage { get; private set; } = 1.0f;
+        [SerializeField, Min(0.0f)] private float _damage = 1.0f;
         [field: SerializeField, Min(0.0f)] public float Cooldown { get; private set; } = 1.0f;
         
         [field: Header("Prefabs")]
@@ -22,6 +21,8 @@ namespace SustainTheStrain.Configs.Buildings
             get => _currentEnergy;
             set => _currentEnergy = Mathf.Clamp(value, 0, EnergyDamageMultipliers.Length);
         }
+
+        public float Damage => _damage * EnergyDamageMultipliers[CurrentEnergy];
 
         public override int NextLevelPrice => NextLevelConfig == null ? int.MaxValue : NextLevelConfig.Price;
     }

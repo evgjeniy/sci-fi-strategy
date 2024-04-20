@@ -20,7 +20,6 @@ MonoBehaviour:
     m_Bits: 8
   <Radius>k__BackingField: 8
   _damage: 24
-  <Damage>k__BackingField: 24
   <Cooldown>k__BackingField: 1.5
   <LineRenderer>k__BackingField: {fileID: 3930199137400860807, guid: 97c02ea80f5dc3a44bf4fb3eaa8d7c0d,
     type: 3}

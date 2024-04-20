@@ -20,7 +20,6 @@ MonoBehaviour:
     m_Bits: 8
   <Radius>k__BackingField: 8
   _damage: 24
-  <Damage>k__BackingField: 24
   <Cooldown>k__BackingField: 3
   <ExplosionRadius>k__BackingField: 4
   <GfxPrefab>k__BackingField: {fileID: 6957716040307377065, guid: 138f31c3b5b46654a8c9bb9c7aafbddd,
