@@ -11,6 +11,11 @@ namespace SustainTheStrain.Installers
         public override void InstallBindings()
         {
             Container.Bind<AbilitiesController>().FromInstance(_controller).AsSingle();
+
+            Container
+                .Bind<Abilities.New.IAbilityController>()
+                .To<Abilities.New.AbilityController>()
+                .AsSingle();
         }
     }
 }

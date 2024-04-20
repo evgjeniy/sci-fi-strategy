@@ -2,7 +2,8 @@
 {
     public interface ITimer
     {
-        float Time { get;  }
+        float Time { get; }
+        float Percent { get; }
         bool IsOver { get; }
         bool IsPaused { get; set; }
 

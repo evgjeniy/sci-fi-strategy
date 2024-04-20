@@ -6,14 +6,17 @@
         [UnityEngine.SerializeField] private float _time;
         [UnityEngine.SerializeField] private bool _isPaused;
 
+        private float _definedTime;
+
         public float Time    { get => _time;     private set { _time = value;     Changed(this); }  }
         public bool IsPaused { get => _isPaused;         set { _isPaused = value; Changed(this); }  }
+        public float Percent => _definedTime == 0.0f ? 0.0f : _time / _definedTime;
         public bool IsOver => Time <= 0.0f;
         
         public ITimer Value => this;
-        public event System.Action<ITimer> Changed = _ => { };
+        public event System.Action<ITimer> Changed = _ => {};
 
-        public Timer(float time = 0) => _time = time;
+        public Timer(float time = 0) => ResetTime(time);
 
         public void Tick()
         {
@@ -23,6 +26,6 @@
             Time -= UnityEngine.Time.deltaTime;
         }
 
-        public void ResetTime(float newTime) => Time = newTime;
+        public void ResetTime(float newTime) => Time = _definedTime = newTime;
     }
 }
