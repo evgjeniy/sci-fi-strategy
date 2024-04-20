@@ -19,14 +19,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   <Radius>k__BackingField: 9
-  <Damage>k__BackingField: 8
+  _damage: 8
   <Cooldown>k__BackingField: 0.4
   <MaxTargets>k__BackingField: 3
   <SectorAngle>k__BackingField: 60
-  <GfxPrefab>k__BackingField: {fileID: 671993456240729189, guid: 58e1740c519ba074093afee1e3ac2ae5,
-    type: 3}
-  <RocketRadiusVisualizer>k__BackingField: {fileID: 317919500258007457, guid: 637d4fcd76af37a4d9a8f1c229992e8c,
-    type: 3}
+  <EnergyMultipliers>k__BackingField:
+  - 0.5
+  - 0.7
+  - 1
+  - 1.2
   <ProjectilePrefab>k__BackingField: {fileID: 3020685036469273396, guid: 06347687b9a8b424c95b6862f55f5040,
     type: 3}
   <NextLevelConfig>k__BackingField: {fileID: 0}
+  <Damage>k__BackingField: 8
