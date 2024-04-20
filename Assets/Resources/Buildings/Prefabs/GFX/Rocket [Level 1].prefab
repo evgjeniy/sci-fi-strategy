@@ -60,7 +60,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d4dff89d09d232d4fadc577d20934bcb, type: 2}
@@ -145,7 +145,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d4dff89d09d232d4fadc577d20934bcb, type: 2}
@@ -184,7 +184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _horizontalRotationBone: {fileID: 3191029133882000361}
   _verticalRotationBone: {fileID: 4371984831655728777}
-  _projectileSpawnPoint: {fileID: 8071216146320557082}
   _verticalClamp: {x: -45, y: 45}
   _projectileSpawnPoints:
   - {fileID: 8071216146320557082}
@@ -249,7 +248,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d4dff89d09d232d4fadc577d20934bcb, type: 2}
@@ -394,7 +393,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d4dff89d09d232d4fadc577d20934bcb, type: 2}
