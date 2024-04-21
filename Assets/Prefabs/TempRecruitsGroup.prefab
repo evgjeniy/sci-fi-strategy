@@ -54,7 +54,7 @@ MonoBehaviour:
   _squadMaxSize: 5
   <GuardPost>k__BackingField:
     _position: {x: 0, y: 0, z: 0}
-    _radius: 2.5
+    _radius: 1.6
 --- !u!1001 &1807938471762527366
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -22,20 +22,20 @@ MonoBehaviour:
         _enemyCount: 10
         _enemyType: Mob
   - _spawners:
-    - _delay: 0
+    - _delay: 35
       _index: 2
       _subwaves:
       - _delay: 2
         _spawnPeriod: 2
-        _enemyCount: 15
+        _enemyCount: 10
         _enemyType: Mob
   - _spawners:
-    - _delay: 0
+    - _delay: 30
       _index: 1
       _subwaves:
       - _delay: 0
         _spawnPeriod: 2
-        _enemyCount: 7
+        _enemyCount: 10
         _enemyType: Kamikaze
   - _spawners:
     - _delay: 0

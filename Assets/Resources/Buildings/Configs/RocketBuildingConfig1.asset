@@ -19,7 +19,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   <Radius>k__BackingField: 8.1
-  <Damage>k__BackingField: 4
+  <Damage>k__BackingField: 6
   <Cooldown>k__BackingField: 0.7
   <MaxTargets>k__BackingField: 1
   <SectorAngle>k__BackingField: 30
