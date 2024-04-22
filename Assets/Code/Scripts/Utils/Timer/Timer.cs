@@ -10,7 +10,7 @@
 
         public float Time    { get => _time;     private set { _time = value;     Changed(this); }  }
         public bool IsPaused { get => _isPaused;         set { _isPaused = value; Changed(this); }  }
-        public float Percent => _definedTime == 0.0f ? 0.0f : _time / _definedTime;
+        public float Percent => _definedTime == 0.0f ? 1.0f : (1.0f - _time / _definedTime);
         public bool IsOver => Time <= 0.0f;
         
         public ITimer Value => this;

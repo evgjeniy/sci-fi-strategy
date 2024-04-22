@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Abilities.New
 {
@@ -24,5 +25,7 @@ namespace SustainTheStrain.Abilities.New
         public override void Destroy() => Object.Destroy(_aimInstance);
 
         public override void UpdatePosition(RaycastHit hit) => _aimInstance.transform.position = hit.point;
+
+        public void DisplayReload(ITimer timer) => _aimInstance.IfNotNull(zone => zone.Color = timer.IsOver ? Color.green : Color.red);
     }
 }

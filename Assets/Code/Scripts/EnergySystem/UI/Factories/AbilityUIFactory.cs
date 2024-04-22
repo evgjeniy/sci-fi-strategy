@@ -25,7 +25,7 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
             slider.value = 0;
             button.image.sprite = system.EnergySettings.ButtonImage;
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
-            _abilityUIController.MakeSubscriptions(ui, system, slider);
+            _abilityUIController.MakeSubscriptions(ui, system as Abilities.New.IAbility, slider);
             return ui;
         }
     }

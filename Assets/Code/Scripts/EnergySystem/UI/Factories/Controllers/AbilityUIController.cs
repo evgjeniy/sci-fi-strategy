@@ -1,6 +1,7 @@
 ﻿using SustainTheStrain.Abilities;
 using SustainTheStrain.EnergySystem;
 using SustainTheStrain.EnergySystem.UI;
+using SustainTheStrain.Input;
 using SustainTheStrain.Input.UI;
 using UnityEngine.UI;
 
@@ -8,28 +9,33 @@ namespace SustainTheStrain
 {
     public class AbilityUIController
     {
-        private EnergyController _energyController;
-        private AbilitiesUIController _abilitiesUIController;
+        private readonly EnergyController _energyController;
+        private readonly IInputSystem _inputSystem;
 
-        public AbilityUIController(EnergyController energyCntroller, AbilitiesUIController abilitiesUIController)
+        public AbilityUIController(EnergyController energyCntroller, IInputSystem inputSystem)
         {
             _energyController = energyCntroller;
-            _abilitiesUIController = abilitiesUIController;
+            _inputSystem = inputSystem;
         }
         
-        public void MakeSubscriptions(EnergySystemUI ui, IEnergySystem system, Slider slider)
+        public void MakeSubscriptions(EnergySystemUI ui, Abilities.New.IAbility ability, Slider slider)
         {
-            var button = ui.ControllButton;
-            _abilitiesUIController.AddControlButton(button.GetComponent<InputSystemButtonBridge>(), slider);
-            button.OnLeftMouseClick += () =>
+            ui.ControllButton.OnLeftMouseClick += () =>
             {
-                _energyController.TryLoadEnergyToSystem(system);
+                if (ability.CurrentEnergy == 0)
+                    _energyController.TryLoadEnergyToSystem(ability);
+                else
+                    _inputSystem.Select(ability);
             };
-            button.OnRightMouseClick += () =>
+            ui.ControllButton.OnRightMouseClick += () =>
             {
-                _energyController.TryReturnEnergyFromSystem(system);
+                if (ability.CurrentEnergy == 0) return;
+                
+                _energyController.TryReturnEnergyFromSystem(ability);
+                _inputSystem.Idle();
             };
-            system.Changed += ui.ChangeEnergy;
+            ability.CooldownTimer.Changed += timer => slider.value = timer.Percent;
+            ability.Changed += ui.ChangeEnergy;
         }
     }
 }

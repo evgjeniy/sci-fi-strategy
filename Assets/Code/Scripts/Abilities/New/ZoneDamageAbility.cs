@@ -35,6 +35,8 @@ namespace SustainTheStrain.Abilities.New
 
                 if (isEnergyEmpty)
                     _timer.ResetTime(_config.Cooldown);
+
+                Changed(this);
             }
         }
 
@@ -45,7 +47,9 @@ namespace SustainTheStrain.Abilities.New
             _config = configProvider.GetAbilityConfig<ZoneDamageAbilityConfig>();
             _aim = new ZoneAim(_config.Radius, _config.AimPrefab, _config.GroundMask, _config.RaycastDistance);
             _timer = timer;
+            _timer.IsPaused = true;
             _timer.ResetTime(_config.Cooldown);
+            _timer.Changed += t => _aim.DisplayReload(t);
 
             energyController.AddEnergySystem(this);
         }

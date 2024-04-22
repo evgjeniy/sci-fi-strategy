@@ -5,8 +5,15 @@ namespace SustainTheStrain
 {
     public class ZoneVisualizer : DecalProjector, IZoneVisualizer
     {
+        private static readonly int ColorMaterialNameID = Shader.PropertyToID("_Color");
         private static readonly int AngleMaterialNameID = Shader.PropertyToID("_Angle");
         private const float ScaleFactor = 1.1f;
+
+        public Color Color
+        {
+            get => material.GetColor(ColorMaterialNameID);
+            set => material.SetColor(ColorMaterialNameID, value);
+        }
 
         public float Radius
         {

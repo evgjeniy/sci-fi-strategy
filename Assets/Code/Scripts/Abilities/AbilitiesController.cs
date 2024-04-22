@@ -9,7 +9,7 @@ using Zenject;
 
 namespace SustainTheStrain.Abilities
 {
-    public class AbilitiesController : MonoBehaviour
+    /*public class AbilitiesController : MonoBehaviour
     {
         [SerializeField] private AbilitiesListSettings _abilitiesSettings;
         [SerializeField] private GameObject aimZonePrefab;
@@ -191,5 +191,5 @@ namespace SustainTheStrain.Abilities
         public LandingAbilitySettings LandingAbility;
         public ZoneDamageAbilitySettings ZoneDamage;
         public ZoneSlownessAbilitySettings ZoneSlowness;
-    }
+    }*/
 }

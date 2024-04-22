@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SustainTheStrain.Abilities
 {
-    public class OutLineControll : MonoBehaviour
+    public class OutLineControll : MonoBehaviour // TODO : REMOVE THIS USELESS SCRIPT
     {
         private Outline outline;
         private bool needMark = false;
@@ -17,7 +17,7 @@ namespace SustainTheStrain.Abilities
 
         private void LateUpdate()
         {
-            if (needMark || AbilitiesController.freezeSelected)
+            if (needMark /*|| AbilitiesController.freezeSelected*/)
             {
                 if (!outline.enabled)
                     outline.enabled = true;

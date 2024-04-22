@@ -25,19 +25,19 @@ namespace SustainTheStrain.Abilities
 
         protected override void SuccessShootLogic(RaycastHit hit, Team team)
         {
-            if (AbilitiesController.activeSquads.Count == AbilitiesController.maxSquads)
+            /*if (AbilitiesController.activeSquads.Count == AbilitiesController.maxSquads)
             {
                 GameObject.Destroy(AbilitiesController.activeSquads[0]);
                 AbilitiesController.activeSquads.RemoveAt(0);
-            }
+            }*/
 
             var squad = GameObject.Instantiate(SquadPrefab, hit.point, Quaternion.identity);
-            AbilitiesController.activeSquads.Add(squad);
+            /*AbilitiesController.activeSquads.Add(squad);*/
 
             var group = squad.GetComponent<RecruitGroup>();
             group.GuardPost.Position = hit.point;
             
-            group.OnGroupEmpty += () => { AbilitiesController.activeSquads.Remove(squad); GameObject.Destroy(squad); };
+            group.OnGroupEmpty += () => { /*AbilitiesController.activeSquads.Remove(squad);*/ GameObject.Destroy(squad); };
             SpawnParticles(hit.point, group.GuardPost.Radius);
         }
 
