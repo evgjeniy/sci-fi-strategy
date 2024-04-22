@@ -1,5 +1,6 @@
 using Dreamteck.Splines;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
@@ -32,8 +33,6 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void FrameUpdate()
         {
-            if (context.IsAnnoyed && !context.Duelable.HasOpponent) InitiateDuel();
-
             if (!_isOnSpline)
                 if (context.NavPathFollower.IsDestinationReached())
                 {
@@ -56,7 +55,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void PhysicsUpdate()
         {
-
+            context.FindOpponent().IfNotNull(duelable => context.Duelable.RequestDuel(duelable));
         }
 
         private void SwitchNavigation()
@@ -70,17 +69,6 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
             else
             {
                 context.SwitchPathFollower(context.SplinePathFollower);
-            }
-        }
-
-        private void InitiateDuel()
-        {
-            if (context.AggroRadiusCheck.AggroZoneUnits.Count == 0) return;
-
-            foreach (var unit in context.AggroRadiusCheck.AggroZoneUnits)
-            {
-                if (context.Duelable.RequestDuel(unit))
-                    break;
             }
         }
     }

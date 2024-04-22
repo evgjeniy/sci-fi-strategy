@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
@@ -30,25 +31,12 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void FrameUpdate()
         {
-            if(context.IsAnnoyed && !context.Duelable.HasOpponent) InitiateDuel();
-
             if (context.Duelable.HasOpponent) context.StateMachine.ChangeState(_aggroState);
         }
 
         public override void PhysicsUpdate()
         {
-            
-        }
-        
-        private void InitiateDuel()
-        {
-            if (context.AggroRadiusCheck.AggroZoneUnits.Count == 0) return;
-
-            foreach (var unit in context.AggroRadiusCheck.AggroZoneUnits)
-            {
-                if (context.Duelable.RequestDuel(unit))
-                    break;
-            }
+            context.FindOpponent().IfNotNull(duelable => context.Duelable.RequestDuel(duelable));
         }
     }
 }

@@ -1,5 +1,9 @@
+using SustainTheStrain.Units.Components;
+using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.PlayerSettings;
 
 namespace SustainTheStrain.Units
 {
@@ -15,8 +19,15 @@ namespace SustainTheStrain.Units
         protected StateMachine.StateMachine _stateMachine = new StateMachine.StateMachine();
     
         public Duelable Duelable { get; protected set; }
-        public AggroRadiusCheck AggroRadiusCheck { get; protected set;}
-        public AttackRadiusCheck AttackRadiusCheck { get; protected set;}
+        //public AggroRadiusCheck AggroRadiusCheck { get; protected set;}
+        //public AttackRadiusCheck AttackRadiusCheck { get; protected set;}
+
+        [SerializeField] private float _aggroRadius = 5f;
+        [SerializeField] private float _attackRadius = 5f;
+
+        public Area<Duelable> AggroZone = new Area<Duelable>();
+        public Area<Duelable> AttackZone = new Area<Duelable>();
+
         public StateMachine.StateMachine StateMachine => _stateMachine;
         public NavPathFollower NavPathFollower { get; protected set; }
 
@@ -24,11 +35,7 @@ namespace SustainTheStrain.Units
         public bool IsOpponentInAggroZone { get; protected set; }
         public bool IsOpponentInAttackZone { get; protected set; }
 
-        //[Zenject.Inject]
-        //private void Construct(UnitData unitData) 
-        //{
-            
-        //}
+        private Timer _timer = new Timer(0.2f);
 
         private void Awake()
         {
@@ -39,13 +46,13 @@ namespace SustainTheStrain.Units
         {
             Duelable = GetComponent<Duelable>();
 
-            AggroRadiusCheck = GetComponentInChildren<AggroRadiusCheck>();
-            AggroRadiusCheck.OnUnitEnteredAggroZone += UnitEnteredAggroZone;
-            AggroRadiusCheck.OnUnitLeftAggroZone += UnitLeftAggroZone;
+            //AggroRadiusCheck = GetComponentInChildren<AggroRadiusCheck>();
+            //AggroRadiusCheck.OnUnitEnteredAggroZone += UnitEnteredAggroZone;
+            //AggroRadiusCheck.OnUnitLeftAggroZone += UnitLeftAggroZone;
 
-            AttackRadiusCheck = GetComponentInChildren<AttackRadiusCheck>();
-            AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEnteredAttackZone;
-            AttackRadiusCheck.OnUnitLeftAttackZone += UnitLeftAttackZone;
+            //AttackRadiusCheck = GetComponentInChildren<AttackRadiusCheck>();
+            //AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEnteredAttackZone;
+            //AttackRadiusCheck.OnUnitLeftAttackZone += UnitLeftAttackZone;
 
             NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
 
@@ -54,42 +61,73 @@ namespace SustainTheStrain.Units
 
         #region UNIT_TRIGGER_LOGIC
 
-        private void UnitEnteredAggroZone(Duelable unit)
+        public virtual Duelable FindOpponent()
         {
-            IsAnnoyed = true;
+            AggroZone.Update(transform.position, _aggroRadius, LayerMask.GetMask("Unit"));
+
+            var enemies = AggroZone.Entities.
+                Where((e) =>
+                    e.Damageable.Team != Duelable.Damageable.Team /*&&*/
+                   /* Duelable.Opponent != null ? e.Priority > Duelable.Opponent.Priority : true*/).
+                OrderBy((e) => Vector3.Distance(e.transform.position, transform.position));
+
+            if (enemies.Count() > 0) 
+                return enemies.First();
+            else return null;
         }
 
-        private void UnitLeftAggroZone(Duelable unit)
+        public virtual bool CheckIfInAttackZone(Duelable duelable)
         {
-            IsAnnoyed = AggroRadiusCheck.AggroZoneUnits.Count != 0;
+            if(duelable == null) return false;
 
-            IsOpponentInAggroZone = Duelable.Opponent == unit;
+            AttackZone.Update(transform.position, _attackRadius, LayerMask.GetMask("Unit"));
+            return duelable.IsIn(AttackZone);
         }
 
-        private void UnitEnteredAttackZone(Duelable unit)
+        public virtual bool CheckIfInAggroZone(Duelable duelable)
         {
-            if (!Duelable.HasOpponent)
-            {
-                IsOpponentInAttackZone = false;
-                return;
-            }
-            
-            if(IsOpponentInAttackZone) return;
-            
-            IsOpponentInAttackZone = unit == Duelable.Opponent;
+            if (duelable == null) return false;
+
+            AggroZone.Update(transform.position, _aggroRadius, LayerMask.GetMask("Unit"));
+            return duelable.IsIn(AggroZone);
         }
 
-        private void UnitLeftAttackZone(Duelable unit)
-        {
-            if (!Duelable.HasOpponent) 
-            {
-                IsOpponentInAttackZone = false;
-                return;
-            }
-            
-            if(IsOpponentInAttackZone)
-                IsOpponentInAttackZone = !(unit == Duelable.Opponent);
-        }
+        //private void UnitEnteredAggroZone(Duelable unit)
+        //{
+        //    IsAnnoyed = true;
+        //}
+
+        //private void UnitLeftAggroZone(Duelable unit)
+        //{
+        //    IsAnnoyed = AggroRadiusCheck.AggroZoneUnits.Count != 0;
+
+        //    IsOpponentInAggroZone = Duelable.Opponent == unit;
+        //}
+
+        //private void UnitEnteredAttackZone(Duelable unit)
+        //{
+        //    if (!Duelable.HasOpponent)
+        //    {
+        //        IsOpponentInAttackZone = false;
+        //        return;
+        //    }
+
+        //    if(IsOpponentInAttackZone) return;
+
+        //    IsOpponentInAttackZone = unit == Duelable.Opponent;
+        //}
+
+        //private void UnitLeftAttackZone(Duelable unit)
+        //{
+        //    if (!Duelable.HasOpponent) 
+        //    {
+        //        IsOpponentInAttackZone = false;
+        //        return;
+        //    }
+
+        //    if(IsOpponentInAttackZone)
+        //        IsOpponentInAttackZone = !(unit == Duelable.Opponent);
+        //}
 
         #endregion
 
@@ -122,12 +160,19 @@ namespace SustainTheStrain.Units
 
         private void Update()
         {
+            _timer.Tick();
             _stateMachine.CurrentState.FrameUpdate();
+
+            if (_timer.IsTimeOver)
+            {
+                _stateMachine.CurrentState.PhysicsUpdate();
+                _timer.ResetTime(0.2f);
+            }
         }
 
         private void FixedUpdate()
         {
-            _stateMachine.CurrentState.PhysicsUpdate();
+            //_stateMachine.CurrentState.PhysicsUpdate();
         }
     }
 }

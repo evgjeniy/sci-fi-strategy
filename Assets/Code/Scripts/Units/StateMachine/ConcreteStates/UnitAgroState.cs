@@ -39,7 +39,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void FrameUpdate()
         {
-            if(!context.IsOpponentInAggroZone && _time > _disaggroTime)
+            if(!context.CheckIfInAggroZone(context.Duelable.Opponent) && _time > _disaggroTime)
             {
                 context.Duelable.BreakDuel();
                 return;
@@ -53,7 +53,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
             context.NavPathFollower.MoveTo(context.Duelable.Opponent.GetNearestDuelPosition(context.transform.position));
 
-            if(context.IsOpponentInAttackZone)
+            if (context.CheckIfInAttackZone(context.Duelable.Opponent))
                 context.StateMachine.ChangeState(_attackState);
 
             _time += Time.deltaTime;

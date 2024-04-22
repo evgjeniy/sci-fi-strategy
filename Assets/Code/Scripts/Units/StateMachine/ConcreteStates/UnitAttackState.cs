@@ -54,7 +54,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
                 return;
             }
 
-            if (!context.IsOpponentInAttackZone)
+            if (!context.CheckIfInAttackZone(context.Duelable.Opponent))
             {
                 context.StateMachine.ChangeState(_aggroState);
                 return;
