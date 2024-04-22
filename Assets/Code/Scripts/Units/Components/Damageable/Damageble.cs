@@ -21,6 +21,9 @@ namespace SustainTheStrain.Units
         [field: SerializeField]
         public Team Team { get; set; }
 
+        [field:SerializeField] 
+        public bool IsFlying { get; set; }
+
         public event Action<Damageble> OnDied;
         public event Action<float> OnCurrentHPChanged;
 
