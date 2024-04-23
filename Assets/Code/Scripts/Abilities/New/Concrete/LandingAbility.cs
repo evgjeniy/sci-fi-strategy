@@ -40,7 +40,7 @@ namespace SustainTheStrain.Abilities.New
 
         public event Action<IEnergySystem> Changed = _ => { };
 
-        public LandingAbility(IConfigProviderService configProvider, EnergyController energyController, Timer timer)
+        public LandingAbility(IConfigProviderService configProvider, Timer timer)
         {
             _config = configProvider.GetAbilityConfig<LandingAbilityConfig>();
             _aim = new ZoneAim(_config.SquadPrefab.GuardPost.Radius, _config.AimPrefab, _config.GroundMask, _config.RaycastDistance);
@@ -48,8 +48,6 @@ namespace SustainTheStrain.Abilities.New
             _timer.IsPaused = true;
             _timer.ResetTime(_config.Cooldown);
             _timer.Changed += t => _aim.DisplayReload(t);
-
-            energyController.AddEnergySystem(this);
         }
 
         void IInputSelectable.OnSelected()

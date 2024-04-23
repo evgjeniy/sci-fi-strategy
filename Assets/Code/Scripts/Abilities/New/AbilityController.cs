@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SustainTheStrain.EnergySystem;
 
 namespace SustainTheStrain.Abilities.New
 {
@@ -17,7 +18,7 @@ namespace SustainTheStrain.Abilities.New
 
         public IReadOnlyList<IAbility> Abilities => _abilitiesList;
 
-        public AbilityController(Zenject.IInstantiator instantiator)
+        public AbilityController(Zenject.IInstantiator instantiator, EnergyController energyController)
         {
             _abilitiesList = new List<IAbility>(capacity: 4)
             {
@@ -26,6 +27,9 @@ namespace SustainTheStrain.Abilities.New
                 instantiator.Instantiate<LandingAbility>()
             };
             _abilitiesDictionary = _abilitiesList.ToDictionary(ability => ability.GetType());
+
+            foreach (var ability in _abilitiesList)
+                energyController.AddEnergySystem(ability);
         }
 
         public bool TryGetAbility<TAbility>(out TAbility ability) where TAbility : IAbility

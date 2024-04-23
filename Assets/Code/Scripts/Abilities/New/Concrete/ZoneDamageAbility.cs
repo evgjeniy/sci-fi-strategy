@@ -42,7 +42,7 @@ namespace SustainTheStrain.Abilities.New
 
         public event Action<IEnergySystem> Changed = _ => { };
 
-        public ZoneDamageAbility(IConfigProviderService configProvider, EnergyController energyController, Timer timer)
+        public ZoneDamageAbility(IConfigProviderService configProvider, Timer timer)
         {
             _config = configProvider.GetAbilityConfig<ZoneDamageAbilityConfig>();
             _aim = new ZoneAim(_config.Radius, _config.AimPrefab, _config.GroundMask, _config.RaycastDistance);
@@ -50,8 +50,6 @@ namespace SustainTheStrain.Abilities.New
             _timer.IsPaused = true;
             _timer.ResetTime(_config.Cooldown);
             _timer.Changed += t => _aim.DisplayReload(t);
-
-            energyController.AddEnergySystem(this);
         }
 
         void IInputSelectable.OnSelected()

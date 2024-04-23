@@ -43,15 +43,13 @@ namespace SustainTheStrain.Abilities.New
 
         public event Action<IEnergySystem> Changed = _ => { };
 
-        public EnemyHackAbility(IConfigProviderService configProvider, EnergyController energyController, Timer timer)
+        public EnemyHackAbility(IConfigProviderService configProvider, Timer timer)
         {
             _config = configProvider.GetAbilityConfig<EnemyHackAbilityConfig>();
             _aim = new BaseAim(_config.EnemyMask, _config.RaycastDistance);
             _timer = timer;
             _timer.IsPaused = true;
             _timer.ResetTime(_config.Cooldown);
-
-            energyController.AddEnergySystem(this);
         }
 
         IInputState IInputSelectable.OnSelectedLeftClick(IInputState currentState, Ray ray)
