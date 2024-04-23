@@ -22,7 +22,8 @@ namespace SustainTheStrain.Abilities.New
             _abilitiesList = new List<IAbility>(capacity: 4)
             {
                 instantiator.Instantiate<ZoneDamageAbility>(),
-                instantiator.Instantiate<ZoneSlownessAbility>()
+                instantiator.Instantiate<ZoneSlownessAbility>(),
+                instantiator.Instantiate<LandingAbility>()
             };
             _abilitiesDictionary = _abilitiesList.ToDictionary(ability => ability.GetType());
         }
