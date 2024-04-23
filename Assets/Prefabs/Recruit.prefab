@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 2132817689220846837}
   - component: {fileID: 9139420997716089492}
   - component: {fileID: 1925202636387091328}
-  - component: {fileID: -2486561499931800298}
   m_Layer: 3
   m_Name: Recruit
   m_TagString: Untagged
@@ -129,6 +128,7 @@ MonoBehaviour:
   <Damage>k__BackingField: 1
   <DamagePeriod>k__BackingField: 0.5
   Animator: {fileID: 1795451277360461822}
+  _afterDeath: {fileID: 0}
 --- !u!136 &2351310096217553143
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -223,18 +223,6 @@ MonoBehaviour:
   recacheOnEnable: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &-2486561499931800298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235370898999074474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa4362ae563bae84292e7cf77dc02748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &795949853038617089
 GameObject:
   m_ObjectHideFlags: 0
