@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Zenject;
 
 namespace SustainTheStrain.Abilities.New
 {
@@ -18,11 +17,12 @@ namespace SustainTheStrain.Abilities.New
 
         public IReadOnlyList<IAbility> Abilities => _abilitiesList;
 
-        public AbilityController(IInstantiator instantiator)
+        public AbilityController(Zenject.IInstantiator instantiator)
         {
             _abilitiesList = new List<IAbility>(capacity: 4)
             {
                 instantiator.Instantiate<ZoneDamageAbility>(),
+                instantiator.Instantiate<ZoneSlownessAbility>()
             };
             _abilitiesDictionary = _abilitiesList.ToDictionary(ability => ability.GetType());
         }

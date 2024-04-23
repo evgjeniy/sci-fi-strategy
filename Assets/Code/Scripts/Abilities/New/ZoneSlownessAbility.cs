@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Abilities;
 using SustainTheStrain.EnergySystem;
@@ -6,14 +7,13 @@ using SustainTheStrain.Input;
 using SustainTheStrain.Scriptable.EnergySettings;
 using SustainTheStrain.Units;
 using UnityEngine;
-using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Abilities.New
 {
-    public class ZoneDamageAbility : IAbility
+    public class ZoneSlownessAbility : IAbility
     {
         private readonly Area<Damageble> _damageArea = new(conditions: damageable => damageable.Team != Team.Player);
-        private readonly ZoneDamageAbilityConfig _config;
+        private readonly ZoneSlownessAbilityConfig _config;
         private readonly ZoneAim _aim;
         private readonly Timer _timer;
         private int _currentEnergy;
@@ -42,9 +42,9 @@ namespace SustainTheStrain.Abilities.New
 
         public event Action<IEnergySystem> Changed = _ => { };
 
-        public ZoneDamageAbility(IConfigProviderService configProvider, EnergyController energyController, Timer timer)
+        public ZoneSlownessAbility(IConfigProviderService configProvider, EnergyController energyController, Timer timer)
         {
-            _config = configProvider.GetAbilityConfig<ZoneDamageAbilityConfig>();
+            _config = configProvider.GetAbilityConfig<ZoneSlownessAbilityConfig>();
             _aim = new ZoneAim(_config.Radius, _config.AimPrefab, _config.GroundMask, _config.RaycastDistance);
             _timer = timer;
             _timer.IsPaused = true;
@@ -70,12 +70,26 @@ namespace SustainTheStrain.Abilities.New
             _damageArea.Update(hit.point, _config.Radius, _config.DamageMask);
 
             foreach (var damageable in _damageArea.Entities)
-                damageable.Damage(_config.Damage);
+            {
+                if (damageable.TryGetComponent<Unit>(out var unit) is false)
+                    continue;
 
-            SpawnExplosionParticles(hit.point);
+                var pathFollower = unit.CurrentPathFollower;
+                if (pathFollower == null) continue;
+
+                pathFollower.Speed *= _config.SpeedMultiplier;
+                RestoreSpeed(_config.Duration, pathFollower);
+            }
 
             _timer.ResetTime(_config.Cooldown);
             return new InputIdleState();
+        }
+
+        private async void RestoreSpeed(float slownessDuration, IPathFollower pathFollower)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(slownessDuration));
+            if (pathFollower != null) 
+                pathFollower.Speed /= _config.SpeedMultiplier;
         }
 
         IInputState IInputSelectable.OnSelectedUpdate(IInputState currentState, Ray ray)
@@ -85,13 +99,5 @@ namespace SustainTheStrain.Abilities.New
 
             return currentState;
         }
-
-        private void SpawnExplosionParticles(Vector3 position) => _config.ExplosionPrefab.IfNotNull(prefab =>
-        {
-            prefab.Spawn(position)
-                .With(explosion => explosion.transform.localScale = Vector3.one * 3.0f)
-                .With(explosion => explosion.transform.localPosition += new Vector3(-0.7f, 0, 0.2f))
-                .DestroyObject(delay: 3.0f);
-        });
     }
 }
