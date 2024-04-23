@@ -6,8 +6,8 @@ namespace SustainTheStrain.Configs.Abilities
     public class ZoneSlownessAbilityConfig : AbilityConfig
     {
         [field: SerializeField, Min(0.0f)] public float Radius { get; private set; } = 5.0f;
-        [field: SerializeField, Range(0.0f, 1.0f)] public float SpeedMultiplier { get; set; } = 0.5f;
-        [field: SerializeField] public float Duration { get; set; } = 1.5f;
+        [field: SerializeField, Min(0.0f)] public float Duration { get; set; } = 1.5f;
+        [field: SerializeField, Range(0.001f, 1.0f)] public float SpeedMultiplier { get; set; } = 0.5f;
 
         [field: Header("Prefabs")]
         [field: SerializeField] public ZoneVisualizer AimPrefab { get; private set; }
