@@ -219,9 +219,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4514545327090110762}
   - component: {fileID: 6673945333405373458}
-  - component: {fileID: 4159056179134376914}
   m_Layer: 5
-  m_Name: ShieldBar
+  m_Name: EnergyBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,17 +298,3 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4159056179134376914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5749860466863169626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d192be2cd70813f4d9329d5f735dae79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _slider: {fileID: 6673945333405373458}
-  _text: {fileID: 3760002834546683162}

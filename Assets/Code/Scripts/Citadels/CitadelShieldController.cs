@@ -9,9 +9,9 @@ namespace SustainTheStrain.Citadels
     {
         [SerializeField] private Shield _shield;
 
-        private void OnEnable() => OnCurrentEnergyChanged += UpdateCellsCount;
-        private void OnDisable() => OnCurrentEnergyChanged -= UpdateCellsCount;
-        private void UpdateCellsCount(int currentEnergy) => _shield.CellsCount = currentEnergy;
+        private void OnEnable() => Changed += UpdateCellsCount;
+        private void OnDisable() => Changed -= UpdateCellsCount;
+        private void UpdateCellsCount(IEnergySystem system) => _shield.CellsCount = system.CurrentEnergy;
 
         public override void SetEnergySettings(EnergySystemSettings settings)
         {
