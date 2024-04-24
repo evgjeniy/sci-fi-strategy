@@ -49,7 +49,7 @@ namespace SustainTheStrain.Citadels
 
         private void UpdateHP(float value)
         {
-            _text.text = string.Format("{0}/{1}", value, _damageble.MaxHP);
+            //_text.text = string.Format("{0}/{1}", value, _damageble.MaxHP);
             if (_healthSlider != null)
             {
                 _healthSlider.value = value / _damageble.MaxHP;
