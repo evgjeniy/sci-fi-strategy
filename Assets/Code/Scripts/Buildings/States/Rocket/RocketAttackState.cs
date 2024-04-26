@@ -29,7 +29,7 @@ namespace SustainTheStrain.Buildings
                 if (attackedAmount >= rocket.Config.MaxTargets) break;
                 if (!IsInSector(rocket, target.transform)) continue;
 
-                Object.Instantiate(rocket.Config.ProjectilePrefab, rocket.SpawnPointProvider.SpawnPoint)
+                Object.Instantiate(rocket.Config.ProjectilePrefab)
                     .With(x => x.transform.position = rocket.SpawnPointProvider.SpawnPoint.position)
                     .LaunchTo(target, onComplete: x => x.Damage(rocket.Config.Damage));
 

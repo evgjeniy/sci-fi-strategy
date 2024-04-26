@@ -31,6 +31,7 @@ namespace SustainTheStrain.Units
         public bool IsFlying { get; set; }
 
         public event Action<Damageble> OnDied;
+        public event Action<Damageble, bool> OnDiedResult;
         public event Action<float> OnCurrentHPChanged;
 
         public void InvokeOnDied()
@@ -50,7 +51,14 @@ namespace SustainTheStrain.Units
             CurrentHP -= damage;
         }
 
-        public virtual void Die()
+        public void Kill(bool suicide = false)
+        {
+            OnDiedResult?.Invoke(this, suicide);
+            
+            Die();
+        }
+        
+        protected virtual void Die()
         {
             OnDied?.Invoke(this);
 

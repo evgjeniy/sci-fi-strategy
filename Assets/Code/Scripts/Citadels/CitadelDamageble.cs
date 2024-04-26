@@ -24,7 +24,7 @@ namespace SustainTheStrain.Citadels
             }
         }
 
-        public override void Die()
+        protected override void Die()
         {
             InvokeOnDied();
         }

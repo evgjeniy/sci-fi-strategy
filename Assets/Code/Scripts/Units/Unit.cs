@@ -57,6 +57,7 @@ namespace SustainTheStrain.Units
                 Where((e) =>
                 {
                     if (e.Damageable.Team == Duelable.Damageable.Team) return false;
+                    if (e.Damageable.IsFlying) return false;
 
                     if (Duelable.Opponent == null) return true;
                     
