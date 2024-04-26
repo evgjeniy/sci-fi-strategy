@@ -18,18 +18,20 @@ namespace SustainTheStrain.Units
 
         public override bool IsDuelPossible(Duelable initiator)
         {
-            return !HasOpponent && initiator.Damageable.Team != Damageable.Team;
+            return initiator.Damageable.Team != Damageable.Team && !HasOpponent;
         }
 
         public override bool RequestDuel(Duelable dueler)
         {
             if (dueler.IsDuelPossible(this))
             {
+                if(_opponent != null) BreakDuel();
+                
                 dueler.SetOpponent(this);
                 SetOpponent(dueler);
                 return true;
             }
-            else return false;
+            return false;
         }
 
         public override void SetOpponent(Duelable dueler)
@@ -48,6 +50,8 @@ namespace SustainTheStrain.Units
 
         public override void RemoveOpponent(Duelable dueler)
         {
+            if (_opponent == null) return;
+            
             _opponent.Damageable.OnDied -= OpponentDead;
             _opponent = null;
         }

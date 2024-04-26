@@ -216,7 +216,7 @@ MonoBehaviour:
   Animator: {fileID: 0}
   _afterDeath: {fileID: 0}
   _aggroRadius: 5
-  _attackRadius: 5
+  _attackRadius: 2
   CoinsDrop: 0
 --- !u!195 &752340526721805729
 NavMeshAgent:
@@ -351,7 +351,37 @@ MonoBehaviour:
   _offsetModifier:
     blend: 1
     useClippedPercent: 0
-    keys: []
+    keys:
+    - _featherStart: 0
+      _featherEnd: 0
+      _centerStart: 0.10000000149011612
+      _centerEnd: 0.8999999761581421
+      interpolation:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 1
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      blend: 1
+      offset: {x: 0, y: 0}
   _colorModifier:
     blend: 1
     useClippedPercent: 0
@@ -389,9 +419,9 @@ MonoBehaviour:
   _dontLerpDirection: 0
   _physicsMode: 0
   _motion:
-    _hasOffset: 0
+    _hasOffset: 1
     _hasRotationOffset: 0
-    _offset: {x: 0, y: 0}
+    _offset: {x: 0, y: 2}
     _rotationOffset: {x: 0, y: 0, z: 0}
     _baseScale: {x: 1, y: 1, z: 1}
     _2dMode: 0
@@ -434,7 +464,7 @@ MonoBehaviour:
   _follow: 1
   _startPosition: 0
   preserveUniformSpeedWithOffset: 0
-  _followSpeed: 1
+  _followSpeed: 3
   _followDuration: 1
   _speedModifier:
     blend: 1

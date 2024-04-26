@@ -129,6 +129,9 @@ MonoBehaviour:
   <Damage>k__BackingField: 1
   <DamagePeriod>k__BackingField: 0.5
   Animator: {fileID: 1795451277360461822}
+  _afterDeath: {fileID: 0}
+  _aggroRadius: 5
+  _attackRadius: 2
 --- !u!136 &2351310096217553143
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -190,6 +193,7 @@ MonoBehaviour:
     type: 3}
   <MaxHP>k__BackingField: 6
   <Team>k__BackingField: 1
+  <IsFlying>k__BackingField: 0
 --- !u!114 &9139420997716089492
 MonoBehaviour:
   m_ObjectHideFlags: 0

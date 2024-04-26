@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
@@ -69,7 +70,10 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void PhysicsUpdate()
         {
-        
+            context.FindOpponent().IfNotNull(duelable =>
+            {
+                if(context.Duelable.Opponent != duelable) context.Duelable.RequestDuel(duelable);
+            });
         }
     }
 }

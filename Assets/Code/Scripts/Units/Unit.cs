@@ -16,26 +16,22 @@ namespace SustainTheStrain.Units
         [SerializeField] public Animator Animator;
         [SerializeField] public GameObject _afterDeath;
         public IPathFollower CurrentPathFollower { get; protected set; }   
-        protected StateMachine.StateMachine _stateMachine = new StateMachine.StateMachine();
+        protected StateMachine.StateMachine _stateMachine = new();
     
         public Duelable Duelable { get; protected set; }
-        //public AggroRadiusCheck AggroRadiusCheck { get; protected set;}
-        //public AttackRadiusCheck AttackRadiusCheck { get; protected set;}
 
         [SerializeField] private float _aggroRadius = 5f;
         [SerializeField] private float _attackRadius = 5f;
 
-        public Area<Duelable> AggroZone = new Area<Duelable>();
-        public Area<Duelable> AttackZone = new Area<Duelable>();
+        public Area<Duelable> AggroZone = new();
+        public Area<Duelable> AttackZone = new();
 
         public StateMachine.StateMachine StateMachine => _stateMachine;
         public NavPathFollower NavPathFollower { get; protected set; }
-
-        public bool IsAnnoyed { get; protected set; } 
-        public bool IsOpponentInAggroZone { get; protected set; }
+        
         public bool IsOpponentInAttackZone { get; protected set; }
 
-        private Timer _timer = new Timer(0.2f);
+        private Timer _timer = new(0.2f);
 
         private void Awake()
         {
@@ -45,14 +41,6 @@ namespace SustainTheStrain.Units
         protected virtual void Init()
         {
             Duelable = GetComponent<Duelable>();
-
-            //AggroRadiusCheck = GetComponentInChildren<AggroRadiusCheck>();
-            //AggroRadiusCheck.OnUnitEnteredAggroZone += UnitEnteredAggroZone;
-            //AggroRadiusCheck.OnUnitLeftAggroZone += UnitLeftAggroZone;
-
-            //AttackRadiusCheck = GetComponentInChildren<AttackRadiusCheck>();
-            //AttackRadiusCheck.OnUnitEnteredAttackZone += UnitEnteredAttackZone;
-            //AttackRadiusCheck.OnUnitLeftAttackZone += UnitLeftAttackZone;
 
             NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
 
@@ -67,13 +55,19 @@ namespace SustainTheStrain.Units
 
             var enemies = AggroZone.Entities.
                 Where((e) =>
-                    e.Damageable.Team != Duelable.Damageable.Team /*&&*/
-                   /* Duelable.Opponent != null ? e.Priority > Duelable.Opponent.Priority : true*/).
+                {
+                    if (e.Damageable.Team == Duelable.Damageable.Team) return false;
+
+                    if (Duelable.Opponent == null) return true;
+                    
+                    return e.Priority > Duelable.Opponent.Priority;
+                }).
                 OrderBy((e) => Vector3.Distance(e.transform.position, transform.position));
 
-            if (enemies.Count() > 0) 
+            if (enemies.Any()) 
                 return enemies.First();
-            else return null;
+            
+            return null;
         }
 
         public virtual bool CheckIfInAttackZone(Duelable duelable)
@@ -91,43 +85,6 @@ namespace SustainTheStrain.Units
             AggroZone.Update(transform.position, _aggroRadius, LayerMask.GetMask("Unit"));
             return duelable.IsIn(AggroZone);
         }
-
-        //private void UnitEnteredAggroZone(Duelable unit)
-        //{
-        //    IsAnnoyed = true;
-        //}
-
-        //private void UnitLeftAggroZone(Duelable unit)
-        //{
-        //    IsAnnoyed = AggroRadiusCheck.AggroZoneUnits.Count != 0;
-
-        //    IsOpponentInAggroZone = Duelable.Opponent == unit;
-        //}
-
-        //private void UnitEnteredAttackZone(Duelable unit)
-        //{
-        //    if (!Duelable.HasOpponent)
-        //    {
-        //        IsOpponentInAttackZone = false;
-        //        return;
-        //    }
-
-        //    if(IsOpponentInAttackZone) return;
-
-        //    IsOpponentInAttackZone = unit == Duelable.Opponent;
-        //}
-
-        //private void UnitLeftAttackZone(Duelable unit)
-        //{
-        //    if (!Duelable.HasOpponent) 
-        //    {
-        //        IsOpponentInAttackZone = false;
-        //        return;
-        //    }
-
-        //    if(IsOpponentInAttackZone)
-        //        IsOpponentInAttackZone = !(unit == Duelable.Opponent);
-        //}
 
         #endregion
 
@@ -168,11 +125,6 @@ namespace SustainTheStrain.Units
                 _stateMachine.CurrentState.PhysicsUpdate();
                 _timer.ResetTime(0.2f);
             }
-        }
-
-        private void FixedUpdate()
-        {
-            //_stateMachine.CurrentState.PhysicsUpdate();
         }
     }
 }

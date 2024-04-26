@@ -15,7 +15,13 @@ namespace SustainTheStrain.Units
         public float CurrentHP
         {
             get => _currentHp;
-            set { _currentHp = Mathf.Clamp(value, 0, MaxHP); OnCurrentHPChanged?.Invoke(value); }
+            set
+            {
+                _currentHp = Mathf.Clamp(value, 0, MaxHP); 
+                OnCurrentHPChanged?.Invoke(value);
+                
+                if (_currentHp <= 0.1f) Die();
+            }
         }
 
         [field: SerializeField]
@@ -42,12 +48,6 @@ namespace SustainTheStrain.Units
         public virtual void Damage(float damage)
         {
             CurrentHP -= damage;
-            OnCurrentHPChanged?.Invoke(CurrentHP);
-
-            if (CurrentHP <= 0)
-            {
-                Die();
-            }
         }
 
         public virtual void Die()
