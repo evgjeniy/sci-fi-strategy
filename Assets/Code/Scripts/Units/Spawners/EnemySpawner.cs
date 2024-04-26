@@ -40,7 +40,7 @@ namespace SustainTheStrain.Units.Spawners
             unit.GetComponent<SplineTracer>().spline = _spline;
             unit.GetComponent<SplineTracer>().RebuildImmediate();
             _spawnedEnemies.Add(unit);
-            unit.GetComponent<Damageble>().OnDied += (Damageble d) => { _resourceManager.Gold.Value += unit.CoinsDrop;
+            unit.GetComponent<Damageble>().OnDied += (Damageble d) => { _resourceManager.Gold.Value += (int)(unit.CoinsDrop * _resourceManager.CurrentMultiplayer);
                 _spawnedEnemies.Remove(unit);
             };
             var agent = unit.GetComponent<NavMeshAgent>();;

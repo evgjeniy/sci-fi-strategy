@@ -6,11 +6,13 @@ using Zenject;
 
 namespace SustainTheStrain.ResourceSystems
 {
-    public class GoldGenerator : ResourceGenerator, IEnergySystem
+    public class Mine : ResourceGenerator, IEnergySystem
     {
         [Inject] public EnergyController EnergyController { get; set; }
 
         [field: SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
+        [field: SerializeField] public float[] _goldMultiplayers { get; private set; }
+        
         public Sprite ButtonImage => EnergySettings.ButtonImage;
    
         private int _currentEnergy;
@@ -23,7 +25,7 @@ namespace SustainTheStrain.ResourceSystems
                 if (value < 0 || value > MaxEnergy) return;
                 if (!_canGenerate && value > 0)
                 {
-                    StartGeneration();
+                    //StartGeneration();
                 }
                 _currentEnergy = value;
                 _canGenerate = value != 0;
@@ -46,14 +48,14 @@ namespace SustainTheStrain.ResourceSystems
         public bool TrySpendEnergy(int count)
         {
             CurrentEnergy += count;
-            UpgradeAll();
+            //UpgradeAll();
             return true;
         }
 
         public bool TryRefillEnergy(int count)
         {
             CurrentEnergy -= count;
-            DowngradeAll();
+            //DowngradeAll();
             return true;
         }
 
