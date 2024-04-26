@@ -13,7 +13,7 @@ namespace SustainTheStrain.Abilities.New
             _raycastDistance = raycastDistance;
         }
 
-        public bool TryRaycast(Ray ray, out RaycastHit hit) => Physics.Raycast(ray, out hit, _raycastDistance, _raycastMask);
+        public virtual bool TryRaycast(Ray ray, out RaycastHit hit) => Physics.Raycast(ray, out hit, _raycastDistance, _raycastMask);
 
         public virtual void UpdatePosition(RaycastHit hit) {}
         public virtual void SpawnAimZone() {}
