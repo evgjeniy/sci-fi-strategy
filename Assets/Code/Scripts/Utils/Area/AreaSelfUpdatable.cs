@@ -7,7 +7,7 @@ namespace SustainTheStrain
     {
         private readonly IAreaDataProvider _areaDataProvider;
 
-        public AreaSelfUpdatable(IAreaDataProvider areaDataProvider, params Func<TComponent, bool>[] conditions) : base(conditions)
+        public AreaSelfUpdatable(IAreaDataProvider areaDataProvider, int bufferMaxSize = 32, params Func<TComponent, bool>[] conditions) : base(bufferMaxSize, conditions)
         {
             _areaDataProvider = areaDataProvider;
         }

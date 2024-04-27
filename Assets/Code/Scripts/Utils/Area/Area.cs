@@ -7,13 +7,18 @@ namespace SustainTheStrain
 {
     public class Area<TComponent>
     {
-        private readonly Dictionary<Collider, TComponent> _entities = new(16);
-        private readonly Collider[] _buffer = new Collider[32];
+        private readonly Dictionary<Collider, TComponent> _entities;
+        private readonly Collider[] _buffer;
         private readonly Func<TComponent, bool>[] _conditions;
         
         private int _bufferSize;
 
-        public Area(params Func<TComponent, bool>[] conditions) => _conditions = conditions;
+        public Area(int bufferMaxSize = 32, params Func<TComponent, bool>[] conditions)
+        {
+            _conditions = conditions;
+            _buffer = new Collider[bufferMaxSize];
+            _entities = new Dictionary<Collider, TComponent>(capacity: bufferMaxSize / 2);
+        }
 
         public IReadOnlyCollection<TComponent> Entities => _entities.Values;
 

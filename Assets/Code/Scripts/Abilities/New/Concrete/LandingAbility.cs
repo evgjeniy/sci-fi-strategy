@@ -63,10 +63,22 @@ namespace SustainTheStrain.Abilities.New
             if (!_timer.IsOver) return currentState;
             if (!_aim.TryRaycast(ray, out var hit)) return currentState;
 
-            _config.SquadPrefab.Spawn(hit.point)
+            if (AbilityController.ActiveSquads.Count == AbilityController.MaxSquads)
+            {
+                UnityEngine.Object.Destroy(AbilityController.ActiveSquads[0]);
+                AbilityController.ActiveSquads.RemoveAt(0);
+            }
+            
+            var squad = _config.SquadPrefab.Spawn(hit.point)
                 .With(group => group.GuardPost.Position = hit.point)
-                .With(group => group.OnGroupEmpty += () => group.DestroyObject())
+                .With(group => group.OnGroupEmpty += () =>
+                {
+                    AbilityController.ActiveSquads.Remove(group.gameObject);
+                    group.DestroyObject();
+                })
                 .With(group => SpawnParticles(hit.point + Vector3.up, group.GuardPost.Radius));
+            
+            AbilityController.ActiveSquads.Add(squad.gameObject);
 
             _timer.ResetTime(_config.Cooldown);
             return new InputIdleState();

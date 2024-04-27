@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SustainTheStrain.EnergySystem;
+using UnityEngine;
 
 namespace SustainTheStrain.Abilities.New
 {
@@ -16,6 +17,9 @@ namespace SustainTheStrain.Abilities.New
         private readonly Dictionary<Type, IAbility> _abilitiesDictionary;
         private readonly List<IAbility> _abilitiesList;
 
+        public static readonly List<GameObject> ActiveSquads = new();
+        public const int MaxSquads = 2;
+
         public IReadOnlyList<IAbility> Abilities => _abilitiesList;
 
         public AbilityController(Zenject.IInstantiator instantiator, EnergyController energyController)
@@ -26,6 +30,7 @@ namespace SustainTheStrain.Abilities.New
                 instantiator.Instantiate<ZoneSlownessAbility>(),
                 instantiator.Instantiate<ChainDamageAbility>(),
                 instantiator.Instantiate<LandingAbility>(),
+                instantiator.Instantiate<FreezeAbility>()
             };
             _abilitiesDictionary = _abilitiesList.ToDictionary(ability => ability.GetType());
 
