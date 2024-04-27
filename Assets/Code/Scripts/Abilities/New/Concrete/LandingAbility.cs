@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Abilities;
 using SustainTheStrain.EnergySystem;
@@ -11,9 +12,11 @@ namespace SustainTheStrain.Abilities.New
 {
     public class LandingAbility : IAbility
     {
+        private readonly List<GameObject> _activeSquads = new();
         private readonly LandingAbilityConfig _config;
         private readonly ZoneAim _aim;
         private readonly Timer _timer;
+
         private int _currentEnergy;
 
         public IObservable<ITimer> CooldownTimer => _timer;
@@ -63,22 +66,22 @@ namespace SustainTheStrain.Abilities.New
             if (!_timer.IsOver) return currentState;
             if (!_aim.TryRaycast(ray, out var hit)) return currentState;
 
-            if (AbilityController.ActiveSquads.Count == AbilityController.MaxSquads)
+            if (_activeSquads.Count == _config.MaxSquads)
             {
-                UnityEngine.Object.Destroy(AbilityController.ActiveSquads[0]);
-                AbilityController.ActiveSquads.RemoveAt(0);
+                UnityEngine.Object.Destroy(_activeSquads[0]);
+                _activeSquads.RemoveAt(0);
             }
             
             var squad = _config.SquadPrefab.Spawn(hit.point)
                 .With(group => group.GuardPost.Position = hit.point)
                 .With(group => group.OnGroupEmpty += () =>
                 {
-                    AbilityController.ActiveSquads.Remove(group.gameObject);
+                    _activeSquads.Remove(group.gameObject);
                     group.DestroyObject();
                 })
                 .With(group => SpawnParticles(hit.point + Vector3.up, group.GuardPost.Radius));
             
-            AbilityController.ActiveSquads.Add(squad.gameObject);
+            _activeSquads.Add(squad.gameObject);
 
             _timer.ResetTime(_config.Cooldown);
             return new InputIdleState();

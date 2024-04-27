@@ -17,9 +17,6 @@ namespace SustainTheStrain.Abilities.New
         private readonly Dictionary<Type, IAbility> _abilitiesDictionary;
         private readonly List<IAbility> _abilitiesList;
 
-        public static readonly List<GameObject> ActiveSquads = new();
-        public const int MaxSquads = 2;
-
         public IReadOnlyList<IAbility> Abilities => _abilitiesList;
 
         public AbilityController(Zenject.IInstantiator instantiator, EnergyController energyController)
