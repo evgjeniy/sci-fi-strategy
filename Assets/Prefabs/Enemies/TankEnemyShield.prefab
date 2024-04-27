@@ -222,7 +222,7 @@ PrefabInstance:
     - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: <Damage>k__BackingField
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
@@ -276,8 +276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellsCount: 1
-  _cellHp: 100
-  _recoverDelay: 8
+  _cellHp: 200
+  _recoverDelay: 7
   _recoverySpeed: 0.3
 --- !u!114 &8064178535992659472
 MonoBehaviour:
@@ -292,5 +292,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _afterDeath: {fileID: 0}
-  <MaxHP>k__BackingField: 500
+  <MaxHP>k__BackingField: 200
   <Team>k__BackingField: 0

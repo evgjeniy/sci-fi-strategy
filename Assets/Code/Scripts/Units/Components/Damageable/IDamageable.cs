@@ -7,6 +7,8 @@ namespace SustainTheStrain.Units.Components
     {
         public event Action<Damageble> OnDied;
 
+        public bool IsFlying { get; }
+
         public void Damage(float damage);
         public void Die();
     }
