@@ -1,21 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Abilities;
 using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Input;
 using SustainTheStrain.Scriptable.EnergySettings;
-using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 
-namespace SustainTheStrain.Abilities.New
+namespace SustainTheStrain.Abilities
 {
-    public class ZoneDamageAbility : IAbility
+    public class LandingAbility : IAbility
     {
-        private readonly Area<Damageble> _damageArea = new(conditions: damageable => damageable.Team != Team.Player);
-        private readonly ZoneDamageAbilityConfig _config;
+        private readonly List<GameObject> _activeSquads = new();
+        private readonly LandingAbilityConfig _config;
         private readonly ZoneAim _aim;
         private readonly Timer _timer;
+
         private int _currentEnergy;
 
         public IObservable<ITimer> CooldownTimer => _timer;
@@ -42,10 +43,10 @@ namespace SustainTheStrain.Abilities.New
 
         public event Action<IEnergySystem> Changed = _ => { };
 
-        public ZoneDamageAbility(IConfigProviderService configProvider, Timer timer)
+        public LandingAbility(IConfigProviderService configProvider, Timer timer)
         {
-            _config = configProvider.GetAbilityConfig<ZoneDamageAbilityConfig>();
-            _aim = new ZoneAim(_config.Radius, _config.AimPrefab, _config.GroundMask, _config.RaycastDistance);
+            _config = configProvider.GetAbilityConfig<LandingAbilityConfig>();
+            _aim = new ZoneAim(_config.SquadPrefab.GuardPost.Radius, _config.AimPrefab, _config.GroundMask, _config.RaycastDistance);
             _timer = timer;
             _timer.IsPaused = true;
             _timer.ResetTime(_config.Cooldown);
@@ -65,12 +66,22 @@ namespace SustainTheStrain.Abilities.New
             if (!_timer.IsOver) return currentState;
             if (!_aim.TryRaycast(ray, out var hit)) return currentState;
 
-            _damageArea.Update(hit.point, _config.Radius, _config.DamageMask);
-
-            foreach (var damageable in _damageArea.Entities)
-                damageable.Damage(_config.Damage);
-
-            SpawnExplosionParticles(hit.point);
+            if (_activeSquads.Count == _config.MaxSquads)
+            {
+                UnityEngine.Object.Destroy(_activeSquads[0]);
+                _activeSquads.RemoveAt(0);
+            }
+            
+            var squad = _config.SquadPrefab.Spawn(hit.point)
+                .With(group => group.GuardPost.Position = hit.point)
+                .With(group => group.OnGroupEmpty += () =>
+                {
+                    _activeSquads.Remove(group.gameObject);
+                    group.DestroyObject();
+                })
+                .With(group => SpawnParticles(hit.point + Vector3.up, group.GuardPost.Radius));
+            
+            _activeSquads.Add(squad.gameObject);
 
             _timer.ResetTime(_config.Cooldown);
             return new InputIdleState();
@@ -84,12 +95,22 @@ namespace SustainTheStrain.Abilities.New
             return currentState;
         }
 
-        private void SpawnExplosionParticles(Vector3 position) => _config.ExplosionPrefab.IfNotNull(prefab =>
+        private void SpawnParticles(Vector3 position, float radius)
         {
-            prefab.Spawn(position)
-                .With(explosion => explosion.transform.localScale = Vector3.one * 3.0f)
-                .With(explosion => explosion.transform.localPosition += new Vector3(-0.7f, 0, 0.2f))
-                .DestroyObject(delay: 3.0f);
-        });
+            _config.SpawnEffect.IfNotNull(effectPrefab => effectPrefab.Spawn(position)
+                .With(effect => effect.SetActive(false))
+                .With(effect =>
+                {
+                    var main = effect.GetComponent<ParticleSystem>().main;
+                    main.startSize = new ParticleSystem.MinMaxCurve
+                    {
+                        mode = ParticleSystemCurveMode.TwoConstants,
+                        constantMin = Mathf.Max(0, radius + 1f),
+                        constantMax = radius + 2f
+                    };
+                })
+                .With(effect => effect.SetActive(true))
+                .DestroyObject(delay: 2.0f));
+        }
     }
 }

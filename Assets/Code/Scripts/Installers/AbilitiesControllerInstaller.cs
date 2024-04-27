@@ -13,8 +13,8 @@ namespace SustainTheStrain.Installers
             /*Container.Bind<AbilitiesController>().FromInstance(_controller).AsSingle();*/
 
             Container
-                .Bind<Abilities.New.IAbilityController>()
-                .To<Abilities.New.AbilityController>()
+                .Bind<IAbilityController>()
+                .To<AbilityController>()
                 .AsSingle();
         }
     }

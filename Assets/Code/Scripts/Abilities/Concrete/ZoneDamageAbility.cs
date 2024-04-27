@@ -8,16 +8,15 @@ using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 
-namespace SustainTheStrain.Abilities.New
+namespace SustainTheStrain.Abilities
 {
-    public class EnemyHackAbility : IAbility
+    public class ZoneDamageAbility : IAbility
     {
-        private readonly EnemyHackAbilityConfig _config;
-        private readonly BaseAim _aim;
+        private readonly Area<Damageble> _damageArea = new(conditions: damageable => damageable.Team != Team.Player);
+        private readonly ZoneDamageAbilityConfig _config;
+        private readonly ZoneAim _aim;
         private readonly Timer _timer;
-        
         private int _currentEnergy;
-        private Damageble _currentDamageable;
 
         public IObservable<ITimer> CooldownTimer => _timer;
         public EnergySystemSettings EnergySettings => _config.EnergySettings;
@@ -43,22 +42,35 @@ namespace SustainTheStrain.Abilities.New
 
         public event Action<IEnergySystem> Changed = _ => { };
 
-        public EnemyHackAbility(IConfigProviderService configProvider, Timer timer)
+        public ZoneDamageAbility(IConfigProviderService configProvider, Timer timer)
         {
-            _config = configProvider.GetAbilityConfig<EnemyHackAbilityConfig>();
-            _aim = new BaseAim(_config.EnemyMask, _config.RaycastDistance);
+            _config = configProvider.GetAbilityConfig<ZoneDamageAbilityConfig>();
+            _aim = new ZoneAim(_config.Radius, _config.AimPrefab, _config.GroundMask, _config.RaycastDistance);
             _timer = timer;
             _timer.IsPaused = true;
             _timer.ResetTime(_config.Cooldown);
+            _timer.Changed += t => _aim.DisplayReload(t);
         }
+
+        void IInputSelectable.OnSelected()
+        {
+            _aim.SpawnAimZone();
+            _aim.DisplayReload(_timer);
+        }
+
+        void IInputSelectable.OnDeselected() => _aim.Destroy();
 
         IInputState IInputSelectable.OnSelectedLeftClick(IInputState currentState, Ray ray)
         {
             if (!_timer.IsOver) return currentState;
-            if (_currentDamageable == null) return currentState;
+            if (!_aim.TryRaycast(ray, out var hit)) return currentState;
 
-            _currentDamageable.Team = _config.NewTeam;
-            _currentDamageable.GetComponent<Outline>().IfNotNull(outline => outline.Disable());
+            _damageArea.Update(hit.point, _config.Radius, _config.DamageMask);
+
+            foreach (var damageable in _damageArea.Entities)
+                damageable.Damage(_config.Damage);
+
+            SpawnExplosionParticles(hit.point);
 
             _timer.ResetTime(_config.Cooldown);
             return new InputIdleState();
@@ -67,23 +79,17 @@ namespace SustainTheStrain.Abilities.New
         IInputState IInputSelectable.OnSelectedUpdate(IInputState currentState, Ray ray)
         {
             if (_aim.TryRaycast(ray, out var hit))
-            {
-                if (hit.collider.TryGetComponent<Damageble>(out var damageable) && damageable.Team != _config.NewTeam)
-                {
-                    if (_currentDamageable == null)
-                    {
-                        _currentDamageable = damageable;
-                        _currentDamageable.GetComponent<Outline>().IfNotNull(outline => outline.Enable());
-                    }
-                }
-            }
-            else if (_currentDamageable != null)
-            {
-                _currentDamageable.GetComponent<Outline>().IfNotNull(outline => outline.Disable());
-                _currentDamageable = null;
-            }
+                _aim.UpdatePosition(hit);
 
             return currentState;
         }
+
+        private void SpawnExplosionParticles(Vector3 position) => _config.ExplosionPrefab.IfNotNull(prefab =>
+        {
+            prefab.Spawn(position)
+                .With(explosion => explosion.transform.localScale = Vector3.one * 3.0f)
+                .With(explosion => explosion.transform.localPosition += new Vector3(-0.7f, 0, 0.2f))
+                .DestroyObject(delay: 3.0f);
+        });
     }
 }

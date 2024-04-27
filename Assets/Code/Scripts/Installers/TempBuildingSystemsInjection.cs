@@ -1,4 +1,4 @@
-﻿using SustainTheStrain.Abilities.New;
+﻿using SustainTheStrain.Abilities;
 using SustainTheStrain.Buildings;
 using UnityEngine;
 using Zenject;

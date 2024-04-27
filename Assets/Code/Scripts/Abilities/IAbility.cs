@@ -1,7 +1,7 @@
 ﻿using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Input;
 
-namespace SustainTheStrain.Abilities.New
+namespace SustainTheStrain.Abilities
 {
     public interface IAbility : IInputSelectable, IEnergySystem
     {

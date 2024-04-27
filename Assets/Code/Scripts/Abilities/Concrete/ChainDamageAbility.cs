@@ -9,7 +9,7 @@ using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 
-namespace SustainTheStrain.Abilities.New
+namespace SustainTheStrain.Abilities
 {
     // TODO : Create 'private List<Damageable> GetTargets(RaycashHit hit)' method
     // TODO : Use this in the 'OnSelectedUpdate' to enable/disable Outline 

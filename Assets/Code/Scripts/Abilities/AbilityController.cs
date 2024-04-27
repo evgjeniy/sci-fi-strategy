@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using SustainTheStrain.EnergySystem;
-using UnityEngine;
 
-namespace SustainTheStrain.Abilities.New
+namespace SustainTheStrain.Abilities
 {
     public interface IAbilityController
     {

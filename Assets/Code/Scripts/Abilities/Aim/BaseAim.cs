@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SustainTheStrain.Abilities.New
+namespace SustainTheStrain.Abilities
 {
     public class BaseAim
     {

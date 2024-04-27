@@ -18,7 +18,7 @@ namespace SustainTheStrain
             _inputSystem = inputSystem;
         }
         
-        public void MakeSubscriptions(EnergySystemUI ui, Abilities.New.IAbility ability, Slider slider)
+        public void MakeSubscriptions(EnergySystemUI ui, IAbility ability, Slider slider)
         {
             ui.ControllButton.OnLeftMouseClick += () =>
             {
