@@ -29,10 +29,10 @@ namespace SustainTheStrain.Units
         public StateMachine.StateMachine StateMachine => _stateMachine;
         public NavPathFollower NavPathFollower { get; protected set; }
         
-        public bool IsOpponentInAttackZone { get; protected set; }
-
         private Timer _timer = new(0.2f);
-
+        
+        public bool IsFreezed { get; private set; }
+        
         private void Awake()
         {
             Init();
@@ -41,7 +41,7 @@ namespace SustainTheStrain.Units
         protected virtual void Init()
         {
             Duelable = GetComponent<Duelable>();
-
+            
             NavPathFollower = new NavPathFollower(GetComponent<NavMeshAgent>());
 
             SwitchPathFollower(NavPathFollower);
@@ -107,13 +107,13 @@ namespace SustainTheStrain.Units
         public void Freeze()
         {
             CurrentPathFollower.Speed = 0;
-            Debug.Log("FREEZED");
+            IsFreezed = true;
         }
 
         public void Unfreeze(float oldSpeed)
         {
             CurrentPathFollower.Speed = oldSpeed;
-            Debug.Log("UNFREEZ");
+            IsFreezed = false;
         }
 
         private void Update()

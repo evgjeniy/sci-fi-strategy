@@ -105,7 +105,11 @@ namespace SustainTheStrain.Level
             {
                 for (int i = 0; i < subwave.enemyCount; i++)
                 {
-                    spawner.Spawn(subwave.enemyType);
+                    foreach (var groupItem in subwave.enemyGroup)
+                    {
+                        var enemy = spawner.Spawn(groupItem.enemyType);
+                        enemy.RoadOffset = groupItem.xOffset;
+                    }
                     yield return new WaitForSeconds(subwave.spawnPeriod);
                 }
                 yield return new WaitForSeconds(subwave.delay);

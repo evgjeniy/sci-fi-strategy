@@ -61,6 +61,8 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
                 return;
             }
 
+            if (context.IsFreezed) return;
+            
             if(_attackTime > context.DamagePeriod)
             {
                 _attackTime = 0;

@@ -18,7 +18,7 @@ namespace SustainTheStrain.Units
 
         public override bool IsDuelPossible(Duelable initiator)
         {
-            return initiator.Damageable.Team != Damageable.Team && !HasOpponent;
+            return initiator.Damageable.Team != Damageable.Team && !HasOpponent && !initiator.Damageable.IsFlying;
         }
 
         public override bool RequestDuel(Duelable dueler)

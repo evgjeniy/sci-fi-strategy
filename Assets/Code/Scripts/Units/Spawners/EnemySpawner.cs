@@ -32,7 +32,6 @@ namespace SustainTheStrain.Units.Spawners
 
             if (unit == null) return null;
 
-
             unit.GetComponent<NavMeshAgent>().Warp(SpawnPosition);
             unit.GetComponent<SplineTracer>().spline = _spline;
             unit.GetComponent<SplineTracer>().RebuildImmediate();
