@@ -31,4 +31,6 @@ MonoBehaviour:
   - 0.7
   - 1
   - 1.2
+  <PassiveSkill>k__BackingField: {fileID: 11400000, guid: c3b45ef9ccf74b74a9f5495ca7686017,
+    type: 2}
   <NextLevelConfig>k__BackingField: {fileID: 0}

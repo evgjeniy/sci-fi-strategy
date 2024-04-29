@@ -4,21 +4,21 @@ using UnityEngine;
 
 namespace SustainTheStrain.Buildings
 {
-    public class ShieldDeactivatorEffect : MonoBehaviour
+    public class StunEffect : MonoBehaviour
     {
         private Coroutine _routine;
-        private Shield _shield;
-        private int _shieldCells;
+        private Unit _unit;
+        private float _oldSpeed;
 
         public void Initialize(float duration)
         {
-            if (TryGetComponent(out _shield) is false)
+            if (TryGetComponent(out _unit) is false)
             {
                 Destroy(this);
             }
             else
             {
-                if (_routine == null) _shieldCells = _shield.CellsCount;
+                if (_routine == null) _oldSpeed = _unit.CurrentPathFollower.Speed;
                 else StopCoroutine(_routine);
 
                 _routine = StartCoroutine(DeactivateShield(duration));
@@ -27,12 +27,12 @@ namespace SustainTheStrain.Buildings
 
         private IEnumerator DeactivateShield(float duration)
         {
-            _shield.CellsCount = 0;
+            _unit.Freeze();
             yield return new WaitForSeconds(duration);
 
             Destroy(this);
         }
 
-        private void OnDestroy() => _shield.CellsCount = _shieldCells;
+        private void OnDestroy() => _unit.Unfreeze(_oldSpeed);
     }
 }

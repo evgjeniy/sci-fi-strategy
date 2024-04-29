@@ -1,5 +1,4 @@
-﻿using SustainTheStrain.Configs.Buildings;
-using SustainTheStrain.Units;
+﻿using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 
@@ -25,7 +24,7 @@ namespace SustainTheStrain.Buildings
             {
                 Object.Instantiate(artillery.Config.ProjectilePrefab, artillery.SpawnPointProvider.SpawnPoint)
                     .With(x => x.transform.position = artillery.SpawnPointProvider.SpawnPoint.position)
-                    .LaunchTo(_target, onComplete: damageable => Explosion(artillery.Config, damageable));
+                    .LaunchTo(_target, onComplete: damageable => Explosion(artillery, damageable));
                 
                 artillery.Timer.ResetTime(artillery.Config.Cooldown);
             }
@@ -33,12 +32,20 @@ namespace SustainTheStrain.Buildings
             return this;
         }
 
-        private void Explosion(ArtilleryBuildingConfig artilleryConfig, Damageble target)
+        private void Explosion(Artillery artillery, Damageble target)
         {
-            _explodeArea.Update(target.transform.position, artilleryConfig.ExplosionRadius, artilleryConfig.Mask);
+            _explodeArea.Update(target.transform.position, artillery.Config.ExplosionRadius, artillery.Config.Mask);
 
-            foreach (var damageable in _explodeArea.Entities) 
-                damageable.Damage(artilleryConfig.Damage);
+            foreach (var damageable in _explodeArea.Entities)
+            {
+                damageable.Damage(artillery.Config.Damage);
+
+                if (artillery.Config.IsMaxEnergy is false) continue;
+                if (artillery.Config.HasPassiveSkill is false) continue;
+                if (artillery.AttackCounter % artillery.Config.PassiveSkill.AttackFrequency != 0) continue;
+
+                artillery.Config.PassiveSkill.EnableSkill(_target.gameObject);
+            }
         }
     }
 }

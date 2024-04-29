@@ -1,4 +1,3 @@
-using System;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.Units;
@@ -18,6 +17,7 @@ namespace SustainTheStrain.Buildings
 
         public Area<Damageble> Area { get; } = new(conditions: damageable => damageable.Team != Team.Player);
         public Timer Timer { get; private set; }
+        public int AttackCounter { get; set; }
         public ISpawnPointProvider SpawnPointProvider { get; set; }
 
         public ArtilleryBuildingConfig Config => _config.Value;
