@@ -20,25 +20,27 @@ namespace SustainTheStrain.ResourceSystems
         public List<IEnergySystem> Generators => _generators;
         private List<IEnergySystem> _generators = new List<IEnergySystem>();
         
-        private GoldGenerator _goldGenerator;
+        public float CurrentMultiplayer => _mine._goldMultiplayers[_mine.CurrentEnergy];
+        
+        private Mine _mine;
 
         [Inject]
-        public void AddGenerators([Inject(Optional = true)] GoldGenerator goldGenerator)
+        public void AddGenerators([Inject(Optional = true)] Mine mine)
         {
-            _goldGenerator = goldGenerator;
-            _generators.Add(_goldGenerator);
+            _mine = mine;
+            _generators.Add(_mine);
 
             Gold = new Observable<int>(_currentGold);
         }
 
         private void OnEnable()
         {
-            _goldGenerator.OnResourceGenerated += AddGold;
+            //_mine.OnResourceGenerated += AddGold;
         }
 
         private void OnDisable()
         {
-            _goldGenerator.OnResourceGenerated -= AddGold;
+            //_mine.OnResourceGenerated -= AddGold;
         }
 
         public void AddGold(int count)

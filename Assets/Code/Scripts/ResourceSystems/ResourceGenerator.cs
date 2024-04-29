@@ -57,7 +57,7 @@ namespace SustainTheStrain.ResourceSystems
 
         public void StartGeneration()
         {
-            _canGenerate = true;
+            //_canGenerate = true;
         }
 
         private void Update()

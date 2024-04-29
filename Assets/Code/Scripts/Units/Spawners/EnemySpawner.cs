@@ -38,8 +38,9 @@ namespace SustainTheStrain.Units.Spawners
             _spawnedEnemies.Add(unit);
             unit.GetComponent<Damageble>().OnDiedResult += (_, isSuicide) => 
             { 
-                if(!isSuicide) _resourceManager.Gold.Value += unit.CoinsDrop;
+                if(!isSuicide) _resourceManager.Gold.Value += (int)(unit.CoinsDrop * _resourceManager.CurrentMultiplayer);
 
+           
                 _spawnedEnemies.Remove(unit);
             };
 
