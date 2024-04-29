@@ -221,6 +221,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
+      propertyPath: _attackRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
+        type: 3}
       propertyPath: <Damage>k__BackingField
       value: 20
       objectReference: {fileID: 0}
@@ -294,3 +299,4 @@ MonoBehaviour:
   _afterDeath: {fileID: 0}
   <MaxHP>k__BackingField: 200
   <Team>k__BackingField: 0
+  <IsFlying>k__BackingField: 0

@@ -1,3 +1,4 @@
+using SustainTheStrain.Units.Components;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace SustainTheStrain.Units
 
         public event Action<Duelable> OnUnitEnteredAttackZone;
         public event Action<Duelable> OnUnitLeftAttackZone;
+
+        private Area<IDamageable> _area;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -44,7 +47,6 @@ namespace SustainTheStrain.Units
                 {
                     OnUnitLeftAttackZone?.Invoke(_attackZoneUnits[i]);
                     _attackZoneUnits[i].Damageable.OnDied -= UnitDied;
-                    //Debug.Log(string.Format("[AttackRadius] On {0} left {1} attack radius", _attackZoneUnits[i].name, name));
                     _attackZoneUnits.RemoveAt(i);
                     break;
                 }

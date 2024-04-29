@@ -426,8 +426,13 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 3357532105762482792, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
+      propertyPath: _attackRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3357532105762482792, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
       propertyPath: <Damage>k__BackingField
-      value: 3
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3357532105762482792, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
@@ -507,7 +512,7 @@ PrefabInstance:
     - target: {fileID: 9139420997716089492, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
       propertyPath: <Priority>k__BackingField
-      value: -1
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7358440343129375846, guid: d26196ebbe3508543843b41c3962409d, type: 3}

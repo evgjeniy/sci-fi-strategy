@@ -15,7 +15,13 @@ namespace SustainTheStrain.Units
         public float CurrentHP
         {
             get => _currentHp;
-            set { _currentHp = Mathf.Clamp(value, 0, MaxHP); OnCurrentHPChanged?.Invoke(value); }
+            set
+            {
+                _currentHp = Mathf.Clamp(value, 0, MaxHP); 
+                OnCurrentHPChanged?.Invoke(value);
+                
+                if (_currentHp <= 0.1f) Die();
+            }
         }
 
         [field: SerializeField]
@@ -25,6 +31,7 @@ namespace SustainTheStrain.Units
         public bool IsFlying { get; set; }
 
         public event Action<Damageble> OnDied;
+        public event Action<Damageble, bool> OnDiedResult;
         public event Action<float> OnCurrentHPChanged;
 
         public void InvokeOnDied()
@@ -42,15 +49,16 @@ namespace SustainTheStrain.Units
         public virtual void Damage(float damage)
         {
             CurrentHP -= damage;
-            OnCurrentHPChanged?.Invoke(CurrentHP);
-
-            if (CurrentHP <= 0)
-            {
-                Die();
-            }
         }
 
-        public virtual void Die()
+        public void Kill(bool suicide = false)
+        {
+            OnDiedResult?.Invoke(this, suicide);
+            
+            Die();
+        }
+        
+        protected virtual void Die()
         {
             OnDied?.Invoke(this);
 

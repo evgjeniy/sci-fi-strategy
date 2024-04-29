@@ -23,7 +23,7 @@ namespace SustainTheStrain.Buildings
 
             if (artillery.Timer.IsTimeOver)
             {
-                Object.Instantiate(artillery.Config.ProjectilePrefab, artillery.SpawnPointProvider.SpawnPoint)
+                Object.Instantiate(artillery.Config.ProjectilePrefab)
                     .With(x => x.transform.position = artillery.SpawnPointProvider.SpawnPoint.position)
                     .LaunchTo(_target, onComplete: damageable => Explosion(artillery.Config, damageable));
                 
@@ -37,8 +37,9 @@ namespace SustainTheStrain.Buildings
         {
             _explodeArea.Update(target.transform.position, artilleryConfig.ExplosionRadius, artilleryConfig.Mask);
 
-            foreach (var damageable in _explodeArea.Entities) 
-                damageable.Damage(artilleryConfig.Damage);
+            foreach (var damageable in _explodeArea.Entities)
+                if(!damageable.IsFlying)
+                    damageable.Damage(artilleryConfig.Damage);
         }
     }
 }

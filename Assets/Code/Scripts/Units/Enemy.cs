@@ -14,13 +14,27 @@ namespace SustainTheStrain.Units
 
         #endregion
 
+        private float _roadOffset;
+        
+        public float RoadOffset
+        {
+            get => _roadOffset;
+            set
+            {
+                _roadOffset = value;
+                if (TryGetComponent<SplineFollower>(out var splineFollower))
+                {
+                    splineFollower.motion.offset = new(value, splineFollower.motion.offset.y);
+                }
+            }
+        }
+        
         public int CoinsDrop;
         
         public SplinePathFollower SplinePathFollower { get; protected set; }
 
         private void Start()
         {
-            //Init();
             InitLogic();
         }
 
@@ -30,7 +44,8 @@ namespace SustainTheStrain.Units
 
             if (TryGetComponent<SplineFollower>(out var splineFollower))
             {
-                SplinePathFollower = new SplinePathFollower(splineFollower); ;
+                SplinePathFollower = new SplinePathFollower(splineFollower);
+                splineFollower.motion.offset = new(RoadOffset, splineFollower.motion.offset.y);
             }
 
         }

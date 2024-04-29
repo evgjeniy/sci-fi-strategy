@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 {
@@ -54,12 +55,14 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
                 return;
             }
 
-            if (!context.IsOpponentInAttackZone)
+            if (!context.CheckIfInAttackZone(context.Duelable.Opponent))
             {
                 context.StateMachine.ChangeState(_aggroState);
                 return;
             }
 
+            if (context.IsFreezed) return;
+            
             if(_attackTime > context.DamagePeriod)
             {
                 _attackTime = 0;
@@ -69,7 +72,10 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void PhysicsUpdate()
         {
-        
+            context.FindOpponent().IfNotNull(duelable =>
+            {
+                if(context.Duelable.Opponent != duelable) context.Duelable.RequestDuel(duelable);
+            });
         }
     }
 }

@@ -30,21 +30,19 @@ namespace SustainTheStrain.Units.Spawners
         {
             var unit = _enemyFactoryManager.CreateEnemy(type);
 
-            if (unit == null)
-            {
-                //Debug.LogError($"[EnemySpawner {name}] Enemy spaw failed");
-                return null;
-            }
+            if (unit == null) return null;
 
             unit.GetComponent<NavMeshAgent>().Warp(SpawnPosition);
             unit.GetComponent<SplineTracer>().spline = _spline;
             unit.GetComponent<SplineTracer>().RebuildImmediate();
             _spawnedEnemies.Add(unit);
-            unit.GetComponent<Damageble>().OnDied += (Damageble d) => { _resourceManager.Gold.Value += unit.CoinsDrop;
+            unit.GetComponent<Damageble>().OnDiedResult += (_, isSuicide) => 
+            { 
+                if(!isSuicide) _resourceManager.Gold.Value += unit.CoinsDrop;
+
                 _spawnedEnemies.Remove(unit);
             };
-            var agent = unit.GetComponent<NavMeshAgent>();;
-            //Debug.Log($"[EnemySpawner {name}] Spawned unit");
+
             return unit;
         }
 

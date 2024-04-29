@@ -36,14 +36,14 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
                 return;
             }
 
-            if (!context.IsOpponentInAttackZone)
+            if (!context.CheckIfInAttackZone(context.Duelable.Opponent))
             {
                 context.StateMachine.ChangeState(_aggroState);
                 return;
             }
 
             context.Duelable.Opponent.Damageable.Damage(context.Damage);
-            context.Duelable.Damageable.Damage(1000);
+            context.Duelable.Damageable.Kill(true);
         }
 
         public override void PhysicsUpdate()

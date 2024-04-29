@@ -444,6 +444,11 @@ PrefabInstance:
       propertyPath: _coinsDrop
       value: 27
       objectReference: {fileID: 0}
+    - target: {fileID: 3820965047363471534, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _attackRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4119611173220569212, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
       propertyPath: m_LocalPosition.y

@@ -143,6 +143,8 @@ MonoBehaviour:
   Animator: {fileID: 0}
   _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
     type: 3}
+  _aggroRadius: 5
+  _attackRadius: 1
   CoinsDrop: 10
 --- !u!1001 &6214077512151166896
 PrefabInstance:
