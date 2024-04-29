@@ -18,6 +18,7 @@ namespace SustainTheStrain.Buildings
 
         public Area<Damageble> Area { get; } = new(conditions: damageable => damageable.Team != Team.Player);
         public Timer Timer { get; private set; }
+        public int AttackCounter { get; set; }
         public ISpawnPointProvider SpawnPointProvider { get; set; }
 
         public RocketBuildingConfig Config => _config.Value;
@@ -28,6 +29,7 @@ namespace SustainTheStrain.Buildings
             get => _orientation.Value;
             set => _orientation.Value = value;
         }
+
 
         [Inject]
         private void Construct(Timer timer, IResourceManager resourceManager,

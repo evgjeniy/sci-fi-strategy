@@ -31,13 +31,25 @@ namespace SustainTheStrain.Buildings
 
                 Object.Instantiate(rocket.Config.ProjectilePrefab, rocket.SpawnPointProvider.SpawnPoint)
                     .With(x => x.transform.position = rocket.SpawnPointProvider.SpawnPoint.position)
-                    .LaunchTo(target, onComplete: x => x.Damage(rocket.Config.Damage));
+                    .LaunchTo(target, onComplete: damageable =>
+                    {
+                        damageable.Damage(rocket.Config.Damage);
+
+                        if (rocket.Config.HasPassiveSkill is false) return;
+                        if (rocket.AttackCounter % rocket.Config.PassiveSkill.AttackFrequency != 0) return;
+                        if (rocket.Config.IsMaxEnergy is false) return;
+                        
+                        rocket.Config.PassiveSkill.EnableSkill(damageable.gameObject);
+                    });
 
                 attackedAmount++;
             }
 
             if (attackedAmount != 0)
+            {
                 rocket.Timer.ResetTime(rocket.Config.Cooldown);
+                rocket.AttackCounter++;
+            }
 
             return this;
         }
