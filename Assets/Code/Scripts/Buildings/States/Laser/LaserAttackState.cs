@@ -23,6 +23,12 @@ namespace SustainTheStrain.Buildings
             if (!laser.Timer.IsOver) return this;
             
             _target.Damage(laser.Config.Damage);
+
+            if (laser.Config.HasPassiveSkill && laser.Config.IsMaxEnergy)
+                if (laser.AttackCounter % laser.Config.PassiveSkill.AttackFrequency == 0)
+                    laser.Config.PassiveSkill.EnableSkill(_target.gameObject);
+
+            laser.AttackCounter++;
             laser.Timer.ResetTime(laser.Config.Cooldown);
 
             EnableLineAttack(laser);

@@ -9,25 +9,19 @@ namespace SustainTheStrain.Buildings
         [field: SerializeField, Min(0.0f)] public float DamagePerSecond { get; private set; }
         [field: SerializeField, Min(0.0f)] public float FireDuration { get; private set; }
         [field: SerializeField, Min(0)] public int AttackFrequency { get; private set; }
-
-        private readonly Dictionary<GameObject, FireEffect> _effects = new(capacity: 16);
         
         public override void EnableSkill(GameObject gameObject)
         {
-            if (_effects.TryGetValue(gameObject, out var fireEffect) is false)
-            {
-                fireEffect = gameObject.AddComponent<FireEffect>();
-                _effects.Add(gameObject, fireEffect);
-            }
+            var effect = gameObject.GetComponent<FireEffect>();
+            if (effect == null) effect = gameObject.AddComponent<FireEffect>();
             
-            fireEffect.Initialize(DamagePerSecond, FireDuration);
-            
+            effect.Initialize(DamagePerSecond, FireDuration);
         }
 
         public override void DisableSkill(GameObject gameObject)
         {
-            if (_effects.Remove(gameObject, out var fireEffect)) 
-                Destroy(fireEffect);
+            if (gameObject.TryGetComponent<FireEffect>(out var effect)) 
+                Destroy(effect);
         }
     }
 }
