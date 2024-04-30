@@ -20,7 +20,7 @@ namespace SustainTheStrain.ResourceSystems
         public List<IEnergySystem> Generators => _generators;
         private List<IEnergySystem> _generators = new List<IEnergySystem>();
         
-        public float CurrentMultiplayer => _mine._goldMultiplayers[_mine.CurrentEnergy];
+        public float CurrentMultiplayer => _mine.GoldMultipliers[_mine.CurrentEnergy];
         
         private Mine _mine;
 

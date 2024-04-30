@@ -53,15 +53,14 @@ namespace SustainTheStrain.Units
 
         public void Kill(bool suicide = false)
         {
-            OnDiedResult?.Invoke(this, suicide);
-            
-            Die();
+            Die(true);
         }
         
-        protected virtual void Die()
+        protected virtual void Die(bool suicide = false)
         {
             OnDied?.Invoke(this);
-
+            OnDiedResult?.Invoke(this, suicide);
+            
             _afterDeath.IfNotNull(x => Instantiate(x, transform.position, Quaternion.identity));
             Destroy(gameObject);
         }

@@ -44,7 +44,7 @@ namespace SustainTheStrain.Units
         public List<ShieldCell> ShieldCells => _shieldCells;
 
         private float _lastDamageTime = 0;
-        private bool _calm = true;
+        private bool _calm = false;
 
         private Coroutine _recoveryCoroutine;
 

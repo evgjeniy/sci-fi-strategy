@@ -11,7 +11,7 @@ namespace SustainTheStrain.ResourceSystems
         [Inject] public EnergyController EnergyController { get; set; }
 
         [field: SerializeField] public EnergySystemSettings EnergySettings { get; private set; }
-        [field: SerializeField] public float[] _goldMultiplayers { get; private set; }
+        [field: SerializeField] public float[] GoldMultipliers { get; private set; }
         
         public Sprite ButtonImage => EnergySettings.ButtonImage;
    
