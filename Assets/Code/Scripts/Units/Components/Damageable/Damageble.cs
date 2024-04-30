@@ -51,6 +51,11 @@ namespace SustainTheStrain.Units
             CurrentHP -= damage;
         }
 
+        public void DeepDamage(float damage)
+        {
+            Damage(damage);
+        }
+        
         public void Kill(bool suicide = false)
         {
             Die(true);

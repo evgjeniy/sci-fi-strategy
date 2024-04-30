@@ -22,11 +22,11 @@ namespace SustainTheStrain.Units
                 }
             }
             CurrentHP -= damage;
-
-            if (CurrentHP <= 0)
-            {
-                Die();
-            }
+        }
+        
+        public void DeepDamage(float damage)
+        {
+            CurrentHP -= damage;
         }
     }
 }

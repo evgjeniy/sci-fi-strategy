@@ -10,6 +10,7 @@ namespace SustainTheStrain.Units.Components
         public bool IsFlying { get; }
 
         public void Damage(float damage);
+        public void DeepDamage(float damage);
         public void Kill(bool suicide = false);
     }
 }

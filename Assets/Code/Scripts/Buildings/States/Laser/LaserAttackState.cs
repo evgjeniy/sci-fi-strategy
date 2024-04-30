@@ -22,7 +22,7 @@ namespace SustainTheStrain.Buildings
             laser.Orientation = _target.transform.position;
             if (!laser.Timer.IsTimeOver) return this;
             
-            _target.Damage(laser.Config.Damage);
+            _target.DeepDamage(laser.Config.Damage);
             laser.Timer.ResetTime(laser.Config.Cooldown);
 
             EnableLineAttack(laser);

@@ -22,9 +22,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
             Debug.Log(string.Format("[StateMachine {0}] RecruitIdleState entered", context.gameObject.name));
 
             context.SwitchPathFollower(context.NavPathFollower);
-
-            if (context.transform.position != context.GuardPosition)
-                context.NavPathFollower.MoveTo(context.GuardPosition);
+            context.CurrentPathFollower.Stop();
             
             context.Animator.SetBool("Moving", false);
         }

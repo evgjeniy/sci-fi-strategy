@@ -10,13 +10,14 @@ namespace SustainTheStrain.Units
         #region State Machine Variables
 
         protected RecruitIdleState _recruitIdleState;
+        protected RecruitMoveState _recruitMoveState;
         protected UnitAttackState _attackState;
         protected UnitAgroState _aggroState;
 
         #endregion
 
         private Vector3 _guardPosition;
-
+        public bool IsMoving { get; set; }
         public Vector3 GuardPosition => _guardPosition;
 
         private void Start()
@@ -33,9 +34,11 @@ namespace SustainTheStrain.Units
             _recruitIdleState = new RecruitIdleState(this, _stateMachine);
             _attackState = new UnitAttackState(this, _stateMachine);
             _aggroState = new UnitAgroState(this, _stateMachine);
+            _recruitMoveState = new RecruitMoveState(this, _stateMachine);
             _recruitIdleState.Init(_aggroState);
             _aggroState.Init(_attackState, _recruitIdleState);
             _attackState.Init(_aggroState, _recruitIdleState);
+            _recruitMoveState.Init(_aggroState);
 
             _stateMachine.Initialize(_recruitIdleState);
         }
@@ -43,7 +46,7 @@ namespace SustainTheStrain.Units
         public void UpdatePosition(Vector3 position)
         {
             _guardPosition = position;
-            _stateMachine.ChangeState(_recruitIdleState);
+            _stateMachine.ChangeState(_recruitMoveState);
         }
 
         public void UpdateStats(BarrackData.Stats stats)

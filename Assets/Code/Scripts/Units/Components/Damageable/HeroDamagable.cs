@@ -19,11 +19,6 @@ namespace SustainTheStrain.Units
             _calm = false;
             
             CurrentHP -= damage;
-
-            if (CurrentHP <= 0)
-            {
-                Die();
-            }
         }
         
         private void Update()
