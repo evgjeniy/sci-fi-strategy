@@ -11,6 +11,7 @@ namespace SustainTheStrain.Installers
         private void Construct(RocketSystem system,
             LaserSystem laserSystem,
             ArtillerySystem artillerySystem,
+            BarrackSystem barrackSystem,
             IAbilityController abilityController) {}
     }
 }

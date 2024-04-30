@@ -10,7 +10,11 @@ namespace SustainTheStrain.Units
         [SerializeField] private List<Recruit> _predefinedRecruits;
         [SerializeField] private int _squadMaxSize = 3;
 
-        public int squadMaxSize => _squadMaxSize;
+        public int squadMaxSize
+        {
+            get => _squadMaxSize;
+            set => _squadMaxSize = value;
+        }
 
         [field: SerializeField] public GuardPost GuardPost { get; set; }
 

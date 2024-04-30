@@ -11,6 +11,7 @@ namespace SustainTheStrain.Installers
             Container.Bind<RocketSystem>().AsSingle();
             Container.Bind<LaserSystem>().AsSingle();
             Container.Bind<ArtillerySystem>().AsSingle();
+            Container.Bind<BarrackSystem>().AsSingle();
         }
     }
 }

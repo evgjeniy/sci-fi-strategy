@@ -40,8 +40,18 @@ namespace SustainTheStrain.Buildings
             Observable<SelectionType> selection)
         {
             _resourceManager = resourceManager;
-            _config = config;
             _selection = selection;
+
+            _config = config;
+            _config.Changed += barrackConfig =>
+            {
+                if (barrackConfig.HasPassiveSkill is false) return;
+                
+                if (barrackConfig.IsMaxEnergy)
+                    barrackConfig.PassiveSkill.EnableSkill(gameObject);
+                else 
+                    barrackConfig.PassiveSkill.DisableSkill(gameObject);
+            };
 
             SpawnPoint = spawnPoint.Value + Vector3.up * 2f;
             
