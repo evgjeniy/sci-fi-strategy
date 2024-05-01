@@ -18,8 +18,8 @@ namespace SustainTheStrain.Configs.Buildings
         [field: Header("Prefabs")]
         [field: SerializeField] public ZoneVisualizer RecruitSpawnAimPrefab { get; private set; }
 
-        [field: Space]
-        [field: SerializeField] public BarrackBuildingConfig NextLevelConfig { get; private set; }
+        [field: Header("Next Level")]
+        [field: SerializeField, Expandable] public BarrackBuildingConfig NextLevelConfig { get; private set; }
 
         public override int NextLevelPrice => NextLevelConfig == null ? int.MaxValue : NextLevelConfig.Price;
 

@@ -18,6 +18,7 @@ namespace SustainTheStrain.Buildings
         public Area<Damageble> Area { get; } = new(conditions: damageable => damageable.Team != Team.Player);
         public Timer Timer { get; private set; }
         public int AttackCounter { get; set; }
+        public ArtillerySystem EnergySystem { get; set; }
         public ISpawnPointProvider SpawnPointProvider { get; set; }
 
         public ArtilleryBuildingConfig Config => _config.Value;
@@ -31,10 +32,12 @@ namespace SustainTheStrain.Buildings
 
         [Inject]
         private void Construct(Timer timer, IResourceManager resourceManager,
+            ArtillerySystem artillerySystem,
             Observable<ArtilleryBuildingConfig> config,
             Observable<Vector3> orientation,
             Observable<SelectionType> selection)
         {
+            EnergySystem = artillerySystem;
             _resourceManager = resourceManager;
             _config = config;
             _selection = selection;

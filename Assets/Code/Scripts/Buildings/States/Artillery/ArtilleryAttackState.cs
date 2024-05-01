@@ -38,13 +38,13 @@ namespace SustainTheStrain.Buildings
 
             foreach (var damageable in _explodeArea.Entities)
             {
-                damageable.Damage(artillery.Config.Damage);
+                damageable.Damage(artillery.Config.Damage * artillery.EnergySystem.DamageMultiplier);
 
-                if (artillery.Config.IsMaxEnergy is false) continue;
-                if (artillery.Config.HasPassiveSkill is false) continue;
-                if (artillery.AttackCounter % artillery.Config.PassiveSkill.AttackFrequency != 0) continue;
-
-                artillery.Config.PassiveSkill.EnableSkill(_target.gameObject);
+                if (artillery.Config.NextLevelConfig != null) return;
+                if (artillery.AttackCounter % artillery.EnergySystem.Settings.PassiveSkill.AttackFrequency != 0) return;
+                if (artillery.EnergySystem.CurrentEnergy != artillery.EnergySystem.MaxEnergy) return;
+                        
+                artillery.EnergySystem.Settings.PassiveSkill.EnableSkill(damageable.gameObject);
             }
         }
     }

@@ -10,28 +10,28 @@ namespace SustainTheStrain.Buildings
 {
     public class ArtillerySystem : IEnergySystem
     {
-        private const string EnergySettingsPath = Const.ResourcePath.Buildings.Configs.Root + "/EnergySettings/Artillery";
-        private ArtilleryBuildingConfig _config;
+        private const string EnergySettingsPath = Const.ResourcePath.Buildings.Configs.Root + "/Energy/" + nameof(ArtilleryEnergySettings);
+        private int _currentEnergy;
 
-        public EnergySystemSettings EnergySettings { get; } = Resources.Load<EnergySystemSettings>(EnergySettingsPath);
-        public int MaxEnergy => EnergySettings.MaxEnergy;
+        public ArtilleryEnergySettings Settings { get; } = Resources.Load<ArtilleryEnergySettings>(EnergySettingsPath);
+        EnergySystemSettings IEnergySystem.EnergySettings => Settings;
+        public int MaxEnergy => Settings.MaxEnergy;
+
         public int CurrentEnergy
         {
-            get => _config.CurrentEnergy;
+            get => _currentEnergy;
             set
             {
-                _config.CurrentEnergy = value;
+                _currentEnergy = value;
                 Changed(this);
             }
         }
 
         public event Action<IEnergySystem> Changed = _ => {};
 
+        public float DamageMultiplier => Settings.GetDamageMultiplier(CurrentEnergy);
+
         [Inject]
-        private void Construct(IConfigProviderService configProvider, EnergyController energyController)
-        {
-            _config = configProvider.GetBuildingConfig<ArtilleryBuildingConfig>();
-            energyController.AddEnergySystem(this);
-        }
+        private void Construct(EnergyController energyController) => energyController.AddEnergySystem(this);
     }
 }

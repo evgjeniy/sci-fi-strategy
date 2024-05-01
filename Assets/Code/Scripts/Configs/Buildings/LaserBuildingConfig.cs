@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace SustainTheStrain.Configs.Buildings
@@ -12,8 +13,8 @@ namespace SustainTheStrain.Configs.Buildings
         [field: Header("Prefabs")]
         [field: SerializeField] public LineRenderer LineRenderer { get; private set; }
 
-        [field: Space]
-        [field: SerializeField] public LaserBuildingConfig NextLevelConfig { get; private set; }
+        [field: Header("Next Level")]
+        [field: SerializeField, Expandable] public LaserBuildingConfig NextLevelConfig { get; private set; }
         
         public override int NextLevelPrice => NextLevelConfig == null ? int.MaxValue : NextLevelConfig.Price;
     }

@@ -36,10 +36,10 @@ namespace SustainTheStrain.Buildings
                         damageable.Damage(rocket.Config.Damage * rocket.EnergySystem.DamageMultiplier);
 
                         if (rocket.Config.NextLevelConfig != null) return;
-                        if (rocket.AttackCounter % rocket.EnergySystem.EnergySettings.PassiveSkill.AttackFrequency != 0) return;
+                        if (rocket.AttackCounter % rocket.EnergySystem.Settings.PassiveSkill.AttackFrequency != 0) return;
                         if (rocket.EnergySystem.CurrentEnergy != rocket.EnergySystem.MaxEnergy) return;
                         
-                        rocket.EnergySystem.EnergySettings.PassiveSkill.EnableSkill(damageable.gameObject);
+                        rocket.EnergySystem.Settings.PassiveSkill.EnableSkill(damageable.gameObject);
                     });
 
                 attackedAmount++;

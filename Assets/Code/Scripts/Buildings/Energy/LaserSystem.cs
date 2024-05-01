@@ -12,9 +12,9 @@ namespace SustainTheStrain.Buildings
         private const string EnergySettingsPath = Const.ResourcePath.Buildings.Configs.Root + "/Energy/" + nameof(LaserEnergySettings);
         private int _currentEnergy;
 
-        public LaserEnergySettings EnergySettings { get; } = Resources.Load<LaserEnergySettings>(EnergySettingsPath);
-        EnergySystemSettings IEnergySystem.EnergySettings => EnergySettings;
-        public int MaxEnergy => EnergySettings.MaxEnergy;
+        public LaserEnergySettings Settings { get; } = Resources.Load<LaserEnergySettings>(EnergySettingsPath);
+        EnergySystemSettings IEnergySystem.EnergySettings => Settings;
+        public int MaxEnergy => Settings.MaxEnergy;
 
         public int CurrentEnergy
         {
@@ -28,7 +28,7 @@ namespace SustainTheStrain.Buildings
 
         public event Action<IEnergySystem> Changed = _ => {};
 
-        public float DamageMultiplier => EnergySettings.GetDamageMultiplier(CurrentEnergy);
+        public float DamageMultiplier => Settings.GetDamageMultiplier(CurrentEnergy);
 
         [Inject]
         private void Construct(EnergyController energyController) => energyController.AddEnergySystem(this);

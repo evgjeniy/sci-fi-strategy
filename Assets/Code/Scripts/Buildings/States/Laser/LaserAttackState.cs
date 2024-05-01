@@ -25,9 +25,9 @@ namespace SustainTheStrain.Buildings
             _target.Damage(laser.Config.Damage * laser.EnergySystem.DamageMultiplier);
 
             if (laser.Config.NextLevelConfig == null)
-                if (laser.AttackCounter % laser.EnergySystem.EnergySettings.PassiveSkill.AttackFrequency == 0)
+                if (laser.AttackCounter % laser.EnergySystem.Settings.PassiveSkill.AttackFrequency == 0)
                     if (laser.EnergySystem.CurrentEnergy == laser.EnergySystem.MaxEnergy)
-                        laser.EnergySystem.EnergySettings.PassiveSkill.EnableSkill(_target.gameObject);
+                        laser.EnergySystem.Settings.PassiveSkill.EnableSkill(_target.gameObject);
 
             laser.AttackCounter++;
             laser.Timer.ResetTime(laser.Config.Cooldown);
