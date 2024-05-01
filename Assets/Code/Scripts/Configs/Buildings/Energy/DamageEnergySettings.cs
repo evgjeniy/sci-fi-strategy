@@ -9,7 +9,8 @@ namespace SustainTheStrain.Configs.Buildings
 
         public float GetDamageMultiplier(int currentEnergy)
         {
-            return Mathf.Clamp(currentEnergy, 0, EnergyDamageMultipliers.Length);
+            var clampEnergy = Mathf.Clamp(currentEnergy, 0, EnergyDamageMultipliers.Length);
+            return EnergyDamageMultipliers[clampEnergy];
         }
     }
 }
