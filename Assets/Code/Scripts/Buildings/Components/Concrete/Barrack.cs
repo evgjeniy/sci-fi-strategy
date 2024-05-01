@@ -115,7 +115,7 @@ namespace SustainTheStrain.Buildings
         private void ConfigChanged(BarrackBuildingConfig barrackConfig)
         {
             if (barrackConfig.NextLevelConfig == null &&
-                BarrackSystem.CurrentEnergy != BarrackSystem.MaxEnergy)
+                BarrackSystem.CurrentEnergy == BarrackSystem.MaxEnergy)
             {
                 BarrackSystem.Settings.PassiveSkill.EnableSkill(gameObject);
             }

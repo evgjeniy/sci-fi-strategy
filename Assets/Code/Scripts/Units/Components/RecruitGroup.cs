@@ -13,7 +13,15 @@ namespace SustainTheStrain.Units
         public int squadMaxSize
         {
             get => _squadMaxSize;
-            set => _squadMaxSize = value;
+            set
+            {
+                if (value < _squadMaxSize)
+                {
+                    // TODO : destroy and remove from list unnecessary recruits
+                }
+                
+                _squadMaxSize = value;
+            }
         }
 
         [field: SerializeField] public GuardPost GuardPost { get; set; }
