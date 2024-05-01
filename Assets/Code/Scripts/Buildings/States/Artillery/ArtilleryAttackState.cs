@@ -7,7 +7,7 @@ namespace SustainTheStrain.Buildings
 {
     public class ArtilleryAttackState : IUpdatableState<Artillery>
     {
-        private readonly Area<Damageble> _explodeArea = new(conditions: damageable => damageable.Team != Team.Player);
+        private readonly Area<Damageble> _explodeArea = new(conditions: damageable => !damageable.IsFlying && damageable.Team != Team.Player);
         private readonly Damageble _target;
 
         public ArtilleryAttackState(Damageble target) => _target = target;
@@ -21,11 +21,11 @@ namespace SustainTheStrain.Buildings
 
             artillery.Orientation = _target.transform.position;
 
-            if (artillery.Timer.IsTimeOver)
+            if (artillery.Timer.IsOver)
             {
                 Object.Instantiate(artillery.Config.ProjectilePrefab)
                     .With(x => x.transform.position = artillery.SpawnPointProvider.SpawnPoint.position)
-                    .LaunchTo(_target, onComplete: damageable => Explosion(artillery.Config, damageable));
+                    .LaunchTo(_target, onComplete: damageable => Explosion(artillery, damageable));
                 
                 artillery.Timer.ResetTime(artillery.Config.Cooldown);
             }
@@ -33,13 +33,20 @@ namespace SustainTheStrain.Buildings
             return this;
         }
 
-        private void Explosion(ArtilleryBuildingConfig artilleryConfig, Damageble target)
+        private void Explosion(Artillery artillery, Damageble target)
         {
-            _explodeArea.Update(target.transform.position, artilleryConfig.ExplosionRadius, artilleryConfig.Mask);
+            _explodeArea.Update(target.transform.position, artillery.Config.ExplosionRadius, artillery.Config.Mask);
 
             foreach (var damageable in _explodeArea.Entities)
-                if(!damageable.IsFlying)
-                    damageable.Damage(artilleryConfig.Damage);
+            {
+                damageable.Damage(artillery.Config.Damage * artillery.EnergySystem.DamageMultiplier);
+
+                if (artillery.Config.NextLevelConfig != null) return;
+                if (artillery.AttackCounter % artillery.EnergySystem.Settings.PassiveSkill.AttackFrequency != 0) return;
+                if (artillery.EnergySystem.CurrentEnergy != artillery.EnergySystem.MaxEnergy) return;
+                        
+                artillery.EnergySystem.Settings.PassiveSkill.EnableSkill(damageable.gameObject);
+            }
         }
     }
 }

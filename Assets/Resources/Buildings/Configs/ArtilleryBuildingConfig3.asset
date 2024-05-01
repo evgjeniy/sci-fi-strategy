@@ -19,6 +19,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   <Radius>k__BackingField: 9
+  _damage: 42
   <Damage>k__BackingField: 42
   <Cooldown>k__BackingField: 3
   <ExplosionRadius>k__BackingField: 5

@@ -101,7 +101,6 @@ GameObject:
   - component: {fileID: 3714704819440048923}
   - component: {fileID: 5367921590081931393}
   - component: {fileID: 4983479498594913281}
-  - component: {fileID: 2145467868494169081}
   - component: {fileID: -3151490091240472385}
   m_Layer: 3
   m_Name: Enemy
@@ -305,7 +304,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352702111144956991}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e76b30fd04129744ac24605310c0aa2, type: 3}
   m_Name: 
@@ -317,18 +316,6 @@ MonoBehaviour:
   recacheOnEnable: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &2145467868494169081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352702111144956991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa4362ae563bae84292e7cf77dc02748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-3151490091240472385
 MonoBehaviour:
   m_ObjectHideFlags: 0

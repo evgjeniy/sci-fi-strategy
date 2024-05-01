@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace SustainTheStrain.Buildings
 {
-    public interface IPlaceholder : IInputSelectable, IInputPointerable
+    public interface IPlaceholder : ITransformable, IInputSelectable, IInputPointerable
     {
-        public Transform transform { get; }
         public Road Road { get; }
         
         public void SetBuilding(IBuilding building);

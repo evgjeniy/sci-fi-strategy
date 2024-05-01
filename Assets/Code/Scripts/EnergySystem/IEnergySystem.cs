@@ -3,10 +3,11 @@ using SustainTheStrain.Scriptable.EnergySettings;
 
 namespace SustainTheStrain.EnergySystem
 {
-    public interface IEnergySystem
+    public interface IEnergySystem : IObservable<IEnergySystem>
     {
+        IEnergySystem IObservable<IEnergySystem>.Value => this;
+
         public EnergySystemSettings EnergySettings { get; }
-        public event Action<IEnergySystem> Changed;
         public int FreeEnergyCellsCount => MaxEnergy - CurrentEnergy;
         public int MaxEnergy { get; }
 

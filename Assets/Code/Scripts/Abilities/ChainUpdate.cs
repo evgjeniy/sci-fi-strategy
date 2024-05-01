@@ -5,55 +5,46 @@ namespace SustainTheStrain.Abilities
 {
     public class ChainUpdate : MonoBehaviour
     {
-        private LineRenderer lineRenderer;
-        private float lifeTime;
-        private List<Collider> colliders;
-        private float startTime;
+        private LineRenderer _lineRenderer;
+        private List<Collider> _colliders;
+        private float _lifeTime;
+        private float _startTime;
 
-        public void setFields(float time, List<Collider> colls)
+        public void SetData(float time, List<Collider> colliders)
         {
-            lifeTime = time;
-            colliders = colls;
+            _lifeTime = time;
+            _colliders = colliders;
         }
 
-        void Start()
+        private void Start()
         {
-            lineRenderer = GetComponent<LineRenderer>();
-            startTime = Time.time;
+            _lineRenderer = GetComponent<LineRenderer>();
+            _startTime = Time.time;
         }
 
-        void Update()
+        private void Update()
         {
-            if (Time.time - startTime > lifeTime)
+            if (Time.time - _startTime > _lifeTime)
             {
                 End();
                 return;
             }
-            if (lineRenderer == null || colliders == null) return;
-            for (int i = 0; i < colliders.Count; i++)
+            if (_lineRenderer == null || _colliders == null) return;
+            for (var i = 0; i < _colliders.Count; i++)
             {
-                if (colliders[i] == null)
-                    lineRenderer.SetPosition(i, lineRenderer.GetPosition(getIdx(colliders.Count, i)));
-                else
-                    lineRenderer.SetPosition(i, colliders[i].transform.position);
+                _lineRenderer.SetPosition(i, _colliders[i] == null
+                        ? _lineRenderer.GetPosition(GetIndex(_colliders.Count, i))
+                        : _colliders[i].transform.position);
+                
             }
         }
 
-        private int getIdx(int siz, int arg)
+        private static int GetIndex(int size, int index)
         {
-            if (siz == 1)
-                return 0;
-            if (arg == 0)
-                return 1;
-            return arg - 1;
+            if (size == 1) return 0;
+            return index == 0 ? 1 : index - 1;
         }
 
-        private void End()
-        {
-            colliders = null;
-            Destroy(lineRenderer);
-            Destroy(gameObject);
-            Destroy(this);
-        }
+        private void End() => Destroy(gameObject);
     }
 }

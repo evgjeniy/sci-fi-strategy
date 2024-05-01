@@ -19,7 +19,7 @@ namespace SustainTheStrain.Buildings
             
             rocket.Orientation = _target.transform.position;
 
-            if (!rocket.Timer.IsTimeOver)
+            if (!rocket.Timer.IsOver)
                 return this;
            
             var attackedAmount = 0;
@@ -31,13 +31,25 @@ namespace SustainTheStrain.Buildings
 
                 Object.Instantiate(rocket.Config.ProjectilePrefab)
                     .With(x => x.transform.position = rocket.SpawnPointProvider.SpawnPoint.position)
-                    .LaunchTo(target, onComplete: x => x.Damage(rocket.Config.Damage));
+                    .LaunchTo(target, onComplete: damageable =>
+                    {
+                        damageable.Damage(rocket.Config.Damage * rocket.EnergySystem.DamageMultiplier);
+
+                        if (rocket.Config.NextLevelConfig != null) return;
+                        if (rocket.AttackCounter % rocket.EnergySystem.Settings.PassiveSkill.AttackFrequency != 0) return;
+                        if (rocket.EnergySystem.CurrentEnergy != rocket.EnergySystem.MaxEnergy) return;
+                        
+                        rocket.EnergySystem.Settings.PassiveSkill.EnableSkill(damageable.gameObject);
+                    });
 
                 attackedAmount++;
             }
 
             if (attackedAmount != 0)
+            {
                 rocket.Timer.ResetTime(rocket.Config.Cooldown);
+                rocket.AttackCounter++;
+            }
 
             return this;
         }

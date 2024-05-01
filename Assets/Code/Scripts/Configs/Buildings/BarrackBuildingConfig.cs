@@ -1,3 +1,5 @@
+using NaughtyAttributes;
+using SustainTheStrain.Buildings;
 using UnityEngine;
 
 namespace SustainTheStrain.Configs.Buildings
@@ -9,11 +11,12 @@ namespace SustainTheStrain.Configs.Buildings
         [field: SerializeField, Min(0.01f)] public float UnitAttackDamage { get; private set; } = 1.0f;
         [field: SerializeField, Min(0.01f)] public float UnitAttackCooldown { get; private set; } = 1.0f;
         [field: SerializeField, Min(0.01f)] public float RespawnCooldown { get; private set; } = 1.0f;
-        
+
         [field: Header("Prefabs")]
         [field: SerializeField] public ZoneVisualizer RecruitSpawnAimPrefab { get; private set; }
 
-        [field: Space, SerializeField] public BarrackBuildingConfig NextLevelConfig { get; private set; }
+        [field: Header("Next Level")]
+        [field: SerializeField, Expandable] public BarrackBuildingConfig NextLevelConfig { get; private set; }
 
         public override int NextLevelPrice => NextLevelConfig == null ? int.MaxValue : NextLevelConfig.Price;
     }
