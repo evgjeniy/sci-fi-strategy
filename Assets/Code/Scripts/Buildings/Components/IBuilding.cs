@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace SustainTheStrain.Buildings
 {
-    public interface IBuilding : IInputSelectable, IInputPointerable
+    public interface IBuilding : ITransformable, IInputSelectable, IInputPointerable
     {
-        public Transform transform { get; }
         public BuildingConfig Config { get; }
 
         public void Upgrade();

@@ -8,6 +8,10 @@ namespace SustainTheStrain.Installers
         public override void InstallBindings()
         {
             Container.Bind<IBuildingFactory>().To<BuildingFactory>().AsSingle();
+            Container.Bind<RocketSystem>().AsSingle();
+            Container.Bind<LaserSystem>().AsSingle();
+            Container.Bind<ArtillerySystem>().AsSingle();
+            Container.Bind<BarrackSystem>().AsSingle();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace SustainTheStrain.Units
         {
             _timer.ResetTime(_timer.Time - Time.deltaTime);
             
-            if (_timer.IsTimeOver)
+            if (_timer.IsOver)
                 _damageble.Kill(true);
         }
     }

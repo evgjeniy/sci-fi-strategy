@@ -121,7 +121,7 @@ namespace SustainTheStrain.Units
             _timer.Tick();
             _stateMachine.CurrentState.FrameUpdate();
 
-            if (_timer.IsTimeOver)
+            if (_timer.IsOver)
             {
                 _stateMachine.CurrentState.PhysicsUpdate();
                 _timer.ResetTime(0.2f);

@@ -8,7 +8,6 @@ namespace SustainTheStrain.Buildings
     public class Projectile : MonoBehaviour
     {
         [SerializeField] private float flyingTime = 2.0f;
-        [SerializeField] private AnimationCurve flyingCurve;
         [SerializeField] private ParticleSystem explosionParticle;
         
         public void LaunchTo<T>(T target, Action<T> onComplete = null) where T : Component
@@ -23,17 +22,15 @@ namespace SustainTheStrain.Buildings
             
             for (var t = 0.0f; t < 1.0f; t += Time.deltaTime / flyingTime)
             {
-                if (target == null)
-                {
-                    Destroy(gameObject);
-                    yield break;
-                }
+                if (target == null) { Destroy(gameObject); yield break; }
                 
-                transform.position = Vector3.Lerp(startPosition, target.transform.position, flyingCurve.Evaluate(t));
+                transform.position = Vector3.Lerp(startPosition, target.transform.position, t);
                 yield return null;
             }
+            
+            if (target == null) { Destroy(gameObject); yield break; }
 
-            transform.position = Vector3.Lerp(startPosition, target.transform.position, flyingCurve.Evaluate(1.0f));
+            transform.position = target.transform.position;
             onComplete?.Invoke(target);
 
             if (explosionParticle != null)

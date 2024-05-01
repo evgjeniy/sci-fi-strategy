@@ -19,7 +19,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   <Radius>k__BackingField: 9
-  <Damage>k__BackingField: 45
+  _damage: 42
+  <Damage>k__BackingField: 42
   <Cooldown>k__BackingField: 3
   <ExplosionRadius>k__BackingField: 5
   <GfxPrefab>k__BackingField: {fileID: 6957716040307377065, guid: 54e1e5f605bb4ee4d9e42ba750fe60d0,

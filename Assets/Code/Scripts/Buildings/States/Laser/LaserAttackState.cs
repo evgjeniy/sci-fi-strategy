@@ -20,9 +20,16 @@ namespace SustainTheStrain.Buildings
                 return new LaserIdleState();
             
             laser.Orientation = _target.transform.position;
-            if (!laser.Timer.IsTimeOver) return this;
-            
-            _target.DeepDamage(laser.Config.Damage);
+            if (!laser.Timer.IsOver) return this;
+
+            _target.DeepDamage(laser.Config.Damage * laser.EnergySystem.DamageMultiplier);
+
+            if (laser.Config.NextLevelConfig == null)
+                if (laser.AttackCounter % laser.EnergySystem.Settings.PassiveSkill.AttackFrequency == 0)
+                    if (laser.EnergySystem.CurrentEnergy == laser.EnergySystem.MaxEnergy)
+                        laser.EnergySystem.Settings.PassiveSkill.EnableSkill(_target.gameObject);
+
+            laser.AttackCounter++;
             laser.Timer.ResetTime(laser.Config.Cooldown);
 
             EnableLineAttack(laser);
