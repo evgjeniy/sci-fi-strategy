@@ -24,7 +24,7 @@ namespace SustainTheStrain.Units
             CurrentHP -= damage;
         }
         
-        public void DeepDamage(float damage)
+        public override void DeepDamage(float damage)
         {
             CurrentHP -= damage;
         }

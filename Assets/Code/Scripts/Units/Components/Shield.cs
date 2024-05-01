@@ -53,11 +53,11 @@ namespace SustainTheStrain.Units
         private void Awake()
         {
             CellsCount = _cellsCount;
-            
-            /*for(int i = 0; i < _cellsCount; i++)
+
+            foreach (var cell in _shieldCells)
             {
-                _shieldCells.Add(new ShieldCell(_cellHp));
-            }*/
+                cell.CurrentHP = cell.MaxHP;
+            }
         }
 
         private void Update()
