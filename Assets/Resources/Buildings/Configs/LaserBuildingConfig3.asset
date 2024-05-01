@@ -20,14 +20,8 @@ MonoBehaviour:
     m_Bits: 8
   <Radius>k__BackingField: 9
   _damage: 45
+  <Damage>k__BackingField: 45
   <Cooldown>k__BackingField: 1.5
   <LineRenderer>k__BackingField: {fileID: 3930199137400860807, guid: 97c02ea80f5dc3a44bf4fb3eaa8d7c0d,
     type: 3}
-  <EnergyDamageMultipliers>k__BackingField:
-  - 0.5
-  - 0.7
-  - 1
-  - 1.2
-  <PassiveSkill>k__BackingField: {fileID: 11400000, guid: 18a7b583fd1adcb4eb46a172f149c3ed,
-    type: 2}
   <NextLevelConfig>k__BackingField: {fileID: 0}

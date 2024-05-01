@@ -6,7 +6,6 @@ namespace SustainTheStrain.Configs.Buildings
     [CreateAssetMenu(fileName = nameof(LaserBuildingConfig), menuName = "Configs/" + nameof(LaserBuildingConfig), order = Const.Order.BuildingConfigs)]
     public class LaserBuildingConfig : BuildingConfig
     {
-        [SerializeField, Min(0.0f)] private float _damage = 1.0f;
         [field: SerializeField, Min(0.0f)] public float Damage { get; set; } = 1.0f;
         [field: SerializeField, Min(0.0f)] public float Cooldown { get; private set; } = 1.0f;
         

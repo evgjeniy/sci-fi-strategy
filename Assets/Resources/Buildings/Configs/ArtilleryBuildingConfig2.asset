@@ -20,16 +20,12 @@ MonoBehaviour:
     m_Bits: 8
   <Radius>k__BackingField: 8
   _damage: 24
+  <Damage>k__BackingField: 24
   <Cooldown>k__BackingField: 3
   <ExplosionRadius>k__BackingField: 4
   <GfxPrefab>k__BackingField: {fileID: 6957716040307377065, guid: 138f31c3b5b46654a8c9bb9c7aafbddd,
     type: 3}
   <ProjectilePrefab>k__BackingField: {fileID: 3020685036469273396, guid: 06347687b9a8b424c95b6862f55f5040,
     type: 3}
-  <EnergyDamageMultipliers>k__BackingField:
-  - 0.5
-  - 0.7
-  - 1
-  - 1.2
   <NextLevelConfig>k__BackingField: {fileID: 11400000, guid: 02fbc14f7dd4a7341a35332af10b9579,
     type: 2}
