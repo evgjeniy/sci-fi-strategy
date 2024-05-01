@@ -1,5 +1,4 @@
 ﻿using System;
-using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Scriptable.EnergySettings;
@@ -10,17 +9,19 @@ namespace SustainTheStrain.Buildings
 {
     public class RocketSystem : IEnergySystem
     {
-        private const string EnergySettingsPath = Const.ResourcePath.Buildings.Configs.Root + "/EnergySettings/Rocket";
-        private RocketBuildingConfig _config;
+        private const string EnergySettingsPath = Const.ResourcePath.Buildings.Configs.Root + "/Energy/" + nameof(RocketEnergySettings);
+        private int _currentEnergy;
 
-        public EnergySystemSettings EnergySettings { get; } = Resources.Load<EnergySystemSettings>(EnergySettingsPath);
+        public RocketEnergySettings EnergySettings { get; } = Resources.Load<RocketEnergySettings>(EnergySettingsPath);
+        EnergySystemSettings IEnergySystem.EnergySettings => EnergySettings;
         public int MaxEnergy => EnergySettings.MaxEnergy;
+
         public int CurrentEnergy
         {
-            get => _config.CurrentEnergy;
+            get => _currentEnergy;
             set
             {
-                _config.CurrentEnergy = value;
+                _currentEnergy = value;
                 Changed(this);
             }
         }
@@ -28,10 +29,6 @@ namespace SustainTheStrain.Buildings
         public event Action<IEnergySystem> Changed = _ => {};
 
         [Inject]
-        private void Construct(IConfigProviderService configProvider, EnergyController energyController)
-        {
-            _config = configProvider.GetBuildingConfig<RocketBuildingConfig>();
-            energyController.AddEnergySystem(this);
-        }
+        private void Construct(EnergyController energyController) => energyController.AddEnergySystem(this);
     }
 }
