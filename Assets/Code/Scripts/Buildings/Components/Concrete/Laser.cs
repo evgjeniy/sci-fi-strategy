@@ -17,9 +17,11 @@ namespace SustainTheStrain.Buildings
         private Observable<Vector3> _orientation;
         private Observable<SelectionType> _selection;
 
+
         public Area<Damageble> Area { get; } = new(conditions: damageable => damageable.Team != Team.Player);
         public Timer Timer { get; private set; }
         public int AttackCounter { get; set; }
+        public LaserSystem EnergySystem { get; set; }
         public ISpawnPointProvider SpawnPointProvider { get; set; }
 
         public LaserBuildingConfig Config => _config.Value;
@@ -33,10 +35,12 @@ namespace SustainTheStrain.Buildings
 
         [Inject]
         private void Construct(Timer timer, IResourceManager resourceManager,
+            LaserSystem laserSystem,
             Observable<LaserBuildingConfig> config,
             Observable<Vector3> orientation,
             Observable<SelectionType> selection)
         {
+            EnergySystem = laserSystem;
             _resourceManager = resourceManager;
             _config = config;
             _orientation = orientation;

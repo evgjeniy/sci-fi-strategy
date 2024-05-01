@@ -21,12 +21,13 @@ namespace SustainTheStrain.Buildings
             
             laser.Orientation = _target.transform.position;
             if (!laser.Timer.IsOver) return this;
-            
-            _target.Damage(laser.Config.Damage);
 
-            if (laser.Config.HasPassiveSkill && laser.Config.IsMaxEnergy)
-                if (laser.AttackCounter % laser.Config.PassiveSkill.AttackFrequency == 0)
-                    laser.Config.PassiveSkill.EnableSkill(_target.gameObject);
+            _target.Damage(laser.Config.Damage * laser.EnergySystem.DamageMultiplier);
+
+            if (laser.Config.NextLevelConfig == null)
+                if (laser.AttackCounter % laser.EnergySystem.EnergySettings.PassiveSkill.AttackFrequency == 0)
+                    if (laser.EnergySystem.CurrentEnergy == laser.EnergySystem.MaxEnergy)
+                        laser.EnergySystem.EnergySettings.PassiveSkill.EnableSkill(_target.gameObject);
 
             laser.AttackCounter++;
             laser.Timer.ResetTime(laser.Config.Cooldown);

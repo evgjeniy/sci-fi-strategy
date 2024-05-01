@@ -28,6 +28,8 @@ namespace SustainTheStrain.Buildings
 
         public event Action<IEnergySystem> Changed = _ => {};
 
+        public float DamageMultiplier => EnergySettings.GetDamageMultiplier(CurrentEnergy);
+
         [Inject]
         private void Construct(EnergyController energyController) => energyController.AddEnergySystem(this);
     }

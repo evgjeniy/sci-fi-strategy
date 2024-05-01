@@ -1,5 +1,4 @@
 ﻿using System;
-using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Buildings;
 using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Scriptable.EnergySettings;
@@ -10,28 +9,28 @@ namespace SustainTheStrain.Buildings
 {
     public class LaserSystem : IEnergySystem
     {
-        private const string EnergySettingsPath = Const.ResourcePath.Buildings.Configs.Root + "/EnergySettings/Laser";
-        private LaserBuildingConfig _config;
+        private const string EnergySettingsPath = Const.ResourcePath.Buildings.Configs.Root + "/Energy/" + nameof(LaserEnergySettings);
+        private int _currentEnergy;
 
-        public EnergySystemSettings EnergySettings { get; } = Resources.Load<EnergySystemSettings>(EnergySettingsPath);
+        public LaserEnergySettings EnergySettings { get; } = Resources.Load<LaserEnergySettings>(EnergySettingsPath);
+        EnergySystemSettings IEnergySystem.EnergySettings => EnergySettings;
         public int MaxEnergy => EnergySettings.MaxEnergy;
+
         public int CurrentEnergy
         {
-            get => _config.CurrentEnergy;
+            get => _currentEnergy;
             set
             {
-                _config.CurrentEnergy = value;
+                _currentEnergy = value;
                 Changed(this);
             }
         }
 
         public event Action<IEnergySystem> Changed = _ => {};
 
+        public float DamageMultiplier => EnergySettings.GetDamageMultiplier(CurrentEnergy);
+
         [Inject]
-        private void Construct(IConfigProviderService configProvider, EnergyController energyController)
-        {
-            _config = configProvider.GetBuildingConfig<LaserBuildingConfig>();
-            energyController.AddEnergySystem(this);
-        }
+        private void Construct(EnergyController energyController) => energyController.AddEnergySystem(this);
     }
 }

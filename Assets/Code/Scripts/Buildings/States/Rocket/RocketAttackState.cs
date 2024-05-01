@@ -33,16 +33,13 @@ namespace SustainTheStrain.Buildings
                     .With(x => x.transform.position = rocket.SpawnPointProvider.SpawnPoint.position)
                     .LaunchTo(target, onComplete: damageable =>
                     {
-                        var currentEnergy = rocket.RocketSystem.CurrentEnergy;
-                        var multiplier = rocket.RocketSystem.EnergySettings.GetDamageMultiplier(currentEnergy);
-                        
-                        damageable.Damage(rocket.Config.Damage * multiplier);
+                        damageable.Damage(rocket.Config.Damage * rocket.EnergySystem.DamageMultiplier);
 
                         if (rocket.Config.NextLevelConfig != null) return;
-                        if (rocket.AttackCounter % rocket.RocketSystem.EnergySettings.PassiveSkill.AttackFrequency != 0) return;
-                        if (rocket.RocketSystem.CurrentEnergy != rocket.RocketSystem.MaxEnergy) return;
+                        if (rocket.AttackCounter % rocket.EnergySystem.EnergySettings.PassiveSkill.AttackFrequency != 0) return;
+                        if (rocket.EnergySystem.CurrentEnergy != rocket.EnergySystem.MaxEnergy) return;
                         
-                        rocket.RocketSystem.EnergySettings.PassiveSkill.EnableSkill(damageable.gameObject);
+                        rocket.EnergySystem.EnergySettings.PassiveSkill.EnableSkill(damageable.gameObject);
                     });
 
                 attackedAmount++;
