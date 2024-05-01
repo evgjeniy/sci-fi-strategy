@@ -1,5 +1,5 @@
-using System;
 using SustainTheStrain.Configs.Buildings;
+using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Input;
 using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.Units;
@@ -23,6 +23,7 @@ namespace SustainTheStrain.Buildings
         private GameObject _recruitsPointer;
 
         public Timer Timer { get; private set; }
+        public BarrackSystem BarrackSystem { get; set; }
 
         public BarrackBuildingConfig Config => _config.Value;
         BuildingConfig IBuilding.Config => Config;
@@ -35,23 +36,18 @@ namespace SustainTheStrain.Buildings
 
         [Inject]
         private void Construct(Timer timer, IResourceManager resourceManager,
+            BarrackSystem barrackSystem,
             Observable<BarrackBuildingConfig> config,
             Observable<Vector3> spawnPoint,
             Observable<SelectionType> selection)
         {
+            BarrackSystem = barrackSystem;
             _resourceManager = resourceManager;
             _selection = selection;
-
             _config = config;
-            _config.Changed += barrackConfig =>
-            {
-                if (barrackConfig.HasPassiveSkill is false) return;
-                
-                if (barrackConfig.IsMaxEnergy)
-                    barrackConfig.PassiveSkill.EnableSkill(gameObject);
-                else 
-                    barrackConfig.PassiveSkill.DisableSkill(gameObject);
-            };
+
+            _config.Changed += ConfigChanged;
+            BarrackSystem.Changed += EnergyChanged;
 
             SpawnPoint = spawnPoint.Value + Vector3.up * 2f;
             
@@ -61,10 +57,10 @@ namespace SustainTheStrain.Buildings
 
         private void Update() => _currentState = _currentState.Update(this);
 
-        public void OnPointerEnter() => _selection.Value = SelectionType.Pointer;
-        public void OnPointerExit() => _selection.Value = SelectionType.None;
-        public void OnSelected() => _selection.Value = SelectionType.Select;
-        public void OnDeselected() { _selection.Value = SelectionType.None; _recruitsPointer.IfNotNull(x => x.DestroyObject()); }
+        void IInputPointerable.OnPointerEnter() => _selection.Value = SelectionType.Pointer;
+        void IInputPointerable.OnPointerExit() => _selection.Value = SelectionType.None;
+        void IInputSelectable.OnSelected() => _selection.Value = SelectionType.Select;
+        void IInputSelectable.OnDeselected() { _selection.Value = SelectionType.None; _recruitsPointer.IfNotNull(x => x.DestroyObject()); }
 
         public void Upgrade()
         {
@@ -83,7 +79,7 @@ namespace SustainTheStrain.Buildings
             });
         }
 
-        public IInputState OnSelectedLeftClick(IInputState currentState, Ray ray)
+        IInputState IInputSelectable.OnSelectedLeftClick(IInputState currentState, Ray ray)
         {
             if (_recruitsPointer == null)
                 return currentState;
@@ -92,7 +88,7 @@ namespace SustainTheStrain.Buildings
             return new InputIdleState();
         }
 
-        public IInputState OnSelectedUpdate(IInputState currentState, Ray ray)
+        IInputState IInputSelectable.OnSelectedUpdate(IInputState currentState, Ray ray)
         {
             if (_recruitsPointer == null)
                 return currentState;
@@ -112,6 +108,21 @@ namespace SustainTheStrain.Buildings
         {
             var zoneVisualizer = _config.Value.RecruitSpawnAimPrefab.Spawn();
             _recruitsPointer = zoneVisualizer.gameObject.With(x => x.SetParent(transform));
+        }
+
+        private void EnergyChanged(IEnergySystem _) => ConfigChanged(_config);
+
+        private void ConfigChanged(BarrackBuildingConfig barrackConfig)
+        {
+            if (barrackConfig.NextLevelConfig == null &&
+                BarrackSystem.CurrentEnergy != BarrackSystem.MaxEnergy)
+            {
+                BarrackSystem.Settings.PassiveSkill.EnableSkill(gameObject);
+            }
+            else
+            {
+                BarrackSystem.Settings.PassiveSkill.DisableSkill(gameObject);
+            }
         }
     }
 }

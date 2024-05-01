@@ -1,5 +1,6 @@
 using System;
 using SustainTheStrain.Configs.Buildings;
+using SustainTheStrain.Input;
 using SustainTheStrain.ResourceSystems;
 using SustainTheStrain.Units;
 using UnityEngine;
@@ -16,7 +17,6 @@ namespace SustainTheStrain.Buildings
         private Observable<LaserBuildingConfig> _config;
         private Observable<Vector3> _orientation;
         private Observable<SelectionType> _selection;
-
 
         public Area<Damageble> Area { get; } = new(conditions: damageable => damageable.Team != Team.Player);
         public Timer Timer { get; private set; }
@@ -52,10 +52,10 @@ namespace SustainTheStrain.Buildings
 
         private void Update() => _currentState = _currentState.Update(this);
 
-        public void OnPointerEnter() => _selection.Value = SelectionType.Pointer;
-        public void OnPointerExit() => _selection.Value = SelectionType.None;
-        public void OnSelected() => _selection.Value = SelectionType.Select;
-        public void OnDeselected() => _selection.Value = SelectionType.None;
+        void IInputPointerable.OnPointerEnter() => _selection.Value = SelectionType.Pointer;
+        void IInputPointerable.OnPointerExit() => _selection.Value = SelectionType.None;
+        void IInputSelectable.OnSelected() => _selection.Value = SelectionType.Select;
+        void IInputSelectable.OnDeselected() => _selection.Value = SelectionType.None;
 
         public void Upgrade()
         {
