@@ -432,7 +432,7 @@ PrefabInstance:
     - target: {fileID: 3357532105762482792, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
       propertyPath: <Damage>k__BackingField
-      value: 30
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3357532105762482792, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
@@ -507,7 +507,7 @@ PrefabInstance:
     - target: {fileID: 5579810907258726874, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
       propertyPath: m_Speed
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 9139420997716089492, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}

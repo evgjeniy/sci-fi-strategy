@@ -232,7 +232,7 @@ PrefabInstance:
     - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: <DamagePeriod>k__BackingField
-      value: 1.6
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7715807382400100011, guid: d11d8725d54934741b6c008f48bd65a8, type: 3}
@@ -280,8 +280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40557cea94440554b8833c905c394a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cellsCount: 1
-  _cellHp: 200
+  _cellsCount: 2
+  _cellHp: 150
   _recoverDelay: 7
   _recoverySpeed: 0.3
 --- !u!114 &8064178535992659472
@@ -297,6 +297,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _afterDeath: {fileID: 0}
-  <MaxHP>k__BackingField: 200
+  <MaxHP>k__BackingField: 300
   <Team>k__BackingField: 0
   <IsFlying>k__BackingField: 0

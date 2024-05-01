@@ -663,7 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellsCount: 1
-  _cellHp: 40
+  _cellHp: 60
   _recoverDelay: 5
   _recoverySpeed: 0.3
 --- !u!114 &8516106465088655114
@@ -681,3 +681,4 @@ MonoBehaviour:
   _afterDeath: {fileID: 0}
   <MaxHP>k__BackingField: 0
   <Team>k__BackingField: 0
+  <IsFlying>k__BackingField: 0
