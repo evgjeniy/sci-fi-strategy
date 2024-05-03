@@ -15,128 +15,538 @@ MonoBehaviour:
   _waves:
   - _spawners:
     - _delay: 0
-      _index: 1
-      _subwaves:
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 0
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 0
-        _spawnPeriod: 6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 0
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 0
-    - _delay: 75
       _index: 0
       _subwaves:
       - _delay: 0
-        _spawnPeriod: 1.6
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 20
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+  - _spawners:
+    - _delay: 30
+      _index: 0
+      _subwaves:
+      - _delay: 1
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 0
+      - _delay: 5
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 1
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 0
+      - _delay: 5
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 1
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 0
+      - _delay: 5
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 5
+        _spawnPeriod: 1
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+    - _delay: 90
+      _index: 2
+      _subwaves:
+      - _delay: 1
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 5
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+  - _spawners:
+    - _delay: 30
+      _index: 0
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 25
+        _spawnPeriod: 2
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 40
+        _spawnPeriod: 2
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+    - _delay: 75
+      _index: 2
+      _subwaves:
+      - _delay: 35
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 1
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+    - _delay: 111
+      _index: 1
+      _subwaves:
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
+  - _spawners:
+    - _delay: 30
+      _index: 0
+      _subwaves:
+      - _delay: 1
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 35
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 35
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 1
+        _spawnPeriod: 0
         _enemyCount: 1
         _enemyGroup:
         - _enemyType: Mob
           _xOffset: 0
       - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
+        _spawnPeriod: 1
+        _enemyCount: 2
         _enemyGroup:
         - _enemyType: Mob
           _xOffset: 1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
         - _enemyType: Mob
           _xOffset: -1.5
       - _delay: 0
-        _spawnPeriod: 1.6
+        _spawnPeriod: 3
+        _enemyCount: 6
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+    - _delay: 30
+      _index: 2
+      _subwaves:
+      - _delay: 35
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
+      - _delay: 1
+        _spawnPeriod: 0
         _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
+      - _delay: 1
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 0
+      - _delay: 35
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
+    - _delay: 120
+      _index: 1
+      _subwaves:
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
+  - _spawners:
+    - _delay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 6
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 2
         _enemyGroup:
         - _enemyType: Mob
           _xOffset: 1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
         - _enemyType: Mob
           _xOffset: -1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
+      - _delay: 55
+        _spawnPeriod: 5
+        _enemyCount: 4
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 0
+      - _delay: 6
+        _spawnPeriod: 0
         _enemyCount: 1
         _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 0
+        _enemyCount: 2
+        _enemyGroup:
         - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 1.5
+        - _enemyType: Tank
+          _xOffset: -1.5
+      - _delay: 0
+        _spawnPeriod: 2
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 1.5
+        - _enemyType: Tank
+          _xOffset: -1.5
+    - _delay: 90
+      _index: 2
+      _subwaves:
+      - _delay: 80
+        _spawnPeriod: 1
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+    - _delay: 80
+      _index: 1
+      _subwaves:
+      - _delay: 0
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 0
+  - _spawners:
+    - _delay: 30
+      _index: 0
+      _subwaves:
+      - _delay: 6
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
+      - _delay: 4
+        _spawnPeriod: 3
+        _enemyCount: 6
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 40
+        _spawnPeriod: 3
+        _enemyCount: 6
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 3
+        _enemyCount: 6
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 3
+        _enemyCount: 6
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+      - _delay: 4
+        _spawnPeriod: 3
+        _enemyCount: 6
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
+    - _delay: 110
+      _index: 2
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 1
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob_Shield
           _xOffset: 0
       - _delay: 0
-        _spawnPeriod: 1.6
+        _spawnPeriod: 1
         _enemyCount: 1
         _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
+        - _enemyType: Mob_Shield
           _xOffset: 1.5
-      - _delay: 0
-        _spawnPeriod: 1.6
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
+    - _delay: 110
+      _index: 1
+      _subwaves:
+      - _delay: 1
+        _spawnPeriod: 0
         _enemyCount: 1
         _enemyGroup:
-        - _enemyType: Mob
+        - _enemyType: Mob_Shield
           _xOffset: 0
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5

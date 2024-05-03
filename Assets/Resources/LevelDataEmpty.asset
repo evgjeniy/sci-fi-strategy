@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fa98590c6fd614598d276ac775bd38, type: 3}
   m_Name: LevelDataEmpty
   m_EditorClassIdentifier: 
-  _waves: []
+  _waves:
+  - _spawners:
+    - _delay: 0
+      _index: 1
+      _subwaves:
+      - _delay: 0
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
