@@ -1,5 +1,4 @@
-﻿using SustainTheStrain.Configs.Buildings;
-using SustainTheStrain.Units;
+﻿using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 
@@ -38,15 +37,14 @@ namespace SustainTheStrain.Buildings
             _explodeArea.Update(target.transform.position, artillery.Config.ExplosionRadius, artillery.Config.Mask);
 
             foreach (var damageable in _explodeArea.Entities)
-            {
                 damageable.Damage(artillery.Config.Damage * artillery.EnergySystem.DamageMultiplier);
 
-                if (artillery.Config.NextLevelConfig != null) return;
-                if (artillery.AttackCounter % artillery.EnergySystem.Settings.PassiveSkill.AttackFrequency != 0) return;
-                if (artillery.EnergySystem.CurrentEnergy != artillery.EnergySystem.MaxEnergy) return;
-                        
+            if (artillery.Config.NextLevelConfig != null) return;
+            if (artillery.AttackCounter % artillery.EnergySystem.Settings.PassiveSkill.AttackFrequency != 0) return;
+            if (artillery.EnergySystem.CurrentEnergy != artillery.EnergySystem.MaxEnergy) return;
+
+            foreach (var damageable in _explodeArea.Entities)
                 artillery.EnergySystem.Settings.PassiveSkill.EnableSkill(damageable.gameObject);
-            }
         }
     }
 }
