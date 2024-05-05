@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40469dd6d6914b0d82c2cbb2305cf3ce, type: 3}
   m_Name: BarrackEnergySettings
   m_EditorClassIdentifier: 
-  <ButtonImage>k__BackingField: {fileID: 21300000, guid: 0bbd31ba04155e449a43101e7f8f755c,
+  <ButtonImage>k__BackingField: {fileID: 21300000, guid: edcc1435678d3d242a185cdbf3dc0a57,
     type: 3}
   <EnergySpend>k__BackingField: 1
   <MaxEnergy>k__BackingField: 3

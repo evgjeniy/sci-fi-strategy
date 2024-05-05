@@ -16,11 +16,6 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
         {
             return _factories.ContainsKey(system.EnergySettings.SystemUIType) ? _factories[system.EnergySettings.SystemUIType].Create(system) : null;
         }
-
-        /*private IFactory<IEnergySystem, EnergySystemUI> Find(IEnergySystem system)
-        {
-            return (from factory in Factories where factory.systemUIType == system.EnergySettings.SystemUIType select factory.Factory).FirstOrDefault();
-        }*/
         
     }
 }

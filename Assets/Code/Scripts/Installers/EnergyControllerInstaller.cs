@@ -42,15 +42,15 @@ namespace SustainTheStrain.Installers
 
         private IFactory<IEnergySystem, EnergySystemUI> GetFactoryByType(EnergySystemUISettings settings)
         {
-            switch (settings.UIType)
+            return settings.UIType switch
             {
-                case EnergySystemUIType.Generator:
-                    return new ResourceGeneratorUIFactory(settings, new ResourceGeneratorUIController(_controller), baseSpawnTransform);
-                case EnergySystemUIType.Ability:
-                    return new AbilityUIFactory(settings, new AbilityUIController(_controller, _inputSystem), abilitySpawnTransform);
-                default:
-                    return new BasicEnergySystemUIFactory(settings, new BaseEnergyUIController(_controller), baseSpawnTransform);
-            }
+                EnergySystemUIType.Generator => new ResourceGeneratorUIFactory(settings,
+                    new ResourceGeneratorUIController(_controller), baseSpawnTransform),
+                EnergySystemUIType.Ability => new AbilityUIFactory(settings,
+                    new AbilityUIController(_controller, _inputSystem), abilitySpawnTransform),
+                _ => new BasicEnergySystemUIFactory(settings, new BaseEnergyUIController(_controller),
+                    baseSpawnTransform)
+            };
         }
     }
 }
