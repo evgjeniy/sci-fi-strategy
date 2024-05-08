@@ -15,5 +15,13 @@ namespace SustainTheStrain.Buildings
             
             effect.Initialize(Duration);
         }
+
+	public void EnableSkillWithDuration(GameObject gameObject, float duration)
+        {
+            var effect = gameObject.GetComponent<StunEffect>();
+            if (effect == null) effect = gameObject.AddComponent<StunEffect>();
+            
+            effect.Initialize(duration);
+        }
     }
 }
