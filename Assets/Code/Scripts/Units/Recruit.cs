@@ -28,7 +28,7 @@ namespace SustainTheStrain.Units
         protected override void Init()
         {
             base.Init();
-
+            IsMoving = false;
             _guardPosition = transform.position;
 
             _recruitIdleState = new RecruitIdleState(this, _stateMachine);

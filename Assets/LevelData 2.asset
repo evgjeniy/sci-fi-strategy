@@ -20,7 +20,9 @@ MonoBehaviour:
       - _delay: 2
         _spawnPeriod: 2
         _enemyCount: 10
-        _enemyType: Mob
+        _enemyGroup:
+        - _enemyType: Kamikaze
+          _xOffset: 0
   - _spawners:
     - _delay: 35
       _index: 2
@@ -28,7 +30,7 @@ MonoBehaviour:
       - _delay: 2
         _spawnPeriod: 2
         _enemyCount: 10
-        _enemyType: Mob
+        _enemyGroup: []
   - _spawners:
     - _delay: 30
       _index: 1
@@ -36,7 +38,7 @@ MonoBehaviour:
       - _delay: 0
         _spawnPeriod: 2
         _enemyCount: 10
-        _enemyType: Kamikaze
+        _enemyGroup: []
   - _spawners:
     - _delay: 0
       _index: 2
@@ -44,7 +46,7 @@ MonoBehaviour:
       - _delay: 2
         _spawnPeriod: 2
         _enemyCount: 12
-        _enemyType: Mob_Shield
+        _enemyGroup: []
   - _spawners:
     - _delay: 0
       _index: 0
@@ -52,11 +54,11 @@ MonoBehaviour:
       - _delay: 2
         _spawnPeriod: 2
         _enemyCount: 15
-        _enemyType: Mob
+        _enemyGroup: []
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 5
-        _enemyType: Mob_Shield
+        _enemyGroup: []
   - _spawners:
     - _delay: 0
       _index: 0
@@ -64,14 +66,14 @@ MonoBehaviour:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 6
-        _enemyType: Shield
+        _enemyGroup: []
     - _delay: 0
       _index: 2
       _subwaves:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 4
-        _enemyType: Shield
+        _enemyGroup: []
   - _spawners:
     - _delay: 0
       _index: 0
@@ -79,29 +81,29 @@ MonoBehaviour:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 13
-        _enemyType: Mob
+        _enemyGroup: []
     - _delay: 0
       _index: 2
       _subwaves:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 10
-        _enemyType: Mob
+        _enemyGroup: []
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 3
-        _enemyType: Tank
+        _enemyGroup: []
     - _delay: 0
       _index: 1
       _subwaves:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 7
-        _enemyType: Mob
+        _enemyGroup: []
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 2
-        _enemyType: Shield
+        _enemyGroup: []
   - _spawners:
     - _delay: 0
       _index: 0
@@ -109,18 +111,18 @@ MonoBehaviour:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 15
-        _enemyType: Mob
+        _enemyGroup: []
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 4
-        _enemyType: Shield
+        _enemyGroup: []
     - _delay: 0
       _index: 1
       _subwaves:
       - _delay: 2
         _spawnPeriod: 2
         _enemyCount: 20
-        _enemyType: Mob
+        _enemyGroup: []
   - _spawners:
     - _delay: 0
       _index: 0
@@ -128,14 +130,14 @@ MonoBehaviour:
       - _delay: 2
         _spawnPeriod: 2
         _enemyCount: 7
-        _enemyType: Kamikadze
+        _enemyGroup: []
     - _delay: 0
       _index: 2
       _subwaves:
       - _delay: 2
         _spawnPeriod: 2
         _enemyCount: 9
-        _enemyType: Kamikadze
+        _enemyGroup: []
   - _spawners:
     - _delay: 2
       _index: 2
@@ -143,14 +145,14 @@ MonoBehaviour:
       - _delay: 2
         _spawnPeriod: 2
         _enemyCount: 9
-        _enemyType: Shield
+        _enemyGroup: []
     - _delay: 2
       _index: 1
       _subwaves:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 6
-        _enemyType: Shield
+        _enemyGroup: []
   - _spawners:
     - _delay: 0
       _index: 0
@@ -158,18 +160,18 @@ MonoBehaviour:
       - _delay: 2
         _spawnPeriod: 2
         _enemyCount: 12
-        _enemyType: Shield
+        _enemyGroup: []
     - _delay: 2
       _index: 2
       _subwaves:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 4
-        _enemyType: Shield
+        _enemyGroup: []
       - _delay: 4
         _spawnPeriod: 4
         _enemyCount: 4
-        _enemyType: Shield
+        _enemyGroup: []
   - _spawners:
     - _delay: 0
       _index: 2
@@ -177,21 +179,21 @@ MonoBehaviour:
       - _delay: 2
         _spawnPeriod: 3
         _enemyCount: 3
-        _enemyType: Kamikadze
+        _enemyGroup: []
     - _delay: 3
       _index: 1
       _subwaves:
       - _delay: 0
         _spawnPeriod: 2
         _enemyCount: 5
-        _enemyType: Kamikadze
+        _enemyGroup: []
     - _delay: 1
       _index: 0
       _subwaves:
       - _delay: 2
         _spawnPeriod: 1
         _enemyCount: 4
-        _enemyType: Kamikadze
+        _enemyGroup: []
   - _spawners:
     - _delay: 2
       _index: 0
@@ -199,22 +201,22 @@ MonoBehaviour:
       - _delay: 0
         _spawnPeriod: 2
         _enemyCount: 5
-        _enemyType: Shield
+        _enemyGroup: []
       - _delay: 3
         _spawnPeriod: 2
         _enemyCount: 9
-        _enemyType: Mob
+        _enemyGroup: []
     - _delay: 0
       _index: 2
       _subwaves:
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 4
-        _enemyType: Shield
+        _enemyGroup: []
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 13
-        _enemyType: Mob
+        _enemyGroup: []
   - _spawners:
     - _delay: 0
       _index: 0
@@ -222,29 +224,29 @@ MonoBehaviour:
       - _delay: 1
         _spawnPeriod: 2
         _enemyCount: 25
-        _enemyType: Mob
+        _enemyGroup: []
     - _delay: 5
       _index: 2
       _subwaves:
       - _delay: 2
         _spawnPeriod: 1
         _enemyCount: 18
-        _enemyType: Mob
+        _enemyGroup: []
       - _delay: 6
         _spawnPeriod: 3
         _enemyCount: 3
-        _enemyType: Shield
+        _enemyGroup: []
     - _delay: 2
       _index: 1
       _subwaves:
       - _delay: 3
         _spawnPeriod: 2
         _enemyCount: 15
-        _enemyType: Mob
+        _enemyGroup: []
       - _delay: 2
         _spawnPeriod: 5
         _enemyCount: 6
-        _enemyType: Mob_Shield
+        _enemyGroup: []
   - _spawners:
     - _delay: 3
       _index: 0
@@ -252,42 +254,42 @@ MonoBehaviour:
       - _delay: 0
         _spawnPeriod: 3
         _enemyCount: 10
-        _enemyType: Shield
+        _enemyGroup: []
       - _delay: 4
         _spawnPeriod: 2
         _enemyCount: 8
-        _enemyType: Mob
+        _enemyGroup: []
       - _delay: 2
         _spawnPeriod: 4
         _enemyCount: 5
-        _enemyType: Shield
+        _enemyGroup: []
     - _delay: 0
       _index: 2
       _subwaves:
       - _delay: 8
         _spawnPeriod: 2
         _enemyCount: 1
-        _enemyType: BOSS
+        _enemyGroup: []
       - _delay: 0
         _spawnPeriod: 5
         _enemyCount: 5
-        _enemyType: Shield
+        _enemyGroup: []
       - _delay: 3
         _spawnPeriod: 3
         _enemyCount: 12
-        _enemyType: Mob_Shield
+        _enemyGroup: []
     - _delay: 5
       _index: 1
       _subwaves:
       - _delay: 0
         _spawnPeriod: 1
         _enemyCount: 7
-        _enemyType: Kamikadze
+        _enemyGroup: []
       - _delay: 10
         _spawnPeriod: 2
         _enemyCount: 13
-        _enemyType: Mob
+        _enemyGroup: []
       - _delay: 12
         _spawnPeriod: 3
         _enemyCount: 7
-        _enemyType: Mob_Shield
+        _enemyGroup: []
