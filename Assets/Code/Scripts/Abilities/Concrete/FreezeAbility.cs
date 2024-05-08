@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using SustainTheStrain.Buildings;
 using SustainTheStrain.Configs;
 using SustainTheStrain.Configs.Abilities;
 using SustainTheStrain.EnergySystem;
@@ -17,6 +18,7 @@ namespace SustainTheStrain.Abilities
         private readonly Area<Unit> _freezeArea = new(bufferMaxSize: 64, conditions: unit => unit.TryGetComponent<Damageble>(out var damageable) && damageable.Team != Team.Player);
         private readonly BaseAim _aim;
         private readonly FreezeAbilityConfig _config;
+		public StunConfig stunConfig = new();
         private readonly Timer _timer;
         private int _currentEnergy;
 
@@ -64,24 +66,17 @@ namespace SustainTheStrain.Abilities
             return new InputIdleState();
         }
 
-        private async void UseAbility()
+        private void UseAbility()
         {
-            var oldSpeeds = new List<float>(_freezeArea.Entities.Count);
 
             foreach (var unit in _freezeArea.Entities)
             {
                 if (unit.TryGetComponent<Outline>(out var outline))
                     outline.Disable();
 
-                oldSpeeds.Add(unit.CurrentPathFollower.Speed);
-                unit.Freeze();
+                stunConfig.EnableSkill(unit.gameObject);
             }
 
-            await UniTask.Delay(TimeSpan.FromSeconds(_config.Duration));
-
-            var currentIndex = 0;
-            foreach (var unit in _freezeArea.Entities) 
-                unit.Unfreeze(oldSpeeds[currentIndex++]);
         }
 
         IInputState IInputSelectable.OnSelectedUpdate(IInputState currentState, Ray ray)
