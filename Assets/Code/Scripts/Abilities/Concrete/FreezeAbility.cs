@@ -18,7 +18,7 @@ namespace SustainTheStrain.Abilities
         private readonly Area<Unit> _freezeArea = new(bufferMaxSize: 64, conditions: unit => unit.TryGetComponent<Damageble>(out var damageable) && damageable.Team != Team.Player);
         private readonly BaseAim _aim;
         private readonly FreezeAbilityConfig _config;
-		public StunConfig stunConfig = new();
+	public StunConfig stunConfig = new();
         private readonly Timer _timer;
         private int _currentEnergy;
 
