@@ -20,7 +20,7 @@ namespace SustainTheStrain.Buildings
             _config.Changed += UpdateConfig;
             _buildingSelected.Changed += UpdateSelection;
 
-            Const.IsDebugRadius.Changed += OnDebugRadiusChanged;
+            //Const.IsDebugRadius.Changed += OnDebugRadiusChanged;
         }
 
         protected virtual void OnDestroy()
@@ -28,7 +28,7 @@ namespace SustainTheStrain.Buildings
             _config.Changed -= UpdateConfig;
             _buildingSelected.Changed -= UpdateSelection;
             
-            Const.IsDebugRadius.Changed -= OnDebugRadiusChanged;
+            //Const.IsDebugRadius.Changed -= OnDebugRadiusChanged;
         }
         
         protected virtual void UpdateSelection(SelectionType selectionType)

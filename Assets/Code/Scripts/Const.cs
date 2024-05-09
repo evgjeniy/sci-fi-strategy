@@ -3,7 +3,7 @@
     public static class Const
     {
         public const float RotationSpeed = 180.0f; // Degrees Per Seconds
-        public static Observable<bool> IsDebugRadius { get; private set; } = new(true);
+        public static Observable<bool> IsDebugRadius { get; private set; } = new(false);
 
         public static class ResourcePath
         {

@@ -23,8 +23,8 @@ namespace SustainTheStrain.Abilities
             _abilitiesList = new List<IAbility>(capacity: 4)
             {
                 instantiator.Instantiate<ZoneDamageAbility>(),
-                instantiator.Instantiate<ZoneSlownessAbility>(),
-                instantiator.Instantiate<ChainDamageAbility>(),
+                //instantiator.Instantiate<ZoneSlownessAbility>(),
+                //instantiator.Instantiate<ChainDamageAbility>(),
                 instantiator.Instantiate<LandingAbility>(),
                 instantiator.Instantiate<FreezeAbility>()
             };
