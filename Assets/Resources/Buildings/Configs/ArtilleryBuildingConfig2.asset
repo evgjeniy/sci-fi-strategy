@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 2
   <Price>k__BackingField: 220
-  <Compensation>k__BackingField: 345
+  <Compensation>k__BackingField: 200
   <Mask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8

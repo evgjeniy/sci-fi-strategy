@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 3
   <Price>k__BackingField: 320
-  <Compensation>k__BackingField: 665
+  <Compensation>k__BackingField: 400
   <Mask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
   <Radius>k__BackingField: 9
-  _damage: 42
   <Damage>k__BackingField: 42
   <Cooldown>k__BackingField: 3
   <ExplosionRadius>k__BackingField: 5

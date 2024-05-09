@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EnergySettings>k__BackingField: {fileID: 11400000, guid: 0ea66b49c831c334089fcc1da9b3d537,
     type: 2}
-  <ReloadingSpeed>k__BackingField: 1
+  <ReloadingSpeed>k__BackingField: 10
   <ZoneRadius>k__BackingField: 1000
   <SpeedMultiplier>k__BackingField: 0
-  <DurationTime>k__BackingField: 2
+  <DurationTime>k__BackingField: 3
   <ExplosionPrefab>k__BackingField: {fileID: 0}

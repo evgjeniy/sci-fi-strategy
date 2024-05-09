@@ -13,16 +13,14 @@ MonoBehaviour:
   m_Name: LaserBuildingConfig2
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 2
-  <Price>k__BackingField: 160
-  <Compensation>k__BackingField: 260
+  <Price>k__BackingField: 170
+  <Compensation>k__BackingField: 180
   <Mask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
   <Radius>k__BackingField: 8.2
   <Damage>k__BackingField: 24
   <Cooldown>k__BackingField: 1.5
-  <GfxPrefab>k__BackingField: {fileID: 5397870296889520178, guid: a3b8a7af39c0b26418860e972cace959,
-    type: 3}
   <LineRenderer>k__BackingField: {fileID: 3930199137400860807, guid: 97c02ea80f5dc3a44bf4fb3eaa8d7c0d,
     type: 3}
   <NextLevelConfig>k__BackingField: {fileID: 11400000, guid: de0716a996483bb42b07e95ea86d9857,

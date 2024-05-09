@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EnergySettings>k__BackingField: {fileID: 11400000, guid: 48986234cf6d44e429fa84e0edf45015,
     type: 2}
-  <Cooldown>k__BackingField: 3
-  <Damage>k__BackingField: 200
-  <Radius>k__BackingField: 5
+  <Cooldown>k__BackingField: 30
+  <Damage>k__BackingField: 210
+  <Radius>k__BackingField: 4
   <AimPrefab>k__BackingField: {fileID: -7253956914196207495, guid: dec463a7aab7ab7489701ffb37bc966f,
     type: 3}
   <ExplosionPrefab>k__BackingField: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,

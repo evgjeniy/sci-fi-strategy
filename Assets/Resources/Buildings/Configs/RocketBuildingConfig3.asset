@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: RocketBuildingConfig3
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 3
-  <Price>k__BackingField: 140
-  <Compensation>k__BackingField: 320
+  <Price>k__BackingField: 200
+  <Compensation>k__BackingField: 250
   <Mask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
   <Radius>k__BackingField: 10
-  <Damage>k__BackingField: 9
-  <Cooldown>k__BackingField: 0.4
-  <MaxTargets>k__BackingField: 3
+  <Damage>k__BackingField: 8
+  <Cooldown>k__BackingField: 0.7
+  <MaxTargets>k__BackingField: 2
   <SectorAngle>k__BackingField: 60
   <ProjectilePrefab>k__BackingField: {fileID: 3020685036469273396, guid: 06347687b9a8b424c95b6862f55f5040,
     type: 3}
