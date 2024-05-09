@@ -2,13 +2,6 @@
 
 namespace SustainTheStrain.Tips
 {
-    public interface IPauseManager
-    {
-        public bool Paused { get; }
-        public void Pause();
-        public void Unpause();
-    }
-
     public class PauseManager : IPauseManager
     {
         private float _lastSaveTimeScale = 1.0f;
