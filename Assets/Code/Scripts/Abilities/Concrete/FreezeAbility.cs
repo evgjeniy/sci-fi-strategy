@@ -74,7 +74,7 @@ namespace SustainTheStrain.Abilities
                 if (unit.TryGetComponent<Outline>(out var outline))
                     outline.Disable();
 
-                stunConfig.EnableSkill(unit.gameObject);
+                stunConfig.EnableSkillWithDuration(unit.gameObject, _config.Duration);
             }
 
         }
