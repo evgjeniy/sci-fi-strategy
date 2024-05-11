@@ -1,4 +1,5 @@
 using SustainTheStrain.Level;
+using SustainTheStrain.Scriptable;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -45,7 +46,17 @@ namespace SustainTheStrain
                 return false;
             }))
             {
-                initiator.ActivateInit(_waveManager.LevelData.waves[wave]._spawners[0].delay, new List<string>());
+                List<string> enemyeTypes = new List<string>();
+
+                foreach (var subwave in _waveManager.LevelData.waves[wave]._spawners[initiator.SpawnerIndex].subwaves)
+                    foreach (var group in subwave.enemyGroup)
+                    {
+                        if (!enemyeTypes.Contains(group.enemyType))
+                        {
+                            enemyeTypes.Add(group.enemyType);
+                        }
+                    }
+                initiator.ActivateInit(_waveManager.LevelData.waves[wave]._spawners[0].delay, enemyeTypes);
             }
         }
 
