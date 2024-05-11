@@ -34,20 +34,20 @@ namespace SustainTheStrain.Buildings
         private void UpdateTipContent(BarrackBuildingConfig config)
         {
             _uiTip.text = config.NextLevelConfig != null
-                ? $@"<b>Barrack (Level {config.Level})</b>
-<b>Stats</b>
-Radius: {config.Radius} {config.NextLevelConfig.Radius.GetUpgradeString(config.Radius)}
-UnitMaxHealth: {config.UnitMaxHealth} {config.NextLevelConfig.UnitMaxHealth.GetUpgradeString(config.UnitMaxHealth)}
-UnitAttackDamage: {config.UnitAttackDamage} {config.NextLevelConfig.UnitAttackDamage.GetUpgradeString(config.UnitAttackDamage)}
-UnitAttackCooldown: {config.UnitAttackCooldown} {config.NextLevelConfig.UnitAttackCooldown.GetUpgradeString(config.UnitAttackCooldown)}
-RespawnCooldown: {config.RespawnCooldown} {config.NextLevelConfig.RespawnCooldown.GetUpgradeString(config.RespawnCooldown)}"
-                : $@"<b>Barrack (Level {config.Level})</b>
-<b>Stats</b>
-Radius: {config.Radius}
-UnitMaxHealth: {config.UnitMaxHealth}
-UnitAttackDamage: {config.UnitAttackDamage}
-UnitAttackCooldown: {config.UnitAttackCooldown}
-RespawnCooldown: {config.RespawnCooldown}";
+                ? $@"<b>Казарма (Уровень {config.Level})</b>
+<b>Характеристики</b>
+Радиус: {config.Radius} {config.NextLevelConfig.Radius.GetUpgradeString(config.Radius)}
+Здоровье рекрута: {config.UnitMaxHealth} {config.NextLevelConfig.UnitMaxHealth.GetUpgradeString(config.UnitMaxHealth)}
+Урон рекрута: {config.UnitAttackDamage} {config.NextLevelConfig.UnitAttackDamage.GetUpgradeString(config.UnitAttackDamage)}
+Скорость атаки: {config.UnitAttackCooldown} {config.NextLevelConfig.UnitAttackCooldown.GetUpgradeString(config.UnitAttackCooldown)}
+Скорость возрождения: {config.RespawnCooldown} {config.NextLevelConfig.RespawnCooldown.GetUpgradeString(config.RespawnCooldown)}"
+                : $@"<b>Казарма (Уровень {config.Level})</b>
+<b>Характеристики</b>
+Радиус: {config.Radius}
+Здоровье рекрута: {config.UnitMaxHealth}
+Урон рекрута: {config.UnitAttackDamage}
+Скорость атаки: {config.UnitAttackCooldown}
+Скорость возрождения: {config.RespawnCooldown}";
         }
     }
 }

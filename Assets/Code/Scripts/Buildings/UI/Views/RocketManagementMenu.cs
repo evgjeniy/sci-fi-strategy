@@ -20,18 +20,18 @@ namespace SustainTheStrain.Buildings
         private void UpdateTipContent(RocketBuildingConfig config)
         {
             _uiTip.text = config.NextLevelConfig != null
-                ? $@"<b>Rocket (Level {config.Level})</b>
-<b>Stats</b>
-Radius: {config.Radius} {config.NextLevelConfig.Radius.GetUpgradeString(config.Radius)}
-Damage: {config.Damage} {config.NextLevelConfig.Damage.GetUpgradeString(config.Damage)}
-Cooldown: {config.Cooldown} {config.NextLevelConfig.Cooldown.GetUpgradeString(config.Cooldown)}
-Targets: {config.MaxTargets} {config.NextLevelConfig.MaxTargets.GetUpgradeString(config.MaxTargets)}"
-                : $@"<b>Rocket (Level {config.Level})</b>
-<b>Stats</b>
-Radius: {config.Radius}
-Damage: {config.Damage}
-Cooldown: {config.Cooldown}
-Targets: {config.MaxTargets}";
+                ? $@"<b>Ракетница (Уровень {config.Level})</b>
+<b>Характеристики</b>
+Радиус: {config.Radius} {config.NextLevelConfig.Radius.GetUpgradeString(config.Radius)}
+Урон: {config.Damage} {config.NextLevelConfig.Damage.GetUpgradeString(config.Damage)}
+Перезарядка: {config.Cooldown} {config.NextLevelConfig.Cooldown.GetUpgradeString(config.Cooldown)}
+Кол-во целей: {config.MaxTargets} {config.NextLevelConfig.MaxTargets.GetUpgradeString(config.MaxTargets)}"
+                : $@"<b>Ракетница (Уровень {config.Level})</b>
+<b>Характеристики</b>
+Радиус: {config.Radius}
+Урон: {config.Damage}
+Перезарядка: {config.Cooldown}
+Кол-во целей: {config.MaxTargets}";
         }
     }
 }
