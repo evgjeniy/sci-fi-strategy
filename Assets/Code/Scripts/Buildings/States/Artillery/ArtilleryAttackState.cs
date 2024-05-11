@@ -1,5 +1,5 @@
-﻿using SustainTheStrain.Units;
-using UnityEngine;
+﻿using NTC.Pool;
+using SustainTheStrain.Units;
 using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
@@ -22,7 +22,7 @@ namespace SustainTheStrain.Buildings
 
             if (artillery.Timer.IsOver)
             {
-                Object.Instantiate(artillery.Config.ProjectilePrefab)
+                NightPool.Spawn(artillery.Config.ProjectilePrefab)
                     .With(x => x.transform.position = artillery.SpawnPointProvider.SpawnPoint.position)
                     .LaunchTo(_target, onComplete: damageable => Explosion(artillery, damageable));
                 

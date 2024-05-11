@@ -1,4 +1,5 @@
-﻿using SustainTheStrain.Units;
+﻿using NTC.Pool;
+using SustainTheStrain.Units;
 using UnityEngine;
 using UnityEngine.Extensions;
 
@@ -29,7 +30,7 @@ namespace SustainTheStrain.Buildings
                 if (attackedAmount >= rocket.Config.MaxTargets) break;
                 if (!IsInSector(rocket, target.transform)) continue;
 
-                Object.Instantiate(rocket.Config.ProjectilePrefab)
+                NightPool.Spawn(rocket.Config.ProjectilePrefab)
                     .With(x => x.transform.position = rocket.SpawnPointProvider.SpawnPoint.position)
                     .LaunchTo(target, onComplete: damageable =>
                     {

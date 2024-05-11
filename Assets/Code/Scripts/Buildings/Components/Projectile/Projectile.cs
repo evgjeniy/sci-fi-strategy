@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using NTC.Pool;
 using UnityEngine;
 using UnityEngine.Extensions;
 
@@ -40,7 +41,7 @@ namespace SustainTheStrain.Buildings
                 yield return new WaitForSeconds(explosionParticle.main.duration);
             }
 
-            gameObject.DestroyObject();
+            NightPool.Despawn(gameObject);
         }
     }
 }
