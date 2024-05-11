@@ -68,6 +68,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
                 _attackTime = 0;
                 context.Duelable.Opponent.Damageable.Damage(context.Damage);
             }
+            LookAtOpponent();
         }
 
         public override void PhysicsUpdate()
@@ -76,6 +77,17 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
             {
                 if(context.Duelable.Opponent != duelable) context.Duelable.RequestDuel(duelable);
             });
+        }
+
+        private void LookAtOpponent()
+        {
+            Quaternion lookRotation = 
+                Quaternion.LookRotation((context.Duelable.Opponent.transform.position - context.transform.position).normalized);
+	
+            //over time
+            context.transform.rotation = 
+                Quaternion.Slerp(context.transform.rotation, lookRotation, Time.deltaTime * 3);
+            
         }
     }
 }
