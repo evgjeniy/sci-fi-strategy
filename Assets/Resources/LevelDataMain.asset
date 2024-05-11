@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waves:
   - _spawners:
-    - _delay: 15
+    - _delay: 1e+10
       _index: 0
       _subwaves:
       - _delay: 6
