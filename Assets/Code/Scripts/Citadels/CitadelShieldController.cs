@@ -29,6 +29,14 @@ namespace SustainTheStrain.Citadels
         }
 
         public override void CacheUiTip(TMP_Text uiTip) { _uiTip = uiTip; UpdateTip(this); }
-        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = $"Active cells: {system.CurrentEnergy}");
+        private void UpdateTip(IEnergySystem system)
+        {
+            _uiTip.IfNotNull(tip => tip.text = 
+$@"<b><align=""center"">Щит цитадели (энергия: <color=""green"">{system.CurrentEnergy}</color>)</align></b>
+Защищает цитадель от получаемого урона. С каждым вложенным
+блоком энергии появляется ячейка защиты. Уничтоженные ячейки
+щита восстанавливаются, если не получают урон.
+Здоровье одной ячейки: <b><#55FF55>200 ед.</color></b>");
+        }
     }
 }
