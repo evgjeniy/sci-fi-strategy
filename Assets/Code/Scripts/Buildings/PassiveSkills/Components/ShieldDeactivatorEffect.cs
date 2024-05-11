@@ -8,7 +8,6 @@ namespace SustainTheStrain.Buildings
     {
         private Coroutine _routine;
         private Shield _shield;
-        private int _shieldCells;
 
         public void Initialize(float duration)
         {
@@ -18,21 +17,16 @@ namespace SustainTheStrain.Buildings
             }
             else
             {
-                if (_routine == null) _shieldCells = _shield.CellsCount;
-                else StopCoroutine(_routine);
-
+                if (_routine != null) StopCoroutine(_routine);
                 _routine = StartCoroutine(DeactivateShield(duration));
             }
         }
 
         private IEnumerator DeactivateShield(float duration)
         {
-            _shield.CellsCount = 0;
+            _shield.CellsCount--;
             yield return new WaitForSeconds(duration);
-
-            Destroy(this);
+            _shield.CellsCount++;
         }
-
-        private void OnDestroy() => _shield.CellsCount = _shieldCells;
     }
 }
