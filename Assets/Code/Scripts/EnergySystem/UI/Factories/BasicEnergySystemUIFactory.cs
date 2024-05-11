@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Extensions;
 using Zenject;
 
 namespace SustainTheStrain.EnergySystem.UI.Factories
@@ -22,6 +23,7 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
             var button = ui.ControllButton;
             button.image.sprite = system.EnergySettings.ButtonImage;
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
+            ui.Tip.IfNotNull(system.CacheUiTip);
             _energyUIController.MakeSubscriptions(ui, system);
             return ui;
         }

@@ -1,7 +1,9 @@
 ﻿using System;
 using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Scriptable.EnergySettings;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Extensions;
 using Zenject;
 
 namespace SustainTheStrain.ResourceSystems
@@ -16,6 +18,7 @@ namespace SustainTheStrain.ResourceSystems
         public Sprite ButtonImage => EnergySettings.ButtonImage;
    
         private int _currentEnergy;
+        private TMP_Text _uiTip;
 
         public int CurrentEnergy
         {
@@ -30,6 +33,7 @@ namespace SustainTheStrain.ResourceSystems
                 _currentEnergy = value;
                 _canGenerate = value != 0;
                 Changed?.Invoke(this);
+                UpdateTip(this);
             }
         }
 
@@ -72,5 +76,7 @@ namespace SustainTheStrain.ResourceSystems
 
         public IEnergySystem Value => this;
         public event Action<IEnergySystem> Changed;
+        public void CacheUiTip(TMP_Text uiTip) { _uiTip = uiTip; UpdateTip(this); }
+        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = $"Active cells: {system.CurrentEnergy}");
     }
 }

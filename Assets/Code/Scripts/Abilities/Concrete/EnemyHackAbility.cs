@@ -5,6 +5,7 @@ using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Input;
 using SustainTheStrain.Scriptable.EnergySettings;
 using SustainTheStrain.Units;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Extensions;
 
@@ -18,6 +19,7 @@ namespace SustainTheStrain.Abilities
         
         private int _currentEnergy;
         private Damageble _currentDamageable;
+        private TMP_Text _uiTip;
 
         public IObservable<ITimer> CooldownTimer => _timer;
         public EnergySystemSettings EnergySettings => _config.EnergySettings;
@@ -38,6 +40,7 @@ namespace SustainTheStrain.Abilities
                     _timer.ResetTime(_config.Cooldown);
 
                 Changed(this);
+                UpdateTip(this);
             }
         }
 
@@ -51,6 +54,9 @@ namespace SustainTheStrain.Abilities
             _timer.IsPaused = true;
             _timer.ResetTime(_config.Cooldown);
         }
+
+        public void CacheUiTip(TMP_Text uiTip) { _uiTip = uiTip; UpdateTip(this); }
+        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = $"Active cells: {system.CurrentEnergy}");
 
         IInputState IInputSelectable.OnSelectedLeftClick(IInputState currentState, Ray ray)
         {

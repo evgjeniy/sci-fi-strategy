@@ -1,5 +1,6 @@
 ﻿using SustainTheStrain.Abilities;
 using UnityEngine;
+using UnityEngine.Extensions;
 using UnityEngine.UI;
 using Zenject;
 
@@ -26,6 +27,7 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
             slider.value = 0;
             button.image.sprite = system.EnergySettings.ButtonImage;
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
+            ui.Tip.IfNotNull(system.CacheUiTip);
             _abilityUIController.MakeSubscriptions(ui, system as IAbility, slider);
             return ui;
         }

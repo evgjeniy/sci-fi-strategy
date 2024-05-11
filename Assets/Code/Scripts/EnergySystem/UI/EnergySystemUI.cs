@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SustainTheStrain.EnergySystem.UI
@@ -10,10 +12,13 @@ namespace SustainTheStrain.EnergySystem.UI
         
         [SerializeField] private Image _imagePrefab;
         [SerializeField] private Color _filledColor;
+        [SerializeField] private TMP_Text _tipText;
         
         private List<Image> _images = new();
         private int _coloredCount = 0;
         private int _enabledCount = 0;
+
+        public TMP_Text Tip => _tipText;
         
         public int MaxBarsCount
         {

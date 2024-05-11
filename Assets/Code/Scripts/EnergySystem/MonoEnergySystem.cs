@@ -1,5 +1,6 @@
 ﻿using System;
 using SustainTheStrain.Scriptable.EnergySettings;
+using TMPro;
 using UnityEngine;
 
 namespace SustainTheStrain.EnergySystem
@@ -60,6 +61,8 @@ namespace SustainTheStrain.EnergySystem
             CurrentEnergy -= count;
             return true;
         }
+
+        public abstract void CacheUiTip(TMP_Text uiTip);
 
         public virtual void SetEnergySettings(EnergySystemSettings settings) {}
     }

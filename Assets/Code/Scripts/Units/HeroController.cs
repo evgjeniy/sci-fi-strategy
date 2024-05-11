@@ -1,5 +1,7 @@
 using SustainTheStrain.EnergySystem;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Extensions;
 using Zenject;
 
 namespace SustainTheStrain.Units
@@ -7,7 +9,8 @@ namespace SustainTheStrain.Units
     public class HeroController : MonoEnergySystem
     {
         [Inject] private Hero _hero;
-        
+        private TMP_Text _uiTip;
+
         public EnergyController EnergyController { get; set; }
         
         [Inject]
@@ -39,6 +42,17 @@ namespace SustainTheStrain.Units
         {
             Debug.LogWarning("HeroSelected");
         }
+        
 
+        private void UpdateTip(IEnergySystem system)
+        {
+            _uiTip.IfNotNull(x => x.text = $"Active cells: {system.CurrentEnergy}");
+        }
+
+        public override void CacheUiTip(TMP_Text uiTip)
+        {
+            _uiTip = uiTip;
+            UpdateTip(this);
+        }
     }
 }

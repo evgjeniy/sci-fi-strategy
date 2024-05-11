@@ -1,5 +1,6 @@
 ﻿using System;
 using SustainTheStrain.Scriptable.EnergySettings;
+using TMPro;
 
 namespace SustainTheStrain.EnergySystem
 {
@@ -30,5 +31,7 @@ namespace SustainTheStrain.EnergySystem
             CurrentEnergy = energyAfterRefill;
             return true;
         }
+
+        public void CacheUiTip(TMP_Text uiTip);
     }
 }

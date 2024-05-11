@@ -5,6 +5,7 @@ using SustainTheStrain.Configs.Abilities;
 using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Input;
 using SustainTheStrain.Scriptable.EnergySettings;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Extensions;
 
@@ -18,6 +19,7 @@ namespace SustainTheStrain.Abilities
         private readonly Timer _timer;
 
         private int _currentEnergy;
+        private TMP_Text _uiTip;
 
         public IObservable<ITimer> CooldownTimer => _timer;
         public EnergySystemSettings EnergySettings => _config.EnergySettings;
@@ -38,6 +40,7 @@ namespace SustainTheStrain.Abilities
                     _timer.ResetTime(_config.Cooldown);
 
                 Changed(this);
+                UpdateTip(this);
             }
         }
 
@@ -52,6 +55,9 @@ namespace SustainTheStrain.Abilities
             _timer.ResetTime(_config.Cooldown);
             _timer.Changed += t => _aim.DisplayReload(t);
         }
+
+        public void CacheUiTip(TMP_Text uiTip) { _uiTip = uiTip; UpdateTip(this); }
+        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = $"Active cells: {system.CurrentEnergy}");
 
         void IInputSelectable.OnSelected()
         {
