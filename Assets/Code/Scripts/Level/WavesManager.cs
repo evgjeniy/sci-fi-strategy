@@ -13,6 +13,8 @@ namespace SustainTheStrain.Level
         [SerializeField] private LevelData _levelData;
         [SerializeField] private List<EnemySpawner> _spawners;
 
+        private bool _skipWaveDelay = false;
+
         public int EnemiesAlive
         {
             get
@@ -27,6 +29,7 @@ namespace SustainTheStrain.Level
             }
         }
 
+        public LevelData LevelData { get => _levelData; }
 
         private readonly Dictionary<int, bool> _waveCoroutines = new();
         private int _currentWave = 0;
@@ -34,7 +37,8 @@ namespace SustainTheStrain.Level
         
         public event Action OnLastWaveEnded;
         public event Action<int> OnWaveEnded;
-        public event Action<int> OnWaveStarted; 
+        public event Action<int> OnWaveStarted;
+        public event Action<int> OnWaveStartedDelayed;
 
         private void Update()
         {
@@ -57,9 +61,12 @@ namespace SustainTheStrain.Level
         
         private void StartWave(WaveData waveData)
         {
+            _skipWaveDelay = false;
             OnWaveStarted?.Invoke(_currentWave);
             _waveCoroutines.Clear();
             _waveInProgress = true;
+            _skipWaveDelay = false;
+
             foreach (var spawnerPart in waveData._spawners)
             {
                 Debug.Log($"[WaveManager] Wave {_currentWave} started");
@@ -96,10 +103,22 @@ namespace SustainTheStrain.Level
             StartWave(_levelData.waves[_currentWave]);
         }
 
+        public void SkipWaveDelay()
+        {
+            _skipWaveDelay = true;
+        }
+
         private IEnumerator Wave(SpawnerPart part, EnemySpawner spawner, int index)
         {
-            if (part.delay > 0)
-                yield return new WaitForSeconds(part.delay);
+            var timer = new Timer(part.delay);
+
+            while (!timer.IsOver && !_skipWaveDelay)
+            {
+                timer.Tick();
+                yield return null;
+            }
+
+            OnWaveStartedDelayed?.Invoke(_currentWave);
 
             foreach (var subwave in part.subwaves)
             {

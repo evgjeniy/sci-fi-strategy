@@ -11,12 +11,12 @@ namespace SustainTheStrain.Level
 
         private void OnEnable()
         {
-            _wavesManager.OnWaveStarted += UpdateLabel;
+            _wavesManager.OnWaveStartedDelayed += UpdateLabel;
         }
 
         private void OnDisable()
         {
-            _wavesManager.OnWaveStarted -= UpdateLabel;
+            _wavesManager.OnWaveStartedDelayed -= UpdateLabel;
         }
 
         private void UpdateLabel(int value)
