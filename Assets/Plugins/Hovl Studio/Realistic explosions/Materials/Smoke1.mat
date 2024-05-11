@@ -53,7 +53,7 @@ Material:
     - _InvFade: 3
     - _Mobile: 0
     - _MotionAmount: 0
-    - _Opacity: 0.544
+    - _Opacity: 0.359
     - _Softparticlesfactor: 1
     - _Usedepth: 1
     - __dirty: 1

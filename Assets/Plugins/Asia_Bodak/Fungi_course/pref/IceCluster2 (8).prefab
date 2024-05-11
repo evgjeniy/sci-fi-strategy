@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8264983129252964183
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 21.086864
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 37.35249
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 21.086864
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -88.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 30.4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9873633
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.15847327
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -18.237
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de7d9ccafdb96a34382c2061ea31cb08, type: 2}
+    - target: {fileID: 919132149155446097, guid: ccc622ec8ffc478408d0d1e8e6ca6d73,
+        type: 3}
+      propertyPath: m_Name
+      value: IceCluster2 (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ccc622ec8ffc478408d0d1e8e6ca6d73, type: 3}
