@@ -46,11 +46,19 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         public bool IsOnSpline(out SplineSample resultSample)
         {
             SplineSample result = new SplineSample();
-            _splineFollower.Project(context.transform.position, ref result);
+            var position = context.transform.position;
+            _splineFollower.Project(position, ref result);
 
             resultSample = result;
 
-            return context.transform.position == result.position;
+            var newPos = position + (_splineFollower.motion.offset.x * result.forward);
+            
+            //var newPos = new Vector3(resultSample.position.x + _splineFollower.motion.offset.x, resultSample.position.y, resultSample.position.z);
+            position = newPos;
+            //context.transform.position = position;
+
+            resultSample.position = newPos;
+            return position == result.position;
         }
 
         public override void PhysicsUpdate()
