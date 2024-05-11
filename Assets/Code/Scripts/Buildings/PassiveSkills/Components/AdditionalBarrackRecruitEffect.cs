@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
@@ -21,6 +23,16 @@ namespace SustainTheStrain.Buildings
             _barrack.RecruitGroup.squadMaxSize += _recruitsAmount;
         }
 
-        private void OnDestroy() => _barrack.RecruitGroup.squadMaxSize -= _recruitsAmount;
+        private void OnDestroy()
+        {
+            _barrack.RecruitGroup.squadMaxSize -= _recruitsAmount;
+            
+            while (_barrack.RecruitGroup.Recruits.Count > _barrack.RecruitGroup.squadMaxSize)
+            {
+                var recruitToDelete = _barrack.RecruitGroup.Recruits.Last();
+                _barrack.RecruitGroup.Recruits.Remove(recruitToDelete);
+                recruitToDelete.Duelable.Damageable.Kill(true);
+            }
+        }
     }
 }
