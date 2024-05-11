@@ -1,3 +1,4 @@
+using SustainTheStrain.Units.Components;
 using UnityEngine;
 
 namespace SustainTheStrain.Units
@@ -7,13 +8,13 @@ namespace SustainTheStrain.Units
     {
         [SerializeField] private Timer _timer;
 
-        private Damageble _damageble;
+        private IDamageable _damageble;
 
-        private void Start() => _damageble = GetComponent<Damageble>();
+        private void Start() => _damageble = GetComponent<IDamageable>();
 
         private void Update()
         {
-            _timer.ResetTime(_timer.Time - Time.deltaTime);
+            _timer.Tick();
             
             if (_timer.IsOver)
                 _damageble.Kill(true);

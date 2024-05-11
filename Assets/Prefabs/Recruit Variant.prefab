@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ffc5a6a5fe64a1468d050ef1955b641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageble: {fileID: 6370506300560116558}
+  _damageble: {fileID: 3580164085099643981}
   _shield: {fileID: 0}
   _hpBar: {fileID: 8350337160791406940}
   _shieldBarsHolder: {fileID: 0}
@@ -517,6 +517,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7358440343129375846, guid: d26196ebbe3508543843b41c3962409d, type: 3}
     - {fileID: 2256109187306574386, guid: d26196ebbe3508543843b41c3962409d, type: 3}
+    - {fileID: 2132817689220846837, guid: d26196ebbe3508543843b41c3962409d, type: 3}
     m_RemovedGameObjects:
     - {fileID: 795949853038617089, guid: d26196ebbe3508543843b41c3962409d, type: 3}
     m_AddedGameObjects:
@@ -528,20 +529,37 @@ PrefabInstance:
         type: 3}
       insertIndex: 1
       addedObject: {fileID: 2687894616974422147}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 235370898999074474, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 3580164085099643981}
   m_SourcePrefab: {fileID: 100100000, guid: d26196ebbe3508543843b41c3962409d, type: 3}
---- !u!114 &6370506300560116558 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2132817689220846837, guid: d26196ebbe3508543843b41c3962409d,
+--- !u!1 &5095237268674068753 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 235370898999074474, guid: d26196ebbe3508543843b41c3962409d,
     type: 3}
   m_PrefabInstance: {fileID: 5040055582127267771}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &3580164085099643981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5095237268674068753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddc838324d2690045a19506f5e1cb70a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3272f43aba238a54790e000f24fd2199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
+    type: 3}
+  <MaxHP>k__BackingField: 70
+  <Team>k__BackingField: 1
+  <IsFlying>k__BackingField: 0
+  _recoverDelay: 1
+  _recoverySpeed: 10
 --- !u!4 &8690171393321964968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,

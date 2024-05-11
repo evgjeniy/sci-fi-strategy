@@ -67,7 +67,7 @@ namespace SustainTheStrain.Units
             OnDiedResult?.Invoke(this, suicide);
             
             _afterDeath.IfNotNull(x => Instantiate(x, transform.position, Quaternion.identity));
-            Destroy(gameObject);
+            gameObject.Deactivate();
         }
     }
 }

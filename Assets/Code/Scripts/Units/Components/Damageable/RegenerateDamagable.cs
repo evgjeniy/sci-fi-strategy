@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SustainTheStrain.Units
 {
-    public class HeroDamagable : Damageble
+    public class RegenerateDamagable : Damageble
     {
         private float _lastDamageTime;
         private bool _calm = true;
@@ -18,7 +18,7 @@ namespace SustainTheStrain.Units
             _lastDamageTime = Time.time;
             _calm = false;
             
-            CurrentHP -= damage;
+            base.Damage(damage);
         }
         
         private void Update()
