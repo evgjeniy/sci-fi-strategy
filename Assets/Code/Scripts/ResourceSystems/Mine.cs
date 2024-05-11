@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using SustainTheStrain.EnergySystem;
 using SustainTheStrain.Scriptable.EnergySettings;
 using TMPro;
@@ -77,6 +78,16 @@ namespace SustainTheStrain.ResourceSystems
         public IEnergySystem Value => this;
         public event Action<IEnergySystem> Changed;
         public void CacheUiTip(TMP_Text uiTip) { _uiTip = uiTip; UpdateTip(this); }
-        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = $"Active cells: {system.CurrentEnergy}");
+        private void UpdateTip(IEnergySystem system)
+        {
+            var statsText = new StringBuilder("\n");
+            for (var i = 1; i < GoldMultipliers.Length; i++) 
+                statsText.AppendLine($"Блок {i} <b><#DD0000>+{(GoldMultipliers[i] - 1) * 100:0.0}%</color></b>");
+
+            _uiTip.IfNotNull(tip => tip.text = 
+$@"<b><align=""center"">Шахта (энергия: <color=""green"">{system.CurrentEnergy}</color>)</align></b>
+Повышает награду за каждого уничтоженного врага
+Характеристики:" + statsText);
+        }
     }
 }
