@@ -45,7 +45,7 @@ namespace SustainTheStrain
                 return false;
             }))
             {
-                initiator.ActivateInit(_waveManager.LevelData.waves[wave]._spawners[0].delay);
+                initiator.ActivateInit(_waveManager.LevelData.waves[wave]._spawners[0].delay, new List<string>());
             }
         }
 

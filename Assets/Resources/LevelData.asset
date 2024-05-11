@@ -37,3 +37,10 @@ MonoBehaviour:
         _spawnPeriod: 0
         _enemyCount: 0
         _enemyGroup: []
+    - _delay: 2
+      _index: 1
+      _subwaves:
+      - _delay: 10
+        _spawnPeriod: 0
+        _enemyCount: 0
+        _enemyGroup: []
