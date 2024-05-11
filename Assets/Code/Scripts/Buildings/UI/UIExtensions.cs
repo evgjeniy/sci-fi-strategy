@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Globalization;
+using UnityEngine;
 
 namespace SustainTheStrain.Buildings
 {
@@ -24,6 +25,30 @@ namespace SustainTheStrain.Buildings
                 uiTransform.position = Vector3.Lerp(from.position, cameraTransform.position, positionLerpOffset);
                 uiTransform.LookAt(uiTransform.position + cameraTransform.forward, cameraTransform.up);
             }
+        }
+        
+        public static string GetUpgradeString(this float firstNumber, float secondNumber)
+        {
+            var number = firstNumber - secondNumber;
+
+            return number switch
+            {
+                > 0 => $"<color=\"green\">+{number:0.00}</color>",
+                < 0 => $"<color=\"red\">-{number:0.00}</color>",
+                _ => ""
+            };
+        }
+        
+        public static string GetUpgradeString(this int firstNumber, int secondNumber)
+        {
+            var number = firstNumber - secondNumber;
+
+            return number switch
+            {
+                > 0 => $"<color=\"green\">+{number}</color>",
+                < 0 => $"<color=\"red\">-{number}</color>",
+                _ => ""
+            };
         }
     }
 }
