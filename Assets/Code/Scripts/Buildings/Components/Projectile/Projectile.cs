@@ -6,11 +6,17 @@ using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
-    public class Projectile : MonoBehaviour
+    public class Projectile : MonoBehaviour, ISpawnable
     {
         [SerializeField] private float flyingTime = 2.0f;
         [SerializeField] private ParticleSystem explosionParticle;
-        
+
+        private MeshRenderer _meshRenderer;
+
+        private void Awake() => _meshRenderer = GetComponent<MeshRenderer>();
+
+        public void OnSpawn() => _meshRenderer.Enable();
+
         public void LaunchTo<T>(T target, Action<T> onComplete = null) where T : Component
         {
             StartCoroutine(LaunchToAsync(target, onComplete));
@@ -37,7 +43,7 @@ namespace SustainTheStrain.Buildings
             if (explosionParticle != null)
             {
                 explosionParticle.Play();
-                GetComponentInChildren<MeshRenderer>().IfNotNull(meshRenderer => meshRenderer.Disable());
+                _meshRenderer.Disable();
                 yield return new WaitForSeconds(explosionParticle.main.duration);
             }
 
