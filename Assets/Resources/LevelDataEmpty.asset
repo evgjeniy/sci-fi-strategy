@@ -19,7 +19,7 @@ MonoBehaviour:
       _subwaves:
       - _delay: 0
         _spawnPeriod: 2
-        _enemyCount: 20
+        _enemyCount: 1
         _enemyGroup:
         - _enemyType: Tank
           _xOffset: 1.5
