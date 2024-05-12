@@ -54,10 +54,15 @@ namespace SustainTheStrain.Abilities
             _timer = timer;
             _timer.IsPaused = true;
             _timer.ResetTime(_config.Cooldown);
+            _timer.Changed += t => UpdateTip(this);
         }
 
         public void CacheUiTip(TMP_Text uiTip) { _uiTip = uiTip; UpdateTip(this); }
-        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = $"Active cells: {system.CurrentEnergy}");
+
+        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = 
+            $@"<b><align=""center"">Электромагнитный импульс (энергия: <color=""green"">{system.CurrentEnergy}</color>)</align></b>
+Оглушает всех врагов на карте в момент применения в течение <b>{_config.Duration} сек.</b>
+Перезарядка: <b><#{(_timer.IsOver ? "55FF55" : "FF0000")}>{_config.Cooldown - _timer.Time:0.0}</color>/{_config.Cooldown} сек.</b>");
 
         IInputState IInputSelectable.OnSelectedLeftClick(IInputState currentState, Ray ray)
         {

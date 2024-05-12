@@ -52,11 +52,16 @@ namespace SustainTheStrain.Abilities
             _timer = timer;
             _timer.IsPaused = true;
             _timer.ResetTime(_config.Cooldown);
-            _timer.Changed += t => _aim.DisplayReload(t);
+            _timer.Changed += t => { _aim.DisplayReload(t); UpdateTip(this); };
         }
 
         public void CacheUiTip(TMP_Text uiTip) { _uiTip = uiTip; UpdateTip(this); }
-        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = $"Active cells: {system.CurrentEnergy}");
+
+        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = 
+            $@"<b><align=""center"">Орбитальный удар (энергия: <color=""green"">{system.CurrentEnergy}</color>)</align></b>
+Однократно наносит <b>{_config.Damage} ед.</b> урона по указанной
+области радиусом <b>{_config.Radius} м</b>. Безопасно для союзных юнитов.
+Перезарядка: <b><#{(_timer.IsOver ? "55FF55" : "FF0000")}>{_config.Cooldown - _timer.Time:0.0}</color>/{_config.Cooldown} сек.</b>");
 
         void IInputSelectable.OnSelected()
         {

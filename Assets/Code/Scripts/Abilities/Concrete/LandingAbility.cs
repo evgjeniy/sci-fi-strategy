@@ -53,11 +53,18 @@ namespace SustainTheStrain.Abilities
             _timer = timer;
             _timer.IsPaused = true;
             _timer.ResetTime(_config.Cooldown);
-            _timer.Changed += t => _aim.DisplayReload(t);
+            _timer.Changed += t => { _aim.DisplayReload(t); UpdateTip(this); };
         }
 
         public void CacheUiTip(TMP_Text uiTip) { _uiTip = uiTip; UpdateTip(this); }
-        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = $"Active cells: {system.CurrentEnergy}");
+
+        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = 
+            $@"<b><align=""center"">Десант (энергия: <color=""green"">{system.CurrentEnergy}</color>)</align></b>
+Приказывает в указанную точку отряд из трёх юнитов.
+Одновременное в игре может находиться не более {_config.MaxSquads} отрядов
+Здоровье: <b>70 ед.</b>
+Урон: <b>6 ед.</b>
+Перезарядка: <b><#{(_timer.IsOver ? "55FF55" : "FF0000")}>{_config.Cooldown - _timer.Time:0.0}</color>/{_config.Cooldown} сек.</b>");
 
         void IInputSelectable.OnSelected()
         {
