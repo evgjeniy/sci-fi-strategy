@@ -1,3 +1,5 @@
+using Dreamteck.Splines;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +11,11 @@ namespace SustainTheStrain.Units
         
         [SerializeField]
         private List<Vector3> _duelOffsets;
+        [SerializeField]
+        private SplineComputer _duelSpline;
+
+        private float _duelOffset = 0.05f;
+
         public override bool HasOpponent { get => _opponents.Count > 0; }
         public override Vector3 DuelPosition
         {
@@ -25,11 +32,17 @@ namespace SustainTheStrain.Units
 
         public override Vector3 GetNearestDuelPosition(Vector3 position)
         {
-            int minIndex = 0;
-            for (int i = 0; i < _duelOffsets.Count; i++)
-                if (Vector3.Distance(position, transform.position + _duelOffsets[i]) < Vector3.Distance(position, transform.position + _duelOffsets[minIndex]))
-                    minIndex = i;
-            return transform.position + _duelOffsets[minIndex];
+            _duelSpline.Evaluate(0.5f);
+
+            int d = _opponents.Count % 2 == 0 ? -1 : 1;
+
+            return _duelSpline.Evaluate(0.5f + d * _duelOffset * _opponents.Count).position;
+
+            //int minIndex = 0;
+            //for (int i = 0; i < _duelOffsets.Count; i++)
+            //    if (Vector3.Distance(position, transform.position + _duelOffsets[i]) < Vector3.Distance(position, transform.position + _duelOffsets[minIndex]))
+            //        minIndex = i;
+            //return transform.position + _duelOffsets[minIndex];
         }
 
         public override bool IsDuelPossible(Duelable initiator)
