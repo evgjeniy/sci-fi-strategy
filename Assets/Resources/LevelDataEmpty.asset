@@ -21,5 +21,5 @@ MonoBehaviour:
         _spawnPeriod: 2
         _enemyCount: 20
         _enemyGroup:
-        - _enemyType: Tank
+        - _enemyType: Mob_Shield
           _xOffset: 1.5

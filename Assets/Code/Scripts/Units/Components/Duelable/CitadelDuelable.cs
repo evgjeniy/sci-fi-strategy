@@ -2,11 +2,13 @@ using Dreamteck.Splines;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace SustainTheStrain.Units
 {
     public class CitadelDuelable : Duelable
     {
+        private Dictionary<Duelable, Vector3> _positions = new Dictionary<Duelable, Vector3>();
         private List<Duelable> _opponents = new List<Duelable>();
         
         [SerializeField]
@@ -30,14 +32,18 @@ namespace SustainTheStrain.Units
             }
         }
 
-        public override Vector3 GetNearestDuelPosition(Vector3 position)
+        public override Vector3 GetNearestDuelPosition(Vector3 position, Duelable requester)
         {
+            if(_positions.ContainsKey(requester)) return _positions[requester];
+
             _duelSpline.Evaluate(0.5f);
 
             int d = _opponents.Count % 2 == 0 ? -1 : 1;
 
-            return _duelSpline.Evaluate(0.5f + d * _duelOffset * _opponents.Count).position;
+            _positions.Add(requester, _duelSpline.Evaluate(Mathf.Clamp01(0.5f + d * _duelOffset * (_opponents.Count % (1f/ _duelOffset)))).position);
 
+
+            return _positions[requester];
             //int minIndex = 0;
             //for (int i = 0; i < _duelOffsets.Count; i++)
             //    if (Vector3.Distance(position, transform.position + _duelOffsets[i]) < Vector3.Distance(position, transform.position + _duelOffsets[minIndex]))
@@ -82,12 +88,18 @@ namespace SustainTheStrain.Units
             if (!_opponents.Contains(dueler)) return;
 
             dueler.Damageable.OnDied -= OpponentDead;
+            _positions.Remove(dueler);
             _opponents.Remove(dueler);
         }
 
         private void OpponentDead(Damageble damageble)
         {
-            BreakDuel();
+            if (_opponents.Count == 0) return;
+
+            var d = damageble.GetComponent<Duelable>();
+
+            d.RemoveOpponent(this);
+            RemoveOpponent(d);
         }
 
         private void OnDrawGizmos()
