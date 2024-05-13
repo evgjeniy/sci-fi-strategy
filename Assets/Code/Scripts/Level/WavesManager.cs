@@ -122,8 +122,6 @@ namespace SustainTheStrain.Level
 
             foreach (var subwave in part.subwaves)
             {
-                yield return new WaitForSeconds(subwave.delay);
-
                 for (int i = 0; i < subwave.enemyCount; i++)
                 {
                     foreach (var groupItem in subwave.enemyGroup)
@@ -133,7 +131,7 @@ namespace SustainTheStrain.Level
                     }
                     yield return new WaitForSeconds(subwave.spawnPeriod);
                 }
-                
+                yield return new WaitForSeconds(subwave.delay);
             }
 
             _waveCoroutines[index] = true;
