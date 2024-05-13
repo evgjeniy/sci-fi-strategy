@@ -23,7 +23,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         public override void EnterState()
         {
             context.SwitchPathFollower(context.NavPathFollower);
-            context.NavPathFollower.MoveTo(context.Duelable.Opponent.GetNearestDuelPosition(context.transform.position));
+            context.NavPathFollower.MoveTo(context.Duelable.Opponent.GetNearestDuelPosition(context.transform.position, context.Duelable));
 
             _time = 0;
             
@@ -51,9 +51,10 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
                 return;
             }
 
-            context.NavPathFollower.MoveTo(context.Duelable.Opponent.GetNearestDuelPosition(context.transform.position));
+            var position = context.Duelable.Opponent.GetNearestDuelPosition(context.transform.position, context.Duelable);
+            context.NavPathFollower.MoveTo(position);
 
-            if (context.CheckIfInAttackZone(context.Duelable.Opponent))
+            if (context.CheckIfInAttackZone(context.Duelable.Opponent) && Vector3.Distance(position, context.transform.position) < 3f)
                 context.StateMachine.ChangeState(_attackState);
 
             _time += Time.deltaTime;

@@ -13,7 +13,7 @@ namespace SustainTheStrain.Units
         [field:SerializeField] public float DamagePeriod { get; set; }
 
         [SerializeField] public Animator Animator;
-        [SerializeField] public GameObject _afterDeath;
+
         public IPathFollower CurrentPathFollower { get; protected set; }   
         protected StateMachine.StateMachine _stateMachine = new();
     
@@ -87,12 +87,6 @@ namespace SustainTheStrain.Units
         }
 
         #endregion
-
-        private void OnDestroy()
-        {
-            if(_afterDeath != null)
-                Instantiate(_afterDeath, transform.position, Quaternion.identity);
-        }
 
         public void SwitchPathFollower(IPathFollower pathFollower)
         {

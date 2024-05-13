@@ -120,6 +120,8 @@ namespace SustainTheStrain.Level
 
             OnWaveStartedDelayed?.Invoke(_currentWave);
 
+            yield return new WaitForSeconds(part.nonIgnorableDelay);
+
             foreach (var subwave in part.subwaves)
             {
                 for (int i = 0; i < subwave.enemyCount; i++)
