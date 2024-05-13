@@ -1,6 +1,5 @@
 using Dreamteck.Splines;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
-using UnityEngine;
 using Zenject;
 
 namespace SustainTheStrain.Units
@@ -62,13 +61,7 @@ namespace SustainTheStrain.Units
 
             _stateMachine.Initialize(_splineMoveState);
         }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(_splineMoveState.last, 0.5f);
-        }
-
+        
         public class Factory : IFactory<Enemy>
         {
             private readonly Enemy _refEnemyPrefab;

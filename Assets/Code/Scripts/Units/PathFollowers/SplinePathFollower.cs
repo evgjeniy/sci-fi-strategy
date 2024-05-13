@@ -68,7 +68,6 @@ namespace SustainTheStrain.Units
         public void Start()
         {
             follower.Enable();
-            follower.SetPercent(follower.spline.Project(follower.transform.position).percent);
             follower.follow = true;
         }
     }

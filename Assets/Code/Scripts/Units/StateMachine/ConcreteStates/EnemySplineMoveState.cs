@@ -33,7 +33,6 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void FrameUpdate()
         {
-
             if (!_isOnSpline)
                 if (context.NavPathFollower.IsDestinationReached())
                 {
@@ -44,25 +43,14 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
             if (context.Duelable.HasOpponent) context.StateMachine.ChangeState(_aggroState);   
         }
 
-        public Vector3 last = Vector3.zero;
-
         public bool IsOnSpline(out SplineSample resultSample)
         {
             SplineSample result = new SplineSample();
-            var position = context.transform.position;
-            _splineFollower.Project(position, ref result);
-            Vector3 s;
-            if (_splineFollower.motion.offset.x > 0)
-                s = Vector3.Cross(result.forward, Vector3.down).normalized * _splineFollower.motion.offset.x;
-            else
-                s = Vector3.Cross(result.forward, Vector3.up).normalized * _splineFollower.motion.offset.x;
+            _splineFollower.Project(context.transform.position, ref result);
 
-            var newPos = new Vector3(result.position.x + s.x, result.position.y + _splineFollower.motion.offset.y, result.position.z + s.z);
-
-            result.position = newPos;
             resultSample = result;
-            last = result.position;
-            return position == result.position;
+
+            return context.transform.position == result.position;
         }
 
         public override void PhysicsUpdate()
