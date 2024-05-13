@@ -11,7 +11,7 @@ namespace SustainTheStrain.Units
         public override Vector3 DuelPosition => transform.position + _duelOffset;
         public override Duelable Opponent => _opponent;
 
-        public override Vector3 GetNearestDuelPosition(Vector3 position)
+        public override Vector3 GetNearestDuelPosition(Vector3 position, Duelable requester)
         {
             return transform.position + _duelOffset;
         }
