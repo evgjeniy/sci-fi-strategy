@@ -81,6 +81,8 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         private void LookAtOpponent()
         {
+            if (context.Duelable.Opponent == null) return;
+
             Quaternion lookRotation = 
                 Quaternion.LookRotation((context.Duelable.Opponent.transform.position - context.transform.position).normalized);
 	
