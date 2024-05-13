@@ -1,14 +1,21 @@
+using Dreamteck.Splines;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace SustainTheStrain.Units
 {
     public class CitadelDuelable : Duelable
     {
+        private Dictionary<Duelable, Vector3> _positions = new Dictionary<Duelable, Vector3>();
         private List<Duelable> _opponents = new List<Duelable>();
         
         [SerializeField]
-        private List<Vector3> _duelOffsets;
+        private SplineComputer _duelSpline;
+
+        private float _duelOffset = 0.05f;
+
         public override bool HasOpponent { get => _opponents.Count > 0; }
         public override Vector3 DuelPosition
         {
@@ -23,13 +30,18 @@ namespace SustainTheStrain.Units
             }
         }
 
-        public override Vector3 GetNearestDuelPosition(Vector3 position)
+        public override Vector3 GetNearestDuelPosition(Vector3 position, Duelable requester)
         {
-            int minIndex = 0;
-            for (int i = 0; i < _duelOffsets.Count; i++)
-                if (Vector3.Distance(position, transform.position + _duelOffsets[i]) < Vector3.Distance(position, transform.position + _duelOffsets[minIndex]))
-                    minIndex = i;
-            return transform.position + _duelOffsets[minIndex];
+            if(_positions.ContainsKey(requester)) return _positions[requester];
+
+            _duelSpline.Evaluate(0.5f);
+
+            int d = _opponents.Count % 2 == 0 ? -1 : 1;
+
+            _positions.Add(requester, _duelSpline.Evaluate(Mathf.Clamp01(0.5f + d * _duelOffset * (_opponents.Count % (1f/ _duelOffset)))).position);
+
+
+            return _positions[requester];
         }
 
         public override bool IsDuelPossible(Duelable initiator)
@@ -59,9 +71,6 @@ namespace SustainTheStrain.Units
         public override void BreakDuel()
         {
             if (_opponents.Count == 0) return;
-
-            //dueler.RemoveOpponent(this);
-            //RemoveOpponent(dueler);
         }
 
         public override void RemoveOpponent(Duelable dueler)
@@ -69,21 +78,18 @@ namespace SustainTheStrain.Units
             if (!_opponents.Contains(dueler)) return;
 
             dueler.Damageable.OnDied -= OpponentDead;
+            _positions.Remove(dueler);
             _opponents.Remove(dueler);
         }
 
         private void OpponentDead(Damageble damageble)
         {
-            BreakDuel();
-        }
+            if (_opponents.Count == 0) return;
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            foreach (var offset in _duelOffsets)
-            {
-                Gizmos.DrawWireSphere(transform.position + offset, 0.5f);
-            }
+            var d = damageble.GetComponent<Duelable>();
+
+            d.RemoveOpponent(this);
+            RemoveOpponent(d);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace SustainTheStrain.Units
             Damageable = GetComponent<IDamageable>();
         }
 
-        public abstract Vector3 GetNearestDuelPosition(Vector3 position);
+        public abstract Vector3 GetNearestDuelPosition(Vector3 position, Duelable requester);
         
         public abstract bool IsDuelPossible(Duelable initiator);
         public abstract bool RequestDuel(Duelable dueler);
