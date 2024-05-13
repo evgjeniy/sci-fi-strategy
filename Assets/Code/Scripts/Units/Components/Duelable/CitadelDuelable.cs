@@ -12,8 +12,6 @@ namespace SustainTheStrain.Units
         private List<Duelable> _opponents = new List<Duelable>();
         
         [SerializeField]
-        private List<Vector3> _duelOffsets;
-        [SerializeField]
         private SplineComputer _duelSpline;
 
         private float _duelOffset = 0.05f;
@@ -44,11 +42,6 @@ namespace SustainTheStrain.Units
 
 
             return _positions[requester];
-            //int minIndex = 0;
-            //for (int i = 0; i < _duelOffsets.Count; i++)
-            //    if (Vector3.Distance(position, transform.position + _duelOffsets[i]) < Vector3.Distance(position, transform.position + _duelOffsets[minIndex]))
-            //        minIndex = i;
-            //return transform.position + _duelOffsets[minIndex];
         }
 
         public override bool IsDuelPossible(Duelable initiator)
@@ -78,9 +71,6 @@ namespace SustainTheStrain.Units
         public override void BreakDuel()
         {
             if (_opponents.Count == 0) return;
-
-            //dueler.RemoveOpponent(this);
-            //RemoveOpponent(dueler);
         }
 
         public override void RemoveOpponent(Duelable dueler)
@@ -100,15 +90,6 @@ namespace SustainTheStrain.Units
 
             d.RemoveOpponent(this);
             RemoveOpponent(d);
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            foreach (var offset in _duelOffsets)
-            {
-                Gizmos.DrawWireSphere(transform.position + offset, 0.5f);
-            }
         }
     }
 }
