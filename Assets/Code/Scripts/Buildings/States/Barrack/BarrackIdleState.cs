@@ -16,9 +16,9 @@ namespace SustainTheStrain.Buildings
                 {
                     var recruit = barrack.RecruitSpawner.Spawn()
                         .With(x => x.SetParent(barrack.transform))
-                        .With(x => x.Damage = barrack.Config.UnitAttackDamage)
-                        .With(x => x.Duelable.Damageable.MaxHP = barrack.Config.UnitMaxHealth)
-                        .With(x => x.Duelable.Damageable.CurrentHP = barrack.Config.UnitMaxHealth)
+                        .With(x => x.Damage = barrack.Config.UnitAttackDamage * barrack.BarrackSystem.DamageMultiplier)
+                        .With(x => x.Duelable.Damageable.MaxHP = barrack.Config.UnitMaxHealth * barrack.BarrackSystem.HealthMultiplier)
+                        .With(x => x.Duelable.Damageable.CurrentHP = barrack.Config.UnitMaxHealth * barrack.BarrackSystem.HealthMultiplier)
                         .With(x => x.DamagePeriod = barrack.Config.UnitAttackCooldown);
                     
                     

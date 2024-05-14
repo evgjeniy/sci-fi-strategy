@@ -23,9 +23,9 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
         {
             var ui = Object.Instantiate(_uiPrefab, _spawnParent);
             var button = ui.ControllButton;
-            var slider = button.transform.parent.GetComponent<Slider>();
+            var slider = button.transform.parent.GetComponentInChildren<Slider>();
             slider.value = 0;
-            button.image.sprite = system.EnergySettings.ButtonImage;
+            ui.SetIcon(system.EnergySettings.ButtonImage);
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
             ui.Tip.IfNotNull(system.CacheUiTip);
             _abilityUIController.MakeSubscriptions(ui, system as IAbility, slider);

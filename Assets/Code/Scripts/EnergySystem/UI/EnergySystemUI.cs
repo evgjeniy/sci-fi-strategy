@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Extensions;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ namespace SustainTheStrain.EnergySystem.UI
         [field: SerializeField] public EnergySystemControllButton ControllButton { get; private set; }
         
         [SerializeField] private Image _imagePrefab;
+        [SerializeField] private Image _icon;
+        [SerializeField] private RectTransform _barsHolder;
         [SerializeField] private Color _filledColor;
         [SerializeField] private TMP_Text _tipText;
         
@@ -56,7 +59,7 @@ namespace SustainTheStrain.EnergySystem.UI
 
         private void SpawnNewBar()
         {
-            _images.Add(Instantiate(_imagePrefab, transform));
+            _images.Add(Instantiate(_imagePrefab, _barsHolder));
             _enabledCount++;
         }
 
@@ -65,6 +68,13 @@ namespace SustainTheStrain.EnergySystem.UI
             if (system.CurrentEnergy < 0 || system.CurrentEnergy > _images.Count) return;
             _coloredCount = system.CurrentEnergy;
             ReColorBars();
+        }
+
+        public void SetIcon(Sprite sprite)
+        {
+            if (sprite == null) return;
+
+            _icon.sprite = sprite;
         }
 
         private void AddBars(int count)
@@ -108,12 +118,12 @@ namespace SustainTheStrain.EnergySystem.UI
 
         private void LoadBar(Image img)
         {
-            img.color = _filledColor;
+            img.transform.Activate();
         }
 
         private void UnloadBar(Image img)
         {
-            img.color = _imagePrefab.color;
+            img.transform.Deactivate();
         }
         
     }
