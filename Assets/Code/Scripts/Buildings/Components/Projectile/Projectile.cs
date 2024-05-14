@@ -36,7 +36,7 @@ namespace SustainTheStrain.Buildings
                 (transform1 = transform).position = Vector3.Lerp(startPosition, position, t);
                 //Rotation to target
                 Quaternion lookRotation = Quaternion.LookRotation((position - transform1.position).normalized);
-                transform.rotation = lookRotation;
+                transform.localRotation = lookRotation;
                 
                 yield return null;
             }
