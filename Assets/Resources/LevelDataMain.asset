@@ -867,20 +867,20 @@ MonoBehaviour:
       _nonIgnorableDelay: 0
       _index: 1
       _subwaves:
-      - _delay: 5
-        _spawnPeriod: 3
+      - _delay: 3
+        _spawnPeriod: 2
         _enemyCount: 2
         _enemyGroup:
         - _enemyType: Kamikaze
           _xOffset: 0
-      - _delay: 4
-        _spawnPeriod: 3
+      - _delay: 3
+        _spawnPeriod: 2
         _enemyCount: 2
         _enemyGroup:
         - _enemyType: Kamikaze
           _xOffset: 0
-      - _delay: 6
-        _spawnPeriod: 3
+      - _delay: 0
+        _spawnPeriod: 2
         _enemyCount: 2
         _enemyGroup:
         - _enemyType: Kamikaze
@@ -890,7 +890,7 @@ MonoBehaviour:
       _index: 2
       _subwaves:
       - _delay: 0
-        _spawnPeriod: 3
+        _spawnPeriod: 2
         _enemyCount: 4
         _enemyGroup:
         - _enemyType: Kamikaze
@@ -942,32 +942,32 @@ MonoBehaviour:
       _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
-      - _delay: 4
-        _spawnPeriod: 3
+      - _delay: 3
+        _spawnPeriod: 2
         _enemyCount: 5
         _enemyGroup:
         - _enemyType: Kamikaze
           _xOffset: 0
-      - _delay: 5
-        _spawnPeriod: 3
+      - _delay: 3
+        _spawnPeriod: 2
         _enemyCount: 5
         _enemyGroup:
         - _enemyType: Kamikaze
           _xOffset: 0
       - _delay: 13
-        _spawnPeriod: 3
+        _spawnPeriod: 2
         _enemyCount: 6
         _enemyGroup:
         - _enemyType: Kamikaze
           _xOffset: 0
       - _delay: 8
-        _spawnPeriod: 3
+        _spawnPeriod: 2
         _enemyCount: 6
         _enemyGroup:
         - _enemyType: Kamikaze
           _xOffset: 0
       - _delay: 8
-        _spawnPeriod: 3
+        _spawnPeriod: 2
         _enemyCount: 8
         _enemyGroup:
         - _enemyType: Kamikaze
@@ -977,25 +977,25 @@ MonoBehaviour:
       _index: 1
       _subwaves:
       - _delay: 5
-        _spawnPeriod: 3
+        _spawnPeriod: 2
         _enemyCount: 3
         _enemyGroup:
         - _enemyType: Kamikaze
           _xOffset: 0
       - _delay: 20
-        _spawnPeriod: 3
+        _spawnPeriod: 2
         _enemyCount: 3
         _enemyGroup:
         - _enemyType: Kamikaze
           _xOffset: 0
       - _delay: 20
-        _spawnPeriod: 3
+        _spawnPeriod: 2
         _enemyCount: 4
         _enemyGroup:
         - _enemyType: Kamikaze
           _xOffset: 0
       - _delay: 9
-        _spawnPeriod: 3
+        _spawnPeriod: 2
         _enemyCount: 4
         _enemyGroup:
         - _enemyType: Kamikaze
@@ -1011,13 +1011,13 @@ MonoBehaviour:
         - _enemyType: Kamikaze
           _xOffset: 0
       - _delay: 10
-        _spawnPeriod: 3
+        _spawnPeriod: 2
         _enemyCount: 6
         _enemyGroup:
         - _enemyType: Kamikaze
           _xOffset: 0
       - _delay: 25
-        _spawnPeriod: 3
+        _spawnPeriod: 2
         _enemyCount: 4
         _enemyGroup:
         - _enemyType: Kamikaze
