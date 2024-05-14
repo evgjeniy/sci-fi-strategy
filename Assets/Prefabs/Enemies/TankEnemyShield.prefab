@@ -257,7 +257,7 @@ PrefabInstance:
     - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: CoinsDrop
-      value: 43
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
@@ -272,7 +272,7 @@ PrefabInstance:
     - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: <DamagePeriod>k__BackingField
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7715807382400100011, guid: d11d8725d54934741b6c008f48bd65a8, type: 3}
@@ -327,9 +327,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellsCount: 2
-  _cellHp: 150
-  _recoverDelay: 7
-  _recoverySpeed: 0.3
+  _cellHp: 200
+  _recoverDelay: 6
+  _recoverySpeed: 0.5
 --- !u!114 &8064178535992659472
 MonoBehaviour:
   m_ObjectHideFlags: 0

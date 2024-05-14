@@ -904,7 +904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellsCount: 1
-  _cellHp: 6
+  _cellHp: 40
   _recoverDelay: 5
   _recoverySpeed: 0.3
 --- !u!114 &3818348866077359420
