@@ -21,7 +21,7 @@ namespace SustainTheStrain.EnergySystem.UI.Factories
         {
             var ui = GameObject.Instantiate(_uiPrefab, _spawnParent);
             var button = ui.ControllButton;
-            button.image.sprite = system.EnergySettings.ButtonImage;
+            ui.SetIcon(system.EnergySettings.ButtonImage);
             ui.MaxBarsCount = system.EnergySettings.MaxEnergy;
             ui.Tip.IfNotNull(system.CacheUiTip);
             _energyUIController.MakeSubscriptions(ui, system);

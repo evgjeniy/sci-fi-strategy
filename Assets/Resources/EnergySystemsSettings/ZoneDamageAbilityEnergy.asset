@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3520a80c2c47bfad0b6a6d15c20c1a, type: 3}
   m_Name: ZoneDamageAbilityEnergy
   m_EditorClassIdentifier: 
-  <ButtonImage>k__BackingField: {fileID: 21300000, guid: 9b3d3a00989550744b10fb4e23bba227,
+  <ButtonImage>k__BackingField: {fileID: 21300000, guid: 975909ebf64b4104bb0fab350204026c,
     type: 3}
   <EnergySpend>k__BackingField: 3
   <MaxEnergy>k__BackingField: 3

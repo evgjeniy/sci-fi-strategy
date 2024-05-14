@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waves:
   - _spawners:
-    - _delay: 0
+    - _delay: 1e+18
+      _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
       - _delay: 1
@@ -97,6 +98,7 @@ MonoBehaviour:
           _xOffset: -1.5
   - _spawners:
     - _delay: 20
+      _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
       - _delay: 1
@@ -156,6 +158,7 @@ MonoBehaviour:
         - _enemyType: Mob_Shield
           _xOffset: -1.5
     - _delay: 55
+      _nonIgnorableDelay: 0
       _index: 1
       _subwaves:
       - _delay: 4
@@ -172,6 +175,7 @@ MonoBehaviour:
           _xOffset: 0
   - _spawners:
     - _delay: 0
+      _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
       - _delay: 4
@@ -211,6 +215,7 @@ MonoBehaviour:
         - _enemyType: Kamikaze
           _xOffset: 0
     - _delay: 0
+      _nonIgnorableDelay: 0
       _index: 1
       _subwaves:
       - _delay: 1
@@ -245,6 +250,7 @@ MonoBehaviour:
           _xOffset: -1.5
   - _spawners:
     - _delay: 0
+      _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
       - _delay: 4
@@ -302,6 +308,7 @@ MonoBehaviour:
         - _enemyType: Kamikaze
           _xOffset: 0
     - _delay: 85
+      _nonIgnorableDelay: 0
       _index: 1
       _subwaves:
       - _delay: 1
@@ -333,6 +340,7 @@ MonoBehaviour:
         - _enemyType: Mob_Shield
           _xOffset: -1.5
     - _delay: 90
+      _nonIgnorableDelay: 0
       _index: 2
       _subwaves:
       - _delay: 1
@@ -365,6 +373,7 @@ MonoBehaviour:
           _xOffset: -1.5
   - _spawners:
     - _delay: 30
+      _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
       - _delay: 20
@@ -444,6 +453,7 @@ MonoBehaviour:
         - _enemyType: Tank
           _xOffset: -1.5
     - _delay: 90
+      _nonIgnorableDelay: 0
       _index: 1
       _subwaves:
       - _delay: 4
@@ -469,6 +479,7 @@ MonoBehaviour:
         - _enemyType: Mob
           _xOffset: -1.5
     - _delay: 80
+      _nonIgnorableDelay: 0
       _index: 2
       _subwaves:
       - _delay: 15
@@ -495,6 +506,7 @@ MonoBehaviour:
           _xOffset: -1.5
   - _spawners:
     - _delay: 7
+      _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
       - _delay: 5
@@ -546,6 +558,7 @@ MonoBehaviour:
         - _enemyType: Mob_Shield
           _xOffset: -1.5
     - _delay: 30
+      _nonIgnorableDelay: 0
       _index: 1
       _subwaves:
       - _delay: 8
@@ -573,6 +586,7 @@ MonoBehaviour:
         - _enemyType: Mob_Shield
           _xOffset: -1.5
     - _delay: 45
+      _nonIgnorableDelay: 0
       _index: 2
       _subwaves:
       - _delay: 8
@@ -601,6 +615,7 @@ MonoBehaviour:
           _xOffset: -1.5
   - _spawners:
     - _delay: 0
+      _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
       - _delay: 10
@@ -712,6 +727,7 @@ MonoBehaviour:
         - _enemyType: Mob
           _xOffset: -1.5
     - _delay: 60
+      _nonIgnorableDelay: 0
       _index: 1
       _subwaves:
       - _delay: 15
@@ -737,6 +753,7 @@ MonoBehaviour:
         - _enemyType: Shield
           _xOffset: -1.5
     - _delay: 45
+      _nonIgnorableDelay: 0
       _index: 2
       _subwaves:
       - _delay: 60
@@ -761,6 +778,7 @@ MonoBehaviour:
           _xOffset: 0
   - _spawners:
     - _delay: 0
+      _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
       - _delay: 6
@@ -830,6 +848,7 @@ MonoBehaviour:
         - _enemyType: Shield
           _xOffset: -1.5
     - _delay: 30
+      _nonIgnorableDelay: 0
       _index: 1
       _subwaves:
       - _delay: 5
@@ -853,6 +872,7 @@ MonoBehaviour:
         - _enemyType: Kamikaze
           _xOffset: 0
     - _delay: 0
+      _nonIgnorableDelay: 0
       _index: 2
       _subwaves:
       - _delay: 0
@@ -901,6 +921,7 @@ MonoBehaviour:
           _xOffset: -1.5
   - _spawners:
     - _delay: 0
+      _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
       - _delay: 5
@@ -934,6 +955,7 @@ MonoBehaviour:
         - _enemyType: Kamikaze
           _xOffset: 0
     - _delay: 20
+      _nonIgnorableDelay: 0
       _index: 1
       _subwaves:
       - _delay: 5
@@ -961,6 +983,7 @@ MonoBehaviour:
         - _enemyType: Kamikaze
           _xOffset: 0
     - _delay: 40
+      _nonIgnorableDelay: 0
       _index: 2
       _subwaves:
       - _delay: 4
@@ -989,6 +1012,7 @@ MonoBehaviour:
           _xOffset: 0
   - _spawners:
     - _delay: 0
+      _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
       - _delay: 15
@@ -1086,6 +1110,7 @@ MonoBehaviour:
         - _enemyType: Shield
           _xOffset: -1.5
     - _delay: 20
+      _nonIgnorableDelay: 0
       _index: 1
       _subwaves:
       - _delay: 15
@@ -1121,6 +1146,7 @@ MonoBehaviour:
         - _enemyType: Shield
           _xOffset: -1.5
     - _delay: 40
+      _nonIgnorableDelay: 0
       _index: 2
       _subwaves:
       - _delay: 20
@@ -1157,6 +1183,7 @@ MonoBehaviour:
           _xOffset: -1.5
   - _spawners:
     - _delay: 0
+      _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
       - _delay: 15
@@ -1254,6 +1281,7 @@ MonoBehaviour:
         - _enemyType: Shield
           _xOffset: -1.5
     - _delay: 20
+      _nonIgnorableDelay: 0
       _index: 1
       _subwaves:
       - _delay: 15
@@ -1289,6 +1317,7 @@ MonoBehaviour:
         - _enemyType: Shield
           _xOffset: -1.5
     - _delay: 40
+      _nonIgnorableDelay: 0
       _index: 2
       _subwaves:
       - _delay: 20

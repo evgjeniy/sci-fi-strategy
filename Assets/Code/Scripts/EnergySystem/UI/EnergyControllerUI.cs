@@ -11,7 +11,8 @@ namespace SustainTheStrain.EnergySystem.UI
         [SerializeField] private Image _imagePrefab;
         [SerializeField] private Color _filledColor;
         [SerializeField] private EnergyCellBuyButton _buyButton;
-        
+        [SerializeField] private RectTransform _energyHolder;
+
         private EnergyController _energyController;
         private List<Image> _images = new();
         
@@ -74,7 +75,7 @@ namespace SustainTheStrain.EnergySystem.UI
 
         private void SpawnNewBar()
         {
-            _images.Add(Instantiate(_imagePrefab, transform));
+            _images.Add(Instantiate(_imagePrefab, _energyHolder));
             _enabledCount++;
         }
 
