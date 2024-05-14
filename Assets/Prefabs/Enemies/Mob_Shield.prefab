@@ -352,17 +352,17 @@ PrefabInstance:
     - target: {fileID: 7158709995888706516, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7158709995888706516, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7158709995888706516, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7158709995888706516, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
@@ -422,7 +422,7 @@ PrefabInstance:
     - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: CoinsDrop
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
@@ -489,7 +489,7 @@ MonoBehaviour:
   _cellsCount: 1
   _cellHp: 40
   _recoverDelay: 5
-  _recoverySpeed: 0.3
+  _recoverySpeed: 0.5
 --- !u!114 &8064178535992659472
 MonoBehaviour:
   m_ObjectHideFlags: 0

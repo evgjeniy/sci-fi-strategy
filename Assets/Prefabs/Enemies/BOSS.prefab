@@ -91,7 +91,17 @@ PrefabInstance:
     - target: {fileID: 7931212609518137421, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
         type: 3}
       propertyPath: _cellsCount
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931212609518137421, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
+        type: 3}
+      propertyPath: _recoverDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931212609518137421, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
+        type: 3}
+      propertyPath: _recoverySpeed
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8064178535992659472, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
         type: 3}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EnergySettings>k__BackingField: {fileID: 11400000, guid: b539cea88764dc6488b537608ad5ee28,
     type: 2}
-  <Cooldown>k__BackingField: 1
+  <Cooldown>k__BackingField: 17
   <MaxSquads>k__BackingField: 2
   <AimPrefab>k__BackingField: {fileID: -7253956914196207495, guid: dec463a7aab7ab7489701ffb37bc966f,
     type: 3}
