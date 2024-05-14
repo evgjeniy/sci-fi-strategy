@@ -8,13 +8,13 @@ namespace SustainTheStrain.EnergySystem.UI
 {
     public class EnergyControllerUI : MonoBehaviour
     {
-        [SerializeField] private Image _imagePrefab;
+        [SerializeField] private Cell _imagePrefab;
         [SerializeField] private Color _filledColor;
         [SerializeField] private EnergyCellBuyButton _buyButton;
         [SerializeField] private RectTransform _energyHolder;
 
         private EnergyController _energyController;
-        private List<Image> _images = new();
+        private List<Cell> _images = new();
         
         private int _coloredCount = 0;
         private int _enabledCount = 0;
@@ -125,14 +125,14 @@ namespace SustainTheStrain.EnergySystem.UI
             }
         }
 
-        private void LoadBar(Image img)
+        private void LoadBar(Cell img)
         {
-            img.color = _filledColor;
+            img.On();
         }
 
-        private void UnloadBar(Image img)
+        private void UnloadBar(Cell img)
         {
-            img.color = _imagePrefab.color;
+            img.Off();
         }
 
         private void OnDisable()

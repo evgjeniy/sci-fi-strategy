@@ -22,7 +22,7 @@ namespace SustainTheStrain.Citadels
 
         public void UpdateValue(float value)
         {
-            //_text.text = $"{(int)value}/{_cell.MaxHP}";
+            _text.text = $"{Mathf.Max(0,(int)value)}/{_cell.MaxHP}";
             if (_slider != null)
             {
                 _slider.value = value/_cell.MaxHP;

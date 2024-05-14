@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ControllButton>k__BackingField: {fileID: 6101548422675254255}
-  _imagePrefab: {fileID: 7664057810937648228, guid: d759a88e2394dae48ba619b27ce81fa6,
+  _imagePrefab: {fileID: 4828409528778546258, guid: d759a88e2394dae48ba619b27ce81fa6,
     type: 3}
   _icon: {fileID: 2992151326912872653}
   _barsHolder: {fileID: 1562501238145331844}
