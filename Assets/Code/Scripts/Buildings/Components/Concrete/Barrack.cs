@@ -23,7 +23,7 @@ namespace SustainTheStrain.Buildings
         private GameObject _recruitsPointer;
 
         public Timer Timer { get; private set; }
-        public BarrackSystem BarrackSystem { get; set; }
+        public BarrackSystem BarrackSystem { get; private set; }
 
         public BarrackBuildingConfig Config => _config.Value;
         BuildingConfig IBuilding.Config => Config;

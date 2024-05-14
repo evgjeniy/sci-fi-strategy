@@ -31,6 +31,8 @@ namespace SustainTheStrain.Buildings
             }
         }
 
+        public float DamageMultiplier => Settings.GetDamageMultiplier(CurrentEnergy);
+
         public event Action<IEnergySystem> Changed = _ => { };
 
         [Inject]
