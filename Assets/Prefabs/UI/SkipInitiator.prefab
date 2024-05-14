@@ -611,14 +611,15 @@ PrefabInstance:
     - target: {fileID: 4761676804713735805, guid: 26335deed0cc4ba47a4e4a9798e3c56c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 89.955
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4761676804713735805, guid: 26335deed0cc4ba47a4e4a9798e3c56c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7941997587830963206, guid: 26335deed0cc4ba47a4e4a9798e3c56c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
