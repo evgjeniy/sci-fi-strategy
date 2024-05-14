@@ -10,12 +10,10 @@ namespace SustainTheStrain.Units
         [SerializeField] private RectTransform _shieldBar;
 
         private Shield.ShieldCell _cell;
-        private Vector3 _camForward;
 
         public void Init(Shield.ShieldCell shieldCell)
         {
             if (shieldCell == null) return;
-            _camForward = Camera.main.transform.forward;
             _cell = shieldCell;
             _cell.OnCurrentHPChanged += UpdateValue;
             UpdateValue(_cell.CurrentHP);
@@ -31,7 +29,7 @@ namespace SustainTheStrain.Units
 
         private void LateUpdate()
         {
-            _shieldBar.LookAt(_shieldBar.position + _camForward);
+            _shieldBar.LookAt(_shieldBar.position + Camera.main.transform.forward);
         }
     }
 }
