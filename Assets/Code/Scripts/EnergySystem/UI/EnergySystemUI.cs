@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Extensions;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 namespace SustainTheStrain.EnergySystem.UI
 {
@@ -10,11 +12,13 @@ namespace SustainTheStrain.EnergySystem.UI
     {
         [field: SerializeField] public EnergySystemControllButton ControllButton { get; private set; }
         
-        [SerializeField] private Image _imagePrefab;
+        [SerializeField] private Cell _imagePrefab;
+        [SerializeField] private Image _icon;
+        [SerializeField] private RectTransform _barsHolder;
         [SerializeField] private Color _filledColor;
         [SerializeField] private TMP_Text _tipText;
         
-        private List<Image> _images = new();
+        private List<Cell> _images = new();
         private int _coloredCount = 0;
         private int _enabledCount = 0;
 
@@ -56,7 +60,9 @@ namespace SustainTheStrain.EnergySystem.UI
 
         private void SpawnNewBar()
         {
-            _images.Add(Instantiate(_imagePrefab, transform));
+            var cell = Instantiate(_imagePrefab, _barsHolder);
+            _images.Add(cell);
+            cell.Off();
             _enabledCount++;
         }
 
@@ -67,12 +73,19 @@ namespace SustainTheStrain.EnergySystem.UI
             ReColorBars();
         }
 
+        public void SetIcon(Sprite sprite)
+        {
+            if (sprite == null) return;
+
+            _icon.sprite = sprite;
+        }
+
         private void AddBars(int count)
         {
             int i = 0;
             for (; i+_enabledCount < _images.Count; i++)
             {
-                _images[i+_enabledCount].enabled = true;
+                _images[i+_enabledCount].On();
             }
 
             _enabledCount += i;
@@ -88,7 +101,7 @@ namespace SustainTheStrain.EnergySystem.UI
             int i = _enabledCount-1;
             for (; i >= _enabledCount - count; i--)
             {
-                _images[i].enabled = false;
+                _images[i].Off();
             }
             _enabledCount = i+1;
         }
@@ -106,14 +119,14 @@ namespace SustainTheStrain.EnergySystem.UI
             }
         }
 
-        private void LoadBar(Image img)
+        private void LoadBar(Cell img)
         {
-            img.color = _filledColor;
+            img.On();
         }
 
-        private void UnloadBar(Image img)
+        private void UnloadBar(Cell img)
         {
-            img.color = _imagePrefab.color;
+            img.Off();
         }
         
     }

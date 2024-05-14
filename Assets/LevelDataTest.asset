@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24fa98590c6fd614598d276ac775bd38, type: 3}
+  m_Name: LevelDataTest
+  m_EditorClassIdentifier: 
+  _waves:
+  - _spawners:
+    - _delay: 0
+      _nonIgnorableDelay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 4
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Shield
+          _xOffset: 1.5
+        - _enemyType: Shield
+          _xOffset: -1.5
+      - _delay: 15
+        _spawnPeriod: 1
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 4
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 1.5
+        - _enemyType: Tank
+          _xOffset: -1.5
+      - _delay: 7
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 1.5
+        - _enemyType: Tank
+          _xOffset: -1.5
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Shield
+          _xOffset: 1.5
+        - _enemyType: Shield
+          _xOffset: -1.5
+      - _delay: 8
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Shield
+          _xOffset: 1.5
+        - _enemyType: Shield
+          _xOffset: -1.5
+      - _delay: 4
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 4
+        _spawnPeriod: 3
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Shield
+          _xOffset: 1.5
+        - _enemyType: Shield
+          _xOffset: -1.5
+    - _delay: 0
+      _nonIgnorableDelay: 20
+      _index: 1
+      _subwaves:
+      - _delay: 15
+        _spawnPeriod: 2
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 35
+        _spawnPeriod: 1
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Mob_Shield
+          _xOffset: 1.5
+        - _enemyType: Mob_Shield
+          _xOffset: -1.5
+      - _delay: 15
+        _spawnPeriod: 2
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 1.5
+        - _enemyType: Tank
+          _xOffset: -1.5
+      - _delay: 4
+        _spawnPeriod: 2
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 1.5
+        - _enemyType: Shield
+          _xOffset: -1.5
+    - _delay: 0
+      _nonIgnorableDelay: 40
+      _index: 2
+      _subwaves:
+      - _delay: 30
+        _spawnPeriod: 2
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 1.5
+        - _enemyType: Tank
+          _xOffset: -1.5
+      - _delay: 40
+        _spawnPeriod: 3
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 30
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Shield
+          _xOffset: 1.5
+        - _enemyType: Shield
+          _xOffset: -1.5
+      - _delay: 0
+        _spawnPeriod: 3
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Shield
+          _xOffset: 1.5
+        - _enemyType: Shield
+          _xOffset: -1.5

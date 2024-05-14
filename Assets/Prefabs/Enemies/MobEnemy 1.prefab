@@ -125,7 +125,7 @@ MonoBehaviour:
   _shield: {fileID: 694672699747138330}
   _hpBar: {fileID: 5778967373257655668}
   _shieldBarsHolder: {fileID: 4854315418047971427}
-  _shieldBarRef: {fileID: 7566107790692516826, guid: f591025cd2e0971478c6c6b5c0281750,
+  _shieldBarRef: {fileID: 7052509062722021378, guid: 711e6dbf961275840ab0d68dce489763,
     type: 3}
   _cellOffset: 3
   _maxHpSize: 5
@@ -904,7 +904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cellsCount: 1
-  _cellHp: 6
+  _cellHp: 40
   _recoverDelay: 5
   _recoverySpeed: 0.3
 --- !u!114 &3818348866077359420

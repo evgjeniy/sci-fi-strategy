@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EnergySettings>k__BackingField: {fileID: 11400000, guid: 0ea66b49c831c334089fcc1da9b3d537,
     type: 2}
-  <Cooldown>k__BackingField: 35
-  <Duration>k__BackingField: 3
+  <Cooldown>k__BackingField: 20
+  <Duration>k__BackingField: 5
   <Radius>k__BackingField: 1000
   <RaycastDistance>k__BackingField: 3.4028235e+38
   <RaycastMask>k__BackingField:

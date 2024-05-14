@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3520a80c2c47bfad0b6a6d15c20c1a, type: 3}
   m_Name: SlowAbilityEnergy
   m_EditorClassIdentifier: 
-  <ButtonImage>k__BackingField: {fileID: 21300000, guid: 8d8c73e885d27634c92d341f3350e3cd,
+  <ButtonImage>k__BackingField: {fileID: 21300000, guid: 84dc120c89be6dd4a91ef38bb7e2cd19,
     type: 3}
-  <EnergySpend>k__BackingField: 3
-  <MaxEnergy>k__BackingField: 3
+  <EnergySpend>k__BackingField: 2
+  <MaxEnergy>k__BackingField: 2
   <SystemUIType>k__BackingField: 2

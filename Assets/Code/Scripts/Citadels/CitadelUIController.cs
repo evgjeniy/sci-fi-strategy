@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using SustainTheStrain.Units;
 using TMPro;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace SustainTheStrain.Citadels
@@ -21,7 +22,8 @@ namespace SustainTheStrain.Citadels
         
         private void OnEnable()
         {
-            _damageble.OnCurrentHPChanged += UpdateHP; 
+            _damageble.OnCurrentHPChanged += UpdateHP;
+            UpdateHP(_damageble.CurrentHP);
             _shield.OnCellsCountChanged += RebuildShieldUI;
         }
 
@@ -49,7 +51,7 @@ namespace SustainTheStrain.Citadels
 
         private void UpdateHP(float value)
         {
-            //_text.text = string.Format("{0}/{1}", value, _damageble.MaxHP);
+            _text.text = string.Format("{0}/{1}", Mathf.Max(0,value), _damageble.MaxHP);
             if (_healthSlider != null)
             {
                 _healthSlider.value = value / _damageble.MaxHP;

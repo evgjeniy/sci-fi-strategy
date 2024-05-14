@@ -21,7 +21,7 @@ namespace SustainTheStrain.Level
 
         private void UpdateLabel(int value)
         {
-            _textMesh.text = value.ToString();
+            _textMesh.text = (value+1).ToString();
         }
     }
 }
