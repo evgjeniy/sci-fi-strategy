@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Extensions;
 using Zenject;
 
 namespace SustainTheStrain.Level.UI
@@ -10,6 +11,8 @@ namespace SustainTheStrain.Level.UI
 
         [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private GameObject _holder;
+        [SerializeField] private RectTransform _restartButton;
+
         private void OnEnable()
         {
             _holder.SetActive(false);
@@ -27,13 +30,15 @@ namespace SustainTheStrain.Level.UI
         private void GameLost()
         {
             _holder.SetActive(true);
-            _text.text = "YOU LOST";
+            _restartButton.Activate();
+            _text.text = "¬€ œ–Œ»√–¿À»";
         }
 
-        private void GameWon()
+        private void GameWon(int stars)
         {
             _holder.SetActive(true);
-            _text.text = "YOU WON";
+            _restartButton.Deactivate();
+            _text.text = "¬€ ¬€»√–¿À»";
         }
     }
 }
