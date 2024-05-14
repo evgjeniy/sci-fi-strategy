@@ -559,8 +559,8 @@ MonoBehaviour:
   <MaxHP>k__BackingField: 70
   <Team>k__BackingField: 1
   <IsFlying>k__BackingField: 0
-  _recoverDelay: 1
-  _recoverySpeed: 10
+  _recoverDelay: 0
+  _recoverySpeed: 0
 --- !u!4 &8690171393321964968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,

@@ -31,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 5974477956742811665, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: m_Speed
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6664281841693878671, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
@@ -142,8 +142,6 @@ MonoBehaviour:
   <Damage>k__BackingField: 40
   <DamagePeriod>k__BackingField: 0.1
   Animator: {fileID: 0}
-  _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
-    type: 3}
   _aggroRadius: 5
   _attackRadius: 1
   CoinsDrop: 15
