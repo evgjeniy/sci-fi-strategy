@@ -25,5 +25,7 @@ MonoBehaviour:
   <SectorAngle>k__BackingField: 45
   <ProjectilePrefab>k__BackingField: {fileID: 3020685036469273396, guid: 06347687b9a8b424c95b6862f55f5040,
     type: 3}
+  <ShootEffect>k__BackingField: {fileID: 1646245868718706, guid: edaa02000d0ae9b4fa3b8153801d51ef,
+    type: 3}
   <NextLevelConfig>k__BackingField: {fileID: 11400000, guid: e91b3019b774f9c468643b0a0196a3c9,
     type: 2}
