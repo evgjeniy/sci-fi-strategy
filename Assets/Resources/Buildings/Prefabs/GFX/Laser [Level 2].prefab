@@ -199,7 +199,6 @@ GameObject:
   - component: {fileID: 68883465762758504}
   - component: {fileID: 6254192771348579420}
   - component: {fileID: 6346952077965862844}
-  - component: {fileID: 75435178301486396}
   m_Layer: 0
   m_Name: Laser Gun Lighting
   m_TagString: Untagged
@@ -272,27 +271,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &75435178301486396
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737440189994928604}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2153338545774418078
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +282,6 @@ GameObject:
   - component: {fileID: 2674948600464296491}
   - component: {fileID: 8069292188761692599}
   - component: {fileID: 8945817574170409746}
-  - component: {fileID: 9009267183026197235}
   m_Layer: 0
   m_Name: Laser Body Lighting
   m_TagString: Untagged
@@ -377,29 +354,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &9009267183026197235
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2153338545774418078}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &4295096736916157800
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +365,6 @@ GameObject:
   - component: {fileID: 5301647556004749032}
   - component: {fileID: 107967477695454827}
   - component: {fileID: 249027844058114905}
-  - component: {fileID: 4998809576682991189}
   m_Layer: 0
   m_Name: Laser Gun Lighting
   m_TagString: Untagged
@@ -484,28 +437,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4998809576682991189
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4295096736916157800}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &4739912792947075475
 GameObject:
   m_ObjectHideFlags: 0
@@ -5536,7 +5467,6 @@ GameObject:
   - component: {fileID: 2003468263531719189}
   - component: {fileID: 7529715958160746701}
   - component: {fileID: 7423988990649275216}
-  - component: {fileID: 3677271353859918076}
   m_Layer: 0
   m_Name: Laser Gun Lighting
   m_TagString: Untagged
@@ -5609,27 +5539,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3677271353859918076
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7056004948444021851}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7504486391059894747
 GameObject:
   m_ObjectHideFlags: 0
@@ -5641,7 +5550,6 @@ GameObject:
   - component: {fileID: 5318560797014961840}
   - component: {fileID: 7842702413068143106}
   - component: {fileID: 7056141322800578822}
-  - component: {fileID: 4428367965993595397}
   m_Layer: 0
   m_Name: Laser Gun Lighting
   m_TagString: Untagged
@@ -5714,24 +5622,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4428367965993595397
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7504486391059894747}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
