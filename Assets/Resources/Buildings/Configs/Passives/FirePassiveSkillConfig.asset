@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c730ff73dafa4335a2a801089e85aee6, type: 3}
   m_Name: FirePassiveSkillConfig
   m_EditorClassIdentifier: 
-  <DamagePerSecond>k__BackingField: 2
-  <FireDuration>k__BackingField: 5
+  <DamagePerSecond>k__BackingField: 20
+  <FireDuration>k__BackingField: 8
   <AttackFrequency>k__BackingField: 2
-  <FireParticle>k__BackingField: {fileID: 4072639781364330663, guid: 300a685d538d532488f3c4a0f0e43283,
+  <FireParticle>k__BackingField: {fileID: 198663536934198432, guid: bb98861c48ad2024ca93498c7dd93a6c,
     type: 3}
