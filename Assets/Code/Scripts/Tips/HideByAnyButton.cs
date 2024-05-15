@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Extensions;
 using UnityEngine.UI;
 
 namespace SustainTheStrain.Tips
@@ -9,8 +10,17 @@ namespace SustainTheStrain.Tips
     {
         private Graphic _graphic;
 
-        private void Awake() => _graphic = GetComponent<Graphic>();
-
+        private void Awake()
+        {
+            if (Const.FirstGameStarted is false)
+            {
+                this.DestroyObject();
+                return;
+            }
+            
+            _graphic = GetComponent<Graphic>();
+            Const.FirstGameStarted = false;
+        }
 
         public void OnPointerClick(PointerEventData eventData) => Hide(_graphic);
 
