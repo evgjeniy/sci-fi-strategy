@@ -40,6 +40,15 @@ namespace SustainTheStrain.Buildings
         private void Construct(EnergyController energyController) => energyController.AddEnergySystem(this);
 
         public void CacheUiTip(TMP_Text uiTip) { _uiTip = uiTip; UpdateTip(this); }
-        private void UpdateTip(IEnergySystem system) => _uiTip.IfNotNull(x => x.text = $"Active cells: {system.CurrentEnergy}");
+        private void UpdateTip(IEnergySystem system)
+        {
+            _uiTip.IfNotNull(x => x.text = 
+                $@"<b><align=""center"">Система казарм (энергия: <color=""green"">{system.CurrentEnergy}</color>)</align></b>
+Блок 3: урон <b><#FF0000>120%</color></b> + пассивная способность: добавляет
+            группе <#00FF00>4</color>-го рекрута
+Блок 2: урон <b><#FF0000>100%</color></b>
+Блок 1: урон <b><#FF0000>70%</color></b>
+Энергии нет: урон <b><#FF0000>50%</color></b>");
+        }
     }
 }
