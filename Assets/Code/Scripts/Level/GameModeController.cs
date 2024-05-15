@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using SustainTheStrain.Citadels;
+using SustainTheStrain.Tips;
 using SustainTheStrain.Units;
 using UnityEngine;
 using Zenject;
@@ -9,6 +10,7 @@ namespace SustainTheStrain.Level
 {
     public class GameModeController : MonoBehaviour
     {
+        [Inject] private IPauseManager _pauseManager;
         [Inject] private WavesManager _wavesManager;
         [Inject] private Citadel _citadel;
 
@@ -28,6 +30,7 @@ namespace SustainTheStrain.Level
 
         private void Start()
         {
+            _pauseManager.Unpause();
             _wavesManager.StartWaves();
         }
 

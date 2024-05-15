@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e2c0914d524da188439850bc54a3ad, type: 3}
   m_Name: ShieldDeactivatorConfig
   m_EditorClassIdentifier: 
-  <Duration>k__BackingField: 1.5
+  <Duration>k__BackingField: 3
   <AttackFrequency>k__BackingField: 2
