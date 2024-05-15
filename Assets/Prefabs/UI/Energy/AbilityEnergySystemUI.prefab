@@ -220,6 +220,7 @@ MonoBehaviour:
   _barsHolder: {fileID: 1562501238145331844}
   _filledColor: {r: 0, g: 0.5254902, b: 0.6901961, a: 1}
   _tipText: {fileID: 2595615308869618297}
+  _tip: {fileID: 1891561916842761503}
 --- !u!1 &2808532003532892242
 GameObject:
   m_ObjectHideFlags: 0
