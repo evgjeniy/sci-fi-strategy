@@ -15,7 +15,7 @@ namespace SustainTheStrain.Buildings
         private Observable<RocketBuildingConfig> _config;
         private Observable<Vector3> _orientation;
         private Observable<SelectionType> _selection;
-
+        
         public Area<Damageble> Area { get; } = new(conditions: damageable => damageable.Team != Team.Player);
         public Timer Timer { get; private set; }
         public int AttackCounter { get; set; }

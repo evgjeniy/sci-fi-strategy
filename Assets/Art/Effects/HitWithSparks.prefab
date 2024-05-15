@@ -4910,7 +4910,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1646245868718706, guid: 2ea333935f7b6f94fa230c60d5915169, type: 3}
       propertyPath: m_Name
-      value: Hit_1 Variant
+      value: HitWithSparks
       objectReference: {fileID: 0}
     - target: {fileID: 4211315035262536, guid: 2ea333935f7b6f94fa230c60d5915169, type: 3}
       propertyPath: m_LocalScale.x
@@ -4926,15 +4926,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4211315035262536, guid: 2ea333935f7b6f94fa230c60d5915169, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4211315035262536, guid: 2ea333935f7b6f94fa230c60d5915169, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.799988
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4211315035262536, guid: 2ea333935f7b6f94fa230c60d5915169, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4211315035262536, guid: 2ea333935f7b6f94fa230c60d5915169, type: 3}
       propertyPath: m_LocalRotation.w

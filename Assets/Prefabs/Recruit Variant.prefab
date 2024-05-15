@@ -525,6 +525,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 864155309475453549}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &3063132172303488072 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -6810437867845382619, guid: b9c680a378bf66b49aa260c838c2605a,
+    type: 3}
+  m_PrefabInstance: {fileID: 864155309475453549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5040055582127267771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -651,10 +657,11 @@ PrefabInstance:
     - {fileID: 1795451277360461822, guid: d26196ebbe3508543843b41c3962409d, type: 3}
     m_RemovedGameObjects:
     - {fileID: 795949853038617089, guid: d26196ebbe3508543843b41c3962409d, type: 3}
+    - {fileID: 3300110456601824311, guid: d26196ebbe3508543843b41c3962409d, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
-      insertIndex: 0
+      insertIndex: -1
       addedObject: {fileID: 7624173373071499451}
     - targetCorrespondingSourceObject: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
@@ -665,6 +672,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 4
       addedObject: {fileID: 3580164085099643981}
+    - targetCorrespondingSourceObject: {fileID: 235370898999074474, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1872510087764181159}
   m_SourcePrefab: {fileID: 100100000, guid: d26196ebbe3508543843b41c3962409d, type: 3}
 --- !u!1 &5095237268674068753 stripped
 GameObject:
@@ -691,6 +702,20 @@ MonoBehaviour:
   <IsFlying>k__BackingField: 0
   _recoverDelay: 2
   _recoverySpeed: 0.3
+--- !u!114 &1872510087764181159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5095237268674068753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b4e28836366674786cddf1935f10d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nrenderer: {fileID: 3063132172303488072}
+  _spawnSpeed: 0.25
 --- !u!4 &8690171393321964968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,

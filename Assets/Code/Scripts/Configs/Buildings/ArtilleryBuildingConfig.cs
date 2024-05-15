@@ -14,6 +14,8 @@ namespace SustainTheStrain.Configs.Buildings
         [field: Header("Prefabs")]
         [field: SerializeField] public BuildingRotator GfxPrefab { get; private set; }
         [field: SerializeField] public Projectile ProjectilePrefab { get; private set; }
+        [field: SerializeField] public GameObject ShootEffect { get; private set; }
+        
 
         [field: Header("Next Level")]
         [field: SerializeField, Expandable] public ArtilleryBuildingConfig NextLevelConfig { get; private set; }

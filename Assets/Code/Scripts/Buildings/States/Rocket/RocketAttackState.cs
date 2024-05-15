@@ -24,7 +24,12 @@ namespace SustainTheStrain.Buildings
                 return this;
            
             var attackedAmount = 0;
-
+            if (rocket.Config.ShootEffect != null)
+            {
+                var effect = NightPool.Spawn(rocket.Config.ShootEffect).With(x =>
+                    x.transform.position = rocket.SpawnPointProvider.SpawnPoint.position);
+                NightPool.Despawn(effect, effect.GetComponent<ParticleSystem>().main.duration+0.1f);
+            }
             foreach (var target in rocket.Area.Entities)
             {
                 if (attackedAmount >= rocket.Config.MaxTargets) break;
