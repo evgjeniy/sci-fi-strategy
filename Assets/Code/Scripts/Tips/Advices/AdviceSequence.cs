@@ -12,11 +12,7 @@ namespace SustainTheStrain.Tips
         private int _currentIndex;
         private Canvas _canvas;
 
-        private void Awake()
-        {
-            _canvas = GetComponentInParent<AdviceController>().BackgroundCanvas;
-            _childAdvices.ForEach(advice => advice.Deactivate());
-        }
+        private void Awake() => _canvas = GetComponentInParent<AdviceController>().BackgroundCanvas;
 
         public void OnEnable()
         {
@@ -49,7 +45,7 @@ namespace SustainTheStrain.Tips
         {
             _childAdvices[_currentIndex].Deactivate();
             _pauseManager.Unpause();
-            _canvas.Deactivate();
+            _canvas.Disable();
         }
     }
 }
