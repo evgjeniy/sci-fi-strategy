@@ -477,7 +477,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1b153e1cb4a89014aac3f6dfef95caba, type: 2}
+      objectReference: {fileID: 2100000, guid: b275890c889d0d448b353f9cece692ca, type: 2}
     - target: {fileID: 919132149155446097, guid: b9c680a378bf66b49aa260c838c2605a,
         type: 3}
       propertyPath: m_Name
@@ -715,7 +715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nrenderer: {fileID: 3063132172303488072}
-  _spawnSpeed: 0.25
+  _spawnSpeed: 1
 --- !u!4 &8690171393321964968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,

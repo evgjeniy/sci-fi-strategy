@@ -23,12 +23,14 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
             
             context.Duelable.BreakDuel();
             context.IsMoving = true;
+            context.Animator.SetBool("Moving", true);
         }
 
         public override void ExitState()
         {
             context.CurrentPathFollower.Stop();
             context.IsMoving = false;
+            context.Animator.SetBool("Moving", true);
         }
 
         public override void FrameUpdate()

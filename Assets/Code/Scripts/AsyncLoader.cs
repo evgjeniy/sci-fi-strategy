@@ -15,6 +15,10 @@ namespace SustainTheStrain
 
         public void LoadLevel(string levelName)
         {
+            if (_mainMenu != null)
+            {
+                _mainMenu.Deactivate();
+            }
             _loadingScreen.Activate();
 
             StartCoroutine(LoadLevelAsync(levelName));

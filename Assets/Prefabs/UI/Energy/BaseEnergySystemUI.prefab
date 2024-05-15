@@ -246,7 +246,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -34, y: -34}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3970788560293523333
 CanvasRenderer:
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8576c9e21485b6646b9b35638d420925, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a5d421823b81d7d4a912bf5139681a7c, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -343,6 +343,7 @@ MonoBehaviour:
   _barsHolder: {fileID: 3584954680163210111}
   _filledColor: {r: 1, g: 1, b: 1, a: 1}
   _tipText: {fileID: 3548342623588223252}
+  _tip: {fileID: 1115600804560379506}
 --- !u!1001 &1213634698469382077
 PrefabInstance:
   m_ObjectHideFlags: 0

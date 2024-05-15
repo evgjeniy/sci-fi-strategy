@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3520a80c2c47bfad0b6a6d15c20c1a, type: 3}
   m_Name: CitadelShieldEnergy
   m_EditorClassIdentifier: 
-  <ButtonImage>k__BackingField: {fileID: 21300000, guid: 25689c7c6514e594ba02bfb3f64b1b8e,
+  <ButtonImage>k__BackingField: {fileID: 21300000, guid: 869b12d40db631c44bb9e1325e5b649f,
     type: 3}
   <EnergySpend>k__BackingField: 1
   <MaxEnergy>k__BackingField: 3

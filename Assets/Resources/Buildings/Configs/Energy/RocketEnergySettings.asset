@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6145974cf5047998883eea630a29f33, type: 3}
   m_Name: RocketEnergySettings
   m_EditorClassIdentifier: 
-  <ButtonImage>k__BackingField: {fileID: 21300000, guid: 15303363629b5074bbddae324ce52fe8,
+  <ButtonImage>k__BackingField: {fileID: 21300000, guid: a5d421823b81d7d4a912bf5139681a7c,
     type: 3}
   <EnergySpend>k__BackingField: 1
   <MaxEnergy>k__BackingField: 3
