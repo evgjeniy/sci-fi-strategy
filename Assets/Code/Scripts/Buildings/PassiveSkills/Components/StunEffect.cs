@@ -26,8 +26,8 @@ namespace SustainTheStrain.Buildings
                 if (_routine == null) _oldSpeed = _unit.CurrentPathFollower.Speed;
                 else StopCoroutine(_routine);
 
+                if (!gameObject.activeSelf) return;
                 _routine = StartCoroutine(StunRoutine(duration));
-            
                 if (_stunEffect == null && config.StunParticle != null)
                     _stunEffect = config.StunParticle.Spawn(transform);
             }

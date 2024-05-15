@@ -9,7 +9,8 @@ namespace SustainTheStrain.Music
 {
     public class BackgroundMusicController : MonoBehaviour
     {
-        //public static BackgroundMusicController Instance;
+        public static BackgroundMusicController instance = null; // Экземпляр объекта
+
         [SerializeField] private AudioSource _source;
         [SerializeField] private AudioClip[] _clips;
 
@@ -17,12 +18,18 @@ namespace SustainTheStrain.Music
         
         private void Awake()
         {
-            DontDestroyOnLoad(this);
             PlayRandomSong();
         }
 
         private IEnumerator Start()
         {
+            if (instance == null) { // Экземпляр менеджера был найден
+                DontDestroyOnLoad(this);
+                instance = this; // Задаем ссылку на экземпляр объекта
+            } else if(instance == this){ // Экземпляр объекта уже существует на сцене
+                Destroy(gameObject); // Удаляем объект
+            }
+            
             while (true)
             {
                 yield return new WaitForSeconds(3);
@@ -33,11 +40,14 @@ namespace SustainTheStrain.Music
 
         private void PlayRandomSong()
         {
-            var indexes = Enumerable.Range(0, _clips.Length).Where(x => x != _lastSongIndex).ToArray();
-            int index = Random.Range(0, indexes.Length);
-            var clip = _source.clip = _clips[index];
-            _lastSongIndex = _clips.IndexOf(clip);
-            _source.Play(2);
+            if (instance == this)
+            {
+                var indexes = Enumerable.Range(0, _clips.Length).Where(x => x != _lastSongIndex).ToArray();
+                int index = Random.Range(0, indexes.Length);
+                var clip = _source.clip = _clips[index];
+                _lastSongIndex = _clips.IndexOf(clip);
+                _source.Play(2);
+            }
         }
 
     }

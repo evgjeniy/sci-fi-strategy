@@ -28,23 +28,28 @@ namespace SustainTheStrain.Buildings
             }
             
             if (_routine != null) StopCoroutine(_routine);
-            _routine = StartCoroutine(TakeFireDamage());
-            
-            if (_fireEffect == null && config.FireParticle != null)
-                _fireEffect = config.FireParticle.Spawn(transform);
+            if (!gameObject.activeSelf) {return;}
+            else
+            {
+                _routine = StartCoroutine(TakeFireDamage());
+
+                if (_fireEffect == null && config.FireParticle != null)
+                    _fireEffect = config.FireParticle.Spawn(transform);
+            }
         }
 
         private IEnumerator TakeFireDamage()
         {
-            _damageable.Damage(_damagePerSecond);
-
-            if (Time.time - _startTime > _duration)
+            while (true)
             {
-                _fireEffect.IfNotNull(Destroy);
-                Destroy(this);
+                _damageable.Damage(_damagePerSecond);
+                yield return new WaitForSeconds(1.0f);
+                if (Time.time - _startTime > _duration)
+                    break;
             }
-
-            yield return new WaitForSeconds(1.0f);
+            _fireEffect.IfNotNull(Destroy);
+            Destroy(this);
         }
+
     }
 }
