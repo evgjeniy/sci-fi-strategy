@@ -4,6 +4,7 @@
     {
         public const float RotationSpeed = 180.0f; // Degrees Per Seconds
         public static Observable<bool> IsDebugRadius { get; private set; } = new(false);
+        public static bool FirstGameStarted { get; set; } = true;
 
         public static class ResourcePath
         {
