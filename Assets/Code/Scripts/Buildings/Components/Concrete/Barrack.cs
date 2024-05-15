@@ -18,7 +18,6 @@ namespace SustainTheStrain.Buildings
         private IUpdatableState<Barrack> _currentState = new BarrackInitState();
         private IResourceManager _resourceManager;
         private Observable<BarrackBuildingConfig> _config;
-        private Observable<Vector3> _spawnPoint;
         private Observable<SelectionType> _selection;
         private GameObject _recruitsPointer;
 
