@@ -680,12 +680,12 @@ PrefabInstance:
     - target: {fileID: 5466643690414773136, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
         type: 3}
       propertyPath: <Damage>k__BackingField
-      value: 60
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 5466643690414773136, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
         type: 3}
       propertyPath: <DamagePeriod>k__BackingField
-      value: 2
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 7931212609518137421, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
         type: 3}

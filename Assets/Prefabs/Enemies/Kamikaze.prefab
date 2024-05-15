@@ -471,7 +471,7 @@ PrefabInstance:
     - target: {fileID: 926314085104909583, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: _followSpeed
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 926314085104909583, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
@@ -501,7 +501,7 @@ PrefabInstance:
     - target: {fileID: 5974477956742811665, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: m_Speed
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6664281841693878671, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
@@ -567,7 +567,7 @@ PrefabInstance:
     - target: {fileID: 7715807382400100011, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: <MaxHP>k__BackingField
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7715807382400100011, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
