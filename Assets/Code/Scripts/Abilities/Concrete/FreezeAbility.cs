@@ -78,12 +78,7 @@ namespace SustainTheStrain.Abilities
         private void UseAbility()
         {
             foreach (var unit in _freezeArea.Entities)
-            {
-                if (unit.TryGetComponent<Outline>(out var outline))
-                    outline.Disable();
-
                 _stunConfig.EnableSkillWithDuration(unit.gameObject, _config.Duration);
-            }
         }
 
         IInputState IInputSelectable.OnSelectedUpdate(IInputState currentState, Ray ray)
@@ -96,6 +91,15 @@ namespace SustainTheStrain.Abilities
                     outline.Enable();
             
             return currentState;
+        }
+
+        public void OnDeselected()
+        {
+            foreach (var unit in _freezeArea.Entities)
+            {
+                if (unit.TryGetComponent<Outline>(out var outline))
+                    outline.Disable();
+            }
         }
     }
 }
