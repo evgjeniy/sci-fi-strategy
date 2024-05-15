@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Duration>k__BackingField: 2
   <AttackFrequency>k__BackingField: 2
+  <StunParticle>k__BackingField: {fileID: 4072639781364330663, guid: 300a685d538d532488f3c4a0f0e43283,
+    type: 3}

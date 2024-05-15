@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using SustainTheStrain.Units.Components;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
@@ -12,11 +13,12 @@ namespace SustainTheStrain.Buildings
         
         private Coroutine _routine;
         private IDamageable _damageable;
+        private ParticleSystem _fireEffect;
 
-        public void Initialize(float damagePerSecond, float duration)
+        public void Initialize(FirePassiveSkillConfig config)
         {
-            _damagePerSecond = damagePerSecond;
-            _duration = duration;
+            _damagePerSecond = config.DamagePerSecond;
+            _duration = config.FireDuration;
             _startTime = Time.time;
 
             if (TryGetComponent(out _damageable) is false)
@@ -27,14 +29,20 @@ namespace SustainTheStrain.Buildings
             
             if (_routine != null) StopCoroutine(_routine);
             _routine = StartCoroutine(TakeFireDamage());
+            
+            if (_fireEffect == null && config.FireParticle != null)
+                _fireEffect = config.FireParticle.Spawn(transform);
         }
 
         private IEnumerator TakeFireDamage()
         {
             _damageable.Damage(_damagePerSecond);
-            
-            if (Time.time - _startTime > _duration) 
+
+            if (Time.time - _startTime > _duration)
+            {
+                _fireEffect.IfNotNull(Destroy);
                 Destroy(this);
+            }
 
             yield return new WaitForSeconds(1.0f);
         }

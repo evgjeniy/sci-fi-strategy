@@ -7,21 +7,22 @@ namespace SustainTheStrain.Buildings
     {
         [field: SerializeField, Min(0.0f)] public float Duration { get; private set; } = 1.5f;
         [field: SerializeField, Min(0)] public int AttackFrequency { get; private set; } = 2;
-        
+        [field: SerializeField] public ParticleSystem StunParticle { get; private set; }
+
         public void EnableSkill(GameObject gameObject)
         {
             var effect = gameObject.GetComponent<StunEffect>();
             if (effect == null) effect = gameObject.AddComponent<StunEffect>();
             
-            effect.Initialize(Duration);
+            effect.Initialize(this);
         }
 
-	public void EnableSkillWithDuration(GameObject gameObject, float duration)
+	    public void EnableSkillWithDuration(GameObject gameObject, float duration)
         {
             var effect = gameObject.GetComponent<StunEffect>();
             if (effect == null) effect = gameObject.AddComponent<StunEffect>();
             
-            effect.Initialize(duration);
+            effect.Initialize(this, duration);
         }
     }
 }
