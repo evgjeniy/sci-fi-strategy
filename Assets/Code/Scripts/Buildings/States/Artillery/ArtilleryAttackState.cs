@@ -29,6 +29,13 @@ namespace SustainTheStrain.Buildings
                 
                 artillery.Timer.ResetTime(artillery.Config.Cooldown);
                 
+                if (artillery.Config.ShootEffect != null)
+                {
+                    var effect = NightPool.Spawn(artillery.Config.ShootEffect).With(x =>
+                        x.transform.position = artillery.SpawnPointProvider.SpawnPoint.position);
+                    NightPool.Despawn(effect, effect.GetComponent<ParticleSystem>().main.duration+0.1f);
+                }
+                
                 if(artillery.AudioPlayer!=null && _target!=null)
                 {
                     artillery.AudioPlayer.Play(0);
@@ -40,13 +47,6 @@ namespace SustainTheStrain.Buildings
 
         private void Explosion(Artillery artillery, Damageble target)
         {
-            if (artillery.Config.ShootEffect != null)
-            {
-                var effect = NightPool.Spawn(artillery.Config.ShootEffect).With(x =>
-                    x.transform.position = artillery.SpawnPointProvider.SpawnPoint.position);
-                NightPool.Despawn(effect, effect.GetComponent<ParticleSystem>().main.duration+0.1f);
-            }
-            
             _explodeArea.Update(target.transform.position, artillery.Config.ExplosionRadius, artillery.Config.Mask);
 
             foreach (var damageable in _explodeArea.Entities)
