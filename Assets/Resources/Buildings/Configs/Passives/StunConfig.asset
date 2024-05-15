@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03977be541d44b8caf8f99affd6e6df9, type: 3}
   m_Name: StunConfig
   m_EditorClassIdentifier: 
-  <Duration>k__BackingField: 2
+  <Duration>k__BackingField: 1.5
   <AttackFrequency>k__BackingField: 2
   <StunParticle>k__BackingField: {fileID: 4072639781364330663, guid: 300a685d538d532488f3c4a0f0e43283,
     type: 3}
