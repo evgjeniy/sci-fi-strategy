@@ -30,6 +30,12 @@ namespace SustainTheStrain.Buildings
                     x.transform.position = rocket.SpawnPointProvider.SpawnPoint.position);
                 NightPool.Despawn(effect, effect.GetComponent<ParticleSystem>().main.duration+0.1f);
             }
+            
+            if(rocket.AudioPlayer!=null && _target!=null)
+            {
+                rocket.AudioPlayer.Play(0);
+            }
+            
             foreach (var target in rocket.Area.Entities)
             {
                 if (attackedAmount >= rocket.Config.MaxTargets) break;

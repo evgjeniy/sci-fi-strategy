@@ -26,6 +26,8 @@ namespace SustainTheStrain.Buildings
 
         public LaserBuildingConfig Config => _config.Value;
         BuildingConfig IBuilding.Config => Config;
+        
+        [field:SerializeField]public AudioSource AudioPlayer { get; private set; }
 
         public Vector3 Orientation
         {

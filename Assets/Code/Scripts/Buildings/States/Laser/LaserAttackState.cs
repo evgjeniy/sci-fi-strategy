@@ -39,6 +39,10 @@ namespace SustainTheStrain.Buildings
 
         private async void EnableLineAttack(Laser laser)
         {
+            if(laser.AudioPlayer!=null && _target!=null)
+            {
+                laser.AudioPlayer.Play(0);
+            }
             laser.Line.Enable();
 
             for (var time = 0.0f; time < LineVisualDuration; time += Time.deltaTime)
