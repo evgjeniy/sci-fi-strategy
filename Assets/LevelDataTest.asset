@@ -14,165 +14,83 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waves:
   - _spawners:
-    - _delay: 0
+    - _delay: 3.4028235e+38
       _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
-      - _delay: 4
-        _spawnPeriod: 0
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: BOSS
-          _xOffset: 0
-      - _delay: 15
-        _spawnPeriod: 1
-        _enemyCount: 3
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 1.5
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 4
-        _spawnPeriod: 1
-        _enemyCount: 4
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 1.5
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 4
-        _spawnPeriod: 1
-        _enemyCount: 2
-        _enemyGroup:
-        - _enemyType: Mob_Shield
-          _xOffset: 1.5
-        - _enemyType: Mob_Shield
-          _xOffset: -1.5
-      - _delay: 4
-        _spawnPeriod: 1
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Tank
-          _xOffset: 1.5
-        - _enemyType: Tank
-          _xOffset: -1.5
-      - _delay: 7
-        _spawnPeriod: 1
-        _enemyCount: 2
-        _enemyGroup:
-        - _enemyType: Mob_Shield
-          _xOffset: 1.5
-        - _enemyType: Mob_Shield
-          _xOffset: -1.5
-      - _delay: 4
+      - _delay: 10
         _spawnPeriod: 2
         _enemyCount: 2
         _enemyGroup:
-        - _enemyType: Tank
-          _xOffset: 1.5
-        - _enemyType: Tank
-          _xOffset: -1.5
-      - _delay: 4
-        _spawnPeriod: 1
-        _enemyCount: 1
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 8
+        _spawnPeriod: 2
+        _enemyCount: 2
         _enemyGroup:
-        - _enemyType: Shield
-          _xOffset: 1.5
-        - _enemyType: Shield
-          _xOffset: -1.5
+        - _enemyType: Mob
+          _xOffset: 0
       - _delay: 8
         _spawnPeriod: 1
         _enemyCount: 1
         _enemyGroup:
-        - _enemyType: Shield
-          _xOffset: 1.5
-        - _enemyType: Shield
-          _xOffset: -1.5
-      - _delay: 4
-        _spawnPeriod: 1
-        _enemyCount: 2
-        _enemyGroup:
         - _enemyType: Mob
           _xOffset: 1.5
         - _enemyType: Mob
           _xOffset: -1.5
-      - _delay: 4
-        _spawnPeriod: 3
-        _enemyCount: 2
-        _enemyGroup:
-        - _enemyType: Shield
-          _xOffset: 1.5
-        - _enemyType: Shield
-          _xOffset: -1.5
-    - _delay: 0
-      _nonIgnorableDelay: 20
-      _index: 1
-      _subwaves:
-      - _delay: 15
-        _spawnPeriod: 2
-        _enemyCount: 3
-        _enemyGroup:
-        - _enemyType: BOSS
-          _xOffset: 1.5
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 35
-        _spawnPeriod: 1
-        _enemyCount: 3
-        _enemyGroup:
-        - _enemyType: Mob_Shield
-          _xOffset: 1.5
-        - _enemyType: Mob_Shield
-          _xOffset: -1.5
-      - _delay: 15
-        _spawnPeriod: 2
-        _enemyCount: 2
-        _enemyGroup:
-        - _enemyType: Tank
-          _xOffset: 1.5
-        - _enemyType: Tank
-          _xOffset: -1.5
-      - _delay: 4
-        _spawnPeriod: 2
-        _enemyCount: 2
-        _enemyGroup:
-        - _enemyType: Tank
-          _xOffset: 1.5
-        - _enemyType: Shield
-          _xOffset: -1.5
-    - _delay: 0
-      _nonIgnorableDelay: 40
-      _index: 2
-      _subwaves:
-      - _delay: 30
-        _spawnPeriod: 2
-        _enemyCount: 2
-        _enemyGroup:
-        - _enemyType: Tank
-          _xOffset: 1.5
-        - _enemyType: Tank
-          _xOffset: -1.5
-      - _delay: 40
-        _spawnPeriod: 3
-        _enemyCount: 3
+      - _delay: 1
+        _spawnPeriod: 0
+        _enemyCount: 1
         _enemyGroup:
         - _enemyType: Mob
-          _xOffset: 1.5
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 30
+          _xOffset: 0
+      - _delay: 8
         _spawnPeriod: 1
         _enemyCount: 1
         _enemyGroup:
-        - _enemyType: Shield
+        - _enemyType: Mob
           _xOffset: 1.5
-        - _enemyType: Shield
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 1
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 8
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
           _xOffset: -1.5
       - _delay: 0
-        _spawnPeriod: 3
-        _enemyCount: 2
+        _spawnPeriod: 1
+        _enemyCount: 1
         _enemyGroup:
-        - _enemyType: Shield
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 8
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
           _xOffset: 1.5
-        - _enemyType: Shield
+        - _enemyType: Mob
+          _xOffset: -1.5
+      - _delay: 1
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 1.5
+        - _enemyType: Mob
           _xOffset: -1.5
