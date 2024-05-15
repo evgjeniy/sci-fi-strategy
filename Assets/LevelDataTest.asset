@@ -22,10 +22,8 @@ MonoBehaviour:
         _spawnPeriod: 0
         _enemyCount: 1
         _enemyGroup:
-        - _enemyType: Shield
-          _xOffset: 1.5
-        - _enemyType: Shield
-          _xOffset: -1.5
+        - _enemyType: BOSS
+          _xOffset: 0
       - _delay: 15
         _spawnPeriod: 1
         _enemyCount: 3
@@ -114,7 +112,7 @@ MonoBehaviour:
         _spawnPeriod: 2
         _enemyCount: 3
         _enemyGroup:
-        - _enemyType: Mob
+        - _enemyType: BOSS
           _xOffset: 1.5
         - _enemyType: Mob
           _xOffset: -1.5

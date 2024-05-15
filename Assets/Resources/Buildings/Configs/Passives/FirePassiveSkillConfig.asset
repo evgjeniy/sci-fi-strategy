@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FirePassiveSkillConfig
   m_EditorClassIdentifier: 
   <DamagePerSecond>k__BackingField: 2
-  <FireDuration>k__BackingField: 1
+  <FireDuration>k__BackingField: 5
   <AttackFrequency>k__BackingField: 2

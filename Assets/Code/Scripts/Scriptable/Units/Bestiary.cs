@@ -12,12 +12,18 @@ namespace SustainTheStrain
 
         public List<EnemyItem> Catalogue => _enemiesCatalogue;
 
+        public string GetFullName(string enemyType)
+        {
+            return _enemiesCatalogue.Find(item => { return enemyType == item.name; }).fullName;
+        }
+
         [Serializable]
         public struct EnemyItem 
         { 
             [SerializeField] public string name;
             [SerializeField] public int id;
             [SerializeField] public Enemy enemy;
+            [SerializeField] public string fullName;
         }
     }
 }

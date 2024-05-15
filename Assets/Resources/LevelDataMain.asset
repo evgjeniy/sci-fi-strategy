@@ -157,7 +157,7 @@ MonoBehaviour:
           _xOffset: 1.5
         - _enemyType: Mob_Shield
           _xOffset: -1.5
-    - _delay: 0
+    - _delay: 40
       _nonIgnorableDelay: 55
       _index: 1
       _subwaves:

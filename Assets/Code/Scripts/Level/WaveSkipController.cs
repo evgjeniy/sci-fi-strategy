@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using SustainTheStrain.Level;
 using SustainTheStrain.Scriptable;
 using System.Collections.Generic;
@@ -13,12 +14,12 @@ namespace SustainTheStrain
         private List<SkipInitiator> _skipInitiators;
 
         private WavesManager _waveManager;
+        [SerializeField] private Bestiary _bestiary;
 
         [Inject]
         private void Construct(WavesManager waveManager)
         {
             _waveManager = waveManager;
-
             waveManager.OnWaveStarted += WaveStarted;
             waveManager.OnWaveStartedDelayed += _ => { DeactivateInitiators(); };
         }
@@ -48,12 +49,12 @@ namespace SustainTheStrain
             {
                 List<string> enemyeTypes = new List<string>();
 
-                foreach (var subwave in _waveManager.LevelData.waves[wave]._spawners[initiator.SpawnerIndex].subwaves)
+                foreach (var subwave in _waveManager.LevelData.waves[wave]._spawners.Find((i) => { return i.index == initiator.SpawnerIndex; }).subwaves)
                     foreach (var group in subwave.enemyGroup)
                     {
-                        if (!enemyeTypes.Contains(group.enemyType))
+                        if (!enemyeTypes.Contains(_bestiary.GetFullName(group.enemyType)))
                         {
-                            enemyeTypes.Add(group.enemyType);
+                            enemyeTypes.Add(_bestiary.GetFullName(group.enemyType));
                         }
                     }
                 initiator.ActivateInit(_waveManager.LevelData.waves[wave]._spawners[0].delay, enemyeTypes);

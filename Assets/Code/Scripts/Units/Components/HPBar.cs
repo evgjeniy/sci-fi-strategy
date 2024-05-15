@@ -9,6 +9,7 @@ namespace SustainTheStrain.Units
     {
         [SerializeField] private Damageble _damageble;
         [SerializeField] private Shield _shield;
+        [SerializeField] private RectTransform _ui;
         [SerializeField] private RectTransform _hpBar;
         [SerializeField] private Transform _shieldBarsHolder;
         [SerializeField] private ShieldBar _shieldBarRef;
@@ -40,7 +41,7 @@ namespace SustainTheStrain.Units
 
             if (_shield != null)
             {
-                if (_shield.ShieldCells[0].CurrentHP <= 0)
+                if (_shield.ShieldCells.Count <= 0 || _shield.ShieldCells[0].CurrentHP <= 0)
                     _visual.gameObject.Deactivate();
                 else
                     _visual.gameObject.Activate();
@@ -49,7 +50,7 @@ namespace SustainTheStrain.Units
 
         private void LateUpdate()
         {
-            _hpBar.LookAt(_hpBar.position + _camForward);
+            _ui.LookAt(_ui.position + _camForward);
         }
 
         private void OnDisable()
