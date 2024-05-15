@@ -13,7 +13,7 @@ namespace SustainTheStrain.Level
         [Inject] private Citadel _citadel;
 
         public event Action OnGameLost;
-        public event Action OnGameWon;
+        public event Action<int> OnGameWon;
 
         private void OnEnable()
         {
@@ -39,7 +39,18 @@ namespace SustainTheStrain.Level
             }
 
             Debug.LogWarning("Won");
-            OnGameWon?.Invoke();
+            OnGameWon?.Invoke(GetGameResult());
+        }
+
+        private int GetGameResult()
+        {
+            if (_citadel.damageble.CurrentHP >= _citadel.damageble.MaxHP * 0.85f)
+                return 3;
+            if (_citadel.damageble.CurrentHP >= _citadel.damageble.MaxHP * 0.50f)
+                return 2;
+            if (_citadel.damageble.CurrentHP >= _citadel.damageble.MaxHP * 0.25f)
+                return 1;
+            return 0;
         }
     }
 }

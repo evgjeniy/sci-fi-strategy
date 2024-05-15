@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Extensions;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 namespace SustainTheStrain.EnergySystem.UI
 {
@@ -17,7 +16,8 @@ namespace SustainTheStrain.EnergySystem.UI
         [SerializeField] private RectTransform _barsHolder;
         [SerializeField] private Color _filledColor;
         [SerializeField] private TMP_Text _tipText;
-        
+        [SerializeField] private RectTransform _tip;
+
         private List<Cell> _images = new();
         private int _coloredCount = 0;
         private int _enabledCount = 0;
@@ -40,12 +40,17 @@ namespace SustainTheStrain.EnergySystem.UI
                 else {SetMaxBarsCount(value);}
             }
         }
-        
+
         // private void SetMax(int value)
         // {
         //     MaxBarsCount = value;
         // }
-        
+
+        private void OnEnable()
+        {
+            _tip.Deactivate();
+        }
+
         private void SetMaxBarsCount(int value)
         {
             if (value > _enabledCount)

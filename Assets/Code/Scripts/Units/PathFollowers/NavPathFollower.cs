@@ -52,6 +52,8 @@ namespace SustainTheStrain.Units
         
         public void Start()
         {
+            if (!agent.isActiveAndEnabled) return;
+
             agent.isStopped = false;
             agent.avoidancePriority = 100;
             //agent.Enable();
@@ -59,6 +61,8 @@ namespace SustainTheStrain.Units
 
         public void Stop()
         {
+            if (!agent.isActiveAndEnabled) return;
+
             agent.isStopped = true;
             agent.avoidancePriority = 50;
             //agent.Disable();
