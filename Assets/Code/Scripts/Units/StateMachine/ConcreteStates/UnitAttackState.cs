@@ -83,11 +83,9 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
         {
             Quaternion lookRotation = 
                 Quaternion.LookRotation((context.Duelable.Opponent.transform.position - context.transform.position).normalized);
-	
-            //over time
+            
             context.transform.rotation = 
                 Quaternion.Slerp(context.transform.rotation, lookRotation, Time.deltaTime * 3);
-            
         }
     }
 }

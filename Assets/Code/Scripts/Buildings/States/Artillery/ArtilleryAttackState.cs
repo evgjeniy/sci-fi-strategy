@@ -1,5 +1,6 @@
 ﻿using NTC.Pool;
 using SustainTheStrain.Units;
+using UnityEngine;
 using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
@@ -34,6 +35,13 @@ namespace SustainTheStrain.Buildings
 
         private void Explosion(Artillery artillery, Damageble target)
         {
+            if (artillery.Config.ShootEffect != null)
+            {
+                var effect = NightPool.Spawn(artillery.Config.ShootEffect).With(x =>
+                    x.transform.position = artillery.SpawnPointProvider.SpawnPoint.position);
+                NightPool.Despawn(effect, effect.GetComponent<ParticleSystem>().main.duration+0.1f);
+            }
+            
             _explodeArea.Update(target.transform.position, artillery.Config.ExplosionRadius, artillery.Config.Mask);
 
             foreach (var damageable in _explodeArea.Entities)

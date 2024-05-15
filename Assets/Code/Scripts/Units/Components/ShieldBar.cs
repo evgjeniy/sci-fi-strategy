@@ -29,7 +29,10 @@ namespace SustainTheStrain.Units
 
         private void LateUpdate()
         {
-            _shieldBar.LookAt(_shieldBar.position + Camera.main.transform.forward);
+            if (_shieldBar != null)
+            {
+                _shieldBar.LookAt(_shieldBar.position + Camera.main.transform.forward);
+            }
         }
     }
 }

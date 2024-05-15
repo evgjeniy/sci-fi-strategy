@@ -14,10 +14,11 @@ namespace SustainTheStrain.Configs.Buildings
 
         [field: Header("Prefabs")]
         [field: SerializeField] public Projectile ProjectilePrefab { get; set; }
+        [field: SerializeField] public GameObject ShootEffect { get; private set; }
 
         [field: Header("Next Level")]
         [field: SerializeField, Expandable] public RocketBuildingConfig NextLevelConfig { get; private set; }
-
+        
         public override int NextLevelPrice => NextLevelConfig == null ? int.MaxValue : NextLevelConfig.Price;
     }
 }
