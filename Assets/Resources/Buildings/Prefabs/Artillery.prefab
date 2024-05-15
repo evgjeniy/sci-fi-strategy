@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8079244789116783344}
   - component: {fileID: -8666834760005969805}
   - component: {fileID: 1276478491613489972}
-  - component: {fileID: -8796230398184431472}
+  - component: {fileID: -999388178133594488}
   m_Layer: 0
   m_Name: Artillery
   m_TagString: Untagged
@@ -67,7 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08214684b86b47a38dd02f874eb8f74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &-8796230398184431472
+  <AudioPlayer>k__BackingField: {fileID: -999388178133594488}
+--- !u!82 &-999388178133594488
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,9 +78,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: ebe98244012602343934ed7335096efe, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.601
   m_Pitch: 1
   Loop: 0
   Mute: 0

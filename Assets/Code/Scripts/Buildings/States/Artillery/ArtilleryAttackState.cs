@@ -28,6 +28,11 @@ namespace SustainTheStrain.Buildings
                     .LaunchTo(_target, onComplete: damageable => Explosion(artillery, damageable));
                 
                 artillery.Timer.ResetTime(artillery.Config.Cooldown);
+                
+                if(artillery.AudioPlayer!=null && _target!=null)
+                {
+                    artillery.AudioPlayer.Play(0);
+                }
             }
 
             return this;
