@@ -521,10 +521,11 @@ PrefabInstance:
     - {fileID: 1795451277360461822, guid: d26196ebbe3508543843b41c3962409d, type: 3}
     m_RemovedGameObjects:
     - {fileID: 795949853038617089, guid: d26196ebbe3508543843b41c3962409d, type: 3}
+    - {fileID: 3300110456601824311, guid: d26196ebbe3508543843b41c3962409d, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
-      insertIndex: 0
+      insertIndex: -1
       addedObject: {fileID: 7624173373071499451}
     - targetCorrespondingSourceObject: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
@@ -535,6 +536,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 4
       addedObject: {fileID: 3580164085099643981}
+    - targetCorrespondingSourceObject: {fileID: 235370898999074474, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4452466784664492352}
   m_SourcePrefab: {fileID: 100100000, guid: d26196ebbe3508543843b41c3962409d, type: 3}
 --- !u!1 &5095237268674068753 stripped
 GameObject:
@@ -554,13 +559,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3272f43aba238a54790e000f24fd2199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
+  _afterDeath: {fileID: 1620140131458704099, guid: 57e5b83dfee152a47aedf7d83c83e9f5,
     type: 3}
   <MaxHP>k__BackingField: 70
   <Team>k__BackingField: 1
   <IsFlying>k__BackingField: 0
   _recoverDelay: 0
   _recoverySpeed: 0
+--- !u!114 &4452466784664492352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5095237268674068753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b4e28836366674786cddf1935f10d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nrenderer: {fileID: 6921125543576445205}
+  _spawnSpeed: 0.5
 --- !u!4 &8690171393321964968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4424908747409459731, guid: d26196ebbe3508543843b41c3962409d,
@@ -692,3 +711,9 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!137 &6921125543576445205 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3524067964684240644, guid: 814645c4e6dcc494f91cbdaae909b5df,
+    type: 3}
+  m_PrefabInstance: {fileID: 5829001690167584273}
+  m_PrefabAsset: {fileID: 0}

@@ -19,7 +19,7 @@ MonoBehaviour:
   <Radius>k__BackingField: 4
   <AimPrefab>k__BackingField: {fileID: -7253956914196207495, guid: dec463a7aab7ab7489701ffb37bc966f,
     type: 3}
-  <ExplosionPrefab>k__BackingField: {fileID: 100004, guid: 82019e923dca94848916b96b8f98a352,
+  <ExplosionPrefab>k__BackingField: {fileID: 1121192042590650, guid: 461362262675f7744aac8432026f4a2d,
     type: 3}
   <RaycastDistance>k__BackingField: 3.402823e+38
   <GroundMask>k__BackingField:
