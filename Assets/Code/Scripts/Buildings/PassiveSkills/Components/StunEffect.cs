@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using SustainTheStrain.Units;
 using UnityEngine;
+using UnityEngine.Extensions;
 
 namespace SustainTheStrain.Buildings
 {
@@ -10,7 +11,11 @@ namespace SustainTheStrain.Buildings
         private Unit _unit;
         private float _oldSpeed;
 
-        public void Initialize(float duration)
+        private ParticleSystem _stunEffect;
+
+        public void Initialize(StunConfig config) => Initialize(config, config.Duration);
+
+        public void Initialize(StunConfig config, float duration)
         {
             if (TryGetComponent(out _unit) is false)
             {
@@ -21,18 +26,21 @@ namespace SustainTheStrain.Buildings
                 if (_routine == null) _oldSpeed = _unit.CurrentPathFollower.Speed;
                 else StopCoroutine(_routine);
 
-                _routine = StartCoroutine(DeactivateShield(duration));
+                _routine = StartCoroutine(StunRoutine(duration));
+            
+                if (_stunEffect == null && config.StunParticle != null)
+                    _stunEffect = config.StunParticle.Spawn(transform);
             }
         }
 
-        private IEnumerator DeactivateShield(float duration)
+        private IEnumerator StunRoutine(float duration)
         {
             _unit.Freeze();
+
             yield return new WaitForSeconds(duration);
 
-            Destroy(this);
+            _unit.Unfreeze(_oldSpeed);
+            _stunEffect.IfNotNull(Destroy);
         }
-
-        private void OnDestroy() => _unit.Unfreeze(_oldSpeed);
     }
 }
