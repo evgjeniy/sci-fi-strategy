@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: BarrackBuildingConfig2
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 2
-  <Price>k__BackingField: 190
+  <Price>k__BackingField: 110
   <Compensation>k__BackingField: 110
   <Mask>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
   <Radius>k__BackingField: 8.2
-  <UnitMaxHealth>k__BackingField: 90
-  <UnitAttackDamage>k__BackingField: 7
+  <UnitMaxHealth>k__BackingField: 100
+  <UnitAttackDamage>k__BackingField: 5
   <UnitAttackCooldown>k__BackingField: 1
-  <RespawnCooldown>k__BackingField: 14
+  <RespawnCooldown>k__BackingField: 10
   <RecruitSpawnAimPrefab>k__BackingField: {fileID: -3427867631016709973, guid: 90fe8d8ae151dde499b44cd4a8253e82,
     type: 3}
   <NextLevelConfig>k__BackingField: {fileID: 11400000, guid: 1e654eeadaa571944a65e6f784363bf8,
