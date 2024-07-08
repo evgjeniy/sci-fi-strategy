@@ -47,11 +47,11 @@ namespace SustainTheStrain.Level
 
         private int GetGameResult()
         {
-            if (_citadel.damageble.CurrentHP >= _citadel.damageble.MaxHP * 0.85f)
+            if (_citadel.Damageable.CurrentHP >= _citadel.Damageable.MaxHP * 0.85f)
                 return 3;
-            if (_citadel.damageble.CurrentHP >= _citadel.damageble.MaxHP * 0.50f)
+            if (_citadel.Damageable.CurrentHP >= _citadel.Damageable.MaxHP * 0.50f)
                 return 2;
-            if (_citadel.damageble.CurrentHP >= _citadel.damageble.MaxHP * 0.25f)
+            if (_citadel.Damageable.CurrentHP >= _citadel.Damageable.MaxHP * 0.25f)
                 return 1;
             return 0;
         }

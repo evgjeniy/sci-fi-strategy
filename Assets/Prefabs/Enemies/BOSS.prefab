@@ -692,6 +692,11 @@ PrefabInstance:
       propertyPath: <DamagePeriod>k__BackingField
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5466643690414773136, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
+        type: 3}
+      propertyPath: <CitadelDamage>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7931212609518137421, guid: c967dbd03c9d7db4099ff3c8aa4983e4,
         type: 3}
       propertyPath: _cellHp

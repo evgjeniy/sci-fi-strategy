@@ -1,5 +1,7 @@
+using System;
 using Dreamteck.Splines;
 using SustainTheStrain.Units.StateMachine.ConcreteStates;
+using UnityEngine;
 using Zenject;
 
 namespace SustainTheStrain.Units
@@ -15,7 +17,9 @@ namespace SustainTheStrain.Units
         #endregion
 
         private float _roadOffset;
-        
+
+        [field:SerializeField] public float CitadelDamage { get; private set; }
+
         public float RoadOffset
         {
             get => _roadOffset;
@@ -60,6 +64,10 @@ namespace SustainTheStrain.Units
             _attackState.Init(_aggroState, _splineMoveState);
 
             _stateMachine.Initialize(_splineMoveState);
+        }
+        
+        private void OnCitadelReached(){
+           
         }
         
         public class Factory : IFactory<Enemy>

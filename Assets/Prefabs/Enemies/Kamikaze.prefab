@@ -637,6 +637,7 @@ MonoBehaviour:
   Animator: {fileID: 0}
   _aggroRadius: 5
   _attackRadius: 1
+  <CitadelDamage>k__BackingField: 1
   CoinsDrop: 15
 --- !u!1001 &6214077512151166896
 PrefabInstance:

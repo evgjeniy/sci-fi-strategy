@@ -55,6 +55,10 @@ namespace SustainTheStrain.Units
             var enemies = AggroZone.Entities.
                 Where((e) =>
                 {
+                    if (e.Damageable == null)
+                    {
+                        return false;
+                    }
                     if (e.Damageable.Team == Duelable.Damageable.Team) return false;
                     if (e.Damageable.IsFlying) return false;
 

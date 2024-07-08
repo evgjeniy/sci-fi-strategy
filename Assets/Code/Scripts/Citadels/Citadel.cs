@@ -1,16 +1,32 @@
+using System;
 using SustainTheStrain.Units;
 using UnityEngine;
 
 namespace SustainTheStrain.Citadels
 {
     [RequireComponent(typeof(Damageble))]
+    [RequireComponent(typeof(CitadelTrigger))]
     public class Citadel : MonoBehaviour
     {
-        public Damageble damageble;
+        public Damageble Damageable { get; private set; }
+        public CitadelTrigger Trigger { get; private set; }
 
         private void Awake()
         {
-            damageble = GetComponent<Damageble>();
+            Damageable = GetComponent<Damageble>();
+            Trigger = GetComponent<CitadelTrigger>();
+            Trigger.OnEnemyTriggered += KillOnEnemy;
         }
+
+        private void KillOnEnemy(Damageble enemy)
+        {
+            if (enemy.Team != Team.Enemy) return;
+            if (enemy.TryGetComponent<Enemy>(out var enemyUnit))
+            {
+                Damageable.Damage(enemyUnit.CitadelDamage);
+            }
+            enemy.Kill();
+        }
+        
     }
 }
