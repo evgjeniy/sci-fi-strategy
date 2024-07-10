@@ -567,16 +567,20 @@ PrefabInstance:
     - target: {fileID: 7715807382400100011, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: <MaxHP>k__BackingField
-      value: 20
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7715807382400100011, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: <IsFlying>k__BackingField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
+        type: 3}
+      propertyPath: <CitadelDamage>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8, type: 3}
-    - {fileID: 2898110286951984679, guid: d11d8725d54934741b6c008f48bd65a8, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects:
     - {fileID: 764146738834307669, guid: d11d8725d54934741b6c008f48bd65a8, type: 3}
     - {fileID: 4685110404732548077, guid: d11d8725d54934741b6c008f48bd65a8, type: 3}
@@ -637,7 +641,7 @@ MonoBehaviour:
   Animator: {fileID: 0}
   _aggroRadius: 5
   _attackRadius: 1
-  <CitadelDamage>k__BackingField: 1
+  <CitadelDamage>k__BackingField: 0
   CoinsDrop: 15
 --- !u!1001 &6214077512151166896
 PrefabInstance:

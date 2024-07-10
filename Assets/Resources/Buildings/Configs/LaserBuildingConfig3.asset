@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: LaserBuildingConfig3
   m_EditorClassIdentifier: 
   <Level>k__BackingField: 3
-  <Price>k__BackingField: 260
-  <Compensation>k__BackingField: 320
+  <Price>k__BackingField: 240
+  <Compensation>k__BackingField: 310
   <Mask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8
   <Radius>k__BackingField: 9
-  <Damage>k__BackingField: 45
+  <Damage>k__BackingField: 57
   <Cooldown>k__BackingField: 1.5
   <LineRenderer>k__BackingField: {fileID: 3930199137400860807, guid: 97c02ea80f5dc3a44bf4fb3eaa8d7c0d,
     type: 3}

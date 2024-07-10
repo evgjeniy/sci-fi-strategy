@@ -18,23 +18,23 @@ MonoBehaviour:
       _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
-      - _delay: 10
+      - _delay: 9
         _spawnPeriod: 2
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 7
+        _spawnPeriod: 2
+        _enemyCount: 5
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+      - _delay: 7
+        _spawnPeriod: 1
         _enemyCount: 2
         _enemyGroup:
         - _enemyType: Mob
-          _xOffset: 0
-      - _delay: 8
-        _spawnPeriod: 2
-        _enemyCount: 2
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 0
-      - _delay: 8
-        _spawnPeriod: 1
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
           _xOffset: 1.5
         - _enemyType: Mob
           _xOffset: -1.5
@@ -44,51 +44,17 @@ MonoBehaviour:
         _enemyGroup:
         - _enemyType: Mob
           _xOffset: 0
-      - _delay: 8
+      - _delay: 7
         _spawnPeriod: 1
-        _enemyCount: 1
+        _enemyCount: 3
         _enemyGroup:
         - _enemyType: Mob
           _xOffset: 1.5
         - _enemyType: Mob
           _xOffset: -1.5
-      - _delay: 1
-        _spawnPeriod: 0
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 0
-      - _delay: 8
-        _spawnPeriod: 0
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 1.5
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 0
-        _spawnPeriod: 1
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 0
       - _delay: 8
         _spawnPeriod: 1
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 1.5
-        - _enemyType: Mob
-          _xOffset: -1.5
-      - _delay: 1
-        _spawnPeriod: 1
-        _enemyCount: 1
-        _enemyGroup:
-        - _enemyType: Mob
-          _xOffset: 0
-      - _delay: 0
-        _spawnPeriod: 1
-        _enemyCount: 1
+        _enemyCount: 4
         _enemyGroup:
         - _enemyType: Mob
           _xOffset: 1.5
