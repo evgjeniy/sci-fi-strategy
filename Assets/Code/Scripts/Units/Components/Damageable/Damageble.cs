@@ -53,7 +53,7 @@ namespace SustainTheStrain.Units
 
         public virtual void Damage(float damage)
         {
-            float dmg = (100 - DamageResistance) / 100 * damage;
+            float dmg = (100 - DamageResistance) / 100f * damage;
             CurrentHP -= Mathf.Round(dmg);
         }
 
