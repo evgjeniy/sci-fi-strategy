@@ -441,6 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67fd0fa0834b988429f9548845bf0e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <DamageResistance>k__BackingField: 50
   _afterDeath: {fileID: 0}
   <MaxHP>k__BackingField: 300
   <Team>k__BackingField: 0

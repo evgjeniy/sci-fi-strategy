@@ -1,6 +1,7 @@
 using SustainTheStrain.Units.Components;
 using System;
 using System.Linq;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.AI;
 

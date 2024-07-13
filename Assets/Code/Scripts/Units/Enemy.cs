@@ -66,6 +66,8 @@ namespace SustainTheStrain.Units
             _stateMachine.Initialize(_splineMoveState);
         }
         
+        
+        
         private void OnCitadelReached(){
            
         }

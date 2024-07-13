@@ -1,5 +1,6 @@
 using SustainTheStrain.Units.Components;
 using System;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Extensions;
 
@@ -7,6 +8,10 @@ namespace SustainTheStrain.Units
 {
     public class Damageble : MonoBehaviour, IDamageable
     {
+        [field: SerializeField] 
+        [field: MinValue(0)] [field: MaxValue(100)] 
+        public int DamageResistance { get; private set; }
+        
         [SerializeField] public GameObject _afterDeath;
 
         [field:SerializeField]
@@ -48,12 +53,13 @@ namespace SustainTheStrain.Units
 
         public virtual void Damage(float damage)
         {
-            CurrentHP -= damage;
+            float dmg = (100 - DamageResistance) / 100 * damage;
+            CurrentHP -= Mathf.Round(dmg);
         }
 
         public virtual void DeepDamage(float damage)
         {
-            Damage(damage);
+            CurrentHP -= damage;
         }
         
         public void Kill(bool suicide = false)

@@ -15,10 +15,10 @@ namespace SustainTheStrain.Citadels
         {
             Damageable = GetComponent<Damageble>();
             Trigger = GetComponent<CitadelTrigger>();
-            Trigger.OnEnemyTriggered += KillOnEnemy;
+            Trigger.OnEnemyTriggered += KillEnemy;
         }
 
-        private void KillOnEnemy(Damageble enemy)
+        private void KillEnemy(Damageble enemy)
         {
             if (enemy.Team != Team.Enemy) return;
             if (enemy.TryGetComponent<Enemy>(out var enemyUnit))
