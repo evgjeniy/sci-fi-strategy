@@ -21,7 +21,7 @@ namespace SustainTheStrain.Buildings
         private Observable<SelectionType> _selection;
         private GameObject _recruitsPointer;
 
-        public Timer Timer { get; private set; }
+        public Timer[] Timers { get; private set; }
         public BarrackSystem BarrackSystem { get; private set; }
 
         public BarrackBuildingConfig Config => _config.Value;
@@ -34,7 +34,7 @@ namespace SustainTheStrain.Buildings
         }
 
         [Inject]
-        private void Construct(Timer timer, IResourceManager resourceManager,
+        private void Construct(IResourceManager resourceManager,
             BarrackSystem barrackSystem,
             Observable<BarrackBuildingConfig> config,
             Observable<Vector3> spawnPoint,
@@ -50,8 +50,12 @@ namespace SustainTheStrain.Buildings
 
             SpawnPoint = spawnPoint.Value + Vector3.up * 2f;
             
-            Timer = timer;
-            Timer.ResetTime(config.Value.RespawnCooldown);
+            Timers = new Timer[RecruitGroup.squadMaxSize];
+            for (int i = 0; i < Timers.Length; i++)
+            {
+                Timers[i] = new Timer(config.Value.RespawnCooldown);
+                Timers[i].IsPaused = true;
+            }
         }
 
         private void Update() => _currentState = _currentState.Update(this);

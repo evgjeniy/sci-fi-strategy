@@ -6,6 +6,7 @@ namespace SustainTheStrain.Buildings
     {
         public IUpdatableState<Barrack> Update(Barrack barrack)
         {
+            int index = 0;
             while (barrack.RecruitGroup.Recruits.Count < barrack.RecruitGroup.squadMaxSize)
             {
                 var recruit = barrack.RecruitSpawner.Spawn()
@@ -16,6 +17,9 @@ namespace SustainTheStrain.Buildings
                     .With(x => x.DamagePeriod = barrack.Config.UnitAttackCooldown);
 
                 barrack.RecruitGroup.AddRecruit(recruit);
+                var timer = barrack.Timers[index];
+                recruit.Duelable.Damageable.OnDied += (x) => { timer.IsPaused = false; };
+                index++;
             }
 
             return new BarrackIdleState();

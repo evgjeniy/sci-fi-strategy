@@ -6,13 +6,15 @@ namespace SustainTheStrain.Buildings
     {
         public IUpdatableState<Barrack> Update(Barrack barrack)
         {
-            if (barrack.Timer.IsOver)
+            foreach (var timer in barrack.Timers)
             {
+                timer.Tick();
+                if (!timer.IsOver) continue;
                 barrack.RecruitGroup.Recruits.RemoveAll(x => x == null);
 
                 var needToSpawn = barrack.RecruitGroup.Recruits.Count < barrack.RecruitGroup.squadMaxSize;
-                
-                if (needToSpawn)
+
+                if (!needToSpawn) continue;
                 {
                     var recruit = barrack.RecruitSpawner.Spawn()
                         .With(x => x.SetParent(barrack.transform))
@@ -23,10 +25,11 @@ namespace SustainTheStrain.Buildings
                     
                     
                     barrack.RecruitGroup.AddRecruit(recruit);
-                    barrack.Timer.ResetTime(barrack.Config.RespawnCooldown);
+                    timer.ResetTime(barrack.Config.RespawnCooldown);
+                    timer.IsPaused = true;
+                    recruit.Duelable.Damageable.OnDied += (x) => { timer.IsPaused = false; };
                 }
             }
-
             return this;
         }
     }
