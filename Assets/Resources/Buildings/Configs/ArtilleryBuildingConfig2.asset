@@ -21,7 +21,7 @@ MonoBehaviour:
   <Radius>k__BackingField: 8.2
   <Damage>k__BackingField: 33
   <Cooldown>k__BackingField: 3
-  <ExplosionRadius>k__BackingField: 3
+  <ExplosionRadius>k__BackingField: 4
   <GfxPrefab>k__BackingField: {fileID: 6957716040307377065, guid: 138f31c3b5b46654a8c9bb9c7aafbddd,
     type: 3}
   <ProjectilePrefab>k__BackingField: {fileID: -2524694159036644151, guid: 2d45a8d99d56b88449f483ae47bf861d,

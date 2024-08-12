@@ -383,8 +383,7 @@ PrefabInstance:
       propertyPath: <DamagePeriod>k__BackingField
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7715807382400100011, guid: d11d8725d54934741b6c008f48bd65a8, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5354511381987174743, guid: d11d8725d54934741b6c008f48bd65a8,
