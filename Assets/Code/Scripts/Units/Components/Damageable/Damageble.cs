@@ -45,6 +45,7 @@ namespace SustainTheStrain.Units
         }
 
         private float _currentHp;
+        private bool _died;
 
         private void Awake()
         {
@@ -69,11 +70,13 @@ namespace SustainTheStrain.Units
         
         protected virtual void Die(bool suicide = false)
         {
+            if (_died) return;
             OnDied?.Invoke(this);
             OnDiedResult?.Invoke(this, suicide);
-            
+
             _afterDeath.IfNotNull(x => Instantiate(x, transform.position, Quaternion.identity));
             gameObject.Deactivate();
+            _died = true;
         }
     }
 }
