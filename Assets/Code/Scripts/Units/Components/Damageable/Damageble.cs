@@ -1,5 +1,7 @@
 using SustainTheStrain.Units.Components;
 using System;
+using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Extensions;
@@ -8,11 +10,10 @@ namespace SustainTheStrain.Units
 {
     public class Damageble : MonoBehaviour, IDamageable
     {
-        [field: SerializeField] 
-        [field: MinValue(0)] [field: MaxValue(100)] 
-        public int DamageResistance { get; private set; }
-        
         [SerializeField] public GameObject _afterDeath;
+        
+        [SerializedDictionary("Damage type", "Resistance in percents")]
+        public SerializedDictionary<DamageType, int> _damageResistances;
 
         [field:SerializeField]
         public float MaxHP { get; set; }
@@ -52,15 +53,10 @@ namespace SustainTheStrain.Units
             CurrentHP = MaxHP;
         }
 
-        public virtual void Damage(float damage)
+        public virtual void Damage(float damage, DamageType damageType)
         {
-            float dmg = (100 - DamageResistance) / 100f * damage;
+            float dmg = (100 - _damageResistances[damageType]) / 100f * damage;
             CurrentHP -= Mathf.Round(dmg);
-        }
-
-        public virtual void DeepDamage(float damage)
-        {
-            CurrentHP -= damage;
         }
         
         public void Kill(bool suicide = false)

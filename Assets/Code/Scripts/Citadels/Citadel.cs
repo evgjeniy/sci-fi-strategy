@@ -23,7 +23,8 @@ namespace SustainTheStrain.Citadels
             if (enemy.Team != Team.Enemy) return;
             if (enemy.TryGetComponent<Enemy>(out var enemyUnit))
             {
-                Damageable.Damage(enemyUnit.CitadelDamage);
+                //TODO DAMAGE TYPE INSTALLER
+                Damageable.Damage(enemyUnit.CitadelDamage, DamageType.Physical);
             }
             enemy.Kill();
         }

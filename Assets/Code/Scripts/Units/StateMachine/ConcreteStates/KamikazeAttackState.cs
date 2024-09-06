@@ -41,8 +41,9 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
                 context.StateMachine.ChangeState(_aggroState);
                 return;
             }
-
-            context.Duelable.Opponent.Damageable.Damage(context.Damage);
+    
+            //TODO DAMAGE TYPE INSTALLER
+            context.Duelable.Opponent.Damageable.Damage(context.Damage, DamageType.Physical);
             context.Duelable.Damageable.Kill(true);
         }
 

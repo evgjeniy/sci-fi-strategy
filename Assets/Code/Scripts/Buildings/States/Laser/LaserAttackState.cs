@@ -22,7 +22,7 @@ namespace SustainTheStrain.Buildings
             laser.Orientation = _target.transform.position;
             if (!laser.Timer.IsOver) return this;
 
-            _target.DeepDamage(laser.Config.Damage * laser.EnergySystem.DamageMultiplier);
+            _target.Damage(laser.Config.Damage * laser.EnergySystem.DamageMultiplier, DamageType.Laser);
 
             if (laser.Config.NextLevelConfig == null)
                 if (laser.AttackCounter % laser.EnergySystem.Settings.PassiveSkill.AttackFrequency == 0)

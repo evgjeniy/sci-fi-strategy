@@ -7,7 +7,7 @@ namespace SustainTheStrain.Citadels
     {
         [SerializeField] private Shield _shield;
 
-        public override void Damage(float damage)
+        public override void Damage(float damage, DamageType damageType)
         {
             if (_shield != null)
             {

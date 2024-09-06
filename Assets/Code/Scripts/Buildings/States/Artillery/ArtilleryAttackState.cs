@@ -50,7 +50,8 @@ namespace SustainTheStrain.Buildings
             _explodeArea.Update(target.transform.position, artillery.Config.ExplosionRadius, artillery.Config.Mask);
 
             foreach (var damageable in _explodeArea.Entities)
-                damageable.Damage(artillery.Config.Damage * artillery.EnergySystem.DamageMultiplier);
+                //TODO DAMAGE TYPE INSTALLER
+                damageable.Damage(artillery.Config.Damage * artillery.EnergySystem.DamageMultiplier, DamageType.Physical);
 
             if (artillery.Config.NextLevelConfig != null) return;
             if (artillery.AttackCounter % artillery.EnergySystem.Settings.PassiveSkill.AttackFrequency != 0) return;

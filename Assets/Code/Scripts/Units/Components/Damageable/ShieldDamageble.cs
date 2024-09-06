@@ -12,7 +12,7 @@ namespace SustainTheStrain.Units
             _shield = GetComponent<Shield>();
         }
         
-        public override void Damage(float damage)
+        public override void Damage(float damage, DamageType damageType)
         {
             if (_shield != null)
             {
@@ -24,9 +24,5 @@ namespace SustainTheStrain.Units
             CurrentHP -= damage;
         }
         
-        public override void DeepDamage(float damage)
-        {
-            CurrentHP -= damage;
-        }
     }
 }

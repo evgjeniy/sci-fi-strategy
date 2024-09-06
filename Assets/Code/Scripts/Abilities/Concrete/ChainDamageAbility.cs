@@ -81,7 +81,8 @@ namespace SustainTheStrain.Abilities
             var currentTarget = hit.collider;
             List<Collider> usedTargets = new(_config.MaxTargets) { hit.collider };
 
-            currentTarget.GetComponent<Damageble>().Damage(_config.Damage);
+            //TODO DAMAGE TYPE INSTALLER
+            currentTarget.GetComponent<Damageble>().Damage(_config.Damage, DamageType.Physical);
 
             line.positionCount++;
             line.SetPosition(line.positionCount - 1, currentTarget.transform.position);
@@ -106,7 +107,8 @@ namespace SustainTheStrain.Abilities
                 if (nearest == null) break;
 
                 currentTarget = nearest;
-                currentTarget.GetComponent<Damageble>().Damage(_config.Damage);
+                //TODO DAMAGE TYPE INSTALLER
+                currentTarget.GetComponent<Damageble>().Damage(_config.Damage, DamageType.Physical);
                 usedTargets.Add(currentTarget);
 
                 line.positionCount++;

@@ -76,6 +76,7 @@ namespace SustainTheStrain.Units
 
         public bool Damage(float damage)
         {
+            //TODO CHECK DAMAGE TYPE LOGIC
             _lastDamageTime = Time.time;
             _calm = false;
 

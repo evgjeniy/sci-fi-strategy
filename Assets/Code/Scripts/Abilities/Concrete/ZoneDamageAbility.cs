@@ -79,7 +79,8 @@ namespace SustainTheStrain.Abilities
             _damageArea.Update(hit.point, _config.Radius, _config.DamageMask);
 
             foreach (var damageable in _damageArea.Entities)
-                damageable.Damage(_config.Damage);
+                //TODO DAMAGE TYPE INSTALLER
+                damageable.Damage(_config.Damage, DamageType.Physical);
 
             SpawnExplosionParticles(hit.point);
 

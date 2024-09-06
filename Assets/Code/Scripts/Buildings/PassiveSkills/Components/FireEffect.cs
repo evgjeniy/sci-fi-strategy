@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using SustainTheStrain.Units;
 using SustainTheStrain.Units.Components;
 using UnityEngine;
 using UnityEngine.Extensions;
@@ -42,7 +43,8 @@ namespace SustainTheStrain.Buildings
         {
             while (true)
             {
-                _damageable.Damage(_damagePerSecond);
+                //TODO DAMAGE TYPE INSTALLER
+                _damageable.Damage(_damagePerSecond, DamageType.Physical);
                 yield return new WaitForSeconds(1.0f);
                 if (Time.time - _startTime > _duration)
                     break;

@@ -45,7 +45,8 @@ namespace SustainTheStrain.Buildings
                     .With(x => x.transform.position = rocket.SpawnPointProvider.SpawnPoint.position)
                     .LaunchTo(target, onComplete: damageable =>
                     {
-                        damageable.Damage(rocket.Config.Damage * rocket.EnergySystem.DamageMultiplier);
+                        //TODO DAMAGE TYPE INSTALLER
+                        damageable.Damage(rocket.Config.Damage * rocket.EnergySystem.DamageMultiplier, DamageType.Physical);
 
                         if (rocket.Config.NextLevelConfig != null) return;
                         if (rocket.AttackCounter % rocket.EnergySystem.Settings.PassiveSkill.AttackFrequency != 0) return;

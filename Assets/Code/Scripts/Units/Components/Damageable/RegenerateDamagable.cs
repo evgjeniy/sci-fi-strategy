@@ -13,12 +13,12 @@ namespace SustainTheStrain.Units
         private float _recoverySpeed = 0.3f;
         private Coroutine _recoveryCoroutine;
 
-        public override void Damage(float damage)
+        public override void Damage(float damage, DamageType damageType)
         {
             _lastDamageTime = Time.time;
             _calm = false;
             
-            base.Damage(damage);
+            base.Damage(damage, damageType);
         }
         
         private void Update()
