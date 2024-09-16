@@ -22,7 +22,7 @@ MonoBehaviour:
         _spawnPeriod: 0
         _enemyCount: 0
         _enemyGroup:
-        - _enemyType: BOSS
+        - _enemyType: Tank
           _xOffset: 0
       - _delay: 0
         _spawnPeriod: 0

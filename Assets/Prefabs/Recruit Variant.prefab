@@ -760,13 +760,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3272f43aba238a54790e000f24fd2199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <DamageResistance>k__BackingField: 0
   _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
     type: 3}
   <MaxHP>k__BackingField: 70
   <Team>k__BackingField: 1
   <IsFlying>k__BackingField: 0
-  _recoverDelay: 2
-  _recoverySpeed: 0.3
+  _recoverDelay: 3
+  _recoverySpeed: 3
 --- !u!114 &1872510087764181159
 MonoBehaviour:
   m_ObjectHideFlags: 0

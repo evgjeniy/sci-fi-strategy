@@ -22,7 +22,7 @@ MonoBehaviour:
   <UnitMaxHealth>k__BackingField: 100
   <UnitAttackDamage>k__BackingField: 5
   <UnitAttackCooldown>k__BackingField: 1
-  <RespawnCooldown>k__BackingField: 10
+  <RespawnCooldown>k__BackingField: 15
   <RecruitSpawnAimPrefab>k__BackingField: {fileID: -3427867631016709973, guid: 90fe8d8ae151dde499b44cd4a8253e82,
     type: 3}
   <NextLevelConfig>k__BackingField: {fileID: 11400000, guid: 1e654eeadaa571944a65e6f784363bf8,
