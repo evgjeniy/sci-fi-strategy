@@ -37,3 +37,7 @@ MonoBehaviour:
     id: 5
     enemy: {fileID: 8951883212839780672, guid: 1a22d5c5b93e3ec4baee04419e208109, type: 3}
     fullName: B.O.S.S.
+  - name: MobArmored
+    id: 6
+    enemy: {fileID: 7899189236986033438, guid: 29520a54f208d36499d9474252a9e934, type: 3}
+    fullName: "\u041D\u0430\u043A\u0430\u0447\u0430\u043D\u043D\u044B\u0439 \u043C\u043E\u0431"
