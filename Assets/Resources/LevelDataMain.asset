@@ -18,6 +18,47 @@ MonoBehaviour:
       _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
+      - _delay: 5
+        _spawnPeriod: 0.8
+        _enemyCount: 4
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: -1.5
+        - _enemyType: Mob
+          _xOffset: 1.5
+      - _delay: 5
+        _spawnPeriod: 0
+        _enemyCount: 1
+        _enemyGroup:
+        - _enemyType: MobArmored
+          _xOffset: -1.5
+        - _enemyType: MobArmored
+          _xOffset: 1.5
+      - _delay: 5
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Shaman
+          _xOffset: -1.5
+        - _enemyType: Shaman
+          _xOffset: 1.5
+      - _delay: 3
+        _spawnPeriod: 1
+        _enemyCount: 2
+        _enemyGroup:
+        - _enemyType: Tank
+          _xOffset: 0
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 5
+        _enemyGroup:
+        - _enemyType: Mob
+          _xOffset: 0
+  - _spawners:
+    - _delay: 3.4028235e+38
+      _nonIgnorableDelay: 0
+      _index: 0
+      _subwaves:
       - _delay: 8
         _spawnPeriod: 1.5
         _enemyCount: 8
@@ -88,7 +129,7 @@ MonoBehaviour:
       _subwaves:
       - _delay: 0
         _spawnPeriod: 1.2
-        _enemyCount: 6
+        _enemyCount: 5
         _enemyGroup:
         - _enemyType: Mob
           _xOffset: -1.5
@@ -99,12 +140,6 @@ MonoBehaviour:
       _nonIgnorableDelay: 0
       _index: 0
       _subwaves:
-      - _delay: 0
-        _spawnPeriod: 1.5
-        _enemyCount: 2
-        _enemyGroup:
-        - _enemyType: MobArmored
-          _xOffset: 0
       - _delay: 0
         _spawnPeriod: 1.5
         _enemyCount: 4
@@ -126,7 +161,7 @@ MonoBehaviour:
           _xOffset: 0
       - _delay: 0
         _spawnPeriod: 1.5
-        _enemyCount: 5
+        _enemyCount: 4
         _enemyGroup:
         - _enemyType: MobArmored
           _xOffset: 0
@@ -140,4 +175,15 @@ MonoBehaviour:
         _enemyCount: 1
         _enemyGroup:
         - _enemyType: Tank
+          _xOffset: 0
+  - _spawners:
+    - _delay: 3.4028235e+38
+      _nonIgnorableDelay: 0
+      _index: 0
+      _subwaves:
+      - _delay: 0
+        _spawnPeriod: 1
+        _enemyCount: 3
+        _enemyGroup:
+        - _enemyType: Shaman
           _xOffset: 0

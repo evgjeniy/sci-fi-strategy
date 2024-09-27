@@ -16,19 +16,21 @@ MonoBehaviour:
   - name: Tank
     id: 0
     enemy: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8, type: 3}
-    fullName: "\u041F\u0430\u043B\u0430\u0447"
+    fullName: "\u0412\u0430\u043B\u0435\u0440\u0430 "
   - name: Kamikaze
     id: 1
     enemy: {fileID: 2256044856611374577, guid: 5f85e57578bdd124384f4441cf0a90d2, type: 3}
-    fullName: "\u041E\u0441\u0430"
+    fullName: "\u0411\u044B\u0441\u0442\u0440\u044B\u0439"
   - name: Shield
     id: 2
     enemy: {fileID: 5466643690414773136, guid: c967dbd03c9d7db4099ff3c8aa4983e4, type: 3}
-    fullName: "\u041F\u0430\u043B\u0430\u0447 \u043C\u043A.2"
+    fullName: "\u0412\u0430\u043B\u0435\u0440\u0430 \u0429\u0438\u0442 (\u0444\u0438\u0437.
+      \u0443\u0440\u043E\u043D)"
   - name: Mob
     id: 3
     enemy: {fileID: 7899189236986033438, guid: 826df1b61eee9524a87e95793d295b8d, type: 3}
-    fullName: "\u041E\u0445\u043E\u0442\u043D\u0438\u043A"
+    fullName: "\u0421\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0439
+      \u043C\u043E\u0431"
   - name: Mob_Shield
     id: 4
     enemy: {fileID: 7899189236986033438, guid: a34838853d9e1944abdb15d4e28b8bfd, type: 3}
@@ -40,4 +42,9 @@ MonoBehaviour:
   - name: MobArmored
     id: 6
     enemy: {fileID: 7899189236986033438, guid: 29520a54f208d36499d9474252a9e934, type: 3}
-    fullName: "\u041D\u0430\u043A\u0430\u0447\u0430\u043D\u043D\u044B\u0439 \u043C\u043E\u0431"
+    fullName: "\u041C\u043E\u0431 \u0429\u0438\u0442 (\u0444\u0438\u0437. \u0443\u0440\u043E\u043D)"
+  - name: Shaman
+    id: 6
+    enemy: {fileID: 7899189236986033438, guid: 212bf6efaf4fd4b47a765b1bba6b28ff, type: 3}
+    fullName: "\u0428\u0430\u043C\u0430\u043D \u0429\u0438\u0442 (\u043B\u0430\u0437.
+      \u0443\u0440\u043E\u043D)"

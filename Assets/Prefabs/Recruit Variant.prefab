@@ -614,6 +614,16 @@ PrefabInstance:
       propertyPath: <MaxHP>k__BackingField
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 2132817689220846837, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
+      propertyPath: _damageResistances._serializedList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132817689220846837, guid: d26196ebbe3508543843b41c3962409d,
+        type: 3}
+      propertyPath: _damageResistances._serializedList.Array.data[0].Key
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3357532105762482792, guid: d26196ebbe3508543843b41c3962409d,
         type: 3}
       propertyPath: Animator
@@ -718,7 +728,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7358440343129375846, guid: d26196ebbe3508543843b41c3962409d, type: 3}
     - {fileID: 2256109187306574386, guid: d26196ebbe3508543843b41c3962409d, type: 3}
-    - {fileID: 2132817689220846837, guid: d26196ebbe3508543843b41c3962409d, type: 3}
     - {fileID: 1795451277360461822, guid: d26196ebbe3508543843b41c3962409d, type: 3}
     m_RemovedGameObjects:
     - {fileID: 795949853038617089, guid: d26196ebbe3508543843b41c3962409d, type: 3}
@@ -760,9 +769,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3272f43aba238a54790e000f24fd2199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DamageResistance>k__BackingField: 0
   _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
     type: 3}
+  _damageResistances:
+    _serializedList:
+    - Key: 0
+      Value: 0
+    - Key: 1
+      Value: 0
   <MaxHP>k__BackingField: 70
   <Team>k__BackingField: 1
   <IsFlying>k__BackingField: 0

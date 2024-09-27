@@ -581,7 +581,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c94f0a134c2e0434e8acad9804ffad0b, type: 2}
+      objectReference: {fileID: 2100000, guid: 5aab354ea1f3d834781dd998a7b4818b, type: 2}
     - target: {fileID: -8679921383154817045, guid: e4fbf801374ceb947803b6b59f58a4b4,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -969,9 +969,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67fd0fa0834b988429f9548845bf0e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DamageResistance>k__BackingField: 0
   _afterDeath: {fileID: 1007127540951276732, guid: 3ace37360f306cb4aac03640550fa9ef,
     type: 3}
+  _damageResistances:
+    _serializedList: []
   <MaxHP>k__BackingField: 0
   <Team>k__BackingField: 0
   <IsFlying>k__BackingField: 0

@@ -363,6 +363,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7715807382400100011, guid: d11d8725d54934741b6c008f48bd65a8,
+        type: 3}
+      propertyPath: <MaxHP>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7715807382400100011, guid: d11d8725d54934741b6c008f48bd65a8,
+        type: 3}
+      propertyPath: _damageResistances._serializedList.Array.data[0].Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
         type: 3}
       propertyPath: CoinsDrop
@@ -382,6 +392,11 @@ PrefabInstance:
         type: 3}
       propertyPath: <DamagePeriod>k__BackingField
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899189236986033438, guid: d11d8725d54934741b6c008f48bd65a8,
+        type: 3}
+      propertyPath: <CitadelDamage>k__BackingField
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -424,10 +439,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40557cea94440554b8833c905c394a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cellsCount: 2
-  _cellHp: 200
-  _recoverDelay: 8
-  _recoverySpeed: 0.2
+  _cellsCount: 0
+  _cellHp: 0
+  _recoverDelay: 0
+  _recoverySpeed: 0
 --- !u!114 &8064178535992659472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,8 +455,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67fd0fa0834b988429f9548845bf0e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DamageResistance>k__BackingField: 50
   _afterDeath: {fileID: 0}
-  <MaxHP>k__BackingField: 300
+  _damageResistances:
+    _serializedList: []
+  <MaxHP>k__BackingField: 0
   <Team>k__BackingField: 0
   <IsFlying>k__BackingField: 0
