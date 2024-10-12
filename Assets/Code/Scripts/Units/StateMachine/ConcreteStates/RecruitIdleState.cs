@@ -39,7 +39,7 @@ namespace SustainTheStrain.Units.StateMachine.ConcreteStates
 
         public override void PhysicsUpdate()
         {
-            context.FindOpponent().IfNotNull(duelable => { context.Duelable.RequestDuel(duelable); Debug.Log("Recruit Opponent"); });
+            context.FindOpponent().IfNotNull(duelable => { context.Duelable.RequestDuel(duelable); Debug.Log($"Recruit found opponent with name {duelable.gameObject}"); });
         }
     }
 }

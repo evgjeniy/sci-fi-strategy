@@ -1,8 +1,11 @@
+using UnityEngine;
+
 namespace SustainTheStrain.Units
 {
     public class RecruitDuelable : UnitDuelable
     {
         private Recruit _recruit;
+        private Duelable _opponent;
         
         protected override void Init()
         {
@@ -15,5 +18,6 @@ namespace SustainTheStrain.Units
         {
             return _opponent == null && initiator.Damageable.Team != Damageable.Team && !_recruit.IsMoving && !initiator.Damageable.IsFlying;
         }
+
     }
 }

@@ -1,31 +1,37 @@
+using System.Collections.Generic;
+using ModestTree;
 using UnityEngine;
 
 namespace SustainTheStrain.Units
 {
     public class UnitDuelable : Duelable
     {
-        protected Duelable _opponent;
-        [SerializeField]
-        private Vector3 _duelOffset;
-        public override bool HasOpponent => Opponent != null;
-        public override Vector3 DuelPosition => transform.position + _duelOffset;
-        public override Duelable Opponent => _opponent;
+        
+        private Queue<Duelable> _opponents = new Queue<Duelable>();
+        
+        [SerializeField] private Vector3[] _duelOffsets = new Vector3[3];
+        
+        public override bool HasOpponent => !_opponents.IsEmpty();
 
+        public override Vector3 DuelPosition => transform.position + _duelOffsets[_opponents.Count];
+        public override Duelable Opponent => _opponents.Peek();
+        
         public override Vector3 GetNearestDuelPosition(Vector3 position, Duelable requester)
         {
-            return transform.position + _duelOffset;
+            return transform.position + _duelOffsets[_opponents.Count-1];
         }
 
         public override bool IsDuelPossible(Duelable initiator)
         {
-            return initiator.Damageable.Team != Damageable.Team && !HasOpponent && !initiator.Damageable.IsFlying;
+            return initiator.Damageable.Team != Damageable.Team && !initiator.Damageable.IsFlying && _opponents.Count<3;
         }
 
         public override bool RequestDuel(Duelable dueler)
         {
             if (dueler.IsDuelPossible(this))
             {
-                if(_opponent != null) BreakDuel();
+                
+                //if(_opponent != null) BreakDuel();
                 
                 dueler.SetOpponent(this);
                 SetOpponent(dueler);
@@ -36,29 +42,41 @@ namespace SustainTheStrain.Units
 
         public override void SetOpponent(Duelable dueler)
         {
-            _opponent = dueler;
-            dueler.Damageable.OnDied += OpponentDead;
+            if (!_opponents.Contains(dueler))
+            {
+                _opponents.Enqueue(dueler);
+                dueler.Damageable.OnDied += OpponentDead;
+            }
+            //_opponent = dueler;
+            //dueler.Damageable.OnDied += OpponentDead;
         }
 
         public override void BreakDuel()
         {
-            if (_opponent == null) return;
+            if (!HasOpponent) return;
 
-            _opponent.RemoveOpponent(this);
-            RemoveOpponent(_opponent);
+            _opponents.Peek().RemoveOpponent(this);
+            RemoveOpponent(_opponents.Peek());
         }
 
         public override void RemoveOpponent(Duelable dueler)
         {
-            if (_opponent == null) return;
+            if (!HasOpponent) return;
             
-            _opponent.Damageable.OnDied -= OpponentDead;
-            _opponent = null;
+            _opponents.Dequeue().Damageable.OnDied -= OpponentDead;
         }
 
         private void OpponentDead(Damageble damageble)
         {
-            BreakDuel();
+            if (HasOpponent)
+            {
+                BreakDuel();
+            }
+
+            if (_opponents.Count > 1)
+            {
+                _opponents.Peek().RequestDuel(this);
+            }
         }
         
         private void OnDrawGizmos()

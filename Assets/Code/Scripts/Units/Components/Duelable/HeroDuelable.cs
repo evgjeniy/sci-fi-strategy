@@ -2,6 +2,7 @@ namespace SustainTheStrain.Units
 {
     public class HeroDuelable : UnitDuelable
     {
+        private Duelable _opponent;
         private Hero _hero;
         
         protected override void Init()

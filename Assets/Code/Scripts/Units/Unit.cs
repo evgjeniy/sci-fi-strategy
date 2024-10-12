@@ -54,20 +54,16 @@ namespace SustainTheStrain.Units
             AggroZone.Update(transform.position, _aggroRadius, LayerMask.GetMask("Unit"));
 
             var enemies = AggroZone.Entities.
-                Where((e) =>
+                Where((enemy) =>
                 {
-                    if (e.Damageable == null)
-                    {
-                        return false;
-                    }
-                    if (e.Damageable.Team == Duelable.Damageable.Team) return false;
-                    if (e.Damageable.IsFlying) return false;
-
-                    if (Duelable.Opponent == null) return true;
+                    if (enemy.Damageable == null) return false;
+                    if (enemy.Damageable.Team == Duelable.Damageable.Team) return false;
+                    if (enemy.Damageable.IsFlying) return false;
+                    if (!Duelable.HasOpponent) return true;
                     
-                    return e.Priority > Duelable.Opponent.Priority;
+                    return enemy.Priority > Duelable.Opponent.Priority;
                 }).
-                OrderBy((e) => Vector3.Distance(e.transform.position, transform.position));
+                OrderBy((enemy) => Vector3.Distance(enemy.transform.position, transform.position));
 
             if (enemies.Any()) 
                 return enemies.First();

@@ -763,6 +763,76 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffset2.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffset2.y
+      value: -0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffset2.z
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffset3.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffset3.y
+      value: -0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffset3.z
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffsets.Array.data[0].y
+      value: -0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffsets.Array.data[0].z
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffsets.Array.data[1].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffsets.Array.data[1].y
+      value: -0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffsets.Array.data[1].z
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffsets.Array.data[2].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffsets.Array.data[2].y
+      value: -0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367921590081931393, guid: 006d3ba058686ba4ea484983393fffd9,
+        type: 3}
+      propertyPath: _duelOffsets.Array.data[2].z
+      value: 0.65
+      objectReference: {fileID: 0}
     - target: {fileID: 5371437360750009807, guid: 006d3ba058686ba4ea484983393fffd9,
         type: 3}
       propertyPath: m_LocalScale.z
